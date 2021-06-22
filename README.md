@@ -1,29 +1,29 @@
 # MK7_3D_KMP_Editor
 
-[Overview]
+#Overvie
 This program is for editing KMP files of "Mario Kart 7". 
 
-[Project purpose]
+#Project purpose
 This project was originally created to understand how to work with 3D data using Helix Toolkit.
 I chose the KMP file because of my pure curiosity, "I want to express this file in 3D," and the merit of being able to achieve my original purpose by reading this file.
 
-[how to use]
+#how to use
 To actually use this program, you need to build a project. 
 
-[Note]
+#Note
 When building, please build as a debug version. 
 The main reason is that the state of Helix Toolkit after 3D conversion is different between the debug version and the build version. 
 
-[About the build environment]
+#About the build environment
 HelixToolkit v2.12.0 
 HelixToolkit.Wpf v2.12.0 
 Visual Studio 2019 
 
-[Things to prepare before build]
+#Things to prepare before build
 ObjFlow.bin 
 KMPObjectFlow.zip
 
-[About KMPObjectFlow.zip] 
+#About KMPObjectFlow.zip
 KMPObjectFlow.zip contains in-game models (enemy, environment objects, etc.), but this project uses KMPObjectFlow.zip, which is a compressed empty folder.
 If you want to use the in-game model, do the following (start at step 4 if you want to use the default model):
 
