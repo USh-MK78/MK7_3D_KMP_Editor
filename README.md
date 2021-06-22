@@ -1,6 +1,6 @@
 # MK7_3D_KMP_Editor
   
-*Overvie*  
+*Overview*  
 This program is for editing KMP files of "Mario Kart 7".  
   
 *Project purpose*  
