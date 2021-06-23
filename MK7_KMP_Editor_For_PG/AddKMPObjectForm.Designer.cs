@@ -34,6 +34,8 @@ namespace MK7_KMP_Editor_For_PG_
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.userControl21 = new MK7_KMP_Editor_For_PG_.UserControl2();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -41,7 +43,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(125, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(132, 20);
+            this.comboBox1.Size = new System.Drawing.Size(126, 20);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -56,6 +58,7 @@ namespace MK7_KMP_Editor_For_PG_
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(245, 198);
@@ -72,6 +75,14 @@ namespace MK7_KMP_Editor_For_PG_
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.userControl21;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 18);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(232, 174);
+            this.textBox1.TabIndex = 0;
+            // 
             // AddKMPObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -84,6 +95,8 @@ namespace MK7_KMP_Editor_For_PG_
             this.Name = "AddKMPObjectForm";
             this.Text = "AddKMPObjectForm";
             this.Load += new System.EventHandler(this.AddKMPObjectForm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,5 +109,6 @@ namespace MK7_KMP_Editor_For_PG_
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
