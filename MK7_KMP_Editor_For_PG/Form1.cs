@@ -1059,9 +1059,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         ObjectID = data.ObjID,
                         JBOG_ITOP_RouteIDIndex = 65535,
-                        JBOG_PresenceSetting = 65535,
+                        JBOG_PresenceSetting = 7,
                         JBOG_UnkByte1 = 0,
-                        JBOG_UnkByte2 = 0,
+                        JBOG_UnkByte2 = 65535,
                         JBOG_UnkByte3 = 0,
                         Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
                         {
@@ -1083,14 +1083,14 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
                         {
-                            Value0 = 65535,
-                            Value1 = 65535,
-                            Value2 = 65535,
-                            Value3 = 65535,
-                            Value4 = 65535,
-                            Value5 = 65535,
-                            Value6 = 65535,
-                            Value7 = 65535
+                            Value0 = 0,
+                            Value1 = 0,
+                            Value2 = 0,
+                            Value3 = 0,
+                            Value4 = 0,
+                            Value5 = 0,
+                            Value6 = 0,
+                            Value7 = 0
                         }
                     };
 
@@ -3652,6 +3652,9 @@ namespace MK7_KMP_Editor_For_PG_
                 //Display only IGTS section directly to PropertyGrid
                 propertyGrid_KMP_StageInfo.SelectedObject = IGTS_Section;
             }
+
+            writeBinaryToolStripMenuItem.Enabled = true;
+            closeKMPToolStripMenuItem.Enabled = true;
         }
 
         private void writeBinaryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5067,9 +5070,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         ObjectID = data.ObjID,
                         JBOG_ITOP_RouteIDIndex = 65535,
-                        JBOG_PresenceSetting = 65535,
+                        JBOG_PresenceSetting = 7,
                         JBOG_UnkByte1 = 0,
-                        JBOG_UnkByte2 = 0,
+                        JBOG_UnkByte2 = 65535,
                         JBOG_UnkByte3 = 0,
                         Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
                         {
@@ -5091,14 +5094,14 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
                         {
-                            Value0 = 65535,
-                            Value1 = 65535,
-                            Value2 = 65535,
-                            Value3 = 65535,
-                            Value4 = 65535,
-                            Value5 = 65535,
-                            Value6 = 65535,
-                            Value7 = 65535
+                            Value0 = 0,
+                            Value1 = 0,
+                            Value2 = 0,
+                            Value3 = 0,
+                            Value4 = 0,
+                            Value5 = 0,
+                            Value6 = 0,
+                            Value7 = 0
                         }
                     };
 
