@@ -120,7 +120,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (Directory.Exists(CD + "\\KMP_OBJ") == false)
             {
                 var KMPOBJ = Properties.Resources.KMP_OBJ;
-                FileStream fs1 = new FileStream("KMP_OBJ.zip", FileMode.Create, FileAccess.Write);
+                FileStream fs1 = new FileStream("BYAML_OBJ.zip", FileMode.Create, FileAccess.Write);
                 fs1.Write(KMPOBJ, 0, KMPOBJ.Length);
                 fs1.Close();
                 fs1.Dispose();
@@ -2775,12 +2775,12 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     HPTI_NextGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_NextGroups
                     {
-                        Next0 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev0,
-                        Next1 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev1,
-                        Next2 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev2,
-                        Next3 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev3,
-                        Next4 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev4,
-                        Next5 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev5
+                        Next0 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next0,
+                        Next1 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next1,
+                        Next2 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next2,
+                        Next3 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next3,
+                        Next4 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next4,
+                        Next5 = KMPFormat.KMP_Section.HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next5
                     },
                     TPTIValueList = null
                 };
