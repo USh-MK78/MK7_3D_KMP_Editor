@@ -58,8 +58,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.propertyGrid_KMP_StageInfo = new System.Windows.Forms.PropertyGrid();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.DeleteSectionBtn = new System.Windows.Forms.Button();
-            this.AddSectionBtn = new System.Windows.Forms.Button();
             this.KMPSectionComboBox = new System.Windows.Forms.ComboBox();
             this.KMP_Viewport_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
@@ -84,6 +82,7 @@
             this.CH_Kartpoint = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.createKMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -129,7 +128,8 @@
             this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readBinaryToolStripMenuItem,
             this.writeBinaryToolStripMenuItem,
-            this.closeKMPToolStripMenuItem});
+            this.closeKMPToolStripMenuItem,
+            this.createKMPToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.addToolStripMenuItem.Text = "File";
@@ -137,21 +137,21 @@
             // readBinaryToolStripMenuItem
             // 
             this.readBinaryToolStripMenuItem.Name = "readBinaryToolStripMenuItem";
-            this.readBinaryToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.readBinaryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.readBinaryToolStripMenuItem.Text = "Open KMP";
             this.readBinaryToolStripMenuItem.Click += new System.EventHandler(this.readBinaryToolStripMenuItem_Click);
             // 
             // writeBinaryToolStripMenuItem
             // 
             this.writeBinaryToolStripMenuItem.Name = "writeBinaryToolStripMenuItem";
-            this.writeBinaryToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.writeBinaryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.writeBinaryToolStripMenuItem.Text = "Write KMP";
             this.writeBinaryToolStripMenuItem.Click += new System.EventHandler(this.writeBinaryToolStripMenuItem_Click);
             // 
             // closeKMPToolStripMenuItem
             // 
             this.closeKMPToolStripMenuItem.Name = "closeKMPToolStripMenuItem";
-            this.closeKMPToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.closeKMPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeKMPToolStripMenuItem.Text = "Close KMP";
             this.closeKMPToolStripMenuItem.Click += new System.EventHandler(this.closeKMPToolStripMenuItem_Click);
             // 
@@ -242,13 +242,13 @@
             // 
             this.KMP_Main_SplitContainer.Panel2.Controls.Add(this.KMP_Viewport_SplitContainer);
             this.KMP_Main_SplitContainer.Panel2MinSize = 28;
-            this.KMP_Main_SplitContainer.Size = new System.Drawing.Size(885, 617);
+            this.KMP_Main_SplitContainer.Size = new System.Drawing.Size(885, 588);
             this.KMP_Main_SplitContainer.SplitterDistance = 193;
             this.KMP_Main_SplitContainer.TabIndex = 8;
             // 
             // AddKMPSection
             // 
-            this.AddKMPSection.Location = new System.Drawing.Point(13, 587);
+            this.AddKMPSection.Location = new System.Drawing.Point(13, 559);
             this.AddKMPSection.Name = "AddKMPSection";
             this.AddKMPSection.Size = new System.Drawing.Size(77, 23);
             this.AddKMPSection.TabIndex = 11;
@@ -258,7 +258,7 @@
             // 
             // DeleteKMPSection
             // 
-            this.DeleteKMPSection.Location = new System.Drawing.Point(105, 587);
+            this.DeleteKMPSection.Location = new System.Drawing.Point(105, 559);
             this.DeleteKMPSection.Name = "DeleteKMPSection";
             this.DeleteKMPSection.Size = new System.Drawing.Size(78, 23);
             this.DeleteKMPSection.TabIndex = 12;
@@ -271,7 +271,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(4, 81);
+            this.tabControl1.Location = new System.Drawing.Point(4, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(187, 504);
@@ -390,35 +390,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.DeleteSectionBtn);
-            this.groupBox1.Controls.Add(this.AddSectionBtn);
             this.groupBox1.Controls.Add(this.KMPSectionComboBox);
             this.groupBox1.Location = new System.Drawing.Point(5, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(185, 72);
+            this.groupBox1.Size = new System.Drawing.Size(185, 46);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Section";
-            // 
-            // DeleteSectionBtn
-            // 
-            this.DeleteSectionBtn.Location = new System.Drawing.Point(100, 44);
-            this.DeleteSectionBtn.Name = "DeleteSectionBtn";
-            this.DeleteSectionBtn.Size = new System.Drawing.Size(75, 23);
-            this.DeleteSectionBtn.TabIndex = 5;
-            this.DeleteSectionBtn.Text = "Delete";
-            this.DeleteSectionBtn.UseVisualStyleBackColor = true;
-            this.DeleteSectionBtn.Click += new System.EventHandler(this.DeleteSectionBtn_Click);
-            // 
-            // AddSectionBtn
-            // 
-            this.AddSectionBtn.Location = new System.Drawing.Point(10, 44);
-            this.AddSectionBtn.Name = "AddSectionBtn";
-            this.AddSectionBtn.Size = new System.Drawing.Size(75, 23);
-            this.AddSectionBtn.TabIndex = 4;
-            this.AddSectionBtn.Text = "Add";
-            this.AddSectionBtn.UseVisualStyleBackColor = true;
-            this.AddSectionBtn.Click += new System.EventHandler(this.AddSectionBtn_Click);
             // 
             // KMPSectionComboBox
             // 
@@ -445,7 +423,7 @@
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox4);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox3);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox2);
-            this.KMP_Viewport_SplitContainer.Size = new System.Drawing.Size(688, 617);
+            this.KMP_Viewport_SplitContainer.Size = new System.Drawing.Size(688, 588);
             this.KMP_Viewport_SplitContainer.SplitterDistance = 489;
             this.KMP_Viewport_SplitContainer.TabIndex = 0;
             // 
@@ -454,7 +432,7 @@
             this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elementHost1.Location = new System.Drawing.Point(0, 0);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(489, 617);
+            this.elementHost1.Size = new System.Drawing.Size(489, 588);
             this.elementHost1.TabIndex = 6;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.userControl11;
@@ -677,11 +655,18 @@
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
+            // createKMPToolStripMenuItem
+            // 
+            this.createKMPToolStripMenuItem.Name = "createKMPToolStripMenuItem";
+            this.createKMPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createKMPToolStripMenuItem.Text = "Create KMP";
+            this.createKMPToolStripMenuItem.Click += new System.EventHandler(this.createKMPToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 641);
+            this.ClientSize = new System.Drawing.Size(885, 612);
             this.Controls.Add(this.KMP_Main_SplitContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -750,8 +735,6 @@
         private System.Windows.Forms.SplitContainer KMP_Path_SplitContainer;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.PropertyGrid propertyGrid_KMP_StageInfo;
-        private System.Windows.Forms.Button DeleteSectionBtn;
-        private System.Windows.Forms.Button AddSectionBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -779,6 +762,7 @@
         private System.Windows.Forms.ToolStripMenuItem objFlowXmlEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeKMPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visibilityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createKMPToolStripMenuItem;
     }
 }
 
