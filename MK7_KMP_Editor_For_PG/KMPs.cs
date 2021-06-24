@@ -88,11 +88,11 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         public Vector3D TPNE_Position { get; set; }
                         public float Control { get; set; }
-                        public ushort f1 { get; set; }
-                        public byte f2 { get; set; }
-                        public byte f3 { get; set; }
-                        public ushort f4 { get; set; }
-                        public ushort f5 { get; set; }
+                        public ushort MushSetting { get; set; }
+                        public byte DriftSetting { get; set; }
+                        public byte Flags { get; set; }
+                        public short PathFindOption { get; set; }
+                        public short MaxSearchYOffset { get; set; }
                     }
                 }
 
@@ -165,7 +165,8 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         public Vector3D TPTI_Position { get; set; }
                         public float TPTI_PointSize { get; set; }
-                        public uint TPTI_UnkBytes1 { get; set; }
+                        public ushort GravityMode { get; set; }
+                        public ushort PlayerScanRadius { get; set; }
                     }
                 }
 
@@ -275,7 +276,7 @@ namespace MK7_KMP_Editor_For_PG_
                     public class JBOGValue
                     {
                         public byte[] ObjectID { get; set; }
-                        public ushort JBOG_UnkByte1 { get; set; }
+                        public byte[] JBOG_UnkByte1 { get; set; }
                         public Vector3D JBOG_Position { get; set; }
                         public Vector3D JBOG_Rotation { get; set; }
                         public Vector3D JBOG_Scale { get; set; }
@@ -293,7 +294,7 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Value7 { get; set; }
                         }
                         public ushort JBOG_PresenceSetting { get; set; }
-                        public ushort JBOG_UnkByte2 { get; set; }
+                        public byte[] JBOG_UnkByte2 { get; set; }
                         public ushort JBOG_UnkByte3 { get; set; }
                     }
                 }
@@ -490,7 +491,7 @@ namespace MK7_KMP_Editor_For_PG_
                             public byte Next5 { get; set; }
                         }
 
-                        public uint HPLG_UnkBytes1 { get; set; }
+                        public uint RouteSetting { get; set; }
                         public uint HPLG_UnkBytes2 { get; set; }
                     }
                 }
@@ -1172,6 +1173,385 @@ namespace MK7_KMP_Editor_For_PG_
                     return Str2byte;
                 }
             }
+
+            public class FlagConverter : KMPHelper
+            {
+                public class EnemyRoute
+                {
+                    #region RouteSetting(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\EnemyRoutes.cs" of "KMP Expander")
+                    public byte Flags { get; set; }
+                    public bool WideTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x1) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 0)) | ((value ? 1 : 0) << 0));
+                        }
+                    }
+
+                    public bool NormalTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x4) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 2)) | ((value ? 1 : 0) << 2));
+                        }
+                    }
+
+                    public bool SharpTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x10) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 4)) | ((value ? 1 : 0) << 4));
+                        }
+                    }
+
+                    public bool TricksForbidden
+                    {
+                        get
+                        {
+                            return (Flags & 0x8) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 3)) | ((value ? 1 : 0) << 3));
+                        }
+                    }
+
+                    public bool StickToRoute
+                    {
+                        get
+                        {
+                            return (Flags & 0x40) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 6)) | ((value ? 1 : 0) << 6));
+                        }
+                    }
+
+                    public bool BouncyMushSection
+                    {
+                        get
+                        {
+                            return (Flags & 0x20) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 5)) | ((value ? 1 : 0) << 5));
+                        }
+                    }
+
+                    public bool ForceDefaultSpeed
+                    {
+                        get
+                        {
+                            return (Flags & 0x80) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 7)) | ((value ? 1 : 0) << 7));
+                        }
+                    }
+
+                    public bool UnknownFlag
+                    {
+                        get
+                        {
+                            return (Flags & 0x2) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 1)) | ((value ? 1 : 0) << 1));
+                        }
+                    }
+                    #endregion
+
+                    public enum FlagType
+                    {
+                        WideTurn,
+                        NormalTurn,
+                        SharpTurn,
+                        TricksForbidden,
+                        StickToRoute,
+                        BouncyMushSection,
+                        ForceDefaultSpeed,
+                        UnknownFlag
+                    }
+
+                    public bool ConvertFlags(byte InputFlags, FlagType flagType)
+                    {
+                        Flags = InputFlags;
+
+                        bool FlagValue = new bool();
+                        if (flagType == FlagType.WideTurn)
+                        {
+                            FlagValue = WideTurn;
+                        }
+                        if (flagType == FlagType.NormalTurn)
+                        {
+                            FlagValue = NormalTurn;
+                        }
+                        if (flagType == FlagType.SharpTurn)
+                        {
+                            FlagValue = SharpTurn;
+                        }
+                        if (flagType == FlagType.TricksForbidden)
+                        {
+                            FlagValue = TricksForbidden;
+                        }
+                        if (flagType == FlagType.StickToRoute)
+                        {
+                            FlagValue = StickToRoute;
+                        }
+                        if (flagType == FlagType.BouncyMushSection)
+                        {
+                            FlagValue = BouncyMushSection;
+                        }
+                        if (flagType == FlagType.ForceDefaultSpeed)
+                        {
+                            FlagValue = ForceDefaultSpeed;
+                        }
+                        if (flagType == FlagType.UnknownFlag)
+                        {
+                            FlagValue = UnknownFlag;
+                        }
+
+                        return FlagValue;
+                    }
+                }
+
+                public class GlideRoute
+                {
+                    #region RouteSetting(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\GliderRoutes.cs" of "KMP Expander")
+                    public uint RouteSettings { get; set; }
+                    public bool ForceToRoute
+                    {
+                        get
+                        {
+                            return (RouteSettings & 0xFF) != 0;
+                        }
+                        set
+                        {
+                            RouteSettings = (RouteSettings & ~0xFFu) | (value ? 1u : 0u);
+                        }
+                    }
+
+                    public bool CannonSection
+                    {
+                        get
+                        {
+                            return (RouteSettings & 0xFF00) != 0;
+                        }
+                        set
+                        {
+                            RouteSettings = (RouteSettings & ~0xFF00u) | (value ? 1u : 0u) << 8;
+                        }
+                    }
+
+                    public bool PreventRaising
+                    {
+                        get
+                        {
+                            return (RouteSettings & 0xFF0000) != 0;
+                        }
+                        set
+                        {
+                            RouteSettings = (RouteSettings & ~0xFF0000u) | (value ? 1u : 0u) << 16;
+                        }
+                    }
+                    #endregion
+
+                    public enum FlagType
+                    {
+                        ForceToRoute,
+                        CannonSection,
+                        PreventRaising
+                    }
+
+                    public bool ConvertFlags(uint InputFlags, FlagType flagType)
+                    {
+                        RouteSettings = InputFlags;
+
+                        bool FlagValue = new bool();
+                        if (flagType == FlagType.ForceToRoute)
+                        {
+                            FlagValue = ForceToRoute;
+                        }
+                        if (flagType == FlagType.CannonSection)
+                        {
+                            FlagValue = CannonSection;
+                        }
+                        if (flagType == FlagType.PreventRaising)
+                        {
+                            FlagValue = PreventRaising;
+                        }
+
+                        return FlagValue;
+                    }
+                }
+            }
+
+            public class KMPValueTypeConverter : KMPHelper
+            {
+                public class EnemyRoute
+                {
+                    public enum MushSetting
+                    {
+                        CanUseMushroom = 0,
+                        NeedsMushroom = 1,
+                        CannotUseMushroom = 2,
+                        Unknown
+                    }
+
+                    public static MushSetting MushSettingType(ushort Value)
+                    {
+                        MushSetting mushSetting;
+                        if (Value > 2)
+                        {
+                            mushSetting = MushSetting.Unknown;
+                        }
+                        else
+                        {
+                            mushSetting = (MushSetting)Value;
+                        }
+
+                        return mushSetting;
+                    }
+
+                    public enum DriftSetting
+                    {
+                        AllowDrift_AllowMiniturbo,
+                        DisallowDrift_AllowMiniturbo,
+                        DisallowDrift_DisallowMiniturbo,
+                        Unknown
+                    }
+
+                    public static DriftSetting DriftSettingType(ushort Value)
+                    {
+                        DriftSetting driftSetting;
+                        if (Value > 2)
+                        {
+                            driftSetting = DriftSetting.Unknown;
+                        }
+                        else
+                        {
+                            driftSetting = (DriftSetting)Value;
+                        }
+
+                        return driftSetting;
+                    }
+
+                    public enum PathFindOption
+                    {
+                        Taken_under_unknown_flag2 = -4,
+                        Taken_under_unknown_flag1 = -3,
+                        Bullet_cannot_find = -2,
+                        CPU_Racer_cannot_find = -1,
+                        No_restrictions = 0,
+                        Unknown
+                    }
+
+                    public static PathFindOption PathFindOptionType(short Value)
+                    {
+                        PathFindOption pathFindOption;
+                        if (Value > 0 || Value < -4)
+                        {
+                            pathFindOption = PathFindOption.Unknown;
+                        }
+                        else
+                        {
+                            pathFindOption = (PathFindOption)Value;
+                        }
+
+                        return pathFindOption;
+                    }
+
+                    public enum MaxSearchYOffsetOption
+                    {
+                        Limited_offset_MinusOne = -1,
+                        No_limited_offset = 0,
+                        Limited_offset
+                    }
+
+                    public static MaxSearchYOffsetOption MaxSearchYOffsetOptionType(short Value)
+                    {
+                        MaxSearchYOffsetOption maxSearchYOffsetOption;
+                        if (Value < 0)
+                        {
+                            maxSearchYOffsetOption = MaxSearchYOffsetOption.Limited_offset_MinusOne;
+                        }
+                        else if(Value > 0)
+                        {
+                            maxSearchYOffsetOption = MaxSearchYOffsetOption.Limited_offset;
+                        }
+                        else
+                        {
+                            maxSearchYOffsetOption = MaxSearchYOffsetOption.No_limited_offset;
+                        }
+
+                        return maxSearchYOffsetOption;
+                    }
+                }
+
+                public class ItemRoute
+                {
+                    public enum GravityMode
+                    {
+                        Affected_By_Gravity = 0,
+                        Unaffected_By_Gravity = 1,
+                        Cannon_Section = 2,
+                        Unknown
+                    }
+
+                    public static GravityMode GravityModeType(ushort Value)
+                    {
+                        GravityMode gravityMode;
+                        if (Value > 2)
+                        {
+                            gravityMode = GravityMode.Unknown;
+                        }
+                        else
+                        {
+                            gravityMode = (GravityMode)Value;
+                        }
+
+                        return gravityMode;
+                    }
+
+                    public enum PlayerScanRadius
+                    {
+                        Small = 0,
+                        Big = 1,
+                        Unknown
+                    }
+
+                    public static PlayerScanRadius PlayerScanRadiusType(ushort Value)
+                    {
+                        PlayerScanRadius playerScanRadius;
+                        if (Value > 1)
+                        {
+                            playerScanRadius = PlayerScanRadius.Unknown;
+                        }
+                        else
+                        {
+                            playerScanRadius = (PlayerScanRadius)Value;
+                        }
+
+                        return playerScanRadius;
+                    }
+                }
+            }
         }
 
         public class KMPWriter : KMPs
@@ -1230,11 +1610,11 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[1]);
                     bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[2]);
                     bw.Write(TPNE.TPNEValue_List[Count].Control);
-                    bw.Write(TPNE.TPNEValue_List[Count].f1);
-                    bw.Write(TPNE.TPNEValue_List[Count].f2);
-                    bw.Write(TPNE.TPNEValue_List[Count].f3);
-                    bw.Write(TPNE.TPNEValue_List[Count].f4);
-                    bw.Write(TPNE.TPNEValue_List[Count].f5);
+                    bw.Write(TPNE.TPNEValue_List[Count].MushSetting);
+                    bw.Write(TPNE.TPNEValue_List[Count].DriftSetting);
+                    bw.Write(TPNE.TPNEValue_List[Count].Flags);
+                    bw.Write(TPNE.TPNEValue_List[Count].PathFindOption);
+                    bw.Write(TPNE.TPNEValue_List[Count].MaxSearchYOffset);
                 }
                 #endregion
 
@@ -1317,7 +1697,8 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[1]);
                     bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[2]);
                     bw.Write(TPTI.TPTIValue_List[Count].TPTI_PointSize);
-                    bw.Write(TPTI.TPTIValue_List[Count].TPTI_UnkBytes1);
+                    bw.Write(TPTI.TPTIValue_List[Count].GravityMode);
+                    bw.Write(TPTI.TPTIValue_List[Count].PlayerScanRadius);
                 }
                 #endregion
 
@@ -1700,7 +2081,7 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next3);
                     bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next4);
                     bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next5);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_UnkBytes1);
+                    bw.Write(HPLG.HPLGValue_List[Count].RouteSetting);
                     bw.Write(HPLG.HPLGValue_List[Count].HPLG_UnkBytes2);
                 }
                 #endregion

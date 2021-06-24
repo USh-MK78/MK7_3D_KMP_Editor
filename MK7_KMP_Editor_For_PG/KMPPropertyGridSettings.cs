@@ -210,23 +210,157 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
-                    [Category("EnemyPoint Params")]
                     public float Control { get; set; }
 
-                    [Category("EnemyPoint Params")]
-                    public ushort f1 { get; set; }
+                    [Category("MushSettings")]
+                    public ushort MushSettingValue { get; set; }
 
-                    [Category("EnemyPoint Params")]
-                    public byte f2 { get; set; }
+                    [Category("MushSettings")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSetting MushSettingEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSettingType(MushSettingValue); }
+                    }
 
-                    [Category("EnemyPoint Params")]
-                    public byte f3 { get; set; }
+                    [Category("DriftSetting")]
+                    public byte DriftSettingValue { get; set; }
 
-                    [Category("EnemyPoint Params")]
-                    public ushort f4 { get; set; }
+                    [Category("DriftSetting")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSetting DriftSettingEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSettingType(DriftSettingValue); }
+                    }
 
-                    [Category("EnemyPoint Params")]
-                    public ushort f5 { get; set; }
+                    #region Flags(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\EnemyRoutes.cs" of "KMP Expander")
+                    [Category("Flags")]
+                    [Browsable(false)]
+                    public byte Flags { get; set; }
+
+                    [Category("Flags")]
+                    public bool WideTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x1) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 0)) | ((value ? 1 : 0) << 0));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool NormalTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x4) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 2)) | ((value ? 1 : 0) << 2));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool SharpTurn
+                    {
+                        get
+                        {
+                            return (Flags & 0x10) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 4)) | ((value ? 1 : 0) << 4));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool TricksForbidden
+                    {
+                        get
+                        {
+                            return (Flags & 0x8) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 3)) | ((value ? 1 : 0) << 3));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool StickToRoute
+                    {
+                        get
+                        {
+                            return (Flags & 0x40) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 6)) | ((value ? 1 : 0) << 6));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool BouncyMushSection
+                    {
+                        get
+                        {
+                            return (Flags & 0x20) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 5)) | ((value ? 1 : 0) << 5));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool ForceDefaultSpeed
+                    {
+                        get
+                        {
+                            return (Flags & 0x80) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 7)) | ((value ? 1 : 0) << 7));
+                        }
+                    }
+
+                    [Category("Flags")]
+                    public bool UnknownFlag
+                    {
+                        get
+                        {
+                            return (Flags & 0x2) != 0;
+                        }
+                        set
+                        {
+                            Flags = (byte)((Flags & ~(1 << 1)) | ((value ? 1 : 0) << 1));
+                        }
+                    }
+                    #endregion
+
+                    [Category("PathFindOption")]
+                    public short PathFindOptionValue { get; set; }
+
+                    [Category("PathFindOption")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOption PathFindOptionEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOptionType(PathFindOptionValue); }
+                    }
+
+                    [Category("MaxSearchYOffset")]
+                    public short MaxSearchYOffsetValue { get; set; }
+
+                    [Category("MaxSearchYOffset")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOption MaxSearchYOffsetOptionEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOptionType(MaxSearchYOffsetValue); }
+                    }
 
                     public override string ToString()
                     {
@@ -330,11 +464,27 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
-                    [Category("ItemPoint Params")]
                     public float TPTI_PointSize { get; set; }
 
-                    [Category("ItemPoint Params")]
-                    public uint TPTI_UnkBytes1 { get; set; }
+                    [Category("Gravity Mode")]
+                    public ushort GravityModeValue { get; set; }
+
+                    [Category("Gravity Mode")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityMode GravityModeEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityModeType(GravityModeValue); }
+                    }
+
+                    [Category("PlayerScanRadius")]
+                    public ushort PlayerScanRadiusValue { get; set; }
+
+                    [Category("PlayerScanRadius")]
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadius PlayerScanRadiusEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadiusType(PlayerScanRadiusValue); }
+                    }
 
                     public override string ToString()
                     {
@@ -505,7 +655,7 @@ namespace MK7_KMP_Editor_For_PG_
 
                 [ReadOnly(false)]
                 public string ObjectID { get; set; }
-                public ushort JBOG_UnkByte1 { get; set; }
+                public string JBOG_UnkByte1 { get; set; }
 
                 [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
@@ -624,7 +774,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
                 public ushort JBOG_PresenceSetting { get; set; }
-                public ushort JBOG_UnkByte2 { get; set; }
+                public string JBOG_UnkByte2 { get; set; }
                 public ushort JBOG_UnkByte3 { get; set; }
 
                 public override string ToString()
@@ -1144,10 +1294,55 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                public uint HPLG_UnkBytes1 { get; set; }
+                #region RouteSetting(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\GliderRoutes.cs" of "KMP Expander")
+                [Category("RouteSetting")]
+                [Browsable(false)]
+                public uint RouteSetting { get; set; }
+
+                [Category("RouteSetting")]
+                public bool ForceToRoute
+                {
+                    get
+                    {
+                        return (RouteSetting & 0xFF) != 0;
+                    }
+                    set
+                    {
+                        RouteSetting = (RouteSetting & ~0xFFu) | (value ? 1u : 0u);
+                    }
+                }
+
+                [Category("RouteSetting")]
+                public bool CannonSection
+                {
+                    get
+                    {
+                        return (RouteSetting & 0xFF00) != 0;
+                    }
+                    set
+                    {
+                        RouteSetting = (RouteSetting & ~0xFF00u) | (value ? 1u : 0u) << 8;
+                    }
+                }
+
+                [Category("RouteSetting")]
+                public bool PreventRaising
+                {
+                    get
+                    {
+                        return (RouteSetting & 0xFF0000) != 0;
+                    }
+                    set
+                    {
+                        RouteSetting = (RouteSetting & ~0xFF0000u) | (value ? 1u : 0u) << 16;
+                    }
+                }
+                #endregion
+
                 public uint HPLG_UnkBytes2 { get; set; }
 
                 public List<TPLGValue> TPLGValue_List = new List<TPLGValue>();
+                [Browsable(false)]
                 public List<TPLGValue> TPLGValueList { get => TPLGValue_List; set => TPLGValue_List = value; }
                 public class TPLGValue
                 {
@@ -1189,6 +1384,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
 
                     public float TPLG_PointScaleValue { get; set; }
+
                     public uint TPLG_UnkBytes1 { get; set; }
                     public uint TPLG_UnkBytes2 { get; set; }
 
@@ -1366,6 +1562,16 @@ namespace MK7_KMP_Editor_For_PG_
             return true;
         }
     }
+
+    //public class ValueRange
+    //{
+    //    public int _Value;
+    //    public int Value
+    //    {
+    //        set => _Value = Math.Min(65536, Math.Max(-2, value));
+    //        get => _Value;
+    //    }
+    //}
 
     public class CustomRotationEditor : UITypeEditor
     {
