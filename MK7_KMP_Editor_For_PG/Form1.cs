@@ -781,11 +781,26 @@ namespace MK7_KMP_Editor_For_PG_
                                 Z = Pos.Z.ToString()
                             },
                             Control = 1,
-                            MushSettingValue = 0,
-                            DriftSettingValue = 0,
-                            Flags = 0,
-                            PathFindOptionValue = 0,
-                            MaxSearchYOffsetValue = 0
+                            MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
+                            {
+                                MushSettingValue = 0
+                            },
+                            DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
+                            {
+                                DriftSettingValue = 0
+                            },
+                            FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
+                            {
+                                Flags = 0
+                            },
+                            PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
+                            {
+                                PathFindOptionValue = 0
+                            },
+                            MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
+                            {
+                                MaxSearchYOffsetValue = 0
+                            }
                         };
 
                         HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex].TPNEValueList.Add(tPNEValue);
@@ -852,8 +867,14 @@ namespace MK7_KMP_Editor_For_PG_
                                 Z = Pos.Z.ToString()
                             },
                             TPTI_PointSize = 1,
-                            GravityModeValue = 0,
-                            PlayerScanRadiusValue = 0
+                            GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
+                            {
+                                GravityModeValue = 0
+                            },
+                            PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
+                            {
+                                PlayerScanRadiusValue = 0
+                            }
                         };
 
                         HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex].TPTIValueList.Add(tPTIValue);
@@ -1060,6 +1081,7 @@ namespace MK7_KMP_Editor_For_PG_
                     KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
                     {
                         ID = KMP_Path_ListBox.Items.Count,
+                        ObjectName = data.Name,
                         ObjectID = data.ObjID,
                         JBOG_ITOP_RouteIDIndex = 65535,
                         JBOG_PresenceSetting = 7,
@@ -1228,13 +1250,17 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = Pos.Y.ToString(),
                             Z = Pos.Z.ToString()
                         },
-                        AreaMode = 0,
+                        AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
+                        {
+                            AreaModeValue = 0
+                        },
                         AreaType = 0,
                         AERA_EMACIndex = 0,
                         Priority = 0,
                         AERA_UnkByte1 = 0,
                         AERA_UnkByte2 = 0,
-                        AERA_UnkByte3 = 0,
+                        RouteID = 0,
+                        EnemyID = 0,
                         AERA_UnkByte4 = 0
                     };
 
@@ -1265,7 +1291,8 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     };
 
-                    ModelVisual3D dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area.obj");
+                    ModelVisual3D dv3D_AreaOBJ = null;
+                    if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
 
                     //モデルの名前と番号を文字列に格納(情報化)
                     HTK_3DEdit.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
@@ -1284,26 +1311,17 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         ID = KMP_Path_ListBox.Items.Count,
                         CameraType = 0,
-                        Camera_Active_Time = 0,
-                        Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
-                        {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
-                        },
-                        Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
-                        {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
-                        },
-                        FOVAngle_End = 0,
-                        FOVAngle_Start = 0,
-                        FOVSpeed = 0,
-                        EMAC_ITOP_CameraIndex = 0,
-                        RouteSpeed = 0,
                         NextCameraIndex = 0,
-                        ViewpointSpeed = 0,
+                        EMAC_UnkBytes1 = 0,
+                        EMAC_ITOP_CameraIndex = 0,
+                        SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
+                        {
+                            RouteSpeed = 0,
+                            FOVSpeed = 0,
+                            ViewpointSpeed = 0
+                        },
+                        EMAC_UnkBytes2 = 0,
+                        EMAC_UnkBytes3 = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                         {
                             X = Pos.X.ToString(),
@@ -1316,9 +1334,24 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = "0",
                             Z = "0"
                         },
-                        EMAC_UnkBytes1 = 0,
-                        EMAC_UnkBytes2 = 0,
-                        EMAC_UnkBytes3 = 0
+                        FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
+                        {
+                            FOVAngle_Start = 0,
+                            FOVAngle_End = 0
+                        },
+                        Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
+                        {
+                            X = "0",
+                            Y = "0",
+                            Z = "0"
+                        },
+                        Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
+                        {
+                            X = "0",
+                            Y = "0",
+                            Z = "0"
+                        },
+                        Camera_Active_Time = 0
                     };
 
                     EMAC_Section.EMACValueList.Add(eMACValue);
@@ -2270,7 +2303,8 @@ namespace MK7_KMP_Editor_For_PG_
                     AERA_Scale = ByteToVector3DConvert.ByteArrayToVector3D(new byte[][] { br1.ReadBytes(4), br1.ReadBytes(4), br1.ReadBytes(4) }),
                     AERA_UnkByte1 = br1.ReadUInt16(),
                     AERA_UnkByte2 = br1.ReadUInt16(),
-                    AERA_UnkByte3 = br1.ReadUInt16(),
+                    RouteID = br1.ReadByte(),
+                    EnemyID = br1.ReadByte(),
                     AERA_UnkByte4 = br1.ReadUInt16()
                 };
 
@@ -2393,14 +2427,19 @@ namespace MK7_KMP_Editor_For_PG_
             KMPs.KMPFormat.KMPSection.IGTS_Section IGTS = new KMPs.KMPFormat.KMPSection.IGTS_Section
             {
                 IGTSHeader = br1.ReadChars(4),
-                UnkBytes1 = br1.ReadByte(),
-                UnkBytes2 = br1.ReadByte(),
-                UnkBytes3 = br1.ReadByte(),
-                UnkBytes4 = br1.ReadByte(),
-                UnkBytes5 = br1.ReadUInt32(),
-                UnkBytes6 = br1.ReadUInt16(),
-                UnkBytes7 = br1.ReadUInt16(),
-                UnkBytes8 = br1.ReadUInt32()
+                Unknown1 = br1.ReadUInt32(),
+                LapCount = br1.ReadByte(),
+                PolePosition = br1.ReadByte(),
+                Unknown2 = br1.ReadByte(),
+                Unknown3 = br1.ReadByte(),
+                RGBAColor = new KMPs.KMPFormat.KMPSection.IGTS_Section.RGBA
+                {
+                    R = br1.ReadByte(),
+                    G = br1.ReadByte(),
+                    B = br1.ReadByte(),
+                    A = br1.ReadByte()
+                },
+                FlareAlpha = br1.ReadUInt32()
             };
 
             KMP_Section.IGTS = IGTS;
@@ -2655,18 +2694,33 @@ namespace MK7_KMP_Editor_For_PG_
                             Z = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Z.ToString()
                         },
                         Control = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Control,
-                        MushSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MushSetting,
-                        DriftSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].DriftSetting,
-                        WideTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.WideTurn),
-                        NormalTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NormalTurn),
-                        SharpTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.SharpTurn),
-                        TricksForbidden = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.TricksForbidden),
-                        StickToRoute = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
-                        BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
-                        ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                        UnknownFlag = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.UnknownFlag),
-                        PathFindOptionValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].PathFindOption,
-                        MaxSearchYOffsetValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MaxSearchYOffset
+                        MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
+                        {
+                            MushSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MushSetting
+                        },
+                        DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
+                        {
+                            DriftSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].DriftSetting
+                        },
+                        FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
+                        {
+                            WideTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.WideTurn),
+                            NormalTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NormalTurn),
+                            SharpTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.SharpTurn),
+                            TricksForbidden = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.TricksForbidden),
+                            StickToRoute = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
+                            BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
+                            ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
+                            UnknownFlag = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.UnknownFlag),
+                        },
+                        PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
+                        {
+                            PathFindOptionValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].PathFindOption
+                        },
+                        MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
+                        {
+                            MaxSearchYOffsetValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MaxSearchYOffset
+                        }
                     };
 
                     TPNEValues_List.Add(tPNEValue);
@@ -2784,8 +2838,14 @@ namespace MK7_KMP_Editor_For_PG_
                             Z = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Z.ToString()
                         },
                         TPTI_PointSize = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_PointSize,
-                        GravityModeValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].GravityMode,
-                        PlayerScanRadiusValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].PlayerScanRadius
+                        GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
+                        {
+                            GravityModeValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].GravityMode
+                        },
+                        PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
+                        {
+                            PlayerScanRadiusValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].PlayerScanRadius
+                        }
                     };
 
                     TPTIVales_List.Add(tPTIValue);
@@ -3070,9 +3130,13 @@ namespace MK7_KMP_Editor_For_PG_
 
             for (int Count = 0; Count < JBOG.NumOfEntries; Count++)
             {
+                KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject_FindName = ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
+                string Name = objFlowXmlToObject_FindName.ObjFlows.Find(x => x.ObjectID == BitConverter.ToString(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
+
                 KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
                 {
                     ID = Count,
+                    ObjectName = Name,
                     ObjectID = BitConverter.ToString(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty),
                     JBOG_UnkByte1 = BitConverter.ToString(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty),
                     Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
@@ -3266,7 +3330,10 @@ namespace MK7_KMP_Editor_For_PG_
                 KMPPropertyGridSettings.AERA_Section.AERAValue AERAValue = new KMPPropertyGridSettings.AERA_Section.AERAValue
                 {
                     ID = AERACount,
-                    AreaMode = AERA.AERAValue_List[AERACount].AreaMode,
+                    AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
+                    {
+                        AreaModeValue = AERA.AERAValue_List[AERACount].AreaMode
+                    },
                     AreaType = AERA.AERAValue_List[AERACount].AreaType,
                     AERA_EMACIndex = AERA.AERAValue_List[AERACount].AERA_EMACIndex,
                     Priority = AERA.AERAValue_List[AERACount].Priority,
@@ -3290,7 +3357,8 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     AERA_UnkByte1 = AERA.AERAValue_List[AERACount].AERA_UnkByte1,
                     AERA_UnkByte2 = AERA.AERAValue_List[AERACount].AERA_UnkByte2,
-                    AERA_UnkByte3 = AERA.AERAValue_List[AERACount].AERA_UnkByte3,
+                    RouteID = AERA.AERAValue_List[AERACount].RouteID,
+                    EnemyID = AERA.AERAValue_List[AERACount].EnemyID,
                     AERA_UnkByte4 = AERA.AERAValue_List[AERACount].AERA_UnkByte4
                 };
 
@@ -3319,7 +3387,10 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 };
 
-                ModelVisual3D dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area.obj");
+                ModelVisual3D dv3D_AreaOBJ = null;
+                if(AERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
+                if(AERAValue.AreaModeSettings.AreaModeValue == 1) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Cylinder\\Area_Cylinder.obj");
+                if(AERAValue.AreaModeSettings.AreaModeValue > 1) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
 
                 //モデルの名前と番号を文字列に格納(情報化)
                 HTK_3DEdit.SetString_MV3D(dv3D_AreaOBJ, "Area " + AERACount + " " + -1);
@@ -3353,9 +3424,12 @@ namespace MK7_KMP_Editor_For_PG_
                     NextCameraIndex = EMAC.EMACValue_List[EMACCount].NextCameraIndex,
                     EMAC_UnkBytes1 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes1,
                     EMAC_ITOP_CameraIndex = EMAC.EMACValue_List[EMACCount].EMAC_ITOP_CameraIndex,
-                    RouteSpeed = EMAC.EMACValue_List[EMACCount].RouteSpeed,
-                    FOVSpeed = EMAC.EMACValue_List[EMACCount].FOVSpeed,
-                    ViewpointSpeed = EMAC.EMACValue_List[EMACCount].ViewpointSpeed,
+                    SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
+                    {
+                        RouteSpeed = EMAC.EMACValue_List[EMACCount].RouteSpeed,
+                        FOVSpeed = EMAC.EMACValue_List[EMACCount].FOVSpeed,
+                        ViewpointSpeed = EMAC.EMACValue_List[EMACCount].ViewpointSpeed
+                    },
                     EMAC_UnkBytes2 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes2,
                     EMAC_UnkBytes3 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes3,
                     Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
@@ -3370,8 +3444,11 @@ namespace MK7_KMP_Editor_For_PG_
                         Y = EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Y.ToString(),
                         Z = EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Z.ToString()
                     },
-                    FOVAngle_Start = EMAC.EMACValue_List[EMACCount].FOVAngle_Start,
-                    FOVAngle_End = EMAC.EMACValue_List[EMACCount].FOVAngle_End,
+                    FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
+                    {
+                        FOVAngle_Start = EMAC.EMACValue_List[EMACCount].FOVAngle_Start,
+                        FOVAngle_End = EMAC.EMACValue_List[EMACCount].FOVAngle_End
+                    },
                     Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
                     {
                         X = EMAC.EMACValue_List[EMACCount].Viewpoint_Start.X.ToString(),
@@ -3506,14 +3583,19 @@ namespace MK7_KMP_Editor_For_PG_
             #region StageInfo
             IGTS_Section = new KMPPropertyGridSettings.IGTS_Section
             {
-                UnkBytes1 = IGTS.UnkBytes1,
-                UnkBytes2 = IGTS.UnkBytes2,
-                UnkBytes3 = IGTS.UnkBytes3,
-                UnkBytes4 = IGTS.UnkBytes4,
-                UnkBytes5 = IGTS.UnkBytes5,
-                UnkBytes6 = IGTS.UnkBytes6,
-                UnkBytes7 = IGTS.UnkBytes7,
-                UnkBytes8 = IGTS.UnkBytes8
+                Unknown1 = IGTS.Unknown1,
+                LapCount = IGTS.LapCount,
+                PolePosition = IGTS.PolePosition,
+                Unknown2 = IGTS.Unknown2,
+                Unknown3 = IGTS.Unknown3,
+                RGBAColor = new KMPPropertyGridSettings.IGTS_Section.RGBA
+                {
+                    R = IGTS.RGBAColor.R,
+                    G = IGTS.RGBAColor.G,
+                    B = IGTS.RGBAColor.B,
+                    A = IGTS.RGBAColor.A
+                },
+                FlareAlpha = IGTS.FlareAlpha
             };
             #endregion
 
@@ -3557,9 +3639,12 @@ namespace MK7_KMP_Editor_For_PG_
                         Next4 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next4,
                         Next5 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next5
                     },
-                    ForceToRoute = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.ForceToRoute),
-                    CannonSection = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.CannonSection),
-                    PreventRaising = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.PreventRaising),
+                    RouteSettings = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.RouteSetting
+                    {
+                        ForceToRoute = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.ForceToRoute),
+                        CannonSection = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.CannonSection),
+                        PreventRaising = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.PreventRaising),
+                    },
                     HPLG_UnkBytes2 = HPLG.HPLGValue_List[i].HPLG_UnkBytes2,
                     TPLGValueList = null
                 };
@@ -3852,11 +3937,11 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             TPNE_Position = new Vector3D(PX, PY, PZ),
                             Control = Convert.ToSingle(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Control),
-                            MushSetting = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MushSettingValue,
-                            DriftSetting = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].DriftSettingValue),
-                            Flags = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Flags),
-                            PathFindOption = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].PathFindOptionValue,
-                            MaxSearchYOffset = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MaxSearchYOffsetValue
+                            MushSetting = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MushSettings.MushSettingValue,
+                            DriftSetting = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].DriftSettings.DriftSettingValue),
+                            Flags = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].FlagSettings.Flags),
+                            PathFindOption = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].PathFindOptions.PathFindOptionValue,
+                            MaxSearchYOffset = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MaxSearchYOffset.MaxSearchYOffsetValue
                         };
 
                         TPNE_Values_List.Add(TPNE_Values);
@@ -3947,8 +4032,8 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             TPTI_Position = new Vector3D(PX, PY, PZ),
                             TPTI_PointSize = Convert.ToSingle(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_PointSize),
-                            GravityMode = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].GravityModeValue,
-                            PlayerScanRadius = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].PlayerScanRadiusValue
+                            GravityMode = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].GravityModeSettings.GravityModeValue,
+                            PlayerScanRadius = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].PlayerScanRadiusSettings.PlayerScanRadiusValue
                         };
 
                         TPTI_Values_List.Add(TPTI_Values);
@@ -4232,7 +4317,7 @@ namespace MK7_KMP_Editor_For_PG_
 
                 KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue AERA_Values = new KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue
                 {
-                    AreaMode = Convert.ToByte(AERA_Section.AERAValueList[Count].AreaMode),
+                    AreaMode = Convert.ToByte(AERA_Section.AERAValueList[Count].AreaModeSettings.AreaModeValue),
                     AreaType = Convert.ToByte(AERA_Section.AERAValueList[Count].AreaType),
                     AERA_EMACIndex = Convert.ToByte(AERA_Section.AERAValueList[Count].AERA_EMACIndex),
                     Priority = Convert.ToByte(AERA_Section.AERAValueList[Count].Priority),
@@ -4241,7 +4326,8 @@ namespace MK7_KMP_Editor_For_PG_
                     AERA_Scale = new Vector3D(SX, SY, SZ),
                     AERA_UnkByte1 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte1),
                     AERA_UnkByte2 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte2),
-                    AERA_UnkByte3 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte3),
+                    RouteID = Convert.ToByte(AERA_Section.AERAValueList[Count].RouteID),
+                    EnemyID = Convert.ToByte(AERA_Section.AERAValueList[Count].EnemyID),
                     AERA_UnkByte4 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte4)
                 };
 
@@ -4292,15 +4378,15 @@ namespace MK7_KMP_Editor_For_PG_
                     NextCameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].NextCameraIndex),
                     EMAC_UnkBytes1 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes1),
                     EMAC_ITOP_CameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_ITOP_CameraIndex),
-                    RouteSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].RouteSpeed),
-                    FOVSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].FOVSpeed),
-                    ViewpointSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].ViewpointSpeed),
+                    RouteSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.RouteSpeed),
+                    FOVSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.FOVSpeed),
+                    ViewpointSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.ViewpointSpeed),
                     EMAC_UnkBytes2 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes2),
                     EMAC_UnkBytes3 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes3),
                     EMAC_Position = new Vector3D(PX, PY, PZ),
                     EMAC_Rotation = new Vector3D(RX, RY, RZ),
-                    FOVAngle_Start = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngle_Start),
-                    FOVAngle_End = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngle_End),
+                    FOVAngle_Start = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngleSettings.FOVAngle_Start),
+                    FOVAngle_End = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngleSettings.FOVAngle_End),
                     Viewpoint_Start = new Vector3D(VP_Start_PX, VP_Start_PY, VP_Start_PZ),
                     Viewpoint_Destination = new Vector3D(VP_Destination_PX, VP_Destination_PY, VP_Destination_PZ),
                     Camera_Active_Time = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Camera_Active_Time)
@@ -4379,14 +4465,19 @@ namespace MK7_KMP_Editor_For_PG_
             KMPs.KMPFormat.KMPSection.IGTS_Section IGTS = new KMPs.KMPFormat.KMPSection.IGTS_Section
             {
                 IGTSHeader = new char[] { 'I', 'G', 'T', 'S' },
-                UnkBytes1 = Convert.ToByte(IGTS_Section.UnkBytes1),
-                UnkBytes2 = Convert.ToByte(IGTS_Section.UnkBytes2),
-                UnkBytes3 = Convert.ToByte(IGTS_Section.UnkBytes3),
-                UnkBytes4 = Convert.ToByte(IGTS_Section.UnkBytes4),
-                UnkBytes5 = Convert.ToUInt32(IGTS_Section.UnkBytes5),
-                UnkBytes6 = Convert.ToUInt16(IGTS_Section.UnkBytes6),
-                UnkBytes7 = Convert.ToUInt16(IGTS_Section.UnkBytes7),
-                UnkBytes8 = Convert.ToUInt32(IGTS_Section.UnkBytes8)
+                Unknown1 = IGTS_Section.Unknown1,
+                LapCount = IGTS_Section.LapCount,
+                PolePosition = IGTS_Section.PolePosition,
+                Unknown2 = IGTS_Section.Unknown2,
+                Unknown3 = IGTS_Section.Unknown3,
+                RGBAColor = new KMPs.KMPFormat.KMPSection.IGTS_Section.RGBA
+                {
+                    R = IGTS_Section.RGBAColor.R,
+                    G = IGTS_Section.RGBAColor.G,
+                    B = IGTS_Section.RGBAColor.B,
+                    A = IGTS_Section.RGBAColor.A
+                },
+                FlareAlpha = IGTS_Section.FlareAlpha
             };
 
             uint StageInfoPos = Writer.Write_IGTS(bw1, IGTS);
@@ -4433,7 +4524,7 @@ namespace MK7_KMP_Editor_For_PG_
                             Next4 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next4),
                             Next5 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next5),
                         },
-                        RouteSetting = Convert.ToUInt32(HPLG_TPLG_Section.HPLGValueList[HPLGCount].RouteSetting),
+                        RouteSetting = Convert.ToUInt32(HPLG_TPLG_Section.HPLGValueList[HPLGCount].RouteSettings.RouteSettingValue),
                         HPLG_UnkBytes2 = Convert.ToUInt32(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_UnkBytes2)
                     };
 
@@ -4705,7 +4796,10 @@ namespace MK7_KMP_Editor_For_PG_
                         GroupID = KMP_Group_ListBox.Items.Count,
                         HPLG_NextGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_NextGroups(),
                         HPLG_PreviewGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_PreviewGroups(),
-                        RouteSetting = 0,
+                        RouteSettings = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.RouteSetting
+                        {
+                            RouteSettingValue = 0,
+                        },
                         HPLG_UnkBytes2 = 0,
                         TPLGValueList = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue>()
                     };
@@ -4807,11 +4901,26 @@ namespace MK7_KMP_Editor_For_PG_
                                 Z = Pos.Z.ToString()
                             },
                             Control = 1,
-                            MushSettingValue = 0,
-                            DriftSettingValue = 0,
-                            Flags = 0,
-                            PathFindOptionValue = 0,
-                            MaxSearchYOffsetValue = 0
+                            MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
+                            {
+                                MushSettingValue = 0
+                            },
+                            DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
+                            {
+                                DriftSettingValue = 0
+                            },
+                            FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
+                            {
+                                Flags = 0
+                            },
+                            PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
+                            {
+                                PathFindOptionValue = 0
+                            },
+                            MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
+                            {
+                                MaxSearchYOffsetValue = 0
+                            }
                         };
 
                         HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex].TPNEValueList.Add(tPNEValue);
@@ -4877,8 +4986,14 @@ namespace MK7_KMP_Editor_For_PG_
                                 Z = Pos.Z.ToString()
                             },
                             TPTI_PointSize = 1,
-                            GravityModeValue = 0,
-                            PlayerScanRadiusValue = 0
+                            GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
+                            {
+                                GravityModeValue = 0
+                            },
+                            PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
+                            {
+                                PlayerScanRadiusValue = 0
+                            }
                         };
 
                         HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex].TPTIValueList.Add(tPTIValue);
@@ -5082,6 +5197,7 @@ namespace MK7_KMP_Editor_For_PG_
                     KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
                     {
                         ID = KMP_Path_ListBox.Items.Count,
+                        ObjectName = data.Name,
                         ObjectID = data.ObjID,
                         JBOG_ITOP_RouteIDIndex = 65535,
                         JBOG_PresenceSetting = 7,
@@ -5249,13 +5365,18 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = Pos.Y.ToString(),
                             Z = Pos.Z.ToString()
                         },
-                        AreaMode = 0,
+                        AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
+                        {
+                            AreaModeValue = 0
+                        },
+                        //AreaMode = 0,
                         AreaType = 0,
                         AERA_EMACIndex = 0,
                         Priority = 0,
                         AERA_UnkByte1 = 0,
                         AERA_UnkByte2 = 0,
-                        AERA_UnkByte3 = 0,
+                        RouteID = 0,
+                        EnemyID = 0,
                         AERA_UnkByte4 = 0
                     };
 
@@ -5286,7 +5407,8 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     };
 
-                    ModelVisual3D dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area.obj");
+                    ModelVisual3D dv3D_AreaOBJ = null;
+                    if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
 
                     //モデルの名前と番号を文字列に格納(情報化)
                     HTK_3DEdit.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
@@ -5305,26 +5427,17 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         ID = KMP_Path_ListBox.Items.Count,
                         CameraType = 0,
-                        Camera_Active_Time = 0,
-                        Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
-                        {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
-                        },
-                        Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
-                        {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
-                        },
-                        FOVAngle_End = 0,
-                        FOVAngle_Start = 0,
-                        FOVSpeed = 0,
-                        EMAC_ITOP_CameraIndex = 0,
-                        RouteSpeed = 0,
                         NextCameraIndex = 0,
-                        ViewpointSpeed = 0,
+                        EMAC_UnkBytes1 = 0,
+                        EMAC_ITOP_CameraIndex = 0,
+                        SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
+                        {
+                            RouteSpeed = 0,
+                            FOVSpeed = 0,
+                            ViewpointSpeed = 0
+                        },
+                        EMAC_UnkBytes2 = 0,
+                        EMAC_UnkBytes3 = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                         {
                             X = Pos.X.ToString(),
@@ -5337,9 +5450,24 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = "0",
                             Z = "0"
                         },
-                        EMAC_UnkBytes1 = 0,
-                        EMAC_UnkBytes2 = 0,
-                        EMAC_UnkBytes3 = 0
+                        FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
+                        {
+                            FOVAngle_Start = 0,
+                            FOVAngle_End = 0
+                        },
+                        Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
+                        {
+                            X = "0",
+                            Y = "0",
+                            Z = "0"
+                        },
+                        Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
+                        {
+                            X = "0",
+                            Y = "0",
+                            Z = "0"
+                        },
+                        Camera_Active_Time = 0
                     };
 
                     EMAC_Section.EMACValueList.Add(eMACValue);
@@ -6527,6 +6655,10 @@ namespace MK7_KMP_Editor_For_PG_
 
                 KMPPropertyGridSettings.JBOG_section.JBOGValue GetJBOGValue = JBOG_Section.JBOGValueList[KMP_Path_ListBox.SelectedIndex];
 
+                KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject_FindName = ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
+                string ObjectName = objFlowXmlToObject_FindName.ObjFlows.Find(x => x.ObjectID == GetJBOGValue.ObjectID).ObjectName;
+                JBOG_Section.JBOGValueList[KMP_Path_ListBox.SelectedIndex].ObjectName = ObjectName;
+
                 #region Add Model(OBJ)
                 HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                 {
@@ -6611,33 +6743,48 @@ namespace MK7_KMP_Editor_For_PG_
             }
             if (KMPSectionComboBox.Text == "Area")
             {
+                render.MainViewPort.Children.Remove(KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+                KMPViewportObject.Area_MV3DList.Remove(KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+
                 KMPPropertyGridSettings.AERA_Section.AERAValue GetAERAValue = AERA_Section.AERAValueList[KMP_Path_ListBox.SelectedIndex];
 
-                //ラジアンから角度を求める
-                double angle_X = float.Parse(GetAERAValue.Rotations.X) * (180 / Math.PI);
-                double angle_Y = float.Parse(GetAERAValue.Rotations.Y) * (180 / Math.PI);
-                double angle_Z = float.Parse(GetAERAValue.Rotations.Z) * (180 / Math.PI);
-
-                double Scale_X = float.Parse(GetAERAValue.Scales.X) * 1000;
-                double Scale_Y = float.Parse(GetAERAValue.Scales.Y) * 1000;
-                double Scale_Z = float.Parse(GetAERAValue.Scales.Z) * 1000;
-
-                double Translate_X = float.Parse(GetAERAValue.Positions.X);
-                double Translate_Y = float.Parse(GetAERAValue.Positions.Y);
-                double Translate_Z = float.Parse(GetAERAValue.Positions.Z);
-
-                HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
+                #region Add Model(OBJ)
+                HTK_3DES.TSRSystem.Transform_Value Area_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                 {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_X / 2, Scale_Y / 2, Scale_Z / 2),
-                    Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                    Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
+                    {
+                        X = float.Parse(GetAERAValue.Positions.X),
+                        Y = float.Parse(GetAERAValue.Positions.Y),
+                        Z = float.Parse(GetAERAValue.Positions.Z)
+                    },
+                    Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                    {
+                        X = float.Parse(GetAERAValue.Scales.X) * 1000,
+                        Y = float.Parse(GetAERAValue.Scales.Y) * 1000,
+                        Z = float.Parse(GetAERAValue.Scales.Z) * 1000
+                    },
+                    Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
+                    {
+                        X = float.Parse(GetAERAValue.Rotations.X) * (180 / Math.PI),
+                        Y = float.Parse(GetAERAValue.Rotations.Y) * (180 / Math.PI),
+                        Z = float.Parse(GetAERAValue.Rotations.Z) * (180 / Math.PI)
+                    }
                 };
 
-#if DEBUG
-                HTK_3DEdit.NewTransformSystem3D(t, KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex].Content);
-#else
-                HTK_3DEdit.NewTransformSystem3D(t, KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex]);
-#endif
+                ModelVisual3D dv3D_AreaOBJ = null;
+                if (GetAERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
+                if (GetAERAValue.AreaModeSettings.AreaModeValue == 1) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Cylinder\\Area_Cylinder.obj");
+                if (GetAERAValue.AreaModeSettings.AreaModeValue > 1) dv3D_AreaOBJ = HTK_3DEdit.OBJReader("KMP_OBJ\\Area\\Area_Box\\Area_Box.obj");
+
+                //モデルの名前と番号を文字列に格納(情報化)
+                HTK_3DEdit.SetString_MV3D(dv3D_AreaOBJ, "Area " + KMP_Path_ListBox.SelectedIndex + " " + -1);
+
+                TransformMV3D_NotNewCreate.Transform_MV3D(Area_transform_Value, dv3D_AreaOBJ);
+
+                KMPViewportObject.Area_MV3DList.Insert(KMP_Path_ListBox.SelectedIndex, dv3D_AreaOBJ);
+
+                render.MainViewPort.Children.Insert(KMP_Path_ListBox.SelectedIndex, dv3D_AreaOBJ);
+                #endregion
             }
             if (KMPSectionComboBox.Text == "Camera")
             {
@@ -6880,14 +7027,19 @@ namespace MK7_KMP_Editor_For_PG_
 
             IGTS_Section = new KMPPropertyGridSettings.IGTS_Section
             {
-                UnkBytes1 = 0,
-                UnkBytes2 = 0,
-                UnkBytes3 = 0,
-                UnkBytes4 = 0,
-                UnkBytes5 = 0,
-                UnkBytes6 = 0,
-                UnkBytes7 = 0,
-                UnkBytes8 = 0
+                Unknown1 = 0,
+                LapCount = 3,
+                PolePosition = 0,
+                Unknown2 = 0,
+                Unknown3 = 0,
+                RGBAColor = new KMPPropertyGridSettings.IGTS_Section.RGBA
+                {
+                    R = 255,
+                    G = 255,
+                    B = 255,
+                    A = 0
+                },
+                FlareAlpha = 75
             };
 
             HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section

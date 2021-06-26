@@ -18,11 +18,12 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<TPTKValue> TPTKValue_List = new List<TPTKValue>();
             public List<TPTKValue> TPTKValueList { get => TPTKValue_List; set => TPTKValue_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class TPTKValue
             {
+                [ReadOnly(true)]
                 public int ID { get; set; }
 
-                [Category("Position")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Position_Value { get; set; } = new Position();
                 public class Position
@@ -54,7 +55,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Rotation")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Rotation Rotate_Value { get; set; } = new Rotation();
                 public class Rotation
@@ -106,6 +106,7 @@ namespace MK7_KMP_Editor_For_PG_
             [TypeConverter(typeof(CustomSortTypeConverter))]
             public class HPNEValue
             {
+                [ReadOnly(true)]
                 public int GroupID { get; set; }
 
                 [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
@@ -164,23 +165,20 @@ namespace MK7_KMP_Editor_For_PG_
 
                 public uint HPNE_UnkBytes1 { get; set; }
 
-                [Category("EnemyRoute_Point")]
-                [TypeConverter(typeof(ExpandableObjectConverter))]
                 public List<TPNEValue> TPNEValue_List = new List<TPNEValue>();
                 [Browsable(false)]
                 public List<TPNEValue> TPNEValueList { get => TPNEValue_List; set => TPNEValue_List = value; }
-
+                [TypeConverter(typeof(CustomSortTypeConverter))]
                 public class TPNEValue
                 {
                     [ReadOnly(true)]
-                    public int Group_ID { get; set; } 
+                    public int Group_ID { get; set; }
 
+                    [ReadOnly(true)]
                     public int ID { get; set; }
 
-                    [Category("EnemyPoint Position")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public Position Positions { get; set; } = new Position();
-
                     public class Position
                     {
                         private string _X = "";
@@ -212,154 +210,187 @@ namespace MK7_KMP_Editor_For_PG_
 
                     public float Control { get; set; }
 
-                    [Category("MushSettings")]
-                    public ushort MushSettingValue { get; set; }
-
-                    [Category("MushSettings")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSetting MushSettingEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public MushSetting MushSettings { get; set; } = new MushSetting();
+                    public class MushSetting
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSettingType(MushSettingValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSetting MushSettingEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MushSettingType(MushSettingValue); }
+                        }
+
+                        public ushort MushSettingValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "Mush Setting";
+                        }
                     }
 
-                    [Category("DriftSetting")]
-                    public byte DriftSettingValue { get; set; }
-
-                    [Category("DriftSetting")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSetting DriftSettingEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public DriftSetting DriftSettings { get; set; } = new DriftSetting();
+                    public class DriftSetting
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSettingType(DriftSettingValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSetting DriftSettingEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.DriftSettingType(DriftSettingValue); }
+                        }
+
+                        public byte DriftSettingValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "Drift Setting";
+                        }
                     }
 
                     #region Flags(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\EnemyRoutes.cs" of "KMP Expander")
-                    [Category("Flags")]
-                    [Browsable(false)]
-                    public byte Flags { get; set; }
-
-                    [Category("Flags")]
-                    public bool WideTurn
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public FlagSetting FlagSettings { get; set; } = new FlagSetting();
+                    public class FlagSetting
                     {
-                        get
-                        {
-                            return (Flags & 0x1) != 0;
-                        }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 0)) | ((value ? 1 : 0) << 0));
-                        }
-                    }
+                        [Browsable(false)]
+                        public byte Flags { get; set; }
 
-                    [Category("Flags")]
-                    public bool NormalTurn
-                    {
-                        get
+                        public bool WideTurn
                         {
-                            return (Flags & 0x4) != 0;
+                            get
+                            {
+                                return (Flags & 0x1) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 0)) | ((value ? 1 : 0) << 0));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 2)) | ((value ? 1 : 0) << 2));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool SharpTurn
-                    {
-                        get
+                        public bool NormalTurn
                         {
-                            return (Flags & 0x10) != 0;
+                            get
+                            {
+                                return (Flags & 0x4) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 2)) | ((value ? 1 : 0) << 2));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 4)) | ((value ? 1 : 0) << 4));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool TricksForbidden
-                    {
-                        get
+                        public bool SharpTurn
                         {
-                            return (Flags & 0x8) != 0;
+                            get
+                            {
+                                return (Flags & 0x10) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 4)) | ((value ? 1 : 0) << 4));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 3)) | ((value ? 1 : 0) << 3));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool StickToRoute
-                    {
-                        get
+                        public bool TricksForbidden
                         {
-                            return (Flags & 0x40) != 0;
+                            get
+                            {
+                                return (Flags & 0x8) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 3)) | ((value ? 1 : 0) << 3));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 6)) | ((value ? 1 : 0) << 6));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool BouncyMushSection
-                    {
-                        get
+                        public bool StickToRoute
                         {
-                            return (Flags & 0x20) != 0;
+                            get
+                            {
+                                return (Flags & 0x40) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 6)) | ((value ? 1 : 0) << 6));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 5)) | ((value ? 1 : 0) << 5));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool ForceDefaultSpeed
-                    {
-                        get
+                        public bool BouncyMushSection
                         {
-                            return (Flags & 0x80) != 0;
+                            get
+                            {
+                                return (Flags & 0x20) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 5)) | ((value ? 1 : 0) << 5));
+                            }
                         }
-                        set
-                        {
-                            Flags = (byte)((Flags & ~(1 << 7)) | ((value ? 1 : 0) << 7));
-                        }
-                    }
 
-                    [Category("Flags")]
-                    public bool UnknownFlag
-                    {
-                        get
+                        public bool ForceDefaultSpeed
                         {
-                            return (Flags & 0x2) != 0;
+                            get
+                            {
+                                return (Flags & 0x80) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 7)) | ((value ? 1 : 0) << 7));
+                            }
                         }
-                        set
+
+                        public bool UnknownFlag
                         {
-                            Flags = (byte)((Flags & ~(1 << 1)) | ((value ? 1 : 0) << 1));
+                            get
+                            {
+                                return (Flags & 0x2) != 0;
+                            }
+                            set
+                            {
+                                Flags = (byte)((Flags & ~(1 << 1)) | ((value ? 1 : 0) << 1));
+                            }
+                        }
+
+                        public override string ToString()
+                        {
+                            return "Flag Setting";
                         }
                     }
                     #endregion
 
-                    [Category("PathFindOption")]
-                    public short PathFindOptionValue { get; set; }
-
-                    [Category("PathFindOption")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOption PathFindOptionEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public PathFindOption PathFindOptions { get; set; } = new PathFindOption();
+                    public class PathFindOption
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOptionType(PathFindOptionValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOption PathFindOptionEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.PathFindOptionType(PathFindOptionValue); }
+                        }
+
+                        public short PathFindOptionValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "PathFindOption";
+                        }
                     }
 
-                    [Category("MaxSearchYOffset")]
-                    public short MaxSearchYOffsetValue { get; set; }
-
-                    [Category("MaxSearchYOffset")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOption MaxSearchYOffsetOptionEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public MaxSearch_YOffset MaxSearchYOffset { get; set; } = new MaxSearch_YOffset();
+                    public class MaxSearch_YOffset
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOptionType(MaxSearchYOffsetValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOption MaxSearchYOffsetOptionEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.EnemyRoute.MaxSearchYOffsetOptionType(MaxSearchYOffsetValue); }
+                        }
+
+                        public short MaxSearchYOffsetValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "MaxSearchYOffset";
+                        }
                     }
 
                     public override string ToString()
@@ -379,9 +410,10 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<HPTIValue> HPTIValue_List = new List<HPTIValue>();
             public List<HPTIValue> HPTIValueList { get => HPTIValue_List; set => HPTIValue_List = value; }
-
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class HPTIValue
             {
+                [ReadOnly(true)]
                 public int GroupID { get; set; }
 
                 [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
@@ -418,23 +450,20 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("ItemRoute_Point")]
-                [TypeConverter(typeof(ExpandableObjectConverter))]
                 public List<TPTIValue> TPTIValue_List = new List<TPTIValue>();
                 [Browsable(false)]
                 public List<TPTIValue> TPTIValueList { get => TPTIValue_List; set => TPTIValue_List = value; }
-
+                [TypeConverter(typeof(CustomSortTypeConverter))]
                 public class TPTIValue
                 {
                     [ReadOnly(true)]
                     public int Group_ID { get; set; }
 
+                    [ReadOnly(true)]
                     public int ID { get; set; }
 
-                    [Category("ItemPoint Position")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public TPTI_Position TPTI_Positions { get; set; } = new TPTI_Position();
-
                     public class TPTI_Position
                     {
                         private string _X = "";
@@ -466,24 +495,40 @@ namespace MK7_KMP_Editor_For_PG_
 
                     public float TPTI_PointSize { get; set; }
 
-                    [Category("Gravity Mode")]
-                    public ushort GravityModeValue { get; set; }
-
-                    [Category("Gravity Mode")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityMode GravityModeEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public GravityModeSetting GravityModeSettings { get; set; } = new GravityModeSetting();
+                    public class GravityModeSetting
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityModeType(GravityModeValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityMode GravityModeEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.GravityModeType(GravityModeValue); }
+                        }
+
+                        public ushort GravityModeValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "Gravity Mode";
+                        }
                     }
 
-                    [Category("PlayerScanRadius")]
-                    public ushort PlayerScanRadiusValue { get; set; }
-
-                    [Category("PlayerScanRadius")]
-                    [ReadOnly(true)]
-                    public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadius PlayerScanRadiusEnum
+                    [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                    public PlayerScanRadiusSetting PlayerScanRadiusSettings { get; set; } = new PlayerScanRadiusSetting();
+                    public class PlayerScanRadiusSetting
                     {
-                        get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadiusType(PlayerScanRadiusValue); }
+                        [ReadOnly(true)]
+                        public KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadius PlayerScanRadiusEnum
+                        {
+                            get { return KMPs.KMPHelper.KMPValueTypeConverter.ItemRoute.PlayerScanRadiusType(PlayerScanRadiusValue); }
+                        }
+
+                        public ushort PlayerScanRadiusValue { get; set; }
+
+                        public override string ToString()
+                        {
+                            return "PlayerScanRadius";
+                        }
                     }
 
                     public override string ToString()
@@ -503,9 +548,10 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<HPKCValue> HPKCValue_List = new List<HPKCValue>();
             public List<HPKCValue> HPKCValueList { get => HPKCValue_List; set => HPKCValue_List = value; }
-
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class HPKCValue
             {
+                [ReadOnly(true)]
                 public int GroupID { get; set; }
 
                 [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
@@ -544,20 +590,18 @@ namespace MK7_KMP_Editor_For_PG_
 
                 public ushort HPKC_UnkBytes1 { get; set; }
 
-                [Category("CheckPoint Point")]
-                [TypeConverter(typeof(ExpandableObjectConverter))]
                 public List<TPKCValue> TPKCValue_List = new List<TPKCValue>();
                 [Browsable(false)]
                 public List<TPKCValue> TPKCValueList { get => TPKCValue_List; set => TPKCValue_List = value; }
-
+                [TypeConverter(typeof(CustomSortTypeConverter))]
                 public class TPKCValue
                 {
                     [ReadOnly(true)]
                     public int Group_ID { get; set; }
 
+                    [ReadOnly(true)]
                     public int ID { get; set; }
 
-                    [Category("Position2D_Left")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public Position2D_Left Position_2D_Left { get; set; } = new Position2D_Left();
                     public class Position2D_Left
@@ -582,7 +626,6 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
-                    [Category("Position2D_Left")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public Position2D_Right Position_2D_Right { get; set; } = new Position2D_Right();
                     public class Position2D_Right
@@ -607,28 +650,13 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
-                    [Category("CheckPoint Params")]
                     public byte TPKC_RespawnID { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_Checkpoint_Type { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_PreviousCheckPoint { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_NextCheckPoint { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_UnkBytes1 { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_UnkBytes2 { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_UnkBytes3 { get; set; }
-
-                    [Category("CheckPoint Params")]
                     public byte TPKC_UnkBytes4 { get; set; }
 
                     public override string ToString()
@@ -648,16 +676,17 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<JBOGValue> JBOGValue_List = new List<JBOGValue>();
             public List<JBOGValue> JBOGValueList { get => JBOGValue_List; set => JBOGValue_List = value; }
-
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class JBOGValue
             {
+                [ReadOnly(true)]
                 public int ID { get; set; }
 
-                [ReadOnly(false)]
+                [ReadOnly(true)]
+                public string ObjectName { get; set; }
                 public string ObjectID { get; set; }
                 public string JBOG_UnkByte1 { get; set; }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Positions { get; set; } = new Position();
                 public class Position
@@ -689,7 +718,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
@@ -721,7 +749,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
@@ -755,7 +782,7 @@ namespace MK7_KMP_Editor_For_PG_
 
                 public ushort JBOG_ITOP_RouteIDIndex { get; set; }
 
-                [TypeConverter(typeof(ExpandableObjectConverter))]
+                [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
                 public JBOG_SpecificSetting JOBJ_Specific_Setting { get; set; } = new JBOG_SpecificSetting();
                 public class JBOG_SpecificSetting
                 {
@@ -788,27 +815,27 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<ITOP_Route> ITOP_Route_List = new List<ITOP_Route>();
             public List<ITOP_Route> ITOP_RouteList { get => ITOP_Route_List; set => ITOP_Route_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class ITOP_Route
             {
+                [ReadOnly(true)]
                 public int GroupID { get; set; }
 
                 public byte ITOP_RouteSetting1 { get; set; }
-
                 public byte ITOP_RouteSetting2 { get; set; }
 
-                [Category("Route Point")]
-                [TypeConverter(typeof(ExpandableObjectConverter))]
                 public List<ITOP_Point> ITOP_Point_List = new List<ITOP_Point>();
                 [Browsable(false)]
                 public List<ITOP_Point> ITOP_PointList { get => ITOP_Point_List; set => ITOP_Point_List = value; }
+                [TypeConverter(typeof(CustomSortTypeConverter))]
                 public class ITOP_Point
                 {
                     [ReadOnly(true)]
                     public int GroupID { get; set; }
 
+                    [ReadOnly(true)]
                     public int ID { get; set; }
 
-                    [Category("Point Position")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public Position Positions { get; set; } = new Position();
                     public class Position
@@ -841,7 +868,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
 
                     public ushort ITOP_Point_RouteSpeed { get; set; }
-
                     public ushort ITOP_PointSetting2 { get; set; }
 
                     public override string ToString()
@@ -863,13 +889,32 @@ namespace MK7_KMP_Editor_For_PG_
             public List<AERAValue> AERAValueList { get => AERAValue_List; set => AERAValue_List = value; }
             public class AERAValue
             {
+                [ReadOnly(true)]
                 public int ID { get; set; }
-                public byte AreaMode { get; set; }
+
                 public byte AreaType { get; set; }
+
+                [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                public AreaModeSetting AreaModeSettings { get; set; } = new AreaModeSetting();
+                public class AreaModeSetting
+                {
+                    [ReadOnly(true)]
+                    public KMPs.KMPHelper.KMPValueTypeConverter.Area.AreaMode AreaTypeEnum
+                    {
+                        get { return KMPs.KMPHelper.KMPValueTypeConverter.Area.AreaModes(AreaModeValue); }
+                    }
+
+                    public byte AreaModeValue { get; set; }
+
+                    public override string ToString()
+                    {
+                        return "Area Mode";
+                    }
+                }
+
                 public byte AERA_EMACIndex { get; set; }
                 public byte Priority { get; set; }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Positions { get; set; } = new Position();
                 public class Position
@@ -901,7 +946,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
@@ -933,7 +977,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
@@ -965,16 +1008,10 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Unknown Value")]
                 public ushort AERA_UnkByte1 { get; set; }
-
-                [Category("Unknown Value")]
                 public ushort AERA_UnkByte2 { get; set; }
-
-                [Category("Unknown Value")]
-                public ushort AERA_UnkByte3 { get; set; }
-
-                [Category("Unknown Value")]
+                public byte RouteID { get; set; }
+                public byte EnemyID { get; set; }
                 public ushort AERA_UnkByte4 { get; set; }
 
                 public override string ToString()
@@ -988,8 +1025,10 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<EMACValue> EMACValue_List = new List<EMACValue>();
             public List<EMACValue> EMACValueList { get => EMACValue_List; set => EMACValue_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class EMACValue
             {
+                [ReadOnly(true)]
                 public int ID { get; set; }
 
                 public byte CameraType { get; set; }
@@ -997,19 +1036,23 @@ namespace MK7_KMP_Editor_For_PG_
                 public byte EMAC_UnkBytes1 { get; set; }
                 public byte EMAC_ITOP_CameraIndex { get; set; }
 
-                [Category("Speed")]
-                public ushort RouteSpeed { get; set; }
+                [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                public SpeedSetting SpeedSettings { get; set; } = new SpeedSetting();
+                public class SpeedSetting
+                {
+                    public ushort RouteSpeed { get; set; }
+                    public ushort FOVSpeed { get; set; }
+                    public ushort ViewpointSpeed { get; set; }
 
-                [Category("Speed")]
-                public ushort FOVSpeed { get; set; }
-
-                [Category("Speed")]
-                public ushort ViewpointSpeed { get; set; }
+                    public override string ToString()
+                    {
+                        return "Speed";
+                    }
+                }
 
                 public byte EMAC_UnkBytes2 { get; set; }
                 public byte EMAC_UnkBytes3 { get; set; }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Positions { get; set; } = new Position();
                 public class Position
@@ -1041,7 +1084,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
@@ -1073,13 +1115,19 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("FOV Angle")]
-                public float FOVAngle_Start { get; set; }
+                [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                public FOVAngleSetting FOVAngleSettings { get; set; } = new FOVAngleSetting();
+                public class FOVAngleSetting
+                {
+                    public float FOVAngle_Start { get; set; }
+                    public float FOVAngle_End { get; set; }
 
-                [Category("FOV Angle")]
-                public float FOVAngle_End { get; set; }
+                    public override string ToString()
+                    {
+                        return "FOV Angle";
+                    }
+                }
 
-                [Category("Viewpoint")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public ViewpointStart Viewpoint_Start { get; set; } = new ViewpointStart();
                 public class ViewpointStart
@@ -1111,7 +1159,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Viewpoint")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public ViewpointDestination Viewpoint_Destination { get; set; } = new ViewpointDestination();
                 public class ViewpointDestination
@@ -1156,11 +1203,12 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<TPGJValue> TPGJValue_List = new List<TPGJValue>();
             public List<TPGJValue> TPGJValueList { get => TPGJValue_List; set => TPGJValue_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class TPGJValue
             {
+                [ReadOnly(true)]
                 public int ID { get; set; }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Positions { get; set; } = new Position();
                 public class Position
@@ -1192,7 +1240,6 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                [Category("Transform")]
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
@@ -1238,16 +1285,31 @@ namespace MK7_KMP_Editor_For_PG_
 
         //TPSM = null
 
+        [TypeConverter(typeof(CustomSortTypeConverter))]
         public class IGTS_Section
         {
-            public byte UnkBytes1 { get; set; }
-            public byte UnkBytes2 { get; set; }
-            public byte UnkBytes3 { get; set; }
-            public byte UnkBytes4 { get; set; }
-            public uint UnkBytes5 { get; set; }
-            public ushort UnkBytes6 { get; set; }
-            public ushort UnkBytes7 { get; set; }
-            public uint UnkBytes8 { get; set; }
+            public uint Unknown1 { get; set; }
+            public byte LapCount { get; set; }
+            public byte PolePosition { get; set; }
+            public byte Unknown2 { get; set; }
+            public byte Unknown3 { get; set; }
+
+            [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+            public RGBA RGBAColor { get; set; }
+            public class RGBA
+            {
+                public byte R { get; set; }
+                public byte G { get; set; }
+                public byte B { get; set; }
+                public byte A { get; set; }
+
+                public override string ToString()
+                {
+                    return "RGBA Color";
+                }
+            }
+
+            public uint FlareAlpha { get; set; }
         }
 
         //SROC = null
@@ -1256,8 +1318,10 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<HPLGValue> HPLGValue_List = new List<HPLGValue>();
             public List<HPLGValue> HPLGValueList { get => HPLGValue_List; set => HPLGValue_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class HPLGValue
             {
+                [ReadOnly(true)]
                 public int GroupID { get; set; }
 
                 [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
@@ -1295,46 +1359,52 @@ namespace MK7_KMP_Editor_For_PG_
                 }
 
                 #region RouteSetting(I'm using the code in "KMPExpander-master\KMPExpander\Class\SimpleKMPs\GliderRoutes.cs" of "KMP Expander")
-                [Category("RouteSetting")]
-                [Browsable(false)]
-                public uint RouteSetting { get; set; }
-
-                [Category("RouteSetting")]
-                public bool ForceToRoute
+                [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
+                public RouteSetting RouteSettings { get; set; } = new RouteSetting();
+                public class RouteSetting
                 {
-                    get
-                    {
-                        return (RouteSetting & 0xFF) != 0;
-                    }
-                    set
-                    {
-                        RouteSetting = (RouteSetting & ~0xFFu) | (value ? 1u : 0u);
-                    }
-                }
+                    [Browsable(false)]
+                    public uint RouteSettingValue { get; set; }
 
-                [Category("RouteSetting")]
-                public bool CannonSection
-                {
-                    get
+                    public bool ForceToRoute
                     {
-                        return (RouteSetting & 0xFF00) != 0;
+                        get
+                        {
+                            return (RouteSettingValue & 0xFF) != 0;
+                        }
+                        set
+                        {
+                            RouteSettingValue = (RouteSettingValue & ~0xFFu) | (value ? 1u : 0u);
+                        }
                     }
-                    set
-                    {
-                        RouteSetting = (RouteSetting & ~0xFF00u) | (value ? 1u : 0u) << 8;
-                    }
-                }
 
-                [Category("RouteSetting")]
-                public bool PreventRaising
-                {
-                    get
+                    public bool CannonSection
                     {
-                        return (RouteSetting & 0xFF0000) != 0;
+                        get
+                        {
+                            return (RouteSettingValue & 0xFF00) != 0;
+                        }
+                        set
+                        {
+                            RouteSettingValue = (RouteSettingValue & ~0xFF00u) | (value ? 1u : 0u) << 8;
+                        }
                     }
-                    set
+
+                    public bool PreventRaising
                     {
-                        RouteSetting = (RouteSetting & ~0xFF0000u) | (value ? 1u : 0u) << 16;
+                        get
+                        {
+                            return (RouteSettingValue & 0xFF0000) != 0;
+                        }
+                        set
+                        {
+                            RouteSettingValue = (RouteSettingValue & ~0xFF0000u) | (value ? 1u : 0u) << 16;
+                        }
+                    }
+
+                    public override string ToString()
+                    {
+                        return "Route Setting";
                     }
                 }
                 #endregion
@@ -1344,14 +1414,15 @@ namespace MK7_KMP_Editor_For_PG_
                 public List<TPLGValue> TPLGValue_List = new List<TPLGValue>();
                 [Browsable(false)]
                 public List<TPLGValue> TPLGValueList { get => TPLGValue_List; set => TPLGValue_List = value; }
+                [TypeConverter(typeof(CustomSortTypeConverter))]
                 public class TPLGValue
                 {
                     [ReadOnly(true)]
                     public int GroupID { get; set; }
 
+                    [ReadOnly(true)]
                     public int ID { get; set; }
 
-                    [Category("HPLG_Position")]
                     [TypeConverter(typeof(ExpandableObjectConverter))]
                     public Position Positions { get; set; } = new Position();
                     public class Position

@@ -339,7 +339,8 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D AERA_Scale { get; set; }
                         public ushort AERA_UnkByte1 { get; set; }
                         public ushort AERA_UnkByte2 { get; set; }
-                        public ushort AERA_UnkByte3 { get; set; }
+                        public byte RouteID { get; set; }
+                        public byte EnemyID { get; set; }
                         public ushort AERA_UnkByte4 { get; set; }
                     }
                 }
@@ -418,14 +419,23 @@ namespace MK7_KMP_Editor_For_PG_
                 public class IGTS_Section
                 {
                     public char[] IGTSHeader { get; set; }
-                    public byte UnkBytes1 { get; set; }
-                    public byte UnkBytes2 { get; set; }
-                    public byte UnkBytes3 { get; set; }
-                    public byte UnkBytes4 { get; set; }
-                    public uint UnkBytes5 { get; set; }
-                    public ushort UnkBytes6 { get; set; }
-                    public ushort UnkBytes7 { get; set; }
-                    public uint UnkBytes8 { get; set; }
+
+                    public uint Unknown1 { get; set; }
+                    public byte LapCount { get; set; }
+                    public byte PolePosition { get; set; }
+                    public byte Unknown2 { get; set; }
+                    public byte Unknown3 { get; set; }
+
+                    public RGBA RGBAColor { get; set; }
+                    public class RGBA
+                    {
+                        public byte R { get; set; }
+                        public byte G { get; set; }
+                        public byte B { get; set; }
+                        public byte A { get; set; }
+                    }
+
+                    public uint FlareAlpha { get; set; }
                 }
 
                 public SROC_Section SROC { get; set; }
@@ -1551,6 +1561,32 @@ namespace MK7_KMP_Editor_For_PG_
                         return playerScanRadius;
                     }
                 }
+
+                public class Area
+                {
+                    public enum AreaMode
+                    {
+                        Box = 0,
+                        Cylinder = 1,
+                        Unknown
+                    }
+
+                    public static AreaMode AreaModes(byte Value)
+                    {
+                        AreaMode areaMode;
+                        if (Value > 1)
+                        {
+                            areaMode = AreaMode.Unknown;
+                        }
+                        else
+                        {
+                            areaMode = (AreaMode)Value;
+                        }
+
+                        return areaMode;
+
+                    }
+                }
             }
         }
 
@@ -1898,7 +1934,8 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[2]);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte1);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte2);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte3);
+                    bw.Write(AERA.AERAValue_List[Count].RouteID);
+                    bw.Write(AERA.AERAValue_List[Count].EnemyID);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte4);
                 }
 
@@ -2000,15 +2037,16 @@ namespace MK7_KMP_Editor_For_PG_
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
 
                 bw.Write(IGTS.IGTSHeader);
-                bw.Write(IGTS.UnkBytes1);
-                bw.Write(IGTS.UnkBytes2);
-                bw.Write(IGTS.UnkBytes3);
-                bw.Write(IGTS.UnkBytes4);
-                bw.Write(IGTS.UnkBytes5);
-                bw.Write(IGTS.UnkBytes6);
-                bw.Write(IGTS.UnkBytes7);
-                bw.Write(IGTS.UnkBytes8);
-
+                bw.Write(IGTS.Unknown1);
+                bw.Write(IGTS.LapCount);
+                bw.Write(IGTS.PolePosition);
+                bw.Write(IGTS.Unknown2);
+                bw.Write(IGTS.Unknown3);
+                bw.Write(IGTS.RGBAColor.R);
+                bw.Write(IGTS.RGBAColor.G);
+                bw.Write(IGTS.RGBAColor.B);
+                bw.Write(IGTS.RGBAColor.A);
+                bw.Write(IGTS.FlareAlpha);
                 return WritePosition;
             }
 
