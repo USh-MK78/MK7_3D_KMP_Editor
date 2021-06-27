@@ -20,10 +20,7 @@ namespace MK7_KMP_Editor_For_PG_
         public KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject ObjFlowDictionary { get; set; }
         ModelVisual3D dv3D_OBJ = null;
 
-        HTK_3DES.TSRSystem HTK_3DEdit = new HTK_3DES.TSRSystem();
         KMPs.KMPHelper.ObjFlowReader ObjFlowReader = new KMPs.KMPHelper.ObjFlowReader();
-        HTK_3DES.TransformMV3D_NewCreate TransformMV3D_NotNewCreate = new HTK_3DES.TransformMV3D_NewCreate();
-
 
         public AddKMPObjectForm()
         {
@@ -82,9 +79,9 @@ namespace MK7_KMP_Editor_For_PG_
             };
 
             string Path = ObjFlowDictionary.ObjFlows.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Path;
-            dv3D_OBJ = HTK_3DEdit.OBJReader(Path);
+            dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
-            TransformMV3D_NotNewCreate.Transform_MV3D(OBJ_transform_Value, dv3D_OBJ);
+            HTK_3DES.TransformMV3D.Transform_MV3D(OBJ_transform_Value, dv3D_OBJ);
 
             render.MainViewPort.Children.Add(dv3D_OBJ);
             #endregion

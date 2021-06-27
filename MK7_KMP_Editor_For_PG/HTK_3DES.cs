@@ -51,7 +51,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// </summary>
             /// <param name="Path">Model Path</param>
             /// <returns>ModelVisual3D</returns>
-            public ModelVisual3D OBJReader(string Path)
+            public static ModelVisual3D OBJReader(string Path)
             {
                 ModelVisual3D dv3D = new ModelVisual3D();
                 ObjReader objRead = new ObjReader();
@@ -76,7 +76,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// <summary>
             /// ガベージコレクション
             /// </summary>
-            public void GC_Dispose(object f)
+            public static void GC_Dispose(object f)
             {
                 int GCNum = GC.GetGeneration(f);
 
@@ -91,7 +91,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// <param name="MV3D">Input ModelVisual3D</param>
             /// <param name="InputString">Input String</param>
             /// <returns></returns>
-            public ModelVisual3D SetStringAndNewMV3D(ModelVisual3D MV3D, string InputString)
+            public static ModelVisual3D SetStringAndNewMV3D(ModelVisual3D MV3D, string InputString)
             {
                 MV3D.SetName(InputString);
                 return MV3D;
@@ -102,7 +102,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// </summary>
             /// <param name="MV3D">Input ModelVisual3D</param>
             /// <param name="InputString">Input String</param>
-            public void SetString_MV3D(ModelVisual3D MV3D, string InputString)
+            public static void SetString_MV3D(ModelVisual3D MV3D, string InputString)
             {
                 MV3D.SetName(InputString);
             }
@@ -114,7 +114,17 @@ namespace MK7_KMP_Editor_For_PG_
                 public Vector3D Translate3D { get; set; }
             }
 
-            public Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
+            public static double RadianToAngle(double Radian)
+            {
+                return Radian * (180 / Math.PI);
+            }
+
+            public static double AngleToRadian(double Angle)
+            {
+                return Angle * (Math.PI / 180);
+            }
+
+            public static Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
             {
                 Rect3D r = MV3D.Content.Bounds;
                 double cX = r.X + r.SizeX / 2;
@@ -125,7 +135,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return P3;
             }
 
-            public Point3D CalculateModelCenterPoint(Model3D MV3D)
+            public static Point3D CalculateModelCenterPoint(Model3D MV3D)
             {
                 Rect3D r = MV3D.Bounds;
                 double cX = r.X + r.SizeX / 2;
@@ -136,17 +146,40 @@ namespace MK7_KMP_Editor_For_PG_
                 return P3;
             }
 
-            public void NewTransformSystem3D(Transform transform, ModelVisual3D MV3D)
+            public enum RotationSetting
             {
+                Angle,
+                Radian
+            }
+
+            public static void NewTransformSystem3D(Transform transform, ModelVisual3D MV3D, RotationSetting rotationSetting)
+            {
+                double RotateX = new double();
+                double RotateY = new double();
+                double RotateZ = new double();
+
+                if (rotationSetting == RotationSetting.Angle)
+                {
+                    RotateX = transform.Rotate3D.X;
+                    RotateY = transform.Rotate3D.Y;
+                    RotateZ = transform.Rotate3D.Z;
+                }
+                if (rotationSetting == RotationSetting.Radian)
+                {
+                    RotateX = RadianToAngle(transform.Rotate3D.X);
+                    RotateY = RadianToAngle(transform.Rotate3D.Y);
+                    RotateZ = RadianToAngle(transform.Rotate3D.Z);
+                }
+
                 Model3D Model = MV3D.Content;
                 var Rotate3D_X = new RotateTransform3D();
-                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), transform.Rotate3D.X));
+                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), RotateX));
 
                 var Rotate3D_Y = new RotateTransform3D();
-                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), transform.Rotate3D.Y));
+                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), RotateY));
 
                 var Rotate3D_Z = new RotateTransform3D();
-                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), transform.Rotate3D.Z));
+                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), RotateZ));
 
                 var Scale3D = new ScaleTransform3D(transform.Scale3D, CalculateModelCenterPoint(Model));
                 var Translate3D = new TranslateTransform3D(transform.Translate3D);
@@ -162,16 +195,33 @@ namespace MK7_KMP_Editor_For_PG_
                 Model.Transform = T3DGroup;
             }
 
-            public void NewTransformSystem3D(Transform transform, Model3D MV3D)
+            public static void NewTransformSystem3D(Transform transform, Model3D MV3D, RotationSetting rotationSetting)
             {
+                double RotateX = new double();
+                double RotateY = new double();
+                double RotateZ = new double();
+
+                if (rotationSetting == RotationSetting.Angle)
+                {
+                    RotateX = transform.Rotate3D.X;
+                    RotateY = transform.Rotate3D.Y;
+                    RotateZ = transform.Rotate3D.Z;
+                }
+                if (rotationSetting == RotationSetting.Radian)
+                {
+                    RotateX = RadianToAngle(transform.Rotate3D.X);
+                    RotateY = RadianToAngle(transform.Rotate3D.Y);
+                    RotateZ = RadianToAngle(transform.Rotate3D.Z);
+                }
+
                 var Rotate3D_X = new RotateTransform3D();
-                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), transform.Rotate3D.X));
+                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), RotateX));
 
                 var Rotate3D_Y = new RotateTransform3D();
-                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), transform.Rotate3D.Y));
+                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), RotateY));
 
                 var Rotate3D_Z = new RotateTransform3D();
-                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), transform.Rotate3D.Z));
+                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), RotateZ));
 
                 var Scale3D = new ScaleTransform3D(transform.Scale3D);
                 var Translate3D = new TranslateTransform3D(transform.Translate3D);
@@ -186,140 +236,106 @@ namespace MK7_KMP_Editor_For_PG_
                 Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
                 MV3D.Transform = T3DGroup;
             }
+
+            public static void NewTransformSystem3D(Transform_Value transform, ModelVisual3D MV3D, RotationSetting rotationSetting)
+            {
+                double RotateX = new double();
+                double RotateY = new double();
+                double RotateZ = new double();
+
+                if (rotationSetting == RotationSetting.Angle)
+                {
+                    RotateX = transform.Rotate_Value.X;
+                    RotateY = transform.Rotate_Value.Y;
+                    RotateZ = transform.Rotate_Value.Z;
+                }
+                if (rotationSetting == RotationSetting.Radian)
+                {
+                    RotateX = RadianToAngle(transform.Rotate_Value.X);
+                    RotateY = RadianToAngle(transform.Rotate_Value.Y);
+                    RotateZ = RadianToAngle(transform.Rotate_Value.Z);
+                }
+
+                Model3D Model = MV3D.Content;
+                var Rotate3D_X = new RotateTransform3D();
+                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), RotateX));
+
+                var Rotate3D_Y = new RotateTransform3D();
+                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), RotateY));
+
+                var Rotate3D_Z = new RotateTransform3D();
+                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), RotateZ));
+
+                var Scale3D = new ScaleTransform3D(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), CalculateModelCenterPoint(Model));
+                var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+
+                Transform3DCollection T3D_Collection = new Transform3DCollection();
+                T3D_Collection.Add(Scale3D);
+                T3D_Collection.Add(Rotate3D_X);
+                T3D_Collection.Add(Rotate3D_Y);
+                T3D_Collection.Add(Rotate3D_Z);
+                T3D_Collection.Add(Translate3D);
+
+                Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+                Model.Transform = T3DGroup;
+            }
+
+            public static void NewTransformSystem3D(Transform_Value transform, Model3D MV3D, RotationSetting rotationSetting)
+            {
+                double RotateX = new double();
+                double RotateY = new double();
+                double RotateZ = new double();
+
+                if (rotationSetting == RotationSetting.Angle)
+                {
+                    RotateX = transform.Rotate_Value.X;
+                    RotateY = transform.Rotate_Value.Y;
+                    RotateZ = transform.Rotate_Value.Z;
+                }
+                if (rotationSetting == RotationSetting.Radian)
+                {
+                    RotateX = RadianToAngle(transform.Rotate_Value.X);
+                    RotateY = RadianToAngle(transform.Rotate_Value.Y);
+                    RotateZ = RadianToAngle(transform.Rotate_Value.Z);
+                }
+
+                var Rotate3D_X = new RotateTransform3D();
+                Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(1, 0, 0), RotateX));
+
+                var Rotate3D_Y = new RotateTransform3D();
+                Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 1, 0), RotateY));
+
+                var Rotate3D_Z = new RotateTransform3D();
+                Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(new Vector3D(0, 0, 1), RotateZ));
+
+                var Scale3D = new ScaleTransform3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z);
+                var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+
+                Transform3DCollection T3D_Collection = new Transform3DCollection();
+                T3D_Collection.Add(Scale3D);
+                T3D_Collection.Add(Rotate3D_X);
+                T3D_Collection.Add(Rotate3D_Y);
+                T3D_Collection.Add(Rotate3D_Z);
+                T3D_Collection.Add(Translate3D);
+
+                Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+                MV3D.Transform = T3DGroup;
+            }
         }
 
-        public class TransformMV3D_NewCreate : TSRSystem
+        public class TransformMV3D : TSRSystem
         {
             /// <summary>
-            /// Objectを読み込み、モデルの変換やList<ModelVisual3D>への格納を提供するメソッド
-            /// </summary>
-            /// <param name="Translate_Ary">Translate Value Array</param>
-            /// <param name="Scale_Ary">Scale Value Array</param>
-            /// <param name="Rotate_Ary">Rotate Value Array</param>
-            /// <param name="MdlPath">表示に使用するモデルのパス</param>
-            /// <param name="Dispose">true = Dispose, false = No Dispose</param> 
-            /// <param name="KeyList">List<ModelVisual3D>(Option)</param>
-            public ModelVisual3D Transform_MV3D(double[] Translate_Ary, double[] Scale_Ary, double[] Rotate_Ary, String MdlPath, bool Dispose, List<ModelVisual3D> KeyList = null)
-            {
-                ModelVisual3D dv3D = OBJReader(MdlPath);
-
-                //ラジアンから角度を求める
-                double angle_X = Rotate_Ary[0] * (180 / Math.PI);
-                double angle_Y = Rotate_Ary[1] * (180 / Math.PI);
-                double angle_Z = Rotate_Ary[2] * (180 / Math.PI);
-
-                //XYZ軸
-                var axis_X = new Vector3D(1, 0, 0);
-                var axis_Y = new Vector3D(0, 1, 0);
-                var axis_Z = new Vector3D(0, 0, 1);
-
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_Ary[0] / 2, Scale_Ary[1] / 2, Scale_Ary[2] / 2),
-                    Translate3D = new Vector3D(Translate_Ary[0], Translate_Ary[1], Translate_Ary[2])
-                };
-
-                NewTransformSystem3D(t, dv3D.Content);
-                #endregion
-
-                if (KeyList != null)
-                {
-                    KeyList.Add(dv3D);
-                }
-
-                if (Dispose == true)
-                {
-                    GC_Dispose(dv3D);
-                }
-                if (Dispose == false)
-                {
-                    //Nothing
-                }
-
-                return dv3D;
-            }
-
-            /// <summary>
-            /// モデルの変換のみを提供するメソッド
-            /// </summary>
-            /// <param name="Translate_Ary">Translate Value Array</param>
-            /// <param name="Scale_Ary">Scale Value Array</param>
-            /// <param name="Rotate_Ary">Rotate Value Array</param>
-            /// <param name="dv3D">Input ModelVisual3D</param>
-            public ModelVisual3D Transform_MV3D(double[] Translate_Ary, double[] Scale_Ary, double[] Rotate_Ary, ModelVisual3D dv3D)
-            {
-                //ラジアンから角度を求める
-                double angle_X = Rotate_Ary[0] * (180 / Math.PI);
-                double angle_Y = Rotate_Ary[1] * (180 / Math.PI);
-                double angle_Z = Rotate_Ary[2] * (180 / Math.PI);
-
-                //XYZ軸
-                var axis_X = new Vector3D(1, 0, 0);
-                var axis_Y = new Vector3D(0, 1, 0);
-                var axis_Z = new Vector3D(0, 0, 1);
-
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_Ary[0] / 2, Scale_Ary[1] / 2, Scale_Ary[2] / 2),
-                    Translate3D = new Vector3D(Translate_Ary[0], Translate_Ary[1], Translate_Ary[2])
-                };
-
-                NewTransformSystem3D(t, dv3D.Content);
-                #endregion
-
-                return dv3D;
-            }
-
-            /// <summary>
-            /// Objectを読み込み、Transform_Valueを使用してモデルの変換やList<ModelVisual3D>への格納を提供するメソッド()
+            /// Transform_Valueを使用してモデルの変換のみを提供するメソッド
             /// </summary>
             /// <param name="transform_Value"></param>
-            /// <param name="MdlPath">表示に使用するモデルのパス</param>
-            /// <param name="Dispose">true = Dispose, false = No Dispose</param> 
-            /// <param name="KeyList">List<ModelVisual3D>(Option)</param>
-            public ModelVisual3D Transform_MV3D(Transform_Value transform_Value, String MdlPath, bool Dispose, List<ModelVisual3D> KeyList = null)
+            /// <param name="dv3D">Input ModelVisual3D</param>
+            public static ModelVisual3D Transform_MV3D(Transform_Value transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
             {
-                ModelVisual3D dv3D = OBJReader(MdlPath);
-
-                //ラジアンから角度を求める
-                double angle_X = transform_Value.Rotate_Value.X * (180 / Math.PI);
-                double angle_Y = transform_Value.Rotate_Value.Y * (180 / Math.PI);
-                double angle_Z = transform_Value.Rotate_Value.Z * (180 / Math.PI);
-
-                //XYZ軸
-                var axis_X = new Vector3D(1, 0, 0);
-                var axis_Y = new Vector3D(0, 1, 0);
-                var axis_Z = new Vector3D(0, 0, 1);
-
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(transform_Value.Scale_Value.X / 2, transform_Value.Scale_Value.Y / 2, transform_Value.Scale_Value.Z / 2),
-                    Translate3D = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z)
-                };
-
-                NewTransformSystem3D(t, dv3D.Content);
-                #endregion
-
-                if (KeyList != null)
-                {
-                    KeyList.Add(dv3D);
-                }
-
-                if (Dispose == true)
-                {
-                    GC_Dispose(dv3D);
-                }
-                if (Dispose == false)
-                {
-                    //Nothing
-                }
-
+                transform_Value.Scale_Value.X = transform_Value.Scale_Value.X / 2;
+                transform_Value.Scale_Value.Y = transform_Value.Scale_Value.Y / 2;
+                transform_Value.Scale_Value.Z = transform_Value.Scale_Value.Z / 2;
+                NewTransformSystem3D(transform_Value, dv3D.Content, rotationSetting);
                 return dv3D;
             }
 
@@ -328,84 +344,41 @@ namespace MK7_KMP_Editor_For_PG_
             /// </summary>
             /// <param name="transform_Value"></param>
             /// <param name="dv3D">Input ModelVisual3D</param>
-            public ModelVisual3D Transform_MV3D(Transform_Value transform_Value, ModelVisual3D dv3D)
+            public static ModelVisual3D Transform_MV3D(Transform transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
             {
-                //ラジアンから角度を求める
-                double angle_X = transform_Value.Rotate_Value.X * (180 / Math.PI);
-                double angle_Y = transform_Value.Rotate_Value.Y * (180 / Math.PI);
-                double angle_Z = transform_Value.Rotate_Value.Z * (180 / Math.PI);
-
-                //XYZ軸
-                var axis_X = new Vector3D(1, 0, 0);
-                var axis_Y = new Vector3D(0, 1, 0);
-                var axis_Z = new Vector3D(0, 0, 1);
-
-                #if DEBUG
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(transform_Value.Scale_Value.X / 2, transform_Value.Scale_Value.Y / 2, transform_Value.Scale_Value.Z / 2),
-                    Translate3D = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z)
-                };
-                #endregion
-                NewTransformSystem3D(t, dv3D.Content);
-                #else
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(transform_Value.Scale_Value.X / 10, transform_Value.Scale_Value.Y / 10, transform_Value.Scale_Value.Z / 10),
-                    Translate3D = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z)
-                };
-                #endregion
-                NewTransformSystem3D(t, dv3D);
-                #endif
-
+                transform_Value.Scale3D = new Vector3D(transform_Value.Scale3D.X / 2, transform_Value.Scale3D.Y / 2, transform_Value.Scale3D.Z / 2);
+                NewTransformSystem3D(transform_Value, dv3D.Content, rotationSetting);
                 return dv3D;
             }
 
-            /// <summary>
-            /// Transform_Valueを使用してモデルの変換のみを提供するメソッド
-            /// </summary>
-            /// <param name="transform_Value"></param>
-            /// <param name="dv3D">Input ModelVisual3D</param>
-            public Model3D Transform_MV3D(Transform transform_Value, Model3D dv3D)
-            {
-                //ラジアンから角度を求める
-                double angle_X = transform_Value.Rotate3D.X * (180 / Math.PI);
-                double angle_Y = transform_Value.Rotate3D.Y * (180 / Math.PI);
-                double angle_Z = transform_Value.Rotate3D.Z * (180 / Math.PI);
 
-                //XYZ軸
-                var axis_X = new Vector3D(1, 0, 0);
-                var axis_Y = new Vector3D(0, 1, 0);
-                var axis_Z = new Vector3D(0, 0, 1);
+            #region Unused(?)
+            ///// <summary>
+            ///// Transform_Valueを使用してモデルの変換のみを提供するメソッド
+            ///// </summary>
+            ///// <param name="transform_Value"></param>
+            ///// <param name="dv3D">Input ModelVisual3D</param>
+            //public static Model3D Transform_MV3D(Transform_Value transform_Value, Model3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
+            //{
+            //    transform_Value.Scale_Value.X = transform_Value.Scale_Value.X / 10;
+            //    transform_Value.Scale_Value.Y = transform_Value.Scale_Value.Y / 10;
+            //    transform_Value.Scale_Value.Z = transform_Value.Scale_Value.Z / 10;
+            //    NewTransformSystem3D(transform_Value, dv3D, rotationSetting);
+            //    return dv3D;
+            //}
 
-                #if DEBUG
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(transform_Value.Scale3D.X / 2, transform_Value.Scale3D.Y / 2, transform_Value.Scale3D.Z / 2),
-                    Translate3D = new Vector3D(transform_Value.Translate3D.X, transform_Value.Translate3D.Y, transform_Value.Translate3D.Z)
-                };
-                #endregion
-                NewTransformSystem3D(t, dv3D);
-                #else
-                #region Transform
-                Transform t = new Transform
-                {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(transform_Value.Scale3D.X / 2, transform_Value.Scale3D.Y / 2, transform_Value.Scale3D.Z / 2),
-                    Translate3D = new Vector3D(transform_Value.Translate3D.X, transform_Value.Translate3D.Y, transform_Value.Translate3D.Z)
-                };
-                #endregion
-                NewTransformSystem3D(t, dv3D);
-                #endif
-
-                return dv3D;
-            }
+            ///// <summary>
+            ///// Transform_Valueを使用してモデルの変換のみを提供するメソッド
+            ///// </summary>
+            ///// <param name="transform_Value"></param>
+            ///// <param name="dv3D">Input ModelVisual3D</param>
+            //public static Model3D Transform_MV3D(Transform transform_Value, Model3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
+            //{
+            //    transform_Value.Scale3D = new Vector3D(transform_Value.Scale3D.X / 10, transform_Value.Scale3D.Y / 10, transform_Value.Scale3D.Z / 10);
+            //    NewTransformSystem3D(transform_Value, dv3D, rotationSetting);
+            //    return dv3D;
+            //}
+            #endregion
         }
 
         public class Line3DSystem : TSRSystem
