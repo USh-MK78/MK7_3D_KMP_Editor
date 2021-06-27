@@ -10,10 +10,6 @@ I chose the KMP file because of my pure curiosity, "I want to express this file 
 *how to use*  
 To actually use this program, you need to build a project.  
   
-*Note*  
-When building, please build as a debug version.  
-The main reason is that the state of Helix Toolkit after 3D conversion is different between the debug version and the build version.  
-  
 *About the build environment*  
 HelixToolkit v2.12.0  
 HelixToolkit.Wpf v2.12.0  
