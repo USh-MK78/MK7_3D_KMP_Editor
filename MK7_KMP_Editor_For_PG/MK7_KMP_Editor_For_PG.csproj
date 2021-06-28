@@ -68,7 +68,6 @@
     <Compile Include="AddKMPObjectForm.Designer.cs">
       <DependentUpon>AddKMPObjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataTableHelper.cs" />
     <Compile Include="FBOC.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

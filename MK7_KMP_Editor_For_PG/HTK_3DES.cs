@@ -325,32 +325,27 @@ namespace MK7_KMP_Editor_For_PG_
 
         public class TransformMV3D : TSRSystem
         {
-            /// <summary>
-            /// Transform_Valueを使用してモデルの変換のみを提供するメソッド
-            /// </summary>
-            /// <param name="transform_Value"></param>
-            /// <param name="dv3D">Input ModelVisual3D</param>
-            public static ModelVisual3D Transform_MV3D(Transform_Value transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
+            public static ModelVisual3D Transform_MV3D(Transform_Value transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian, bool IsContent = true, double ScaleFactor = 2)
             {
-                transform_Value.Scale_Value.X = transform_Value.Scale_Value.X / 2;
-                transform_Value.Scale_Value.Y = transform_Value.Scale_Value.Y / 2;
-                transform_Value.Scale_Value.Z = transform_Value.Scale_Value.Z / 2;
-                NewTransformSystem3D(transform_Value, dv3D.Content, rotationSetting);
+                Transform t = new Transform
+                {
+                    Rotate3D = new Vector3D(transform_Value.Rotate_Value.X, transform_Value.Rotate_Value.Y, transform_Value.Rotate_Value.Z),
+                    Scale3D = new Vector3D(transform_Value.Scale_Value.X / ScaleFactor, transform_Value.Scale_Value.Y / ScaleFactor, transform_Value.Scale_Value.Z / ScaleFactor),
+                    Translate3D = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z)
+                };
+
+                if (IsContent == true) NewTransformSystem3D(t, dv3D.Content, rotationSetting);
+                if (IsContent == false) NewTransformSystem3D(t, dv3D, rotationSetting);
                 return dv3D;
             }
 
-            /// <summary>
-            /// Transform_Valueを使用してモデルの変換のみを提供するメソッド
-            /// </summary>
-            /// <param name="transform_Value"></param>
-            /// <param name="dv3D">Input ModelVisual3D</param>
-            public static ModelVisual3D Transform_MV3D(Transform transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
+            public static ModelVisual3D Transform_MV3D(Transform transform_Value, ModelVisual3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian, bool IsContent = true, double ScaleFactor = 2)
             {
-                transform_Value.Scale3D = new Vector3D(transform_Value.Scale3D.X / 2, transform_Value.Scale3D.Y / 2, transform_Value.Scale3D.Z / 2);
-                NewTransformSystem3D(transform_Value, dv3D.Content, rotationSetting);
+                transform_Value.Scale3D = new Vector3D(transform_Value.Scale3D.X / ScaleFactor, transform_Value.Scale3D.Y / ScaleFactor, transform_Value.Scale3D.Z / ScaleFactor);
+                if (IsContent == true) NewTransformSystem3D(transform_Value, dv3D.Content, rotationSetting);
+                if (IsContent == false) NewTransformSystem3D(transform_Value, dv3D, rotationSetting);
                 return dv3D;
             }
-
 
             #region Unused(?)
             ///// <summary>
@@ -358,11 +353,14 @@ namespace MK7_KMP_Editor_For_PG_
             ///// </summary>
             ///// <param name="transform_Value"></param>
             ///// <param name="dv3D">Input ModelVisual3D</param>
-            //public static Model3D Transform_MV3D(Transform_Value transform_Value, Model3D dv3D, RotationSetting rotationSetting = RotationSetting.Radian)
+            //public static Model3D Transform_MV3D(Transform_Value transform_Value, Model3D dv3D, bool IsScale = true, RotationSetting rotationSetting = RotationSetting.Radian)
             //{
-            //    transform_Value.Scale_Value.X = transform_Value.Scale_Value.X / 10;
-            //    transform_Value.Scale_Value.Y = transform_Value.Scale_Value.Y / 10;
-            //    transform_Value.Scale_Value.Z = transform_Value.Scale_Value.Z / 10;
+            //    if(IsScale == true)
+            //    {
+            //        transform_Value.Scale_Value.X = transform_Value.Scale_Value.X / 10;
+            //        transform_Value.Scale_Value.Y = transform_Value.Scale_Value.Y / 10;
+            //        transform_Value.Scale_Value.Z = transform_Value.Scale_Value.Z / 10;
+            //    }
             //    NewTransformSystem3D(transform_Value, dv3D, rotationSetting);
             //    return dv3D;
             //}
