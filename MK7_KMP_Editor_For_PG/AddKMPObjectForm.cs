@@ -40,7 +40,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void AddKMPObjectForm_Load(object sender, EventArgs e)
         {
-            ObjFlowDictionary = ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
+            ObjFlowDictionary = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
 
             foreach (var f in ObjFlowDictionary.ObjFlows)
             {

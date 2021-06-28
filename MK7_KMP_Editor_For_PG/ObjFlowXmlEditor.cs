@@ -13,8 +13,6 @@ namespace MK7_KMP_Editor_For_PG_
 {
     public partial class ObjFlowXmlEditor : Form
     {
-        KMPs.KMPHelper.ObjFlowReader ObjFlowReader = new KMPs.KMPHelper.ObjFlowReader();
-
         public KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject;
 
         public ObjFlowXmlPropertyGridSetting ObjFlowXmlPropertyGridSettings;
@@ -26,7 +24,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void ObjFlowXmlEditor_Load(object sender, EventArgs e)
         {
-            objFlowXmlToObject = ObjFlowReader.ReadObjFlowXml("ObjFlowData.Xml");
+            objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.Xml");
 
             ObjFlowXmlPropertyGridSettings = new ObjFlowXmlPropertyGridSetting
             {
@@ -212,7 +210,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             //Save ObjFlowData.xml
-            ObjFlowReader.WriteObjFlowXml(ObjFlowXmlPropertyGridSettings, "ObjFlowData.Xml");
+            KMPs.KMPHelper.ObjFlowReader.WriteObjFlowXml(ObjFlowXmlPropertyGridSettings, "ObjFlowData.Xml");
         }
 
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)

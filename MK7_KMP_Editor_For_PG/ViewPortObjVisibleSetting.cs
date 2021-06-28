@@ -19,7 +19,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">true=Hide</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3D">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<ModelVisual3D> MV3D)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<ModelVisual3D> MV3D)
         {
             //非表示にする
             if (Visible == true)
@@ -68,7 +68,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">true=Hide</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3DList_List">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<List<ModelVisual3D>> MV3DList_List)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<List<ModelVisual3D>> MV3DList_List)
         {
             //非表示にする
             if (Visible == true)
@@ -123,7 +123,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">bool</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3D">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, ModelVisual3D MV3D)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, ModelVisual3D MV3D)
         {
             //非表示にする
             if (Visible == true)
@@ -159,7 +159,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">bool</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3D">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, HTK_3DES.PathTools.Rail rail)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, HTK_3DES.PathTools.Rail rail)
         {
             //非表示にする
             if (Visible == true)
@@ -230,7 +230,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">bool</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3D">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<HTK_3DES.PathTools.Rail> rail_List)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<HTK_3DES.PathTools.Rail> rail_List)
         {
             //非表示にする
             if (Visible == true)
@@ -307,7 +307,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// <param name="Visible">bool</param>
         /// <param name="UserCtrl">UserControl(UserControl1.xaml)</param>
         /// <param name="MV3D">ModelVisual3D List</param>
-        public void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint> Checkpoint_List)
+        public static void ViewportObj_Visibility(bool Visible, UserControl1 UserCtrl, List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint> Checkpoint_List)
         {
             //非表示にする
             if (Visible == true)

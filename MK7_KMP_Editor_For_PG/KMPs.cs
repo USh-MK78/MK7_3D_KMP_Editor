@@ -524,7 +524,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="BVector3D"></param>
                 /// <returns></returns>
-                public Vector3D ByteArrayToVector3D(ByteVector3D BVector3D)
+                public static Vector3D ByteArrayToVector3D(ByteVector3D BVector3D)
                 {
                     double Value_X = BitConverter.ToSingle(BVector3D.Byte_X, 0);
                     double Value_Y = BitConverter.ToSingle(BVector3D.Byte_Y, 0);
@@ -538,7 +538,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="BVector3D"></param>
                 /// <returns></returns>
-                public Vector3D ByteArrayToVector3D(byte[][] BVector3D)
+                public static Vector3D ByteArrayToVector3D(byte[][] BVector3D)
                 {
                     double Value_X = BitConverter.ToSingle(BVector3D[0], 0);
                     double Value_Y = BitConverter.ToSingle(BVector3D[1], 0);
@@ -555,7 +555,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="Vector3D"></param>
                 /// <returns></returns>
-                public ByteVector3D Vector3DToBVector3D(Vector3D Vector3D)
+                public static ByteVector3D Vector3DToBVector3D(Vector3D Vector3D)
                 {
                     byte[] Byte_X = BitConverter.GetBytes(Convert.ToSingle(Vector3D.X));
                     byte[] Byte_Y = BitConverter.GetBytes(Convert.ToSingle(Vector3D.Y));
@@ -576,7 +576,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="Vector3D"></param>
                 /// <returns></returns>
-                public byte[][] Vector3DToByteArray(Vector3D Vector3D)
+                public static byte[][] Vector3DToByteArray(Vector3D Vector3D)
                 {
                     byte[] Byte_X = BitConverter.GetBytes(Convert.ToSingle(Vector3D.X));
                     byte[] Byte_Y = BitConverter.GetBytes(Convert.ToSingle(Vector3D.Y));
@@ -599,7 +599,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="InputBVector2"></param>
                 /// <returns>Vector2</returns>
-                public Vector2 BVector2ToVector2D(ByteVector2D InputBVector2)
+                public static Vector2 BVector2ToVector2D(ByteVector2D InputBVector2)
                 {
                     return new Vector2(BitConverter.ToSingle(InputBVector2.Byte_X, 0), BitConverter.ToSingle(InputBVector2.Byte_Y, 0));
                 }
@@ -609,7 +609,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="InputByteArray"></param>
                 /// <returns>Vector2</returns>
-                public Vector2 ByteArrayToVector2D(byte[][] InputByteArray)
+                public static Vector2 ByteArrayToVector2D(byte[][] InputByteArray)
                 {
                     return new Vector2(BitConverter.ToSingle(InputByteArray[0], 0), BitConverter.ToSingle(InputByteArray[1], 0));
                 }
@@ -619,7 +619,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="InputVector2"></param>
                 /// <returns>ByteVector2D</returns>
-                public ByteVector2D Vector2ToBVector2D(Vector2 InputVector2)
+                public static ByteVector2D Vector2ToBVector2D(Vector2 InputVector2)
                 {
                     ByteVector2D BVector2D = new ByteVector2D
                     {
@@ -635,7 +635,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// </summary>
                 /// <param name="InputVector2"></param>
                 /// <returns>ByteVector2D</returns>
-                public byte[][] Vector2ToByteArray(Vector2 InputVector2)
+                public static byte[][] Vector2ToByteArray(Vector2 InputVector2)
                 {
                     return new byte[][] { BitConverter.GetBytes(Convert.ToSingle(InputVector2.X)), BitConverter.GetBytes(Convert.ToSingle(InputVector2.Y)) };
                 }
@@ -653,7 +653,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// <param name="InputVector3D"></param>
                 /// <param name="AxisToExc"></param>
                 /// <returns></returns>
-                public Vector2 Vector3DTo2D(Vector3D InputVector3D, Axis_Up AxisToExc = Axis_Up.Y)
+                public static Vector2 Vector3DTo2D(Vector3D InputVector3D, Axis_Up AxisToExc = Axis_Up.Y)
                 {
                     Vector2 Position2D = new Vector2();
                     if (AxisToExc == Axis_Up.X)
@@ -679,7 +679,7 @@ namespace MK7_KMP_Editor_For_PG_
                 /// <param name="UpDirection"></param>
                 /// <param name="Height"></param>
                 /// <returns></returns>
-                public Vector3D Vector2DTo3D(Vector2 InputVector2D, Axis_Up UpDirection = Axis_Up.Y, double Height = 0)
+                public static Vector3D Vector2DTo3D(Vector2 InputVector2D, Axis_Up UpDirection = Axis_Up.Y, double Height = 0)
                 {
                     Vector3D Position3D = new Vector3D();
                     if (UpDirection == Axis_Up.X)
@@ -808,7 +808,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                public List<ObjFlowValue> Read(string Path)
+                public static List<ObjFlowValue> Read(string Path)
                 {
                     List<ObjFlowValue> objFlowValues_List = new List<ObjFlowValue>();
 
@@ -872,7 +872,7 @@ namespace MK7_KMP_Editor_For_PG_
                     return objFlowValues_List;
                 }
 
-                public Dictionary<string[], string> ObjFlowMdlPathDictionary(ObjFlowXmlToObject ObjFlowToObj, string Path, string DefaultModelPath)
+                public static Dictionary<string[], string> ObjFlowMdlPathDictionary(ObjFlowXmlToObject ObjFlowToObj, string Path, string DefaultModelPath)
                 {
                     //指定したディレクトリの中にあるファイルパスを全て取得
                     string[] PathAry = System.IO.Directory.GetFiles(Path, "*.obj", System.IO.SearchOption.AllDirectories);
@@ -893,7 +893,7 @@ namespace MK7_KMP_Editor_For_PG_
                     return ObjFlowDicts;
                 }
 
-                public void CreateXml(List<ObjFlowValue> ObjFlowVal_List, string KMPObjectFolderPath, string DefaultModelPath, string XmlPath)
+                public static void CreateXml(List<ObjFlowValue> ObjFlowVal_List, string KMPObjectFolderPath, string DefaultModelPath, string XmlPath)
                 {
                     string[] PathAry = System.IO.Directory.GetFiles(KMPObjectFolderPath, "*.obj", System.IO.SearchOption.AllDirectories);
 
@@ -989,7 +989,7 @@ namespace MK7_KMP_Editor_For_PG_
                     sw.Close();
                 }
 
-                public ObjFlowXmlToObject ReadObjFlowXml(string Path)
+                public static ObjFlowXmlToObject ReadObjFlowXml(string Path)
                 {
                     System.IO.FileStream fs1 = new FileStream(Path, FileMode.Open, FileAccess.Read);
                     System.Xml.Serialization.XmlSerializer s1 = new System.Xml.Serialization.XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
@@ -1069,7 +1069,7 @@ namespace MK7_KMP_Editor_For_PG_
                     return objFlowXmlToObject;
                 }
 
-                public void WriteObjFlowXml(ObjFlowXmlPropertyGridSetting objFlowXmlToObject, string Path)
+                public static void WriteObjFlowXml(ObjFlowXmlPropertyGridSetting objFlowXmlToObject, string Path)
                 {
                     TestXml.KMPObjFlowDataXml kMPObjFlowDataXml = new TestXml.KMPObjFlowDataXml
                     {
@@ -1167,7 +1167,7 @@ namespace MK7_KMP_Editor_For_PG_
                 //    return Str2byte;
                 //}
 
-                public byte[] OBJIDStrToByteArray(string InputString_OBJID)
+                public static byte[] OBJIDStrToByteArray(string InputString_OBJID)
                 {
                     string w1 = InputString_OBJID.Substring(0, 2);
                     string w2 = InputString_OBJID.Substring(2);
@@ -1592,11 +1592,9 @@ namespace MK7_KMP_Editor_For_PG_
 
         public class KMPWriter : KMPs
         {
-            public uint Write_TPTK(BinaryWriter bw, KMPFormat.KMPSection.TPTK_Section TPTK)
+            public static uint Write_TPTK(BinaryWriter bw, KMPFormat.KMPSection.TPTK_Section TPTK)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(TPTK.TPTKHeader);
                 bw.Write(TPTK.NumOfEntries);
@@ -1604,12 +1602,12 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for(int Count = 0; Count < TPTK.NumOfEntries; Count++)
                 {
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[2]);
                     bw.Write(TPTK.TPTKValue_List[Count].Player_Index);
                     bw.Write(TPTK.TPTKValue_List[Count].TPTK_UnkBytes);
                 }
@@ -1623,10 +1621,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint HPNE { get; set; }
             }
 
-            public TPNE_HPNE_WritePosition Write_TPNE_HPNE(BinaryWriter bw, KMPFormat.KMPSection.TPNE_Section TPNE, KMPFormat.KMPSection.HPNE_Section HPNE)
+            public static TPNE_HPNE_WritePosition Write_TPNE_HPNE(BinaryWriter bw, KMPFormat.KMPSection.TPNE_Section TPNE, KMPFormat.KMPSection.HPNE_Section HPNE)
             {
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
-
                 TPNE_HPNE_WritePosition tPNE_HPNE_WritePosition = new TPNE_HPNE_WritePosition
                 {
                     TPNE = 0,
@@ -1642,9 +1638,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int Count = 0; Count < TPNE.TPNEValue_List.Count; Count++)
                 {
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[2]);
                     bw.Write(TPNE.TPNEValue_List[Count].Control);
                     bw.Write(TPNE.TPNEValue_List[Count].MushSetting);
                     bw.Write(TPNE.TPNEValue_List[Count].DriftSetting);
@@ -1710,10 +1706,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint HPTI { get; set; }
             }
 
-            public TPTI_HPTI_WritePosition Write_TPTI_HPTI(BinaryWriter bw, KMPFormat.KMPSection.TPTI_Section TPTI, KMPFormat.KMPSection.HPTI_Section HPTI)
+            public static TPTI_HPTI_WritePosition Write_TPTI_HPTI(BinaryWriter bw, KMPFormat.KMPSection.TPTI_Section TPTI, KMPFormat.KMPSection.HPTI_Section HPTI)
             {
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
-
                 TPTI_HPTI_WritePosition tPTI_HPTI_WritePosition = new TPTI_HPTI_WritePosition
                 {
                     TPTI = 0,
@@ -1729,9 +1723,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int Count = 0; Count < TPTI.TPTIValue_List.Count; Count++)
                 {
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[2]);
                     bw.Write(TPTI.TPTIValue_List[Count].TPTI_PointSize);
                     bw.Write(TPTI.TPTIValue_List[Count].GravityMode);
                     bw.Write(TPTI.TPTIValue_List[Count].PlayerScanRadius);
@@ -1773,10 +1767,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint HPKC { get; set; }
             }
 
-            public TPKC_HPKC_WritePosition Write_TPKC_HPKC(BinaryWriter bw, KMPFormat.KMPSection.TPKC_Section TPKC, KMPFormat.KMPSection.HPKC_Section HPKC)
+            public static TPKC_HPKC_WritePosition Write_TPKC_HPKC(BinaryWriter bw, KMPFormat.KMPSection.TPKC_Section TPKC, KMPFormat.KMPSection.HPKC_Section HPKC)
             {
-                KMPHelper.Vector3DTo2DConverter Vector2DToByteArrayConverter = new KMPHelper.Vector3DTo2DConverter();
-
                 TPKC_HPKC_WritePosition tPKC_HPKC_WritePosition = new TPKC_HPKC_WritePosition
                 {
                     TPKC = 0,
@@ -1792,10 +1784,10 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int Count = 0; Count < TPKC.TPKCValue_List.Count; Count++)
                 {
-                    bw.Write(Vector2DToByteArrayConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[0]);
-                    bw.Write(Vector2DToByteArrayConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[1]);
-                    bw.Write(Vector2DToByteArrayConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[0]);
-                    bw.Write(Vector2DToByteArrayConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[1]);
+                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[0]);
+                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[1]);
+                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[0]);
+                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[1]);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_RespawnID);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_Checkpoint_Type);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_PreviousCheckPoint);
@@ -1838,11 +1830,9 @@ namespace MK7_KMP_Editor_For_PG_
                 return tPKC_HPKC_WritePosition;
             }
 
-            public uint Write_JBOG(BinaryWriter bw, KMPFormat.KMPSection.JBOG_Section JBOG)
+            public static uint Write_JBOG(BinaryWriter bw, KMPFormat.KMPSection.JBOG_Section JBOG)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(JBOG.JBOGHeader);
                 bw.Write(JBOG.NumOfEntries);
@@ -1852,15 +1842,15 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     bw.Write(JBOG.JBOGValue_List[Count].ObjectID);
                     bw.Write(JBOG.JBOGValue_List[Count].JBOG_UnkByte1);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[2]);
                     bw.Write(JBOG.JBOGValue_List[Count].JBOG_ITOP_RouteIDIndex);
                     bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value0);
                     bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value1);
@@ -1878,11 +1868,9 @@ namespace MK7_KMP_Editor_For_PG_
                 return WritePosition;
             }
 
-            public uint Write_ITOP(BinaryWriter bw, KMPFormat.KMPSection.ITOP_Section ITOP)
+            public static uint Write_ITOP(BinaryWriter bw, KMPFormat.KMPSection.ITOP_Section ITOP)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(ITOP.ITOPHeader);
                 bw.Write(ITOP.ITOP_NumberOfRoute);
@@ -1896,9 +1884,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
                     {
-                        bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[0]);
-                        bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[1]);
-                        bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[2]);
+                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[0]);
+                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[1]);
+                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[2]);
                         bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_RouteSpeed);
                         bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_PointSetting2);
                     }
@@ -1907,11 +1895,9 @@ namespace MK7_KMP_Editor_For_PG_
                 return WritePosition;
             }
 
-            public uint Write_AERA(BinaryWriter bw, KMPFormat.KMPSection.AERA_Section AERA)
+            public static uint Write_AERA(BinaryWriter bw, KMPFormat.KMPSection.AERA_Section AERA)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(AERA.AERAHeader);
                 bw.Write(AERA.NumOfEntries);
@@ -1923,15 +1909,15 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(AERA.AERAValue_List[Count].AreaType);
                     bw.Write(AERA.AERAValue_List[Count].AERA_EMACIndex);
                     bw.Write(AERA.AERAValue_List[Count].Priority);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[2]);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte1);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte2);
                     bw.Write(AERA.AERAValue_List[Count].RouteID);
@@ -1942,11 +1928,9 @@ namespace MK7_KMP_Editor_For_PG_
                 return WritePosition;
             }
 
-            public uint Write_EMAC(BinaryWriter bw, KMPFormat.KMPSection.EMAC_Section EMAC)
+            public static uint Write_EMAC(BinaryWriter bw, KMPFormat.KMPSection.EMAC_Section EMAC)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(EMAC.EMACHeader);
                 bw.Write(EMAC.NumOfEntries);
@@ -1963,31 +1947,29 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(EMAC.EMACValue_List[Count].ViewpointSpeed);
                     bw.Write(EMAC.EMACValue_List[Count].EMAC_UnkBytes2);
                     bw.Write(EMAC.EMACValue_List[Count].EMAC_UnkBytes3);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[2]);
                     bw.Write(EMAC.EMACValue_List[Count].FOVAngle_Start);
                     bw.Write(EMAC.EMACValue_List[Count].FOVAngle_End);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[2]);
                     bw.Write(EMAC.EMACValue_List[Count].Camera_Active_Time);
                 }
 
                 return WritePosition;
             }
 
-            public uint Write_TPGJ(BinaryWriter bw, KMPFormat.KMPSection.TPGJ_Section TPGJ)
+            public static uint Write_TPGJ(BinaryWriter bw, KMPFormat.KMPSection.TPGJ_Section TPGJ)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 bw.Write(TPGJ.TPGJHeader);
                 bw.Write(TPGJ.NumOfEntries);
@@ -1995,12 +1977,12 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int Count = 0; Count < TPGJ.NumOfEntries; Count++)
                 {
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[2]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[2]);
                     bw.Write(TPGJ.TPGJValue_List[Count].TPGJ_RespawnID);
                     bw.Write(TPGJ.TPGJValue_List[Count].TPGJ_UnkBytes1);
                 }
@@ -2009,7 +1991,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             //Unused Section
-            public uint Write_TPNC(BinaryWriter bw, KMPFormat.KMPSection.TPNC_Section TPNC)
+            public static uint Write_TPNC(BinaryWriter bw, KMPFormat.KMPSection.TPNC_Section TPNC)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
 
@@ -2021,7 +2003,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             //Unused Section
-            public uint Write_TPSM(BinaryWriter bw, KMPFormat.KMPSection.TPSM_Section TPSM)
+            public static uint Write_TPSM(BinaryWriter bw, KMPFormat.KMPSection.TPSM_Section TPSM)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
 
@@ -2032,7 +2014,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return WritePosition;
             }
 
-            public uint Write_IGTS(BinaryWriter bw, KMPFormat.KMPSection.IGTS_Section IGTS)
+            public static uint Write_IGTS(BinaryWriter bw, KMPFormat.KMPSection.IGTS_Section IGTS)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
 
@@ -2051,7 +2033,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             //Unused Section
-            public uint Write_SROC(BinaryWriter bw, KMPFormat.KMPSection.SROC_Section SROC)
+            public static uint Write_SROC(BinaryWriter bw, KMPFormat.KMPSection.SROC_Section SROC)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
 
@@ -2068,7 +2050,7 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint HPLG { get; set; }
             }
 
-            public TPLG_HPLG_WritePosition Write_TPLG_HPLG(BinaryWriter bw, KMPFormat.KMPSection.TPLG_Section TPLG, KMPFormat.KMPSection.HPLG_Section HPLG)
+            public static TPLG_HPLG_WritePosition Write_TPLG_HPLG(BinaryWriter bw, KMPFormat.KMPSection.TPLG_Section TPLG, KMPFormat.KMPSection.HPLG_Section HPLG)
             {
                 TPLG_HPLG_WritePosition tPLG_HPLG_WritePosition = new TPLG_HPLG_WritePosition
                 {
@@ -2077,7 +2059,6 @@ namespace MK7_KMP_Editor_For_PG_
                 };
 
                 #region TPLG
-                KMPHelper.Vector3DToByteArrayConverter Vector3DToByteArrayConverter = new KMPHelper.Vector3DToByteArrayConverter();
 
                 tPLG_HPLG_WritePosition.TPLG = Convert.ToUInt32(bw.BaseStream.Position);
 
@@ -2087,9 +2068,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int Count = 0; Count < TPLG.NumOfEntries; Count++)
                 {
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[0]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[1]);
-                    bw.Write(Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[2]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[0]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[1]);
+                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[2]);
                     bw.Write(TPLG.TPLGValue_List[Count].TPLG_PointScaleValue);
                     bw.Write(TPLG.TPLGValue_List[Count].TPLG_UnkBytes1);
                     bw.Write(TPLG.TPLGValue_List[Count].TPLG_UnkBytes2);

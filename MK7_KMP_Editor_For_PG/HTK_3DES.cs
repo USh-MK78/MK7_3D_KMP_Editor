@@ -114,11 +114,21 @@ namespace MK7_KMP_Editor_For_PG_
                 public Vector3D Translate3D { get; set; }
             }
 
+            /// <summary>
+            /// Radianを角度に変換
+            /// </summary>
+            /// <param name="Radian"></param>
+            /// <returns></returns>
             public static double RadianToAngle(double Radian)
             {
                 return Radian * (180 / Math.PI);
             }
 
+            /// <summary>
+            /// 角度をRadianに変換
+            /// </summary>
+            /// <param name="Angle"></param>
+            /// <returns></returns>
             public static double AngleToRadian(double Angle)
             {
                 return Angle * (Math.PI / 180);
@@ -560,7 +570,7 @@ namespace MK7_KMP_Editor_For_PG_
                 public List<TubeVisual3D> TV3D_List { get; set; }
             }
 
-            public List<Point3D> MV3DListToPoint3DList(List<ModelVisual3D> MV3DList)
+            public static List<Point3D> MV3DListToPoint3DList(List<ModelVisual3D> MV3DList)
             {
                 List<Point3D> point3Ds = new List<Point3D>();
 
@@ -576,7 +586,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return point3Ds;
             }
 
-            public List<LinesVisual3D> DrawPath_Line(UserControl1 UserCtrl, List<Point3D> point3Ds, double Thickness, Color color)
+            public static List<LinesVisual3D> DrawPath_Line(UserControl1 UserCtrl, List<Point3D> point3Ds, double Thickness, Color color)
             {
                 List<LinesVisual3D> linesVisual3DList_Out = new List<LinesVisual3D>();
                 if (point3Ds.Count > 1)
@@ -603,7 +613,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return linesVisual3DList_Out;
             }
 
-            public List<TubeVisual3D> DrawPath_Tube(UserControl1 UserCtrl, List<Point3D> point3Ds, double TubeDiametor, Color color)
+            public static List<TubeVisual3D> DrawPath_Tube(UserControl1 UserCtrl, List<Point3D> point3Ds, double TubeDiametor, Color color)
             {
                 List<TubeVisual3D> tubeVisual3DList_Out = new List<TubeVisual3D>();
                 if (point3Ds.Count > 1)
@@ -631,7 +641,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return tubeVisual3DList_Out;
             }
 
-            public void MoveRails(int MDLNum, Vector3D Pos, List<TubeVisual3D> TubeVisual3D_List)
+            public static void MoveRails(int MDLNum, Vector3D Pos, List<TubeVisual3D> TubeVisual3D_List)
             {
                 if (MDLNum == 0)
                 {
@@ -648,7 +658,7 @@ namespace MK7_KMP_Editor_For_PG_
                 }
             }
 
-            public void MoveRails(int MDLNum, Vector3D Pos, List<LinesVisual3D> LinesVisual3D_List)
+            public static void MoveRails(int MDLNum, Vector3D Pos, List<LinesVisual3D> LinesVisual3D_List)
             {
                 if (MDLNum == 0)
                 {
@@ -677,11 +687,12 @@ namespace MK7_KMP_Editor_For_PG_
                 Point3D
             }
 
-            Point3D? SelectedIndex_Next = null;
-            Point3D? SelectedIndex_Current = null;
-            Point3D? SelectedIndex_Prev = null;
-            public void DeleteRailPoint(UserControl1 UserCtrl, Rail rail, int SelectedIdx, double TubeDiametor, Color color, RailType railType)
+            public static void DeleteRailPoint(UserControl1 UserCtrl, Rail rail, int SelectedIdx, double TubeDiametor, Color color, RailType railType)
             {
+                Point3D? SelectedIndex_Next = null;
+                Point3D? SelectedIndex_Current = null;
+                Point3D? SelectedIndex_Prev = null;
+
                 List<Point3D> point3Ds = new List<Point3D>();
 
                 #region SelectedIndex_Next
@@ -900,7 +911,7 @@ namespace MK7_KMP_Editor_For_PG_
                 }
             }
 
-            public void DeleteRail(UserControl1 UserCtrl, Rail rail)
+            public static void DeleteRail(UserControl1 UserCtrl, Rail rail)
             {
                 if (rail.TV3D_List != null)
                 {
@@ -942,7 +953,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// <param name="UserCtrl"></param>
             /// <param name="rail"></param>
             /// <param name="railType"></param>
-            public void ResetRail(UserControl1 UserCtrl, Rail rail, RailType railType)
+            public static void ResetRail(UserControl1 UserCtrl, Rail rail, RailType railType)
             {
                 if (railType == RailType.Line)
                 {
@@ -994,7 +1005,7 @@ namespace MK7_KMP_Editor_For_PG_
                 public List<TubeVisual3D> Checkpoint_Tube { get; set; }
             }
 
-            public void DeleteRailChk(UserControl1 UserCtrl, Checkpoint railChk)
+            public static void DeleteRailChk(UserControl1 UserCtrl, Checkpoint railChk)
             {
                 if (railChk.Checkpoint_Left.MV3D_List != null)
                 {
