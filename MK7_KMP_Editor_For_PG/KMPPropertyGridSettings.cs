@@ -28,26 +28,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Position_Value { get; set; } = new Position();
                 public class Position
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -59,29 +42,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotate_Value { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    private string _X = "";
-                    [Editor(typeof(CustomRotationEditor), typeof(UITypeEditor))]
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    [Editor(typeof(CustomRotationEditor), typeof(UITypeEditor))]
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    [Editor(typeof(CustomRotationEditor), typeof(UITypeEditor))]
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -181,26 +144,9 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Z = "";
-                        public string Z
-                        {
-                            get { return _Z; }
-                            set => _Z = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
+                        public float Z { get; set; }
 
                         public override string ToString()
                         {
@@ -466,26 +412,9 @@ namespace MK7_KMP_Editor_For_PG_
                     public TPTI_Position TPTI_Positions { get; set; } = new TPTI_Position();
                     public class TPTI_Position
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Z = "";
-                        public string Z
-                        {
-                            get { return _Z; }
-                            set => _Z = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
+                        public float Z { get; set; }
 
                         public override string ToString()
                         {
@@ -606,19 +535,8 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position2D_Left Position_2D_Left { get; set; } = new Position2D_Left();
                     public class Position2D_Left
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
 
                         public override string ToString()
                         {
@@ -630,19 +548,8 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position2D_Right Position_2D_Right { get; set; } = new Position2D_Right();
                     public class Position2D_Right
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
 
                         public override string ToString()
                         {
@@ -691,26 +598,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -722,26 +612,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -753,26 +626,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -840,26 +696,9 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Z = "";
-                        public string Z
-                        {
-                            get { return _Z; }
-                            set => _Z = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
+                        public float Z { get; set; }
 
                         public override string ToString()
                         {
@@ -887,6 +726,7 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public List<AERAValue> AERAValue_List = new List<AERAValue>();
             public List<AERAValue> AERAValueList { get => AERAValue_List; set => AERAValue_List = value; }
+            [TypeConverter(typeof(CustomSortTypeConverter))]
             public class AERAValue
             {
                 [ReadOnly(true)]
@@ -919,26 +759,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -950,26 +773,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -981,26 +787,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1057,26 +846,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1088,26 +860,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1132,26 +887,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public ViewpointStart Viewpoint_Start { get; set; } = new ViewpointStart();
                 public class ViewpointStart
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1163,26 +901,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public ViewpointDestination Viewpoint_Destination { get; set; } = new ViewpointDestination();
                 public class ViewpointDestination
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1213,26 +934,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1244,26 +948,9 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    private string _X = "";
-                    public string X
-                    {
-                        get { return _X; }
-                        set => _X = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Y = "";
-                    public string Y
-                    {
-                        get { return _Y; }
-                        set => _Y = value == "" || value == null ? "0" : value;
-                    }
-
-                    private string _Z = "";
-                    public string Z
-                    {
-                        get { return _Z; }
-                        set => _Z = value == "" || value == null ? "0" : value;
-                    }
+                    public float X { get; set; }
+                    public float Y { get; set; }
+                    public float Z { get; set; }
 
                     public override string ToString()
                     {
@@ -1427,26 +1114,9 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        private string _X = "";
-                        public string X
-                        {
-                            get { return _X; }
-                            set => _X = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Y = "";
-                        public string Y
-                        {
-                            get { return _Y; }
-                            set => _Y = value == "" || value == null ? "0" : value;
-                        }
-
-                        private string _Z = "";
-                        public string Z
-                        {
-                            get { return _Z; }
-                            set => _Z = value == "" || value == null ? "0" : value;
-                        }
+                        public float X { get; set; }
+                        public float Y { get; set; }
+                        public float Z { get; set; }
 
                         public override string ToString()
                         {
@@ -1521,10 +1191,6 @@ namespace MK7_KMP_Editor_For_PG_
             public Scale Scales { get; set; } = new Scale();
             public class Scale
             {
-                //public int X { get; set; }
-                //public int Y { get; set; }
-                //public int Z { get; set; }
-
                 private string _X = "";
                 public string X
                 {
@@ -1644,61 +1310,63 @@ namespace MK7_KMP_Editor_For_PG_
     //    }
     //}
 
-    public class CustomRotationEditor : UITypeEditor
-    {
-        private IWindowsFormsEditorService _WinFormEditorService;
+    #region Delcode(?)
+    //public class CustomRotationEditor : UITypeEditor
+    //{
+    //    private IWindowsFormsEditorService _WinFormEditorService;
 
-        //編集時にドロップダウンスタイルで表示
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-        {
-            return UITypeEditorEditStyle.DropDown;
-        }
+    //    //編集時にドロップダウンスタイルで表示
+    //    public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
+    //    {
+    //        return UITypeEditorEditStyle.DropDown;
+    //    }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
-        {
-            _WinFormEditorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+    //    public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+    //    {
+    //        _WinFormEditorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
 
-            TrackBar trackBar_Rotation = new TrackBar
-            {
-                Location = new System.Drawing.Point(5, 15),
-                Minimum = -3142,
-                Maximum = 3142,
-                SmallChange = 0,
-                Orientation = Orientation.Horizontal,
-                TickFrequency = 1,
-                LargeChange = 1,
-                TickStyle = TickStyle.BottomRight,
-                Value = Convert.ToInt32(Convert.ToDouble(value.ToString()) * 1000)
-            };
+    //        TrackBar trackBar_Rotation = new TrackBar
+    //        {
+    //            Location = new System.Drawing.Point(5, 15),
+    //            Minimum = -3142,
+    //            Maximum = 3142,
+    //            SmallChange = 0,
+    //            Orientation = Orientation.Horizontal,
+    //            TickFrequency = 1,
+    //            LargeChange = 1,
+    //            TickStyle = TickStyle.BottomRight,
+    //            Value = Convert.ToInt32(Convert.ToDouble(value.ToString()) * 1000)
+    //        };
 
-            Label label_Radian = new Label
-            {
-                Location = new System.Drawing.Point(5, 60),
-                Text = "Radian : " + value.ToString() + " \r\nAngle : " + Math.Round(Convert.ToSingle(value.ToString()) * (180 / Math.PI), 0, MidpointRounding.AwayFromZero)
-            };
+    //        Label label_Radian = new Label
+    //        {
+    //            Location = new System.Drawing.Point(5, 60),
+    //            Text = "Radian : " + value.ToString() + " \r\nAngle : " + Math.Round(Convert.ToSingle(value.ToString()) * (180 / Math.PI), 0, MidpointRounding.AwayFromZero)
+    //        };
 
-            //Add controls to the GroupBox to combine multiple controls into a single control.
-            GroupBox groupBox = new GroupBox();
-            groupBox.Width = 100;
-            groupBox.Height = 100;
-            groupBox.Controls.Add(trackBar_Rotation);
-            groupBox.Controls.Add(label_Radian);
+    //        //Add controls to the GroupBox to combine multiple controls into a single control.
+    //        GroupBox groupBox = new GroupBox();
+    //        groupBox.Width = 100;
+    //        groupBox.Height = 100;
+    //        groupBox.Controls.Add(trackBar_Rotation);
+    //        groupBox.Controls.Add(label_Radian);
 
-            trackBar_Rotation.Scroll += (object sender, EventArgs e) =>
-            {
-                string output = (float.Parse(trackBar_Rotation.Value.ToString()) / 1000).ToString();
-                StringBuilder sb = new StringBuilder();
-                sb.Append(output);
+    //        trackBar_Rotation.Scroll += (object sender, EventArgs e) =>
+    //        {
+    //            string output = (float.Parse(trackBar_Rotation.Value.ToString()) / 1000).ToString();
+    //            StringBuilder sb = new StringBuilder();
+    //            sb.Append(output);
 
-                label_Radian.Text = "Radian : " + sb.ToString() + " \r\nAngle : " + Math.Round(Convert.ToSingle(sb.ToString()) * (180 / Math.PI), 0, MidpointRounding.AwayFromZero);
-                label_Radian.Update();
+    //            label_Radian.Text = "Radian : " + sb.ToString() + " \r\nAngle : " + Math.Round(Convert.ToSingle(sb.ToString()) * (180 / Math.PI), 0, MidpointRounding.AwayFromZero);
+    //            label_Radian.Update();
 
-                value = sb.ToString();
-            };
+    //            value = sb.ToString();
+    //        };
 
-            _WinFormEditorService.DropDownControl(groupBox);
+    //        _WinFormEditorService.DropDownControl(groupBox);
 
-            return value;
-        }
-    }
+    //        return value;
+    //    }
+    //}
+    #endregion
 }

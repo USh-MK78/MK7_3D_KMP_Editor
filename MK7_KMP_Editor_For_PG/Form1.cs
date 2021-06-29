@@ -229,9 +229,19 @@ namespace MK7_KMP_Editor_For_PG_
                 HTR = HTRs as RayMeshGeometry3DHitTestResult;
                 if (HTR != null)
                 {
-                    //ダウンキャスト
-                    FindMV3D = (ModelVisual3D)HTR.VisualHit;
-                    string[] MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
+                    string[] MDLStr_GetName = null;
+                    if (typeof(ModelVisual3D) == HTR.VisualHit.GetType())
+                    {
+                        //ダウンキャスト
+                        FindMV3D = (ModelVisual3D)HTR.VisualHit;
+                        MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
+                    }
+                    if (typeof(LinesVisual3D) == HTR.VisualHit.GetType()) return;
+                    if (typeof(TubeVisual3D) == HTR.VisualHit.GetType()) return;
+
+                    ////ダウンキャスト
+                    //FindMV3D = (ModelVisual3D)HTR.VisualHit;
+                    //string[] MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
 
                     #region Get Object info
                     string OBJ_Name = MDLStr_GetName[0];
@@ -254,9 +264,9 @@ namespace MK7_KMP_Editor_For_PG_
                             {
                                 Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                                 {
-                                    X = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.X),
-                                    Y = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.Y),
-                                    Z = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.Z)
+                                    X = TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.X,
+                                    Y = TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.Y,
+                                    Z = TPTK_Section.TPTKValueList[MDLNum].Rotate_Value.Z
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
@@ -266,9 +276,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Position_Value.X),
-                                    Y = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Position_Value.Y),
-                                    Z = Convert.ToDouble(TPTK_Section.TPTKValueList[MDLNum].Position_Value.Z)
+                                    X = TPTK_Section.TPTKValueList[MDLNum].Position_Value.X,
+                                    Y = TPTK_Section.TPTKValueList[MDLNum].Position_Value.Y,
+                                    Z = TPTK_Section.TPTKValueList[MDLNum].Position_Value.Z
                                 }
                             };
 
@@ -300,15 +310,15 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
-                                    X = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100),
-                                    Y = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100),
-                                    Z = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100)
+                                    X = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100,
+                                    Y = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100,
+                                    Z = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Control * 100
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Z)
+                                    X = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.X,
+                                    Y = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Y,
+                                    Z = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -339,15 +349,15 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
-                                    X = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100),
-                                    Y = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100),
-                                    Z = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100)
+                                    X = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100,
+                                    Y = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100,
+                                    Z = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_PointSize * 100
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.X),
-                                    Y = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Y),
-                                    Z = Convert.ToDouble(HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Z)
+                                    X = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.X,
+                                    Y = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Y,
+                                    Z = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Z
                                 }
                             };
 
@@ -384,9 +394,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.X),
+                                    X = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.X,
                                     Y = Convert.ToDouble(textBox1.Text),
-                                    Z = Convert.ToDouble(HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y)
+                                    Z = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y
                                 }
                             };
 
@@ -423,9 +433,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.X),
+                                    X = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.X,
                                     Y = Convert.ToDouble(textBox1.Text),
-                                    Z = Convert.ToDouble(HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y)
+                                    Z = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y
                                 }
                             };
 
@@ -449,21 +459,21 @@ namespace MK7_KMP_Editor_For_PG_
                             {
                                 Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                                 {
-                                    X = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Rotations.X),
-                                    Y = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Rotations.Y),
-                                    Z = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Rotations.Z)
+                                    X = JBOG_Section.JBOGValueList[MDLNum].Rotations.X,
+                                    Y = JBOG_Section.JBOGValueList[MDLNum].Rotations.Y,
+                                    Z = JBOG_Section.JBOGValueList[MDLNum].Rotations.Z
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
-                                    X = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Scales.X) * 2,
-                                    Y = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Scales.Y) * 2,
-                                    Z = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Scales.Z) * 2
+                                    X = JBOG_Section.JBOGValueList[MDLNum].Scales.X * 2,
+                                    Y = JBOG_Section.JBOGValueList[MDLNum].Scales.Y * 2,
+                                    Z = JBOG_Section.JBOGValueList[MDLNum].Scales.Z * 2
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(JBOG_Section.JBOGValueList[MDLNum].Positions.Z)
+                                    X = JBOG_Section.JBOGValueList[MDLNum].Positions.X,
+                                    Y = JBOG_Section.JBOGValueList[MDLNum].Positions.Y,
+                                    Z = JBOG_Section.JBOGValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -500,9 +510,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Z)
+                                    X = ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.X,
+                                    Y = ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Y,
+                                    Z = ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -526,21 +536,21 @@ namespace MK7_KMP_Editor_For_PG_
                             {
                                 Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                                 {
-                                    X = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Rotations.X),
-                                    Y = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Rotations.Y),
-                                    Z = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Rotations.Z)
+                                    X = AERA_Section.AERAValueList[MDLNum].Rotations.X,
+                                    Y = AERA_Section.AERAValueList[MDLNum].Rotations.Y,
+                                    Z = AERA_Section.AERAValueList[MDLNum].Rotations.Z
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
-                                    X = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Scales.X) * 1000,
-                                    Y = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Scales.Y) * 1000,
-                                    Z = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Scales.Z) * 1000
+                                    X = AERA_Section.AERAValueList[MDLNum].Scales.X * 1000,
+                                    Y = AERA_Section.AERAValueList[MDLNum].Scales.Y * 1000,
+                                    Z = AERA_Section.AERAValueList[MDLNum].Scales.Z * 1000
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(AERA_Section.AERAValueList[MDLNum].Positions.Z)
+                                    X = AERA_Section.AERAValueList[MDLNum].Positions.X,
+                                    Y = AERA_Section.AERAValueList[MDLNum].Positions.Y,
+                                    Z = AERA_Section.AERAValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -564,9 +574,9 @@ namespace MK7_KMP_Editor_For_PG_
                             {
                                 Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                                 {
-                                    X = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Rotations.X),
-                                    Y = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Rotations.Y),
-                                    Z = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Rotations.Z)
+                                    X = EMAC_Section.EMACValueList[MDLNum].Rotations.X,
+                                    Y = EMAC_Section.EMACValueList[MDLNum].Rotations.Y,
+                                    Z = EMAC_Section.EMACValueList[MDLNum].Rotations.Z
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
@@ -576,9 +586,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(EMAC_Section.EMACValueList[MDLNum].Positions.Z)
+                                    X = EMAC_Section.EMACValueList[MDLNum].Positions.X,
+                                    Y = EMAC_Section.EMACValueList[MDLNum].Positions.Y,
+                                    Z = EMAC_Section.EMACValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -602,9 +612,9 @@ namespace MK7_KMP_Editor_For_PG_
                             {
                                 Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                                 {
-                                    X = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Rotations.X),
-                                    Y = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Rotations.Y),
-                                    Z = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Rotations.Z)
+                                    X = TPGJ_Section.TPGJValueList[MDLNum].Rotations.X,
+                                    Y = TPGJ_Section.TPGJValueList[MDLNum].Rotations.Y,
+                                    Z = TPGJ_Section.TPGJValueList[MDLNum].Rotations.Z
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
@@ -614,9 +624,9 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(TPGJ_Section.TPGJValueList[MDLNum].Positions.Z)
+                                    X = TPGJ_Section.TPGJValueList[MDLNum].Positions.X,
+                                    Y = TPGJ_Section.TPGJValueList[MDLNum].Positions.Y,
+                                    Z = TPGJ_Section.TPGJValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -647,15 +657,15 @@ namespace MK7_KMP_Editor_For_PG_
                                 },
                                 Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                                 {
-                                    X = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue) * 100,
-                                    Y = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue) * 100,
-                                    Z = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue) * 100
+                                    X = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue * 100,
+                                    Y = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue * 100,
+                                    Z = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].TPLG_PointScaleValue * 100
                                 },
                                 Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                                 {
-                                    X = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.X),
-                                    Y = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Y),
-                                    Z = Convert.ToDouble(HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Z)
+                                    X = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.X,
+                                    Y = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Y,
+                                    Z = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Z
                                 }
                             };
 
@@ -700,15 +710,15 @@ namespace MK7_KMP_Editor_For_PG_
                         Player_Index = 0,
                         Position_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotate_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         TPTK_UnkBytes = 0
                     };
@@ -764,9 +774,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             Control = 1,
                             MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
@@ -837,7 +847,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
@@ -850,9 +860,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             TPTI_PointSize = 1,
                             GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
@@ -911,7 +921,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
@@ -924,13 +934,13 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Position_2D_Left = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Left
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Z
                             },
                             Position_2D_Right = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Right
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Z
                             },
                             TPKC_RespawnID = 0xFF,
                             TPKC_Checkpoint_Type = 0,
@@ -1056,7 +1066,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "Obj")
@@ -1078,21 +1088,21 @@ namespace MK7_KMP_Editor_For_PG_
                         JBOG_UnkByte3 = 0,
                         Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Scales = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Scale
                         {
-                            X = "1",
-                            Y = "1",
-                            Z = "1"
+                            X = 1,
+                            Y = 1,
+                            Z = 1
                         },
                         Rotations = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
                         {
@@ -1158,9 +1168,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             ITOP_PointSetting2 = 0,
                             ITOP_Point_RouteSpeed = 0
@@ -1212,7 +1222,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "Area")
@@ -1222,21 +1232,21 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         Scales = new KMPPropertyGridSettings.AERA_Section.AERAValue.Scale
                         {
-                            X = "1",
-                            Y = "1",
-                            Z = "1"
+                            X = 1,
+                            Y = 1,
+                            Z = 1
                         },
                         Rotations = new KMPPropertyGridSettings.AERA_Section.AERAValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Positions = new KMPPropertyGridSettings.AERA_Section.AERAValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
                         {
@@ -1312,15 +1322,15 @@ namespace MK7_KMP_Editor_For_PG_
                         EMAC_UnkBytes3 = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
                         {
@@ -1329,15 +1339,15 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Camera_Active_Time = 0
                     };
@@ -1390,15 +1400,15 @@ namespace MK7_KMP_Editor_For_PG_
                         TPGJ_RespawnID = 65535,
                         Positions = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotations = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         TPGJ_UnkBytes1 = 0
                     };
@@ -1453,9 +1463,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             TPLG_PointScaleValue = 1,
                             TPLG_UnkBytes1 = 0,
@@ -1508,7 +1518,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
             }
@@ -1520,7 +1530,15 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 if (HTR != null)
                 {
-                    string[] MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
+                    string[] MDLStr_GetName = null;
+                    if (typeof(ModelVisual3D) == HTR.VisualHit.GetType())
+                    {
+                        MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
+                    }
+                    if (typeof(LinesVisual3D) == HTR.VisualHit.GetType()) return;
+                    if (typeof(TubeVisual3D) == HTR.VisualHit.GetType()) return;
+
+                    //string[] MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
 
                     #region Get Object info
                     string OBJ_Name = MDLStr_GetName[0];
@@ -1539,12 +1557,11 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.X = transform_Value.Translate_Value.X.ToString();
-                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.Y = transform_Value.Translate_Value.Y.ToString();
-                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.Z = transform_Value.Translate_Value.Z.ToString();
+                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.X = (float)transform_Value.Translate_Value.X;
+                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.Y = (float)transform_Value.Translate_Value.Y;
+                        TPTK_Section.TPTKValueList[MDLNum].Position_Value.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
-                        //HTK_3DES.TSRSystem.NewTransformSystem3D(transform_Value, FindMV3D.Content, HTK_3DES.TSRSystem.RotationSetting.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = TPTK_Section.TPTKValueList[MDLNum];
@@ -1558,9 +1575,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1580,9 +1597,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.X = transform_Value.Translate_Value.X.ToString();
-                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.X = (float)transform_Value.Translate_Value.X;
+                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1602,8 +1619,8 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.X = transform_Value.Translate_Value.X.ToString();
-                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y = transform_Value.Translate_Value.Z.ToString();
+                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.X = (float)transform_Value.Translate_Value.X;
+                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1626,8 +1643,8 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.X = transform_Value.Translate_Value.X.ToString();
-                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y = transform_Value.Translate_Value.Z.ToString();
+                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.X = (float)transform_Value.Translate_Value.X;
+                        HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1652,9 +1669,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        JBOG_Section.JBOGValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        JBOG_Section.JBOGValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        JBOG_Section.JBOGValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        JBOG_Section.JBOGValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        JBOG_Section.JBOGValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        JBOG_Section.JBOGValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1672,9 +1689,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1696,9 +1713,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        AERA_Section.AERAValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        AERA_Section.AERAValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        AERA_Section.AERAValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        AERA_Section.AERAValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        AERA_Section.AERAValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        AERA_Section.AERAValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1716,9 +1733,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        EMAC_Section.EMACValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        EMAC_Section.EMACValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        EMAC_Section.EMACValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        EMAC_Section.EMACValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        EMAC_Section.EMACValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        EMAC_Section.EMACValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1736,9 +1753,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        TPGJ_Section.TPGJValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        TPGJ_Section.TPGJValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        TPGJ_Section.TPGJValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        TPGJ_Section.TPGJValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        TPGJ_Section.TPGJValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        TPGJ_Section.TPGJValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -1756,9 +1773,9 @@ namespace MK7_KMP_Editor_For_PG_
                         transform_Value.Translate_Value.Z = NewPos.Z;
 
                         //Propertyに値を格納する
-                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.X = transform_Value.Translate_Value.X.ToString();
-                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Y = transform_Value.Translate_Value.Y.ToString();
-                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Z = transform_Value.Translate_Value.Z.ToString();
+                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
+                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
+                        HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
                         HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
 
@@ -2549,15 +2566,15 @@ namespace MK7_KMP_Editor_For_PG_
                     ID = i,
                     Position_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Position
                     {
-                        X = TPTK.TPTKValue_List[i].TPTK_Position.X.ToString(),
-                        Y = TPTK.TPTKValue_List[i].TPTK_Position.Y.ToString(),
-                        Z = TPTK.TPTKValue_List[i].TPTK_Position.Z.ToString()
+                        X = (float)TPTK.TPTKValue_List[i].TPTK_Position.X,
+                        Y = (float)TPTK.TPTKValue_List[i].TPTK_Position.Y,
+                        Z = (float)TPTK.TPTKValue_List[i].TPTK_Position.Z
                     },
                     Rotate_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Rotation
                     {
-                        X = TPTK.TPTKValue_List[i].TPTK_Rotation.X.ToString(),
-                        Y = TPTK.TPTKValue_List[i].TPTK_Rotation.Y.ToString(),
-                        Z = TPTK.TPTKValue_List[i].TPTK_Rotation.Z.ToString()
+                        X = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.X),
+                        Y = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.Y),
+                        Z = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.Z)
                     },
                     Player_Index = TPTK.TPTKValue_List[i].Player_Index,
                     TPTK_UnkBytes = TPTK.TPTKValue_List[i].TPTK_UnkBytes
@@ -2678,9 +2695,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = Count,
                         Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
                         {
-                            X = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.X.ToString(),
-                            Y = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Y.ToString(),
-                            Z = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Z.ToString()
+                            X = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.X,
+                            Y = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Y,
+                            Z = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Z
                         },
                         Control = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Control,
                         MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
@@ -2822,9 +2839,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = Count,
                         TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
                         {
-                            X = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.X.ToString(),
-                            Y = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Y.ToString(),
-                            Z = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Z.ToString()
+                            X = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.X,
+                            Y = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Y,
+                            Z = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Z
                         },
                         TPTI_PointSize = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_PointSize,
                         GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
@@ -2963,13 +2980,13 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = Count,
                         Position_2D_Left = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Left
                         {
-                            X = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.X.ToString(),
-                            Y = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.Y.ToString()
+                            X = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.X,
+                            Y = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.Y
                         },
                         Position_2D_Right = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Right
                         {
-                            X = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.X.ToString(),
-                            Y = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.Y.ToString()
+                            X = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.X,
+                            Y = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.Y
                         },
                         TPKC_RespawnID = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_RespawnID,
                         TPKC_Checkpoint_Type = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_Checkpoint_Type,
@@ -3130,21 +3147,21 @@ namespace MK7_KMP_Editor_For_PG_
                     JBOG_UnkByte1 = BitConverter.ToString(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty),
                     Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
                     {
-                        X = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.X.ToString(),
-                        Y = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.Y.ToString(),
-                        Z = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.Z.ToString()
+                        X = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.X,
+                        Y = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.Y,
+                        Z = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Position.Z
                     },
                     Rotations = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Rotation
                     {
-                        X = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.X.ToString(),
-                        Y = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.Y.ToString(),
-                        Z = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.Z.ToString()
+                        X = HTK_3DES.TSRSystem.RadianToAngle(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.X),
+                        Y = HTK_3DES.TSRSystem.RadianToAngle(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.Y),
+                        Z = HTK_3DES.TSRSystem.RadianToAngle(KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Rotation.Z)
                     },
                     Scales = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Scale
                     {
-                        X = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.X.ToString(),
-                        Y = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.Y.ToString(),
-                        Z = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.Z.ToString()
+                        X = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.X,
+                        Y = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.Y,
+                        Z = (float)KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_Scale.Z
                     },
                     JBOG_ITOP_RouteIDIndex = KMPFormat.KMP_Section.JBOG.JBOGValue_List[Count].JBOG_ITOP_RouteIDIndex,
                     JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
@@ -3241,9 +3258,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = ITOP_PointsCount,
                         Positions = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point.Position
                         {
-                            X = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.X.ToString(),
-                            Y = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Y.ToString(),
-                            Z = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Z.ToString()
+                            X = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.X,
+                            Y = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Y,
+                            Z = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Z
                         },
                         ITOP_Point_RouteSpeed = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_RouteSpeed,
                         ITOP_PointSetting2 = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_PointSetting2
@@ -3328,21 +3345,21 @@ namespace MK7_KMP_Editor_For_PG_
                     Priority = AERA.AERAValue_List[AERACount].Priority,
                     Positions = new KMPPropertyGridSettings.AERA_Section.AERAValue.Position
                     {
-                        X = AERA.AERAValue_List[AERACount].AERA_Position.X.ToString(),
-                        Y = AERA.AERAValue_List[AERACount].AERA_Position.Y.ToString(),
-                        Z = AERA.AERAValue_List[AERACount].AERA_Position.Z.ToString()
+                        X = (float)AERA.AERAValue_List[AERACount].AERA_Position.X,
+                        Y = (float)AERA.AERAValue_List[AERACount].AERA_Position.Y,
+                        Z = (float)AERA.AERAValue_List[AERACount].AERA_Position.Z
                     },
                     Rotations = new KMPPropertyGridSettings.AERA_Section.AERAValue.Rotation
                     {
-                        X = AERA.AERAValue_List[AERACount].AERA_Rotation.X.ToString(),
-                        Y = AERA.AERAValue_List[AERACount].AERA_Rotation.Y.ToString(),
-                        Z = AERA.AERAValue_List[AERACount].AERA_Rotation.Z.ToString()
+                        X = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.X),
+                        Y = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.Y),
+                        Z = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.Z)
                     },
                     Scales = new KMPPropertyGridSettings.AERA_Section.AERAValue.Scale
                     {
-                        X = AERA.AERAValue_List[AERACount].AERA_Scale.X.ToString(),
-                        Y = AERA.AERAValue_List[AERACount].AERA_Scale.Y.ToString(),
-                        Z = AERA.AERAValue_List[AERACount].AERA_Scale.Z.ToString()
+                        X = (float)AERA.AERAValue_List[AERACount].AERA_Scale.X,
+                        Y = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Y,
+                        Z = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Z
                     },
                     AERA_UnkByte1 = AERA.AERAValue_List[AERACount].AERA_UnkByte1,
                     AERA_UnkByte2 = AERA.AERAValue_List[AERACount].AERA_UnkByte2,
@@ -3423,15 +3440,15 @@ namespace MK7_KMP_Editor_For_PG_
                     EMAC_UnkBytes3 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes3,
                     Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                     {
-                        X = EMAC.EMACValue_List[EMACCount].EMAC_Position.X.ToString(),
-                        Y = EMAC.EMACValue_List[EMACCount].EMAC_Position.Y.ToString(),
-                        Z = EMAC.EMACValue_List[EMACCount].EMAC_Position.Z.ToString()
+                        X = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.X,
+                        Y = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.Y,
+                        Z = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.Z
                     },
                     Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation
                     {
-                        X = EMAC.EMACValue_List[EMACCount].EMAC_Rotation.X.ToString(),
-                        Y = EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Y.ToString(),
-                        Z = EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Z.ToString()
+                        X = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.X),
+                        Y = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Y),
+                        Z = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Z)
                     },
                     FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
                     {
@@ -3440,15 +3457,15 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
                     {
-                        X = EMAC.EMACValue_List[EMACCount].Viewpoint_Start.X.ToString(),
-                        Y = EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Y.ToString(),
-                        Z = EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Z.ToString()
+                        X = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.X,
+                        Y = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Y,
+                        Z = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Z
                     },
                     Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
                     {
-                        X = EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.X.ToString(),
-                        Y = EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Y.ToString(),
-                        Z = EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Z.ToString()
+                        X = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.X,
+                        Y = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Y,
+                        Z = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Z
                     },
                     Camera_Active_Time = EMAC.EMACValue_List[EMACCount].Camera_Active_Time
                 };
@@ -3511,15 +3528,15 @@ namespace MK7_KMP_Editor_For_PG_
                     TPGJ_RespawnID = TPGJ.TPGJValue_List[TPGJCount].TPGJ_RespawnID,
                     Positions = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Position
                     {
-                        X = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.X.ToString(),
-                        Y = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Y.ToString(),
-                        Z = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Z.ToString()
+                        X = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.X,
+                        Y = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Y,
+                        Z = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Z
                     },
                     Rotations = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Rotation
                     {
-                        X = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.X.ToString(),
-                        Y = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Y.ToString(),
-                        Z = TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Z.ToString()
+                        X = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.X),
+                        Y = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Y),
+                        Z = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Z)
                     },
                     TPGJ_UnkBytes1 = TPGJ.TPGJValue_List[TPGJCount].TPGJ_UnkBytes1
                 };
@@ -3648,9 +3665,9 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = Count,
                         Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
                         {
-                            X = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.X.ToString(),
-                            Y = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Y.ToString(),
-                            Z = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Z.ToString()
+                            X = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.X,
+                            Y = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Y,
+                            Z = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Z
                         },
                         TPLG_PointScaleValue = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_PointScaleValue,
                         TPLG_UnkBytes1 = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_UnkBytes1,
@@ -3836,13 +3853,15 @@ namespace MK7_KMP_Editor_For_PG_
 
             for (int Count = 0; Count < TPTK_Section.TPTKValueList.Count; Count++)
             {
-                double PX = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Position_Value.X);
-                double PY = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Position_Value.Y);
-                double PZ = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Position_Value.Z);
+                #region Transform
+                double PX = TPTK_Section.TPTKValueList[Count].Position_Value.X;
+                double PY = TPTK_Section.TPTKValueList[Count].Position_Value.Y;
+                double PZ = TPTK_Section.TPTKValueList[Count].Position_Value.Z;
 
-                double RX = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Rotate_Value.X);
-                double RY = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Rotate_Value.Y);
-                double RZ = Convert.ToSingle(TPTK_Section.TPTKValueList[Count].Rotate_Value.Z);
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.Z);
+                #endregion
 
                 KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue TPTK_Values = new KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue
                 {
@@ -3917,9 +3936,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for(int TPNECount = 0; TPNECount < HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList.Count; TPNECount++)
                     {
-                        double PX = Convert.ToSingle(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.X);
-                        double PY = Convert.ToSingle(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.Y);
-                        double PZ = Convert.ToSingle(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.Z);
+                        double PX = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.X;
+                        double PY = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.Y;
+                        double PZ = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.Z;
 
                         KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue TPNE_Values = new KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue
                         {
@@ -4012,9 +4031,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for(int TPTICount = 0; TPTICount < HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList.Count; TPTICount++)
                     {
-                        double PX = Convert.ToSingle(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.X);
-                        double PY = Convert.ToSingle(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.Y);
-                        double PZ = Convert.ToSingle(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.Z);
+                        double PX = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.X;
+                        double PY = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.Y;
+                        double PZ = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.Z;
 
                         KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue TPTI_Values = new KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue
                         {
@@ -4104,10 +4123,10 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for(int TPKCCount = 0; TPKCCount < HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList.Count; TPKCCount++)
                     {
-                        float PX_L = Convert.ToSingle(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Left.X);
-                        float PY_L = Convert.ToSingle(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Left.Y);
-                        float PX_R = Convert.ToSingle(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.X);
-                        float PY_R = Convert.ToSingle(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.Y);
+                        float PX_L = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Left.X;
+                        float PY_L = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Left.Y;
+                        float PX_R = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.X;
+                        float PY_R = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.Y;
 
                         KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue TPKC_Values = new KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue
                         {
@@ -4182,17 +4201,17 @@ namespace MK7_KMP_Editor_For_PG_
             for (int Count = 0; Count < JBOG_Section.JBOGValueList.Count; Count++)
             {
                 #region Transform Value
-                double PX = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Positions.X);
-                double PY = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Positions.Y);
-                double PZ = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Positions.Z);
+                double PX = JBOG_Section.JBOGValueList[Count].Positions.X;
+                double PY = JBOG_Section.JBOGValueList[Count].Positions.Y;
+                double PZ = JBOG_Section.JBOGValueList[Count].Positions.Z;
 
-                double RX = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Rotations.X);
-                double RY = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Rotations.Y);
-                double RZ = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Rotations.Z);
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Z);
 
-                double SX = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Scales.X);
-                double SY = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Scales.Y);
-                double SZ = Convert.ToSingle(JBOG_Section.JBOGValueList[Count].Scales.Z);
+                double SX = JBOG_Section.JBOGValueList[Count].Scales.X;
+                double SY = JBOG_Section.JBOGValueList[Count].Scales.Y;
+                double SZ = JBOG_Section.JBOGValueList[Count].Scales.Z;
                 #endregion
 
                 KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue JBOG_Values = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue
@@ -4252,9 +4271,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int ITOP_PointCount = 0; ITOP_PointCount < ITOP_Routes.ITOP_Route_NumOfPoint; ITOP_PointCount++)
                 {
-                    double PX = Convert.ToSingle(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.X);
-                    double PY = Convert.ToSingle(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.Y);
-                    double PZ = Convert.ToSingle(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.Z);
+                    double PX = ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.X;
+                    double PY = ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.Y;
+                    double PZ = ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.Z;
 
                     KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point ITOP_Points = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point
                     {
@@ -4289,17 +4308,19 @@ namespace MK7_KMP_Editor_For_PG_
 
             for (int Count = 0; Count < AERA_Section.AERAValueList.Count; Count++)
             {
-                double PX = Convert.ToSingle(AERA_Section.AERAValueList[Count].Positions.X);
-                double PY = Convert.ToSingle(AERA_Section.AERAValueList[Count].Positions.Y);
-                double PZ = Convert.ToSingle(AERA_Section.AERAValueList[Count].Positions.Z);
+                #region Transform
+                double PX = AERA_Section.AERAValueList[Count].Positions.X;
+                double PY = AERA_Section.AERAValueList[Count].Positions.Y;
+                double PZ = AERA_Section.AERAValueList[Count].Positions.Z;
 
-                double RX = Convert.ToSingle(AERA_Section.AERAValueList[Count].Rotations.X);
-                double RY = Convert.ToSingle(AERA_Section.AERAValueList[Count].Rotations.Y);
-                double RZ = Convert.ToSingle(AERA_Section.AERAValueList[Count].Rotations.Z);
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.Z);
 
-                double SX = Convert.ToSingle(AERA_Section.AERAValueList[Count].Scales.X);
-                double SY = Convert.ToSingle(AERA_Section.AERAValueList[Count].Scales.Y);
-                double SZ = Convert.ToSingle(AERA_Section.AERAValueList[Count].Scales.Z);
+                double SX = AERA_Section.AERAValueList[Count].Scales.X;
+                double SY = AERA_Section.AERAValueList[Count].Scales.Y;
+                double SZ = AERA_Section.AERAValueList[Count].Scales.Z;
+                #endregion
 
                 KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue AERA_Values = new KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue
                 {
@@ -4339,23 +4360,23 @@ namespace MK7_KMP_Editor_For_PG_
             for (int EMACCount = 0; EMACCount < EMAC_Section.EMACValueList.Count; EMACCount++)
             {
                 #region Transform Value
-                double PX = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Positions.X);
-                double PY = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Positions.Y);
-                double PZ = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Positions.Z);
+                double PX = EMAC_Section.EMACValueList[EMACCount].Positions.X;
+                double PY = EMAC_Section.EMACValueList[EMACCount].Positions.Y;
+                double PZ = EMAC_Section.EMACValueList[EMACCount].Positions.Z;
 
-                double RX = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Rotations.X);
-                double RY = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Rotations.Y);
-                double RZ = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Rotations.Z);
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.Z);
                 #endregion
 
                 #region Viewpoint Position(Start, End)
-                double VP_Start_PX = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.X);
-                double VP_Start_PY = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.Y);
-                double VP_Start_PZ = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.Z);
+                double VP_Start_PX = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.X;
+                double VP_Start_PY = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.Y;
+                double VP_Start_PZ = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.Z;
 
-                double VP_Destination_PX = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.X);
-                double VP_Destination_PY = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.Y);
-                double VP_Destination_PZ = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.Z);
+                double VP_Destination_PX = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.X;
+                double VP_Destination_PY = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.Y;
+                double VP_Destination_PZ = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.Z;
                 #endregion
 
                 KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue EMAC_Values = new KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue
@@ -4400,13 +4421,13 @@ namespace MK7_KMP_Editor_For_PG_
             for (int TPGJCount = 0; TPGJCount < TPGJ_Section.TPGJValueList.Count; TPGJCount++)
             {
                 #region Transform Value
-                double PX = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Positions.X);
-                double PY = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Positions.Y);
-                double PZ = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Positions.Z);
+                double PX = TPGJ_Section.TPGJValueList[TPGJCount].Positions.X;
+                double PY = TPGJ_Section.TPGJValueList[TPGJCount].Positions.Y;
+                double PZ = TPGJ_Section.TPGJValueList[TPGJCount].Positions.Z;
 
-                double RX = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.X);
-                double RY = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Y);
-                double RZ = Convert.ToSingle(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Z);
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Z);
                 #endregion
 
                 KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue TPGJ_Values = new KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue
@@ -4518,9 +4539,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for(int TPLGCount = 0; TPLGCount < HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList.Count; TPLGCount++)
                     {
-                        double PX = Convert.ToSingle(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.X);
-                        double PY = Convert.ToSingle(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.Y);
-                        double PZ = Convert.ToSingle(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.Z);
+                        double PX = HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.X;
+                        double PY = HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.Y;
+                        double PZ = HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.Z;
 
                         KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue TPLG_Values = new KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue
                         {
@@ -4818,15 +4839,15 @@ namespace MK7_KMP_Editor_For_PG_
                         Player_Index = 0,
                         Position_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotate_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         TPTK_UnkBytes = 0
                     };
@@ -4840,9 +4861,9 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                         {
-                            X = Convert.ToDouble(tPTKValue.Position_Value.X),
-                            Y = Convert.ToDouble(tPTKValue.Position_Value.Y),
-                            Z = Convert.ToDouble(tPTKValue.Position_Value.Z)
+                            X = tPTKValue.Position_Value.X,
+                            Y = tPTKValue.Position_Value.Y,
+                            Z = tPTKValue.Position_Value.Z
                         },
                         Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                         {
@@ -4852,9 +4873,9 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                         {
-                            X = Convert.ToDouble(tPTKValue.Rotate_Value.X),
-                            Y = Convert.ToDouble(tPTKValue.Rotate_Value.Y),
-                            Z = Convert.ToDouble(tPTKValue.Rotate_Value.Z)
+                            X = tPTKValue.Rotate_Value.X,
+                            Y = tPTKValue.Rotate_Value.Y,
+                            Z = tPTKValue.Rotate_Value.Z
                         }
                     };
 
@@ -4882,9 +4903,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             Control = 1,
                             MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
@@ -4918,9 +4939,9 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                             {
-                                X = Convert.ToDouble(tPNEValue.Positions.X),
-                                Y = Convert.ToDouble(tPNEValue.Positions.Y),
-                                Z = Convert.ToDouble(tPNEValue.Positions.Z)
+                                X = tPNEValue.Positions.X,
+                                Y = tPNEValue.Positions.Y,
+                                Z = tPNEValue.Positions.Z
                             },
                             Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                             {
@@ -4954,7 +4975,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
@@ -4967,9 +4988,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             TPTI_PointSize = 1,
                             GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
@@ -4991,15 +5012,15 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                             {
-                                X = Convert.ToDouble(tPTIValue.TPTI_Positions.X),
-                                Y = Convert.ToDouble(tPTIValue.TPTI_Positions.Y),
-                                Z = Convert.ToDouble(tPTIValue.TPTI_Positions.Z)
+                                X = tPTIValue.TPTI_Positions.X,
+                                Y = tPTIValue.TPTI_Positions.Y,
+                                Z = tPTIValue.TPTI_Positions.Z
                             },
                             Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                             {
-                                X = Convert.ToDouble(tPTIValue.TPTI_PointSize) * 100,
-                                Y = Convert.ToDouble(tPTIValue.TPTI_PointSize) * 100,
-                                Z = Convert.ToDouble(tPTIValue.TPTI_PointSize) * 100
+                                X = tPTIValue.TPTI_PointSize * 100,
+                                Y = tPTIValue.TPTI_PointSize * 100,
+                                Z = tPTIValue.TPTI_PointSize * 100
                             },
                             Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                             {
@@ -5027,7 +5048,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
@@ -5040,13 +5061,13 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Position_2D_Left = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Left
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Z
                             },
                             Position_2D_Right = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Right
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Z
                             },
                             TPKC_RespawnID = 0xFF,
                             TPKC_Checkpoint_Type = 0,
@@ -5170,7 +5191,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "Obj")
@@ -5192,21 +5213,21 @@ namespace MK7_KMP_Editor_For_PG_
                         JBOG_UnkByte3 = 0,
                         Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Scales = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Scale
                         {
-                            X = "1",
-                            Y = "1",
-                            Z = "1"
+                            X = 1,
+                            Y = 1,
+                            Z = 1
                         },
                         Rotations = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
                         {
@@ -5230,21 +5251,21 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                         {
-                            X = Convert.ToDouble(jBOGValue.Positions.X),
-                            Y = Convert.ToDouble(jBOGValue.Positions.Y),
-                            Z = Convert.ToDouble(jBOGValue.Positions.Z)
+                            X = jBOGValue.Positions.X,
+                            Y = jBOGValue.Positions.Y,
+                            Z = jBOGValue.Positions.Z
                         },
                         Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                         {
-                            X = Convert.ToDouble(jBOGValue.Scales.X) * 2,
-                            Y = Convert.ToDouble(jBOGValue.Scales.Y) * 2,
-                            Z = Convert.ToDouble(jBOGValue.Scales.Z) * 2
+                            X = jBOGValue.Scales.X * 2,
+                            Y = jBOGValue.Scales.Y * 2,
+                            Z = jBOGValue.Scales.Z * 2
                         },
                         Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                         {
-                            X = Convert.ToDouble(jBOGValue.Rotations.X),
-                            Y = Convert.ToDouble(jBOGValue.Rotations.Y),
-                            Z = Convert.ToDouble(jBOGValue.Rotations.Z)
+                            X = jBOGValue.Rotations.X,
+                            Y = jBOGValue.Rotations.Y,
+                            Z = jBOGValue.Rotations.Z
                         }
                     };
 
@@ -5272,9 +5293,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             ITOP_PointSetting2 = 0,
                             ITOP_Point_RouteSpeed = 0
@@ -5289,9 +5310,9 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                             {
-                                X = Convert.ToSingle(iTOP_Point.Positions.X),
-                                Y = Convert.ToSingle(iTOP_Point.Positions.Y),
-                                Z = Convert.ToSingle(iTOP_Point.Positions.Z)
+                                X = iTOP_Point.Positions.X,
+                                Y = iTOP_Point.Positions.Y,
+                                Z = iTOP_Point.Positions.Z
                             },
                             Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                             {
@@ -5325,7 +5346,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
                 if (KMPSectionComboBox.Text == "Area")
@@ -5335,21 +5356,21 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         Scales = new KMPPropertyGridSettings.AERA_Section.AERAValue.Scale
                         {
-                            X = "1",
-                            Y = "1",
-                            Z = "1"
+                            X = 1,
+                            Y = 1,
+                            Z = 1
                         },
                         Rotations = new KMPPropertyGridSettings.AERA_Section.AERAValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Positions = new KMPPropertyGridSettings.AERA_Section.AERAValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
                         {
@@ -5375,21 +5396,21 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                         {
-                            X = Convert.ToDouble(aERAValue.Positions.X),
-                            Y = Convert.ToDouble(aERAValue.Positions.Y),
-                            Z = Convert.ToDouble(aERAValue.Positions.Z)
+                            X = aERAValue.Positions.X,
+                            Y = aERAValue.Positions.Y,
+                            Z = aERAValue.Positions.Z
                         },
                         Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                         {
-                            X = Convert.ToDouble(aERAValue.Scales.X) * 1000,
-                            Y = Convert.ToDouble(aERAValue.Scales.Y) * 1000,
-                            Z = Convert.ToDouble(aERAValue.Scales.Z) * 1000
+                            X = aERAValue.Scales.X * 1000,
+                            Y = aERAValue.Scales.Y * 1000,
+                            Z = aERAValue.Scales.Z * 1000
                         },
                         Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                         {
-                            X = Convert.ToDouble(aERAValue.Rotations.X),
-                            Y = Convert.ToDouble(aERAValue.Rotations.Y),
-                            Z = Convert.ToDouble(aERAValue.Rotations.Z)
+                            X = aERAValue.Rotations.X,
+                            Y = aERAValue.Rotations.Y,
+                            Z = aERAValue.Rotations.Z
                         }
                     };
 
@@ -5426,15 +5447,15 @@ namespace MK7_KMP_Editor_For_PG_
                         EMAC_UnkBytes3 = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
                         {
@@ -5443,15 +5464,15 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         Camera_Active_Time = 0
                     };
@@ -5465,9 +5486,9 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                         {
-                            X = Convert.ToDouble(eMACValue.Positions.X),
-                            Y = Convert.ToDouble(eMACValue.Positions.Y),
-                            Z = Convert.ToDouble(eMACValue.Positions.Z)
+                            X = eMACValue.Positions.X,
+                            Y = eMACValue.Positions.Y,
+                            Z = eMACValue.Positions.Z
                         },
                         Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                         {
@@ -5477,9 +5498,9 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                         {
-                            X = Convert.ToDouble(eMACValue.Rotations.X),
-                            Y = Convert.ToDouble(eMACValue.Rotations.Y),
-                            Z = Convert.ToDouble(eMACValue.Rotations.Z)
+                            X = eMACValue.Rotations.X,
+                            Y = eMACValue.Rotations.Y,
+                            Z = eMACValue.Rotations.Z
                         }
                     };
 
@@ -5504,15 +5525,15 @@ namespace MK7_KMP_Editor_For_PG_
                         TPGJ_RespawnID = 65535,
                         Positions = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Position
                         {
-                            X = Pos.X.ToString(),
-                            Y = Pos.Y.ToString(),
-                            Z = Pos.Z.ToString()
+                            X = (float)Pos.X,
+                            Y = (float)Pos.Y,
+                            Z = (float)Pos.Z
                         },
                         Rotations = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Rotation
                         {
-                            X = "0",
-                            Y = "0",
-                            Z = "0"
+                            X = 0,
+                            Y = 0,
+                            Z = 0
                         },
                         TPGJ_UnkBytes1 = 0
                     };
@@ -5526,9 +5547,9 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                         {
-                            X = Convert.ToDouble(tPGJValue.Positions.X),
-                            Y = Convert.ToDouble(tPGJValue.Positions.Y),
-                            Z = Convert.ToDouble(tPGJValue.Positions.Z)
+                            X = tPGJValue.Positions.X,
+                            Y = tPGJValue.Positions.Y,
+                            Z = tPGJValue.Positions.Z
                         },
                         Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                         {
@@ -5538,9 +5559,9 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                         {
-                            X = Convert.ToDouble(tPGJValue.Rotations.X),
-                            Y = Convert.ToDouble(tPGJValue.Rotations.Y),
-                            Z = Convert.ToDouble(tPGJValue.Rotations.Z)
+                            X = tPGJValue.Rotations.X,
+                            Y = tPGJValue.Rotations.Y,
+                            Z = tPGJValue.Rotations.Z
                         }
                     };
 
@@ -5567,9 +5588,9 @@ namespace MK7_KMP_Editor_For_PG_
                             ID = KMP_Path_ListBox.Items.Count,
                             Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
                             {
-                                X = Pos.X.ToString(),
-                                Y = Pos.Y.ToString(),
-                                Z = Pos.Z.ToString()
+                                X = (float)Pos.X,
+                                Y = (float)Pos.Y,
+                                Z = (float)Pos.Z
                             },
                             TPLG_PointScaleValue = 1,
                             TPLG_UnkBytes1 = 0,
@@ -5585,9 +5606,9 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                             {
-                                X = Convert.ToDouble(tPLGValue.Positions.X),
-                                Y = Convert.ToDouble(tPLGValue.Positions.Y),
-                                Z = Convert.ToDouble(tPLGValue.Positions.Z)
+                                X = tPLGValue.Positions.X,
+                                Y = tPLGValue.Positions.Y,
+                                Z = tPLGValue.Positions.Z
                             },
                             Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                             {
@@ -5621,7 +5642,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Group : Null");
+                        System.Windows.Forms.MessageBox.Show("Group : The group may not be selected or it may be empty.");
                     }
                 }
             }
@@ -5843,6 +5864,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Clear();
                         propertyGrid_KMP_Path.SelectedObject = null;
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
                     }
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
@@ -5874,6 +5897,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Clear();
                         propertyGrid_KMP_Path.SelectedObject = null;
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
                     }
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
@@ -5906,6 +5931,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Clear();
                         propertyGrid_KMP_Path.SelectedObject = null;
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
                     }
                 }
                 if (KMPSectionComboBox.Text == "Route")
@@ -5937,6 +5964,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Clear();
                         propertyGrid_KMP_Path.SelectedObject = null;
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
                     }
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
@@ -5968,6 +5997,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Clear();
                         propertyGrid_KMP_Path.SelectedObject = null;
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
                     }
                 }
             }
@@ -6463,24 +6494,11 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 KMPPropertyGridSettings.TPTK_Section.TPTKValue GetTPTKValue = TPTK_Section.TPTKValueList[KMP_Path_ListBox.SelectedIndex];
 
-                //ラジアンから角度を求める
-                double angle_X = float.Parse(GetTPTKValue.Rotate_Value.X) * (180 / Math.PI);
-                double angle_Y = float.Parse(GetTPTKValue.Rotate_Value.Y) * (180 / Math.PI);
-                double angle_Z = float.Parse(GetTPTKValue.Rotate_Value.Z) * (180 / Math.PI);
-
-                double Scale_X = 10;
-                double Scale_Y = 10;
-                double Scale_Z = 10;
-
-                double Translate_X = float.Parse(GetTPTKValue.Position_Value.X);
-                double Translate_Y = float.Parse(GetTPTKValue.Position_Value.Y);
-                double Translate_Z = float.Parse(GetTPTKValue.Position_Value.Z);
-
                 HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                 {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                    Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                    Rotate3D = new Vector3D(GetTPTKValue.Rotate_Value.X, GetTPTKValue.Rotate_Value.Y, GetTPTKValue.Rotate_Value.Z),
+                    Scale3D = new Vector3D(10, 10, 10),
+                    Translate3D = new Vector3D(GetTPTKValue.Position_Value.X, GetTPTKValue.Position_Value.Y, GetTPTKValue.Position_Value.Z)
                 };
 
                 HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.StartPosition_MV3DList[KMP_Path_ListBox.SelectedIndex], HTK_3DES.TSRSystem.RotationSetting.Angle, true);
@@ -6491,24 +6509,11 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue GetTPNEValue = HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex].TPNEValueList[KMP_Path_ListBox.SelectedIndex];
 
-                    //ラジアンから角度を求める
-                    double angle_X = 0;
-                    double angle_Y = 0;
-                    double angle_Z = 0;
-
-                    double Scale_X = GetTPNEValue.Control * 100;
-                    double Scale_Y = GetTPNEValue.Control * 100;
-                    double Scale_Z = GetTPNEValue.Control * 100;
-
-                    double Translate_X = float.Parse(GetTPNEValue.Positions.X);
-                    double Translate_Y = float.Parse(GetTPNEValue.Positions.Y);
-                    double Translate_Z = float.Parse(GetTPNEValue.Positions.Z);
-
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
-                        Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                        Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                        Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                        Rotate3D = new Vector3D(0, 0, 0),
+                        Scale3D = new Vector3D(GetTPNEValue.Control * 100, GetTPNEValue.Control * 100, GetTPNEValue.Control * 100),
+                        Translate3D = new Vector3D(GetTPNEValue.Positions.X, GetTPNEValue.Positions.Y, GetTPNEValue.Positions.Z)
                     };
 
                     //パスの形を変更
@@ -6528,24 +6533,11 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue GetTPTIValue = HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex].TPTIValueList[KMP_Path_ListBox.SelectedIndex];
 
-                    //ラジアンから角度を求める
-                    double angle_X = 0;
-                    double angle_Y = 0;
-                    double angle_Z = 0;
-
-                    double Scale_X = GetTPTIValue.TPTI_PointSize * 100;
-                    double Scale_Y = GetTPTIValue.TPTI_PointSize * 100;
-                    double Scale_Z = GetTPTIValue.TPTI_PointSize * 100;
-
-                    double Translate_X = float.Parse(GetTPTIValue.TPTI_Positions.X);
-                    double Translate_Y = float.Parse(GetTPTIValue.TPTI_Positions.Y);
-                    double Translate_Z = float.Parse(GetTPTIValue.TPTI_Positions.Z);
-
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
-                        Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                        Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                        Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                        Rotate3D = new Vector3D(0, 0, 0),
+                        Scale3D = new Vector3D(GetTPTIValue.TPTI_PointSize * 100, GetTPTIValue.TPTI_PointSize * 100, GetTPTIValue.TPTI_PointSize * 100),
+                        Translate3D = new Vector3D(GetTPTIValue.TPTI_Positions.X, GetTPTIValue.TPTI_Positions.Y, GetTPTIValue.TPTI_Positions.Z)
                     };
 
                     //パスの形を変更
@@ -6570,7 +6562,7 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Rotate3D = new Vector3D(0, 0, 0),
                         Scale3D = new Vector3D(50, 50, 50),
-                        Translate3D = new Vector3D(float.Parse(GetTPKCValue_Left.Position_2D_Left.X), float.Parse(textBox1.Text), float.Parse(GetTPKCValue_Left.Position_2D_Left.Y))
+                        Translate3D = new Vector3D(GetTPKCValue_Left.Position_2D_Left.X, float.Parse(textBox1.Text), GetTPKCValue_Left.Position_2D_Left.Y)
                     };
 
                     HTK_3DES.TransformMV3D.Transform_MV3D(t_Left, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List[KMP_Path_ListBox.SelectedIndex], HTK_3DES.TSRSystem.RotationSetting.Angle, true);
@@ -6589,7 +6581,7 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Rotate3D = new Vector3D(0, 0, 0),
                         Scale3D = new Vector3D(50, 50, 50),
-                        Translate3D = new Vector3D(float.Parse(GetTPKCValue_Right.Position_2D_Right.X), float.Parse(textBox1.Text), float.Parse(GetTPKCValue_Right.Position_2D_Right.Y))
+                        Translate3D = new Vector3D(GetTPKCValue_Right.Position_2D_Right.X, float.Parse(textBox1.Text), GetTPKCValue_Right.Position_2D_Right.Y)
                     };
 
                     HTK_3DES.TransformMV3D.Transform_MV3D(t_Right, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List[KMP_Path_ListBox.SelectedIndex], HTK_3DES.TSRSystem.RotationSetting.Angle, true);
@@ -6621,21 +6613,21 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                     {
-                        X = float.Parse(GetJBOGValue.Positions.X),
-                        Y = float.Parse(GetJBOGValue.Positions.Y),
-                        Z = float.Parse(GetJBOGValue.Positions.Z)
+                        X = GetJBOGValue.Positions.X,
+                        Y = GetJBOGValue.Positions.Y,
+                        Z = GetJBOGValue.Positions.Z
                     },
                     Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                     {
-                        X = float.Parse(GetJBOGValue.Scales.X) * 2,
-                        Y = float.Parse(GetJBOGValue.Scales.Y) * 2,
-                        Z = float.Parse(GetJBOGValue.Scales.Z) * 2
+                        X = GetJBOGValue.Scales.X * 2,
+                        Y = GetJBOGValue.Scales.Y * 2,
+                        Z = GetJBOGValue.Scales.Z * 2
                     },
                     Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                     {
-                        X = float.Parse(GetJBOGValue.Rotations.X) * (180 / Math.PI),
-                        Y = float.Parse(GetJBOGValue.Rotations.Y) * (180 / Math.PI),
-                        Z = float.Parse(GetJBOGValue.Rotations.Z) * (180 / Math.PI)
+                        X = GetJBOGValue.Rotations.X,
+                        Y = GetJBOGValue.Rotations.Y,
+                        Z = GetJBOGValue.Rotations.Z
                     }
                 };
 
@@ -6663,24 +6655,11 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point GetITOPValue = ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex].ITOP_PointList[KMP_Path_ListBox.SelectedIndex];
 
-                    //ラジアンから角度を求める
-                    double angle_X = 0;
-                    double angle_Y = 0;
-                    double angle_Z = 0;
-
-                    double Scale_X = 10;
-                    double Scale_Y = 10;
-                    double Scale_Z = 10;
-
-                    double Translate_X = float.Parse(GetITOPValue.Positions.X);
-                    double Translate_Y = float.Parse(GetITOPValue.Positions.Y);
-                    double Translate_Z = float.Parse(GetITOPValue.Positions.Z);
-
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
-                        Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                        Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                        Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                        Rotate3D = new Vector3D(0, 0, 0),
+                        Scale3D = new Vector3D(10, 10, 10),
+                        Translate3D = new Vector3D(GetITOPValue.Positions.X, GetITOPValue.Positions.Y, GetITOPValue.Positions.Z)
                     };
 
                     //パスの形を変更
@@ -6706,21 +6685,21 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
                     {
-                        X = float.Parse(GetAERAValue.Positions.X),
-                        Y = float.Parse(GetAERAValue.Positions.Y),
-                        Z = float.Parse(GetAERAValue.Positions.Z)
+                        X = GetAERAValue.Positions.X,
+                        Y = GetAERAValue.Positions.Y,
+                        Z = GetAERAValue.Positions.Z
                     },
                     Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
                     {
-                        X = float.Parse(GetAERAValue.Scales.X) * 1000,
-                        Y = float.Parse(GetAERAValue.Scales.Y) * 1000,
-                        Z = float.Parse(GetAERAValue.Scales.Z) * 1000
+                        X = GetAERAValue.Scales.X * 1000,
+                        Y = GetAERAValue.Scales.Y * 1000,
+                        Z = GetAERAValue.Scales.Z * 1000
                     },
                     Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
                     {
-                        X = float.Parse(GetAERAValue.Rotations.X) * (180 / Math.PI),
-                        Y = float.Parse(GetAERAValue.Rotations.Y) * (180 / Math.PI),
-                        Z = float.Parse(GetAERAValue.Rotations.Z) * (180 / Math.PI)
+                        X = GetAERAValue.Rotations.X,
+                        Y = GetAERAValue.Rotations.Y,
+                        Z = GetAERAValue.Rotations.Z
                     }
                 };
 
@@ -6743,24 +6722,11 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 KMPPropertyGridSettings.EMAC_Section.EMACValue GetAERAValue = EMAC_Section.EMACValueList[KMP_Path_ListBox.SelectedIndex];
 
-                //ラジアンから角度を求める
-                double angle_X = float.Parse(GetAERAValue.Rotations.X) * (180 / Math.PI);
-                double angle_Y = float.Parse(GetAERAValue.Rotations.Y) * (180 / Math.PI);
-                double angle_Z = float.Parse(GetAERAValue.Rotations.Z) * (180 / Math.PI);
-
-                double Scale_X = 10;
-                double Scale_Y = 10;
-                double Scale_Z = 10;
-
-                double Translate_X = float.Parse(GetAERAValue.Positions.X);
-                double Translate_Y = float.Parse(GetAERAValue.Positions.Y);
-                double Translate_Z = float.Parse(GetAERAValue.Positions.Z);
-
                 HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                 {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                    Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                    Rotate3D = new Vector3D(GetAERAValue.Rotations.X, GetAERAValue.Rotations.Y, GetAERAValue.Rotations.Z),
+                    Scale3D = new Vector3D(10, 10, 10),
+                    Translate3D = new Vector3D(GetAERAValue.Positions.X, GetAERAValue.Positions.Y, GetAERAValue.Positions.Z)
                 };
 
                 HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.Camera_MV3DList[KMP_Path_ListBox.SelectedIndex], HTK_3DES.TSRSystem.RotationSetting.Angle, true);
@@ -6769,24 +6735,11 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 KMPPropertyGridSettings.TPGJ_Section.TPGJValue GetTPGJValue = TPGJ_Section.TPGJValueList[KMP_Path_ListBox.SelectedIndex];
 
-                //ラジアンから角度を求める
-                double angle_X = float.Parse(GetTPGJValue.Rotations.X) * (180 / Math.PI);
-                double angle_Y = float.Parse(GetTPGJValue.Rotations.Y) * (180 / Math.PI);
-                double angle_Z = float.Parse(GetTPGJValue.Rotations.Z) * (180 / Math.PI);
-
-                double Scale_X = 10;
-                double Scale_Y = 10;
-                double Scale_Z = 10;
-
-                double Translate_X = float.Parse(GetTPGJValue.Positions.X);
-                double Translate_Y = float.Parse(GetTPGJValue.Positions.Y);
-                double Translate_Z = float.Parse(GetTPGJValue.Positions.Z);
-
                 HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                 {
-                    Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                    Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                    Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                    Rotate3D = new Vector3D(GetTPGJValue.Rotations.X, GetTPGJValue.Rotations.Y, GetTPGJValue.Rotations.Z),
+                    Scale3D = new Vector3D(10, 10, 10),
+                    Translate3D = new Vector3D(GetTPGJValue.Positions.X, GetTPGJValue.Positions.Y, GetTPGJValue.Positions.Z)
                 };
 
                 HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.RespawnPoint_MV3DList[KMP_Path_ListBox.SelectedIndex], HTK_3DES.TSRSystem.RotationSetting.Angle, true);
@@ -6797,24 +6750,11 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue GetTPLGValue = HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex].TPLGValueList[KMP_Path_ListBox.SelectedIndex];
 
-                    //ラジアンから角度を求める
-                    double angle_X = 0;
-                    double angle_Y = 0;
-                    double angle_Z = 0;
-
-                    double Scale_X = GetTPLGValue.TPLG_PointScaleValue * 100;
-                    double Scale_Y = GetTPLGValue.TPLG_PointScaleValue * 100;
-                    double Scale_Z = GetTPLGValue.TPLG_PointScaleValue * 100;
-
-                    double Translate_X = float.Parse(GetTPLGValue.Positions.X);
-                    double Translate_Y = float.Parse(GetTPLGValue.Positions.Y);
-                    double Translate_Z = float.Parse(GetTPLGValue.Positions.Z);
-
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
-                        Rotate3D = new Vector3D(angle_X, angle_Y, angle_Z),
-                        Scale3D = new Vector3D(Scale_X, Scale_Y, Scale_Z),
-                        Translate3D = new Vector3D(Translate_X, Translate_Y, Translate_Z)
+                        Rotate3D = new Vector3D(0, 0, 0),
+                        Scale3D = new Vector3D(GetTPLGValue.TPLG_PointScaleValue * 100, GetTPLGValue.TPLG_PointScaleValue * 100, GetTPLGValue.TPLG_PointScaleValue * 100),
+                        Translate3D = new Vector3D(GetTPLGValue.Positions.X, GetTPLGValue.Positions.Y, GetTPLGValue.Positions.Z)
                     };
 
                     //パスの形を変更

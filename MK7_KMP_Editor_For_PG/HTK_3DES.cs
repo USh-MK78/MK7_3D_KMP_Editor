@@ -114,14 +114,36 @@ namespace MK7_KMP_Editor_For_PG_
                 public Vector3D Translate3D { get; set; }
             }
 
+            #region delcode
+            ///// <summary>
+            ///// Radianを角度に変換
+            ///// </summary>
+            ///// <param name="Radian"></param>
+            ///// <returns></returns>
+            //public static double RadianToAngle(double Radian)
+            //{
+            //    return Radian * (180 / Math.PI);
+            //}
+
+            ///// <summary>
+            ///// 角度をRadianに変換
+            ///// </summary>
+            ///// <param name="Angle"></param>
+            ///// <returns></returns>
+            //public static double AngleToRadian(double Angle)
+            //{
+            //    return Angle * (Math.PI / 180);
+            //}
+            #endregion
+
             /// <summary>
             /// Radianを角度に変換
             /// </summary>
             /// <param name="Radian"></param>
             /// <returns></returns>
-            public static double RadianToAngle(double Radian)
+            public static float RadianToAngle(double Radian)
             {
-                return Radian * (180 / Math.PI);
+                return (float)(Radian * (180 / Math.PI));
             }
 
             /// <summary>
@@ -131,7 +153,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// <returns></returns>
             public static double AngleToRadian(double Angle)
             {
-                return Angle * (Math.PI / 180);
+                return (float)(Angle * (Math.PI / 180));
             }
 
             public static Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
