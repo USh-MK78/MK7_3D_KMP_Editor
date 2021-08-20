@@ -41,8 +41,23 @@
             this.cameraModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewportTypeChange = new System.Windows.Forms.ToolStripMenuItem();
             this.oBJFlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objFlowXmlEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kartPointToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.enemyRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.routeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.returnPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glideRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allSectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.kartPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.KMP_Main_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.AddKMPSection = new System.Windows.Forms.Button();
@@ -63,6 +78,11 @@
             this.KMP_Viewport_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.userControl11 = new MK7_KMP_Editor_For_PG_.UserControl1();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Rad_AxisZ = new System.Windows.Forms.RadioButton();
+            this.Rad_AxisY = new System.Windows.Forms.RadioButton();
+            this.Rad_AxisX = new System.Windows.Forms.RadioButton();
+            this.Rad_AxisAll = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Section_ID_LBL = new System.Windows.Forms.Label();
             this.Section_Group_ID_LBL = new System.Windows.Forms.Label();
@@ -105,6 +125,7 @@
             this.KMP_Viewport_SplitContainer.Panel1.SuspendLayout();
             this.KMP_Viewport_SplitContainer.Panel2.SuspendLayout();
             this.KMP_Viewport_SplitContainer.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -116,7 +137,8 @@
             this.addToolStripMenuItem,
             this.oBJToolStripMenuItem,
             this.cameraModeToolStripMenuItem,
-            this.oBJFlowToolStripMenuItem});
+            this.oBJFlowToolStripMenuItem,
+            this.xmlToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1065, 24);
@@ -211,25 +233,142 @@
             // oBJFlowToolStripMenuItem
             // 
             this.oBJFlowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem,
             this.objFlowXmlEditorToolStripMenuItem});
             this.oBJFlowToolStripMenuItem.Name = "oBJFlowToolStripMenuItem";
             this.oBJFlowToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.oBJFlowToolStripMenuItem.Text = "OBJFlow";
             // 
-            // objFlowbinObjFlowDataXmlToolStripMenuItem
-            // 
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem.Name = "objFlowbinObjFlowDataXmlToolStripMenuItem";
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem.Text = "ObjFlow.bin -> ObjFlowData.Xml";
-            this.objFlowbinObjFlowDataXmlToolStripMenuItem.Click += new System.EventHandler(this.objFlowbinObjFlowDataXmlToolStripMenuItem_Click);
-            // 
             // objFlowXmlEditorToolStripMenuItem
             // 
             this.objFlowXmlEditorToolStripMenuItem.Name = "objFlowXmlEditorToolStripMenuItem";
-            this.objFlowXmlEditorToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.objFlowXmlEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.objFlowXmlEditorToolStripMenuItem.Text = "ObjFlowXml Editor";
             this.objFlowXmlEditorToolStripMenuItem.Click += new System.EventHandler(this.objFlowXmlEditorToolStripMenuItem_Click);
+            // 
+            // xmlToolStripMenuItem
+            // 
+            this.xmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportAllToolStripMenuItem,
+            this.importAllToolStripMenuItem});
+            this.xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
+            this.xmlToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.xmlToolStripMenuItem.Text = "Xml";
+            // 
+            // exportAllToolStripMenuItem
+            // 
+            this.exportAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allSectionToolStripMenuItem,
+            this.kartPointToolStripMenuItem1,
+            this.enemyRouteToolStripMenuItem,
+            this.itemRouteToolStripMenuItem,
+            this.checkpointToolStripMenuItem,
+            this.objectToolStripMenuItem,
+            this.routeToolStripMenuItem,
+            this.areaToolStripMenuItem,
+            this.cameraToolStripMenuItem,
+            this.returnPointToolStripMenuItem,
+            this.glideRouteToolStripMenuItem});
+            this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
+            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.exportAllToolStripMenuItem.Text = "Export";
+            // 
+            // allSectionToolStripMenuItem
+            // 
+            this.allSectionToolStripMenuItem.Name = "allSectionToolStripMenuItem";
+            this.allSectionToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.allSectionToolStripMenuItem.Text = "All Section";
+            this.allSectionToolStripMenuItem.Click += new System.EventHandler(this.allSectionToolStripMenuItem_Click);
+            // 
+            // kartPointToolStripMenuItem1
+            // 
+            this.kartPointToolStripMenuItem1.Name = "kartPointToolStripMenuItem1";
+            this.kartPointToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.kartPointToolStripMenuItem1.Text = "Kart Point";
+            this.kartPointToolStripMenuItem1.Click += new System.EventHandler(this.kartPointToolStripMenuItem1_Click);
+            // 
+            // enemyRouteToolStripMenuItem
+            // 
+            this.enemyRouteToolStripMenuItem.Name = "enemyRouteToolStripMenuItem";
+            this.enemyRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.enemyRouteToolStripMenuItem.Text = "Enemy Route";
+            this.enemyRouteToolStripMenuItem.Click += new System.EventHandler(this.enemyRouteToolStripMenuItem_Click);
+            // 
+            // itemRouteToolStripMenuItem
+            // 
+            this.itemRouteToolStripMenuItem.Name = "itemRouteToolStripMenuItem";
+            this.itemRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.itemRouteToolStripMenuItem.Text = "Item Route";
+            this.itemRouteToolStripMenuItem.Click += new System.EventHandler(this.itemRouteToolStripMenuItem_Click);
+            // 
+            // checkpointToolStripMenuItem
+            // 
+            this.checkpointToolStripMenuItem.Name = "checkpointToolStripMenuItem";
+            this.checkpointToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.checkpointToolStripMenuItem.Text = "Checkpoint";
+            this.checkpointToolStripMenuItem.Click += new System.EventHandler(this.checkpointToolStripMenuItem_Click);
+            // 
+            // objectToolStripMenuItem
+            // 
+            this.objectToolStripMenuItem.Name = "objectToolStripMenuItem";
+            this.objectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.objectToolStripMenuItem.Text = "Object";
+            this.objectToolStripMenuItem.Click += new System.EventHandler(this.objectToolStripMenuItem_Click);
+            // 
+            // routeToolStripMenuItem
+            // 
+            this.routeToolStripMenuItem.Name = "routeToolStripMenuItem";
+            this.routeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.routeToolStripMenuItem.Text = "Route";
+            this.routeToolStripMenuItem.Click += new System.EventHandler(this.routeToolStripMenuItem_Click);
+            // 
+            // areaToolStripMenuItem
+            // 
+            this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
+            this.areaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.areaToolStripMenuItem.Text = "Area";
+            this.areaToolStripMenuItem.Click += new System.EventHandler(this.areaToolStripMenuItem_Click);
+            // 
+            // cameraToolStripMenuItem
+            // 
+            this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.cameraToolStripMenuItem.Text = "Camera";
+            this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click);
+            // 
+            // returnPointToolStripMenuItem
+            // 
+            this.returnPointToolStripMenuItem.Name = "returnPointToolStripMenuItem";
+            this.returnPointToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.returnPointToolStripMenuItem.Text = "Return Point";
+            this.returnPointToolStripMenuItem.Click += new System.EventHandler(this.returnPointToolStripMenuItem_Click);
+            // 
+            // glideRouteToolStripMenuItem
+            // 
+            this.glideRouteToolStripMenuItem.Name = "glideRouteToolStripMenuItem";
+            this.glideRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.glideRouteToolStripMenuItem.Text = "Glide Route";
+            this.glideRouteToolStripMenuItem.Click += new System.EventHandler(this.glideRouteToolStripMenuItem_Click);
+            // 
+            // importAllToolStripMenuItem
+            // 
+            this.importAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allSectionToolStripMenuItem1,
+            this.kartPointToolStripMenuItem});
+            this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
+            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.importAllToolStripMenuItem.Text = "Import";
+            // 
+            // allSectionToolStripMenuItem1
+            // 
+            this.allSectionToolStripMenuItem1.Name = "allSectionToolStripMenuItem1";
+            this.allSectionToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
+            this.allSectionToolStripMenuItem1.Text = "All Section";
+            // 
+            // kartPointToolStripMenuItem
+            // 
+            this.kartPointToolStripMenuItem.Name = "kartPointToolStripMenuItem";
+            this.kartPointToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.kartPointToolStripMenuItem.Text = "Kart Point";
             // 
             // KMP_Main_SplitContainer
             // 
@@ -427,6 +566,7 @@
             // 
             // KMP_Viewport_SplitContainer.Panel2
             // 
+            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox5);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox4);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox3);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox2);
@@ -443,6 +583,64 @@
             this.elementHost1.TabIndex = 6;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.userControl11;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.Rad_AxisZ);
+            this.groupBox5.Controls.Add(this.Rad_AxisY);
+            this.groupBox5.Controls.Add(this.Rad_AxisX);
+            this.groupBox5.Controls.Add(this.Rad_AxisAll);
+            this.groupBox5.Location = new System.Drawing.Point(3, 414);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(189, 111);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Moving Axis";
+            // 
+            // Rad_AxisZ
+            // 
+            this.Rad_AxisZ.AutoSize = true;
+            this.Rad_AxisZ.Location = new System.Drawing.Point(8, 84);
+            this.Rad_AxisZ.Name = "Rad_AxisZ";
+            this.Rad_AxisZ.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisZ.TabIndex = 9;
+            this.Rad_AxisZ.TabStop = true;
+            this.Rad_AxisZ.Text = "Z-Axis Only";
+            this.Rad_AxisZ.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisY
+            // 
+            this.Rad_AxisY.AutoSize = true;
+            this.Rad_AxisY.Location = new System.Drawing.Point(8, 62);
+            this.Rad_AxisY.Name = "Rad_AxisY";
+            this.Rad_AxisY.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisY.TabIndex = 8;
+            this.Rad_AxisY.TabStop = true;
+            this.Rad_AxisY.Text = "Y-Axis Only";
+            this.Rad_AxisY.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisX
+            // 
+            this.Rad_AxisX.AutoSize = true;
+            this.Rad_AxisX.Location = new System.Drawing.Point(8, 40);
+            this.Rad_AxisX.Name = "Rad_AxisX";
+            this.Rad_AxisX.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisX.TabIndex = 7;
+            this.Rad_AxisX.TabStop = true;
+            this.Rad_AxisX.Text = "X-Axis Only";
+            this.Rad_AxisX.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisAll
+            // 
+            this.Rad_AxisAll.AutoSize = true;
+            this.Rad_AxisAll.Checked = true;
+            this.Rad_AxisAll.Location = new System.Drawing.Point(8, 18);
+            this.Rad_AxisAll.Name = "Rad_AxisAll";
+            this.Rad_AxisAll.Size = new System.Drawing.Size(78, 16);
+            this.Rad_AxisAll.TabIndex = 0;
+            this.Rad_AxisAll.TabStop = true;
+            this.Rad_AxisAll.Text = "X Y Z (All)";
+            this.Rad_AxisAll.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -696,6 +894,8 @@
             this.KMP_Viewport_SplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Viewport_SplitContainer)).EndInit();
             this.KMP_Viewport_SplitContainer.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -758,11 +958,31 @@
         public System.Windows.Forms.ComboBox KMPSectionComboBox;
         public System.Windows.Forms.ListBox KMP_Path_ListBox;
         private System.Windows.Forms.ToolStripMenuItem oBJFlowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem objFlowbinObjFlowDataXmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objFlowXmlEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeKMPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visibilityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createKMPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kartPointToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem enemyRouteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemRouteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkpointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem objectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem routeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem returnPointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glideRouteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem kartPointToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton Rad_AxisAll;
+        private System.Windows.Forms.RadioButton Rad_AxisZ;
+        private System.Windows.Forms.RadioButton Rad_AxisY;
+        private System.Windows.Forms.RadioButton Rad_AxisX;
     }
 }
 

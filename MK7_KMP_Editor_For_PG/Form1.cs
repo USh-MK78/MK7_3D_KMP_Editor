@@ -129,15 +129,6 @@ namespace MK7_KMP_Editor_For_PG_
                 fs1.Dispose();
                 System.IO.Compression.ZipFile.ExtractToDirectory("KMPObjectFlow.zip", CD);
             }
-
-            if (File.Exists(CD + "\\ObjFlow.bin") == false)
-            {
-                var ObjFlow = Properties.Resources.ObjFlow;
-                FileStream fs1 = new FileStream("ObjFlow.bin", FileMode.Create, FileAccess.Write);
-                fs1.Write(ObjFlow, 0, ObjFlow.Length);
-                fs1.Close();
-                fs1.Dispose();
-            }
         }
 
         #region Import OBJ
@@ -1551,17 +1542,40 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            //一度Transform_ValueのTranslate_Valueに計算した値を格納
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         TPTK_Section.TPTKValueList[MDLNum].Position_Value.X = (float)transform_Value.Translate_Value.X;
                         TPTK_Section.TPTKValueList[MDLNum].Position_Value.Y = (float)transform_Value.Translate_Value.Y;
                         TPTK_Section.TPTKValueList[MDLNum].Position_Value.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = TPTK_Section.TPTKValueList[MDLNum];
@@ -1570,20 +1584,44 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.EnemyRoute_Rail_List[GroupNum];
-                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, rail.TV3D_List);
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, rail.TV3D_List);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum];
@@ -1592,20 +1630,44 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.X = (float)transform_Value.Translate_Value.X;
                         HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Y = (float)transform_Value.Translate_Value.Y;
                         HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.ItemRoute_Rail_List[GroupNum];
-                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, rail.TV3D_List);
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, rail.TV3D_List);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum];
@@ -1614,22 +1676,44 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, Convert.ToDouble(textBox1.Text), transform_Value.Translate_Value.Z), e);
 
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            //Nothing
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.X = (float)transform_Value.Translate_Value.X;
                         HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更(機能の追加)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = KMPViewportObject.Checkpoint_Rail[GroupNum];
 
                         //Green
-                        if(checkpoint.Checkpoint_Left.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, checkpoint.Checkpoint_Left.LV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[0] = NewPos.ToPoint3D();
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (checkpoint.Checkpoint_Left.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, checkpoint.Checkpoint_Left.LV3D_List);
+                        KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[0] = pos.ToPoint3D();
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum];
@@ -1638,22 +1722,44 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, Convert.ToDouble(textBox1.Text), transform_Value.Translate_Value.Z), e);
 
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            //Nothing
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.X = (float)transform_Value.Translate_Value.X;
                         HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更(機能の追加)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = KMPViewportObject.Checkpoint_Rail[GroupNum];
 
                         //Red
-                        if(checkpoint.Checkpoint_Right.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, checkpoint.Checkpoint_Right.LV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[1] = NewPos.ToPoint3D();
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (checkpoint.Checkpoint_Right.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, checkpoint.Checkpoint_Right.LV3D_List);
+                        KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[1] = pos.ToPoint3D();
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum];
@@ -1663,17 +1769,39 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         JBOG_Section.JBOGValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         JBOG_Section.JBOGValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         JBOG_Section.JBOGValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = JBOG_Section.JBOGValueList[MDLNum];
@@ -1683,21 +1811,44 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.Routes_List[GroupNum];
-                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, rail.TV3D_List);
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, rail.TV3D_List);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum];
@@ -1707,17 +1858,39 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         AERA_Section.AERAValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         AERA_Section.AERAValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         AERA_Section.AERAValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = AERA_Section.AERAValueList[MDLNum];
@@ -1727,17 +1900,39 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         EMAC_Section.EMACValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         EMAC_Section.EMACValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         EMAC_Section.EMACValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = EMAC_Section.EMACValueList[MDLNum];
@@ -1747,17 +1942,39 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         TPGJ_Section.TPGJValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         TPGJ_Section.TPGJValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         TPGJ_Section.TPGJValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = TPGJ_Section.TPGJValueList[MDLNum];
@@ -1767,21 +1984,44 @@ namespace MK7_KMP_Editor_For_PG_
                         //位置を計算
                         Vector3D NewPos = render.Drag(new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z), e);
 
-                        //一度Transform_ValueのTranslate_Valueに計算した値を格納
-                        transform_Value.Translate_Value.X = NewPos.X;
-                        transform_Value.Translate_Value.Y = NewPos.Y;
-                        transform_Value.Translate_Value.Z = NewPos.Z;
+                        #region Moving Axis
+                        if (Rad_AxisAll.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        if (Rad_AxisX.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = NewPos.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisY.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = NewPos.Y;
+                            transform_Value.Translate_Value.Z = transform_Value.Translate_Value.Z;
+                        }
+                        if (Rad_AxisZ.Checked == true)
+                        {
+                            transform_Value.Translate_Value.X = transform_Value.Translate_Value.X;
+                            transform_Value.Translate_Value.Y = transform_Value.Translate_Value.Y;
+                            transform_Value.Translate_Value.Z = NewPos.Z;
+                        }
+                        #endregion
 
                         //Propertyに値を格納する
                         HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.X = (float)transform_Value.Translate_Value.X;
                         HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Y = (float)transform_Value.Translate_Value.Y;
                         HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions.Z = (float)transform_Value.Translate_Value.Z;
 
-                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D);
+                        HTK_3DES.TransformMV3D.Transform_MV3D(transform_Value, FindMV3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.GlideRoute_Rail_List[GroupNum];
-                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, NewPos, rail.TV3D_List);
+                        Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
+                        if (rail.TV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, rail.TV3D_List);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum];
@@ -6448,12 +6688,6 @@ namespace MK7_KMP_Editor_For_PG_
             if (textBox1.Text == "") textBox1.Text = "0";
         }
 
-        private void objFlowbinObjFlowDataXmlToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<KMPs.KMPHelper.ObjFlowReader.ObjFlowValue> objFlowValues = KMPs.KMPHelper.ObjFlowReader.Read("ObjFlow.bin");
-            KMPs.KMPHelper.ObjFlowReader.CreateXml(objFlowValues, "KMPObjectFlow", "KMP_OBJ\\OBJ\\OBJ.obj", "ObjFlowData.xml");
-        }
-
         private void objFlowXmlEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists("ObjFlow.bin") == true)
@@ -6485,7 +6719,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
             }
-            if (File.Exists("ObjFlow.bin") == false) System.Windows.MessageBox.Show("ObjFlow.bin : null\r\nObjFlowXmlEditor");
+            if (File.Exists("ObjFlow.bin") == false) System.Windows.MessageBox.Show("[ObjFlowXmlEditor]\r\nObjFlow.bin : null\r\nObjFlow.binがこのプログラムと同じディレクトリ内に存在しません。\r\nObjFlow.binをこのプログラムと同じディレクトリに配置してください。\r\nObjFlow.binは[RaceCommon.szs]に格納されています。", "Error");
         }
 
         private void propertyGrid_KMP_Path_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -6932,6 +7166,86 @@ namespace MK7_KMP_Editor_For_PG_
 
             writeBinaryToolStripMenuItem.Enabled = true;
             closeKMPToolStripMenuItem.Enabled = true;
+        }
+
+        private void allSectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog Save_KMPXML = new SaveFileDialog()
+            {
+                Title = "Save XML(KMP)",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+            };
+
+            if (Save_KMPXML.ShowDialog() != DialogResult.OK) return;
+
+            KMPPropertyGridSettings kMPPropertyGridSettings = new KMPPropertyGridSettings
+            {
+                TPTKSection = TPTK_Section,
+                HPNE_TPNESection = HPNE_TPNE_Section,
+                HPTI_TPTISection = HPTI_TPTI_Section,
+                HPKC_TPKCSection = HPKC_TPKC_Section,
+                JBOGSection = JBOG_Section,
+                ITOPSection = ITOP_Section,
+                AERASection = AERA_Section,
+                EMACSection = EMAC_Section,
+                TPGJSection = TPGJ_Section,
+                IGTSSection = IGTS_Section,
+                HPLG_TPLGSection = HPLG_TPLG_Section
+            };
+
+
+            XMLExporter.ExportAll(kMPPropertyGridSettings, Save_KMPXML.FileName);
+        }
+
+        private void kartPointToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void enemyRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itemRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkpointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void objectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void routeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void areaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void returnPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void glideRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

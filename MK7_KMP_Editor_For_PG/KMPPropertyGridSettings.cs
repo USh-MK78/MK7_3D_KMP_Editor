@@ -14,6 +14,7 @@ namespace MK7_KMP_Editor_For_PG_
 {
     public class KMPPropertyGridSettings
     {
+        public TPTK_Section TPTKSection { get; set; }
         public class TPTK_Section
         {
             public List<TPTKValue> TPTKValue_List = new List<TPTKValue>();
@@ -62,6 +63,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public HPNE_TPNE_Section HPNE_TPNESection { get; set; }
         public class HPNE_TPNE_Section
         {
             public List<HPNEValue> HPNEValue_List = new List<HPNEValue>();
@@ -352,6 +354,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public HPTI_TPTI_Section HPTI_TPTISection { get; set; }
         public class HPTI_TPTI_Section
         {
             public List<HPTIValue> HPTIValue_List = new List<HPTIValue>();
@@ -473,6 +476,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public HPKC_TPKC_Section HPKC_TPKCSection { get; set; }
         public class HPKC_TPKC_Section
         {
             public List<HPKCValue> HPKCValue_List = new List<HPKCValue>();
@@ -579,6 +583,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public JBOG_section JBOGSection { get; set; }
         public class JBOG_section
         {
             public List<JBOGValue> JBOGValue_List = new List<JBOGValue>();
@@ -667,6 +672,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public ITOP_Section ITOPSection { get; set; }
         public class ITOP_Section
         {
             public List<ITOP_Route> ITOP_Route_List = new List<ITOP_Route>();
@@ -722,6 +728,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public AERA_Section AERASection { get; set; }
         public class AERA_Section
         {
             public List<AERAValue> AERAValue_List = new List<AERAValue>();
@@ -810,6 +817,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public EMAC_Section EMACSection { get; set; }
         public class EMAC_Section
         {
             public List<EMACValue> EMACValue_List = new List<EMACValue>();
@@ -920,6 +928,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public TPGJ_Section TPGJSection { get; set; }
         public class TPGJ_Section
         {
             public List<TPGJValue> TPGJValue_List = new List<TPGJValue>();
@@ -972,6 +981,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         //TPSM = null
 
+        public IGTS_Section IGTSSection { get; set; }
         [TypeConverter(typeof(CustomSortTypeConverter))]
         public class IGTS_Section
         {
@@ -1001,6 +1011,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         //SROC = null
 
+        public HPLG_TPLG_Section HPLG_TPLGSection { get; set; }
         public class HPLG_TPLG_Section
         {
             public List<HPLGValue> HPLGValue_List = new List<HPLGValue>();

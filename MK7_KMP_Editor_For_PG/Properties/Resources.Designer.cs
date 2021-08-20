@@ -79,15 +79,5 @@ namespace MK7_KMP_Editor_For_PG_.Properties {
                 return ((byte[])(obj));
             }
         }
-        
-        /// <summary>
-        ///   型 System.Byte[] のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static byte[] ObjFlow {
-            get {
-                object obj = ResourceManager.GetObject("ObjFlow", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
