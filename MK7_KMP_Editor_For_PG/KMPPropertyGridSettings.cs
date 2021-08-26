@@ -29,9 +29,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Position_Value { get; set; } = new Position();
                 public class Position
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -43,9 +69,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotate_Value { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -146,9 +198,35 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        public float X { get; set; }
-                        public float Y { get; set; }
-                        public float Z { get; set; }
+                        private float _X;
+                        public float X
+                        {
+                            get { return _X; }
+                            set { _X = value; }
+                        }
+
+                        private float _Y;
+                        public float Y
+                        {
+                            get { return _Y; }
+                            set { _Y = value; }
+                        }
+
+                        private float _Z;
+                        public float Z
+                        {
+                            get { return _Z; }
+                            set { _Z = value; }
+                        }
+
+                        public Vector3D GetVector3D()
+                        {
+                            double X = Convert.ToDouble(_X);
+                            double Y = Convert.ToDouble(_Y);
+                            double Z = Convert.ToDouble(_Z);
+
+                            return new Vector3D(X, Y, Z);
+                        }
 
                         public override string ToString()
                         {
@@ -415,9 +493,35 @@ namespace MK7_KMP_Editor_For_PG_
                     public TPTI_Position TPTI_Positions { get; set; } = new TPTI_Position();
                     public class TPTI_Position
                     {
-                        public float X { get; set; }
-                        public float Y { get; set; }
-                        public float Z { get; set; }
+                        private float _X;
+                        public float X
+                        {
+                            get { return _X; }
+                            set { _X = value; }
+                        }
+
+                        private float _Y;
+                        public float Y
+                        {
+                            get { return _Y; }
+                            set { _Y = value; }
+                        }
+
+                        private float _Z;
+                        public float Z
+                        {
+                            get { return _Z; }
+                            set { _Z = value; }
+                        }
+
+                        public Vector3D GetVector3D()
+                        {
+                            double X = Convert.ToDouble(_X);
+                            double Y = Convert.ToDouble(_Y);
+                            double Z = Convert.ToDouble(_Z);
+
+                            return new Vector3D(X, Y, Z);
+                        }
 
                         public override string ToString()
                         {
@@ -603,9 +707,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -617,9 +747,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -631,9 +787,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -702,9 +884,35 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        public float X { get; set; }
-                        public float Y { get; set; }
-                        public float Z { get; set; }
+                        private float _X;
+                        public float X
+                        {
+                            get { return _X; }
+                            set { _X = value; }
+                        }
+
+                        private float _Y;
+                        public float Y
+                        {
+                            get { return _Y; }
+                            set { _Y = value; }
+                        }
+
+                        private float _Z;
+                        public float Z
+                        {
+                            get { return _Z; }
+                            set { _Z = value; }
+                        }
+
+                        public Vector3D GetVector3D()
+                        {
+                            double X = Convert.ToDouble(_X);
+                            double Y = Convert.ToDouble(_Y);
+                            double Z = Convert.ToDouble(_Z);
+
+                            return new Vector3D(X, Y, Z);
+                        }
 
                         public override string ToString()
                         {
@@ -766,9 +974,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -780,9 +1014,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -794,9 +1054,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Scale Scales { get; set; } = new Scale();
                 public class Scale
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -854,9 +1140,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -868,9 +1180,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -943,9 +1281,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Position Positions { get; set; } = new Position();
                 public class Position
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -957,9 +1321,35 @@ namespace MK7_KMP_Editor_For_PG_
                 public Rotation Rotations { get; set; } = new Rotation();
                 public class Rotation
                 {
-                    public float X { get; set; }
-                    public float Y { get; set; }
-                    public float Z { get; set; }
+                    private float _X;
+                    public float X
+                    {
+                        get { return _X; }
+                        set { _X = value; }
+                    }
+
+                    private float _Y;
+                    public float Y
+                    {
+                        get { return _Y; }
+                        set { _Y = value; }
+                    }
+
+                    private float _Z;
+                    public float Z
+                    {
+                        get { return _Z; }
+                        set { _Z = value; }
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X = Convert.ToDouble(_X);
+                        double Y = Convert.ToDouble(_Y);
+                        double Z = Convert.ToDouble(_Z);
+
+                        return new Vector3D(X, Y, Z);
+                    }
 
                     public override string ToString()
                     {
@@ -1125,9 +1515,35 @@ namespace MK7_KMP_Editor_For_PG_
                     public Position Positions { get; set; } = new Position();
                     public class Position
                     {
-                        public float X { get; set; }
-                        public float Y { get; set; }
-                        public float Z { get; set; }
+                        private float _X;
+                        public float X
+                        {
+                            get { return _X; }
+                            set { _X = value; }
+                        }
+
+                        private float _Y;
+                        public float Y
+                        {
+                            get { return _Y; }
+                            set { _Y = value; }
+                        }
+
+                        private float _Z;
+                        public float Z
+                        {
+                            get { return _Z; }
+                            set { _Z = value; }
+                        }
+
+                        public Vector3D GetVector3D()
+                        {
+                            double X = Convert.ToDouble(_X);
+                            double Y = Convert.ToDouble(_Y);
+                            double Z = Convert.ToDouble(_Z);
+
+                            return new Vector3D(X, Y, Z);
+                        }
 
                         public override string ToString()
                         {
@@ -1310,16 +1726,6 @@ namespace MK7_KMP_Editor_For_PG_
             return true;
         }
     }
-
-    //public class ValueRange
-    //{
-    //    public int _Value;
-    //    public int Value
-    //    {
-    //        set => _Value = Math.Min(65536, Math.Max(-2, value));
-    //        get => _Value;
-    //    }
-    //}
 
     #region Delcode(?)
     //public class CustomRotationEditor : UITypeEditor

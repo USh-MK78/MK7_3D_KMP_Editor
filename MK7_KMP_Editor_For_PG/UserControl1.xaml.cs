@@ -117,5 +117,54 @@ namespace MK7_KMP_Editor_For_PG_
 
             return PosMode;
         }
+
+        public void FindObject(object input, int ValueIndex, int GroupIndex = -1)
+        {
+            if (input is List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>)
+            {
+                var PG_KartPositions = input as List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>;
+                MainViewPort.Camera.LookAt(PG_KartPositions[ValueIndex].Position_Value.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>)
+            {
+                var PG_EnemyPoints = input as List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>;
+                MainViewPort.Camera.LookAt(PG_EnemyPoints[GroupIndex].TPNEValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>)
+            {
+                var PG_ItemPoints = input as List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>;
+                MainViewPort.Camera.LookAt(PG_ItemPoints[GroupIndex].TPTIValueList[ValueIndex].TPTI_Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.JBOG_section.JBOGValue>)
+            {
+                var PG_Objects = input as List<KMPPropertyGridSettings.JBOG_section.JBOGValue>;
+                MainViewPort.Camera.LookAt(PG_Objects[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>)
+            {
+                var PG_Routes = input as List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>;
+                MainViewPort.Camera.LookAt(PG_Routes[GroupIndex].ITOP_PointList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.AERA_Section.AERAValue>)
+            {
+                var PG_Areas = input as List<KMPPropertyGridSettings.AERA_Section.AERAValue>;
+                MainViewPort.Camera.LookAt(PG_Areas[GroupIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.EMAC_Section.EMACValue>)
+            {
+                var PG_Cameras = input as List<KMPPropertyGridSettings.EMAC_Section.EMACValue>;
+                MainViewPort.Camera.LookAt(PG_Cameras[GroupIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>)
+            {
+                var PG_JugemPoints = input as List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>;
+                MainViewPort.Camera.LookAt(PG_JugemPoints[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>)
+            {
+                var PG_GlideRoutes = input as List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>;
+                MainViewPort.Camera.LookAt(PG_GlideRoutes[GroupIndex].TPLGValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+        }
     }
 }

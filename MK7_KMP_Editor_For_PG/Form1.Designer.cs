@@ -43,21 +43,14 @@
             this.oBJFlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objFlowXmlEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kartPointToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.enemyRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.routeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.returnPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.glideRouteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputXXXXAsXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xXXXRouteExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allSectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.kartPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputXmlAsXXXXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xXXXRouteImporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.KMP_Main_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.AddKMPSection = new System.Windows.Forms.Button();
@@ -241,134 +234,80 @@
             // objFlowXmlEditorToolStripMenuItem
             // 
             this.objFlowXmlEditorToolStripMenuItem.Name = "objFlowXmlEditorToolStripMenuItem";
-            this.objFlowXmlEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.objFlowXmlEditorToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.objFlowXmlEditorToolStripMenuItem.Text = "ObjFlowXml Editor";
             this.objFlowXmlEditorToolStripMenuItem.Click += new System.EventHandler(this.objFlowXmlEditorToolStripMenuItem_Click);
             // 
             // xmlToolStripMenuItem
             // 
             this.xmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportAllToolStripMenuItem,
+            this.exportToolStripMenuItem,
             this.importAllToolStripMenuItem});
             this.xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
             this.xmlToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.xmlToolStripMenuItem.Text = "Xml";
             // 
-            // exportAllToolStripMenuItem
+            // exportToolStripMenuItem
             // 
-            this.exportAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allSectionToolStripMenuItem,
-            this.kartPointToolStripMenuItem1,
-            this.enemyRouteToolStripMenuItem,
-            this.itemRouteToolStripMenuItem,
-            this.checkpointToolStripMenuItem,
-            this.objectToolStripMenuItem,
-            this.routeToolStripMenuItem,
-            this.areaToolStripMenuItem,
-            this.cameraToolStripMenuItem,
-            this.returnPointToolStripMenuItem,
-            this.glideRouteToolStripMenuItem});
-            this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
-            this.exportAllToolStripMenuItem.Text = "Export";
+            this.outputXXXXAsXmlToolStripMenuItem,
+            this.xXXXRouteExporterToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Text = "Export";
             // 
             // allSectionToolStripMenuItem
             // 
             this.allSectionToolStripMenuItem.Name = "allSectionToolStripMenuItem";
-            this.allSectionToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.allSectionToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.allSectionToolStripMenuItem.Text = "All Section";
             this.allSectionToolStripMenuItem.Click += new System.EventHandler(this.allSectionToolStripMenuItem_Click);
             // 
-            // kartPointToolStripMenuItem1
+            // outputXXXXAsXmlToolStripMenuItem
             // 
-            this.kartPointToolStripMenuItem1.Name = "kartPointToolStripMenuItem1";
-            this.kartPointToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
-            this.kartPointToolStripMenuItem1.Text = "Kart Point";
-            this.kartPointToolStripMenuItem1.Click += new System.EventHandler(this.kartPointToolStripMenuItem1_Click);
+            this.outputXXXXAsXmlToolStripMenuItem.Name = "outputXXXXAsXmlToolStripMenuItem";
+            this.outputXXXXAsXmlToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.outputXXXXAsXmlToolStripMenuItem.Text = "Output XXXX as Xml";
+            this.outputXXXXAsXmlToolStripMenuItem.Click += new System.EventHandler(this.outputXXXXAsXmlToolStripMenuItem_Click);
             // 
-            // enemyRouteToolStripMenuItem
+            // xXXXRouteExporterToolStripMenuItem
             // 
-            this.enemyRouteToolStripMenuItem.Name = "enemyRouteToolStripMenuItem";
-            this.enemyRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.enemyRouteToolStripMenuItem.Text = "Enemy Route";
-            this.enemyRouteToolStripMenuItem.Click += new System.EventHandler(this.enemyRouteToolStripMenuItem_Click);
-            // 
-            // itemRouteToolStripMenuItem
-            // 
-            this.itemRouteToolStripMenuItem.Name = "itemRouteToolStripMenuItem";
-            this.itemRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.itemRouteToolStripMenuItem.Text = "Item Route";
-            this.itemRouteToolStripMenuItem.Click += new System.EventHandler(this.itemRouteToolStripMenuItem_Click);
-            // 
-            // checkpointToolStripMenuItem
-            // 
-            this.checkpointToolStripMenuItem.Name = "checkpointToolStripMenuItem";
-            this.checkpointToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.checkpointToolStripMenuItem.Text = "Checkpoint";
-            this.checkpointToolStripMenuItem.Click += new System.EventHandler(this.checkpointToolStripMenuItem_Click);
-            // 
-            // objectToolStripMenuItem
-            // 
-            this.objectToolStripMenuItem.Name = "objectToolStripMenuItem";
-            this.objectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.objectToolStripMenuItem.Text = "Object";
-            this.objectToolStripMenuItem.Click += new System.EventHandler(this.objectToolStripMenuItem_Click);
-            // 
-            // routeToolStripMenuItem
-            // 
-            this.routeToolStripMenuItem.Name = "routeToolStripMenuItem";
-            this.routeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.routeToolStripMenuItem.Text = "Route";
-            this.routeToolStripMenuItem.Click += new System.EventHandler(this.routeToolStripMenuItem_Click);
-            // 
-            // areaToolStripMenuItem
-            // 
-            this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
-            this.areaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.areaToolStripMenuItem.Text = "Area";
-            this.areaToolStripMenuItem.Click += new System.EventHandler(this.areaToolStripMenuItem_Click);
-            // 
-            // cameraToolStripMenuItem
-            // 
-            this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.cameraToolStripMenuItem.Text = "Camera";
-            this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click);
-            // 
-            // returnPointToolStripMenuItem
-            // 
-            this.returnPointToolStripMenuItem.Name = "returnPointToolStripMenuItem";
-            this.returnPointToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.returnPointToolStripMenuItem.Text = "Return Point";
-            this.returnPointToolStripMenuItem.Click += new System.EventHandler(this.returnPointToolStripMenuItem_Click);
-            // 
-            // glideRouteToolStripMenuItem
-            // 
-            this.glideRouteToolStripMenuItem.Name = "glideRouteToolStripMenuItem";
-            this.glideRouteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.glideRouteToolStripMenuItem.Text = "Glide Route";
-            this.glideRouteToolStripMenuItem.Click += new System.EventHandler(this.glideRouteToolStripMenuItem_Click);
+            this.xXXXRouteExporterToolStripMenuItem.Name = "xXXXRouteExporterToolStripMenuItem";
+            this.xXXXRouteExporterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+            this.xXXXRouteExporterToolStripMenuItem.Click += new System.EventHandler(this.XXXXRouteExporterTSM_Click);
             // 
             // importAllToolStripMenuItem
             // 
             this.importAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allSectionToolStripMenuItem1,
-            this.kartPointToolStripMenuItem});
+            this.inputXmlAsXXXXToolStripMenuItem,
+            this.xXXXRouteImporterToolStripMenuItem});
             this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
-            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importAllToolStripMenuItem.Text = "Import";
             // 
             // allSectionToolStripMenuItem1
             // 
             this.allSectionToolStripMenuItem1.Name = "allSectionToolStripMenuItem1";
-            this.allSectionToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
+            this.allSectionToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
             this.allSectionToolStripMenuItem1.Text = "All Section";
+            this.allSectionToolStripMenuItem1.Click += new System.EventHandler(this.ImportAllSectionTSM_Click);
             // 
-            // kartPointToolStripMenuItem
+            // inputXmlAsXXXXToolStripMenuItem
             // 
-            this.kartPointToolStripMenuItem.Name = "kartPointToolStripMenuItem";
-            this.kartPointToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.kartPointToolStripMenuItem.Text = "Kart Point";
+            this.inputXmlAsXXXXToolStripMenuItem.Name = "inputXmlAsXXXXToolStripMenuItem";
+            this.inputXmlAsXXXXToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.inputXmlAsXXXXToolStripMenuItem.Text = "Input Xml as XXXX";
+            this.inputXmlAsXXXXToolStripMenuItem.Click += new System.EventHandler(this.InputXmlAsXXXXTSM_Click);
+            // 
+            // xXXXRouteImporterToolStripMenuItem
+            // 
+            this.xXXXRouteImporterToolStripMenuItem.Name = "xXXXRouteImporterToolStripMenuItem";
+            this.xXXXRouteImporterToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+            this.xXXXRouteImporterToolStripMenuItem.Click += new System.EventHandler(this.xXXXRouteImporterToolStripMenuItem_Click);
             // 
             // KMP_Main_SplitContainer
             // 
@@ -507,6 +446,7 @@
             this.KMP_Path_ListBox.Size = new System.Drawing.Size(218, 208);
             this.KMP_Path_ListBox.TabIndex = 0;
             this.KMP_Path_ListBox.SelectedIndexChanged += new System.EventHandler(this.KMP_Path_ListBox_SelectedIndexChanged);
+            this.KMP_Path_ListBox.DoubleClick += new System.EventHandler(this.KMP_Path_ListBox_DoubleClick);
             // 
             // propertyGrid_KMP_Path
             // 
@@ -963,26 +903,19 @@
         private System.Windows.Forms.ToolStripMenuItem visibilityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createKMPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kartPointToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem enemyRouteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem itemRouteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checkpointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem objectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem routeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem returnPointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem glideRouteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem kartPointToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.RadioButton Rad_AxisAll;
         private System.Windows.Forms.RadioButton Rad_AxisZ;
         private System.Windows.Forms.RadioButton Rad_AxisY;
         private System.Windows.Forms.RadioButton Rad_AxisX;
+        private System.Windows.Forms.ToolStripMenuItem xXXXRouteExporterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputXXXXAsXmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inputXmlAsXXXXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xXXXRouteImporterToolStripMenuItem;
     }
 }
 

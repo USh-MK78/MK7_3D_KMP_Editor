@@ -161,6 +161,9 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 public ushort Next15 { get; set; }
                 #endregion
 
+                [System.Xml.Serialization.XmlAttribute("Unknown1")]
+                public uint Unknown1 { get; set; }
+
                 [System.Xml.Serialization.XmlElement("Point")]
                 public List<EnemyRoute_Point> Points { get; set; }
                 public class EnemyRoute_Point
@@ -190,6 +193,12 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Control")]
                     public float Control { get; set; }
+
+                    [System.Xml.Serialization.XmlAttribute("PathFind")]
+                    public short PathFindOption { get; set; }
+
+                    [System.Xml.Serialization.XmlAttribute("MaxSearchYOffset")]
+                    public short MaxSearchYOffset { get; set; }
                 }
             }
         }
@@ -801,42 +810,42 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             {
                 #region Prev
                 [System.Xml.Serialization.XmlAttribute("Prev0")]
-                public ushort Prev0 { get; set; }
+                public byte Prev0 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Prev1")]
-                public ushort Prev1 { get; set; }
+                public byte Prev1 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Prev2")]
-                public ushort Prev2 { get; set; }
+                public byte Prev2 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Prev3")]
-                public ushort Prev3 { get; set; }
+                public byte Prev3 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Prev4")]
-                public ushort Prev4 { get; set; }
+                public byte Prev4 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Prev5")]
-                public ushort Prev5 { get; set; }
+                public byte Prev5 { get; set; }
                 #endregion
 
                 #region Next
                 [System.Xml.Serialization.XmlAttribute("Next0")]
-                public ushort Next0 { get; set; }
+                public byte Next0 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Next1")]
-                public ushort Next1 { get; set; }
+                public byte Next1 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Next2")]
-                public ushort Next2 { get; set; }
+                public byte Next2 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Next3")]
-                public ushort Next3 { get; set; }
+                public byte Next3 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Next4")]
-                public ushort Next4 { get; set; }
+                public byte Next4 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Next5")]
-                public ushort Next5 { get; set; }
+                public byte Next5 { get; set; }
                 #endregion
 
                 [System.Xml.Serialization.XmlAttribute("RouteSetting")]
@@ -873,6 +882,23 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                     }
                 }
             }
+        }
+    }
+
+    public class KMPXmlSetting
+    {
+        public enum Section
+        {
+            KartPoint, 
+            EnemyRoutes, 
+            ItemRoutes, 
+            CheckPoint, 
+            Obj, 
+            Route, 
+            Area, 
+            Camera, 
+            JugemPoint, 
+            GlideRoutes
         }
     }
 }

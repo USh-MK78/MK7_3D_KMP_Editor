@@ -106,8 +106,12 @@ namespace MK7_KMP_Editor_For_PG_
 
             writeBinaryToolStripMenuItem.Enabled = false;
             closeKMPToolStripMenuItem.Enabled = false;
+            exportToolStripMenuItem.Enabled = false;
             closeObjToolStripMenuItem.Enabled = false;
             visibilityToolStripMenuItem.Enabled = false;
+            xXXXRouteExporterToolStripMenuItem.Enabled = false;
+            xXXXRouteImporterToolStripMenuItem.Enabled = false;
+            inputXmlAsXXXXToolStripMenuItem.Enabled = false;
 
             string CD = System.IO.Directory.GetCurrentDirectory();
             if (Directory.Exists(CD + "\\KMP_OBJ") == false)
@@ -3988,8 +3992,12 @@ namespace MK7_KMP_Editor_For_PG_
             ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Returnpoints.Checked, render, KMPViewportObject.RespawnPoint_MV3DList);
             ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_GlideRoutes.Checked, render, KMPViewportObject.GlideRoute_Rail_List);
 
-            string[] AllSectionAry = new string[] { "KartPoint", "EnemyRoutes", "ItemRoutes", "CheckPoint", "Obj", "Route", "Area", "Camera", "JugemPoint", "GlideRoutes" };
-            KMPSectionComboBox.Items.AddRange(AllSectionAry.ToArray());
+            if (KMPSectionComboBox.Items.Count == 0)
+            {
+                string[] AllSectionAry = new string[] { "KartPoint", "EnemyRoutes", "ItemRoutes", "CheckPoint", "Obj", "Route", "Area", "Camera", "JugemPoint", "GlideRoutes" };
+                KMPSectionComboBox.Items.AddRange(AllSectionAry.ToArray());
+            }
+
             KMPSectionComboBox.SelectedIndex = 0;
 
             if (IGTS_Section != null)
@@ -4000,6 +4008,8 @@ namespace MK7_KMP_Editor_For_PG_
 
             writeBinaryToolStripMenuItem.Enabled = true;
             closeKMPToolStripMenuItem.Enabled = true;
+            exportToolStripMenuItem.Enabled = true;
+            inputXmlAsXXXXToolStripMenuItem.Enabled = true;
         }
 
         private void writeBinaryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6486,43 +6496,106 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "KartPoint")
             {
                 KMP_Path_ListBox.Items.AddRange(TPTK_Section.TPTKValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "EnemyRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPNE_TPNE_Section.HPNEValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = true;
+
+                xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "ItemRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPTI_TPTI_Section.HPTIValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = true;
+
+                xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "CheckPoint")
             {
                 KMP_Group_ListBox.Items.AddRange(HPKC_TPKC_Section.HPKCValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Obj")
             {
                 KMP_Path_ListBox.Items.AddRange(JBOG_Section.JBOGValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Route")
             {
                 KMP_Group_ListBox.Items.AddRange(ITOP_Section.ITOP_RouteList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Area")
             {
                 KMP_Path_ListBox.Items.AddRange(AERA_Section.AERAValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Camera")
             {
                 KMP_Path_ListBox.Items.AddRange(EMAC_Section.EMACValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "JugemPoint")
             {
                 KMP_Path_ListBox.Items.AddRange(TPGJ_Section.TPGJValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = false;
+
+                xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "GlideRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPLG_TPLG_Section.HPLGValueList.ToArray());
+
+                xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
+                xXXXRouteExporterToolStripMenuItem.Enabled = true;
+
+                xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
+                xXXXRouteImporterToolStripMenuItem.Enabled = true;
             }
+
+            outputXXXXAsXmlToolStripMenuItem.Text = "Output " + KMPSectionComboBox.Text + " as Xml";
+            inputXmlAsXXXXToolStripMenuItem.Text = "Input Xml as " + KMPSectionComboBox.Text; 
         }
 
         private void KMP_Group_ListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -7057,6 +7130,10 @@ namespace MK7_KMP_Editor_For_PG_
 
             writeBinaryToolStripMenuItem.Enabled = false;
             closeKMPToolStripMenuItem.Enabled = false;
+            exportToolStripMenuItem.Enabled = false;
+
+            inputXmlAsXXXXToolStripMenuItem.Enabled = false;
+            xXXXRouteImporterToolStripMenuItem.Enabled = false;
         }
 
         private void KMPVisibility_CheckedChanged(object sender, EventArgs e)
@@ -7161,11 +7238,18 @@ namespace MK7_KMP_Editor_For_PG_
                 HPLGValueList = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>()
             };
 
-            string[] AllSectionAry = new string[] { "KartPoint", "EnemyRoutes", "ItemRoutes", "CheckPoint", "Obj", "Route", "Area", "Camera", "JugemPoint", "GlideRoutes" };
-            KMPSectionComboBox.Items.AddRange(AllSectionAry.ToArray());
+            if (KMPSectionComboBox.Items.Count == 0)
+            {
+                string[] AllSectionAry = new string[] { "KartPoint", "EnemyRoutes", "ItemRoutes", "CheckPoint", "Obj", "Route", "Area", "Camera", "JugemPoint", "GlideRoutes" };
+                KMPSectionComboBox.Items.AddRange(AllSectionAry.ToArray());
+            }
+
+            KMPSectionComboBox.SelectedIndex = 0;
 
             writeBinaryToolStripMenuItem.Enabled = true;
             closeKMPToolStripMenuItem.Enabled = true;
+            exportToolStripMenuItem.Enabled = true;
+            inputXmlAsXXXXToolStripMenuItem.Enabled = true;
         }
 
         private void allSectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7175,6 +7259,7 @@ namespace MK7_KMP_Editor_For_PG_
                 Title = "Save XML(KMP)",
                 InitialDirectory = @"C:\Users\User\Desktop",
                 Filter = "xml file|*.xml"
+                //FileName = ""
             };
 
             if (Save_KMPXML.ShowDialog() != DialogResult.OK) return;
@@ -7198,54 +7283,317 @@ namespace MK7_KMP_Editor_For_PG_
             XMLExporter.ExportAll(kMPPropertyGridSettings, Save_KMPXML.FileName);
         }
 
-        private void kartPointToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void outputXXXXAsXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog Save_KMPXML = new SaveFileDialog()
+            {
+                Title = "Save XML(KMP)",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+                //FileName = ""
+            };
 
+            if (Save_KMPXML.ShowDialog() != DialogResult.OK) return;
+
+            KMPPropertyGridSettings kMPPropertyGridSettings = new KMPPropertyGridSettings
+            {
+                TPTKSection = TPTK_Section,
+                HPNE_TPNESection = HPNE_TPNE_Section,
+                HPTI_TPTISection = HPTI_TPTI_Section,
+                HPKC_TPKCSection = HPKC_TPKC_Section,
+                JBOGSection = JBOG_Section,
+                ITOPSection = ITOP_Section,
+                AERASection = AERA_Section,
+                EMACSection = EMAC_Section,
+                TPGJSection = TPGJ_Section,
+                IGTSSection = IGTS_Section,
+                HPLG_TPLGSection = HPLG_TPLG_Section
+            };
+
+            if (KMPSectionComboBox.Text == "KartPoint") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.KartPoint);
+            if (KMPSectionComboBox.Text == "EnemyRoutes") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.EnemyRoutes);
+            if (KMPSectionComboBox.Text == "ItemRoutes") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.ItemRoutes);
+            if (KMPSectionComboBox.Text == "CheckPoint") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.CheckPoint);
+            if (KMPSectionComboBox.Text == "Obj") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.Obj);
+            if (KMPSectionComboBox.Text == "Route") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.Route);
+            if (KMPSectionComboBox.Text == "Area") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.Area);
+            if (KMPSectionComboBox.Text == "Camera") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.Camera);
+            if (KMPSectionComboBox.Text == "JugemPoint") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.JugemPoint);
+            if (KMPSectionComboBox.Text == "GlideRoutes") XMLExporter.ExportSection(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.KMPXmlSetting.Section.GlideRoutes);
         }
 
-        private void enemyRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void XXXXRouteExporterTSM_Click(object sender, EventArgs e)
         {
+            SaveFileDialog Save_KMPXML = new SaveFileDialog()
+            {
+                Title = "Save XML(KMP)",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+                //FileName = ""
+            };
 
+            if (Save_KMPXML.ShowDialog() != DialogResult.OK) return;
+
+            KMPPropertyGridSettings kMPPropertyGridSettings = new KMPPropertyGridSettings
+            {
+                TPTKSection = TPTK_Section,
+                HPNE_TPNESection = HPNE_TPNE_Section,
+                HPTI_TPTISection = HPTI_TPTI_Section,
+                HPKC_TPKCSection = HPKC_TPKC_Section,
+                JBOGSection = JBOG_Section,
+                ITOPSection = ITOP_Section,
+                AERASection = AERA_Section,
+                EMACSection = EMAC_Section,
+                TPGJSection = TPGJ_Section,
+                IGTSSection = IGTS_Section,
+                HPLG_TPLGSection = HPLG_TPLG_Section
+            };
+
+            if (KMPSectionComboBox.Text == "EnemyRoutes") XMLExporter.ExportXXXXRoute(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.XXXXRouteXmlSetting.RouteType.EnemyRoute);
+            if (KMPSectionComboBox.Text == "ItemRoutes") XMLExporter.ExportXXXXRoute(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.XXXXRouteXmlSetting.RouteType.ItemRoute);
+            if (KMPSectionComboBox.Text == "GlideRoutes") XMLExporter.ExportXXXXRoute(kMPPropertyGridSettings, Save_KMPXML.FileName, TestXml.XXXXRouteXmlSetting.RouteType.GlideRoute);
         }
 
-        private void itemRouteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportAllSectionTSM_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+                Title = "Open Xml",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+            };
 
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            KMPViewportObject = new KMPs.KMPViewportObject
+            {
+                Area_MV3DList = new List<ModelVisual3D>(),
+                Camera_MV3DList = new List<ModelVisual3D>(),
+                EnemyRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>(),
+                ItemRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>(),
+                GlideRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>(),
+                Routes_List = new List<HTK_3DES.PathTools.Rail>(),
+                Checkpoint_Rail = new List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint>(),
+                OBJ_MV3DList = new List<ModelVisual3D>(),
+                RespawnPoint_MV3DList = new List<ModelVisual3D>(),
+                StartPosition_MV3DList = new List<ModelVisual3D>()
+            };
+
+            KMPPropertyGridSettings kMPPropertyGridSettings = XMLImporter.ImportAll(KMPViewportObject, openFileDialog1.FileName, render, textBox1.Text);
+
+            TPTK_Section = kMPPropertyGridSettings.TPTKSection;
+            HPNE_TPNE_Section = kMPPropertyGridSettings.HPNE_TPNESection;
+            HPTI_TPTI_Section = kMPPropertyGridSettings.HPTI_TPTISection;
+            HPKC_TPKC_Section = kMPPropertyGridSettings.HPKC_TPKCSection;
+            JBOG_Section = kMPPropertyGridSettings.JBOGSection;
+            ITOP_Section = kMPPropertyGridSettings.ITOPSection;
+            AERA_Section = kMPPropertyGridSettings.AERASection;
+            EMAC_Section = kMPPropertyGridSettings.EMACSection;
+            TPGJ_Section = kMPPropertyGridSettings.TPGJSection;
+            IGTS_Section = kMPPropertyGridSettings.IGTSSection;
+            HPLG_TPLG_Section = kMPPropertyGridSettings.HPLG_TPLGSection;
+
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.StartPosition_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_EnemyRoutes.Checked, render, KMPViewportObject.EnemyRoute_Rail_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_ItemRoutes.Checked, render, KMPViewportObject.ItemRoute_Rail_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Checkpoint.Checked, render, KMPViewportObject.Checkpoint_Rail);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_OBJ.Checked, render, KMPViewportObject.OBJ_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Routes.Checked, render, KMPViewportObject.Routes_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.Area_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Camera.Checked, render, KMPViewportObject.Camera_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Returnpoints.Checked, render, KMPViewportObject.RespawnPoint_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_GlideRoutes.Checked, render, KMPViewportObject.GlideRoute_Rail_List);
+
+            string[] AllSectionAry = new string[] { "KartPoint", "EnemyRoutes", "ItemRoutes", "CheckPoint", "Obj", "Route", "Area", "Camera", "JugemPoint", "GlideRoutes" };
+            KMPSectionComboBox.Items.AddRange(AllSectionAry.ToArray());
+            KMPSectionComboBox.SelectedIndex = 0;
+
+            if (IGTS_Section != null)
+            {
+                //Display only IGTS section directly to PropertyGrid
+                propertyGrid_KMP_StageInfo.SelectedObject = IGTS_Section;
+            }
+
+            writeBinaryToolStripMenuItem.Enabled = true;
+            closeKMPToolStripMenuItem.Enabled = true;
+            exportToolStripMenuItem.Enabled = true;
+            xXXXRouteImporterToolStripMenuItem.Enabled = true;
+            inputXmlAsXXXXToolStripMenuItem.Enabled = true;
         }
 
-        private void checkpointToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InputXmlAsXXXXTSM_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+                Title = "Open Xml",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+            };
 
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            if (KMPSectionComboBox.Text == "KartPoint")
+            {
+                for (int del = 0; del < KMPViewportObject.StartPosition_MV3DList.Count; del++) render.MainViewPort.Children.Remove(KMPViewportObject.StartPosition_MV3DList[del]);
+                KMPViewportObject.StartPosition_MV3DList.Clear();
+
+                KMPViewportObject.StartPosition_MV3DList = new List<ModelVisual3D>();
+                TPTK_Section = XMLImporter.ImportKartPosition(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "EnemyRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.EnemyRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.EnemyRoute_Rail_List[del]);
+                KMPViewportObject.EnemyRoute_Rail_List.Clear();
+
+                KMPViewportObject.EnemyRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPNE_TPNE_Section = XMLImporter.ImportEnemyRoute(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "ItemRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.ItemRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.ItemRoute_Rail_List[del]);
+                KMPViewportObject.ItemRoute_Rail_List.Clear();
+
+                KMPViewportObject.ItemRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPTI_TPTI_Section = XMLImporter.ImportItemRoute(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "CheckPoint")
+            {
+                for (int del = 0; del < KMPViewportObject.Checkpoint_Rail.Count; del++) HTK_3DES.KMP_3DCheckpointSystem.DeleteRailChk(render, KMPViewportObject.Checkpoint_Rail[del]);
+                KMPViewportObject.ItemRoute_Rail_List.Clear();
+
+                KMPViewportObject.Checkpoint_Rail = new List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint>();
+                HPKC_TPKC_Section = XMLImporter.ImportCheckpoint(KMPViewportObject, openFileDialog1.FileName, render, textBox1.Text);
+            }
+            if (KMPSectionComboBox.Text == "Obj")
+            {
+                for (int del = 0; del < KMPViewportObject.OBJ_MV3DList.Count; del++) render.MainViewPort.Children.Remove(KMPViewportObject.OBJ_MV3DList[del]);
+                KMPViewportObject.OBJ_MV3DList.Clear();
+
+                KMPViewportObject.OBJ_MV3DList = new List<ModelVisual3D>();
+                JBOG_Section = XMLImporter.ImportObject(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "Route")
+            {
+                for (int del = 0; del < KMPViewportObject.Routes_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.Routes_List[del]);
+                KMPViewportObject.Routes_List.Clear();
+
+                KMPViewportObject.Routes_List = new List<HTK_3DES.PathTools.Rail>();
+                ITOP_Section = XMLImporter.ImportRoute(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "Area")
+            {
+                for (int del = 0; del < KMPViewportObject.Area_MV3DList.Count; del++) render.MainViewPort.Children.Remove(KMPViewportObject.Area_MV3DList[del]);
+                KMPViewportObject.Area_MV3DList.Clear();
+
+                KMPViewportObject.Area_MV3DList = new List<ModelVisual3D>();
+                AERA_Section = XMLImporter.ImportArea(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "Camera")
+            {
+                for (int del = 0; del < KMPViewportObject.Camera_MV3DList.Count; del++) render.MainViewPort.Children.Remove(KMPViewportObject.Camera_MV3DList[del]);
+                KMPViewportObject.Camera_MV3DList.Clear();
+
+                KMPViewportObject.Camera_MV3DList = new List<ModelVisual3D>();
+                EMAC_Section = XMLImporter.ImportCamera(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "JugemPoint")
+            {
+                for (int del = 0; del < KMPViewportObject.RespawnPoint_MV3DList.Count; del++) render.MainViewPort.Children.Remove(KMPViewportObject.RespawnPoint_MV3DList[del]);
+                KMPViewportObject.RespawnPoint_MV3DList.Clear();
+
+                KMPViewportObject.RespawnPoint_MV3DList = new List<ModelVisual3D>();
+                TPGJ_Section = XMLImporter.ImportJugemPoint(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "GlideRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.GlideRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.GlideRoute_Rail_List[del]);
+                KMPViewportObject.GlideRoute_Rail_List.Clear();
+
+                KMPViewportObject.GlideRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPLG_TPLG_Section = XMLImporter.ImportGlideRoute(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+
+            KMPSectionComboBox.SelectedIndex = 0;
         }
 
-        private void objectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void xXXXRouteImporterToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+                Title = "Open Xml",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+            };
 
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            if (KMPSectionComboBox.Text == "EnemyRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.EnemyRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.EnemyRoute_Rail_List[del]);
+                KMPViewportObject.EnemyRoute_Rail_List.Clear();
+
+                KMPViewportObject.EnemyRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPNE_TPNE_Section = XMLImporter.ImportEnemyRoutePositionAndScaleOnly(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "ItemRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.ItemRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.ItemRoute_Rail_List[del]);
+                KMPViewportObject.ItemRoute_Rail_List.Clear();
+
+                KMPViewportObject.ItemRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPTI_TPTI_Section = XMLImporter.ImportItemRoutePositionAndScaleOnly(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+            if (KMPSectionComboBox.Text == "GlideRoutes")
+            {
+                for (int del = 0; del < KMPViewportObject.GlideRoute_Rail_List.Count; del++) HTK_3DES.PathTools.DeleteRail(render, KMPViewportObject.GlideRoute_Rail_List[del]);
+                KMPViewportObject.GlideRoute_Rail_List.Clear();
+
+                KMPViewportObject.GlideRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
+                HPLG_TPLG_Section = XMLImporter.ImportGlideRoutePositionAndScaleOnly(KMPViewportObject, openFileDialog1.FileName, render);
+            }
+
+            KMPSectionComboBox.SelectedIndex = 0;
         }
 
-        private void routeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KMP_Path_ListBox_DoubleClick(object sender, EventArgs e)
         {
-
-        }
-
-        private void areaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cameraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void returnPointToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void glideRouteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            if (KMPSectionComboBox.Text == "KartPoint")
+            {
+                render.FindObject(TPTK_Section.TPTKValueList, KMP_Path_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "EnemyRoutes")
+            {
+                if (tabControl1.SelectedIndex == 1) render.FindObject(HPNE_TPNE_Section.HPNEValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "ItemRoutes")
+            {
+                if (tabControl1.SelectedIndex == 1) render.FindObject(HPTI_TPTI_Section.HPTIValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "CheckPoint") return;
+            if (KMPSectionComboBox.Text == "Obj")
+            {
+                render.FindObject(JBOG_Section.JBOGValueList, KMP_Path_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "Route")
+            {
+                if (tabControl1.SelectedIndex == 1) render.FindObject(ITOP_Section.ITOP_RouteList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "Area")
+            {
+                render.FindObject(AERA_Section.AERAValueList, KMP_Path_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "Camera")
+            {
+                render.FindObject(EMAC_Section.EMACValueList, KMP_Path_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "JugemPoint")
+            {
+                render.FindObject(TPGJ_Section.TPGJValueList, KMP_Path_ListBox.SelectedIndex);
+            }
+            if (KMPSectionComboBox.Text == "GlideRoutes")
+            {
+                if (tabControl1.SelectedIndex == 1) render.FindObject(HPLG_TPLG_Section.HPLGValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
+            }
         }
     }
 }
