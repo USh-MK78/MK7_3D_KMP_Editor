@@ -118,7 +118,14 @@ namespace MK7_KMP_Editor_For_PG_
             return PosMode;
         }
 
-        public void FindObject(object input, int ValueIndex, int GroupIndex = -1)
+        public enum CheckpointSearchOption
+        {
+            Left,
+            Right,
+            Null
+        }
+
+        public void FindObject(object input, int ValueIndex, int GroupIndex = -1, CheckpointSearchOption checkpointSearchOption = CheckpointSearchOption.Null, double ChkptYOffsetValue = 0)
         {
             if (input is List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>)
             {
@@ -134,6 +141,22 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 var PG_ItemPoints = input as List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>;
                 MainViewPort.Camera.LookAt(PG_ItemPoints[GroupIndex].TPTIValueList[ValueIndex].TPTI_Positions.GetVector3D().ToPoint3D(), 500, 1000);
+            }
+            if (input is List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>)
+            {
+                var PG_Checkpoints = input as List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>;
+                if (checkpointSearchOption == CheckpointSearchOption.Left)
+                {
+                    var p_Left = PG_Checkpoints[GroupIndex].TPKCValueList[ValueIndex].Position_2D_Left;
+                    Vector3D Chkpt_Left = new Vector3D(p_Left.X, ChkptYOffsetValue, p_Left.Y);
+                    MainViewPort.Camera.LookAt(Chkpt_Left.ToPoint3D(), 500, 1000);
+                }
+                if (checkpointSearchOption == CheckpointSearchOption.Right)
+                {
+                    var p_Right = PG_Checkpoints[GroupIndex].TPKCValueList[ValueIndex].Position_2D_Right;
+                    Vector3D Chkpt_Right = new Vector3D(p_Right.X, ChkptYOffsetValue, p_Right.Y);
+                    MainViewPort.Camera.LookAt(Chkpt_Right.ToPoint3D(), 500, 1000);
+                }
             }
             if (input is List<KMPPropertyGridSettings.JBOG_section.JBOGValue>)
             {

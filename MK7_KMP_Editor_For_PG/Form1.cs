@@ -7569,7 +7569,19 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 if (tabControl1.SelectedIndex == 1) render.FindObject(HPTI_TPTI_Section.HPTIValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
             }
-            if (KMPSectionComboBox.Text == "CheckPoint") return;
+            if (KMPSectionComboBox.Text == "CheckPoint")
+            {
+                if (KMPChkpt_RDTBtn_L.Checked == true)
+                {
+                    double OffsetValue = Convert.ToDouble(textBox1.Text);
+                    render.FindObject(HPKC_TPKC_Section.HPKCValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex, UserControl1.CheckpointSearchOption.Left, OffsetValue);
+                }
+                if (KMPChkpt_RDTBtn_R.Checked == true)
+                {
+                    double OffsetValue = Convert.ToDouble(textBox1.Text);
+                    render.FindObject(HPKC_TPKC_Section.HPKCValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex, UserControl1.CheckpointSearchOption.Right, OffsetValue);
+                }
+            }
             if (KMPSectionComboBox.Text == "Obj")
             {
                 render.FindObject(JBOG_Section.JBOGValueList, KMP_Path_ListBox.SelectedIndex);

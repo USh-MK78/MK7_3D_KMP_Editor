@@ -96,6 +96,9 @@
             this.CH_Kartpoint = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.KMPChkpt_RDTBtn_L = new System.Windows.Forms.RadioButton();
+            this.KMPChkpt_RDTBtn_R = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -122,6 +125,7 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -254,7 +258,7 @@
             this.outputXXXXAsXmlToolStripMenuItem,
             this.xXXXRouteExporterToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // allSectionToolStripMenuItem
@@ -285,7 +289,7 @@
             this.inputXmlAsXXXXToolStripMenuItem,
             this.xXXXRouteImporterToolStripMenuItem});
             this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
-            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.importAllToolStripMenuItem.Text = "Import";
             // 
             // allSectionToolStripMenuItem1
@@ -506,6 +510,7 @@
             // 
             // KMP_Viewport_SplitContainer.Panel2
             // 
+            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox6);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox5);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox4);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox3);
@@ -800,6 +805,39 @@
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.KMPChkpt_RDTBtn_R);
+            this.groupBox6.Controls.Add(this.KMPChkpt_RDTBtn_L);
+            this.groupBox6.Location = new System.Drawing.Point(3, 528);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(189, 60);
+            this.groupBox6.TabIndex = 15;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Type of Checkpoint to search";
+            // 
+            // KMPChkpt_RDTBtn_L
+            // 
+            this.KMPChkpt_RDTBtn_L.AutoSize = true;
+            this.KMPChkpt_RDTBtn_L.Checked = true;
+            this.KMPChkpt_RDTBtn_L.Location = new System.Drawing.Point(8, 26);
+            this.KMPChkpt_RDTBtn_L.Name = "KMPChkpt_RDTBtn_L";
+            this.KMPChkpt_RDTBtn_L.Size = new System.Drawing.Size(85, 16);
+            this.KMPChkpt_RDTBtn_L.TabIndex = 2;
+            this.KMPChkpt_RDTBtn_L.TabStop = true;
+            this.KMPChkpt_RDTBtn_L.Text = "Left (Green)";
+            this.KMPChkpt_RDTBtn_L.UseVisualStyleBackColor = true;
+            // 
+            // KMPChkpt_RDTBtn_R
+            // 
+            this.KMPChkpt_RDTBtn_R.AutoSize = true;
+            this.KMPChkpt_RDTBtn_R.Location = new System.Drawing.Point(99, 26);
+            this.KMPChkpt_RDTBtn_R.Name = "KMPChkpt_RDTBtn_R";
+            this.KMPChkpt_RDTBtn_R.Size = new System.Drawing.Size(82, 16);
+            this.KMPChkpt_RDTBtn_R.TabIndex = 3;
+            this.KMPChkpt_RDTBtn_R.Text = "Right (Red)";
+            this.KMPChkpt_RDTBtn_R.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -842,6 +880,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -916,6 +956,9 @@
         private System.Windows.Forms.ToolStripMenuItem outputXXXXAsXmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inputXmlAsXXXXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xXXXRouteImporterToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_R;
+        private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_L;
     }
 }
 
