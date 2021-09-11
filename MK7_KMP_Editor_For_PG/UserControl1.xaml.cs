@@ -171,12 +171,12 @@ namespace MK7_KMP_Editor_For_PG_
             if (input is List<KMPPropertyGridSettings.AERA_Section.AERAValue>)
             {
                 var PG_Areas = input as List<KMPPropertyGridSettings.AERA_Section.AERAValue>;
-                MainViewPort.Camera.LookAt(PG_Areas[GroupIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+                MainViewPort.Camera.LookAt(PG_Areas[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
             }
             if (input is List<KMPPropertyGridSettings.EMAC_Section.EMACValue>)
             {
                 var PG_Cameras = input as List<KMPPropertyGridSettings.EMAC_Section.EMACValue>;
-                MainViewPort.Camera.LookAt(PG_Cameras[GroupIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
+                MainViewPort.Camera.LookAt(PG_Cameras[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000);
             }
             if (input is List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>)
             {

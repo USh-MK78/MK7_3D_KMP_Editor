@@ -113,6 +113,8 @@ namespace MK7_KMP_Editor_For_PG_
             xXXXRouteImporterToolStripMenuItem.Enabled = false;
             inputXmlAsXXXXToolStripMenuItem.Enabled = false;
 
+            CH_KMPGroupPoint.Enabled = false;
+
             string CD = System.IO.Directory.GetCurrentDirectory();
             if (Directory.Exists(CD + "\\KMP_OBJ") == false)
             {
@@ -6502,6 +6504,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "EnemyRoutes")
             {
@@ -6512,6 +6516,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = true;
+
+                CH_KMPGroupPoint.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "ItemRoutes")
             {
@@ -6522,6 +6528,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = true;
+
+                CH_KMPGroupPoint.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "CheckPoint")
             {
@@ -6532,6 +6540,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "Obj")
             {
@@ -6542,6 +6552,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Route")
             {
@@ -6552,6 +6564,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = true;
             }
             if (KMPSectionComboBox.Text == "Area")
             {
@@ -6562,6 +6576,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "Camera")
             {
@@ -6572,6 +6588,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "JugemPoint")
             {
@@ -6582,6 +6600,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = false;
+
+                CH_KMPGroupPoint.Enabled = false;
             }
             if (KMPSectionComboBox.Text == "GlideRoutes")
             {
@@ -6592,6 +6612,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 xXXXRouteImporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Importer";
                 xXXXRouteImporterToolStripMenuItem.Enabled = true;
+
+                CH_KMPGroupPoint.Enabled = true;
             }
 
             outputXXXXAsXmlToolStripMenuItem.Text = "Output " + KMPSectionComboBox.Text + " as Xml";
@@ -6608,30 +6630,40 @@ namespace MK7_KMP_Editor_For_PG_
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex].TPNEValueList.ToArray());
                     propertyGrid_KMP_Group.SelectedObject = HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex];
+
+                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex].TPTIValueList.ToArray());
                     propertyGrid_KMP_Group.SelectedObject = HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex];
+
+                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex].TPKCValueList.ToArray());
                     propertyGrid_KMP_Group.SelectedObject = HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex];
+
+                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex]);
                 }
                 if (KMPSectionComboBox.Text == "Route")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex].ITOP_PointList.ToArray());
                     propertyGrid_KMP_Group.SelectedObject = ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex];
+
+                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex]);
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex].TPLGValueList.ToArray());
                     propertyGrid_KMP_Group.SelectedObject = HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex];
+
+                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
                 }
             }
         }
@@ -6642,6 +6674,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "KartPoint")
             {
                 propertyGrid_KMP_Path.SelectedObject = TPTK_Section.TPTKValueList[KMP_Path_ListBox.SelectedIndex];
+                CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.StartPosition_MV3DList[KMP_Path_ListBox.SelectedIndex]);
             }
             if (KMPSectionComboBox.Text == "EnemyRoutes")
             {
@@ -6658,6 +6691,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Obj")
             {
                 propertyGrid_KMP_Path.SelectedObject = JBOG_Section.JBOGValueList[KMP_Path_ListBox.SelectedIndex];
+                CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.OBJ_MV3DList[KMP_Path_ListBox.SelectedIndex]);
             }
             if (KMPSectionComboBox.Text == "Route")
             {
@@ -6666,14 +6700,17 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Area")
             {
                 propertyGrid_KMP_Path.SelectedObject = AERA_Section.AERAValueList[KMP_Path_ListBox.SelectedIndex];
+                CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex]);
             }
             if (KMPSectionComboBox.Text == "Camera")
             {
                 propertyGrid_KMP_Path.SelectedObject = EMAC_Section.EMACValueList[KMP_Path_ListBox.SelectedIndex];
+                CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Camera_MV3DList[KMP_Path_ListBox.SelectedIndex]);
             }
             if (KMPSectionComboBox.Text == "JugemPoint")
             {
                 propertyGrid_KMP_Path.SelectedObject = TPGJ_Section.TPGJValueList[KMP_Path_ListBox.SelectedIndex];
+                CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.RespawnPoint_MV3DList[KMP_Path_ListBox.SelectedIndex]);
             }
             if (KMPSectionComboBox.Text == "GlideRoutes")
             {
@@ -6747,12 +6784,17 @@ namespace MK7_KMP_Editor_For_PG_
 
                 for (int CP_DLine_R = 0; CP_DLine_R < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List.Count; CP_DLine_R++)
                 {
+                    //var d = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List.Select(x => x.Points[0]);
+                    //KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0] = d.Select(x => x);
+
                     var RailLineRight1 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0];
                     KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0] = new Point3D(RailLineRight1.X, p, RailLineRight1.Z);
 
                     var RailLineRight2 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[1];
                     KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[1] = new Point3D(RailLineRight2.X, p, RailLineRight2.Z);
                 }
+
+                
             }
         }
 
@@ -7138,35 +7180,16 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void KMPVisibility_CheckedChanged(object sender, EventArgs e)
         {
-            if (CH_Kartpoint.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.StartPosition_MV3DList);
-            if (CH_Kartpoint.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.StartPosition_MV3DList);
-
-            if (CH_EnemyRoutes.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_EnemyRoutes.Checked, render, KMPViewportObject.EnemyRoute_Rail_List);
-            if (CH_EnemyRoutes.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_EnemyRoutes.Checked, render, KMPViewportObject.EnemyRoute_Rail_List);
-
-            if (CH_ItemRoutes.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_ItemRoutes.Checked, render, KMPViewportObject.ItemRoute_Rail_List);
-            if (CH_ItemRoutes.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_ItemRoutes.Checked, render, KMPViewportObject.ItemRoute_Rail_List);
-
-            if (CH_Checkpoint.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Checkpoint.Checked, render, KMPViewportObject.Checkpoint_Rail);
-            if (CH_Checkpoint.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Checkpoint.Checked, render, KMPViewportObject.Checkpoint_Rail);
-
-            if (CH_OBJ.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_OBJ.Checked, render, KMPViewportObject.OBJ_MV3DList);
-            if (CH_OBJ.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_OBJ.Checked, render, KMPViewportObject.OBJ_MV3DList);
-
-            if (CH_Routes.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Routes.Checked, render, KMPViewportObject.Routes_List);
-            if (CH_Routes.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Routes.Checked, render, KMPViewportObject.Routes_List);
-
-            if (CH_Area.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.Area_MV3DList);
-            if (CH_Area.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.Area_MV3DList);
-
-            if (CH_Camera.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Camera.Checked, render, KMPViewportObject.Camera_MV3DList);
-            if (CH_Camera.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Camera.Checked, render, KMPViewportObject.Camera_MV3DList);
-
-            if (CH_Returnpoints.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Returnpoints.Checked, render, KMPViewportObject.RespawnPoint_MV3DList);
-            if (CH_Returnpoints.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Returnpoints.Checked, render, KMPViewportObject.RespawnPoint_MV3DList);
-
-            if (CH_GlideRoutes.Checked == true) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_GlideRoutes.Checked, render, KMPViewportObject.GlideRoute_Rail_List);
-            if (CH_GlideRoutes.Checked == false) ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_GlideRoutes.Checked, render, KMPViewportObject.GlideRoute_Rail_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Kartpoint.Checked, render, KMPViewportObject.StartPosition_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_EnemyRoutes.Checked, render, KMPViewportObject.EnemyRoute_Rail_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_ItemRoutes.Checked, render, KMPViewportObject.ItemRoute_Rail_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Checkpoint.Checked, render, KMPViewportObject.Checkpoint_Rail);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_OBJ.Checked, render, KMPViewportObject.OBJ_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Routes.Checked, render, KMPViewportObject.Routes_List);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Area.Checked, render, KMPViewportObject.Area_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Camera.Checked, render, KMPViewportObject.Camera_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_Returnpoints.Checked, render, KMPViewportObject.RespawnPoint_MV3DList);
+            ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_GlideRoutes.Checked, render, KMPViewportObject.GlideRoute_Rail_List);
         }
 
         private void createKMPToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7605,6 +7628,84 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "GlideRoutes")
             {
                 if (tabControl1.SelectedIndex == 1) render.FindObject(HPLG_TPLG_Section.HPLGValueList, KMP_Path_ListBox.SelectedIndex, KMP_Group_ListBox.SelectedIndex);
+            }
+        }
+
+        private void KMPVisibilityGroupPoint_CheckedChanged(object sender, EventArgs e)
+        {
+            if (KMPSectionComboBox.Text == "KartPoint") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.StartPosition_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "EnemyRoutes") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "ItemRoutes") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "CheckPoint") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "Obj") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.OBJ_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "Route") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "Area") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.Area_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "Camera") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.Camera_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "JugemPoint") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.RespawnPoint_MV3DList[KMP_Path_ListBox.SelectedIndex]);
+            if (KMPSectionComboBox.Text == "GlideRoutes") ViewPortObjVisibleSetting.ViewportObj_Visibility(CH_KMPGroupPoint.Checked, render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (KMPSectionComboBox.Text == "KartPoint")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "EnemyRoutes")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "ItemRoutes")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "CheckPoint")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "Obj")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "Route")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "Area")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "Camera")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "JugemPoint")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+            if (KMPSectionComboBox.Text == "GlideRoutes")
+            {
+                if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
+                if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
+                if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
             }
         }
     }

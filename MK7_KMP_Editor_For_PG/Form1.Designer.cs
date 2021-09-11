@@ -71,6 +71,28 @@
             this.KMP_Viewport_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.userControl11 = new MK7_KMP_Editor_For_PG_.UserControl1();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.CH_KMPGroupPoint = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.CH_GlideRoutes = new System.Windows.Forms.CheckBox();
+            this.CH_Returnpoints = new System.Windows.Forms.CheckBox();
+            this.CH_Camera = new System.Windows.Forms.CheckBox();
+            this.CH_Area = new System.Windows.Forms.CheckBox();
+            this.CH_Routes = new System.Windows.Forms.CheckBox();
+            this.CH_OBJ = new System.Windows.Forms.CheckBox();
+            this.CH_Checkpoint = new System.Windows.Forms.CheckBox();
+            this.CH_ItemRoutes = new System.Windows.Forms.CheckBox();
+            this.CH_EnemyRoutes = new System.Windows.Forms.CheckBox();
+            this.CH_Kartpoint = new System.Windows.Forms.CheckBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.KMPChkpt_RDTBtn_R = new System.Windows.Forms.RadioButton();
+            this.KMPChkpt_RDTBtn_L = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.Rad_AxisZ = new System.Windows.Forms.RadioButton();
             this.Rad_AxisY = new System.Windows.Forms.RadioButton();
@@ -83,22 +105,6 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.CH_GlideRoutes = new System.Windows.Forms.CheckBox();
-            this.CH_Returnpoints = new System.Windows.Forms.CheckBox();
-            this.CH_Camera = new System.Windows.Forms.CheckBox();
-            this.CH_Area = new System.Windows.Forms.CheckBox();
-            this.CH_Routes = new System.Windows.Forms.CheckBox();
-            this.CH_OBJ = new System.Windows.Forms.CheckBox();
-            this.CH_Checkpoint = new System.Windows.Forms.CheckBox();
-            this.CH_ItemRoutes = new System.Windows.Forms.CheckBox();
-            this.CH_EnemyRoutes = new System.Windows.Forms.CheckBox();
-            this.CH_Kartpoint = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.KMPChkpt_RDTBtn_L = new System.Windows.Forms.RadioButton();
-            this.KMPChkpt_RDTBtn_R = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -121,11 +127,16 @@
             this.KMP_Viewport_SplitContainer.Panel1.SuspendLayout();
             this.KMP_Viewport_SplitContainer.Panel2.SuspendLayout();
             this.KMP_Viewport_SplitContainer.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -365,6 +376,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(238, 504);
             this.tabControl1.TabIndex = 7;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -510,13 +522,10 @@
             // 
             // KMP_Viewport_SplitContainer.Panel2
             // 
-            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox6);
-            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox5);
+            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.tabControl2);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox4);
-            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox3);
-            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox2);
             this.KMP_Viewport_SplitContainer.Size = new System.Drawing.Size(816, 591);
-            this.KMP_Viewport_SplitContainer.SplitterDistance = 614;
+            this.KMP_Viewport_SplitContainer.SplitterDistance = 604;
             this.KMP_Viewport_SplitContainer.TabIndex = 0;
             // 
             // elementHost1
@@ -524,137 +533,54 @@
             this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elementHost1.Location = new System.Drawing.Point(0, 0);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(614, 591);
+            this.elementHost1.Size = new System.Drawing.Size(604, 591);
             this.elementHost1.TabIndex = 6;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.userControl11;
             // 
-            // groupBox5
+            // tabControl2
             // 
-            this.groupBox5.Controls.Add(this.Rad_AxisZ);
-            this.groupBox5.Controls.Add(this.Rad_AxisY);
-            this.groupBox5.Controls.Add(this.Rad_AxisX);
-            this.groupBox5.Controls.Add(this.Rad_AxisAll);
-            this.groupBox5.Location = new System.Drawing.Point(3, 414);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(189, 111);
-            this.groupBox5.TabIndex = 14;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Moving Axis";
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Location = new System.Drawing.Point(3, 3);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(204, 479);
+            this.tabControl2.TabIndex = 14;
             // 
-            // Rad_AxisZ
+            // tabPage4
             // 
-            this.Rad_AxisZ.AutoSize = true;
-            this.Rad_AxisZ.Location = new System.Drawing.Point(8, 84);
-            this.Rad_AxisZ.Name = "Rad_AxisZ";
-            this.Rad_AxisZ.Size = new System.Drawing.Size(86, 16);
-            this.Rad_AxisZ.TabIndex = 9;
-            this.Rad_AxisZ.TabStop = true;
-            this.Rad_AxisZ.Text = "Z-Axis Only";
-            this.Rad_AxisZ.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.groupBox7);
+            this.tabPage4.Controls.Add(this.groupBox3);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(196, 453);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "Visibility";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // Rad_AxisY
+            // groupBox7
             // 
-            this.Rad_AxisY.AutoSize = true;
-            this.Rad_AxisY.Location = new System.Drawing.Point(8, 62);
-            this.Rad_AxisY.Name = "Rad_AxisY";
-            this.Rad_AxisY.Size = new System.Drawing.Size(86, 16);
-            this.Rad_AxisY.TabIndex = 8;
-            this.Rad_AxisY.TabStop = true;
-            this.Rad_AxisY.Text = "Y-Axis Only";
-            this.Rad_AxisY.UseVisualStyleBackColor = true;
+            this.groupBox7.Controls.Add(this.CH_KMPGroupPoint);
+            this.groupBox7.Location = new System.Drawing.Point(5, 253);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(188, 50);
+            this.groupBox7.TabIndex = 13;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Visibility (Group, Point)";
             // 
-            // Rad_AxisX
+            // CH_KMPGroupPoint
             // 
-            this.Rad_AxisX.AutoSize = true;
-            this.Rad_AxisX.Location = new System.Drawing.Point(8, 40);
-            this.Rad_AxisX.Name = "Rad_AxisX";
-            this.Rad_AxisX.Size = new System.Drawing.Size(86, 16);
-            this.Rad_AxisX.TabIndex = 7;
-            this.Rad_AxisX.TabStop = true;
-            this.Rad_AxisX.Text = "X-Axis Only";
-            this.Rad_AxisX.UseVisualStyleBackColor = true;
-            // 
-            // Rad_AxisAll
-            // 
-            this.Rad_AxisAll.AutoSize = true;
-            this.Rad_AxisAll.Checked = true;
-            this.Rad_AxisAll.Location = new System.Drawing.Point(8, 18);
-            this.Rad_AxisAll.Name = "Rad_AxisAll";
-            this.Rad_AxisAll.Size = new System.Drawing.Size(78, 16);
-            this.Rad_AxisAll.TabIndex = 0;
-            this.Rad_AxisAll.TabStop = true;
-            this.Rad_AxisAll.Text = "X Y Z (All)";
-            this.Rad_AxisAll.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.Section_ID_LBL);
-            this.groupBox4.Controls.Add(this.Section_Group_ID_LBL);
-            this.groupBox4.Controls.Add(this.Section_Name_LBL);
-            this.groupBox4.Controls.Add(this.Label_ID);
-            this.groupBox4.Controls.Add(this.Label_GroupID);
-            this.groupBox4.Controls.Add(this.Label_SectionName);
-            this.groupBox4.Location = new System.Drawing.Point(3, 308);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(189, 100);
-            this.groupBox4.TabIndex = 13;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Section Info";
-            // 
-            // Section_ID_LBL
-            // 
-            this.Section_ID_LBL.AutoSize = true;
-            this.Section_ID_LBL.Location = new System.Drawing.Point(90, 75);
-            this.Section_ID_LBL.Name = "Section_ID_LBL";
-            this.Section_ID_LBL.Size = new System.Drawing.Size(55, 12);
-            this.Section_ID_LBL.TabIndex = 5;
-            this.Section_ID_LBL.Text = "<!>Null<!>";
-            // 
-            // Section_Group_ID_LBL
-            // 
-            this.Section_Group_ID_LBL.AutoSize = true;
-            this.Section_Group_ID_LBL.Location = new System.Drawing.Point(90, 48);
-            this.Section_Group_ID_LBL.Name = "Section_Group_ID_LBL";
-            this.Section_Group_ID_LBL.Size = new System.Drawing.Size(55, 12);
-            this.Section_Group_ID_LBL.TabIndex = 4;
-            this.Section_Group_ID_LBL.Text = "<!>Null<!>";
-            // 
-            // Section_Name_LBL
-            // 
-            this.Section_Name_LBL.AutoSize = true;
-            this.Section_Name_LBL.Location = new System.Drawing.Point(90, 20);
-            this.Section_Name_LBL.Name = "Section_Name_LBL";
-            this.Section_Name_LBL.Size = new System.Drawing.Size(73, 12);
-            this.Section_Name_LBL.TabIndex = 3;
-            this.Section_Name_LBL.Text = "Not Selected.";
-            // 
-            // Label_ID
-            // 
-            this.Label_ID.AutoSize = true;
-            this.Label_ID.Location = new System.Drawing.Point(60, 75);
-            this.Label_ID.Name = "Label_ID";
-            this.Label_ID.Size = new System.Drawing.Size(22, 12);
-            this.Label_ID.TabIndex = 2;
-            this.Label_ID.Text = "ID :";
-            // 
-            // Label_GroupID
-            // 
-            this.Label_GroupID.AutoSize = true;
-            this.Label_GroupID.Location = new System.Drawing.Point(26, 48);
-            this.Label_GroupID.Name = "Label_GroupID";
-            this.Label_GroupID.Size = new System.Drawing.Size(56, 12);
-            this.Label_GroupID.TabIndex = 1;
-            this.Label_GroupID.Text = "Group ID :";
-            // 
-            // Label_SectionName
-            // 
-            this.Label_SectionName.AutoSize = true;
-            this.Label_SectionName.Location = new System.Drawing.Point(6, 20);
-            this.Label_SectionName.Name = "Label_SectionName";
-            this.Label_SectionName.Size = new System.Drawing.Size(78, 12);
-            this.Label_SectionName.TabIndex = 0;
-            this.Label_SectionName.Text = "SectionName :";
+            this.CH_KMPGroupPoint.AutoSize = true;
+            this.CH_KMPGroupPoint.Location = new System.Drawing.Point(5, 22);
+            this.CH_KMPGroupPoint.Name = "CH_KMPGroupPoint";
+            this.CH_KMPGroupPoint.Size = new System.Drawing.Size(47, 16);
+            this.CH_KMPGroupPoint.TabIndex = 0;
+            this.CH_KMPGroupPoint.Text = "Hide";
+            this.CH_KMPGroupPoint.UseVisualStyleBackColor = true;
+            this.CH_KMPGroupPoint.CheckedChanged += new System.EventHandler(this.KMPVisibilityGroupPoint_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -668,12 +594,12 @@
             this.groupBox3.Controls.Add(this.CH_ItemRoutes);
             this.groupBox3.Controls.Add(this.CH_EnemyRoutes);
             this.groupBox3.Controls.Add(this.CH_Kartpoint);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Location = new System.Drawing.Point(4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(189, 244);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Visibility";
+            this.groupBox3.Text = "Visibility (Section)";
             // 
             // CH_GlideRoutes
             // 
@@ -785,36 +711,38 @@
             this.CH_Kartpoint.UseVisualStyleBackColor = true;
             this.CH_Kartpoint.CheckedChanged += new System.EventHandler(this.KMPVisibility_CheckedChanged);
             // 
-            // groupBox2
+            // tabPage5
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(3, 253);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(189, 49);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Checkpoint height";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 19);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "500";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.tabPage5.Controls.Add(this.groupBox6);
+            this.tabPage5.Controls.Add(this.groupBox2);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(196, 453);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "Checkpoint Setting";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.KMPChkpt_RDTBtn_R);
             this.groupBox6.Controls.Add(this.KMPChkpt_RDTBtn_L);
-            this.groupBox6.Location = new System.Drawing.Point(3, 528);
+            this.groupBox6.Location = new System.Drawing.Point(4, 61);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(189, 60);
-            this.groupBox6.TabIndex = 15;
+            this.groupBox6.TabIndex = 18;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Type of Checkpoint to search";
+            // 
+            // KMPChkpt_RDTBtn_R
+            // 
+            this.KMPChkpt_RDTBtn_R.AutoSize = true;
+            this.KMPChkpt_RDTBtn_R.Location = new System.Drawing.Point(99, 26);
+            this.KMPChkpt_RDTBtn_R.Name = "KMPChkpt_RDTBtn_R";
+            this.KMPChkpt_RDTBtn_R.Size = new System.Drawing.Size(82, 16);
+            this.KMPChkpt_RDTBtn_R.TabIndex = 3;
+            this.KMPChkpt_RDTBtn_R.Text = "Right (Red)";
+            this.KMPChkpt_RDTBtn_R.UseVisualStyleBackColor = true;
             // 
             // KMPChkpt_RDTBtn_L
             // 
@@ -828,15 +756,161 @@
             this.KMPChkpt_RDTBtn_L.Text = "Left (Green)";
             this.KMPChkpt_RDTBtn_L.UseVisualStyleBackColor = true;
             // 
-            // KMPChkpt_RDTBtn_R
+            // groupBox2
             // 
-            this.KMPChkpt_RDTBtn_R.AutoSize = true;
-            this.KMPChkpt_RDTBtn_R.Location = new System.Drawing.Point(99, 26);
-            this.KMPChkpt_RDTBtn_R.Name = "KMPChkpt_RDTBtn_R";
-            this.KMPChkpt_RDTBtn_R.Size = new System.Drawing.Size(82, 16);
-            this.KMPChkpt_RDTBtn_R.TabIndex = 3;
-            this.KMPChkpt_RDTBtn_R.Text = "Right (Red)";
-            this.KMPChkpt_RDTBtn_R.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Location = new System.Drawing.Point(4, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(189, 49);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Checkpoint height";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 18);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(174, 19);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "500";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.groupBox5);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(196, 453);
+            this.tabPage6.TabIndex = 2;
+            this.tabPage6.Text = "Viewport Setting";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.Rad_AxisZ);
+            this.groupBox5.Controls.Add(this.Rad_AxisY);
+            this.groupBox5.Controls.Add(this.Rad_AxisX);
+            this.groupBox5.Controls.Add(this.Rad_AxisAll);
+            this.groupBox5.Location = new System.Drawing.Point(4, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(189, 111);
+            this.groupBox5.TabIndex = 18;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Moving Axis";
+            // 
+            // Rad_AxisZ
+            // 
+            this.Rad_AxisZ.AutoSize = true;
+            this.Rad_AxisZ.Location = new System.Drawing.Point(8, 84);
+            this.Rad_AxisZ.Name = "Rad_AxisZ";
+            this.Rad_AxisZ.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisZ.TabIndex = 9;
+            this.Rad_AxisZ.TabStop = true;
+            this.Rad_AxisZ.Text = "Z-Axis Only";
+            this.Rad_AxisZ.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisY
+            // 
+            this.Rad_AxisY.AutoSize = true;
+            this.Rad_AxisY.Location = new System.Drawing.Point(8, 62);
+            this.Rad_AxisY.Name = "Rad_AxisY";
+            this.Rad_AxisY.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisY.TabIndex = 8;
+            this.Rad_AxisY.TabStop = true;
+            this.Rad_AxisY.Text = "Y-Axis Only";
+            this.Rad_AxisY.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisX
+            // 
+            this.Rad_AxisX.AutoSize = true;
+            this.Rad_AxisX.Location = new System.Drawing.Point(8, 40);
+            this.Rad_AxisX.Name = "Rad_AxisX";
+            this.Rad_AxisX.Size = new System.Drawing.Size(86, 16);
+            this.Rad_AxisX.TabIndex = 7;
+            this.Rad_AxisX.TabStop = true;
+            this.Rad_AxisX.Text = "X-Axis Only";
+            this.Rad_AxisX.UseVisualStyleBackColor = true;
+            // 
+            // Rad_AxisAll
+            // 
+            this.Rad_AxisAll.AutoSize = true;
+            this.Rad_AxisAll.Checked = true;
+            this.Rad_AxisAll.Location = new System.Drawing.Point(8, 18);
+            this.Rad_AxisAll.Name = "Rad_AxisAll";
+            this.Rad_AxisAll.Size = new System.Drawing.Size(78, 16);
+            this.Rad_AxisAll.TabIndex = 0;
+            this.Rad_AxisAll.TabStop = true;
+            this.Rad_AxisAll.Text = "X Y Z (All)";
+            this.Rad_AxisAll.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.Section_ID_LBL);
+            this.groupBox4.Controls.Add(this.Section_Group_ID_LBL);
+            this.groupBox4.Controls.Add(this.Section_Name_LBL);
+            this.groupBox4.Controls.Add(this.Label_ID);
+            this.groupBox4.Controls.Add(this.Label_GroupID);
+            this.groupBox4.Controls.Add(this.Label_SectionName);
+            this.groupBox4.Location = new System.Drawing.Point(3, 488);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(202, 100);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Section Info";
+            // 
+            // Section_ID_LBL
+            // 
+            this.Section_ID_LBL.AutoSize = true;
+            this.Section_ID_LBL.Location = new System.Drawing.Point(90, 75);
+            this.Section_ID_LBL.Name = "Section_ID_LBL";
+            this.Section_ID_LBL.Size = new System.Drawing.Size(55, 12);
+            this.Section_ID_LBL.TabIndex = 5;
+            this.Section_ID_LBL.Text = "<!>Null<!>";
+            // 
+            // Section_Group_ID_LBL
+            // 
+            this.Section_Group_ID_LBL.AutoSize = true;
+            this.Section_Group_ID_LBL.Location = new System.Drawing.Point(90, 48);
+            this.Section_Group_ID_LBL.Name = "Section_Group_ID_LBL";
+            this.Section_Group_ID_LBL.Size = new System.Drawing.Size(55, 12);
+            this.Section_Group_ID_LBL.TabIndex = 4;
+            this.Section_Group_ID_LBL.Text = "<!>Null<!>";
+            // 
+            // Section_Name_LBL
+            // 
+            this.Section_Name_LBL.AutoSize = true;
+            this.Section_Name_LBL.Location = new System.Drawing.Point(90, 20);
+            this.Section_Name_LBL.Name = "Section_Name_LBL";
+            this.Section_Name_LBL.Size = new System.Drawing.Size(73, 12);
+            this.Section_Name_LBL.TabIndex = 3;
+            this.Section_Name_LBL.Text = "Not Selected.";
+            // 
+            // Label_ID
+            // 
+            this.Label_ID.AutoSize = true;
+            this.Label_ID.Location = new System.Drawing.Point(60, 75);
+            this.Label_ID.Name = "Label_ID";
+            this.Label_ID.Size = new System.Drawing.Size(22, 12);
+            this.Label_ID.TabIndex = 2;
+            this.Label_ID.Text = "ID :";
+            // 
+            // Label_GroupID
+            // 
+            this.Label_GroupID.AutoSize = true;
+            this.Label_GroupID.Location = new System.Drawing.Point(26, 48);
+            this.Label_GroupID.Name = "Label_GroupID";
+            this.Label_GroupID.Size = new System.Drawing.Size(56, 12);
+            this.Label_GroupID.TabIndex = 1;
+            this.Label_GroupID.Text = "Group ID :";
+            // 
+            // Label_SectionName
+            // 
+            this.Label_SectionName.AutoSize = true;
+            this.Label_SectionName.Location = new System.Drawing.Point(6, 20);
+            this.Label_SectionName.Name = "Label_SectionName";
+            this.Label_SectionName.Size = new System.Drawing.Size(78, 12);
+            this.Label_SectionName.TabIndex = 0;
+            this.Label_SectionName.Text = "SectionName :";
             // 
             // Form1
             // 
@@ -872,16 +946,22 @@
             this.KMP_Viewport_SplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Viewport_SplitContainer)).EndInit();
             this.KMP_Viewport_SplitContainer.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -915,8 +995,6 @@
         private System.Windows.Forms.SplitContainer KMP_Path_SplitContainer;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.PropertyGrid propertyGrid_KMP_StageInfo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox CH_GlideRoutes;
         private System.Windows.Forms.CheckBox CH_Returnpoints;
@@ -947,18 +1025,26 @@
         private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allSectionToolStripMenuItem1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton Rad_AxisAll;
-        private System.Windows.Forms.RadioButton Rad_AxisZ;
-        private System.Windows.Forms.RadioButton Rad_AxisY;
-        private System.Windows.Forms.RadioButton Rad_AxisX;
         private System.Windows.Forms.ToolStripMenuItem xXXXRouteExporterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outputXXXXAsXmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inputXmlAsXXXXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xXXXRouteImporterToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_R;
         private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_L;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton Rad_AxisZ;
+        private System.Windows.Forms.RadioButton Rad_AxisY;
+        private System.Windows.Forms.RadioButton Rad_AxisX;
+        private System.Windows.Forms.RadioButton Rad_AxisAll;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox CH_KMPGroupPoint;
     }
 }
 
