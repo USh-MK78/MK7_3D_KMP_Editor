@@ -24,28 +24,13 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    var M3D_Del = (Visual3D)MV3D;
-                    UserCtrl.MainViewPort.Children.Remove(M3D_Del);
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                UserCtrl.MainViewPort.Children.Remove((Visual3D)MV3D);
             }
             //表示する
             if (Visible == false)
             {
-                try
-                {
-                    var M3D_Del = (Visual3D)MV3D;
-                    UserCtrl.MainViewPort.Children.Add(M3D_Del);
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                if (UserCtrl.MainViewPort.Children.Contains(MV3D) == true) return;
+                else UserCtrl.MainViewPort.Children.Add((Visual3D)MV3D);
             }
         }
 
@@ -60,41 +45,22 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    //Visual3Dに変換
-                    var MV3DList_Del = MV3D_List.ToArray<Visual3D>();
-
-                    //foreachで全て削除
-                    foreach (var d in MV3DList_Del)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                //Visual3Dに変換, foreachで全て削除
+                foreach (var MV3D_Del in MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(MV3D_Del);
             }
 
             //表示する
             if (Visible == false)
             {
-                try
-                {
-                    //ModelVisual3Dに変換
-                    var MV3DList_Add = MV3D_List.ToArray<ModelVisual3D>();
+                foreach (var MV3D_Add in MV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false)) UserCtrl.MainViewPort.Children.Add(MV3D_Add);
 
-                    //foreachで全て追加
-                    foreach (var d in MV3DList_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                //foreach (var d in MV3D_List)
+                //{
+                //    if (UserCtrl.MainViewPort.Children.Contains(d) == false)
+                //    {
+                //        UserCtrl.MainViewPort.Children.Add(d);
+                //    }
+                //}
             }
         }
 
@@ -109,63 +75,23 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    #region ModelVisual3D
-                    //Visual3Dに変換
-                    var MV3DList_Del = rail.MV3D_List.ToArray<Visual3D>();
-
-                    //foreachで全て削除
-                    foreach (var d in MV3DList_Del)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-
-                    #region TubeVisual3D
-                    var TV3DList_Del = rail.TV3D_List.ToArray<Visual3D>();
-
-                    foreach (var d in TV3DList_Del)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                foreach (var MV3DList_Del in rail.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(MV3DList_Del);
+                foreach (var TV3DList_Del in rail.TV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(TV3DList_Del);
             }
 
             //表示する
             if (Visible == false)
             {
-                try
-                {
-                    #region ModelVisual3D
-                    //ModelVisual3Dに変換
-                    var MV3DList_Add = rail.MV3D_List.ToArray<ModelVisual3D>();
+                foreach (var MV3D_Add in rail.MV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false)) UserCtrl.MainViewPort.Children.Add(MV3D_Add);
+                foreach (var TV3D_Add in rail.TV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false)) UserCtrl.MainViewPort.Children.Add(TV3D_Add);
 
-                    //foreachで全て追加
-                    foreach (var d in MV3DList_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-
-                    #region TubeVisual3D
-                    var TV3DList_Add = rail.TV3D_List.ToArray<TubeVisual3D>();
-
-                    foreach (var d in TV3DList_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                //foreach (var d in rail.MV3D_List)
+                //{
+                //    if (UserCtrl.MainViewPort.Children.Contains(d) == false)
+                //    {
+                //        UserCtrl.MainViewPort.Children.Add(d);
+                //    }
+                //}
             }
         }
 
@@ -180,69 +106,34 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    foreach (var es in rail_List)
-                    {
-                        #region ModelVisual3D
-                        //Visual3Dに変換
-                        var MV3DList_Del = es.MV3D_List.ToArray<Visual3D>();
+                foreach (var MV3DList_Del in rail_List.SelectMany(x => x.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(MV3DList_Del);
+                foreach (var TV3DList_Del in rail_List.SelectMany(x => x.TV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(TV3DList_Del);
 
-                        //foreachで全て削除
-                        foreach (var d in MV3DList_Del)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-
-                        #region TubeVisual3D
-                        var TV3DList_Del = es.TV3D_List.ToArray<Visual3D>();
-
-                        foreach (var d in TV3DList_Del)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                //foreach (var es in rail_List)
+                //{
+                //    foreach (var MV3DList_Del in es.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(MV3DList_Del);
+                //    foreach (var TV3DList_Del in es.TV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(TV3DList_Del);
+                //}
             }
 
             //表示する
             if (Visible == false)
             {
-                try
-                {
-                    foreach (var es in rail_List)
-                    {
-                        #region ModelVisual3D
-                        //ModelVisual3Dに変換
-                        var MV3DList_Add = es.MV3D_List.ToArray<ModelVisual3D>();
+                foreach (var MV3D_Add in rail_List.SelectMany(x => x.MV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false))) UserCtrl.MainViewPort.Children.Add(MV3D_Add);
+                foreach (var TV3D_Add in rail_List.SelectMany(x => x.TV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false))) UserCtrl.MainViewPort.Children.Add(TV3D_Add);
 
-                        //foreachで全て追加
-                        foreach (var d in MV3DList_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
+                //foreach (var dr in rail_List)
+                //{
+                //    foreach (var dq1 in dr.MV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                //    {
+                //        UserCtrl.MainViewPort.Children.Add(dq1);
+                //    }
 
-                        #region TubeVisual3D
-                        var TV3DList_Add = es.TV3D_List.ToArray<TubeVisual3D>();
-
-                        foreach (var d in TV3DList_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                //    foreach (var dq2 in dr.TV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                //    {
+                //        UserCtrl.MainViewPort.Children.Add(dq2);
+                //    }
+                //}
             }
         }
 
@@ -257,116 +148,39 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    #region Checkpoint_DLine
-                    //Visual3Dに変換
-                    var Checkpoint_DLine_Del = Checkpoint.Checkpoint_Line.ToArray<Visual3D>();
-
-                    //foreachで全て削除
-                    foreach (var d in Checkpoint_DLine_Del)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_LeftLine
-                    var Checkpoint_LeftLine = Checkpoint.Checkpoint_Left.LV3D_List.ToArray<Visual3D>();
-
-                    foreach (var d in Checkpoint_LeftLine)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_LeftObj
-                    var Checkpoint_LeftObj = Checkpoint.Checkpoint_Left.MV3D_List.ToArray<Visual3D>();
-
-                    foreach (var d in Checkpoint_LeftObj)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_RightLine
-                    var Checkpoint_RightLine = Checkpoint.Checkpoint_Right.LV3D_List.ToArray<Visual3D>();
-
-                    foreach (var d in Checkpoint_RightLine)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_RightObj
-                    var Checkpoint_RightObj = Checkpoint.Checkpoint_Right.MV3D_List.ToArray<Visual3D>();
-
-                    foreach (var d in Checkpoint_RightObj)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(d);
-                    }
-                    #endregion
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                foreach (var Checkpoint_DLine_Del in Checkpoint.Checkpoint_Line.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_DLine_Del);
+                foreach (var Checkpoint_LeftLine in Checkpoint.Checkpoint_Left.LV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftLine);
+                foreach (var Checkpoint_LeftObj in Checkpoint.Checkpoint_Left.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
+                foreach (var Checkpoint_RightLine in Checkpoint.Checkpoint_Right.LV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
+                foreach (var Checkpoint_RightObj in Checkpoint.Checkpoint_Right.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
             }
 
             //表示する
             if (Visible == false)
             {
-                try
+                foreach (var Checkpoint_DLine_Add in Checkpoint.Checkpoint_Line.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
                 {
-                    #region Checkpoint_DLine
-                    //ModelVisual3Dに変換
-                    var Checkpoint_DLine_Add = Checkpoint.Checkpoint_Line.ToArray<LinesVisual3D>();
-
-                    //foreachで全て追加
-                    foreach (var d in Checkpoint_DLine_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_LeftLine
-                    var Checkpoint_LeftLine_Add = Checkpoint.Checkpoint_Left.LV3D_List.ToArray<LinesVisual3D>();
-
-                    foreach (var d in Checkpoint_LeftLine_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_LeftObj
-                    var Checkpoint_LeftObj_Add = Checkpoint.Checkpoint_Left.MV3D_List.ToArray<ModelVisual3D>();
-
-                    foreach (var d in Checkpoint_LeftObj_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_RightLine
-                    var Checkpoint_RightLine_Add = Checkpoint.Checkpoint_Right.LV3D_List.ToArray<LinesVisual3D>();
-
-                    foreach (var d in Checkpoint_RightLine_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
-
-                    #region Checkpoint_RightObj
-                    var Checkpoint_RightObj_Add = Checkpoint.Checkpoint_Right.MV3D_List.ToArray<ModelVisual3D>();
-
-                    foreach (var d in Checkpoint_RightObj_Add)
-                    {
-                        UserCtrl.MainViewPort.Children.Add(d);
-                    }
-                    #endregion
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_DLine_Add);
                 }
-                catch (System.ArgumentException)
+
+                foreach (var Checkpoint_LeftLine_Add in Checkpoint.Checkpoint_Left.LV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
                 {
-                    //Nothing
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_LeftLine_Add);
+                }
+
+                foreach (var Checkpoint_LeftObj_Add in Checkpoint.Checkpoint_Left.MV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_LeftObj_Add);
+                }
+
+                foreach (var Checkpoint_RightLine_Add in Checkpoint.Checkpoint_Right.LV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_RightLine_Add);
+                }
+
+                foreach (var Checkpoint_RightObj_Add in Checkpoint.Checkpoint_Right.MV3D_List.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_RightObj_Add);
                 }
             }
         }
@@ -382,122 +196,39 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                try
-                {
-                    foreach (var es in Checkpoint_List)
-                    {
-                        #region Checkpoint_DLine
-                        //Visual3Dに変換
-                        var Checkpoint_DLine_Del = es.Checkpoint_Line.ToArray<Visual3D>();
-
-                        //foreachで全て削除
-                        foreach (var d in Checkpoint_DLine_Del)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_LeftLine
-                        var Checkpoint_LeftLine = es.Checkpoint_Left.LV3D_List.ToArray<Visual3D>();
-
-                        foreach (var d in Checkpoint_LeftLine)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_LeftObj
-                        var Checkpoint_LeftObj = es.Checkpoint_Left.MV3D_List.ToArray<Visual3D>();
-
-                        foreach (var d in Checkpoint_LeftObj)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_RightLine
-                        var Checkpoint_RightLine = es.Checkpoint_Right.LV3D_List.ToArray<Visual3D>();
-
-                        foreach (var d in Checkpoint_RightLine)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_RightObj
-                        var Checkpoint_RightObj = es.Checkpoint_Right.MV3D_List.ToArray<Visual3D>();
-
-                        foreach (var d in Checkpoint_RightObj)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(d);
-                        }
-                        #endregion
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    //Nothing
-                }
+                foreach (var Checkpoint_DLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Line.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_DLine);
+                foreach (var Checkpoint_LeftLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.LV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftLine);
+                foreach (var Checkpoint_LeftObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
+                foreach (var Checkpoint_RightLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.LV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
+                foreach (var Checkpoint_RightObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
             }
 
             //表示する
             if (Visible == false)
             {
-                try
+                foreach (var Checkpoint_DLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Line.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
                 {
-                    foreach (var es in Checkpoint_List)
-                    {
-                        #region Checkpoint_DLine
-                        //ModelVisual3Dに変換
-                        var Checkpoint_DLine_Add = es.Checkpoint_Line.ToArray<LinesVisual3D>();
-
-                        //foreachで全て追加
-                        foreach (var d in Checkpoint_DLine_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_LeftLine
-                        var Checkpoint_LeftLine_Add = es.Checkpoint_Left.LV3D_List.ToArray<LinesVisual3D>();
-
-                        foreach (var d in Checkpoint_LeftLine_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_LeftObj
-                        var Checkpoint_LeftObj_Add = es.Checkpoint_Left.MV3D_List.ToArray<ModelVisual3D>();
-
-                        foreach (var d in Checkpoint_LeftObj_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_RightLine
-                        var Checkpoint_RightLine_Add = es.Checkpoint_Right.LV3D_List.ToArray<LinesVisual3D>();
-
-                        foreach (var d in Checkpoint_RightLine_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-
-                        #region Checkpoint_RightObj
-                        var Checkpoint_RightObj_Add = es.Checkpoint_Right.MV3D_List.ToArray<ModelVisual3D>();
-
-                        foreach (var d in Checkpoint_RightObj_Add)
-                        {
-                            UserCtrl.MainViewPort.Children.Add(d);
-                        }
-                        #endregion
-                    }
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_DLine);
                 }
-                catch (System.ArgumentException)
+
+                foreach (var Checkpoint_LeftLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.LV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
                 {
-                    //Nothing
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_LeftLine);
+                }
+
+                foreach (var Checkpoint_LeftObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.MV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_LeftObj);
+                }
+
+                foreach (var Checkpoint_RightLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.LV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_RightLine);
+                }
+
+                foreach (var Checkpoint_RightObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.MV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_RightObj);
                 }
             }
         }

@@ -21,8 +21,6 @@ namespace MK7_KMP_Editor_For_PG_
             Form1 = (Form1)Application.OpenForms["Form1"];
         }
 
-        ViewPortObjVisibleSetting ViewPortObjVisibleSetting = new ViewPortObjVisibleSetting();
-
         List<string> KeyList;
         private void ModelVisibilityForm_Load(object sender, EventArgs e)
         {

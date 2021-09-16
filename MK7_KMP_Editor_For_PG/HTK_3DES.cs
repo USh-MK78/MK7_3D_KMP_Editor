@@ -1,5 +1,6 @@
 ﻿using HelixToolkit.Wpf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -1083,6 +1084,114 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Right.LV3D_List.Clear();
                 }
+            }
+        }
+
+        public class OBJData
+        {
+            public static Matrix3D ReScale(Matrix3D Matrix_3D, double ScaleFactor)
+            {
+                Matrix3D M = Matrix_3D;
+                M.M11 = M.M11 / ScaleFactor;
+                M.M22 = M.M22 / ScaleFactor;
+                M.M33 = M.M33 / ScaleFactor;
+                return M;
+            }
+
+            /// <summary>
+            /// ModelVisual3D or ArrayList
+            /// </summary>
+            /// <param name="Path"></param>
+            /// <returns></returns>
+            public static Dictionary<string, ModelVisual3D> OBJReader_Dictionary(string Path)
+            {
+                Dictionary<string, ModelVisual3D> MV3D_Dictionary = new Dictionary<string, ModelVisual3D>();
+
+                Model3DGroup M3D_Group = null;
+                ObjReader OBJ_Reader = new ObjReader();
+                M3D_Group = OBJ_Reader.Read(Path);
+
+                for (int MDLChildCount = 0; MDLChildCount < M3D_Group.Children.Count; MDLChildCount++)
+                {
+                    Model3D NewM3D = M3D_Group.Children[MDLChildCount];
+                    ModelVisual3D MV3D = new ModelVisual3D
+                    {
+                        Content = NewM3D
+                    };
+
+                    MV3D.Transform = new MatrixTransform3D(ReScale(MV3D.Content.Transform.Value, 100));
+
+                    GeometryModel3D GM3D = (GeometryModel3D)M3D_Group.Children[MDLChildCount];
+                    string MatName = GM3D.Material.GetName();
+
+                    //Give a name to ModelVisual3D
+                    MV3D.SetName(MatName);
+
+                    if (MV3D_Dictionary.Keys.Contains(MatName) && MV3D_Dictionary.Values.Contains(MV3D))
+                    {
+                        //マテリアルの名前が同じだった場合
+                        MV3D_Dictionary.Add(MatName + MDLChildCount, MV3D);
+                    }
+                    else
+                    {
+                        MV3D_Dictionary.Add(MatName, MV3D);
+                    }
+                }
+
+                return MV3D_Dictionary;
+            }
+
+            public static Dictionary<string, ArrayList> OBJReader_AryListDictionary(string Path)
+            {
+                Dictionary<string, ArrayList> MV3D_Dictionary = new Dictionary<string, ArrayList>();
+
+                Model3DGroup M3D_Group = null;
+                ObjReader OBJ_Reader = new ObjReader();
+                M3D_Group = OBJ_Reader.Read(Path);
+
+                for (int MDLChildCount = 0; MDLChildCount < M3D_Group.Children.Count; MDLChildCount++)
+                {
+                    Model3D NewM3D = M3D_Group.Children[MDLChildCount];
+                    ModelVisual3D MV3D = new ModelVisual3D
+                    {
+                        Content = NewM3D
+                    };
+
+                    //MV3D.Transform = new MatrixTransform3D(ReScale(MV3D.Content.Transform.Value, 100));
+
+                    GeometryModel3D GM3D = (GeometryModel3D)M3D_Group.Children[MDLChildCount];
+                    string MatName = GM3D.Material.GetName();
+
+                    //ModelVisual3Dに名前をつける
+                    MV3D.SetName(MatName + " -1 -1");
+
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.Add(false);
+                    arrayList.Add(MV3D);
+
+
+                    if (MV3D_Dictionary.Keys.Contains(MatName) && MV3D_Dictionary.Values.Contains(arrayList))
+                    {
+                        //マテリアルの名前が同じだった場合
+                        MV3D_Dictionary.Add(MatName + MDLChildCount, arrayList);
+                    }
+                    else
+                    {
+                        MV3D_Dictionary.Add(MatName, arrayList);
+                    }
+                }
+
+                return MV3D_Dictionary;
+            }
+
+            public static Geometry3D GetGeometry3D(ModelVisual3D MV3D)
+            {
+                return ((GeometryModel3D)MV3D.Content).Geometry;
+            }
+
+            public static MeshGeometry3D GetMeshGeometry3D(ModelVisual3D MV3D)
+            {
+                return (MeshGeometry3D)((GeometryModel3D)MV3D.Content).Geometry;
             }
         }
     }

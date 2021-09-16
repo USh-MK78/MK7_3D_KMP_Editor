@@ -205,21 +205,21 @@
             // readObjToolStripMenuItem
             // 
             this.readObjToolStripMenuItem.Name = "readObjToolStripMenuItem";
-            this.readObjToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.readObjToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.readObjToolStripMenuItem.Text = "Read Obj";
             this.readObjToolStripMenuItem.Click += new System.EventHandler(this.readObjToolStripMenuItem_Click);
             // 
             // closeObjToolStripMenuItem
             // 
             this.closeObjToolStripMenuItem.Name = "closeObjToolStripMenuItem";
-            this.closeObjToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.closeObjToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeObjToolStripMenuItem.Text = "Close Obj";
             this.closeObjToolStripMenuItem.Click += new System.EventHandler(this.closeObjToolStripMenuItem_Click);
             // 
             // visibilityToolStripMenuItem
             // 
             this.visibilityToolStripMenuItem.Name = "visibilityToolStripMenuItem";
-            this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.visibilityToolStripMenuItem.Text = "Visibility";
             this.visibilityToolStripMenuItem.Click += new System.EventHandler(this.visibilityToolStripMenuItem_Click);
             // 
@@ -773,6 +773,8 @@
             this.textBox1.Size = new System.Drawing.Size(174, 19);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "500";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // tabPage6
             // 
