@@ -14,3 +14,5 @@ To actually use this program, you need to build a project.
 HelixToolkit v2.12.0  
 HelixToolkit.Wpf v2.12.0  
 Visual Studio 2019  
+
+Please see [here](https://github.com/USh-MK78/MK7_3D_KMP_Editor/issues/1#issuecomment-974739010) for how to get ObjFlowData.xml.
