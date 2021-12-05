@@ -1450,7 +1450,7 @@ namespace MK7_KMP_Editor_For_PG_
                             StickToRoute = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
                             BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
                             ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            UnknownFlag = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.UnknownFlag),
+                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
                         },
                         PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
                         {
@@ -2668,7 +2668,7 @@ namespace MK7_KMP_Editor_For_PG_
                             StickToRoute = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
                             BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
                             ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            UnknownFlag = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.UnknownFlag),
+                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
                         },
                         PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
                         {
@@ -3816,7 +3816,7 @@ namespace MK7_KMP_Editor_For_PG_
                             StickToRoute = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
                             BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
                             ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            UnknownFlag = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.UnknownFlag),
+                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
                         },
                         PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
                         {

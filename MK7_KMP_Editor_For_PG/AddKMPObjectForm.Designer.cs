@@ -105,10 +105,10 @@ namespace MK7_KMP_Editor_For_PG_
         #endregion
 
         private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private UserControl2 userControl21;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox1;
+        private UserControl2 userControl21;
     }
 }

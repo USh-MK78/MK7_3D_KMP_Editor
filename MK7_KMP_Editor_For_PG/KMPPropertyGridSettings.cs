@@ -364,7 +364,7 @@ namespace MK7_KMP_Editor_For_PG_
                             }
                         }
 
-                        public bool UnknownFlag
+                        public bool NoPathSwitch
                         {
                             get
                             {
