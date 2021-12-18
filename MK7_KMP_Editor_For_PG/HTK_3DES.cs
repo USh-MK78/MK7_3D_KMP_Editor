@@ -582,6 +582,52 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
+        public class HitTestHelper
+        {
+            public class Search
+            {
+                public enum HitTestType
+                {
+                    Adorner,
+                    Geometry,
+                    Point,
+                    Ray,
+                    RayMeshGeometry3D
+                }
+
+                public static HitTestResult HitTestViewport(Visual Target, Point Point2D, HitTestType hitTestType)
+                {
+                    HitTestResult HTR = null;
+                    HitTestResult HTRs = VisualTreeHelper.HitTest(Target, Point2D);
+                    if (hitTestType == HitTestType.Adorner) HTR = HTRs as AdornerHitTestResult;
+                    if (hitTestType == HitTestType.Geometry) HTR = HTRs as GeometryHitTestResult;
+                    if (hitTestType == HitTestType.Point) HTR = HTRs as PointHitTestResult;
+                    if (hitTestType == HitTestType.Ray) HTR = HTRs as RayHitTestResult;
+                    if (hitTestType == HitTestType.RayMeshGeometry3D) HTR = HTRs as RayMeshGeometry3DHitTestResult;
+
+                    return HTR;
+                    //return HTRs as RayMeshGeometry3DHitTestResult;
+                }
+            }
+
+            //public static T GetObjectName<T>(ModelVisual3D FindMV3D, HitTestResult hitTestResult, )
+            //{
+            //    object MDLStr_GetName = new object();
+            //    if (typeof(ModelVisual3D) == hitTestResult.VisualHit.GetType())
+            //    {
+            //        //ダウンキャスト
+            //        FindMV3D = (ModelVisual3D)hitTestResult.VisualHit;
+            //        MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
+            //    }
+            //    if (typeof(LinesVisual3D) == HTR.VisualHit.GetType()) return;
+            //    if (typeof(TubeVisual3D) == HTR.VisualHit.GetType()) return;
+
+
+            //    return (T)MDLStr_GetName;
+            //}
+
+        }
+
         public class PathTools : TSRSystem
         {
             public class Rail
@@ -997,6 +1043,85 @@ namespace MK7_KMP_Editor_For_PG_
                     rail.TV3D_List.Clear();
                 }
             }
+
+            public class SideWall
+            {
+                public List<ModelVisual3D> SideWallList { get; set; }
+            }
+
+            public static List<ModelVisual3D> DrawPath_SideWall(UserControl1 UserCtrl, List<Point3D> point3Ds, Color color)
+            {
+                List<ModelVisual3D> modelVisual3DList_Out = new List<ModelVisual3D>();
+                if (point3Ds.Count > 1)
+                {
+                    for (int i = 1; i < point3Ds.Count; i++)
+                    {
+                        #region Memo
+                        //OneLine.Add(point3Ds[i - 1]); //1
+                        //OneLine.Add(point3Ds[i]); //3
+                        //OneLine.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
+                        //OneLine.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
+                        #endregion
+
+                        List<Point3D> OneSiideWallMDL = new List<Point3D>();
+                        OneSiideWallMDL.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
+                        OneSiideWallMDL.Add(point3Ds[i - 1]); //1
+                        OneSiideWallMDL.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
+                        OneSiideWallMDL.Add(point3Ds[i]); //3
+
+                        var dwwe = CustomModelCreateHelper.CustomRectanglePlane3D(HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL), color, color, "SideWall -1 -1");
+                        //HTK_3DES.OBJData.GetMeshGeometry3D(dwwe.Content).Positions = HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL);
+                        //((GeometryModel3D)dwwe.Content).Material = MaterialHelper.CreateMaterial(color);
+                        //((GeometryModel3D)dwwe.Content).BackMaterial = MaterialHelper.CreateMaterial(color);
+
+                        ModelVisual3D modelVisual3D = dwwe;
+
+                        UserCtrl.MainViewPort.Children.Add(modelVisual3D);
+
+                        modelVisual3DList_Out.Add(modelVisual3D);
+                    }
+                }
+
+                return modelVisual3DList_Out;
+            }
+
+            public static void MoveSideWalls(int MDLNum, Vector3D Pos, List<ModelVisual3D> ModelVisual3D_List)
+            {
+                if (MDLNum == 0)
+                {
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
+                }
+                if (MDLNum > 0 && MDLNum < ModelVisual3D_List.Count)
+                {
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
+
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
+                }
+                if (MDLNum == ModelVisual3D_List.Count)
+                {
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
+                }
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="UserCtrl"></param>
+            /// <param name="rail"></param>
+            /// <param name="railType"></param>
+            public static void ResetSideWall(UserControl1 UserCtrl, SideWall sideWall)
+            {
+                for (int i = 0; i < sideWall.SideWallList.Count; i++)
+                {
+                    UserCtrl.MainViewPort.Children.Remove(sideWall.SideWallList[i]);
+                }
+
+                sideWall.SideWallList.Clear();
+            }
         }
 
         public class Point3DSystem : TSRSystem
@@ -1024,8 +1149,14 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 public Rail Checkpoint_Left { get; set; }
                 public Rail Checkpoint_Right { get; set; }
+
+                public SideWall SideWall_Left { get; set; }
+                public SideWall SideWall_Right { get; set; }
+
                 public List<LinesVisual3D> Checkpoint_Line { get; set; }
                 public List<TubeVisual3D> Checkpoint_Tube { get; set; }
+
+                public List<ModelVisual3D> Checkpoint_SplitWallMDL { get; set; }
             }
 
             public static void DeleteRailChk(UserControl1 UserCtrl, Checkpoint railChk)
@@ -1063,6 +1194,17 @@ namespace MK7_KMP_Editor_For_PG_
                     railChk.Checkpoint_Line.Clear();
                 }
 
+                if (railChk.Checkpoint_Tube != null)
+                {
+                    for (int ChkTubeCount = 0; ChkTubeCount < railChk.Checkpoint_Tube.Count; ChkTubeCount++)
+                    {
+                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Tube[ChkTubeCount]);
+                        UserCtrl.UpdateLayout();
+                    }
+
+                    railChk.Checkpoint_Tube.Clear();
+                }
+
                 if (railChk.Checkpoint_Left.LV3D_List != null)
                 {
                     for (int ChkRLineLeftCount = 0; ChkRLineLeftCount < railChk.Checkpoint_Left.LV3D_List.Count; ChkRLineLeftCount++)
@@ -1083,6 +1225,39 @@ namespace MK7_KMP_Editor_For_PG_
                     }
 
                     railChk.Checkpoint_Right.LV3D_List.Clear();
+                }
+
+                if(railChk.Checkpoint_SplitWallMDL != null)
+                {
+                    for (int ChkSplitWallCount = 0; ChkSplitWallCount < railChk.Checkpoint_SplitWallMDL.Count; ChkSplitWallCount++)
+                    {
+                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_SplitWallMDL[ChkSplitWallCount]);
+                        UserCtrl.UpdateLayout();
+                    }
+
+                    railChk.Checkpoint_Left.LV3D_List.Clear();
+                }
+
+                if (railChk.SideWall_Left.SideWallList != null)
+                {
+                    for (int ChkSideWallLeftCount = 0; ChkSideWallLeftCount < railChk.SideWall_Left.SideWallList.Count; ChkSideWallLeftCount++)
+                    {
+                        UserCtrl.MainViewPort.Children.Remove(railChk.SideWall_Left.SideWallList[ChkSideWallLeftCount]);
+                        UserCtrl.UpdateLayout();
+                    }
+
+                    railChk.SideWall_Left.SideWallList.Clear();
+                }
+
+                if (railChk.SideWall_Right.SideWallList != null)
+                {
+                    for (int ChkSideWallRightCount = 0; ChkSideWallRightCount < railChk.SideWall_Right.SideWallList.Count; ChkSideWallRightCount++)
+                    {
+                        UserCtrl.MainViewPort.Children.Remove(railChk.SideWall_Right.SideWallList[ChkSideWallRightCount]);
+                        UserCtrl.UpdateLayout();
+                    }
+
+                    railChk.SideWall_Right.SideWallList.Clear();
                 }
             }
         }
@@ -1184,14 +1359,247 @@ namespace MK7_KMP_Editor_For_PG_
                 return MV3D_Dictionary;
             }
 
-            public static Geometry3D GetGeometry3D(ModelVisual3D MV3D)
+            public static GeometryModel3D GetGeometryModel3D(Model3D MV3D)
             {
-                return ((GeometryModel3D)MV3D.Content).Geometry;
+                return (GeometryModel3D)MV3D;
             }
 
-            public static MeshGeometry3D GetMeshGeometry3D(ModelVisual3D MV3D)
+            public static Geometry3D GetGeometry3D(Model3D MV3D)
             {
-                return (MeshGeometry3D)((GeometryModel3D)MV3D.Content).Geometry;
+                return ((GeometryModel3D)MV3D).Geometry;
+            }
+
+            public static MeshGeometry3D GetMeshGeometry3D(Model3D MV3D)
+            {
+                return (MeshGeometry3D)((GeometryModel3D)MV3D).Geometry;
+            }
+        }
+
+        public class CustomModelCreateHelper
+        {
+            public static List<Point3D> DefaultBoxData()
+            {
+                List<Point3D> point3Ds = new List<Point3D>();
+
+                #region d1
+                point3Ds.Add(new Point3D(-0.5, -0.5, -0.5));
+                point3Ds.Add(new Point3D(-0.5, 0.5, -0.5));
+
+                point3Ds.Add(new Point3D(-0.5, 0.5, 0.5));
+                point3Ds.Add(new Point3D(-0.5, -0.5, 0.5));
+
+                point3Ds.Add(new Point3D(0.5, -0.5, 0.5));
+                point3Ds.Add(new Point3D(0.5, 0.5, 0.5));
+
+                point3Ds.Add(new Point3D(0.5, 0.5, -0.5));
+                point3Ds.Add(new Point3D(0.5, -0.5, -0.5));
+                #endregion
+
+                #region d2
+                point3Ds.Add(new Point3D(0.5, -0.5, -0.5));
+                point3Ds.Add(new Point3D(-0.5, -0.5, -0.5));
+
+                point3Ds.Add(new Point3D(-0.5, -0.5, 0.5));
+                point3Ds.Add(new Point3D(0.5, -0.5, 0.5));
+
+                point3Ds.Add(new Point3D(0.5, 0.5, 0.5));
+                point3Ds.Add(new Point3D(-0.5, 0.5, 0.5));
+
+                point3Ds.Add(new Point3D(-0.5, 0.5, -0.5));
+                point3Ds.Add(new Point3D(0.5, 0.5, -0.5));
+                #endregion
+
+                #region d3
+                point3Ds.Add(new Point3D(-0.5, -0.5, -0.5));
+                point3Ds.Add(new Point3D(-0.5, -0.5, 0.5));
+
+                point3Ds.Add(new Point3D(-0.5, 0.5, 0.5));
+                point3Ds.Add(new Point3D(-0.5, 0.5, -0.5));
+
+                point3Ds.Add(new Point3D(0.5, 0.5, 0.5));
+                point3Ds.Add(new Point3D(0.5, 0.5, -0.5));
+
+                point3Ds.Add(new Point3D(0.5, -0.5, 0.5));
+                point3Ds.Add(new Point3D(0.5, -0.5, -0.5));
+                #endregion
+
+                return point3Ds;
+            }
+
+            public static Point3DCollection ToPoint3DCollection(List<Point3D> point3DList)
+            {
+                Point3DCollection P3DCollection = new Point3DCollection();
+                for (int i = 0; i < point3DList.Count; i++) P3DCollection.Add(point3DList[i]);
+                return P3DCollection;
+            }
+
+            public static List<Point3D> ToPoint3DList(Point3DCollection P3DCollection)
+            {
+                List<Point3D> point3DList = new List<Point3D>();
+                for (int i = 0; i < P3DCollection.Count; i++) point3DList.Add(P3DCollection[i]);
+                return point3DList;
+            }
+
+            public static MeshBuilder AddPoint3DList(List<Point3D> point3Ds)
+            {
+                var msb = new MeshBuilder();
+                for (int i = 0; i < point3Ds.Count; i++) msb.Positions.Add(point3Ds[i]);
+                return msb;
+            }
+
+            public static MeshBuilder AddPoint3DCollection(Point3DCollection P3DCollection)
+            {
+                var msb = new MeshBuilder();
+                for (int i = 0; i < P3DCollection.Count; i++) msb.Positions.Add(P3DCollection[i]);
+                return msb;
+            }
+
+            public static ModelVisual3D MeshGeometryToModelVisual3D(Point3DCollection point3Ds, Color color, Color Backcolor, string MDLName = null)
+            {
+                GeometryModel3D mesh = new GeometryModel3D
+                {
+                    Geometry = new MeshGeometry3D
+                    {
+                        Positions = point3Ds
+                    },
+                    Material = MaterialHelper.CreateMaterial(color),
+                    BackMaterial = MaterialHelper.CreateMaterial(Backcolor)
+                };
+
+                ModelVisual3D modelVisual3D = new ModelVisual3D { Content = mesh };
+                modelVisual3D.SetName(MDLName);
+
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D MeshGeometryToModelVisual3D(Point3DCollection point3Ds, Int32Collection TriangleIndicesSetting, Color color, Color Backcolor, string MDLName = null)
+            {
+                GeometryModel3D mesh = new GeometryModel3D
+                {
+                    Geometry = new MeshGeometry3D
+                    {
+                        Positions = point3Ds,
+                        TriangleIndices = TriangleIndicesSetting
+                    },
+                    Material = MaterialHelper.CreateMaterial(color),
+                    BackMaterial = MaterialHelper.CreateMaterial(Backcolor)
+                };
+
+                ModelVisual3D modelVisual3D = new ModelVisual3D { Content = mesh };
+                modelVisual3D.SetName(MDLName);
+
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CreateWireBoxLine()
+            {
+                LinesVisual3D linesVisual3D = new LinesVisual3D();
+                linesVisual3D.Thickness = 15;
+                linesVisual3D.Points = ToPoint3DCollection(DefaultBoxData());
+                ModelVisual3D modelVisual3D = linesVisual3D;
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CreateWireBoxTube()
+            {
+                TubeVisual3D tubeVisual3D = new TubeVisual3D();
+                tubeVisual3D.Diameter = 0.04;
+                tubeVisual3D.Path = ToPoint3DCollection(DefaultBoxData());
+                ModelVisual3D modelVisual3D = tubeVisual3D;
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CreateWireFrameMDLLine(List<Point3D> point3Ds)
+            {
+                LinesVisual3D linesVisual3D = new LinesVisual3D();
+                linesVisual3D.Thickness = 4;
+                linesVisual3D.Points = ToPoint3DCollection(point3Ds);
+                ModelVisual3D modelVisual3D = linesVisual3D;
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CreateWireFrameMDLTube(List<Point3D> point3Ds)
+            {
+                TubeVisual3D tubeVisual3D = new TubeVisual3D();
+                tubeVisual3D.Diameter = 0.05;
+                tubeVisual3D.Path = ToPoint3DCollection(point3Ds);
+                ModelVisual3D modelVisual3D = tubeVisual3D;
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CustomCylinderVisual3D(Color color, Color BackColor)
+            {
+                Point3DCollection point3Ds = new Point3DCollection();
+                point3Ds.Add(new Point3D(0, -0.5, 0));
+                point3Ds.Add(new Point3D(0, 0.5, 0));
+
+                TubeVisual3D tubeVisual3D = new TubeVisual3D
+                {
+                    Diameter = 1,
+                    Path = point3Ds,
+                    AddCaps = true,
+                    Material = MaterialHelper.CreateMaterial(color),
+                    BackMaterial = MaterialHelper.CreateMaterial(BackColor)
+                };
+
+                ModelVisual3D modelVisual3D = tubeVisual3D;
+
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CustomBoxVisual3D(Vector3D vector3D, Color Color, Color BackColor)
+            {
+                BoxVisual3D boxVisual3D = new BoxVisual3D
+                {
+                    Length = vector3D.X,
+                    Width = vector3D.Y,
+                    Height = vector3D.Z,
+                    TopFace = true,
+                    BottomFace = true,
+                    Visible = true,
+                    Material = MaterialHelper.CreateMaterial(Color),
+                    BackMaterial = MaterialHelper.CreateMaterial(BackColor),
+                };
+
+                ModelVisual3D modelVisual3D = boxVisual3D;
+
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CustomSphereVisual3D(int ThetaDivValue, int PhiDivValue, double RadiusValue, Color Color, Color BackColor)
+            {
+                //int ThetaDivValue = 30, int PhiDivValue = 10, double RadiusValue = 0.5
+                SphereVisual3D sphereVisual3D = new SphereVisual3D
+                {
+                    ThetaDiv = ThetaDivValue,
+                    PhiDiv = PhiDivValue,
+                    Radius = RadiusValue,
+                    Material = MaterialHelper.CreateMaterial(Color),
+                    BackMaterial = MaterialHelper.CreateMaterial(BackColor)
+                };
+
+                ModelVisual3D modelVisual3D = sphereVisual3D;
+                return modelVisual3D;
+            }
+
+            public static ModelVisual3D CustomRectanglePlane3D(Point3DCollection P3DCollection, Color color, Color Backcolor, string MDLName = "")
+            {
+                RectangleVisual3D rectangleVisual3D = new RectangleVisual3D
+                {
+                    Length = 1,
+                    Width = 1,
+                    DivLength = 1,
+                    DivWidth = 1,
+                    Origin = new Point3D(0, 0, 0)
+                };
+
+                ModelVisual3D modelVisual3D = rectangleVisual3D;
+                HTK_3DES.OBJData.GetMeshGeometry3D(modelVisual3D.Content).Positions = P3DCollection;
+                ((GeometryModel3D)modelVisual3D.Content).Material = MaterialHelper.CreateMaterial(color);
+                ((GeometryModel3D)modelVisual3D.Content).BackMaterial = MaterialHelper.CreateMaterial(Backcolor);
+                modelVisual3D.SetName(MDLName);
+
+                return modelVisual3D;
             }
         }
     }

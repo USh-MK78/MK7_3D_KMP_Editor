@@ -153,6 +153,9 @@ namespace MK7_KMP_Editor_For_PG_
                 foreach (var Checkpoint_LeftObj in Checkpoint.Checkpoint_Left.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
                 foreach (var Checkpoint_RightLine in Checkpoint.Checkpoint_Right.LV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
                 foreach (var Checkpoint_RightObj in Checkpoint.Checkpoint_Right.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
+                foreach (var Checkpoint_SideWall_Left in Checkpoint.SideWall_Left.SideWallList.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
+                foreach (var Checkpoint_SideWall_Right in Checkpoint.SideWall_Right.SideWallList.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
+                foreach (var Checkpoint_SplitWall in Checkpoint.Checkpoint_SplitWallMDL.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SplitWall);
             }
 
             //表示する
@@ -182,6 +185,22 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_RightObj_Add);
                 }
+
+
+                foreach (var Checkpoint_SideWall_Left_Add in Checkpoint.SideWall_Left.SideWallList.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Left_Add);
+                }
+
+                foreach (var Checkpoint_SideWall_Right_Add in Checkpoint.SideWall_Right.SideWallList.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Right_Add);
+                }
+
+                foreach (var Checkpoint_SplitWall_Add in Checkpoint.Checkpoint_SplitWallMDL.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SplitWall_Add);
+                }
             }
         }
 
@@ -201,6 +220,9 @@ namespace MK7_KMP_Editor_For_PG_
                 foreach (var Checkpoint_LeftObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
                 foreach (var Checkpoint_RightLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.LV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
                 foreach (var Checkpoint_RightObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
+                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.SideWallList.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
+                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.SideWallList.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
+                foreach (var Checkpoint_SplitWall in Checkpoint_List.SelectMany(x => x.Checkpoint_SplitWallMDL.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SplitWall);
             }
 
             //表示する
@@ -229,6 +251,21 @@ namespace MK7_KMP_Editor_For_PG_
                 foreach (var Checkpoint_RightObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.MV3D_List.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_RightObj);
+                }
+
+                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.SideWallList.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Left);
+                }
+
+                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.SideWallList.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Right);
+                }
+
+                foreach (var Checkpoint_SplitWall in Checkpoint_List.SelectMany(x => x.Checkpoint_SplitWallMDL.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                {
+                    UserCtrl.MainViewPort.Children.Add(Checkpoint_SplitWall);
                 }
             }
         }
@@ -260,10 +297,14 @@ namespace MK7_KMP_Editor_For_PG_
             List<bool> BL_R_LV3D = checkpoint.Checkpoint_Right.LV3D_List.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
             List<bool> BL_R_MV3D = checkpoint.Checkpoint_Right.MV3D_List.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
 
-            if (BL_Line.Distinct().Count() == 1 && BL_L_LV3D.Distinct().Count() == 1 && BL_L_MV3D.Distinct().Count() == 1 && BL_R_LV3D.Distinct().Count() == 1 && BL_R_MV3D.Distinct().Count() == 1)
+            List<bool> BL_L_SW = checkpoint.SideWall_Left.SideWallList.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
+            List<bool> BL_R_SW = checkpoint.SideWall_Right.SideWallList.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
+            List<bool> BL_SplitWall = checkpoint.Checkpoint_SplitWallMDL.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
+
+            if (BL_Line.Distinct().Count() == 1 && BL_L_LV3D.Distinct().Count() == 1 && BL_L_MV3D.Distinct().Count() == 1 && BL_R_LV3D.Distinct().Count() == 1 && BL_R_MV3D.Distinct().Count() == 1 && BL_L_SW.Distinct().Count() == 1 && BL_R_SW.Distinct().Count() == 1 && BL_SplitWall.Distinct().Count() == 1)
             {
-                if (BL_Line.Distinct().ToList()[0] == true && BL_L_LV3D.Distinct().ToList()[0] == true && BL_L_MV3D.Distinct().ToList()[0] == true && BL_R_LV3D.Distinct().ToList()[0] == true && BL_R_MV3D.Distinct().ToList()[0] == true) Ch = false;
-                if (BL_Line.Distinct().ToList()[0] == false && BL_L_LV3D.Distinct().ToList()[0] == false && BL_L_MV3D.Distinct().ToList()[0] == false && BL_R_LV3D.Distinct().ToList()[0] == false && BL_R_MV3D.Distinct().ToList()[0] == false) Ch = true;
+                if (BL_Line.Distinct().ToList()[0] == true && BL_L_LV3D.Distinct().ToList()[0] == true && BL_L_MV3D.Distinct().ToList()[0] == true && BL_R_LV3D.Distinct().ToList()[0] == true && BL_R_MV3D.Distinct().ToList()[0] == true && BL_L_SW.Distinct().ToList()[0] == true && BL_R_SW.Distinct().ToList()[0] == true && BL_SplitWall.Distinct().ToList()[0] == true) Ch = false;
+                if (BL_Line.Distinct().ToList()[0] == false && BL_L_LV3D.Distinct().ToList()[0] == false && BL_L_MV3D.Distinct().ToList()[0] == false && BL_R_LV3D.Distinct().ToList()[0] == false && BL_R_MV3D.Distinct().ToList()[0] == false && BL_L_SW.Distinct().ToList()[0] == false && BL_R_SW.Distinct().ToList()[0] == false && BL_SplitWall.Distinct().ToList()[0] == false) Ch = true;
             }
 
             return Ch;

@@ -1679,7 +1679,16 @@ namespace MK7_KMP_Editor_For_PG_
                         MV3D_List = new List<ModelVisual3D>()
                     },
                     Checkpoint_Line = new List<LinesVisual3D>(),
-                    Checkpoint_Tube = new List<TubeVisual3D>()
+                    Checkpoint_Tube = new List<TubeVisual3D>(),
+                    Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
+                    SideWall_Left = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    },
+                    SideWall_Right = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    }
                 };
 
                 KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue hPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue
@@ -1835,6 +1844,18 @@ namespace MK7_KMP_Editor_For_PG_
 
                     checkpoint.Checkpoint_Line.Add(linesVisual3D);
                     UserCtrl.MainViewPort.Children.Add(linesVisual3D);
+
+                    #region SplitWall
+                    Point3DCollection point3Ds1 = new Point3DCollection();
+                    point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                    point3Ds1.Add(point3Ds[1]);
+                    point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                    point3Ds1.Add(point3Ds[0]);
+
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
+                    UserCtrl.MainViewPort.Children.Add(SplitWall);
+                    #endregion
                     #endregion
                 }
 
@@ -1858,8 +1879,12 @@ namespace MK7_KMP_Editor_For_PG_
                 List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Left, 5, Colors.Green);
 
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+
                 List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Right, 5, Colors.Red);
+
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
             }
             #endregion
 
@@ -2905,7 +2930,16 @@ namespace MK7_KMP_Editor_For_PG_
                         MV3D_List = new List<ModelVisual3D>()
                     },
                     Checkpoint_Line = new List<LinesVisual3D>(),
-                    Checkpoint_Tube = new List<TubeVisual3D>()
+                    Checkpoint_Tube = new List<TubeVisual3D>(),
+                    Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
+                    SideWall_Left = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    },
+                    SideWall_Right = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    }
                 };
 
                 KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue hPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue
@@ -3061,6 +3095,18 @@ namespace MK7_KMP_Editor_For_PG_
 
                     checkpoint.Checkpoint_Line.Add(linesVisual3D);
                     UserCtrl.MainViewPort.Children.Add(linesVisual3D);
+
+                    #region SplitWall
+                    Point3DCollection point3Ds1 = new Point3DCollection();
+                    point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                    point3Ds1.Add(point3Ds[1]);
+                    point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                    point3Ds1.Add(point3Ds[0]);
+
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
+                    UserCtrl.MainViewPort.Children.Add(SplitWall);
+                    #endregion
                     #endregion
                 }
 
@@ -3082,8 +3128,12 @@ namespace MK7_KMP_Editor_For_PG_
                 List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Left, 5, Colors.Green);
 
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+
                 List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Right, 5, Colors.Red);
+
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
             }
             #endregion
 

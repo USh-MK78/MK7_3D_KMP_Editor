@@ -1060,15 +1060,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
                         render.MainViewPort.Children.Add(linesVisual3D);
+
+                        #region SplitWall
+                        Point3DCollection point3Ds1 = new Point3DCollection();
+                        point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                        point3Ds1.Add(point3Ds[1]);
+                        point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                        point3Ds1.Add(point3Ds[0]);
+
+                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
+                        render.MainViewPort.Children.Add(SplitWall);
+                        #endregion
                         #endregion
 
                         HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
                         List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
 
+                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+
                         HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
                         List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+
+                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
                     }
                     else
                     {
@@ -1730,6 +1748,11 @@ namespace MK7_KMP_Editor_For_PG_
                         if (checkpoint.Checkpoint_Left.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, checkpoint.Checkpoint_Left.LV3D_List);
                         KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[0] = pos.ToPoint3D();
 
+                        HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_SplitWallMDL[MDLNum].Content).Positions[2] = new Point3D(pos.X, 0, pos.Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_SplitWallMDL[MDLNum].Content).Positions[3] = pos.ToPoint3D();
+
+                        if (checkpoint.SideWall_Left.SideWallList.Count != 0) HTK_3DES.PathTools.MoveSideWalls(MDLNum, pos, checkpoint.SideWall_Left.SideWallList);
+
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum];
                     }
@@ -1775,6 +1798,11 @@ namespace MK7_KMP_Editor_For_PG_
                         Vector3D pos = new Vector3D(transform_Value.Translate_Value.X, transform_Value.Translate_Value.Y, transform_Value.Translate_Value.Z);
                         if (checkpoint.Checkpoint_Right.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(MDLNum, pos, checkpoint.Checkpoint_Right.LV3D_List);
                         KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_Line[MDLNum].Points[1] = pos.ToPoint3D();
+
+                        HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_SplitWallMDL[MDLNum].Content).Positions[0] = new Point3D(pos.X, 0, pos.Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[GroupNum].Checkpoint_SplitWallMDL[MDLNum].Content).Positions[1] = pos.ToPoint3D();
+
+                        if (checkpoint.SideWall_Right.SideWallList.Count != 0) HTK_3DES.PathTools.MoveSideWalls(MDLNum, pos, checkpoint.SideWall_Right.SideWallList);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum];
@@ -3197,7 +3225,16 @@ namespace MK7_KMP_Editor_For_PG_
                         MV3D_List = new List<ModelVisual3D>()
                     },
                     Checkpoint_Line = new List<LinesVisual3D>(),
-                    Checkpoint_Tube = new List<TubeVisual3D>()
+                    Checkpoint_Tube = new List<TubeVisual3D>(),
+                    Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
+                    SideWall_Left = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    },
+                    SideWall_Right = new HTK_3DES.PathTools.SideWall
+                    {
+                        SideWallList = new List<ModelVisual3D>()
+                    }
                 };
 
                 KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue hPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue
@@ -3344,6 +3381,7 @@ namespace MK7_KMP_Editor_For_PG_
                     point3Ds.Add(P3DLeft);
                     point3Ds.Add(P3DRight);
 
+                    #region SplitLine
                     LinesVisual3D linesVisual3D = new LinesVisual3D
                     {
                         Points = new Point3DCollection(point3Ds),
@@ -3353,6 +3391,19 @@ namespace MK7_KMP_Editor_For_PG_
 
                     checkpoint.Checkpoint_Line.Add(linesVisual3D);
                     render.MainViewPort.Children.Add(linesVisual3D);
+                    #endregion
+
+                    #region SplitWall
+                    Point3DCollection point3Ds1 = new Point3DCollection();
+                    point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                    point3Ds1.Add(point3Ds[1]);
+                    point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                    point3Ds1.Add(point3Ds[0]);
+
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
+                    render.MainViewPort.Children.Add(SplitWall);
+                    #endregion
                     #endregion
                 }
 
@@ -3374,8 +3425,12 @@ namespace MK7_KMP_Editor_For_PG_
                 List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
 
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+
                 List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.MV3D_List);
                 KMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+
+                KMPViewportObject.Checkpoint_Rail[i].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
             }
             #endregion
 
@@ -5027,7 +5082,16 @@ namespace MK7_KMP_Editor_For_PG_
                             MV3D_List = new List<ModelVisual3D>()
                         },
                         Checkpoint_Line = new List<LinesVisual3D>(),
-                        Checkpoint_Tube = new List<TubeVisual3D>()
+                        Checkpoint_Tube = new List<TubeVisual3D>(),
+                        Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
+                        SideWall_Left = new HTK_3DES.PathTools.SideWall
+                        {
+                            SideWallList = new List<ModelVisual3D>()
+                        },
+                        SideWall_Right = new HTK_3DES.PathTools.SideWall
+                        {
+                            SideWallList = new List<ModelVisual3D>()
+                        }
                     };
 
                     //Add
@@ -5442,13 +5506,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
                         render.MainViewPort.Children.Add(linesVisual3D);
+
+                        #region SplitWall
+                        Point3DCollection point3Ds1 = new Point3DCollection();
+                        point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                        point3Ds1.Add(point3Ds[1]);
+                        point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                        point3Ds1.Add(point3Ds[0]);
+
+                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
+                        render.MainViewPort.Children.Add(SplitWall);
+                        #endregion
                         #endregion
 
+                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
                         List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
 
+                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+
+                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
                         List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+
+                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
+                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
                     }
                     else
                     {
@@ -6347,11 +6431,47 @@ namespace MK7_KMP_Editor_For_PG_
                             render.MainViewPort.Children.Remove(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line[N]);
                             KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.RemoveAt(N);
 
+                            render.MainViewPort.Children.Remove(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL[N]);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.RemoveAt(N);
+
                             HTK_3DES.PathTools.Rail r = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left;
-                            HTK_3DES.PathTools.DeleteRailPoint(render, r, N, 10.0, Colors.Green, HTK_3DES.PathTools.RailType.Line);
+                            HTK_3DES.PathTools.DeleteRailPoint(render, r, N, 5.0, Colors.Green, HTK_3DES.PathTools.RailType.Line);
+
+                            #region DrawSideWall (Left)
+                            for (int i = 0; i < KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList.Count; i++)
+                            {
+                                render.MainViewPort.Children.Remove(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList[i]);
+                                render.UpdateLayout();
+                            }
+
+                            for (int i = 0; i < KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList.Count; i++)
+                            {
+                                KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList.RemoveAt(i);
+                            }
+
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList.Clear();
+                            List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+                            #endregion
 
                             HTK_3DES.PathTools.Rail r2 = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right;
-                            HTK_3DES.PathTools.DeleteRailPoint(render, r2, N, 10.0, Colors.Red, HTK_3DES.PathTools.RailType.Line);
+                            HTK_3DES.PathTools.DeleteRailPoint(render, r2, N, 5.0, Colors.Red, HTK_3DES.PathTools.RailType.Line);
+
+                            #region DrawSideWall (Right)
+                            for (int i = 0; i < KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList.Count; i++)
+                            {
+                                render.MainViewPort.Children.Remove(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList[i]);
+                                render.UpdateLayout();
+                            }
+
+                            for (int i = 0; i < KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList.Count; i++)
+                            {
+                                KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList.RemoveAt(i);
+                            }
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList.Clear();
+                            List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                            #endregion
 
                             KMP_Path_ListBox.Items.RemoveAt(N);
 
@@ -6733,15 +6853,15 @@ namespace MK7_KMP_Editor_For_PG_
 
             for (int Count = 0; Count < KMPViewportObject.Checkpoint_Rail.Count; Count++)
             {
-                for (int CP_DLine_L = 0; CP_DLine_L < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List.Count; CP_DLine_L++)
+                for (int CP_MDL_L = 0; CP_MDL_L < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List.Count; CP_MDL_L++)
                 {
-                    double SX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.M11;
-                    double SY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.M22;
-                    double SZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.M33;
+                    double SX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.M11;
+                    double SY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.M22;
+                    double SZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.M33;
 
-                    double TX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.OffsetX;
-                    double TY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.OffsetY;
-                    double TZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L].Content.Transform.Value.OffsetZ;
+                    double TX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.OffsetX;
+                    double TY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.OffsetY;
+                    double TZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L].Content.Transform.Value.OffsetZ;
 
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
@@ -6750,18 +6870,18 @@ namespace MK7_KMP_Editor_For_PG_
                         Translate3D = new Vector3D(TX, p, TZ)
                     };
 
-                    HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_DLine_L], HTK_3DES.TSRSystem.RotationSetting.Radian, true, 1);
+                    HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.MV3D_List[CP_MDL_L], HTK_3DES.TSRSystem.RotationSetting.Radian, true, 1);
                 }
 
-                for (int CP_DLine_R = 0; CP_DLine_R < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List.Count; CP_DLine_R++)
+                for (int CP_MDL_R = 0; CP_MDL_R < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List.Count; CP_MDL_R++)
                 {
-                    double SX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.M11;
-                    double SY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.M22;
-                    double SZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.M33;
+                    double SX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.M11;
+                    double SY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.M22;
+                    double SZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.M33;
 
-                    double TX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.OffsetX;
-                    double TY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.OffsetY;
-                    double TZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R].Content.Transform.Value.OffsetZ;
+                    double TX = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.OffsetX;
+                    double TY = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.OffsetY;
+                    double TZ = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R].Content.Transform.Value.OffsetZ;
 
                     HTK_3DES.TSRSystem.Transform t = new HTK_3DES.TSRSystem.Transform
                     {
@@ -6770,7 +6890,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Translate3D = new Vector3D(TX, p, TZ)
                     };
 
-                    HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_DLine_R], HTK_3DES.TSRSystem.RotationSetting.Radian, true, 1);
+                    HTK_3DES.TransformMV3D.Transform_MV3D(t, KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.MV3D_List[CP_MDL_R], HTK_3DES.TSRSystem.RotationSetting.Radian, true, 1);
                 }
 
                 for (int CP_Dline = 0; CP_Dline < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Line.Count; CP_Dline++)
@@ -6782,28 +6902,53 @@ namespace MK7_KMP_Editor_For_PG_
                     KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Line[CP_Dline].Points[1] = new Point3D(DividingLine2.X, p, DividingLine2.Z);
                 }
 
-                for (int CP_RLine_L = 0; CP_RLine_L < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List.Count; CP_RLine_L++)
+                for (int CP_PathLine_L = 0; CP_PathLine_L < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List.Count; CP_PathLine_L++)
                 {
-                    var RailLineLeft1 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_RLine_L].Points[0];
-                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_RLine_L].Points[0] = new Point3D(RailLineLeft1.X, p, RailLineLeft1.Z);
+                    var RailLineLeft1 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_PathLine_L].Points[0];
+                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_PathLine_L].Points[0] = new Point3D(RailLineLeft1.X, p, RailLineLeft1.Z);
 
-                    var RailLineLeft2 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_RLine_L].Points[1];
-                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_RLine_L].Points[1] = new Point3D(RailLineLeft2.X, p, RailLineLeft2.Z);
+                    var RailLineLeft2 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_PathLine_L].Points[1];
+                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Left.LV3D_List[CP_PathLine_L].Points[1] = new Point3D(RailLineLeft2.X, p, RailLineLeft2.Z);
                 }
 
-                for (int CP_DLine_R = 0; CP_DLine_R < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List.Count; CP_DLine_R++)
+                for (int CP_PathLine_R = 0; CP_PathLine_R < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List.Count; CP_PathLine_R++)
                 {
                     //var d = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List.Select(x => x.Points[0]);
                     //KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0] = d.Select(x => x);
 
-                    var RailLineRight1 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0];
-                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[0] = new Point3D(RailLineRight1.X, p, RailLineRight1.Z);
+                    var RailLineRight1 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_PathLine_R].Points[0];
+                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_PathLine_R].Points[0] = new Point3D(RailLineRight1.X, p, RailLineRight1.Z);
 
-                    var RailLineRight2 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[1];
-                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_DLine_R].Points[1] = new Point3D(RailLineRight2.X, p, RailLineRight2.Z);
+                    var RailLineRight2 = KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_PathLine_R].Points[1];
+                    KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_Right.LV3D_List[CP_PathLine_R].Points[1] = new Point3D(RailLineRight2.X, p, RailLineRight2.Z);
                 }
 
-                
+                for (int CP_SideWall_L = 0; CP_SideWall_L < KMPViewportObject.Checkpoint_Rail[Count].SideWall_Left.SideWallList.Count; CP_SideWall_L++)
+                {
+                    var SideWallLeft1 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Left.SideWallList[CP_SideWall_L].Content).Positions[1];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Left.SideWallList[CP_SideWall_L].Content).Positions[1] = new Point3D(SideWallLeft1.X, p, SideWallLeft1.Z);
+
+                    var SideWallLeft2 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Left.SideWallList[CP_SideWall_L].Content).Positions[3];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Left.SideWallList[CP_SideWall_L].Content).Positions[3] = new Point3D(SideWallLeft2.X, p, SideWallLeft2.Z);
+                }
+
+                for (int CP_SideWall_R = 0; CP_SideWall_R < KMPViewportObject.Checkpoint_Rail[Count].SideWall_Right.SideWallList.Count; CP_SideWall_R++)
+                {
+                    var SideWallRight1 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Right.SideWallList[CP_SideWall_R].Content).Positions[1];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Right.SideWallList[CP_SideWall_R].Content).Positions[1] = new Point3D(SideWallRight1.X, p, SideWallRight1.Z);
+
+                    var SideWallRight2 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Right.SideWallList[CP_SideWall_R].Content).Positions[3];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].SideWall_Right.SideWallList[CP_SideWall_R].Content).Positions[3] = new Point3D(SideWallRight2.X, p, SideWallRight2.Z);
+                }
+
+                for (int CP_SplitWall = 0; CP_SplitWall < KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_SplitWallMDL.Count; CP_SplitWall++)
+                {
+                    var SplitWall1 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_SplitWallMDL[CP_SplitWall].Content).Positions[1];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_SplitWallMDL[CP_SplitWall].Content).Positions[1] = new Point3D(SplitWall1.X, p, SplitWall1.Z);
+
+                    var SplitWall2 = HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_SplitWallMDL[CP_SplitWall].Content).Positions[3];
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[Count].Checkpoint_SplitWallMDL[CP_SplitWall].Content).Positions[3] = new Point3D(SplitWall2.X, p, SplitWall2.Z);
+                }
             }
         }
 
@@ -6929,10 +7074,14 @@ namespace MK7_KMP_Editor_For_PG_
                     HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint_Left = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex];
                     if (checkpoint_Left.Checkpoint_Left.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(KMP_Path_ListBox.SelectedIndex, t_Left.Translate3D, checkpoint_Left.Checkpoint_Left.LV3D_List);
                     KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line[KMP_Path_ListBox.SelectedIndex].Points[0] = t_Left.Translate3D.ToPoint3D();
+
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL[KMP_Path_ListBox.SelectedIndex].Content).Positions[2] = new Point3D(t_Left.Translate3D.X, 0, t_Left.Translate3D.Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL[KMP_Path_ListBox.SelectedIndex].Content).Positions[3] = t_Left.Translate3D.ToPoint3D();
+
+                    if (checkpoint_Left.SideWall_Left.SideWallList.Count != 0) HTK_3DES.PathTools.MoveSideWalls(KMP_Path_ListBox.SelectedIndex, t_Left.Translate3D, checkpoint_Left.SideWall_Left.SideWallList);
                     #endregion
 
                     #region Point_Right
-
                     KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue GetTPKCValue_Right = HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex].TPKCValueList[KMP_Path_ListBox.SelectedIndex];
 
                     HTK_3DES.TSRSystem.Transform t_Right = new HTK_3DES.TSRSystem.Transform
@@ -6948,6 +7097,11 @@ namespace MK7_KMP_Editor_For_PG_
                     HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint_Right = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex];
                     if (checkpoint_Right.Checkpoint_Right.LV3D_List.Count != 0) HTK_3DES.PathTools.MoveRails(KMP_Path_ListBox.SelectedIndex, t_Right.Translate3D, checkpoint_Right.Checkpoint_Right.LV3D_List);
                     KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line[KMP_Path_ListBox.SelectedIndex].Points[1] = t_Right.Translate3D.ToPoint3D();
+
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL[KMP_Path_ListBox.SelectedIndex].Content).Positions[0] = new Point3D(t_Right.Translate3D.X, 0, t_Right.Translate3D.Z);
+                    HTK_3DES.OBJData.GetMeshGeometry3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL[KMP_Path_ListBox.SelectedIndex].Content).Positions[1] = t_Right.Translate3D.ToPoint3D();
+
+                    if (checkpoint_Right.SideWall_Right.SideWallList.Count != 0) HTK_3DES.PathTools.MoveSideWalls(KMP_Path_ListBox.SelectedIndex, t_Right.Translate3D, checkpoint_Right.SideWall_Right.SideWallList);
                     #endregion
                 }
                 else
