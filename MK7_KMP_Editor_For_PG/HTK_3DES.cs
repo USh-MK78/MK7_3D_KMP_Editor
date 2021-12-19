@@ -1069,16 +1069,10 @@ namespace MK7_KMP_Editor_For_PG_
                         OneSiideWallMDL.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
                         OneSiideWallMDL.Add(point3Ds[i]); //3
 
-                        var dwwe = CustomModelCreateHelper.CustomRectanglePlane3D(HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL), color, color, "SideWall -1 -1");
-                        //HTK_3DES.OBJData.GetMeshGeometry3D(dwwe.Content).Positions = HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL);
-                        //((GeometryModel3D)dwwe.Content).Material = MaterialHelper.CreateMaterial(color);
-                        //((GeometryModel3D)dwwe.Content).BackMaterial = MaterialHelper.CreateMaterial(color);
-
-                        ModelVisual3D modelVisual3D = dwwe;
-
-                        UserCtrl.MainViewPort.Children.Add(modelVisual3D);
-
-                        modelVisual3DList_Out.Add(modelVisual3D);
+                        ModelVisual3D SideWall_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL), color, color);
+                        HTK_3DES.TSRSystem.SetString_MV3D(SideWall_MV3D, "SideWall -1 -1");
+                        UserCtrl.MainViewPort.Children.Add(SideWall_MV3D);
+                        modelVisual3DList_Out.Add(SideWall_MV3D);
                     }
                 }
 

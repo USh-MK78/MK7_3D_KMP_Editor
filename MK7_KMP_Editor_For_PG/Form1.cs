@@ -156,44 +156,6 @@ namespace MK7_KMP_Editor_For_PG_
                 render.MainViewPort.Children.Add((ModelVisual3D)MV3D_Dictionary[i.Key][1]);
             }
 
-            #region delcode
-            //Model3DGroup M3D_Group = null;
-            //ObjReader OBJ_Reader = new ObjReader();
-            //M3D_Group = OBJ_Reader.Read(openFileDialog2.FileName);
-
-            //for (int n = 0; n < M3D_Group.Children.Count; n++)
-            //{
-            //    Model3D NewM3D = M3D_Group.Children[n];
-            //    ModelVisual3D MV3D = new ModelVisual3D
-            //    {
-            //        Content = NewM3D
-            //    };
-
-            //    GeometryModel3D GM3D = (GeometryModel3D)M3D_Group.Children[n];
-            //    string MatName = GM3D.Material.GetName();
-
-            //    //ModelVisual3Dに名前をつける
-            //    MV3D.SetName(MatName + " -1 -1");
-
-            //    ArrayList arrayList = new ArrayList();
-            //    arrayList.Add(false);
-            //    arrayList.Add(MV3D);
-
-            //    try
-            //    {
-            //        MV3D_Dictionary.Add(MatName, arrayList);
-            //    }
-            //    catch (System.ArgumentException)
-            //    {
-            //        //マテリアルの名前が同じだった場合
-            //        MV3D_Dictionary.Add(MatName + n, arrayList);
-            //    }
-
-            //    //表示
-            //    render.MainViewPort.Children.Add(MV3D);
-            //}
-            #endregion
-
             closeObjToolStripMenuItem.Enabled = true;
             visibilityToolStripMenuItem.Enabled = true;
         }
@@ -244,6 +206,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     if (typeof(LinesVisual3D) == HTR.VisualHit.GetType()) return;
                     if (typeof(TubeVisual3D) == HTR.VisualHit.GetType()) return;
+                    if (typeof(RectangleVisual3D) == HTR.VisualHit.GetType()) return;
 
                     ////ダウンキャスト
                     //FindMV3D = (ModelVisual3D)HTR.VisualHit;
@@ -1068,7 +1031,8 @@ namespace MK7_KMP_Editor_For_PG_
                         point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
                         point3Ds1.Add(point3Ds[0]);
 
-                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                        HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
                         render.MainViewPort.Children.Add(SplitWall);
                         #endregion
@@ -1561,6 +1525,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                     if (typeof(LinesVisual3D) == HTR.VisualHit.GetType()) return;
                     if (typeof(TubeVisual3D) == HTR.VisualHit.GetType()) return;
+                    if (typeof(RectangleVisual3D) == HTR.VisualHit.GetType()) return;
 
                     //string[] MDLStr_GetName = HTR.VisualHit.GetName().Split(' ');
 
@@ -3400,7 +3365,8 @@ namespace MK7_KMP_Editor_For_PG_
                     point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
                     point3Ds1.Add(point3Ds[0]);
 
-                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                    HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
                     checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
                     render.MainViewPort.Children.Add(SplitWall);
                     #endregion
@@ -5514,7 +5480,8 @@ namespace MK7_KMP_Editor_For_PG_
                         point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
                         point3Ds1.Add(point3Ds[0]);
 
-                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                        HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
                         KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
                         render.MainViewPort.Children.Add(SplitWall);
                         #endregion
@@ -7464,7 +7431,6 @@ namespace MK7_KMP_Editor_For_PG_
                 IGTSSection = IGTS_Section,
                 HPLG_TPLGSection = HPLG_TPLG_Section
             };
-
 
             XMLExporter.ExportAll(kMPPropertyGridSettings, Save_KMPXML.FileName);
         }

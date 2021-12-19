@@ -1852,7 +1852,8 @@ namespace MK7_KMP_Editor_For_PG_
                     point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
                     point3Ds1.Add(point3Ds[0]);
 
-                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                    HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
                     checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
                     UserCtrl.MainViewPort.Children.Add(SplitWall);
                     #endregion
@@ -3103,7 +3104,8 @@ namespace MK7_KMP_Editor_For_PG_
                     point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
                     point3Ds1.Add(point3Ds[0]);
 
-                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00), "SplitWall -1 -1");
+                    ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                    HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
                     checkpoint.Checkpoint_SplitWallMDL.Add(SplitWall);
                     UserCtrl.MainViewPort.Children.Add(SplitWall);
                     #endregion
