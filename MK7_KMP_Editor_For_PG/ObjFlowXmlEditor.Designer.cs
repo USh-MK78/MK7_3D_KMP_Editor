@@ -50,7 +50,7 @@ namespace MK7_KMP_Editor_For_PG_
             // 
             this.propertyGrid1.Location = new System.Drawing.Point(183, 3);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(254, 398);
+            this.propertyGrid1.Size = new System.Drawing.Size(373, 398);
             this.propertyGrid1.TabIndex = 1;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
@@ -87,12 +87,15 @@ namespace MK7_KMP_Editor_For_PG_
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 408);
+            this.ClientSize = new System.Drawing.Size(562, 408);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DeleteObjFlowXmlData);
             this.Controls.Add(this.AddObjFlowXmlData);
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.listBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(578, 447);
+            this.MinimumSize = new System.Drawing.Size(578, 447);
             this.Name = "ObjFlowXmlEditor";
             this.Text = "ObjFlowXmlEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ObjFlowXmlEditor_FormClosing);

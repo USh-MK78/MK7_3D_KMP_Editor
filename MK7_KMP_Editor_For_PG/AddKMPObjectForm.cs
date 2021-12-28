@@ -89,7 +89,10 @@ namespace MK7_KMP_Editor_For_PG_
             string Path = ObjFlowDictionary.ObjFlows.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Path;
             dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
-            HTK_3DES.TransformMV3D.Transform_MV3D(OBJ_transform_Value, dv3D_OBJ);
+            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
+            HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
+
+            //HTK_3DES.TransformMV3D.Transform_MV3D(OBJ_transform_Value, dv3D_OBJ);
 
             render.MainViewPort.Children.Add(dv3D_OBJ);
             #endregion

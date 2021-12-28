@@ -13,7 +13,7 @@
         <!-- The HelixViewport3D supports camera manipulation, and can be used just like the Viewport3D -->
         <!-- <ht:HelixViewport3D><ht:HelixViewport3D/> = ビューポートの作成 -->
         <!-- ModelUpDirection:モデルの座標(Yが上) -->
-        <ht:HelixViewport3D x:Name="MainViewPort" ModelUpDirection="0,1,0">
+        <ht:HelixViewport3D x:Name="MainViewPort" ModelUpDirection="0,1,0" ShowCoordinateSystem="True" >
             <!-- <ht:FileModelVisual3D x:Name="LoadModel"/> -->
             <!-- グリッドの追加(Normal -> グリッドの向き) -->
             <ht:GridLinesVisual3D Width="8" Length="8" MinorDistance="1" MajorDistance="1" Thickness="0.01" Normal="0,1,0"/>
