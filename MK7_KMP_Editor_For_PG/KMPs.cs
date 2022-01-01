@@ -323,7 +323,7 @@ namespace MK7_KMP_Editor_For_PG_
                             }
                         };
 
-                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.TSRSystem.OBJReader("KMP_OBJ\\Checkpoint\\RightPoint\\Checkpoint_Right.obj");
+                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
 
                         //モデルの名前と番号を文字列に格納(情報化)
                         HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + Count + " " + HPKCCount);
@@ -955,7 +955,7 @@ namespace MK7_KMP_Editor_For_PG_
                             }
                         };
 
-                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.TSRSystem.OBJReader("KMP_OBJ\\Checkpoint\\RightPoint\\Checkpoint_Right.obj");
+                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
 
                         //モデルの名前と番号を文字列に格納(情報化)
                         HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + PointCount + " " + GroupCount);
