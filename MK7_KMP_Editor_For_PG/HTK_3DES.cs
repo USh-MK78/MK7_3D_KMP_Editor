@@ -28,6 +28,25 @@ namespace MK7_KMP_Editor_For_PG_
                     public double X { get; set; }
                     public double Y { get; set; }
                     public double Z { get; set; }
+
+                    public Translate()
+                    {
+                        X = 0;
+                        Y = 0;
+                        Z = 0;
+                    }
+
+                    public Translate(Vector3D vector3D)
+                    {
+                        X = vector3D.X;
+                        Y = vector3D.Y;
+                        Z = vector3D.Z;
+                    }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 public Scale Scale_Value { get; set; }
@@ -36,6 +55,25 @@ namespace MK7_KMP_Editor_For_PG_
                     public double X { get; set; }
                     public double Y { get; set; }
                     public double Z { get; set; }
+
+                    public Scale()
+                    {
+                        X = 0;
+                        Y = 0;
+                        Z = 0;
+                    }
+
+                    public Scale(Vector3D vector3D, double ScaleFactor = 1)
+                    {
+                        X = vector3D.X * ScaleFactor;
+                        Y = vector3D.Y * ScaleFactor;
+                        Z = vector3D.Z * ScaleFactor;
+                    }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 public Rotate Rotate_Value { get; set; }
@@ -44,6 +82,25 @@ namespace MK7_KMP_Editor_For_PG_
                     public double X { get; set; }
                     public double Y { get; set; }
                     public double Z { get; set; }
+
+                    public Rotate()
+                    {
+                        X = 0;
+                        Y = 0;
+                        Z = 0;
+                    }
+
+                    public Rotate(Vector3D vector3D)
+                    {
+                        X = vector3D.X;
+                        Y = vector3D.Y;
+                        Z = vector3D.Z;
+                    }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
             }
 
@@ -133,6 +190,16 @@ namespace MK7_KMP_Editor_For_PG_
             public static double AngleToRadian(double Angle)
             {
                 return (float)(Angle * (Math.PI / 180));
+            }
+
+            public static Vector3D RadianToAngleVector3D(Vector3D vector3D)
+            {
+                return new Vector3D((float)(vector3D.X * (180 / Math.PI)), (float)(vector3D.Y * (180 / Math.PI)), (float)(vector3D.Z * (180 / Math.PI)));
+            }
+
+            public static Vector3D AngleToRadianVector3D(Vector3D vector3D)
+            {
+                return new Vector3D((float)(vector3D.X * (Math.PI / 180)), (float)(vector3D.Y * (Math.PI / 180)), (float)(vector3D.Z * (Math.PI / 180)));
             }
 
             public static Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
@@ -619,10 +686,22 @@ namespace MK7_KMP_Editor_For_PG_
             public class Rail
             {
                 public List<ModelVisual3D> MV3D_List { get; set; }
-
                 public List<LinesVisual3D> LV3D_List { get; set; }
-
                 public List<TubeVisual3D> TV3D_List { get; set; }
+
+                public Rail()
+                {
+                    MV3D_List = new List<ModelVisual3D>();
+                    LV3D_List = new List<LinesVisual3D>();
+                    TV3D_List = new List<TubeVisual3D>();
+                }
+
+                public Rail(List<ModelVisual3D> MV3DList, List<LinesVisual3D> LV3DList, List<TubeVisual3D> TV3DList)
+                {
+                    MV3D_List = MV3DList;
+                    LV3D_List = LV3DList;
+                    TV3D_List = TV3DList;
+                }
             }
 
             public static List<Point3D> MV3DListToPoint3DList(List<ModelVisual3D> MV3DList)
@@ -1095,11 +1174,7 @@ namespace MK7_KMP_Editor_For_PG_
             /// <param name="railType"></param>
             public static void ResetSideWall(UserControl1 UserCtrl, SideWall sideWall)
             {
-                for (int i = 0; i < sideWall.SideWallList.Count; i++)
-                {
-                    UserCtrl.MainViewPort.Children.Remove(sideWall.SideWallList[i]);
-                }
-
+                for (int i = 0; i < sideWall.SideWallList.Count; i++) UserCtrl.MainViewPort.Children.Remove(sideWall.SideWallList[i]);
                 sideWall.SideWallList.Clear();
             }
         }
@@ -1116,9 +1191,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 List<Point3D> p3d = new List<Point3D>();
                 p3d.Add(DrawPoint3D);
-
                 PV3D_List.Add(new PointsVisual3D { Points = new Point3DCollection(p3d), Color = colors, Size = PointSize });
-
                 return PV3D_List[0];
             }
         }
@@ -1129,13 +1202,10 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 public Rail Checkpoint_Left { get; set; }
                 public Rail Checkpoint_Right { get; set; }
-
                 public SideWall SideWall_Left { get; set; }
                 public SideWall SideWall_Right { get; set; }
-
                 public List<LinesVisual3D> Checkpoint_Line { get; set; }
                 public List<TubeVisual3D> Checkpoint_Tube { get; set; }
-
                 public List<ModelVisual3D> Checkpoint_SplitWallMDL { get; set; }
             }
 
@@ -1151,7 +1221,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Left.MV3D_List.Clear();
                 }
-
                 if (railChk.Checkpoint_Right.MV3D_List != null)
                 {
                     for (int ChkRightCount = 0; ChkRightCount < railChk.Checkpoint_Right.MV3D_List.Count; ChkRightCount++)
@@ -1162,7 +1231,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Right.MV3D_List.Clear();
                 }
-
                 if (railChk.Checkpoint_Line != null)
                 {
                     for (int ChkLineCount = 0; ChkLineCount < railChk.Checkpoint_Line.Count; ChkLineCount++)
@@ -1173,7 +1241,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Line.Clear();
                 }
-
                 if (railChk.Checkpoint_Tube != null)
                 {
                     for (int ChkTubeCount = 0; ChkTubeCount < railChk.Checkpoint_Tube.Count; ChkTubeCount++)
@@ -1184,7 +1251,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Tube.Clear();
                 }
-
                 if (railChk.Checkpoint_Left.LV3D_List != null)
                 {
                     for (int ChkRLineLeftCount = 0; ChkRLineLeftCount < railChk.Checkpoint_Left.LV3D_List.Count; ChkRLineLeftCount++)
@@ -1195,7 +1261,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Left.LV3D_List.Clear();
                 }
-
                 if (railChk.Checkpoint_Right.LV3D_List != null)
                 {
                     for (int ChkRLineRightCount = 0; ChkRLineRightCount < railChk.Checkpoint_Right.LV3D_List.Count; ChkRLineRightCount++)
@@ -1206,7 +1271,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Right.LV3D_List.Clear();
                 }
-
                 if(railChk.Checkpoint_SplitWallMDL != null)
                 {
                     for (int ChkSplitWallCount = 0; ChkSplitWallCount < railChk.Checkpoint_SplitWallMDL.Count; ChkSplitWallCount++)
@@ -1217,7 +1281,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.Checkpoint_Left.LV3D_List.Clear();
                 }
-
                 if (railChk.SideWall_Left.SideWallList != null)
                 {
                     for (int ChkSideWallLeftCount = 0; ChkSideWallLeftCount < railChk.SideWall_Left.SideWallList.Count; ChkSideWallLeftCount++)
@@ -1228,7 +1291,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     railChk.SideWall_Left.SideWallList.Clear();
                 }
-
                 if (railChk.SideWall_Right.SideWallList != null)
                 {
                     for (int ChkSideWallRightCount = 0; ChkSideWallRightCount < railChk.SideWall_Right.SideWallList.Count; ChkSideWallRightCount++)
@@ -1269,10 +1331,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int MDLChildCount = 0; MDLChildCount < M3D_Group.Children.Count; MDLChildCount++)
                 {
                     Model3D NewM3D = M3D_Group.Children[MDLChildCount];
-                    ModelVisual3D MV3D = new ModelVisual3D
-                    {
-                        Content = NewM3D
-                    };
+                    ModelVisual3D MV3D = new ModelVisual3D { Content = NewM3D };
 
                     MV3D.Transform = new MatrixTransform3D(ReScale(MV3D.Content.Transform.Value, 100));
 
@@ -1307,10 +1366,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int MDLChildCount = 0; MDLChildCount < M3D_Group.Children.Count; MDLChildCount++)
                 {
                     Model3D NewM3D = M3D_Group.Children[MDLChildCount];
-                    ModelVisual3D MV3D = new ModelVisual3D
-                    {
-                        Content = NewM3D
-                    };
+                    ModelVisual3D MV3D = new ModelVisual3D { Content = NewM3D };
 
                     //MV3D.Transform = new MatrixTransform3D(ReScale(MV3D.Content.Transform.Value, 100));
 

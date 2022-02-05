@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Windows.Media.Media3D;
+using System.Numerics;
 
 namespace MK7_KMP_Editor_For_PG_
 {
@@ -50,6 +51,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Position()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Position(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -88,6 +103,20 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         get { return _Z; }
                         set { _Z = value; }
+                    }
+
+                    public Rotation()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Rotation(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -217,6 +246,20 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             get { return _Z; }
                             set { _Z = value; }
+                        }
+
+                        public Position()
+                        {
+                            _X = 0;
+                            _Y = 0;
+                            _Z = 0;
+                        }
+
+                        public Position(float X, float Y, float Z)
+                        {
+                            _X = X;
+                            _Y = Y;
+                            _Z = Z;
                         }
 
                         public Vector3D GetVector3D()
@@ -514,6 +557,20 @@ namespace MK7_KMP_Editor_For_PG_
                             set { _Z = value; }
                         }
 
+                        public TPTI_Position()
+                        {
+                            _X = 0;
+                            _Y = 0;
+                            _Z = 0;
+                        }
+
+                        public TPTI_Position(float X, float Y, float Z)
+                        {
+                            _X = X;
+                            _Y = Y;
+                            _Z = Z;
+                        }
+
                         public Vector3D GetVector3D()
                         {
                             double X = Convert.ToDouble(_X);
@@ -646,6 +703,23 @@ namespace MK7_KMP_Editor_For_PG_
                         public float X { get; set; }
                         public float Y { get; set; }
 
+                        public Position2D_Left()
+                        {
+                            X = 0;
+                            Y = 0;
+                        }
+
+                        public Position2D_Left(float Left_X, float Left_Y)
+                        {
+                            X = Left_X;
+                            Y = Left_Y;
+                        }
+
+                        public Vector2 GetVector2()
+                        {
+                            return new Vector2(this.X, this.Y);
+                        }
+
                         public override string ToString()
                         {
                             return "Position2D Left";
@@ -658,6 +732,23 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         public float X { get; set; }
                         public float Y { get; set; }
+
+                        public Position2D_Right()
+                        {
+                            X = 0;
+                            Y = 0;
+                        }
+
+                        public Position2D_Right(float Right_X, float Right_Y)
+                        {
+                            X = Right_X;
+                            Y = Right_Y;
+                        }
+
+                        public Vector2 GetVector2()
+                        {
+                            return new Vector2(this.X, this.Y);
+                        }
 
                         public override string ToString()
                         {
@@ -728,6 +819,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Position()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Position(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -766,6 +871,20 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         get { return _Z; }
                         set { _Z = value; }
+                    }
+
+                    public Rotation()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Rotation(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -808,6 +927,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Scale()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Scale(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -837,6 +970,18 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort Value5 { get; set; }
                     public ushort Value6 { get; set; }
                     public ushort Value7 { get; set; }
+
+                    public JBOG_SpecificSetting()
+                    {
+                        Value0 = 0;
+                        Value1 = 0;
+                        Value2 = 0;
+                        Value3 = 0;
+                        Value4 = 0;
+                        Value5 = 0;
+                        Value6 = 0;
+                        Value7 = 0;
+                    }
 
                     public override string ToString()
                     {
@@ -903,6 +1048,20 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             get { return _Z; }
                             set { _Z = value; }
+                        }
+
+                        public Position()
+                        {
+                            _X = 0;
+                            _Y = 0;
+                            _Z = 0;
+                        }
+
+                        public Position(float X, float Y, float Z)
+                        {
+                            _X = X;
+                            _Y = Y;
+                            _Z = Z;
                         }
 
                         public Vector3D GetVector3D()
@@ -995,6 +1154,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Position()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Position(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1035,6 +1208,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Rotation()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Rotation(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1073,6 +1260,20 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         get { return _Z; }
                         set { _Z = value; }
+                    }
+
+                    public Scale()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Scale(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1127,6 +1328,13 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort FOVSpeed { get; set; }
                     public ushort ViewpointSpeed { get; set; }
 
+                    public SpeedSetting()
+                    {
+                        RouteSpeed = 0;
+                        FOVSpeed = 0;
+                        ViewpointSpeed = 0;
+                    }
+
                     public override string ToString()
                     {
                         return "Speed";
@@ -1159,6 +1367,20 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         get { return _Z; }
                         set { _Z = value; }
+                    }
+
+                    public Position()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Position(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1201,6 +1423,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Rotation()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Rotation(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1223,6 +1459,18 @@ namespace MK7_KMP_Editor_For_PG_
                     public float FOVAngle_Start { get; set; }
                     public float FOVAngle_End { get; set; }
 
+                    public FOVAngleSetting()
+                    {
+                        FOVAngle_Start = 0;
+                        FOVAngle_End = 0;
+                    }
+
+                    public FOVAngleSetting(float Start, float End)
+                    {
+                        FOVAngle_Start = Start;
+                        FOVAngle_End = End;
+                    }
+
                     public override string ToString()
                     {
                         return "FOV Angle";
@@ -1237,6 +1485,29 @@ namespace MK7_KMP_Editor_For_PG_
                     public float Y { get; set; }
                     public float Z { get; set; }
 
+                    public ViewpointStart()
+                    {
+                        X = 0;
+                        Y = 0;
+                        Z = 0;
+                    }
+
+                    public ViewpointStart(float VPS_X, float VPS_Y, float VPS_Z)
+                    {
+                        X = VPS_X;
+                        Y = VPS_Y;
+                        Z = VPS_Z;
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X_ = Convert.ToDouble(X);
+                        double Y_ = Convert.ToDouble(Y);
+                        double Z_ = Convert.ToDouble(Z);
+
+                        return new Vector3D(X_, Y_, Z_);
+                    }
+
                     public override string ToString()
                     {
                         return "Viewpoint Start";
@@ -1250,6 +1521,29 @@ namespace MK7_KMP_Editor_For_PG_
                     public float X { get; set; }
                     public float Y { get; set; }
                     public float Z { get; set; }
+
+                    public ViewpointDestination()
+                    {
+                        X = 0;
+                        Y = 0;
+                        Z = 0;
+                    }
+
+                    public ViewpointDestination(float VPD_X, float VPD_Y, float VPD_Z)
+                    {
+                        X = VPD_X;
+                        Y = VPD_Y;
+                        Z = VPD_Z;
+                    }
+
+                    public Vector3D GetVector3D()
+                    {
+                        double X_ = Convert.ToDouble(X);
+                        double Y_ = Convert.ToDouble(Y);
+                        double Z_ = Convert.ToDouble(Z);
+
+                        return new Vector3D(X_, Y_, Z_);
+                    }
 
                     public override string ToString()
                     {
@@ -1302,6 +1596,20 @@ namespace MK7_KMP_Editor_For_PG_
                         set { _Z = value; }
                     }
 
+                    public Position()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Position(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1340,6 +1648,20 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         get { return _Z; }
                         set { _Z = value; }
+                    }
+
+                    public Rotation()
+                    {
+                        _X = 0;
+                        _Y = 0;
+                        _Z = 0;
+                    }
+
+                    public Rotation(float X, float Y, float Z)
+                    {
+                        _X = X;
+                        _Y = Y;
+                        _Z = Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1534,6 +1856,20 @@ namespace MK7_KMP_Editor_For_PG_
                         {
                             get { return _Z; }
                             set { _Z = value; }
+                        }
+
+                        public Position()
+                        {
+                            _X = 0;
+                            _Y = 0;
+                            _Z = 0;
+                        }
+
+                        public Position(float X, float Y, float Z)
+                        {
+                            _X = X;
+                            _Y = Y;
+                            _Z = Z;
                         }
 
                         public Vector3D GetVector3D()
@@ -2171,6 +2507,800 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             return HPLGValues_List;
+        }
+    }
+
+    public class PropertyGridClassToBinaryConverter
+    {
+        public static KMPs.KMPFormat.KMPSection.TPTK_Section ToTPTK_Section(KMPPropertyGridSettings.TPTK_Section TPTK_Section)
+        {
+            KMPs.KMPFormat.KMPSection.TPTK_Section TPTK = new KMPs.KMPFormat.KMPSection.TPTK_Section
+            {
+                TPTKHeader = new char[] { 'T', 'P', 'T', 'K' },
+                NumOfEntries = Convert.ToUInt16(TPTK_Section.TPTKValueList.Count),
+                AdditionalValue = 0,
+                TPTKValue_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue> TPTK_Value_List = new List<KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue>();
+
+            for (int Count = 0; Count < TPTK_Section.TPTKValueList.Count; Count++)
+            {
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(TPTK_Section.TPTKValueList[Count].Rotate_Value.Z);
+
+                KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue TPTK_Values = new KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue
+                {
+                    TPTK_Position = TPTK_Section.TPTKValueList[Count].Position_Value.GetVector3D(),
+                    TPTK_Rotation = new Vector3D(RX, RY, RZ),
+                    Player_Index = Convert.ToUInt16(TPTK_Section.TPTKValueList[Count].Player_Index),
+                    TPTK_UnkBytes = Convert.ToUInt16(TPTK_Section.TPTKValueList[Count].TPTK_UnkBytes)
+                };
+
+                TPTK_Value_List.Add(TPTK_Values);
+            }
+
+            TPTK.TPTKValue_List = TPTK_Value_List;
+
+            return TPTK;
+        }
+
+        public class HPNE_TPNESection
+        {
+            public class HPNE_TPNEData
+            {
+                public KMPs.KMPFormat.KMPSection.HPNE_Section HPNE_Section;
+                public KMPs.KMPFormat.KMPSection.TPNE_Section TPNE_Section;
+
+                public HPNE_TPNEData(KMPs.KMPFormat.KMPSection.HPNE_Section HPNE, KMPs.KMPFormat.KMPSection.TPNE_Section TPNE)
+                {
+                    HPNE_Section = HPNE;
+                    TPNE_Section = TPNE;
+                }
+            }
+
+            public static HPNE_TPNEData ToHPNE_TPNE_Section(KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section)
+            {
+                HPNE_TPNEData hPNE_TPNEData = null;
+
+                if (HPNE_TPNE_Section.HPNEValueList.Count != 0)
+                {
+                    List<KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue> TPNE_Values_List = new List<KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue>();
+                    List<KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue> HPNE_Values_List = new List<KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue>();
+
+                    int StartPoint = 0;
+                    for (int HPNECount = 0; HPNECount < HPNE_TPNE_Section.HPNEValueList.Count; HPNECount++)
+                    {
+                        KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue HPNE_Values = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue
+                        {
+                            HPNE_StartPoint = Convert.ToUInt16(StartPoint),
+                            HPNE_Length = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList.Count),
+                            HPNE_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_PreviewGroups
+                            {
+                                Prev0 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev0),
+                                Prev1 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev1),
+                                Prev2 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev2),
+                                Prev3 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev3),
+                                Prev4 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev4),
+                                Prev5 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev5),
+                                Prev6 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev6),
+                                Prev7 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev7),
+                                Prev8 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev8),
+                                Prev9 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev9),
+                                Prev10 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev10),
+                                Prev11 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev11),
+                                Prev12 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev12),
+                                Prev13 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev13),
+                                Prev14 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev14),
+                                Prev15 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNEPreviewGroups.Prev15)
+                            },
+                            HPNE_NextGroup = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_NextGroups
+                            {
+                                Next0 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next0),
+                                Next1 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next1),
+                                Next2 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next2),
+                                Next3 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next3),
+                                Next4 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next4),
+                                Next5 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next5),
+                                Next6 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next6),
+                                Next7 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next7),
+                                Next8 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next8),
+                                Next9 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next9),
+                                Next10 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next10),
+                                Next11 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next11),
+                                Next12 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next12),
+                                Next13 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next13),
+                                Next14 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next14),
+                                Next15 = Convert.ToUInt16(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNENextGroups.Next15)
+                            },
+                            HPNE_UnkBytes1 = Convert.ToUInt32(HPNE_TPNE_Section.HPNEValueList[HPNECount].HPNE_UnkBytes1)
+                        };
+
+                        HPNE_Values_List.Add(HPNE_Values);
+
+                        for (int TPNECount = 0; TPNECount < HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList.Count; TPNECount++)
+                        {
+                            KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue TPNE_Values = new KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue
+                            {
+                                TPNE_Position = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Positions.GetVector3D(),
+                                Control = Convert.ToSingle(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].Control),
+                                MushSetting = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MushSettings.MushSettingValue,
+                                DriftSetting = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].DriftSettings.DriftSettingValue),
+                                Flags = Convert.ToByte(HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].FlagSettings.Flags),
+                                PathFindOption = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].PathFindOptions.PathFindOptionValue,
+                                MaxSearchYOffset = HPNE_TPNE_Section.HPNEValueList[HPNECount].TPNEValueList[TPNECount].MaxSearchYOffset.MaxSearchYOffsetValue
+                            };
+
+                            TPNE_Values_List.Add(TPNE_Values);
+
+                            StartPoint++;
+                        }
+                    }
+
+                    KMPs.KMPFormat.KMPSection.TPNE_Section TPNE = new KMPs.KMPFormat.KMPSection.TPNE_Section
+                    {
+                        TPNEHeader = new char[] { 'T', 'P', 'N', 'E' },
+                        NumOfEntries = Convert.ToUInt16(TPNE_Values_List.Count),
+                        AdditionalValue = 0,
+                        TPNEValue_List = TPNE_Values_List
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPNE_Section HPNE = new KMPs.KMPFormat.KMPSection.HPNE_Section
+                    {
+                        HPNEHeader = new char[] { 'H', 'P', 'N', 'E' },
+                        NumOfEntries = Convert.ToUInt16(HPNE_Values_List.Count),
+                        AdditionalValue = 0,
+                        HPNEValue_List = HPNE_Values_List
+                    };
+
+                    hPNE_TPNEData = new HPNE_TPNEData(HPNE, TPNE);
+                }
+                if (HPNE_TPNE_Section.HPNEValueList.Count == 0)
+                {
+                    KMPs.KMPFormat.KMPSection.TPNE_Section TPNE = new KMPs.KMPFormat.KMPSection.TPNE_Section
+                    {
+                        TPNEHeader = new char[] { 'T', 'P', 'N', 'E' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        TPNEValue_List = new List<KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue>()
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPNE_Section HPNE = new KMPs.KMPFormat.KMPSection.HPNE_Section
+                    {
+                        HPNEHeader = new char[] { 'H', 'P', 'N', 'E' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        HPNEValue_List = new List<KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue>()
+                    };
+
+                    hPNE_TPNEData = new HPNE_TPNEData(HPNE, TPNE);
+                }
+
+                return hPNE_TPNEData;
+            }
+        }
+
+        public class HPTI_TPTISection
+        {
+            public class HPTI_TPTIData
+            {
+                public KMPs.KMPFormat.KMPSection.HPTI_Section HPTI_Section;
+                public KMPs.KMPFormat.KMPSection.TPTI_Section TPTI_Section;
+
+                public HPTI_TPTIData(KMPs.KMPFormat.KMPSection.HPTI_Section HPTI, KMPs.KMPFormat.KMPSection.TPTI_Section TPTI)
+                {
+                    HPTI_Section = HPTI;
+                    TPTI_Section = TPTI;
+                }
+            }
+
+            public static HPTI_TPTIData ToHPTI_TPTI_Section(KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section)
+            {
+                HPTI_TPTIData hPTI_TPTIData = null;
+
+                if (HPTI_TPTI_Section.HPTIValueList.Count != 0)
+                {
+                    List<KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue> TPTI_Values_List = new List<KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue>();
+                    List<KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue> HPTI_Values_List = new List<KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue>();
+
+                    int StartPoint = 0;
+                    for (int HPTICount = 0; HPTICount < HPTI_TPTI_Section.HPTIValueList.Count; HPTICount++)
+                    {
+                        KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue HPTI_Values = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue
+                        {
+                            HPTI_StartPoint = Convert.ToUInt16(StartPoint),
+                            HPTI_Length = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList.Count),
+                            HPTI_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_PreviewGroups
+                            {
+                                Prev0 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev0),
+                                Prev1 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev1),
+                                Prev2 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev2),
+                                Prev3 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev3),
+                                Prev4 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev4),
+                                Prev5 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev5),
+                            },
+                            HPTI_NextGroup = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_NextGroups
+                            {
+                                Next0 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next0),
+                                Next1 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next1),
+                                Next2 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next2),
+                                Next3 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next3),
+                                Next4 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next4),
+                                Next5 = Convert.ToUInt16(HPTI_TPTI_Section.HPTIValueList[HPTICount].HPTI_NextGroup.Next5),
+                            }
+                        };
+
+                        HPTI_Values_List.Add(HPTI_Values);
+
+                        for (int TPTICount = 0; TPTICount < HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList.Count; TPTICount++)
+                        {
+                            KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue TPTI_Values = new KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue
+                            {
+                                TPTI_Position = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_Positions.GetVector3D(),
+                                TPTI_PointSize = Convert.ToSingle(HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].TPTI_PointSize),
+                                GravityMode = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].GravityModeSettings.GravityModeValue,
+                                PlayerScanRadius = HPTI_TPTI_Section.HPTIValueList[HPTICount].TPTIValueList[TPTICount].PlayerScanRadiusSettings.PlayerScanRadiusValue
+                            };
+
+                            TPTI_Values_List.Add(TPTI_Values);
+
+                            StartPoint++;
+                        }
+                    }
+
+                    KMPs.KMPFormat.KMPSection.TPTI_Section TPTI = new KMPs.KMPFormat.KMPSection.TPTI_Section
+                    {
+                        TPTIHeader = new char[] { 'T', 'P', 'T', 'I' },
+                        NumOfEntries = Convert.ToUInt16(TPTI_Values_List.Count),
+                        AdditionalValue = 0,
+                        TPTIValue_List = TPTI_Values_List
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPTI_Section HPTI = new KMPs.KMPFormat.KMPSection.HPTI_Section
+                    {
+                        HPTIHeader = new char[] { 'H', 'P', 'T', 'I' },
+                        NumOfEntries = Convert.ToUInt16(HPTI_Values_List.Count),
+                        AdditionalValue = 0,
+                        HPTIValue_List = HPTI_Values_List
+                    };
+
+                    hPTI_TPTIData = new HPTI_TPTIData(HPTI, TPTI);
+                }
+                if (HPTI_TPTI_Section.HPTIValueList.Count == 0)
+                {
+                    KMPs.KMPFormat.KMPSection.TPTI_Section TPTI = new KMPs.KMPFormat.KMPSection.TPTI_Section
+                    {
+                        TPTIHeader = new char[] { 'T', 'P', 'T', 'I' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        TPTIValue_List = new List<KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue>()
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPTI_Section HPTI = new KMPs.KMPFormat.KMPSection.HPTI_Section
+                    {
+                        HPTIHeader = new char[] { 'H', 'P', 'T', 'I' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        HPTIValue_List = new List<KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue>()
+                    };
+
+                    hPTI_TPTIData = new HPTI_TPTIData(HPTI, TPTI);
+                }
+
+                return hPTI_TPTIData;
+            }
+        }
+
+        public class HPKC_TPKCSection
+        {
+            public class HPKC_TPKCData
+            {
+                public KMPs.KMPFormat.KMPSection.HPKC_Section HPKC_Section;
+                public KMPs.KMPFormat.KMPSection.TPKC_Section TPKC_Section;
+
+                public HPKC_TPKCData(KMPs.KMPFormat.KMPSection.HPKC_Section HPKC, KMPs.KMPFormat.KMPSection.TPKC_Section TPKC)
+                {
+                    HPKC_Section = HPKC;
+                    TPKC_Section = TPKC;
+                }
+            }
+
+            public static HPKC_TPKCData ToHPKC_TPKC_Section(KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section)
+            {
+                HPKC_TPKCData hPKC_TPKCData = null;
+
+                if (HPKC_TPKC_Section.HPKCValueList.Count != 0)
+                {
+                    List<KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue> TPKC_Values_List = new List<KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue>();
+                    List<KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue> HPKC_Values_List = new List<KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue>();
+
+                    int StartPoint = 0;
+                    for (int HPKCCount = 0; HPKCCount < HPKC_TPKC_Section.HPKCValueList.Count; HPKCCount++)
+                    {
+                        KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue HPKC_Values = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue
+                        {
+                            HPKC_StartPoint = Convert.ToByte(StartPoint),
+                            HPKC_Length = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList.Count),
+                            HPKC_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_PreviewGroups
+                            {
+                                Prev0 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev0),
+                                Prev1 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev1),
+                                Prev2 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev2),
+                                Prev3 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev3),
+                                Prev4 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev4),
+                                Prev5 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev5),
+                            },
+                            HPKC_NextGroup = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_NextGroups
+                            {
+                                Next0 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next0),
+                                Next1 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next1),
+                                Next2 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next2),
+                                Next3 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next3),
+                                Next4 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next4),
+                                Next5 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].HPKC_NextGroup.Next5),
+                            }
+                        };
+
+                        HPKC_Values_List.Add(HPKC_Values);
+
+                        for (int TPKCCount = 0; TPKCCount < HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList.Count; TPKCCount++)
+                        {
+                            KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue TPKC_Values = new KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue
+                            {
+                                TPKC_2DPosition_Left = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Left.GetVector2(),
+                                TPKC_2DPosition_Right = HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.GetVector2(),
+
+                                TPKC_RespawnID = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_RespawnID),
+                                TPKC_Checkpoint_Type = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Checkpoint_Type),
+                                TPKC_PreviousCheckPoint = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_PreviousCheckPoint),
+                                TPKC_NextCheckPoint = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_NextCheckPoint),
+                                TPKC_UnkBytes1 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes1),
+                                TPKC_UnkBytes2 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes2),
+                                TPKC_UnkBytes3 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes3),
+                                TPKC_UnkBytes4 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes4)
+                            };
+
+                            TPKC_Values_List.Add(TPKC_Values);
+
+                            StartPoint++;
+                        }
+                    }
+
+                    KMPs.KMPFormat.KMPSection.TPKC_Section TPKC = new KMPs.KMPFormat.KMPSection.TPKC_Section
+                    {
+                        TPKCHeader = new char[] { 'T', 'P', 'K', 'C' },
+                        NumOfEntries = Convert.ToUInt16(TPKC_Values_List.Count),
+                        AdditionalValue = 0,
+                        TPKCValue_List = TPKC_Values_List
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPKC_Section HPKC = new KMPs.KMPFormat.KMPSection.HPKC_Section
+                    {
+                        HPKCHeader = new char[] { 'H', 'P', 'K', 'C' },
+                        NumOfEntries = Convert.ToUInt16(HPKC_Values_List.Count),
+                        AdditionalValue = 0,
+                        HPKCValue_List = HPKC_Values_List
+                    };
+
+                    hPKC_TPKCData = new HPKC_TPKCData(HPKC, TPKC);
+                }
+                if (HPKC_TPKC_Section.HPKCValueList.Count == 0)
+                {
+                    KMPs.KMPFormat.KMPSection.TPKC_Section TPKC = new KMPs.KMPFormat.KMPSection.TPKC_Section
+                    {
+                        TPKCHeader = new char[] { 'T', 'P', 'K', 'C' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        TPKCValue_List = new List<KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue>()
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPKC_Section HPKC = new KMPs.KMPFormat.KMPSection.HPKC_Section
+                    {
+                        HPKCHeader = new char[] { 'H', 'P', 'K', 'C' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        HPKCValue_List = new List<KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue>()
+                    };
+
+                    hPKC_TPKCData = new HPKC_TPKCData(HPKC, TPKC);
+                }
+
+                return hPKC_TPKCData;
+            }
+        }
+
+        public static KMPs.KMPFormat.KMPSection.JBOG_Section ToJBOG_Section(KMPPropertyGridSettings.JBOG_section JBOG_Section)
+        {
+            KMPs.KMPFormat.KMPSection.JBOG_Section JBOG = new KMPs.KMPFormat.KMPSection.JBOG_Section
+            {
+                JBOGHeader = new char[] { 'J', 'B', 'O', 'G' },
+                NumOfEntries = Convert.ToUInt16(JBOG_Section.JBOGValueList.Count),
+                AdditionalValue = 0,
+                JBOGValue_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue> JBOG_Value_List = new List<KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue>();
+
+            for (int Count = 0; Count < JBOG_Section.JBOGValueList.Count; Count++)
+            {
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Z);
+
+                KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue JBOG_Values = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue
+                {
+                    ObjectID = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].ObjectID),
+                    JBOG_UnkByte1 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte1),
+                    JBOG_Position = JBOG_Section.JBOGValueList[Count].Positions.GetVector3D(),
+                    JBOG_Rotation = new Vector3D(RX, RY, RZ),
+                    JBOG_Scale = JBOG_Section.JBOGValueList[Count].Scales.GetVector3D(),
+                    JBOG_ITOP_RouteIDIndex = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_ITOP_RouteIDIndex),
+                    JOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
+                    {
+                        Value0 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value0),
+                        Value1 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value1),
+                        Value2 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value2),
+                        Value3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value3),
+                        Value4 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value4),
+                        Value5 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value5),
+                        Value6 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value6),
+                        Value7 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value7)
+                    },
+                    JBOG_PresenceSetting = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_PresenceSetting),
+                    JBOG_UnkByte2 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte2),
+                    JBOG_UnkByte3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte3)
+                };
+
+                JBOG_Value_List.Add(JBOG_Values);
+            }
+
+            JBOG.JBOGValue_List = JBOG_Value_List;
+
+            return JBOG;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.ITOP_Section ToITOP_Section(KMPPropertyGridSettings.ITOP_Section ITOP_Section)
+        {
+            KMPs.KMPFormat.KMPSection.ITOP_Section ITOP = new KMPs.KMPFormat.KMPSection.ITOP_Section
+            {
+                ITOPHeader = new char[] { 'I', 'T', 'O', 'P' },
+                ITOP_NumberOfRoute = Convert.ToUInt16(ITOP_Section.ITOP_RouteList.Count),
+                ITOP_NumberOfPoint = Convert.ToUInt16(ITOP_Section.ITOP_RouteList.Select(x => x.ITOP_PointList.Count).Sum()),
+                ITOP_Route_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route> ITOP_Route_List = new List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route>();
+
+            for (int ITOPRouteCount = 0; ITOPRouteCount < ITOP.ITOP_NumberOfRoute; ITOPRouteCount++)
+            {
+                KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route ITOP_Routes = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route
+                {
+                    ITOP_Route_NumOfPoint = Convert.ToUInt16(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList.Count),
+                    ITOP_RouteSetting1 = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_RouteSetting1),
+                    ITOP_RouteSetting2 = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_RouteSetting2),
+                    ITOP_Point_List = null
+                };
+
+                List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point> ITOP_Point_List = new List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point>();
+
+                for (int ITOP_PointCount = 0; ITOP_PointCount < ITOP_Routes.ITOP_Route_NumOfPoint; ITOP_PointCount++)
+                {
+                    KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point ITOP_Points = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point
+                    {
+                        ITOP_Point_Position = ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].Positions.GetVector3D(),
+                        ITOP_Point_RouteSpeed = Convert.ToUInt16(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].ITOP_Point_RouteSpeed),
+                        ITOP_PointSetting2 = Convert.ToUInt16(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList[ITOP_PointCount].ITOP_PointSetting2)
+                    };
+
+                    ITOP_Point_List.Add(ITOP_Points);
+                }
+
+                ITOP_Routes.ITOP_Point_List = ITOP_Point_List;
+
+                ITOP_Route_List.Add(ITOP_Routes);
+            }
+
+            ITOP.ITOP_Route_List = ITOP_Route_List;
+
+            return ITOP;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.AERA_Section ToAERA_section(KMPPropertyGridSettings.AERA_Section AERA_Section)
+        {
+            KMPs.KMPFormat.KMPSection.AERA_Section AERA = new KMPs.KMPFormat.KMPSection.AERA_Section
+            {
+                AERAHeader = new char[] { 'A', 'E', 'R', 'A' },
+                NumOfEntries = Convert.ToUInt16(AERA_Section.AERAValueList.Count),
+                AdditionalValue = 0,
+                AERAValue_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue> AERA_Value_List = new List<KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue>();
+
+            for (int Count = 0; Count < AERA_Section.AERAValueList.Count; Count++)
+            {
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(AERA_Section.AERAValueList[Count].Rotations.Z);
+
+                KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue AERA_Values = new KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue
+                {
+                    AreaMode = Convert.ToByte(AERA_Section.AERAValueList[Count].AreaModeSettings.AreaModeValue),
+                    AreaType = Convert.ToByte(AERA_Section.AERAValueList[Count].AreaType),
+                    AERA_EMACIndex = Convert.ToByte(AERA_Section.AERAValueList[Count].AERA_EMACIndex),
+                    Priority = Convert.ToByte(AERA_Section.AERAValueList[Count].Priority),
+                    AERA_Position = AERA_Section.AERAValueList[Count].Positions.GetVector3D(),
+                    AERA_Rotation = new Vector3D(RX, RY, RZ),
+                    AERA_Scale = AERA_Section.AERAValueList[Count].Scales.GetVector3D(),
+                    AERA_UnkByte1 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte1),
+                    AERA_UnkByte2 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte2),
+                    RouteID = Convert.ToByte(AERA_Section.AERAValueList[Count].RouteID),
+                    EnemyID = Convert.ToByte(AERA_Section.AERAValueList[Count].EnemyID),
+                    AERA_UnkByte4 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte4)
+                };
+
+                AERA_Value_List.Add(AERA_Values);
+            }
+
+            AERA.AERAValue_List = AERA_Value_List;
+
+            return AERA;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.EMAC_Section ToEMAC_Section(KMPPropertyGridSettings.EMAC_Section EMAC_Section)
+        {
+            KMPs.KMPFormat.KMPSection.EMAC_Section EMAC = new KMPs.KMPFormat.KMPSection.EMAC_Section
+            {
+                EMACHeader = new char[] { 'E', 'M', 'A', 'C' },
+                NumOfEntries = Convert.ToUInt16(EMAC_Section.EMACValueList.Count),
+                AdditionalValue = 65535, //0xFFFF
+                EMACValue_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue> EMAC_Value_List = new List<KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue>();
+
+            for (int EMACCount = 0; EMACCount < EMAC_Section.EMACValueList.Count; EMACCount++)
+            {
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(EMAC_Section.EMACValueList[EMACCount].Rotations.Z);
+
+                KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue EMAC_Values = new KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue
+                {
+                    CameraType = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].CameraType),
+                    NextCameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].NextCameraIndex),
+                    EMAC_UnkBytes1 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes1),
+                    EMAC_ITOP_CameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_ITOP_CameraIndex),
+                    RouteSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.RouteSpeed),
+                    FOVSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.FOVSpeed),
+                    ViewpointSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.ViewpointSpeed),
+                    EMAC_UnkBytes2 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes2),
+                    EMAC_UnkBytes3 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes3),
+                    EMAC_Position = EMAC_Section.EMACValueList[EMACCount].Positions.GetVector3D(),
+                    EMAC_Rotation = new Vector3D(RX, RY, RZ),
+                    FOVAngle_Start = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngleSettings.FOVAngle_Start),
+                    FOVAngle_End = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngleSettings.FOVAngle_End),
+                    Viewpoint_Start = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Start.GetVector3D(),
+                    Viewpoint_Destination = EMAC_Section.EMACValueList[EMACCount].Viewpoint_Destination.GetVector3D(),
+                    Camera_Active_Time = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].Camera_Active_Time)
+                };
+
+                EMAC_Value_List.Add(EMAC_Values);
+            }
+
+            EMAC.EMACValue_List = EMAC_Value_List;
+
+            return EMAC;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.TPGJ_Section ToTPGJ_Section(KMPPropertyGridSettings.TPGJ_Section TPGJ_Section)
+        {
+            KMPs.KMPFormat.KMPSection.TPGJ_Section TPGJ = new KMPs.KMPFormat.KMPSection.TPGJ_Section
+            {
+                TPGJHeader = new char[] { 'T', 'P', 'G', 'J' },
+                NumOfEntries = Convert.ToUInt16(TPGJ_Section.TPGJValueList.Count),
+                AdditionalValue = 0,
+                TPGJValue_List = null
+            };
+
+            List<KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue> TPGJ_Value_List = new List<KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue>();
+
+            for (int TPGJCount = 0; TPGJCount < TPGJ_Section.TPGJValueList.Count; TPGJCount++)
+            {
+                double RX = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.X);
+                double RY = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Y);
+                double RZ = HTK_3DES.TSRSystem.AngleToRadian(TPGJ_Section.TPGJValueList[TPGJCount].Rotations.Z);
+
+                KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue TPGJ_Values = new KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue
+                {
+                    TPGJ_Position = TPGJ_Section.TPGJValueList[TPGJCount].Positions.GetVector3D(),
+                    TPGJ_Rotation = new Vector3D(RX, RY, RZ),
+                    TPGJ_RespawnID = Convert.ToUInt16(TPGJ_Section.TPGJValueList[TPGJCount].TPGJ_RespawnID),
+                    TPGJ_UnkBytes1 = Convert.ToUInt16(TPGJ_Section.TPGJValueList[TPGJCount].TPGJ_UnkBytes1),
+                };
+
+                TPGJ_Value_List.Add(TPGJ_Values);
+            }
+
+            TPGJ.TPGJValue_List = TPGJ_Value_List;
+
+            return TPGJ;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.TPNC_Section ToTPNC_Section()
+        {
+            //TPNC(Unused Section)
+            KMPs.KMPFormat.KMPSection.TPNC_Section TPNC = new KMPs.KMPFormat.KMPSection.TPNC_Section
+            {
+                TPNCHeader = new char[] { 'T', 'P', 'N', 'C' },
+                NumOfEntries = 0,
+                AdditionalValue = 0
+            };
+
+            return TPNC;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.TPSM_Section ToTPSM_Section()
+        {
+            //TPSM(Unused Section)
+            KMPs.KMPFormat.KMPSection.TPSM_Section TPSM = new KMPs.KMPFormat.KMPSection.TPSM_Section
+            {
+                TPSMHeader = new char[] { 'T', 'P', 'S', 'M' },
+                NumOfEntries = 0,
+                AdditionalValue = 0
+            };
+
+            return TPSM;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.IGTS_Section ToIGTS_Section(KMPPropertyGridSettings.IGTS_Section IGTS_Section)
+        {
+            KMPs.KMPFormat.KMPSection.IGTS_Section IGTS = new KMPs.KMPFormat.KMPSection.IGTS_Section
+            {
+                IGTSHeader = new char[] { 'I', 'G', 'T', 'S' },
+                Unknown1 = IGTS_Section.Unknown1,
+                LapCount = IGTS_Section.LapCount,
+                PolePosition = IGTS_Section.PolePosition,
+                Unknown2 = IGTS_Section.Unknown2,
+                Unknown3 = IGTS_Section.Unknown3,
+                RGBAColor = new KMPs.KMPFormat.KMPSection.IGTS_Section.RGBA
+                {
+                    R = IGTS_Section.RGBAColor.R,
+                    G = IGTS_Section.RGBAColor.G,
+                    B = IGTS_Section.RGBAColor.B,
+                    A = IGTS_Section.RGBAColor.A
+                },
+                FlareAlpha = IGTS_Section.FlareAlpha
+            };
+
+            return IGTS;
+        }
+
+        public static KMPs.KMPFormat.KMPSection.SROC_Section ToSROC_Section()
+        {
+            //SROC(Unused Section)
+            KMPs.KMPFormat.KMPSection.SROC_Section SROC = new KMPs.KMPFormat.KMPSection.SROC_Section
+            {
+                SROCHeader = new char[] { 'S', 'R', 'O', 'C' },
+                NumOfEntries = 0,
+                AdditionalValue = 0
+            };
+
+            return SROC;
+        }
+
+        public class HPLG_TPLGSection
+        {
+            public class HPLG_TPLGData
+            {
+                public KMPs.KMPFormat.KMPSection.HPLG_Section HPLG_Section;
+                public KMPs.KMPFormat.KMPSection.TPLG_Section TPLG_Section;
+
+                public HPLG_TPLGData(KMPs.KMPFormat.KMPSection.HPLG_Section HPLG, KMPs.KMPFormat.KMPSection.TPLG_Section TPLG)
+                {
+                    HPLG_Section = HPLG;
+                    TPLG_Section = TPLG;
+                }
+            }
+
+            public static HPLG_TPLGData ToHPLG_TPLG_Section(KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section)
+            {
+                HPLG_TPLGData hPLG_TPLGData = null;
+
+                if (HPLG_TPLG_Section.HPLGValueList.Count != 0)
+                {
+                    List<KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue> TPLG_Values_List = new List<KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue>();
+                    List<KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue> HPLG_Values_List = new List<KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue>();
+
+                    int StartPoint = 0;
+                    for (int HPLGCount = 0; HPLGCount < HPLG_TPLG_Section.HPLGValueList.Count; HPLGCount++)
+                    {
+                        KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue HPLG_Values = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue
+                        {
+                            HPLG_StartPoint = Convert.ToByte(StartPoint),
+                            HPLG_Length = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList.Count),
+                            HPLG_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_PreviewGroups
+                            {
+                                Prev0 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev0),
+                                Prev1 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev1),
+                                Prev2 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev2),
+                                Prev3 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev3),
+                                Prev4 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev4),
+                                Prev5 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev5),
+                            },
+                            HPLG_NextGroup = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_NextGroups
+                            {
+                                Next0 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next0),
+                                Next1 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next1),
+                                Next2 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next2),
+                                Next3 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next3),
+                                Next4 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next4),
+                                Next5 = Convert.ToByte(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_NextGroup.Next5),
+                            },
+                            RouteSetting = Convert.ToUInt32(HPLG_TPLG_Section.HPLGValueList[HPLGCount].RouteSettings.RouteSettingValue),
+                            HPLG_UnkBytes2 = Convert.ToUInt32(HPLG_TPLG_Section.HPLGValueList[HPLGCount].HPLG_UnkBytes2)
+                        };
+
+                        HPLG_Values_List.Add(HPLG_Values);
+
+                        for (int TPLGCount = 0; TPLGCount < HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList.Count; TPLGCount++)
+                        {
+                            KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue TPLG_Values = new KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue
+                            {
+                                TPLG_Position = HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].Positions.GetVector3D(),
+                                TPLG_PointScaleValue = Convert.ToSingle(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].TPLG_PointScaleValue),
+                                TPLG_UnkBytes1 = HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].TPLG_UnkBytes1,
+                                TPLG_UnkBytes2 = Convert.ToUInt16(HPLG_TPLG_Section.HPLGValueList[HPLGCount].TPLGValueList[TPLGCount].TPLG_UnkBytes2)
+                            };
+
+                            TPLG_Values_List.Add(TPLG_Values);
+
+                            StartPoint++;
+                        }
+                    }
+
+                    KMPs.KMPFormat.KMPSection.TPLG_Section TPLG = new KMPs.KMPFormat.KMPSection.TPLG_Section
+                    {
+                        TPLGHeader = new char[] { 'T', 'P', 'L', 'G' },
+                        NumOfEntries = Convert.ToUInt16(TPLG_Values_List.Count),
+                        AdditionalValue = 0,
+                        TPLGValue_List = TPLG_Values_List
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPLG_Section HPLG = new KMPs.KMPFormat.KMPSection.HPLG_Section
+                    {
+                        HPLGHeader = new char[] { 'H', 'P', 'L', 'G' },
+                        NumOfEntries = Convert.ToUInt16(HPLG_Values_List.Count),
+                        AdditionalValue = 0,
+                        HPLGValue_List = HPLG_Values_List
+                    };
+
+                    hPLG_TPLGData = new HPLG_TPLGData(HPLG, TPLG);
+                }
+                if (HPLG_TPLG_Section.HPLGValueList.Count == 0)
+                {
+                    KMPs.KMPFormat.KMPSection.TPLG_Section TPLG = new KMPs.KMPFormat.KMPSection.TPLG_Section
+                    {
+                        TPLGHeader = new char[] { 'T', 'P', 'L', 'G' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        TPLGValue_List = new List<KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue>()
+                    };
+
+                    KMPs.KMPFormat.KMPSection.HPLG_Section HPLG = new KMPs.KMPFormat.KMPSection.HPLG_Section
+                    {
+                        HPLGHeader = new char[] { 'H', 'P', 'L', 'G' },
+                        NumOfEntries = 0,
+                        AdditionalValue = 0,
+                        HPLGValue_List = new List<KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue>()
+                    };
+
+                    hPLG_TPLGData = new HPLG_TPLGData(HPLG, TPLG);
+                }
+
+                return hPLG_TPLGData;
+            }
         }
     }
 

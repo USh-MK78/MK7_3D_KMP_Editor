@@ -96,11 +96,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int i = 0; i < HPNE.NumOfEntries; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int Count = 0; Count < HPNE.HPNEValue_List[i].HPNE_Length; Count++)
                     {
@@ -160,11 +156,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int HPTICount = 0; HPTICount < HPTI.NumOfEntries; HPTICount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int Count = 0; Count < HPTI.HPTIValue_List[HPTICount].HPTI_Length; Count++)
                     {
@@ -224,18 +216,8 @@ namespace MK7_KMP_Editor_For_PG_
                     //Checkpoint_Rails
                     HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
                     {
-                        Checkpoint_Left = new HTK_3DES.PathTools.Rail
-                        {
-                            LV3D_List = new List<LinesVisual3D>(),
-                            TV3D_List = new List<TubeVisual3D>(),
-                            MV3D_List = new List<ModelVisual3D>()
-                        },
-                        Checkpoint_Right = new HTK_3DES.PathTools.Rail
-                        {
-                            LV3D_List = new List<LinesVisual3D>(),
-                            TV3D_List = new List<TubeVisual3D>(),
-                            MV3D_List = new List<ModelVisual3D>()
-                        },
+                        Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
+                        Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
                         Checkpoint_Line = new List<LinesVisual3D>(),
                         Checkpoint_Tube = new List<TubeVisual3D>(),
                         Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
@@ -435,11 +417,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP.ITOP_NumberOfRoute; ITOP_RoutesCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
                     {
@@ -622,11 +600,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int i = 0; i < HPLG.NumOfEntries; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int Count = 0; Count < HPLG.HPLGValue_List[i].HPLG_Length; Count++)
                     {
@@ -728,11 +702,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int i = 0; i < enemyRoute.Groups.Count; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int Count = 0; Count < enemyRoute.Groups[i].Points.Count; Count++)
                     {
@@ -792,11 +762,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < itemRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int PointCount = 0; PointCount < itemRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -856,18 +822,8 @@ namespace MK7_KMP_Editor_For_PG_
                     //Checkpoint_Rails
                     HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
                     {
-                        Checkpoint_Left = new HTK_3DES.PathTools.Rail
-                        {
-                            LV3D_List = new List<LinesVisual3D>(),
-                            TV3D_List = new List<TubeVisual3D>(),
-                            MV3D_List = new List<ModelVisual3D>()
-                        },
-                        Checkpoint_Right = new HTK_3DES.PathTools.Rail
-                        {
-                            LV3D_List = new List<LinesVisual3D>(),
-                            TV3D_List = new List<TubeVisual3D>(),
-                            MV3D_List = new List<ModelVisual3D>()
-                        },
+                        Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
+                        Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
                         Checkpoint_Line = new List<LinesVisual3D>(),
                         Checkpoint_Tube = new List<TubeVisual3D>(),
                         Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
@@ -1067,11 +1023,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < route.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int PointsCount = 0; PointsCount < route.Groups[GroupCount].Points.Count; PointsCount++)
                     {
@@ -1254,11 +1206,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < glideRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int PointCount = 0; PointCount < glideRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -1318,11 +1266,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int i = 0; i < xXXXRoute.Groups.Count; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int Count = 0; Count < xXXXRoute.Groups[i].Points.Count; Count++)
                     {
@@ -1382,11 +1326,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < xXXXRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int PointCount = 0; PointCount < xXXXRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -1444,11 +1384,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < xXXXRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail
-                    {
-                        TV3D_List = new List<TubeVisual3D>(),
-                        MV3D_List = new List<ModelVisual3D>()
-                    };
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
                     for (int PointCount = 0; PointCount < xXXXRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -1529,6 +1465,28 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint SROC_Offset { get; set; }
                 public uint TPLG_Offset { get; set; }
                 public uint HPLG_Offset { get; set; }
+
+                public DMDCSectionOffset()
+                {
+                    TPTK_Offset = 0;
+                    TPNE_Offset = 0;
+                    HPNE_Offset = 0;
+                    TPTI_Offset = 0;
+                    HPTI_Offset = 0;
+                    TPKC_Offset = 0;
+                    HPKC_Offset = 0;
+                    JBOG_Offset = 0;
+                    ITOP_Offset = 0;
+                    AERA_Offset = 0;
+                    EMAC_Offset = 0;
+                    TPGJ_Offset = 0;
+                    TPNC_Offset = 0;
+                    TPSM_Offset = 0;
+                    IGTS_Offset = 0;
+                    SROC_Offset = 0;
+                    TPLG_Offset = 0;
+                    HPLG_Offset = 0;
+                }
             }
 
             public KMPSection KMP_Section { get; set; }
@@ -1543,8 +1501,8 @@ namespace MK7_KMP_Editor_For_PG_
                     public List<TPTKValue> TPTKValue_List { get; set; }
                     public class TPTKValue
                     {
-                        public Vector3D TPTK_Position { get; set; } //0x4
-                        public Vector3D TPTK_Rotation { get; set; } //0x4
+                        public Vector3D TPTK_Position { get; set; }
+                        public Vector3D TPTK_Rotation { get; set; }
                         public ushort Player_Index { get; set; } //0x2
                         public ushort TPTK_UnkBytes { get; set; } //0x2
                     }
@@ -2000,6 +1958,16 @@ namespace MK7_KMP_Editor_For_PG_
                     TPLG = null;
                     HPLG = null;
                 }
+            }
+
+            public KMPFormat()
+            {
+                DMDCHeader = new char[] { ' ', ' ', ' ', ' ' };
+                FileSize = 0;
+                SectionCount = 0;
+                DMDCHeaderSize = 0;
+                VersionNumber = 0;
+                DMDC_SectionOffset = new DMDCSectionOffset();
             }
         }
 
@@ -3706,6 +3674,33 @@ namespace MK7_KMP_Editor_For_PG_
 
         public class KMPWriter : KMPs
         {
+            public static void WriteHeader(BinaryWriter bw, KMPFormat KMPHeader)
+            {
+                bw.Write(KMPHeader.DMDCHeader);
+                bw.Write(KMPHeader.FileSize);
+                bw.Write(KMPHeader.SectionCount);
+                bw.Write(KMPHeader.DMDCHeaderSize);
+                bw.Write(KMPHeader.VersionNumber);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPTK_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPNE_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.HPNE_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPTI_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.HPTI_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPKC_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.HPKC_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.JBOG_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.ITOP_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.AERA_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.EMAC_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPGJ_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPNC_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPSM_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.IGTS_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.SROC_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.TPLG_Offset);
+                bw.Write(KMPHeader.DMDC_SectionOffset.HPLG_Offset);
+            }
+
             public static uint Write_TPTK(BinaryWriter bw, KMPFormat.KMPSection.TPTK_Section TPTK)
             {
                 uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
