@@ -1279,7 +1279,7 @@ namespace MK7_KMP_Editor_For_PG_
                         UserCtrl.UpdateLayout();
                     }
 
-                    railChk.Checkpoint_Left.LV3D_List.Clear();
+                    railChk.Checkpoint_SplitWallMDL.Clear();
                 }
                 if (railChk.SideWall_Left.SideWallList != null)
                 {

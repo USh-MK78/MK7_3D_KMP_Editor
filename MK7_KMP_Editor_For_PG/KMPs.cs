@@ -1652,8 +1652,8 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte TPKC_Checkpoint_Type { get; set; }
                         public byte TPKC_PreviousCheckPoint { get; set; }
                         public byte TPKC_NextCheckPoint { get; set; }
-                        public byte TPKC_UnkBytes1 { get; set; }
-                        public byte TPKC_UnkBytes2 { get; set; }
+                        public byte TPKC_ClipID { get; set; }
+                        public byte TPKC_Section { get; set; }
                         public byte TPKC_UnkBytes3 { get; set; }
                         public byte TPKC_UnkBytes4 { get; set; }
                     }
@@ -1740,8 +1740,8 @@ namespace MK7_KMP_Editor_For_PG_
                     public class ITOP_Route
                     {
                         public ushort ITOP_Route_NumOfPoint { get; set; }
-                        public byte ITOP_RouteSetting1 { get; set; }
-                        public byte ITOP_RouteSetting2 { get; set; }
+                        public byte ITOP_RoopSetting { get; set; }
+                        public byte ITOP_SmoothSetting { get; set; }
                         public List<ITOP_Point> ITOP_Point_List { get; set; }
                         public class ITOP_Point
                         {
@@ -1768,8 +1768,8 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D AERA_Position { get; set; }
                         public Vector3D AERA_Rotation { get; set; }
                         public Vector3D AERA_Scale { get; set; }
-                        public ushort AERA_UnkByte1 { get; set; }
-                        public ushort AERA_UnkByte2 { get; set; }
+                        public ushort AERA_Setting1 { get; set; }
+                        public ushort AERA_Setting2 { get; set; }
                         public byte RouteID { get; set; }
                         public byte EnemyID { get; set; }
                         public ushort AERA_UnkByte4 { get; set; }
@@ -1787,13 +1787,13 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         public byte CameraType { get; set; }
                         public byte NextCameraIndex { get; set; }
-                        public byte EMAC_UnkBytes1 { get; set; }
+                        public byte EMAC_NextVideoIndex { get; set; }
                         public byte EMAC_ITOP_CameraIndex { get; set; }
                         public ushort RouteSpeed { get; set; }
                         public ushort FOVSpeed { get; set; }
                         public ushort ViewpointSpeed { get; set; }
-                        public byte EMAC_UnkBytes2 { get; set; }
-                        public byte EMAC_UnkBytes3 { get; set; }
+                        public byte EMAC_StartFlag { get; set; }
+                        public byte EMAC_VideoFlag { get; set; }
                         public Vector3D EMAC_Position { get; set; }
                         public Vector3D EMAC_Rotation { get; set; }
                         public float FOVAngle_Start { get; set; }
@@ -3283,8 +3283,8 @@ namespace MK7_KMP_Editor_For_PG_
                         TPKC_Checkpoint_Type = br.ReadByte(),
                         TPKC_PreviousCheckPoint = br.ReadByte(),
                         TPKC_NextCheckPoint = br.ReadByte(),
-                        TPKC_UnkBytes1 = br.ReadByte(),
-                        TPKC_UnkBytes2 = br.ReadByte(),
+                        TPKC_ClipID = br.ReadByte(),
+                        TPKC_Section = br.ReadByte(),
                         TPKC_UnkBytes3 = br.ReadByte(),
                         TPKC_UnkBytes4 = br.ReadByte()
                     };
@@ -3404,8 +3404,8 @@ namespace MK7_KMP_Editor_For_PG_
                     KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route ITOP_Routes = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route
                     {
                         ITOP_Route_NumOfPoint = br.ReadUInt16(),
-                        ITOP_RouteSetting1 = br.ReadByte(),
-                        ITOP_RouteSetting2 = br.ReadByte(),
+                        ITOP_RoopSetting = br.ReadByte(),
+                        ITOP_SmoothSetting = br.ReadByte(),
                         ITOP_Point_List = null
                     };
 
@@ -3455,8 +3455,8 @@ namespace MK7_KMP_Editor_For_PG_
                         AERA_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
                         AERA_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
                         AERA_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        AERA_UnkByte1 = br.ReadUInt16(),
-                        AERA_UnkByte2 = br.ReadUInt16(),
+                        AERA_Setting1 = br.ReadUInt16(),
+                        AERA_Setting2 = br.ReadUInt16(),
                         RouteID = br.ReadByte(),
                         EnemyID = br.ReadByte(),
                         AERA_UnkByte4 = br.ReadUInt16()
@@ -3487,13 +3487,13 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         CameraType = br.ReadByte(),
                         NextCameraIndex = br.ReadByte(),
-                        EMAC_UnkBytes1 = br.ReadByte(),
+                        EMAC_NextVideoIndex = br.ReadByte(),
                         EMAC_ITOP_CameraIndex = br.ReadByte(),
                         RouteSpeed = br.ReadUInt16(),
                         FOVSpeed = br.ReadUInt16(),
                         ViewpointSpeed = br.ReadUInt16(),
-                        EMAC_UnkBytes2 = br.ReadByte(),
-                        EMAC_UnkBytes3 = br.ReadByte(),
+                        EMAC_StartFlag = br.ReadByte(),
+                        EMAC_VideoFlag = br.ReadByte(),
                         EMAC_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
                         EMAC_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
                         FOVAngle_Start = br.ReadSingle(),
@@ -3901,8 +3901,8 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_Checkpoint_Type);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_PreviousCheckPoint);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_NextCheckPoint);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes1);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes2);
+                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_ClipID);
+                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_Section);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes3);
                     bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes4);
 
@@ -3988,8 +3988,8 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP.ITOP_NumberOfRoute; ITOP_RoutesCount++)
                 {
                     bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint);
-                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RouteSetting1);
-                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RouteSetting2);
+                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RoopSetting);
+                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_SmoothSetting);
 
                     for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
                     {
@@ -4027,8 +4027,8 @@ namespace MK7_KMP_Editor_For_PG_
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[0]);
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[1]);
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[2]);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte1);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte2);
+                    bw.Write(AERA.AERAValue_List[Count].AERA_Setting1);
+                    bw.Write(AERA.AERAValue_List[Count].AERA_Setting2);
                     bw.Write(AERA.AERAValue_List[Count].RouteID);
                     bw.Write(AERA.AERAValue_List[Count].EnemyID);
                     bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte4);
@@ -4049,13 +4049,13 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     bw.Write(EMAC.EMACValue_List[Count].CameraType);
                     bw.Write(EMAC.EMACValue_List[Count].NextCameraIndex);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_UnkBytes1);
+                    bw.Write(EMAC.EMACValue_List[Count].EMAC_NextVideoIndex);
                     bw.Write(EMAC.EMACValue_List[Count].EMAC_ITOP_CameraIndex);
                     bw.Write(EMAC.EMACValue_List[Count].RouteSpeed);
                     bw.Write(EMAC.EMACValue_List[Count].FOVSpeed);
                     bw.Write(EMAC.EMACValue_List[Count].ViewpointSpeed);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_UnkBytes2);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_UnkBytes3);
+                    bw.Write(EMAC.EMACValue_List[Count].EMAC_StartFlag);
+                    bw.Write(EMAC.EMACValue_List[Count].EMAC_VideoFlag);
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[0]);
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[1]);
                     bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[2]);

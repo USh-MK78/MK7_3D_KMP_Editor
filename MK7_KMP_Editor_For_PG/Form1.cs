@@ -685,8 +685,8 @@ namespace MK7_KMP_Editor_For_PG_
                             TPKC_Checkpoint_Type = 0,
                             TPKC_NextCheckPoint = 0xFF,
                             TPKC_PreviousCheckPoint = 0xFF,
-                            TPKC_UnkBytes1 = 0,
-                            TPKC_UnkBytes2 = 0,
+                            TPKC_ClipID = 255,
+                            TPKC_Section = 0,
                             TPKC_UnkBytes3 = 0,
                             TPKC_UnkBytes4 = 0
                         };
@@ -912,8 +912,8 @@ namespace MK7_KMP_Editor_For_PG_
                         AreaType = 0,
                         AERA_EMACIndex = 0,
                         Priority = 0,
-                        AERA_UnkByte1 = 0,
-                        AERA_UnkByte2 = 0,
+                        AERA_Setting1 = 0,
+                        AERA_Setting2 = 0,
                         RouteID = 0,
                         EnemyID = 0,
                         AERA_UnkByte4 = 0
@@ -953,11 +953,11 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         CameraType = 0,
                         NextCameraIndex = 0,
-                        EMAC_UnkBytes1 = 0,
+                        EMAC_NextVideoIndex = 0,
                         EMAC_ITOP_CameraIndex = 0,
                         SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting(),
-                        EMAC_UnkBytes2 = 0,
-                        EMAC_UnkBytes3 = 0,
+                        EMAC_StartFlag = 0,
+                        EMAC_VideoFlag = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position((float)Pos.X, (float)Pos.Y, (float)Pos.Z),
                         Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation(0, 0, 0),
                         FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting(0, 0),
@@ -2062,8 +2062,8 @@ namespace MK7_KMP_Editor_For_PG_
                     KMPPropertyGridSettings.ITOP_Section.ITOP_Route iTOP_Route = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route
                     {
                         GroupID = KMP_Group_ListBox.Items.Count,
-                        ITOP_RouteSetting1 = 0,
-                        ITOP_RouteSetting2 = 0,
+                        ITOP_Roop = 0,
+                        ITOP_Smooth = 0,
                         ITOP_PointList = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point>()
                     };
 
@@ -2291,8 +2291,8 @@ namespace MK7_KMP_Editor_For_PG_
                             TPKC_Checkpoint_Type = 0,
                             TPKC_NextCheckPoint = 0xFF,
                             TPKC_PreviousCheckPoint = 0xFF,
-                            TPKC_UnkBytes1 = 0,
-                            TPKC_UnkBytes2 = 0,
+                            TPKC_ClipID = 255,
+                            TPKC_Section = 0,
                             TPKC_UnkBytes3 = 0,
                             TPKC_UnkBytes4 = 0
                         };
@@ -2518,8 +2518,8 @@ namespace MK7_KMP_Editor_For_PG_
                         AreaType = 0,
                         AERA_EMACIndex = 0,
                         Priority = 0,
-                        AERA_UnkByte1 = 0,
-                        AERA_UnkByte2 = 0,
+                        AERA_Setting1 = 0,
+                        AERA_Setting2 = 0,
                         RouteID = 0,
                         EnemyID = 0,
                         AERA_UnkByte4 = 0
@@ -2559,11 +2559,11 @@ namespace MK7_KMP_Editor_For_PG_
                         ID = KMP_Path_ListBox.Items.Count,
                         CameraType = 0,
                         NextCameraIndex = 0,
-                        EMAC_UnkBytes1 = 0,
+                        EMAC_NextVideoIndex = 0,
                         EMAC_ITOP_CameraIndex = 0,
                         SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting(),
-                        EMAC_UnkBytes2 = 0,
-                        EMAC_UnkBytes3 = 0,
+                        EMAC_StartFlag = 0,
+                        EMAC_VideoFlag = 0,
                         Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position((float)Pos.X, (float)Pos.Y, (float)Pos.Z),
                         Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation(0, 0, 0),
                         FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting(0, 0),
@@ -4558,6 +4558,96 @@ namespace MK7_KMP_Editor_For_PG_
                 if (tabControl1.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
                 if (tabControl1.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
                 if (tabControl1.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
+            }
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KMPPropertyGridSettings kMPPropertyGridSettings = new KMPPropertyGridSettings
+            {
+                TPTKSection = TPTK_Section,
+                HPNE_TPNESection = HPNE_TPNE_Section,
+                HPTI_TPTISection = HPTI_TPTI_Section,
+                HPKC_TPKCSection = HPKC_TPKC_Section,
+                JBOGSection = JBOG_Section,
+                ITOPSection = ITOP_Section,
+                AERASection = AERA_Section,
+                EMACSection = EMAC_Section,
+                TPGJSection = TPGJ_Section,
+                IGTSSection = IGTS_Section,
+                HPLG_TPLGSection = HPLG_TPLG_Section
+            };
+
+            KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("All", kMPPropertyGridSettings);
+            kMPErrorCheck.Show();
+        }
+
+        private void thisSectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KMPPropertyGridSettings KMPPropertyGridSetting = new KMPPropertyGridSettings
+            {
+                TPTKSection = TPTK_Section,
+                HPNE_TPNESection = HPNE_TPNE_Section,
+                HPTI_TPTISection = HPTI_TPTI_Section,
+                HPKC_TPKCSection = HPKC_TPKC_Section,
+                JBOGSection = JBOG_Section,
+                ITOPSection = ITOP_Section,
+                AERASection = AERA_Section,
+                EMACSection = EMAC_Section,
+                TPGJSection = TPGJ_Section,
+                IGTSSection = IGTS_Section,
+                HPLG_TPLGSection = HPLG_TPLG_Section
+            };
+
+            if (KMPSectionComboBox.Text == "KartPoint")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Kart Point", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "EnemyRoutes")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Enemy Route", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "ItemRoutes")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Item Route", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "CheckPoint")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Checkpoint", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "Obj")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Object", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "Route")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Route", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "Area")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Area", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "Camera")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Camera", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "JugemPoint")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Jugem Point", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
+            }
+            if (KMPSectionComboBox.Text == "GlideRoutes")
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Glide Route", KMPPropertyGridSetting);
+                kMPErrorCheck.Show();
             }
         }
     }

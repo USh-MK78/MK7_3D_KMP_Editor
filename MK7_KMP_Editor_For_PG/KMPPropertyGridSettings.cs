@@ -176,6 +176,26 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort Prev14 { get; set; }
                     public ushort Prev15 { get; set; }
 
+                    public HPNE_PreviewGroups()
+                    {
+                        Prev0 = 65535;
+                        Prev1 = 65535;
+                        Prev2 = 65535;
+                        Prev3 = 65535;
+                        Prev4 = 65535;
+                        Prev5 = 65535;
+                        Prev6 = 65535;
+                        Prev7 = 65535;
+                        Prev8 = 65535;
+                        Prev9 = 65535;
+                        Prev10 = 65535;
+                        Prev11 = 65535;
+                        Prev12 = 65535;
+                        Prev13 = 65535;
+                        Prev14 = 65535;
+                        Prev15 = 65535;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -202,6 +222,26 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort Next13 { get; set; }
                     public ushort Next14 { get; set; }
                     public ushort Next15 { get; set; }
+
+                    public HPNE_NextGroups()
+                    {
+                        Next0 = 65535;
+                        Next1 = 65535; 
+                        Next2 = 65535;
+                        Next3 = 65535; 
+                        Next4 = 65535;
+                        Next5 = 65535;
+                        Next6 = 65535;
+                        Next7 = 65535;
+                        Next8 = 65535;
+                        Next9 = 65535;
+                        Next10 = 65535;
+                        Next11 = 65535;
+                        Next12 = 65535;
+                        Next13 = 65535;
+                        Next14 = 65535;
+                        Next15 = 65535;
+                    }
 
                     public override string ToString()
                     {
@@ -497,6 +537,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort Prev4 { get; set; }
                     public ushort Prev5 { get; set; }
 
+                    public HPTI_PreviewGroups()
+                    {
+                        Prev0 = 65535;
+                        Prev1 = 65535;
+                        Prev2 = 65535;
+                        Prev3 = 65535;
+                        Prev4 = 65535;
+                        Prev5 = 65535;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -513,6 +563,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort Next3 { get; set; }
                     public ushort Next4 { get; set; }
                     public ushort Next5 { get; set; }
+
+                    public HPTI_NextGroups()
+                    {
+                        Next0 = 65535;
+                        Next1 = 65535;
+                        Next2 = 65535;
+                        Next3 = 65535;
+                        Next4 = 65535;
+                        Next5 = 65535;
+                    }
 
                     public override string ToString()
                     {
@@ -659,6 +719,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte Prev4 { get; set; }
                     public byte Prev5 { get; set; }
 
+                    public HPKC_PreviewGroups()
+                    {
+                        Prev0 = 255;
+                        Prev1 = 255;
+                        Prev2 = 255;
+                        Prev3 = 255;
+                        Prev4 = 255;
+                        Prev5 = 255;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -675,6 +745,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte Next3 { get; set; }
                     public byte Next4 { get; set; }
                     public byte Next5 { get; set; }
+
+                    public HPKC_NextGroups()
+                    {
+                        Next0 = 255;
+                        Next1 = 255;
+                        Next2 = 255;
+                        Next3 = 255;
+                        Next4 = 255;
+                        Next5 = 255;
+                    }
 
                     public override string ToString()
                     {
@@ -760,8 +840,8 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte TPKC_Checkpoint_Type { get; set; }
                     public byte TPKC_PreviousCheckPoint { get; set; }
                     public byte TPKC_NextCheckPoint { get; set; }
-                    public byte TPKC_UnkBytes1 { get; set; }
-                    public byte TPKC_UnkBytes2 { get; set; }
+                    public byte TPKC_ClipID { get; set; }
+                    public byte TPKC_Section { get; set; }
                     public byte TPKC_UnkBytes3 { get; set; }
                     public byte TPKC_UnkBytes4 { get; set; }
 
@@ -1010,8 +1090,8 @@ namespace MK7_KMP_Editor_For_PG_
                 [ReadOnly(true)]
                 public int GroupID { get; set; }
 
-                public byte ITOP_RouteSetting1 { get; set; }
-                public byte ITOP_RouteSetting2 { get; set; }
+                public byte ITOP_Roop { get; set; }
+                public byte ITOP_Smooth { get; set; }
 
                 public List<ITOP_Point> ITOP_Point_List = new List<ITOP_Point>();
                 [Browsable(false)]
@@ -1291,8 +1371,8 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                public ushort AERA_UnkByte1 { get; set; }
-                public ushort AERA_UnkByte2 { get; set; }
+                public ushort AERA_Setting1 { get; set; }
+                public ushort AERA_Setting2 { get; set; }
                 public byte RouteID { get; set; }
                 public byte EnemyID { get; set; }
                 public ushort AERA_UnkByte4 { get; set; }
@@ -1317,7 +1397,7 @@ namespace MK7_KMP_Editor_For_PG_
 
                 public byte CameraType { get; set; }
                 public byte NextCameraIndex { get; set; }
-                public byte EMAC_UnkBytes1 { get; set; }
+                public byte EMAC_NextVideoIndex { get; set; }
                 public byte EMAC_ITOP_CameraIndex { get; set; }
 
                 [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
@@ -1341,8 +1421,8 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                public byte EMAC_UnkBytes2 { get; set; }
-                public byte EMAC_UnkBytes3 { get; set; }
+                public byte EMAC_StartFlag { get; set; }
+                public byte EMAC_VideoFlag { get; set; }
 
                 [TypeConverter(typeof(ExpandableObjectConverter))]
                 public Position Positions { get; set; } = new Position();
@@ -1745,6 +1825,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte Prev4 { get; set; }
                     public byte Prev5 { get; set; }
 
+                    public HPLG_PreviewGroups()
+                    {
+                        Prev0 = 255;
+                        Prev1 = 255;
+                        Prev2 = 255;
+                        Prev3 = 255;
+                        Prev4 = 255;
+                        Prev5 = 255;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -1761,6 +1851,16 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte Next3 { get; set; }
                     public byte Next4 { get; set; }
                     public byte Next5 { get; set; }
+
+                    public HPLG_NextGroups()
+                    {
+                        Next0 = 255;
+                        Next1 = 255;
+                        Next2 = 255;
+                        Next3 = 255;
+                        Next4 = 255;
+                        Next5 = 255;
+                    }
 
                     public override string ToString()
                     {
@@ -2166,8 +2266,8 @@ namespace MK7_KMP_Editor_For_PG_
                         TPKC_Checkpoint_Type = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_Checkpoint_Type,
                         TPKC_PreviousCheckPoint = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_PreviousCheckPoint,
                         TPKC_NextCheckPoint = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_NextCheckPoint,
-                        TPKC_UnkBytes1 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes1,
-                        TPKC_UnkBytes2 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes2,
+                        TPKC_ClipID = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_ClipID,
+                        TPKC_Section = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_Section,
                         TPKC_UnkBytes3 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes3,
                         TPKC_UnkBytes4 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes4
                     };
@@ -2247,8 +2347,8 @@ namespace MK7_KMP_Editor_For_PG_
                 KMPPropertyGridSettings.ITOP_Section.ITOP_Route ITOPRoute = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route
                 {
                     GroupID = ITOP_RoutesCount,
-                    ITOP_RouteSetting1 = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RouteSetting1,
-                    ITOP_RouteSetting2 = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RouteSetting2,
+                    ITOP_Roop = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RoopSetting,
+                    ITOP_Smooth = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_SmoothSetting,
                     ITOP_PointList = null
                 };
 
@@ -2315,8 +2415,8 @@ namespace MK7_KMP_Editor_For_PG_
                         Y = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Y,
                         Z = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Z
                     },
-                    AERA_UnkByte1 = AERA.AERAValue_List[AERACount].AERA_UnkByte1,
-                    AERA_UnkByte2 = AERA.AERAValue_List[AERACount].AERA_UnkByte2,
+                    AERA_Setting1 = AERA.AERAValue_List[AERACount].AERA_Setting1,
+                    AERA_Setting2 = AERA.AERAValue_List[AERACount].AERA_Setting2,
                     RouteID = AERA.AERAValue_List[AERACount].RouteID,
                     EnemyID = AERA.AERAValue_List[AERACount].EnemyID,
                     AERA_UnkByte4 = AERA.AERAValue_List[AERACount].AERA_UnkByte4
@@ -2339,7 +2439,7 @@ namespace MK7_KMP_Editor_For_PG_
                     ID = EMACCount,
                     CameraType = EMAC.EMACValue_List[EMACCount].CameraType,
                     NextCameraIndex = EMAC.EMACValue_List[EMACCount].NextCameraIndex,
-                    EMAC_UnkBytes1 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes1,
+                    EMAC_NextVideoIndex = EMAC.EMACValue_List[EMACCount].EMAC_NextVideoIndex,
                     EMAC_ITOP_CameraIndex = EMAC.EMACValue_List[EMACCount].EMAC_ITOP_CameraIndex,
                     SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
                     {
@@ -2347,8 +2447,8 @@ namespace MK7_KMP_Editor_For_PG_
                         FOVSpeed = EMAC.EMACValue_List[EMACCount].FOVSpeed,
                         ViewpointSpeed = EMAC.EMACValue_List[EMACCount].ViewpointSpeed
                     },
-                    EMAC_UnkBytes2 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes2,
-                    EMAC_UnkBytes3 = EMAC.EMACValue_List[EMACCount].EMAC_UnkBytes3,
+                    EMAC_StartFlag = EMAC.EMACValue_List[EMACCount].EMAC_StartFlag,
+                    EMAC_VideoFlag = EMAC.EMACValue_List[EMACCount].EMAC_VideoFlag,
                     Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                     {
                         X = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.X,
@@ -2855,8 +2955,8 @@ namespace MK7_KMP_Editor_For_PG_
                                 TPKC_Checkpoint_Type = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Checkpoint_Type),
                                 TPKC_PreviousCheckPoint = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_PreviousCheckPoint),
                                 TPKC_NextCheckPoint = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_NextCheckPoint),
-                                TPKC_UnkBytes1 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes1),
-                                TPKC_UnkBytes2 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes2),
+                                TPKC_ClipID = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_ClipID),
+                                TPKC_Section = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Section),
                                 TPKC_UnkBytes3 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes3),
                                 TPKC_UnkBytes4 = Convert.ToByte(HPKC_TPKC_Section.HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes4)
                             };
@@ -2977,8 +3077,8 @@ namespace MK7_KMP_Editor_For_PG_
                 KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route ITOP_Routes = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route
                 {
                     ITOP_Route_NumOfPoint = Convert.ToUInt16(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_PointList.Count),
-                    ITOP_RouteSetting1 = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_RouteSetting1),
-                    ITOP_RouteSetting2 = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_RouteSetting2),
+                    ITOP_RoopSetting = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_Roop),
+                    ITOP_SmoothSetting = Convert.ToByte(ITOP_Section.ITOP_RouteList[ITOPRouteCount].ITOP_Smooth),
                     ITOP_Point_List = null
                 };
 
@@ -3033,8 +3133,8 @@ namespace MK7_KMP_Editor_For_PG_
                     AERA_Position = AERA_Section.AERAValueList[Count].Positions.GetVector3D(),
                     AERA_Rotation = new Vector3D(RX, RY, RZ),
                     AERA_Scale = AERA_Section.AERAValueList[Count].Scales.GetVector3D(),
-                    AERA_UnkByte1 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte1),
-                    AERA_UnkByte2 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte2),
+                    AERA_Setting1 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_Setting1),
+                    AERA_Setting2 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_Setting2),
                     RouteID = Convert.ToByte(AERA_Section.AERAValueList[Count].RouteID),
                     EnemyID = Convert.ToByte(AERA_Section.AERAValueList[Count].EnemyID),
                     AERA_UnkByte4 = Convert.ToUInt16(AERA_Section.AERAValueList[Count].AERA_UnkByte4)
@@ -3070,13 +3170,13 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     CameraType = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].CameraType),
                     NextCameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].NextCameraIndex),
-                    EMAC_UnkBytes1 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes1),
+                    EMAC_NextVideoIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_NextVideoIndex),
                     EMAC_ITOP_CameraIndex = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_ITOP_CameraIndex),
                     RouteSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.RouteSpeed),
                     FOVSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.FOVSpeed),
                     ViewpointSpeed = Convert.ToUInt16(EMAC_Section.EMACValueList[EMACCount].SpeedSettings.ViewpointSpeed),
-                    EMAC_UnkBytes2 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes2),
-                    EMAC_UnkBytes3 = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_UnkBytes3),
+                    EMAC_StartFlag = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_StartFlag),
+                    EMAC_VideoFlag = Convert.ToByte(EMAC_Section.EMACValueList[EMACCount].EMAC_VideoFlag),
                     EMAC_Position = EMAC_Section.EMACValueList[EMACCount].Positions.GetVector3D(),
                     EMAC_Rotation = new Vector3D(RX, RY, RZ),
                     FOVAngle_Start = Convert.ToSingle(EMAC_Section.EMACValueList[EMACCount].FOVAngleSettings.FOVAngle_Start),
@@ -3565,8 +3665,8 @@ namespace MK7_KMP_Editor_For_PG_
                         TPKC_Checkpoint_Type = Checkpoint_Point.value.Checkpoint_Type,
                         TPKC_PreviousCheckPoint = Checkpoint_Point.value.PreviousCheckPoint,
                         TPKC_NextCheckPoint = Checkpoint_Point.value.NextCheckPoint,
-                        TPKC_UnkBytes1 = Checkpoint_Point.value.UnkBytes1,
-                        TPKC_UnkBytes2 = Checkpoint_Point.value.UnkBytes2,
+                        TPKC_ClipID = Checkpoint_Point.value.UnkBytes1,
+                        TPKC_Section = Checkpoint_Point.value.UnkBytes2,
                         TPKC_UnkBytes3 = Checkpoint_Point.value.UnkBytes3,
                         TPKC_UnkBytes4 = Checkpoint_Point.value.UnkBytes4
                     };
@@ -3647,8 +3747,8 @@ namespace MK7_KMP_Editor_For_PG_
                 KMPPropertyGridSettings.ITOP_Section.ITOP_Route ITOPRoute = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route
                 {
                     GroupID = Route_Group.index,
-                    ITOP_RouteSetting1 = Route_Group.value.RouteSetting1,
-                    ITOP_RouteSetting2 = Route_Group.value.RouteSetting2,
+                    ITOP_Roop = Route_Group.value.RouteSetting1,
+                    ITOP_Smooth = Route_Group.value.RouteSetting2,
                     ITOP_PointList = null
                 };
 
@@ -3714,8 +3814,8 @@ namespace MK7_KMP_Editor_For_PG_
                         Y = Area.value.Scale.Y,
                         Z = Area.value.Scale.Z
                     },
-                    AERA_UnkByte1 = Area.value.UnkByte1,
-                    AERA_UnkByte2 = Area.value.UnkByte2,
+                    AERA_Setting1 = Area.value.UnkByte1,
+                    AERA_Setting2 = Area.value.UnkByte2,
                     RouteID = Area.value.RouteID,
                     EnemyID = Area.value.EnemyID,
                     AERA_UnkByte4 = Area.value.UnkByte4
@@ -3738,7 +3838,7 @@ namespace MK7_KMP_Editor_For_PG_
                     ID = Camera.index,
                     CameraType = Camera.value.CameraType,
                     NextCameraIndex = Camera.value.NextCameraIndex,
-                    EMAC_UnkBytes1 = Camera.value.UnkBytes1,
+                    EMAC_NextVideoIndex = Camera.value.UnkBytes1,
                     EMAC_ITOP_CameraIndex = Camera.value.Route_CameraIndex,
                     SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
                     {
@@ -3746,8 +3846,8 @@ namespace MK7_KMP_Editor_For_PG_
                         FOVSpeed = Camera.value.SpeedSetting.FOVSpeed,
                         ViewpointSpeed = Camera.value.SpeedSetting.ViewpointSpeed
                     },
-                    EMAC_UnkBytes2 = Camera.value.UnkBytes2,
-                    EMAC_UnkBytes3 = Camera.value.UnkBytes3,
+                    EMAC_StartFlag = Camera.value.UnkBytes2,
+                    EMAC_VideoFlag = Camera.value.UnkBytes3,
                     Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
                     {
                         X = Camera.value.Position.X,

@@ -69,6 +69,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.KMPSectionComboBox = new System.Windows.Forms.ComboBox();
             this.KMP_Viewport_SplitContainer = new System.Windows.Forms.SplitContainer();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.userControl11 = new MK7_KMP_Editor_For_PG_.UserControl1();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -103,8 +105,9 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.userControl11 = new MK7_KMP_Editor_For_PG_.UserControl1();
+            this.errorCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thisSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -146,7 +149,8 @@
             this.oBJToolStripMenuItem,
             this.cameraModeToolStripMenuItem,
             this.oBJFlowToolStripMenuItem,
-            this.xmlToolStripMenuItem});
+            this.xmlToolStripMenuItem,
+            this.errorCheckToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1065, 24);
@@ -544,6 +548,16 @@
             this.KMP_Viewport_SplitContainer.SplitterDistance = 604;
             this.KMP_Viewport_SplitContainer.TabIndex = 0;
             // 
+            // elementHost1
+            // 
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(0, 0);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(604, 591);
+            this.elementHost1.TabIndex = 6;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.userControl11;
+            // 
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabPage4);
@@ -920,15 +934,28 @@
             this.Label_SectionName.TabIndex = 0;
             this.Label_SectionName.Text = "SectionName :";
             // 
-            // elementHost1
+            // errorCheckToolStripMenuItem
             // 
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(0, 0);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(604, 591);
-            this.elementHost1.TabIndex = 6;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.userControl11;
+            this.errorCheckToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem,
+            this.thisSectionToolStripMenuItem});
+            this.errorCheckToolStripMenuItem.Name = "errorCheckToolStripMenuItem";
+            this.errorCheckToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.errorCheckToolStripMenuItem.Text = "Error Check";
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allToolStripMenuItem.Text = "All";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // thisSectionToolStripMenuItem
+            // 
+            this.thisSectionToolStripMenuItem.Name = "thisSectionToolStripMenuItem";
+            this.thisSectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thisSectionToolStripMenuItem.Text = "This section";
+            this.thisSectionToolStripMenuItem.Click += new System.EventHandler(this.thisSectionToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1063,6 +1090,9 @@
         private System.Windows.Forms.RadioButton Rad_AxisAll;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox CH_KMPGroupPoint;
+        private System.Windows.Forms.ToolStripMenuItem errorCheckToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thisSectionToolStripMenuItem;
     }
 }
 

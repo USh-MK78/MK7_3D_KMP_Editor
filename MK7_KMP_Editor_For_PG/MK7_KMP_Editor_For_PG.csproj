@@ -76,6 +76,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="HTK_3DES.cs" />
+    <Compile Include="KMPErrorCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KMPErrorCheck.Designer.cs">
+      <DependentUpon>KMPErrorCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="KMPPropertyGridSettings.cs" />
     <Compile Include="KMPs.cs" />
     <Compile Include="KMPXMLImportExport.cs" />
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KMPErrorCheck.resx">
+      <DependentUpon>KMPErrorCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModelVisibilityForm.resx">
       <DependentUpon>ModelVisibilityForm.cs</DependentUpon>

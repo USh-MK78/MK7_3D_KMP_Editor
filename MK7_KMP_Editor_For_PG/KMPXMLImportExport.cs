@@ -207,8 +207,8 @@ namespace MK7_KMP_Editor_For_PG_
                         Checkpoint_Type = CheckpointPoint.TPKC_Checkpoint_Type,
                         NextCheckPoint = CheckpointPoint.TPKC_NextCheckPoint,
                         PreviousCheckPoint = CheckpointPoint.TPKC_PreviousCheckPoint,
-                        UnkBytes1 = CheckpointPoint.TPKC_UnkBytes1,
-                        UnkBytes2 = CheckpointPoint.TPKC_UnkBytes2,
+                        UnkBytes1 = CheckpointPoint.TPKC_ClipID,
+                        UnkBytes2 = CheckpointPoint.TPKC_Section,
                         UnkBytes3 = CheckpointPoint.TPKC_UnkBytes3,
                         UnkBytes4 = CheckpointPoint.TPKC_UnkBytes4
                     };
@@ -277,8 +277,8 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.Route.Route_Group route_Group = new TestXml.KMPXml.Route.Route_Group
                 {
-                    RouteSetting1 = RouteGroups.ITOP_RouteSetting1,
-                    RouteSetting2 = RouteGroups.ITOP_RouteSetting2,
+                    RouteSetting1 = RouteGroups.ITOP_Roop,
+                    RouteSetting2 = RouteGroups.ITOP_Smooth,
                     Points = null
                 };
 
@@ -336,8 +336,8 @@ namespace MK7_KMP_Editor_For_PG_
                     AreaMode = AreaValues.AreaModeSettings.AreaModeValue,
                     CameraIndex = AreaValues.AERA_EMACIndex,
                     Priority = AreaValues.Priority,
-                    UnkByte1 = AreaValues.AERA_UnkByte1,
-                    UnkByte2 = AreaValues.AERA_UnkByte2,
+                    UnkByte1 = AreaValues.AERA_Setting1,
+                    UnkByte2 = AreaValues.AERA_Setting2,
                     RouteID = AreaValues.RouteID,
                     EnemyID = AreaValues.EnemyID,
                     UnkByte4 = AreaValues.AERA_UnkByte4
@@ -391,10 +391,10 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     CameraType = CameraValues.CameraType,
                     NextCameraIndex = CameraValues.NextCameraIndex,
-                    UnkBytes1 = CameraValues.EMAC_UnkBytes1,
+                    UnkBytes1 = CameraValues.EMAC_NextVideoIndex,
                     Route_CameraIndex = CameraValues.EMAC_ITOP_CameraIndex,
-                    UnkBytes2 = CameraValues.EMAC_UnkBytes2,
-                    UnkBytes3 = CameraValues.EMAC_UnkBytes3,
+                    UnkBytes2 = CameraValues.EMAC_StartFlag,
+                    UnkBytes3 = CameraValues.EMAC_VideoFlag,
                     CameraActiveTime = CameraValues.Camera_Active_Time
                 };
 
@@ -795,8 +795,8 @@ namespace MK7_KMP_Editor_For_PG_
                             Checkpoint_Type = CheckpointPoint.TPKC_Checkpoint_Type,
                             NextCheckPoint = CheckpointPoint.TPKC_NextCheckPoint,
                             PreviousCheckPoint = CheckpointPoint.TPKC_PreviousCheckPoint,
-                            UnkBytes1 = CheckpointPoint.TPKC_UnkBytes1,
-                            UnkBytes2 = CheckpointPoint.TPKC_UnkBytes2,
+                            UnkBytes1 = CheckpointPoint.TPKC_ClipID,
+                            UnkBytes2 = CheckpointPoint.TPKC_Section,
                             UnkBytes3 = CheckpointPoint.TPKC_UnkBytes3,
                             UnkBytes4 = CheckpointPoint.TPKC_UnkBytes4
                         };
@@ -879,8 +879,8 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.Route.Route_Group route_Group = new TestXml.KMPXml.Route.Route_Group
                     {
-                        RouteSetting1 = RouteGroups.ITOP_RouteSetting1,
-                        RouteSetting2 = RouteGroups.ITOP_RouteSetting2,
+                        RouteSetting1 = RouteGroups.ITOP_Roop,
+                        RouteSetting2 = RouteGroups.ITOP_Smooth,
                         Points = null
                     };
 
@@ -945,8 +945,8 @@ namespace MK7_KMP_Editor_For_PG_
                         AreaMode = AreaValues.AreaModeSettings.AreaModeValue,
                         CameraIndex = AreaValues.AERA_EMACIndex,
                         Priority = AreaValues.Priority,
-                        UnkByte1 = AreaValues.AERA_UnkByte1,
-                        UnkByte2 = AreaValues.AERA_UnkByte2,
+                        UnkByte1 = AreaValues.AERA_Setting1,
+                        UnkByte2 = AreaValues.AERA_Setting2,
                         RouteID = AreaValues.RouteID,
                         EnemyID = AreaValues.EnemyID,
                         UnkByte4 = AreaValues.AERA_UnkByte4
@@ -1007,10 +1007,10 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         CameraType = CameraValues.CameraType,
                         NextCameraIndex = CameraValues.NextCameraIndex,
-                        UnkBytes1 = CameraValues.EMAC_UnkBytes1,
+                        UnkBytes1 = CameraValues.EMAC_NextVideoIndex,
                         Route_CameraIndex = CameraValues.EMAC_ITOP_CameraIndex,
-                        UnkBytes2 = CameraValues.EMAC_UnkBytes2,
-                        UnkBytes3 = CameraValues.EMAC_UnkBytes3,
+                        UnkBytes2 = CameraValues.EMAC_StartFlag,
+                        UnkBytes3 = CameraValues.EMAC_VideoFlag,
                         CameraActiveTime = CameraValues.Camera_Active_Time
                     };
 
