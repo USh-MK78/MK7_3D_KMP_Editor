@@ -29,6 +29,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelVisibilityForm));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -60,6 +61,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.treeView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(304, 295);
             this.MinimumSize = new System.Drawing.Size(304, 295);
             this.Name = "ModelVisibilityForm";

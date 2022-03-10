@@ -50,7 +50,6 @@ namespace MK7_KMP_Editor_For_PG_
         public KMPPropertyGridSettings.IGTS_Section IGTS_Section { get; set; }
         public KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section { get; set; }
 
-
         public Form1()
         {
             InitializeComponent();
@@ -516,28 +515,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(tPTKValue);
 
-                    #region Add Model(StartPosition)
-                    HTK_3DES.TSRSystem.Transform_Value StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTKValue.Position_Value.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPTKValue.Rotate_Value.GetVector3D())
-                    };
+                        #region Add Model(StartPosition)
+                        HTK_3DES.TSRSystem.Transform_Value StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTKValue.Position_Value.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPTKValue.Rotate_Value.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
+                        ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + tPTKValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + tPTKValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_StartPositionOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(StartPosition_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_StartPositionOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(StartPosition_transform_Value, transformSetting);
 
-                    KMPViewportObject.StartPosition_MV3DList.Add(dv3D_StartPositionOBJ);
+                        KMPViewportObject.StartPosition_MV3DList.Add(dv3D_StartPositionOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_StartPositionOBJ);
+                        render.MainViewPort.Children.Add(dv3D_StartPositionOBJ);
 
-                    HTK_3DES.TSRSystem.GC_Dispose(dv3D_StartPositionOBJ);
-                    #endregion
+                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_StartPositionOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "EnemyRoutes")
                 {
@@ -575,36 +579,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPNEValue);
 
-                        #region Add Model(EnemyRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value EnemyPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPNEValue.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(EnemyRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value EnemyPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPNEValue.Control * 100,
-                                Y = tPNEValue.Control * 100,
-                                Z = tPNEValue.Control * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPNEValue.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPNEValue.Control * 100,
+                                    Y = tPNEValue.Control * 100,
+                                    Z = tPNEValue.Control * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_EnemyPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0xFF, 0x9B, 0x34), Color.FromArgb(0x80, 0xFF, 0x9B, 0x34));
+                            ModelVisual3D dv3D_EnemyPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0xFF, 0x9B, 0x34), Color.FromArgb(0x80, 0xFF, 0x9B, 0x34));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + tPNEValue.ID + " " + tPNEValue.Group_ID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + tPNEValue.ID + " " + tPNEValue.Group_ID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_EnemyPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(EnemyPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_EnemyPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(EnemyPoint_transform_Value, transformSetting);
 
-                        //Add Rail => MV3DList
-                        KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_EnemyPathOBJ);
+                            //Add Rail => MV3DList
+                            KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_EnemyPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Orange);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Orange);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -635,36 +644,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPTIValue);
 
-                        #region Add Model(ItemRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value ItemPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTIValue.TPTI_Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(ItemRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value ItemPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPTIValue.TPTI_PointSize * 100,
-                                Y = tPTIValue.TPTI_PointSize * 100,
-                                Z = tPTIValue.TPTI_PointSize * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTIValue.TPTI_Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPTIValue.TPTI_PointSize * 100,
+                                    Y = tPTIValue.TPTI_PointSize * 100,
+                                    Z = tPTIValue.TPTI_PointSize * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_ItemPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x00, 0xD1, 0x41), Color.FromArgb(0x80, 0x00, 0xD1, 0x41));
+                            ModelVisual3D dv3D_ItemPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x00, 0xD1, 0x41), Color.FromArgb(0x80, 0x00, 0xD1, 0x41));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_ItemPathOBJ, "ItemRoute " + tPTIValue.ID + " " + tPTIValue.Group_ID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_ItemPathOBJ, "ItemRoute " + tPTIValue.ID + " " + tPTIValue.Group_ID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_ItemPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(ItemPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_ItemPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(ItemPoint_transform_Value, transformSetting);
 
-                        //Add Rail => MV3DList
-                        KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_ItemPathOBJ);
+                            //Add Rail => MV3DList
+                            KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_ItemPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Green);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Green);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -695,104 +709,109 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPKCValue);
 
-                        #region Create
-                        var P2D_Left = tPKCValue.Position_2D_Left;
-                        Vector2 P2DLeftToVector2 = new Vector2(Convert.ToSingle(P2D_Left.X), Convert.ToSingle(P2D_Left.Y));
-                        Point3D P3DLeft = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DLeftToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
-                        P3DLeft.Y = Convert.ToDouble(textBox1.Text);
-
-                        #region Transform(Left)
-                        HTK_3DES.TSRSystem.Transform_Value P2DLeft_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DLeft.ToVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            #region Create
+                            var P2D_Left = tPKCValue.Position_2D_Left;
+                            Vector2 P2DLeftToVector2 = new Vector2(Convert.ToSingle(P2D_Left.X), Convert.ToSingle(P2D_Left.Y));
+                            Point3D P3DLeft = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DLeftToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
+                            P3DLeft.Y = Convert.ToDouble(textBox1.Text);
 
-                        ModelVisual3D dv3D_CheckpointLeftOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46));
+                            #region Transform(Left)
+                            HTK_3DES.TSRSystem.Transform_Value P2DLeft_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DLeft.ToVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointLeftOBJ, "Checkpoint_Left " + tPKCValue.ID + " " + tPKCValue.Group_ID);
+                            ModelVisual3D dv3D_CheckpointLeftOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46));
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DLeft = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointLeftOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(P2DLeft_transform_Value, transformSetting_P2DLeft);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointLeftOBJ, "Checkpoint_Left " + tPKCValue.ID + " " + tPKCValue.Group_ID);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DLeft = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointLeftOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(P2DLeft_transform_Value, transformSetting_P2DLeft);
 
-                        render.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
 
-                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointLeftOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
 
-                        var P2D_Right = tPKCValue.Position_2D_Right;
-                        Vector2 P2DRightToVector2 = new Vector2(Convert.ToSingle(P2D_Right.X), Convert.ToSingle(P2D_Right.Y));
-                        Point3D P3DRight = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DRightToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
-                        P3DRight.Y = Convert.ToDouble(textBox1.Text);
+                            HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointLeftOBJ);
+                            #endregion
 
-                        #region Transform(Right)
-                        HTK_3DES.TSRSystem.Transform_Value P2DRight_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
-                        {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DRight.ToVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            var P2D_Right = tPKCValue.Position_2D_Right;
+                            Vector2 P2DRightToVector2 = new Vector2(Convert.ToSingle(P2D_Right.X), Convert.ToSingle(P2D_Right.Y));
+                            Point3D P3DRight = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DRightToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
+                            P3DRight.Y = Convert.ToDouble(textBox1.Text);
 
-                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
+                            #region Transform(Right)
+                            HTK_3DES.TSRSystem.Transform_Value P2DRight_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DRight.ToVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + tPKCValue.ID + " " + tPKCValue.Group_ID);
+                            ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DRight = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointRightOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(P2DRight_transform_Value, transformSetting_P2DRight);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + tPKCValue.ID + " " + tPKCValue.Group_ID);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DRight = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointRightOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(P2DRight_transform_Value, transformSetting_P2DRight);
 
-                        render.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
 
-                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointRightOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
 
-                        List<Point3D> point3Ds = new List<Point3D>();
-                        point3Ds.Add(P3DLeft);
-                        point3Ds.Add(P3DRight);
+                            HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointRightOBJ);
+                            #endregion
 
-                        LinesVisual3D linesVisual3D = new LinesVisual3D
-                        {
-                            Points = new Point3DCollection(point3Ds),
-                            Thickness = 1,
-                            Color = Colors.Black
-                        };
+                            List<Point3D> point3Ds = new List<Point3D>();
+                            point3Ds.Add(P3DLeft);
+                            point3Ds.Add(P3DRight);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
-                        render.MainViewPort.Children.Add(linesVisual3D);
+                            LinesVisual3D linesVisual3D = new LinesVisual3D
+                            {
+                                Points = new Point3DCollection(point3Ds),
+                                Thickness = 1,
+                                Color = Colors.Black
+                            };
 
-                        #region SplitWall
-                        Point3DCollection point3Ds1 = new Point3DCollection();
-                        point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
-                        point3Ds1.Add(point3Ds[1]);
-                        point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
-                        point3Ds1.Add(point3Ds[0]);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
+                            render.MainViewPort.Children.Add(linesVisual3D);
 
-                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
-                        HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
-                        render.MainViewPort.Children.Add(SplitWall);
-                        #endregion
-                        #endregion
+                            #region SplitWall
+                            Point3DCollection point3Ds1 = new Point3DCollection();
+                            point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                            point3Ds1.Add(point3Ds[1]);
+                            point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                            point3Ds1.Add(point3Ds[0]);
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
-                        List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
+                            ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                            HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
+                            render.MainViewPort.Children.Add(SplitWall);
+                            #endregion
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
+                            List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
-                        List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+                            HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
 
-                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
+                            List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+
+                            HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -826,28 +845,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(jBOGValue);
 
-                    #region Add Model(OBJ)
-                    HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(jBOGValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(jBOGValue.Scales.GetVector3D(), 2),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(OBJ)
+                        HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(jBOGValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(jBOGValue.Scales.GetVector3D(), 2),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
+                        };
 
-                    KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                    string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
-                    ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
+                        KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
+                        string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
+                        ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + jBOGValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + jBOGValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
 
-                    KMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
+                        KMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_OBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_OBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Route")
                 {
@@ -866,31 +890,36 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(iTOP_Point);
 
-                        #region Add Model(Routes)
-                        HTK_3DES.TSRSystem.Transform_Value JugemPath_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(iTOP_Point.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            #region Add Model(Routes)
+                            HTK_3DES.TSRSystem.Transform_Value JugemPath_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(iTOP_Point.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_RouteOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x3F, 0x45, 0xE2), Color.FromArgb(0x80, 0x3F, 0x45, 0xE2));
+                            ModelVisual3D dv3D_RouteOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x3F, 0x45, 0xE2), Color.FromArgb(0x80, 0x3F, 0x45, 0xE2));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RouteOBJ, "Routes " + iTOP_Point.ID + " " + iTOP_Point.GroupID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RouteOBJ, "Routes " + iTOP_Point.ID + " " + iTOP_Point.GroupID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RouteOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(JugemPath_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RouteOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(JugemPath_transform_Value, transformSetting);
 
-                        //AddMDL
-                        KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_RouteOBJ);
+                            //AddMDL
+                            KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_RouteOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_RouteOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_RouteOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Blue);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Blue);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -923,28 +952,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(aERAValue);
 
-                    #region Add Model(Area)
-                    HTK_3DES.TSRSystem.Transform_Value Area_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(aERAValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(aERAValue.Scales.GetVector3D(), 1000),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(aERAValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(Area)
+                        HTK_3DES.TSRSystem.Transform_Value Area_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(aERAValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(aERAValue.Scales.GetVector3D(), 1000),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(aERAValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_AreaOBJ = null;
-                    if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
+                        ModelVisual3D dv3D_AreaOBJ = null;
+                        if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_AreaOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(Area_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_AreaOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(Area_transform_Value, transformSetting);
 
-                    //Area_MV3D_List.Add(dv3D_AreaOBJ);
-                    KMPViewportObject.Area_MV3DList.Add(dv3D_AreaOBJ);
+                        //Area_MV3D_List.Add(dv3D_AreaOBJ);
+                        KMPViewportObject.Area_MV3DList.Add(dv3D_AreaOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_AreaOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_AreaOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Camera")
                 {
@@ -970,27 +1004,32 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(eMACValue);
 
-                    #region Add Model(Camera)
-                    HTK_3DES.TSRSystem.Transform_Value Camera_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(eMACValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(eMACValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(Camera)
+                        HTK_3DES.TSRSystem.Transform_Value Camera_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(eMACValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(eMACValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
+                        ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + eMACValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + eMACValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CameraOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(Camera_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CameraOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(Camera_transform_Value, transformSetting);
 
-                    //Camera_MV3D_List.Add(dv3D_CameraOBJ);
-                    KMPViewportObject.Camera_MV3DList.Add(dv3D_CameraOBJ);
+                        //Camera_MV3D_List.Add(dv3D_CameraOBJ);
+                        KMPViewportObject.Camera_MV3DList.Add(dv3D_CameraOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_CameraOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_CameraOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "JugemPoint")
                 {
@@ -1007,27 +1046,32 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(tPGJValue);
 
-                    #region Add Model(RespawnPoint)
-                    HTK_3DES.TSRSystem.Transform_Value RespawnPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPGJValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPGJValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(RespawnPoint)
+                        HTK_3DES.TSRSystem.Transform_Value RespawnPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPGJValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPGJValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_RespawnPointOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0x80, 0x00, 0xFF, 0x73), Color.FromArgb(0x80, 0x00, 0xFF, 0x73));
+                        ModelVisual3D dv3D_RespawnPointOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0x80, 0x00, 0xFF, 0x73), Color.FromArgb(0x80, 0x00, 0xFF, 0x73));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + tPGJValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + tPGJValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RespawnPointOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(RespawnPoint_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RespawnPointOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(RespawnPoint_transform_Value, transformSetting);
 
-                    //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
-                    KMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
+                        //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
+                        KMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
                 {
@@ -1047,36 +1091,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPLGValue);
 
-                        #region Add Model(GlideRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value GliderPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPLGValue.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(GlideRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value GliderPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPLGValue.TPLG_PointScaleValue * 100,
-                                Y = tPLGValue.TPLG_PointScaleValue * 100,
-                                Z = tPLGValue.TPLG_PointScaleValue * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPLGValue.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPLGValue.TPLG_PointScaleValue * 100,
+                                    Y = tPLGValue.TPLG_PointScaleValue * 100,
+                                    Z = tPLGValue.TPLG_PointScaleValue * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_GliderPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x13, 0xDC, 0xFF), Color.FromArgb(0x80, 0x13, 0xDC, 0xFF));
+                            ModelVisual3D dv3D_GliderPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x13, 0xDC, 0xFF), Color.FromArgb(0x80, 0x13, 0xDC, 0xFF));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_GliderPathOBJ, "GlideRoutes " + tPLGValue.ID + " " + tPLGValue.GroupID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_GliderPathOBJ, "GlideRoutes " + tPLGValue.ID + " " + tPLGValue.GroupID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_GliderPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(GliderPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_GliderPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(GliderPoint_transform_Value, transformSetting);
 
-                        //Add model
-                        KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_GliderPathOBJ);
+                            //Add model
+                            KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_GliderPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.LightSkyBlue);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.LightSkyBlue);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -1996,11 +2045,16 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Group_ListBox.Items.Add(hPNEValue);
 
-                    //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    if (KMP_Group_ListBox.Items.Count != 0)
+                    {
+                        //Rail
+                        HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
-                    //Add
-                    KMPViewportObject.EnemyRoute_Rail_List.Add(KMP_EnemyRoute_Rail);
+                        //Add
+                        KMPViewportObject.EnemyRoute_Rail_List.Add(KMP_EnemyRoute_Rail);
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
                 {
@@ -2016,10 +2070,16 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Group_ListBox.Items.Add(hPTIValue);
 
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    if (KMP_Group_ListBox.Items.Count != 0)
+                    {
+                        //Rail
+                        HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
-                    //Add
-                    KMPViewportObject.ItemRoute_Rail_List.Add(KMP_ItemRoute_Rail);
+                        //Add
+                        KMPViewportObject.ItemRoute_Rail_List.Add(KMP_ItemRoute_Rail);
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
                 {
@@ -2036,26 +2096,31 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Group_ListBox.Items.Add(hPKCValue);
 
-                    //Checkpoint_Rails
-                    HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
+                    if (KMP_Group_ListBox.Items.Count != 0)
                     {
-                        Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Line = new List<LinesVisual3D>(),
-                        Checkpoint_Tube = new List<TubeVisual3D>(),
-                        Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
-                        SideWall_Left = new HTK_3DES.PathTools.SideWall
+                        //Checkpoint_Rails
+                        HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
                         {
-                            SideWallList = new List<ModelVisual3D>()
-                        },
-                        SideWall_Right = new HTK_3DES.PathTools.SideWall
-                        {
-                            SideWallList = new List<ModelVisual3D>()
-                        }
-                    };
+                            Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
+                            Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
+                            Checkpoint_Line = new List<LinesVisual3D>(),
+                            Checkpoint_Tube = new List<TubeVisual3D>(),
+                            Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
+                            SideWall_Left = new HTK_3DES.PathTools.SideWall
+                            {
+                                SideWallList = new List<ModelVisual3D>()
+                            },
+                            SideWall_Right = new HTK_3DES.PathTools.SideWall
+                            {
+                                SideWallList = new List<ModelVisual3D>()
+                            }
+                        };
 
-                    //Add
-                    KMPViewportObject.Checkpoint_Rail.Add(checkpoint);
+                        //Add
+                        KMPViewportObject.Checkpoint_Rail.Add(checkpoint);
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Route")
                 {
@@ -2071,10 +2136,16 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Group_ListBox.Items.Add(iTOP_Route);
 
-                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    if (KMP_Group_ListBox.Items.Count != 0)
+                    {
+                        //Rail
+                        HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
-                    //Add
-                    KMPViewportObject.Routes_List.Add(Route_Rail);
+                        //Add
+                        KMPViewportObject.Routes_List.Add(Route_Rail);
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
                 {
@@ -2095,11 +2166,16 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Group_ListBox.Items.Add(hPLGValue);
 
-                    //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    if (KMP_Group_ListBox.Items.Count != 0)
+                    {
+                        //Rail
+                        HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
-                    //Add
-                    KMPViewportObject.GlideRoute_Rail_List.Add(GlideRoute_Rail);
+                        //Add
+                        KMPViewportObject.GlideRoute_Rail_List.Add(GlideRoute_Rail);
+
+                        KMP_Group_ListBox.SelectedIndex = KMP_Group_ListBox.Items.Count - 1;
+                    }
                 }
             }
             if(tabControl1.SelectedIndex == 1)
@@ -2122,28 +2198,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(tPTKValue);
 
-                    #region Add Model(StartPosition)
-                    HTK_3DES.TSRSystem.Transform_Value StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTKValue.Position_Value.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPTKValue.Rotate_Value.GetVector3D())
-                    };
+                        #region Add Model(StartPosition)
+                        HTK_3DES.TSRSystem.Transform_Value StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTKValue.Position_Value.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPTKValue.Rotate_Value.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
+                        ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + tPTKValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + tPTKValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_StartPositionOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(StartPosition_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_StartPositionOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(StartPosition_transform_Value, transformSetting);
 
-                    KMPViewportObject.StartPosition_MV3DList.Add(dv3D_StartPositionOBJ);
+                        KMPViewportObject.StartPosition_MV3DList.Add(dv3D_StartPositionOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_StartPositionOBJ);
+                        render.MainViewPort.Children.Add(dv3D_StartPositionOBJ);
 
-                    HTK_3DES.TSRSystem.GC_Dispose(dv3D_StartPositionOBJ);
-                    #endregion
+                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_StartPositionOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "EnemyRoutes")
                 {
@@ -2181,36 +2262,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPNEValue);
 
-                        #region Add Model(EnemyRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value EnemyPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPNEValue.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(EnemyRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value EnemyPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPNEValue.Control * 100,
-                                Y = tPNEValue.Control * 100,
-                                Z = tPNEValue.Control * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPNEValue.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPNEValue.Control * 100,
+                                    Y = tPNEValue.Control * 100,
+                                    Z = tPNEValue.Control * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_EnemyPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0xFF, 0x9B, 0x34), Color.FromArgb(0x80, 0xFF, 0x9B, 0x34));
+                            ModelVisual3D dv3D_EnemyPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0xFF, 0x9B, 0x34), Color.FromArgb(0x80, 0xFF, 0x9B, 0x34));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + tPNEValue.ID + " " + tPNEValue.Group_ID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + tPNEValue.ID + " " + tPNEValue.Group_ID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_EnemyPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(EnemyPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_EnemyPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(EnemyPoint_transform_Value, transformSetting);
 
-                        //Add Rail => MV3DList
-                        KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_EnemyPathOBJ);
+                            //Add Rail => MV3DList
+                            KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_EnemyPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Orange);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Orange);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -2241,36 +2327,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPTIValue);
 
-                        #region Add Model(ItemRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value ItemPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTIValue.TPTI_Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(ItemRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value ItemPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPTIValue.TPTI_PointSize * 100,
-                                Y = tPTIValue.TPTI_PointSize * 100,
-                                Z = tPTIValue.TPTI_PointSize * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPTIValue.TPTI_Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPTIValue.TPTI_PointSize * 100,
+                                    Y = tPTIValue.TPTI_PointSize * 100,
+                                    Z = tPTIValue.TPTI_PointSize * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_ItemPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x00, 0xD1, 0x41), Color.FromArgb(0x80, 0x00, 0xD1, 0x41));
+                            ModelVisual3D dv3D_ItemPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x00, 0xD1, 0x41), Color.FromArgb(0x80, 0x00, 0xD1, 0x41));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_ItemPathOBJ, "ItemRoute " + tPTIValue.ID + " " + tPTIValue.Group_ID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_ItemPathOBJ, "ItemRoute " + tPTIValue.ID + " " + tPTIValue.Group_ID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_ItemPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(ItemPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_ItemPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(ItemPoint_transform_Value, transformSetting);
 
-                        //Add Rail => MV3DList
-                        KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_ItemPathOBJ);
+                            //Add Rail => MV3DList
+                            KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_ItemPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Green);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Green);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -2301,104 +2392,109 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPKCValue);
 
-                        #region Create
-                        var P2D_Left = tPKCValue.Position_2D_Left;
-                        Vector2 P2DLeftToVector2 = new Vector2(Convert.ToSingle(P2D_Left.X), Convert.ToSingle(P2D_Left.Y));
-                        Point3D P3DLeft = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DLeftToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
-                        P3DLeft.Y = Convert.ToDouble(textBox1.Text);
-
-                        #region Transform(Left)
-                        HTK_3DES.TSRSystem.Transform_Value P2DLeft_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DLeft.ToVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            #region Create
+                            var P2D_Left = tPKCValue.Position_2D_Left;
+                            Vector2 P2DLeftToVector2 = new Vector2(Convert.ToSingle(P2D_Left.X), Convert.ToSingle(P2D_Left.Y));
+                            Point3D P3DLeft = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DLeftToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
+                            P3DLeft.Y = Convert.ToDouble(textBox1.Text);
 
-                        ModelVisual3D dv3D_CheckpointLeftOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46));
+                            #region Transform(Left)
+                            HTK_3DES.TSRSystem.Transform_Value P2DLeft_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DLeft.ToVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointLeftOBJ, "Checkpoint_Left " + tPKCValue.ID + " " + tPKCValue.Group_ID);
+                            ModelVisual3D dv3D_CheckpointLeftOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46), Color.FromArgb(0xFF, 0x00, 0x7F, 0x46));
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DLeft = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointLeftOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(P2DLeft_transform_Value, transformSetting_P2DLeft);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointLeftOBJ, "Checkpoint_Left " + tPKCValue.ID + " " + tPKCValue.Group_ID);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DLeft = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointLeftOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(P2DLeft_transform_Value, transformSetting_P2DLeft);
 
-                        render.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
 
-                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointLeftOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
 
-                        var P2D_Right = tPKCValue.Position_2D_Right;
-                        Vector2 P2DRightToVector2 = new Vector2(Convert.ToSingle(P2D_Right.X), Convert.ToSingle(P2D_Right.Y));
-                        Point3D P3DRight = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DRightToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
-                        P3DRight.Y = Convert.ToDouble(textBox1.Text);
+                            HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointLeftOBJ);
+                            #endregion
 
-                        #region Transform(Right)
-                        HTK_3DES.TSRSystem.Transform_Value P2DRight_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
-                        {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DRight.ToVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            var P2D_Right = tPKCValue.Position_2D_Right;
+                            Vector2 P2DRightToVector2 = new Vector2(Convert.ToSingle(P2D_Right.X), Convert.ToSingle(P2D_Right.Y));
+                            Point3D P3DRight = KMPs.KMPHelper.Vector3DTo2DConverter.Vector2DTo3D(P2DRightToVector2, KMPs.KMPHelper.Vector3DTo2DConverter.Axis_Up.Y).ToPoint3D();
+                            P3DRight.Y = Convert.ToDouble(textBox1.Text);
 
-                        ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
+                            #region Transform(Right)
+                            HTK_3DES.TSRSystem.Transform_Value P2DRight_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(P3DRight.ToVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(50, 50, 50)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + tPKCValue.ID + " " + tPKCValue.Group_ID);
+                            ModelVisual3D dv3D_CheckpointRightOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00), Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DRight = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointRightOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(P2DRight_transform_Value, transformSetting_P2DRight);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CheckpointRightOBJ, "Checkpoint_Right " + tPKCValue.ID + " " + tPKCValue.Group_ID);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting_P2DRight = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CheckpointRightOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(P2DRight_transform_Value, transformSetting_P2DRight);
 
-                        render.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
 
-                        HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointRightOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
 
-                        List<Point3D> point3Ds = new List<Point3D>();
-                        point3Ds.Add(P3DLeft);
-                        point3Ds.Add(P3DRight);
+                            HTK_3DES.TSRSystem.GC_Dispose(dv3D_CheckpointRightOBJ);
+                            #endregion
 
-                        LinesVisual3D linesVisual3D = new LinesVisual3D
-                        {
-                            Points = new Point3DCollection(point3Ds),
-                            Thickness = 1,
-                            Color = Colors.Black
-                        };
+                            List<Point3D> point3Ds = new List<Point3D>();
+                            point3Ds.Add(P3DLeft);
+                            point3Ds.Add(P3DRight);
 
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
-                        render.MainViewPort.Children.Add(linesVisual3D);
+                            LinesVisual3D linesVisual3D = new LinesVisual3D
+                            {
+                                Points = new Point3DCollection(point3Ds),
+                                Thickness = 1,
+                                Color = Colors.Black
+                            };
 
-                        #region SplitWall
-                        Point3DCollection point3Ds1 = new Point3DCollection();
-                        point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
-                        point3Ds1.Add(point3Ds[1]);
-                        point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
-                        point3Ds1.Add(point3Ds[0]);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Line.Add(linesVisual3D);
+                            render.MainViewPort.Children.Add(linesVisual3D);
 
-                        ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
-                        HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
-                        render.MainViewPort.Children.Add(SplitWall);
-                        #endregion
-                        #endregion
+                            #region SplitWall
+                            Point3DCollection point3Ds1 = new Point3DCollection();
+                            point3Ds1.Add(new Point3D(point3Ds[1].X, 0, point3Ds[1].Z));
+                            point3Ds1.Add(point3Ds[1]);
+                            point3Ds1.Add(new Point3D(point3Ds[0].X, 0, point3Ds[0].Z));
+                            point3Ds1.Add(point3Ds[0]);
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
-                        List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
+                            ModelVisual3D SplitWall = HTK_3DES.CustomModelCreateHelper.CustomRectanglePlane3D(point3Ds1, System.Windows.Media.Color.FromArgb(0xA0, 0xA0, 0x00, 0xA0), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                            HTK_3DES.TSRSystem.SetString_MV3D(SplitWall, "SplitWall -1 -1");
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_SplitWallMDL.Add(SplitWall);
+                            render.MainViewPort.Children.Add(SplitWall);
+                            #endregion
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left, HTK_3DES.PathTools.RailType.Line);
+                            List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Left, 5, Colors.Green);
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
-                        List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+                            HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
 
-                        HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
-                        KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right, HTK_3DES.PathTools.RailType.Line);
+                            List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.MV3D_List);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(render, point3Ds_Right, 5, Colors.Red);
+
+                            HTK_3DES.PathTools.ResetSideWall(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right);
+                            KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(render, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -2432,28 +2528,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(jBOGValue);
 
-                    #region Add Model(OBJ)
-                    HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(jBOGValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(jBOGValue.Scales.GetVector3D(), 2),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(OBJ)
+                        HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(jBOGValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(jBOGValue.Scales.GetVector3D(), 2),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
+                        };
 
-                    KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                    string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
-                    ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
+                        KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
+                        string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
+                        ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + jBOGValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + jBOGValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
 
-                    KMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
+                        KMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_OBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_OBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Route")
                 {
@@ -2472,31 +2573,36 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(iTOP_Point);
 
-                        #region Add Model(Routes)
-                        HTK_3DES.TSRSystem.Transform_Value Route_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(iTOP_Point.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                            #region Add Model(Routes)
+                            HTK_3DES.TSRSystem.Transform_Value Route_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                            {
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(iTOP_Point.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_RouteOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x3F, 0x45, 0xE2), Color.FromArgb(0x80, 0x3F, 0x45, 0xE2));
+                            ModelVisual3D dv3D_RouteOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x3F, 0x45, 0xE2), Color.FromArgb(0x80, 0x3F, 0x45, 0xE2));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RouteOBJ, "Routes " + iTOP_Point.ID + " " + iTOP_Point.GroupID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RouteOBJ, "Routes " + iTOP_Point.ID + " " + iTOP_Point.GroupID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RouteOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(Route_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RouteOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(Route_transform_Value, transformSetting);
 
-                        //AddMDL
-                        KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_RouteOBJ);
+                            //AddMDL
+                            KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_RouteOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_RouteOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_RouteOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Blue);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.Blue);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -2529,28 +2635,33 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(aERAValue);
 
-                    #region Add Model(Area)
-                    HTK_3DES.TSRSystem.Transform_Value Area_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(aERAValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(aERAValue.Scales.GetVector3D(), 1000),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(aERAValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(Area)
+                        HTK_3DES.TSRSystem.Transform_Value Area_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(aERAValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(aERAValue.Scales.GetVector3D(), 1000),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(aERAValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_AreaOBJ = null;
-                    if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
+                        ModelVisual3D dv3D_AreaOBJ = null;
+                        if (aERAValue.AreaModeSettings.AreaModeValue == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + aERAValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_AreaOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(Area_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_AreaOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(Area_transform_Value, transformSetting);
 
-                    //Area_MV3D_List.Add(dv3D_AreaOBJ);
-                    KMPViewportObject.Area_MV3DList.Add(dv3D_AreaOBJ);
+                        //Area_MV3D_List.Add(dv3D_AreaOBJ);
+                        KMPViewportObject.Area_MV3DList.Add(dv3D_AreaOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_AreaOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_AreaOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Camera")
                 {
@@ -2576,27 +2687,32 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(eMACValue);
 
-                    #region Add Model(Camera)
-                    HTK_3DES.TSRSystem.Transform_Value Camera_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(eMACValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(eMACValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(Camera)
+                        HTK_3DES.TSRSystem.Transform_Value Camera_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(eMACValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(eMACValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
+                        ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + eMACValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + eMACValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CameraOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(Camera_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_CameraOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(Camera_transform_Value, transformSetting);
 
-                    //Camera_MV3D_List.Add(dv3D_CameraOBJ);
-                    KMPViewportObject.Camera_MV3DList.Add(dv3D_CameraOBJ);
+                        //Camera_MV3D_List.Add(dv3D_CameraOBJ);
+                        KMPViewportObject.Camera_MV3DList.Add(dv3D_CameraOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_CameraOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_CameraOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "JugemPoint")
                 {
@@ -2613,27 +2729,32 @@ namespace MK7_KMP_Editor_For_PG_
 
                     KMP_Path_ListBox.Items.Add(tPGJValue);
 
-                    #region Add Model(RespawnPoint)
-                    HTK_3DES.TSRSystem.Transform_Value RespawnPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                    if (KMP_Path_ListBox.Items.Count != 0)
                     {
-                        Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPGJValue.Positions.GetVector3D()),
-                        Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
-                        Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPGJValue.Rotations.GetVector3D())
-                    };
+                        #region Add Model(RespawnPoint)
+                        HTK_3DES.TSRSystem.Transform_Value RespawnPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        {
+                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPGJValue.Positions.GetVector3D()),
+                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale(new Vector3D(20, 20, 20)),
+                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(tPGJValue.Rotations.GetVector3D())
+                        };
 
-                    ModelVisual3D dv3D_RespawnPointOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0x80, 0x00, 0xFF, 0x73), Color.FromArgb(0x80, 0x00, 0xFF, 0x73));
+                        ModelVisual3D dv3D_RespawnPointOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0x80, 0x00, 0xFF, 0x73), Color.FromArgb(0x80, 0x00, 0xFF, 0x73));
 
-                    //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + tPGJValue.ID + " " + -1);
+                        //モデルの名前と番号を文字列に格納(情報化)
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + tPGJValue.ID + " " + -1);
 
-                    HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RespawnPointOBJ };
-                    HTK_3DES.TSRSystem.New_TransformSystem3D(RespawnPoint_transform_Value, transformSetting);
+                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_RespawnPointOBJ };
+                        HTK_3DES.TSRSystem.New_TransformSystem3D(RespawnPoint_transform_Value, transformSetting);
 
-                    //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
-                    KMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
+                        //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
+                        KMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
 
-                    render.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);
-                    #endregion
+                        render.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);
+                        #endregion
+
+                        KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
                 {
@@ -2653,36 +2774,41 @@ namespace MK7_KMP_Editor_For_PG_
 
                         KMP_Path_ListBox.Items.Add(tPLGValue);
 
-                        #region Add Model(GlideRoutes)
-                        HTK_3DES.TSRSystem.Transform_Value GliderPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
+                        if (KMP_Path_ListBox.Items.Count != 0)
                         {
-                            Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPLGValue.Positions.GetVector3D()),
-                            Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                            #region Add Model(GlideRoutes)
+                            HTK_3DES.TSRSystem.Transform_Value GliderPoint_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
                             {
-                                X = tPLGValue.TPLG_PointScaleValue * 100,
-                                Y = tPLGValue.TPLG_PointScaleValue * 100,
-                                Z = tPLGValue.TPLG_PointScaleValue * 100
-                            },
-                            Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
-                        };
+                                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate(tPLGValue.Positions.GetVector3D()),
+                                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
+                                {
+                                    X = tPLGValue.TPLG_PointScaleValue * 100,
+                                    Y = tPLGValue.TPLG_PointScaleValue * 100,
+                                    Z = tPLGValue.TPLG_PointScaleValue * 100
+                                },
+                                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(new Vector3D(0, 0, 0))
+                            };
 
-                        ModelVisual3D dv3D_GliderPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x13, 0xDC, 0xFF), Color.FromArgb(0x80, 0x13, 0xDC, 0xFF));
+                            ModelVisual3D dv3D_GliderPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0x13, 0xDC, 0xFF), Color.FromArgb(0x80, 0x13, 0xDC, 0xFF));
 
-                        //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_GliderPathOBJ, "GlideRoutes " + tPLGValue.ID + " " + tPLGValue.GroupID);
+                            //モデルの名前と番号を文字列に格納(情報化)
+                            HTK_3DES.TSRSystem.SetString_MV3D(dv3D_GliderPathOBJ, "GlideRoutes " + tPLGValue.ID + " " + tPLGValue.GroupID);
 
-                        HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_GliderPathOBJ };
-                        HTK_3DES.TSRSystem.New_TransformSystem3D(GliderPoint_transform_Value, transformSetting);
+                            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_GliderPathOBJ };
+                            HTK_3DES.TSRSystem.New_TransformSystem3D(GliderPoint_transform_Value, transformSetting);
 
-                        //Add model
-                        KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_GliderPathOBJ);
+                            //Add model
+                            KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List.Add(dv3D_GliderPathOBJ);
 
-                        render.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
-                        #endregion
+                            render.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
+                            #endregion
 
-                        HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
-                        List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
-                        KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.LightSkyBlue);
+                            HTK_3DES.PathTools.ResetRail(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex], HTK_3DES.PathTools.RailType.Tube);
+                            List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].MV3D_List);
+                            KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(render, point3Ds, 10.0, Colors.LightSkyBlue);
+
+                            KMP_Path_ListBox.SelectedIndex = KMP_Path_ListBox.Items.Count - 1;
+                        }
                     }
                     else
                     {
@@ -3320,14 +3446,16 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void KMPSectionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            KMP_Path_ListBox.Items.Clear();
-            KMP_Group_ListBox.Items.Clear();
             propertyGrid_KMP_Path.SelectedObject = null;
             propertyGrid_KMP_Group.SelectedObject = null;
+
+            KMP_Group_ListBox.Items.Clear();
+            KMP_Path_ListBox.Items.Clear();
 
             if (KMPSectionComboBox.Text == "KartPoint")
             {
                 KMP_Path_ListBox.Items.AddRange(TPTK_Section.TPTKValueList.ToArray());
+                if (KMP_Path_ListBox.Items.Count != 0) KMP_Path_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3340,6 +3468,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "EnemyRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPNE_TPNE_Section.HPNEValueList.ToArray());
+                if (KMP_Group_ListBox.Items.Count != 0) KMP_Group_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = true;
@@ -3352,6 +3481,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "ItemRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPTI_TPTI_Section.HPTIValueList.ToArray());
+                if (KMP_Group_ListBox.Items.Count != 0) KMP_Group_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = true;
@@ -3364,6 +3494,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "CheckPoint")
             {
                 KMP_Group_ListBox.Items.AddRange(HPKC_TPKC_Section.HPKCValueList.ToArray());
+                if (KMP_Group_ListBox.Items.Count != 0) KMP_Group_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3376,6 +3507,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Obj")
             {
                 KMP_Path_ListBox.Items.AddRange(JBOG_Section.JBOGValueList.ToArray());
+                if (KMP_Path_ListBox.Items.Count != 0) KMP_Path_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3388,6 +3520,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Route")
             {
                 KMP_Group_ListBox.Items.AddRange(ITOP_Section.ITOP_RouteList.ToArray());
+                if (KMP_Group_ListBox.Items.Count != 0) KMP_Group_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3400,6 +3533,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Area")
             {
                 KMP_Path_ListBox.Items.AddRange(AERA_Section.AERAValueList.ToArray());
+                if (KMP_Path_ListBox.Items.Count != 0) KMP_Path_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3412,6 +3546,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "Camera")
             {
                 KMP_Path_ListBox.Items.AddRange(EMAC_Section.EMACValueList.ToArray());
+                if (KMP_Path_ListBox.Items.Count != 0) KMP_Path_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3424,6 +3559,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "JugemPoint")
             {
                 KMP_Path_ListBox.Items.AddRange(TPGJ_Section.TPGJValueList.ToArray());
+                if (KMP_Path_ListBox.Items.Count != 0) KMP_Path_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = "XXXX Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = false;
@@ -3436,6 +3572,7 @@ namespace MK7_KMP_Editor_For_PG_
             if (KMPSectionComboBox.Text == "GlideRoutes")
             {
                 KMP_Group_ListBox.Items.AddRange(HPLG_TPLG_Section.HPLGValueList.ToArray());
+                if (KMP_Group_ListBox.Items.Count != 0) KMP_Group_ListBox.SelectedIndex = 0;
 
                 xXXXRouteExporterToolStripMenuItem.Text = KMPSectionComboBox.Text + " Route Exporter";
                 xXXXRouteExporterToolStripMenuItem.Enabled = true;
@@ -3459,41 +3596,56 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex].TPNEValueList.ToArray());
-                    propertyGrid_KMP_Group.SelectedObject = HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex];
-
-                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                    if (KMP_Path_ListBox.Items.Count != 0)
+                    {
+                        propertyGrid_KMP_Group.SelectedObject = HPNE_TPNE_Section.HPNEValueList[KMP_Group_ListBox.SelectedIndex];
+                        CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                        KMP_Path_ListBox.SelectedIndex = 0;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "ItemRoutes")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex].TPTIValueList.ToArray());
-                    propertyGrid_KMP_Group.SelectedObject = HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex];
-
-                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                    if (KMP_Path_ListBox.Items.Count != 0)
+                    {
+                        propertyGrid_KMP_Group.SelectedObject = HPTI_TPTI_Section.HPTIValueList[KMP_Group_ListBox.SelectedIndex];
+                        CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                        KMP_Path_ListBox.SelectedIndex = 0;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "CheckPoint")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex].TPKCValueList.ToArray());
-                    propertyGrid_KMP_Group.SelectedObject = HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex];
-
-                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex]);
+                    if (KMP_Path_ListBox.Items.Count != 0)
+                    {
+                        propertyGrid_KMP_Group.SelectedObject = HPKC_TPKC_Section.HPKCValueList[KMP_Group_ListBox.SelectedIndex];
+                        CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex]);
+                        KMP_Path_ListBox.SelectedIndex = 0;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "Route")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex].ITOP_PointList.ToArray());
-                    propertyGrid_KMP_Group.SelectedObject = ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex];
-
-                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex]);
+                    if (KMP_Path_ListBox.Items.Count != 0)
+                    {
+                        propertyGrid_KMP_Group.SelectedObject = ITOP_Section.ITOP_RouteList[KMP_Group_ListBox.SelectedIndex];
+                        CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex]);
+                        KMP_Path_ListBox.SelectedIndex = 0;
+                    }
                 }
                 if (KMPSectionComboBox.Text == "GlideRoutes")
                 {
                     KMP_Path_ListBox.Items.Clear();
                     KMP_Path_ListBox.Items.AddRange(HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex].TPLGValueList.ToArray());
-                    propertyGrid_KMP_Group.SelectedObject = HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex];
-
-                    CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                    if (KMP_Path_ListBox.Items.Count != 0)
+                    {
+                        propertyGrid_KMP_Group.SelectedObject = HPLG_TPLG_Section.HPLGValueList[KMP_Group_ListBox.SelectedIndex];
+                        CH_KMPGroupPoint.Checked = ViewPortObjVisibleSetting.VisibleCheck(render, KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex]);
+                        KMP_Path_ListBox.SelectedIndex = 0;
+                    }
                 }
             }
         }
@@ -4059,50 +4211,15 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void createKMPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TPTK_Section = new KMPPropertyGridSettings.TPTK_Section
-            {
-                TPTKValueList = new List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>()
-            };
-
-            HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section
-            {
-                HPNEValueList = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>()
-            };
-
-            HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section
-            {
-                HPTIValueList = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>()
-            };
-
-            HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section
-            {
-                HPKCValueList = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>()
-            };
-
-            JBOG_Section = new KMPPropertyGridSettings.JBOG_section
-            {
-                JBOGValueList = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>()
-            };
-
-            ITOP_Section = new KMPPropertyGridSettings.ITOP_Section
-            {
-                ITOP_RouteList = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>()
-            };
-
-            AERA_Section = new KMPPropertyGridSettings.AERA_Section
-            {
-                AERAValueList = new List<KMPPropertyGridSettings.AERA_Section.AERAValue>()
-            };
-
-            EMAC_Section = new KMPPropertyGridSettings.EMAC_Section
-            {
-                EMACValueList = new List<KMPPropertyGridSettings.EMAC_Section.EMACValue>()
-            };
-
-            TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section
-            {
-                TPGJValueList = new List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>()
-            };
+            TPTK_Section = new KMPPropertyGridSettings.TPTK_Section { TPTKValueList = new List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>() };
+            HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section { HPNEValueList = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>() };
+            HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section { HPTIValueList = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>() };
+            HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section { HPKCValueList = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>() };
+            JBOG_Section = new KMPPropertyGridSettings.JBOG_section { JBOGValueList = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>() };
+            ITOP_Section = new KMPPropertyGridSettings.ITOP_Section { ITOP_RouteList = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>() };
+            AERA_Section = new KMPPropertyGridSettings.AERA_Section { AERAValueList = new List<KMPPropertyGridSettings.AERA_Section.AERAValue>() };
+            EMAC_Section = new KMPPropertyGridSettings.EMAC_Section { EMACValueList = new List<KMPPropertyGridSettings.EMAC_Section.EMACValue>() };
+            TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section { TPGJValueList = new List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>() };
 
             IGTS_Section = new KMPPropertyGridSettings.IGTS_Section
             {
@@ -4121,10 +4238,9 @@ namespace MK7_KMP_Editor_For_PG_
                 FlareAlpha = 75
             };
 
-            HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section
-            {
-                HPLGValueList = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>()
-            };
+            propertyGrid_KMP_StageInfo.SelectedObject = IGTS_Section;
+
+            HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section { HPLGValueList = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>() };
 
             if (KMPSectionComboBox.Items.Count == 0)
             {
@@ -4650,6 +4766,11 @@ namespace MK7_KMP_Editor_For_PG_
                 kMPErrorCheck.Show();
             }
         }
+
+        private void infoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            KMP3DEditorInfoForm kMP3DEditorInfoForm = new KMP3DEditorInfoForm();
+            kMP3DEditorInfoForm.ShowDialog();
+        }
     }
 }
-

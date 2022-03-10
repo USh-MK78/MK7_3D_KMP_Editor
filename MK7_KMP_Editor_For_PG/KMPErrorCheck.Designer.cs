@@ -29,6 +29,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KMPErrorCheck));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -341,6 +342,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.Controls.Add(this.Chk_Warning);
             this.Controls.Add(this.Chk_Info);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KMPErrorCheck";
             this.Text = "KMPErrorCheck";
             this.Load += new System.EventHandler(this.KMPErrorCheck_Load);

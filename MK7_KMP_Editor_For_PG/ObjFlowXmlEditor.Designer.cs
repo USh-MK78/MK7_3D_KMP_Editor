@@ -29,6 +29,7 @@ namespace MK7_KMP_Editor_For_PG_
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObjFlowXmlEditor));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.AddObjFlowXmlData = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.listBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(578, 447);
             this.MinimumSize = new System.Drawing.Size(578, 447);
             this.Name = "ObjFlowXmlEditor";

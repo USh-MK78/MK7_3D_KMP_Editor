@@ -79,5 +79,15 @@ namespace MK7_KMP_Editor_For_PG_.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap MK73DKMPEditorLogo {
+            get {
+                object obj = ResourceManager.GetObject("MK73DKMPEditorLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

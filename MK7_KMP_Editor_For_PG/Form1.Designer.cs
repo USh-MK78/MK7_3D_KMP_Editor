@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readBinaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,11 @@
             this.allSectionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.inputXmlAsXXXXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xXXXRouteImporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thisSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.KMP_Main_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.AddKMPSection = new System.Windows.Forms.Button();
@@ -105,9 +111,6 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.errorCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thisSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -150,7 +153,8 @@
             this.cameraModeToolStripMenuItem,
             this.oBJFlowToolStripMenuItem,
             this.xmlToolStripMenuItem,
-            this.errorCheckToolStripMenuItem});
+            this.errorCheckToolStripMenuItem,
+            this.infoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1065, 24);
@@ -327,6 +331,44 @@
             this.xXXXRouteImporterToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.xXXXRouteImporterToolStripMenuItem.Text = "XXXX Route Importer";
             this.xXXXRouteImporterToolStripMenuItem.Click += new System.EventHandler(this.xXXXRouteImporterToolStripMenuItem_Click);
+            // 
+            // errorCheckToolStripMenuItem
+            // 
+            this.errorCheckToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem,
+            this.thisSectionToolStripMenuItem});
+            this.errorCheckToolStripMenuItem.Name = "errorCheckToolStripMenuItem";
+            this.errorCheckToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.errorCheckToolStripMenuItem.Text = "Error Check";
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.allToolStripMenuItem.Text = "All";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // thisSectionToolStripMenuItem
+            // 
+            this.thisSectionToolStripMenuItem.Name = "thisSectionToolStripMenuItem";
+            this.thisSectionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.thisSectionToolStripMenuItem.Text = "This section";
+            this.thisSectionToolStripMenuItem.Click += new System.EventHandler(this.thisSectionToolStripMenuItem_Click);
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem1});
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.infoToolStripMenuItem.Text = "Other";
+            // 
+            // infoToolStripMenuItem1
+            // 
+            this.infoToolStripMenuItem1.Name = "infoToolStripMenuItem1";
+            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.infoToolStripMenuItem1.Text = "Info";
+            this.infoToolStripMenuItem1.Click += new System.EventHandler(this.infoToolStripMenuItem1_Click);
             // 
             // KMP_Main_SplitContainer
             // 
@@ -934,29 +976,6 @@
             this.Label_SectionName.TabIndex = 0;
             this.Label_SectionName.Text = "SectionName :";
             // 
-            // errorCheckToolStripMenuItem
-            // 
-            this.errorCheckToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem,
-            this.thisSectionToolStripMenuItem});
-            this.errorCheckToolStripMenuItem.Name = "errorCheckToolStripMenuItem";
-            this.errorCheckToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
-            this.errorCheckToolStripMenuItem.Text = "Error Check";
-            // 
-            // allToolStripMenuItem
-            // 
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allToolStripMenuItem.Text = "All";
-            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
-            // 
-            // thisSectionToolStripMenuItem
-            // 
-            this.thisSectionToolStripMenuItem.Name = "thisSectionToolStripMenuItem";
-            this.thisSectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.thisSectionToolStripMenuItem.Text = "This section";
-            this.thisSectionToolStripMenuItem.Click += new System.EventHandler(this.thisSectionToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -964,6 +983,7 @@
             this.ClientSize = new System.Drawing.Size(1065, 615);
             this.Controls.Add(this.KMP_Main_SplitContainer);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "MK7 3D KMP Editor - U5h_MK78";
@@ -1093,6 +1113,8 @@
         private System.Windows.Forms.ToolStripMenuItem errorCheckToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thisSectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem1;
     }
 }
 
