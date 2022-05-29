@@ -2283,13 +2283,13 @@ namespace MK7_KMP_Editor_For_PG_
             return HPKCValues_List;
         }
 
-        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(KMPs.KMPFormat.KMPSection.JBOG_Section JBOG, KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject)
+        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(KMPs.KMPFormat.KMPSection.JBOG_Section JBOG, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB)
         {
             List<KMPPropertyGridSettings.JBOG_section.JBOGValue> JBOGValues_List = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>();
 
             for (int Count = 0; Count < JBOG.NumOfEntries; Count++)
             {
-                string Name = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
+                string Name = ObjFlowDB.Find(x => x.ObjectID == BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
 
                 KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
                 {
@@ -3682,14 +3682,14 @@ namespace MK7_KMP_Editor_For_PG_
             return HPKCValues_List;
         }
 
-        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(TestXml.KMPXml.Object Objects, KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject)
+        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(TestXml.KMPXml.Object Objects)
         {
             List<KMPPropertyGridSettings.JBOG_section.JBOGValue> JBOGValues_List = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>();
 
             foreach (var Object in Objects.Object_Values.Select((value, index) => new { value, index }))
             {
-                KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject_FindName = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                string Name = objFlowXmlToObject_FindName.ObjFlows.Find(x => x.ObjectID == Object.value.ObjectID).ObjectName;
+                List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB_FindName = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == Object.value.ObjectID).ObjectName;
 
                 KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
                 {
@@ -4264,9 +4264,9 @@ namespace MK7_KMP_Editor_For_PG_
         [TypeConverter(typeof(CustomSortTypeConverter))]
         public class ObjFlow
         {
-            public string ObjectID { get; set; }
-            public string ObjectName { get; set; }
-            public string Path { get; set; }
+			public string ObjectID { get; set; }
+			public string ObjectName { get; set; }
+			public string Path { get; set; }
             public bool UseKCL { get; set; }
             public string ObjectType { get; set; }
 
@@ -4274,7 +4274,6 @@ namespace MK7_KMP_Editor_For_PG_
             public Common Commons { get; set; } = new Common();
             public class Common
             {
-                public string ObjID { get; set; }
                 public string ColType { get; set; }
                 public string PathType { get; set; }
                 public string ModelSetting { get; set; }
@@ -4305,25 +4304,32 @@ namespace MK7_KMP_Editor_For_PG_
             public Scale Scales { get; set; } = new Scale();
             public class Scale
             {
-                private string _X = "";
-                public string X
+                private float _X;
+                public float X
                 {
                     get { return _X; }
-                    set => _X = value == "" || value == null ? "0" : value;
+                    set { _X = value; }
                 }
 
-                private string _Y = "";
-                public string Y
+                private float _Y;
+                public float Y
                 {
                     get { return _Y; }
-                    set => _Y = value == "" || value == null ? "0" : value;
+                    set { _Y = value; }
                 }
 
-                private string _Z = "";
-                public string Z
+                private float _Z;
+                public float Z
                 {
                     get { return _Z; }
-                    set => _Z = value == "" || value == null ? "0" : value;
+                    set { _Z = value; }
+                }
+
+                public Scale()
+                {
+                    _X = 0;
+                    _Y = 0;
+                    _Z = 0;
                 }
 
                 public override string ToString()

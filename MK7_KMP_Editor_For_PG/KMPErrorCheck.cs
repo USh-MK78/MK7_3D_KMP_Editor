@@ -458,7 +458,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
-                var r = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.Xml");
+                var r = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
 
                 for (int bn = 0; bn < JBOG_Section.JBOGValueList.Count; bn++)
                 {
@@ -467,7 +467,7 @@ namespace MK7_KMP_Editor_For_PG_
 
                     for (int s = 0; s < JBOG_Specific_ValueAry.ToList().Count; s++)
                     {
-                        bool b = r.ObjFlows.Find(x => x.ObjectID == JBOG_Section.JBOGValueList[bn].ObjectID).DefaultValues.Values[s].DefaultObjectValue != -1 ? true : false;
+                        bool b = r.Find(x => x.ObjectID == JBOG_Section.JBOGValueList[bn].ObjectID).DefaultValues.Values[s].DefaultObjectValue != -1 ? true : false;
 
                         if (b == true)
                         {

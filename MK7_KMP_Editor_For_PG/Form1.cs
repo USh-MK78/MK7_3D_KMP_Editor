@@ -855,8 +855,8 @@ namespace MK7_KMP_Editor_For_PG_
                             Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
                         };
 
-                        KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                        string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
+                        List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDataXml_List = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
                         //モデルの名前と番号を文字列に格納(情報化)
@@ -1848,8 +1848,8 @@ namespace MK7_KMP_Editor_For_PG_
             double d = Convert.ToDouble(textBox1.Text);
             KMPs.KMPViewportRendering.Render_Checkpoint(render, KMPViewportObject, KMP_Section.HPKC, KMP_Section.TPKC, d);
 
-            JBOG_Section = new KMPPropertyGridSettings.JBOG_section { JBOGValueList = PropertyGridClassConverter.ToJBOGValueList(KMP_Section.JBOG, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml")) };
-            KMPs.KMPViewportRendering.Render_Object(render, KMPViewportObject, KMP_Section.JBOG, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml"));
+            JBOG_Section = new KMPPropertyGridSettings.JBOG_section { JBOGValueList = PropertyGridClassConverter.ToJBOGValueList(KMP_Section.JBOG, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml")) };
+            KMPs.KMPViewportRendering.Render_Object(render, KMPViewportObject, KMP_Section.JBOG, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml"));
 
             ITOP_Section = new KMPPropertyGridSettings.ITOP_Section { ITOP_RouteList = PropertyGridClassConverter.ToITOPValueList(KMP_Section.ITOP) };
             KMPs.KMPViewportRendering.Render_Route(render, KMPViewportObject, KMP_Section.ITOP);
@@ -2538,8 +2538,8 @@ namespace MK7_KMP_Editor_For_PG_
                             Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(jBOGValue.Rotations.GetVector3D())
                         };
 
-                        KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                        string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == data.ObjID).Path;
+                        List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDataXml_List = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
                         //モデルの名前と番号を文字列に格納(情報化)
@@ -3841,15 +3841,16 @@ namespace MK7_KMP_Editor_For_PG_
                 }
                 if (File.Exists("ObjFlowData.xml") == false)
                 {
-                    string MText = "ObjFlowXmlEditorを使用するにはObjFlowData.Xmlが必要です。\r\nObjFlow.binを使用してObjFlowData.xmlを作成しますか?";
+                    string MText = "ObjFlowXmlEditorを使用するにはObjFlowData.xmlが必要です。\r\nObjFlow.binを使用してObjFlowData.xmlを作成しますか?";
                     string Caption = "確認";
                     MessageBoxButton messageBoxButton = MessageBoxButton.YesNo;
 
                     DialogResult dialogResult = (DialogResult)System.Windows.MessageBox.Show(MText, Caption, messageBoxButton);
                     if(dialogResult == DialogResult.Yes)
                     {
-                        List<KMPs.KMPHelper.ObjFlowReader.ObjFlowValue> objFlowValues = KMPs.KMPHelper.ObjFlowReader.Read("ObjFlow.bin");
-                        KMPs.KMPHelper.ObjFlowReader.CreateXml(objFlowValues, "KMPObjectFlow", "KMP_OBJ\\OBJ\\OBJ.obj", "ObjFlowData.xml");
+                        var FBOCFormat = KMPs.KMPHelper.ObjFlowReader.Binary.Read("ObjFlow.bin");
+                        List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> objFlowValues = KMPs.KMPHelper.ObjFlowReader.ConvertTo.ToObjFlowDB(FBOCFormat);
+                        KMPs.KMPHelper.ObjFlowReader.Xml.CreateXml(objFlowValues, "KMPObjectFlow", "KMP_OBJ\\OBJ\\OBJ.obj", "ObjFlowData.xml");
 
                         ObjFlowXmlEditor objFlowXmlEditor = new ObjFlowXmlEditor();
                         objFlowXmlEditor.Show();
@@ -3862,6 +3863,33 @@ namespace MK7_KMP_Editor_For_PG_
                 }
             }
             if (File.Exists("ObjFlow.bin") == false) System.Windows.MessageBox.Show("[ObjFlowXmlEditor]\r\nObjFlow.bin : null\r\nObjFlow.binがこのプログラムと同じディレクトリ内に存在しません。\r\nObjFlow.binをこのプログラムと同じディレクトリに配置してください。\r\nObjFlow.binは[RaceCommon.szs]に格納されています。", "Error");
+        }
+
+        private void objFlowXmlToObjFlowbinTSM_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Open_ObjFlowDataXml = new OpenFileDialog()
+            {
+                Title = "Open ObjFlowData.xml",
+                InitialDirectory = @"C:\Users\User\Desktop",
+                Filter = "xml file|*.xml"
+            };
+
+            if (Open_ObjFlowDataXml.ShowDialog() == DialogResult.OK)
+			{
+                var ObjFlowDB = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml(Open_ObjFlowDataXml.FileName);
+                KMPs.KMPHelper.ObjFlowReader.Binary.FBOC FBOC = KMPs.KMPHelper.ObjFlowReader.ConvertTo.ToFBOC(ObjFlowDB);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog()
+                {
+                    Title = "Save ObjFlow.bin",
+                    InitialDirectory = @"C:\Users\User\Desktop",
+                    Filter = "bin file|*.bin"
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK) KMPs.KMPHelper.ObjFlowReader.Binary.Write(FBOC.ObjFlow_Data, saveFileDialog.FileName + "_NewObjFlow.bin");
+                else return;
+            }
+            else System.Windows.MessageBox.Show("Abort 1");
         }
 
         private void propertyGrid_KMP_Path_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -3994,8 +4022,8 @@ namespace MK7_KMP_Editor_For_PG_
 
                 KMPPropertyGridSettings.JBOG_section.JBOGValue GetJBOGValue = JBOG_Section.JBOGValueList[KMP_Path_ListBox.SelectedIndex];
 
-                KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject_FindName = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                string ObjectName = objFlowXmlToObject_FindName.ObjFlows.Find(x => x.ObjectID == GetJBOGValue.ObjectID).ObjectName;
+                List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB_FindName = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                string ObjectName = ObjFlowDB_FindName.Find(x => x.ObjectID == GetJBOGValue.ObjectID).ObjectName;
                 JBOG_Section.JBOGValueList[KMP_Path_ListBox.SelectedIndex].ObjectName = ObjectName;
 
                 #region Add Model(OBJ)
@@ -4006,8 +4034,8 @@ namespace MK7_KMP_Editor_For_PG_
                     Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate(GetJBOGValue.Rotations.GetVector3D())
                 };
 
-                KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml");
-                string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == GetJBOGValue.ObjectID).Path;
+                List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                string Path = ObjFlowDB.Find(x => x.ObjectID == GetJBOGValue.ObjectID).Path;
                 ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
                 //モデルの名前と番号を文字列に格納(情報化)
@@ -4772,5 +4800,5 @@ namespace MK7_KMP_Editor_For_PG_
             KMP3DEditorInfoForm kMP3DEditorInfoForm = new KMP3DEditorInfoForm();
             kMP3DEditorInfoForm.ShowDialog();
         }
-    }
+	}
 }

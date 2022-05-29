@@ -1326,10 +1326,10 @@ namespace MK7_KMP_Editor_For_PG_
             #region OBJ
             KMPPropertyGridSettings.JBOG_section JBOG_Section = new KMPPropertyGridSettings.JBOG_section
             {
-                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml"))
+                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects)
             };
 
-            KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml"));
+            KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml"));
             kMPPropertyGridSettings.JBOGSection = JBOG_Section;
             #endregion
 
@@ -1450,10 +1450,10 @@ namespace MK7_KMP_Editor_For_PG_
 
             KMPPropertyGridSettings.JBOG_section JBOG_Section = new KMPPropertyGridSettings.JBOG_section
             {
-                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml"))
+                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects)
             };
 
-            KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.xml"));
+            KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml"));
 
             return JBOG_Section;
         }

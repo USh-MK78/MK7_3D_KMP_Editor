@@ -13,7 +13,7 @@ namespace MK7_KMP_Editor_For_PG_
 {
     public partial class ObjFlowXmlEditor : Form
     {
-        public KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject;
+        public List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> objFlowDataXml_List;
 
         public ObjFlowXmlPropertyGridSetting ObjFlowXmlPropertyGridSettings;
 
@@ -24,7 +24,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         private void ObjFlowXmlEditor_Load(object sender, EventArgs e)
         {
-            objFlowXmlToObject = KMPs.KMPHelper.ObjFlowReader.ReadObjFlowXml("ObjFlowData.Xml");
+            objFlowDataXml_List = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.Xml");
 
             ObjFlowXmlPropertyGridSettings = new ObjFlowXmlPropertyGridSetting
             {
@@ -33,7 +33,7 @@ namespace MK7_KMP_Editor_For_PG_
 
             List<ObjFlowXmlPropertyGridSetting.ObjFlow> objFlows = new List<ObjFlowXmlPropertyGridSetting.ObjFlow>();  
 
-            foreach (var f in objFlowXmlToObject.ObjFlows)
+            foreach (var f in objFlowDataXml_List)
             {
                 ObjFlowXmlPropertyGridSetting.ObjFlow objFlow = new ObjFlowXmlPropertyGridSetting.ObjFlow
                 {
@@ -44,7 +44,6 @@ namespace MK7_KMP_Editor_For_PG_
                     ObjectType = f.ObjectType,
                     Commons = new ObjFlowXmlPropertyGridSetting.ObjFlow.Common
                     {
-                        ObjID = f.Commons.ObjID,
                         ColType = f.Commons.ColType,
                         PathType = f.Commons.PathType,
                         ModelSetting = f.Commons.ModelSetting,
@@ -59,9 +58,9 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     Scales = new ObjFlowXmlPropertyGridSetting.ObjFlow.Scale
                     {
-                        X = f.Scales.X.ToString(),
-                        Y = f.Scales.Y.ToString(),
-                        Z = f.Scales.Z.ToString()
+                        X = f.Scales.X,
+                        Y = f.Scales.Y,
+                        Z = f.Scales.Z
                     },
                     Names = new ObjFlowXmlPropertyGridSetting.ObjFlow.Name
                     {
@@ -126,7 +125,6 @@ namespace MK7_KMP_Editor_For_PG_
                 ObjectType = "Undefined Type",
                 Commons = new ObjFlowXmlPropertyGridSetting.ObjFlow.Common
                 {
-                    ObjID = "0000",
                     ColType = "",
                     PathType = "",
                     ModelSetting = "",
@@ -141,9 +139,9 @@ namespace MK7_KMP_Editor_For_PG_
                 },
                 Scales = new ObjFlowXmlPropertyGridSetting.ObjFlow.Scale
                 {
-                    X = "0",
-                    Y = "0",
-                    Z = "0"
+                    X = 0,
+                    Y = 0,
+                    Z = 0
                 },
                 Names = new ObjFlowXmlPropertyGridSetting.ObjFlow.Name
                 {
@@ -209,8 +207,69 @@ namespace MK7_KMP_Editor_For_PG_
                 File.Move("ObjFlowData.xml", "ObjFlowData.xml.backup");
             }
 
+            List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDBList = new List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB>();
+
+            foreach (var ObjFlowData in ObjFlowXmlPropertyGridSettings.ObjFlowsList)
+			{
+                KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB ObjFlowDB = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB
+                {
+                    ObjectID = ObjFlowData.ObjectID,
+                    ObjectName = ObjFlowData.ObjectName,
+                    Path = ObjFlowData.Path,
+                    UseKCL = ObjFlowData.UseKCL,
+                    ObjectType = ObjFlowData.ObjectType,
+                    Commons = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Common
+                    {
+                        ColType = ObjFlowData.Commons.ColType,
+                        PathType = ObjFlowData.Commons.PathType,
+                        ModelSetting = ObjFlowData.Commons.ModelSetting,
+                        Unknown1 = ObjFlowData.Commons.Unknown1
+                    },
+                    LODSetting = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.LOD_Setting
+                    {
+                        LOD = ObjFlowData.LODSetting.LOD,
+                        LODHPoly = ObjFlowData.LODSetting.LODHPoly,
+                        LODLPoly = ObjFlowData.LODSetting.LODLPoly,
+                        LODDef = ObjFlowData.LODSetting.LODDef
+                    },
+                    Scales = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Scale
+                    {
+                        X = (int)ObjFlowData.Scales.X,
+                        Y = (int)ObjFlowData.Scales.Y,
+                        Z = (int)ObjFlowData.Scales.Z
+                    },
+                    Names = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Name
+                    {
+                        Main = ObjFlowData.Names.Main,
+                        Sub = ObjFlowData.Names.Sub
+                    },
+                    DefaultValues = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Default_Values
+                    {
+                        Values = null
+                    }
+                };
+
+                List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Default_Values.Value> valueList = new List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Default_Values.Value>();
+
+                foreach (var ObjFlowDataValue in ObjFlowData.DefaultValues.ValuesList)
+                {
+                    KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Default_Values.Value value = new KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB.Default_Values.Value
+                    {
+                        DefaultObjectValue = ObjFlowDataValue.DefaultObjectValue,
+                        Description = ObjFlowDataValue.Description
+                    };
+
+                    valueList.Add(value);
+                }
+
+                ObjFlowDB.DefaultValues.Values = valueList;
+
+                ObjFlowDBList.Add(ObjFlowDB);
+
+            }
+
             //Save ObjFlowData.xml
-            KMPs.KMPHelper.ObjFlowReader.WriteObjFlowXml(ObjFlowXmlPropertyGridSettings, "ObjFlowData.Xml");
+            KMPs.KMPHelper.ObjFlowReader.Xml.WriteObjFlowXml(ObjFlowDBList, "ObjFlowData.Xml");
         }
 
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)

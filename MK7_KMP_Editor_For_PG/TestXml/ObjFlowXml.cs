@@ -13,10 +13,10 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
         public List<ObjFlow> ObjFlows { get; set; }
         public class ObjFlow
         {
-            [System.Xml.Serialization.XmlAttribute("ObjectID")]
-            public string ObjectID { get; set; }
+			[System.Xml.Serialization.XmlAttribute("ObjectID")]
+			public string ObjectID { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("ObjectName")]
+			[System.Xml.Serialization.XmlAttribute("ObjectName")]
             public string ObjectName { get; set; }
 
             [System.Xml.Serialization.XmlAttribute("Path")]
@@ -32,8 +32,6 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public Common Commons { get; set; }
             public class Common
             {
-                [System.Xml.Serialization.XmlAttribute("ObjID")]
-                public string ObjID { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("ColType")]
                 public string ColType { get; set; }

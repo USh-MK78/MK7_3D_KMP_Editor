@@ -371,7 +371,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #endregion
             }
 
-            public static void Render_Object(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, KMPs.KMPFormat.KMPSection.JBOG_Section JBOG, KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject)
+            public static void Render_Object(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, KMPs.KMPFormat.KMPSection.JBOG_Section JBOG, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> objFlowDataXml)
             {
                 for (int Count = 0; Count < JBOG.NumOfEntries; Count++)
                 {
@@ -397,7 +397,7 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     };
 
-                    string Path = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).Path;
+                    string Path = objFlowDataXml.Find(x => x.ObjectID == BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).Path;
                     ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
                     //モデルの名前と番号を文字列に格納(情報化)
@@ -977,7 +977,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #endregion
             }
 
-            public static void Render_Object(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.Object Object, KMPs.KMPHelper.ObjFlowReader.ObjFlowXmlToObject objFlowXmlToObject)
+            public static void Render_Object(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.Object Object, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> objFlowDataXml)
             {
                 for (int Count = 0; Count < Object.Object_Values.Count; Count++)
                 {
@@ -1003,7 +1003,7 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     };
 
-                    string ObjectPath = objFlowXmlToObject.ObjFlows.Find(x => x.ObjectID == Object.Object_Values[Count].ObjectID).Path;
+                    string ObjectPath = objFlowDataXml.Find(x => x.ObjectID == Object.Object_Values[Count].ObjectID).Path;
                     ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(ObjectPath);
 
                     //モデルの名前と番号を文字列に格納(情報化)
@@ -2176,47 +2176,148 @@ namespace MK7_KMP_Editor_For_PG_
 
             public class ObjFlowReader
             {
-                public class ObjFlowValue
-                {
-                    //Object ID
-                    public string ObjID { get; set; }
+                public class Binary
+				{
+                    public class FBOC
+                    {
+                        public char[] fboc_Chunk;
+                        public short fboc_HeaderSize;
+                        public short OBJCount;
+                        public List<ObjFlowData> ObjFlow_Data { get; set; }
+                        public class ObjFlowData
+                        {
+                            public byte[] ObjID { get; set; } //オブジェクトID(0x2)
+                            public byte[] ColType { get; set; }  //衝突判定(0x2)
+                            public byte[] PathType { get; set; }  //パスタイプ(0x2)
+                            public short LOD { get; set; }  //LOD(0x2)
+                            public int LODHPoly { get; set; }  //LOD1(ハイポリモデルでの数値), 0x4
+                            public int LODLPoly { get; set; }  //LOD2(ローポリモデルの数値), 0x4
+                            public int LODDef { get; set; }  //LOD(デフォルトの数値), 0x4
+                            public byte[] ModelSetting { get; set; }  //モデルの設定(0x2)
+                            public short ObjX { get; set; }  //X(スケールさせない場合は[0E 00]となってY、Zに値は入らない)(0x2)
+                            public short ObjY { get; set; }  //Y(0x2)
+                            public short ObjZ { get; set; }  //Z(0x2)
+                            public byte[] Unknown1 { get; set; }  //何も無い?(0x4)
+                            public char[] ObjFlowName1 { get; set; }  //Object Name 1
+                            public char[] ObjFlowName2 { get; set; }  //Object Name 2
+                        }
+                    }
 
-                    //衝突タイプ
-                    public string ColType { get; set; }
+                    public static FBOC Read(string Path)
+					{
+                        System.IO.FileStream fs = new System.IO.FileStream(Path, System.IO.FileMode.Open, FileAccess.Read);
+                        BinaryReader br = new BinaryReader(fs);
 
-                    //パスタイプ
-                    public string PathType { get; set; }
+                        FBOC FBOCData = new FBOC
+                        {
+                            fboc_Chunk = br.ReadChars(4),
+                            fboc_HeaderSize = br.ReadInt16(),
+                            OBJCount = br.ReadInt16(),
+                            ObjFlow_Data = null
+                        };
 
-                    //LOD
-                    public int LOD { get; set; }
-                    public int LODHPoly { get; set; }
-                    public int LODLPoly { get; set; }
-                    public int LODDef { get; set; }
+                        if (new string(FBOCData.fboc_Chunk) != "FBOC") throw new Exception("Invalid file.");
 
-                    //モデル設定
-                    public string ModelSetting { get; set; }
+                        List<FBOC.ObjFlowData> datas = new List<FBOC.ObjFlowData>();
 
-                    //X
-                    public int ObjX { get; set; }
+                        for (int Count = 0; Count < FBOCData.OBJCount; Count++)
+                        {
+                            FBOC.ObjFlowData ObjFlowData = new FBOC.ObjFlowData
+                            {
+                                ObjID = br.ReadBytes(2),
+                                ColType = br.ReadBytes(2),
+                                PathType = br.ReadBytes(2),
+                                LOD = br.ReadInt16(),
+                                LODHPoly = br.ReadInt32(),
+                                LODLPoly = br.ReadInt32(),
+                                LODDef = br.ReadInt32(),
+                                ModelSetting = br.ReadBytes(2),
+                                ObjX = br.ReadInt16(),
+                                ObjY = br.ReadInt16(),
+                                ObjZ = br.ReadInt16(),
+                                Unknown1 = br.ReadBytes(4),
+                                ObjFlowName1 = br.ReadChars(64),
+                                ObjFlowName2 = br.ReadChars(64)
+                            };
 
-                    //Y
-                    public int ObjY { get; set; }
+                            datas.Add(ObjFlowData);
+                        }
 
-                    //Z
-                    public int ObjZ { get; set; }
+                        FBOCData.ObjFlow_Data = datas;
 
-                    public string Unk1 { get; set; }
+                        br.Close();
+                        fs.Close();
 
-                    //Object Name 1
-                    public string ObjFlowName1Text { get; set; }
-                    //Object Name 2
-                    public string ObjFlowName2Text { get; set; }
+                        return FBOCData;
+                    }
+
+                    public static void Write(List<FBOC.ObjFlowData> objFlowDatas, string Path)
+                    {
+                        System.IO.FileStream fs = new System.IO.FileStream(Path, System.IO.FileMode.Create, FileAccess.Write);
+                        BinaryWriter bw = new BinaryWriter(fs);
+
+                        FBOC FBOCData = new FBOC
+                        {
+                            fboc_Chunk = new char[] { 'F', 'B', 'O', 'C' },
+                            fboc_HeaderSize = 8,
+                            OBJCount = Convert.ToInt16(objFlowDatas.Count),
+                            ObjFlow_Data = null
+                        };
+
+                        bw.Write(FBOCData.fboc_Chunk);
+                        bw.Write(FBOCData.fboc_HeaderSize);
+                        bw.Write(FBOCData.OBJCount);
+
+                        for (int Count = 0; Count < objFlowDatas.Count; Count++)
+                        {
+                            #region OBJName1
+                            char[] OBJ_NAME1 = objFlowDatas[Count].ObjFlowName1;
+                            int OBJ_NAME1_ZEROPadding = 64 - OBJ_NAME1.Length;
+                            char[] ZEROPaddingChars1 = new char[OBJ_NAME1_ZEROPadding];
+                            for (int p1 = 0; p1 < OBJ_NAME1_ZEROPadding; p1++)
+                            {
+                                ZEROPaddingChars1[p1] = '\0';
+                            }
+
+                            char[] OBJNameChar1 = OBJ_NAME1.Concat(ZEROPaddingChars1).ToArray();
+                            #endregion
+
+                            #region OBJName2
+                            char[] OBJ_NAME2 = objFlowDatas[Count].ObjFlowName2;
+                            int OBJ_NAME2_ZEROPadding = 64 - OBJ_NAME2.Length;
+                            char[] ZEROPaddingChars2 = new char[OBJ_NAME2_ZEROPadding];
+                            for (int p2 = 0; p2 < OBJ_NAME2_ZEROPadding; p2++)
+                            {
+                                ZEROPaddingChars2[p2] = '\0';
+                            }
+
+                            char[] OBJNameChar2 = OBJ_NAME2.Concat(ZEROPaddingChars2).ToArray();
+                            #endregion
+
+                            bw.Write(objFlowDatas[Count].ObjID);
+                            bw.Write(objFlowDatas[Count].ColType);
+                            bw.Write(objFlowDatas[Count].PathType);
+                            bw.Write(objFlowDatas[Count].LOD);
+                            bw.Write(objFlowDatas[Count].LODHPoly);
+                            bw.Write(objFlowDatas[Count].LODLPoly);
+                            bw.Write(objFlowDatas[Count].LODDef);
+                            bw.Write(objFlowDatas[Count].ModelSetting);
+                            bw.Write(objFlowDatas[Count].ObjX);
+                            bw.Write(objFlowDatas[Count].ObjY);
+                            bw.Write(objFlowDatas[Count].ObjZ);
+                            bw.Write(objFlowDatas[Count].Unknown1);
+                            bw.Write(objFlowDatas[Count].ObjFlowName1);
+                            bw.Write(objFlowDatas[Count].ObjFlowName2);
+                        }
+
+                        bw.Close();
+                        fs.Close();
+                    }
                 }
 
-                public class ObjFlowXmlToObject
-                {
-                    public List<ObjFlow> ObjFlows { get; set; }
-                    public class ObjFlow
+                public class Xml
+				{
+                    public class ObjFlowDB
                     {
                         public string ObjectID { get; set; }
                         public string ObjectName { get; set; }
@@ -2227,7 +2328,6 @@ namespace MK7_KMP_Editor_For_PG_
                         public Common Commons { get; set; }
                         public class Common
                         {
-                            public string ObjID { get; set; }
                             public string ColType { get; set; }
                             public string PathType { get; set; }
                             public string ModelSetting { get; set; }
@@ -2269,368 +2369,424 @@ namespace MK7_KMP_Editor_For_PG_
                             }
                         }
                     }
-                }
 
-                public static List<ObjFlowValue> Read(string Path)
-                {
-                    List<ObjFlowValue> objFlowValues_List = new List<ObjFlowValue>();
-
-                    System.IO.FileStream fs = new System.IO.FileStream(Path, System.IO.FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-
-                    FBOC FBOCData = new FBOC
+                    public static Dictionary<string[], string> ObjFlowMdlPathDictionary(List<ObjFlowDB> ObjFlowDataXml, string Path)
                     {
-                        fboc_Chunk = br.ReadChars(4),
-                        fboc_HeaderSize = br.ReadInt16(),
-                        OBJCount = br.ReadInt16(),
-                        ObjFlow_Data = null
-                    };
+                        //指定したディレクトリの中にあるファイルパスを全て取得
+                        string[] PathAry = System.IO.Directory.GetFiles(Path, "*.obj", System.IO.SearchOption.AllDirectories);
 
-                    if (new string(FBOCData.fboc_Chunk) != "FBOC") throw new Exception("Invalid file.");
+                        Dictionary<string[], string> ObjFlowDicts = new Dictionary<string[], string>();
 
-                    for (int Count = 0; Count < FBOCData.OBJCount; Count++)
-                    {
-                        FBOC.ObjFlowData ObjFlowData = new FBOC.ObjFlowData
+                        foreach (var ObjFlowValue in ObjFlowDataXml.Select((item, index) => new { item, index }))
                         {
-                            ObjID = br.ReadBytes(2),
-                            ColType = br.ReadBytes(2),
-                            PathType = br.ReadBytes(2),
-                            LOD = br.ReadInt16(),
-                            LODHPoly = br.ReadInt32(),
-                            LODLPoly = br.ReadInt32(),
-                            LODDef = br.ReadInt32(),
-                            ModelSetting = br.ReadBytes(2),
-                            ObjX = br.ReadInt16(),
-                            ObjY = br.ReadInt16(),
-                            ObjZ = br.ReadInt16(),
-                            Unknown1 = br.ReadBytes(4),
-                            ObjFlowName1 = br.ReadChars(64),
-                            ObjFlowName2 = br.ReadChars(64)
-                        };
-
-                        ObjFlowValue objFlowValue = new ObjFlowValue
-                        {
-                            ObjID = BitConverter.ToString(ObjFlowData.ObjID.Reverse().ToArray()).Replace("-", string.Empty),
-                            ColType = BitConverter.ToString(ObjFlowData.ColType),
-                            PathType = BitConverter.ToString(ObjFlowData.PathType),
-                            LOD = ObjFlowData.LOD,
-                            LODHPoly = ObjFlowData.LODHPoly,
-                            LODLPoly = ObjFlowData.LODLPoly,
-                            LODDef = ObjFlowData.LODDef,
-                            ModelSetting = BitConverter.ToString(ObjFlowData.ModelSetting),
-                            ObjX = ObjFlowData.ObjX,
-                            ObjY = ObjFlowData.ObjY,
-                            ObjZ = ObjFlowData.ObjZ,
-                            Unk1 = BitConverter.ToString(ObjFlowData.Unknown1, 0),
-                            ObjFlowName1Text = new string(ObjFlowData.ObjFlowName1).Replace("\0", ""),
-                            ObjFlowName2Text = new string(ObjFlowData.ObjFlowName2).Replace("\0", "")
-                        };
-
-                        objFlowValues_List.Add(objFlowValue);
-                    }
-
-                    br.Close();
-                    fs.Close();
-
-                    return objFlowValues_List;
-                }
-
-                public static Dictionary<string[], string> ObjFlowMdlPathDictionary(ObjFlowXmlToObject ObjFlowToObj, string Path, string DefaultModelPath)
-                {
-                    //指定したディレクトリの中にあるファイルパスを全て取得
-                    string[] PathAry = System.IO.Directory.GetFiles(Path, "*.obj", System.IO.SearchOption.AllDirectories);
-
-                    Dictionary<string[], string> ObjFlowDicts = new Dictionary<string[], string>();
-
-                    foreach (var ObjFlowValue in ObjFlowToObj.ObjFlows.Select((item, index) => new { item, index }))
-                    {
-                        //Search the path of the corresponding model from PathAry(string[])
-                        if (PathAry.Contains(ObjFlowValue.item.Path))
-                        {
-                            //Get ObjectID
-                            string ObjectID = ObjFlowToObj.ObjFlows.Find(x => x.Path == ObjFlowValue.item.Path).ObjectID ?? "";
-                            ObjFlowDicts.Add(new string[] { ObjFlowValue.item.ObjectName, ObjectID }, ObjFlowValue.item.Path);
-                        }
-                    }
-
-                    return ObjFlowDicts;
-                }
-
-                public static void CreateXml(List<ObjFlowValue> ObjFlowVal_List, string KMPObjectFolderPath, string DefaultModelPath, string XmlPath)
-                {
-                    string[] PathAry = System.IO.Directory.GetFiles(KMPObjectFolderPath, "*.obj", System.IO.SearchOption.AllDirectories);
-
-                    TestXml.KMPObjFlowDataXml kMPObjFlowDataXml = new TestXml.KMPObjFlowDataXml
-                    {
-                        ObjFlows = null
-                    };
-
-                    List<TestXml.KMPObjFlowDataXml.ObjFlow> ObjFlowList = new List<TestXml.KMPObjFlowDataXml.ObjFlow>();
-
-                    foreach (var ObjFlowValue in ObjFlowVal_List.Select((item, index) => new { item, index }))
-                    {
-                        string MDLPath = "";
-
-                        //Search the path of the corresponding model from PathAry(string[])
-                        if (PathAry.Contains(KMPObjectFolderPath + "\\" + ObjFlowValue.item.ObjFlowName1Text + ".obj"))
-                        {
-                            MDLPath = KMPObjectFolderPath + "\\" + ObjFlowValue.item.ObjFlowName1Text + ".obj";
-                        }
-                        if (PathAry.Contains(KMPObjectFolderPath + "\\" + ObjFlowValue.item.ObjFlowName1Text + ".obj") == false)
-                        {
-                            MDLPath = DefaultModelPath;
-                        }
-
-                        TestXml.KMPObjFlowDataXml.ObjFlow objFlow = new TestXml.KMPObjFlowDataXml.ObjFlow
-                        {
-                            ObjectID = ObjFlowValue.item.ObjID,
-                            ObjectName = ObjFlowValue.item.ObjFlowName1Text,
-                            Path = MDLPath,
-                            UseKCL = false,
-                            ObjectType = "Unknown",
-                            Commons = new TestXml.KMPObjFlowDataXml.ObjFlow.Common
+                            //Search the path of the corresponding model from PathAry(string[])
+                            if (PathAry.Contains(ObjFlowValue.item.Path))
                             {
-                                ObjID = ObjFlowValue.item.ObjID,
-                                ColType = ObjFlowValue.item.ColType,
-                                PathType = ObjFlowValue.item.PathType,
-                                ModelSetting = ObjFlowValue.item.ModelSetting,
-                                Unknown1 = ObjFlowValue.item.Unk1
-                            },
-                            LODSetting = new TestXml.KMPObjFlowDataXml.ObjFlow.LOD_Setting
-                            {
-                                LOD = ObjFlowValue.item.LOD,
-                                LODHPoly = ObjFlowValue.item.LODHPoly,
-                                LODLPoly = ObjFlowValue.item.LODLPoly,
-                                LODDef = ObjFlowValue.item.LODDef
-                            },
-                            Scales = new TestXml.KMPObjFlowDataXml.ObjFlow.Scale
-                            {
-                                X = ObjFlowValue.item.ObjX,
-                                Y = ObjFlowValue.item.ObjY,
-                                Z = ObjFlowValue.item.ObjZ
-                            },
-                            Names = new TestXml.KMPObjFlowDataXml.ObjFlow.Name
-                            {
-                                Main = ObjFlowValue.item.ObjFlowName1Text,
-                                Sub = ObjFlowValue.item.ObjFlowName2Text
-                            },
-                            DefaultValues = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values
-                            {
-                                Values = null
+                                //Get ObjectID
+                                string ObjectID = ObjFlowDataXml.Find(x => x.Path == ObjFlowValue.item.Path).ObjectID ?? "";
+                                ObjFlowDicts.Add(new string[] { ObjFlowValue.item.ObjectName, ObjectID }, ObjFlowValue.item.Path);
                             }
+                        }
+
+                        return ObjFlowDicts;
+                    }
+
+                    //Create Xml
+                    public static void CreateXml(List<ObjFlowDB> ObjFlowVal_List, string KMPObjectFolderPath, string DefaultModelPath, string XmlPath)
+                    {
+                        string[] PathAry = System.IO.Directory.GetFiles(KMPObjectFolderPath, "*.obj", System.IO.SearchOption.AllDirectories);
+
+                        TestXml.KMPObjFlowDataXml kMPObjFlowDataXml = new TestXml.KMPObjFlowDataXml
+                        {
+                            ObjFlows = null
                         };
 
-                        #region Values
-                        List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value> ValuesList = new List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value>();
+                        List<TestXml.KMPObjFlowDataXml.ObjFlow> ObjFlowList = new List<TestXml.KMPObjFlowDataXml.ObjFlow>();
 
-                        for (int i = 0; i < 8; i++)
+                        foreach (var ObjFlowValue in ObjFlowVal_List.Select((item, index) => new { item, index }))
                         {
-                            TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value value = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value
+                            string MDLPath = "";
+
+                            //Search the path of the corresponding model from PathAry(string[])
+                            if (PathAry.Contains(KMPObjectFolderPath + "\\" + ObjFlowValue.item.Names.Main + ".obj"))
                             {
-                                DefaultObjectValue = 0,
-                                Description = "Test " + i
+                                MDLPath = KMPObjectFolderPath + "\\" + ObjFlowValue.item.Names.Main + ".obj";
+                            }
+                            if (PathAry.Contains(KMPObjectFolderPath + "\\" + ObjFlowValue.item.Names.Main + ".obj") == false)
+                            {
+                                MDLPath = DefaultModelPath;
+                            }
+
+                            TestXml.KMPObjFlowDataXml.ObjFlow objFlow = new TestXml.KMPObjFlowDataXml.ObjFlow
+                            {
+                                ObjectID = ObjFlowValue.item.ObjectID,
+                                ObjectName = ObjFlowValue.item.ObjectName,
+                                Path = MDLPath,
+                                UseKCL = false,
+                                ObjectType = "Unknown",
+                                Commons = new TestXml.KMPObjFlowDataXml.ObjFlow.Common
+                                {
+                                    ColType = ObjFlowValue.item.Commons.ColType,
+                                    PathType = ObjFlowValue.item.Commons.PathType,
+                                    ModelSetting = ObjFlowValue.item.Commons.ModelSetting,
+                                    Unknown1 = ObjFlowValue.item.Commons.Unknown1
+                                },
+                                LODSetting = new TestXml.KMPObjFlowDataXml.ObjFlow.LOD_Setting
+                                {
+                                    LOD = ObjFlowValue.item.LODSetting.LOD,
+                                    LODHPoly = ObjFlowValue.item.LODSetting.LODHPoly,
+                                    LODLPoly = ObjFlowValue.item.LODSetting.LODLPoly,
+                                    LODDef = ObjFlowValue.item.LODSetting.LODDef
+                                },
+                                Scales = new TestXml.KMPObjFlowDataXml.ObjFlow.Scale
+                                {
+                                    X = ObjFlowValue.item.Scales.X,
+                                    Y = ObjFlowValue.item.Scales.Y,
+                                    Z = ObjFlowValue.item.Scales.Z
+                                },
+                                Names = new TestXml.KMPObjFlowDataXml.ObjFlow.Name
+                                {
+                                    Main = ObjFlowValue.item.Names.Main,
+                                    Sub = ObjFlowValue.item.Names.Sub
+                                },
+                                DefaultValues = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values
+                                {
+                                    Values = null
+                                }
                             };
 
-                            ValuesList.Add(value);
+                            #region Values
+                            List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value> ValuesList = new List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value>();
+
+                            for (int i = 0; i < 8; i++)
+                            {
+                                TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value value = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value
+                                {
+                                    DefaultObjectValue = 0,
+                                    Description = "Test " + i
+                                };
+
+                                ValuesList.Add(value);
+                            }
+
+                            objFlow.DefaultValues.Values = ValuesList;
+                            #endregion
+
+                            ObjFlowList.Add(objFlow);
                         }
 
-                        objFlow.DefaultValues.Values = ValuesList;
-                        #endregion
+                        kMPObjFlowDataXml.ObjFlows = ObjFlowList;
 
-                        ObjFlowList.Add(objFlow);
+                        //Delete Namespaces
+                        var xns = new XmlSerializerNamespaces();
+                        xns.Add(string.Empty, string.Empty);
+
+                        System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
+                        System.IO.StreamWriter sw = new StreamWriter(XmlPath, false, new System.Text.UTF8Encoding(false));
+                        serializer.Serialize(sw, kMPObjFlowDataXml, xns);
+                        sw.Close();
                     }
 
-                    kMPObjFlowDataXml.ObjFlows = ObjFlowList;
-
-                    //Delete Namespaces
-                    var xns = new XmlSerializerNamespaces();
-                    xns.Add(string.Empty, string.Empty);
-
-                    System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
-                    System.IO.StreamWriter sw = new StreamWriter(XmlPath, false, new System.Text.UTF8Encoding(false));
-                    serializer.Serialize(sw, kMPObjFlowDataXml, xns);
-                    sw.Close();
-                }
-
-                public static ObjFlowXmlToObject ReadObjFlowXml(string Path)
-                {
-                    System.IO.FileStream fs1 = new FileStream(Path, FileMode.Open, FileAccess.Read);
-                    System.Xml.Serialization.XmlSerializer s1 = new System.Xml.Serialization.XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
-                    TestXml.KMPObjFlowDataXml ObjFlowXml = (TestXml.KMPObjFlowDataXml)s1.Deserialize(fs1);
-
-                    ObjFlowXmlToObject objFlowXmlToObject = new ObjFlowXmlToObject
+                    //Read ObjFlowData.xml
+                    public static List<ObjFlowDB> ReadObjFlowXml(string Path)
                     {
-                        ObjFlows = null
-                    };
+                        System.IO.FileStream fs1 = new FileStream(Path, FileMode.Open, FileAccess.Read);
+                        System.Xml.Serialization.XmlSerializer s1 = new System.Xml.Serialization.XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
+                        TestXml.KMPObjFlowDataXml ObjFlowXml = (TestXml.KMPObjFlowDataXml)s1.Deserialize(fs1);
 
-                    List<ObjFlowXmlToObject.ObjFlow> ObjFlow_List = new List<ObjFlowXmlToObject.ObjFlow>();
+                        List<ObjFlowDB> ObjFlowXml_List = new List<ObjFlowDB>();
 
-                    foreach(var ObjFlowData in ObjFlowXml.ObjFlows)
-                    {
-                        ObjFlowXmlToObject.ObjFlow objFlow = new ObjFlowXmlToObject.ObjFlow
+                        foreach (var ObjFlowData in ObjFlowXml.ObjFlows)
                         {
-                            ObjectID = ObjFlowData.ObjectID,
-                            ObjectName = ObjFlowData.ObjectName,
-                            Path = ObjFlowData.Path,
-                            UseKCL = ObjFlowData.UseKCL,
-                            ObjectType = ObjFlowData.ObjectType,
-                            Commons = new ObjFlowXmlToObject.ObjFlow.Common
+                            ObjFlowDB objFlow = new ObjFlowDB
                             {
-                                ObjID = ObjFlowData.Commons.ObjID,
-                                ColType = ObjFlowData.Commons.ColType,
-                                PathType = ObjFlowData.Commons.PathType,
-                                ModelSetting = ObjFlowData.Commons.ModelSetting,
-                                Unknown1 = ObjFlowData.Commons.Unknown1
-                            },
-                            LODSetting = new ObjFlowXmlToObject.ObjFlow.LOD_Setting
-                            {
-                                LOD = ObjFlowData.LODSetting.LOD,
-                                LODHPoly = ObjFlowData.LODSetting.LODHPoly,
-                                LODLPoly = ObjFlowData.LODSetting.LODLPoly,
-                                LODDef = ObjFlowData.LODSetting.LODDef
-                            },
-                            Scales = new ObjFlowXmlToObject.ObjFlow.Scale
-                            {
-                                X = ObjFlowData.Scales.X,
-                                Y = ObjFlowData.Scales.Y,
-                                Z = ObjFlowData.Scales.Z
-                            },
-                            Names = new ObjFlowXmlToObject.ObjFlow.Name
-                            {
-                                Main = ObjFlowData.Names.Main,
-                                Sub = ObjFlowData.Names.Sub
-                            },
-                            DefaultValues = new ObjFlowXmlToObject.ObjFlow.Default_Values
-                            {
-                                Values = null
-                            }
-                        };
-
-                        List<ObjFlowXmlToObject.ObjFlow.Default_Values.Value> valueList = new List<ObjFlowXmlToObject.ObjFlow.Default_Values.Value>();
-
-                        foreach(var ObjFlowDataValue in ObjFlowData.DefaultValues.Values)
-                        {
-                            ObjFlowXmlToObject.ObjFlow.Default_Values.Value value = new ObjFlowXmlToObject.ObjFlow.Default_Values.Value
-                            {
-                                DefaultObjectValue = ObjFlowDataValue.DefaultObjectValue,
-                                Description = ObjFlowDataValue.Description
+                                ObjectID = ObjFlowData.ObjectID,
+                                ObjectName = ObjFlowData.ObjectName,
+                                Path = ObjFlowData.Path,
+                                UseKCL = ObjFlowData.UseKCL,
+                                ObjectType = ObjFlowData.ObjectType,
+                                Commons = new ObjFlowDB.Common
+                                {
+                                    ColType = ObjFlowData.Commons.ColType,
+                                    PathType = ObjFlowData.Commons.PathType,
+                                    ModelSetting = ObjFlowData.Commons.ModelSetting,
+                                    Unknown1 = ObjFlowData.Commons.Unknown1
+                                },
+                                LODSetting = new ObjFlowDB.LOD_Setting
+                                {
+                                    LOD = ObjFlowData.LODSetting.LOD,
+                                    LODHPoly = ObjFlowData.LODSetting.LODHPoly,
+                                    LODLPoly = ObjFlowData.LODSetting.LODLPoly,
+                                    LODDef = ObjFlowData.LODSetting.LODDef
+                                },
+                                Scales = new ObjFlowDB.Scale
+                                {
+                                    X = ObjFlowData.Scales.X,
+                                    Y = ObjFlowData.Scales.Y,
+                                    Z = ObjFlowData.Scales.Z
+                                },
+                                Names = new ObjFlowDB.Name
+                                {
+                                    Main = ObjFlowData.Names.Main,
+                                    Sub = ObjFlowData.Names.Sub
+                                },
+                                DefaultValues = new ObjFlowDB.Default_Values
+                                {
+                                    Values = null
+                                }
                             };
 
-                            valueList.Add(value);
+                            List<ObjFlowDB.Default_Values.Value> valueList = new List<ObjFlowDB.Default_Values.Value>();
+
+                            foreach (var ObjFlowDataValue in ObjFlowData.DefaultValues.Values)
+                            {
+                                ObjFlowDB.Default_Values.Value value = new ObjFlowDB.Default_Values.Value
+                                {
+                                    DefaultObjectValue = ObjFlowDataValue.DefaultObjectValue,
+                                    Description = ObjFlowDataValue.Description
+                                };
+
+                                valueList.Add(value);
+                            }
+
+                            objFlow.DefaultValues.Values = valueList;
+
+                            ObjFlowXml_List.Add(objFlow);
                         }
 
-                        objFlow.DefaultValues.Values = valueList;
+                        fs1.Close();
+                        fs1.Dispose();
 
-                        ObjFlow_List.Add(objFlow);
+                        return ObjFlowXml_List;
                     }
 
-                    objFlowXmlToObject.ObjFlows = ObjFlow_List;
-
-                    fs1.Close();
-                    fs1.Dispose();
-
-                    return objFlowXmlToObject;
-                }
-
-                public static void WriteObjFlowXml(ObjFlowXmlPropertyGridSetting objFlowXmlToObject, string Path)
-                {
-                    TestXml.KMPObjFlowDataXml kMPObjFlowDataXml = new TestXml.KMPObjFlowDataXml
+                    //Write ObjFlowData.xml
+                    public static void WriteObjFlowXml(List<ObjFlowDB> ObjFlowDBList, string Path)
                     {
-                        ObjFlows = null
-                    };
-
-                    List<TestXml.KMPObjFlowDataXml.ObjFlow> ObjFlowList = new List<TestXml.KMPObjFlowDataXml.ObjFlow>();
-
-                    foreach (var ObjFlowValue in objFlowXmlToObject.ObjFlowsList.Select((item, index) => new { item, index }))
-                    {
-                        TestXml.KMPObjFlowDataXml.ObjFlow objFlow = new TestXml.KMPObjFlowDataXml.ObjFlow
+                        TestXml.KMPObjFlowDataXml kMPObjFlowDataXml = new TestXml.KMPObjFlowDataXml
                         {
-                            ObjectID = ObjFlowValue.item.ObjectID,
-                            ObjectName = ObjFlowValue.item.ObjectName,
-                            Path = ObjFlowValue.item.Path,
-                            UseKCL = ObjFlowValue.item.UseKCL,
-                            ObjectType = ObjFlowValue.item.ObjectType,
-                            Commons = new TestXml.KMPObjFlowDataXml.ObjFlow.Common
-                            {
-                                ObjID = ObjFlowValue.item.Commons.ObjID,
-                                ColType = ObjFlowValue.item.Commons.ColType,
-                                PathType = ObjFlowValue.item.Commons.PathType,
-                                ModelSetting = ObjFlowValue.item.Commons.ModelSetting,
-                                Unknown1 = ObjFlowValue.item.Commons.Unknown1
-                            },
-                            LODSetting = new TestXml.KMPObjFlowDataXml.ObjFlow.LOD_Setting
-                            {
-                                LOD = ObjFlowValue.item.LODSetting.LOD,
-                                LODHPoly = ObjFlowValue.item.LODSetting.LODHPoly,
-                                LODLPoly = ObjFlowValue.item.LODSetting.LODLPoly,
-                                LODDef = ObjFlowValue.item.LODSetting.LODDef
-                            },
-                            Scales = new TestXml.KMPObjFlowDataXml.ObjFlow.Scale
-                            {
-                                X = Convert.ToInt32(ObjFlowValue.item.Scales.X),
-                                Y = Convert.ToInt32(ObjFlowValue.item.Scales.Y),
-                                Z = Convert.ToInt32(ObjFlowValue.item.Scales.Z)
-                            },
-                            Names = new TestXml.KMPObjFlowDataXml.ObjFlow.Name
-                            {
-                                Main = ObjFlowValue.item.Names.Main,
-                                Sub = ObjFlowValue.item.Names.Sub
-                            },
-                            DefaultValues = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values
-                            {
-                                Values = null
-                            }
+                            ObjFlows = null
                         };
 
-                        #region Values
-                        List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value> ValuesList = new List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value>();
+                        List<TestXml.KMPObjFlowDataXml.ObjFlow> ObjFlowList = new List<TestXml.KMPObjFlowDataXml.ObjFlow>();
 
-                        foreach (var i in ObjFlowValue.item.DefaultValues.ValuesList)
+                        foreach (var ObjFlowValue in ObjFlowDBList.Select((item, index) => new { item, index }))
                         {
-                            TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value value = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value
+                            TestXml.KMPObjFlowDataXml.ObjFlow objFlow = new TestXml.KMPObjFlowDataXml.ObjFlow
                             {
-                                DefaultObjectValue = i.DefaultObjectValue,
-                                Description = i.Description
+                                ObjectID = ObjFlowValue.item.ObjectID,
+                                ObjectName = ObjFlowValue.item.ObjectName,
+                                Path = ObjFlowValue.item.Path,
+                                UseKCL = ObjFlowValue.item.UseKCL,
+                                ObjectType = ObjFlowValue.item.ObjectType,
+                                Commons = new TestXml.KMPObjFlowDataXml.ObjFlow.Common
+                                {
+                                    ColType = ObjFlowValue.item.Commons.ColType,
+                                    PathType = ObjFlowValue.item.Commons.PathType,
+                                    ModelSetting = ObjFlowValue.item.Commons.ModelSetting,
+                                    Unknown1 = ObjFlowValue.item.Commons.Unknown1
+                                },
+                                LODSetting = new TestXml.KMPObjFlowDataXml.ObjFlow.LOD_Setting
+                                {
+                                    LOD = ObjFlowValue.item.LODSetting.LOD,
+                                    LODHPoly = ObjFlowValue.item.LODSetting.LODHPoly,
+                                    LODLPoly = ObjFlowValue.item.LODSetting.LODLPoly,
+                                    LODDef = ObjFlowValue.item.LODSetting.LODDef
+                                },
+                                Scales = new TestXml.KMPObjFlowDataXml.ObjFlow.Scale
+                                {
+                                    X = Convert.ToInt32(ObjFlowValue.item.Scales.X),
+                                    Y = Convert.ToInt32(ObjFlowValue.item.Scales.Y),
+                                    Z = Convert.ToInt32(ObjFlowValue.item.Scales.Z)
+                                },
+                                Names = new TestXml.KMPObjFlowDataXml.ObjFlow.Name
+                                {
+                                    Main = ObjFlowValue.item.Names.Main,
+                                    Sub = ObjFlowValue.item.Names.Sub
+                                },
+                                DefaultValues = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values
+                                {
+                                    Values = null
+                                }
                             };
 
-                            ValuesList.Add(value);
+                            #region Values
+                            List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value> ValuesList = new List<TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value>();
+
+                            foreach (var i in ObjFlowValue.item.DefaultValues.Values)
+                            {
+                                TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value value = new TestXml.KMPObjFlowDataXml.ObjFlow.Default_Values.Value
+                                {
+                                    DefaultObjectValue = i.DefaultObjectValue,
+                                    Description = i.Description
+                                };
+
+                                ValuesList.Add(value);
+                            }
+
+                            objFlow.DefaultValues.Values = ValuesList;
+                            #endregion
+
+                            ObjFlowList.Add(objFlow);
                         }
 
-                        objFlow.DefaultValues.Values = ValuesList;
-                        #endregion
+                        kMPObjFlowDataXml.ObjFlows = ObjFlowList;
 
-                        ObjFlowList.Add(objFlow);
+                        //Delete Namespaces
+                        var xns = new XmlSerializerNamespaces();
+                        xns.Add(string.Empty, string.Empty);
+
+                        System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
+                        System.IO.StreamWriter sw = new StreamWriter(Path, false, new System.Text.UTF8Encoding(false));
+                        serializer.Serialize(sw, kMPObjFlowDataXml, xns);
+                        sw.Close();
+                    }
+                }
+
+				public class ConvertTo
+				{
+					public static ObjFlowReader.Binary.FBOC ToFBOC(List<Xml.ObjFlowDB> ObjFlowDataXml_List)
+					{
+                        Binary.FBOC FBOCFormat = new Binary.FBOC
+                        {
+                            fboc_Chunk = new char[] { 'F', 'B', 'O', 'C' },
+                            fboc_HeaderSize = 8,
+                            OBJCount = 0,
+                            ObjFlow_Data = null
+                        };
+
+                        List<Binary.FBOC.ObjFlowData> objFlowDatas = new List<Binary.FBOC.ObjFlowData>();
+
+						for (int Count = 0; Count < ObjFlowDataXml_List.Count; Count++)
+						{
+							#region OBJName1
+							char[] OBJ_NAME1 = ObjFlowDataXml_List[Count].Names.Main.ToCharArray();
+							int OBJ_NAME1_ZEROPadding = 64 - OBJ_NAME1.Length;
+							char[] ZEROPaddingChars1 = new char[OBJ_NAME1_ZEROPadding];
+							for (int p1 = 0; p1 < OBJ_NAME1_ZEROPadding; p1++)
+							{
+								ZEROPaddingChars1[p1] = '\0';
+							}
+
+							char[] OBJNameChar1 = OBJ_NAME1.Concat(ZEROPaddingChars1).ToArray();
+							#endregion
+
+							#region OBJName2
+							char[] OBJ_NAME2 = ObjFlowDataXml_List[Count].Names.Sub.ToCharArray();
+							int OBJ_NAME2_ZEROPadding = 64 - OBJ_NAME2.Length;
+							char[] ZEROPaddingChars2 = new char[OBJ_NAME2_ZEROPadding];
+							for (int p2 = 0; p2 < OBJ_NAME2_ZEROPadding; p2++)
+							{
+								ZEROPaddingChars2[p2] = '\0';
+							}
+
+							char[] OBJNameChar2 = OBJ_NAME2.Concat(ZEROPaddingChars2).ToArray();
+							#endregion
+
+							Binary.FBOC.ObjFlowData ObjFlowData = new Binary.FBOC.ObjFlowData
+							{
+								ObjID = Byte2StringConverter.ToByteArray(ObjFlowDataXml_List[Count].ObjectID).Reverse().ToArray(),
+								ColType = Byte2StringConverter.ToByteArray(ObjFlowDataXml_List[Count].Commons.ColType).Reverse().ToArray(),
+								PathType = Byte2StringConverter.ToByteArray(ObjFlowDataXml_List[Count].Commons.PathType).Reverse().ToArray(),
+								LOD = (short)ObjFlowDataXml_List[Count].LODSetting.LOD,
+								LODHPoly = (short)ObjFlowDataXml_List[Count].LODSetting.LODHPoly,
+								LODLPoly = (short)ObjFlowDataXml_List[Count].LODSetting.LODLPoly,
+								LODDef = (short)ObjFlowDataXml_List[Count].LODSetting.LODDef,
+								ModelSetting = Byte2StringConverter.ToByteArray(ObjFlowDataXml_List[Count].Commons.ModelSetting).Reverse().ToArray(),
+								ObjX = (short)ObjFlowDataXml_List[Count].Scales.X,
+								ObjY = (short)ObjFlowDataXml_List[Count].Scales.Y,
+								ObjZ = (short)ObjFlowDataXml_List[Count].Scales.Z,
+								Unknown1 = Byte2StringConverter.ToByteArray(ObjFlowDataXml_List[Count].Commons.Unknown1).Reverse().ToArray(),
+								ObjFlowName1 = OBJNameChar1,
+								ObjFlowName2 = OBJNameChar2
+							};
+
+                            objFlowDatas.Add(ObjFlowData);
+						}
+
+                        FBOCFormat.ObjFlow_Data = objFlowDatas;
+                        FBOCFormat.OBJCount = Convert.ToInt16(objFlowDatas.Count);
+
+                        return FBOCFormat;
                     }
 
-                    kMPObjFlowDataXml.ObjFlows = ObjFlowList;
+                    public static List<Xml.ObjFlowDB> ToObjFlowDB(ObjFlowReader.Binary.FBOC FBOCData)
+					{
+						List<Xml.ObjFlowDB> ObjFlowDataXmlList = new List<Xml.ObjFlowDB>();
 
-                    //Delete Namespaces
-                    var xns = new XmlSerializerNamespaces();
-                    xns.Add(string.Empty, string.Empty);
+						for (int Count = 0; Count < FBOCData.OBJCount; Count++)
+						{
+                            Xml.ObjFlowDB ObjFlowDatabase = new Xml.ObjFlowDB
+                            {
+                                ObjectID = BitConverter.ToString(FBOCData.ObjFlow_Data[Count].ObjID.Reverse().ToArray()).Replace("-", string.Empty),
+                                ObjectName = new string(FBOCData.ObjFlow_Data[Count].ObjFlowName1).Replace("\0", ""),
+                                Path = "",
+                                UseKCL = false,
+                                ObjectType = "NaN",
+                                Commons = new Xml.ObjFlowDB.Common
+                                {
+                                    ColType = BitConverter.ToString(FBOCData.ObjFlow_Data[Count].ColType.Reverse().ToArray()).Replace("-", string.Empty),
+                                    PathType = BitConverter.ToString(FBOCData.ObjFlow_Data[Count].PathType.Reverse().ToArray()).Replace("-", string.Empty),
+                                    ModelSetting = BitConverter.ToString(FBOCData.ObjFlow_Data[Count].ModelSetting.Reverse().ToArray()).Replace("-", string.Empty),
+                                    Unknown1 = BitConverter.ToString(FBOCData.ObjFlow_Data[Count].Unknown1.Reverse().ToArray(), 0).Replace("-", string.Empty)
+                                },
+                                LODSetting = new Xml.ObjFlowDB.LOD_Setting
+                                {
+                                    LOD = FBOCData.ObjFlow_Data[Count].LOD,
+                                    LODHPoly = FBOCData.ObjFlow_Data[Count].LODHPoly,
+                                    LODLPoly = FBOCData.ObjFlow_Data[Count].LODLPoly,
+                                    LODDef = FBOCData.ObjFlow_Data[Count].LODDef
+                                },
+                                Scales = new Xml.ObjFlowDB.Scale
+                                {
+                                    X = FBOCData.ObjFlow_Data[Count].ObjX,
+                                    Y = FBOCData.ObjFlow_Data[Count].ObjY,
+                                    Z = FBOCData.ObjFlow_Data[Count].ObjZ
+                                },
+                                Names = new Xml.ObjFlowDB.Name
+                                {
+                                    Main = new string(FBOCData.ObjFlow_Data[Count].ObjFlowName1).Replace("\0", ""),
+                                    Sub = new string(FBOCData.ObjFlow_Data[Count].ObjFlowName2).Replace("\0", "")
+                                },
+                                DefaultValues = new Xml.ObjFlowDB.Default_Values
+                                {
+                                    Values = new List<Xml.ObjFlowDB.Default_Values.Value>()
+                                }
+                            };
 
-                    System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(TestXml.KMPObjFlowDataXml));
-                    System.IO.StreamWriter sw = new StreamWriter(Path, false, new System.Text.UTF8Encoding(false));
-                    serializer.Serialize(sw, kMPObjFlowDataXml, xns);
-                    sw.Close();
-                }
-            }
+                            List<Xml.ObjFlowDB.Default_Values.Value> valueList = new List<Xml.ObjFlowDB.Default_Values.Value>();
+
+                            foreach (var ObjFlowDataValue in ObjFlowDatabase.DefaultValues.Values)
+                            {
+                                Xml.ObjFlowDB.Default_Values.Value value = new Xml.ObjFlowDB.Default_Values.Value
+                                {
+                                    DefaultObjectValue = ObjFlowDataValue.DefaultObjectValue,
+                                    Description = ObjFlowDataValue.Description
+                                };
+
+                                valueList.Add(value);
+                            }
+
+                            ObjFlowDatabase.DefaultValues.Values = valueList;
+
+                            ObjFlowDataXmlList.Add(ObjFlowDatabase);
+                        }
+
+                        return ObjFlowDataXmlList;
+					}
+				}
+			}
 
             public class Byte2StringConverter
             {
-                //public byte[] ToByteArray(string InputString)
-                //{
-                //    string[] SplitStr = InputString.Split('-');
-                //    byte[] Str2byte = new byte[SplitStr.Length];
-                //    for (int n = 0; n < SplitStr.Length; n++)
-                //    {
-                //        byte b = byte.Parse(SplitStr[n], System.Globalization.NumberStyles.AllowHexSpecifier);
-                //        Str2byte[n] = b;
-                //    }
+				public static byte[] ToByteArray(string InputString)
+				{
+                    List<byte> Str2byte = new List<byte>();
+                    for (int i = 0; i < InputString.Length / 2; i++) Str2byte.Add(Convert.ToByte(InputString.Substring(i * 2, 2), 16));
+					return Str2byte.ToArray();
+				}
 
-                //    return Str2byte;
-                //}
-
-                public static byte[] OBJIDStrToByteArray(string InputString_OBJID)
+				public static byte[] OBJIDStrToByteArray(string InputString_OBJID)
                 {
                     string w1 = InputString_OBJID.Substring(0, 2);
                     string w2 = InputString_OBJID.Substring(2);
