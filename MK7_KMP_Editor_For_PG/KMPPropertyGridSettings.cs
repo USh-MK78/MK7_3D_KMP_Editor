@@ -2318,14 +2318,14 @@ namespace MK7_KMP_Editor_For_PG_
                     JBOG_ITOP_RouteIDIndex = JBOG.JBOGValue_List[Count].JBOG_ITOP_RouteIDIndex,
                     JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
                     {
-                        Value0 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value0,
-                        Value1 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value1,
-                        Value2 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value2,
-                        Value3 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value3,
-                        Value4 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value4,
-                        Value5 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value5,
-                        Value6 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value6,
-                        Value7 = JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value7
+                        Value0 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value0,
+                        Value1 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value1,
+                        Value2 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value2,
+                        Value3 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value3,
+                        Value4 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value4,
+                        Value5 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value5,
+                        Value6 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value6,
+                        Value7 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value7
                     },
                     JBOG_PresenceSetting = JBOG.JBOGValue_List[Count].JBOG_PresenceSetting,
                     JBOG_UnkByte2 = BitConverter.ToString(JBOG.JBOGValue_List[Count].JBOG_UnkByte2.Reverse().ToArray()).Replace("-", string.Empty),
@@ -3036,7 +3036,7 @@ namespace MK7_KMP_Editor_For_PG_
                     JBOG_Rotation = new Vector3D(RX, RY, RZ),
                     JBOG_Scale = JBOG_Section.JBOGValueList[Count].Scales.GetVector3D(),
                     JBOG_ITOP_RouteIDIndex = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_ITOP_RouteIDIndex),
-                    JOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
+                    GOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
                     {
                         Value0 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value0),
                         Value1 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value1),

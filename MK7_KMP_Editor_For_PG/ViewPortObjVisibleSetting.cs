@@ -153,8 +153,8 @@ namespace MK7_KMP_Editor_For_PG_
                 foreach (var Checkpoint_LeftObj in Checkpoint.Checkpoint_Left.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
                 foreach (var Checkpoint_RightLine in Checkpoint.Checkpoint_Right.LV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
                 foreach (var Checkpoint_RightObj in Checkpoint.Checkpoint_Right.MV3D_List.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
-                foreach (var Checkpoint_SideWall_Left in Checkpoint.SideWall_Left.SideWallList.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
-                foreach (var Checkpoint_SideWall_Right in Checkpoint.SideWall_Right.SideWallList.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
+                foreach (var Checkpoint_SideWall_Left in Checkpoint.SideWall_Left.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
+                foreach (var Checkpoint_SideWall_Right in Checkpoint.SideWall_Right.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
                 foreach (var Checkpoint_SplitWall in Checkpoint.Checkpoint_SplitWallMDL.ToArray<Visual3D>()) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SplitWall);
             }
 
@@ -187,12 +187,12 @@ namespace MK7_KMP_Editor_For_PG_
                 }
 
 
-                foreach (var Checkpoint_SideWall_Left_Add in Checkpoint.SideWall_Left.SideWallList.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                foreach (var Checkpoint_SideWall_Left_Add in Checkpoint.SideWall_Left.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Left_Add);
                 }
 
-                foreach (var Checkpoint_SideWall_Right_Add in Checkpoint.SideWall_Right.SideWallList.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
+                foreach (var Checkpoint_SideWall_Right_Add in Checkpoint.SideWall_Right.Where(x => UserCtrl.MainViewPort.Children.Contains(x) == false))
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Right_Add);
                 }
@@ -220,8 +220,8 @@ namespace MK7_KMP_Editor_For_PG_
                 foreach (var Checkpoint_LeftObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Left.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_LeftObj);
                 foreach (var Checkpoint_RightLine in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.LV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightLine);
                 foreach (var Checkpoint_RightObj in Checkpoint_List.SelectMany(x => x.Checkpoint_Right.MV3D_List.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_RightObj);
-                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.SideWallList.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
-                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.SideWallList.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
+                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Left);
+                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SideWall_Right);
                 foreach (var Checkpoint_SplitWall in Checkpoint_List.SelectMany(x => x.Checkpoint_SplitWallMDL.ToArray<Visual3D>())) UserCtrl.MainViewPort.Children.Remove(Checkpoint_SplitWall);
             }
 
@@ -253,12 +253,12 @@ namespace MK7_KMP_Editor_For_PG_
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_RightObj);
                 }
 
-                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.SideWallList.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                foreach (var Checkpoint_SideWall_Left in Checkpoint_List.SelectMany(x => x.SideWall_Left.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Left);
                 }
 
-                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.SideWallList.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
+                foreach (var Checkpoint_SideWall_Right in Checkpoint_List.SelectMany(x => x.SideWall_Right.Where(y => UserCtrl.MainViewPort.Children.Contains(y) == false)))
                 {
                     UserCtrl.MainViewPort.Children.Add(Checkpoint_SideWall_Right);
                 }
@@ -297,8 +297,8 @@ namespace MK7_KMP_Editor_For_PG_
             List<bool> BL_R_LV3D = checkpoint.Checkpoint_Right.LV3D_List.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
             List<bool> BL_R_MV3D = checkpoint.Checkpoint_Right.MV3D_List.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
 
-            List<bool> BL_L_SW = checkpoint.SideWall_Left.SideWallList.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
-            List<bool> BL_R_SW = checkpoint.SideWall_Right.SideWallList.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
+            List<bool> BL_L_SW = checkpoint.SideWall_Left.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
+            List<bool> BL_R_SW = checkpoint.SideWall_Right.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
             List<bool> BL_SplitWall = checkpoint.Checkpoint_SplitWallMDL.Select(x => UserCtrl.MainViewPort.Children.Contains(x)).ToList();
 
             if (BL_Line.Distinct().Count() == 1 && BL_L_LV3D.Distinct().Count() == 1 && BL_L_MV3D.Distinct().Count() == 1 && BL_R_LV3D.Distinct().Count() == 1 && BL_R_MV3D.Distinct().Count() == 1 && BL_L_SW.Distinct().Count() == 1 && BL_R_SW.Distinct().Count() == 1 && BL_SplitWall.Distinct().Count() == 1)

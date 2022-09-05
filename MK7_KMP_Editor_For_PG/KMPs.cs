@@ -142,13 +142,8 @@ namespace MK7_KMP_Editor_For_PG_
                     kMPViewportObject.EnemyRoute_Rail_List.Add(KMP_EnemyRoute_Rail);
                 }
 
-                #region Add Rail
-                for (int i = 0; i < kMPViewportObject.EnemyRoute_Rail_List.Count; i++)
-                {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.EnemyRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.EnemyRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Orange);
-                }
-                #endregion
+                //Add Rail
+                for (int i = 0; i < kMPViewportObject.EnemyRoute_Rail_List.Count; i++) kMPViewportObject.EnemyRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Orange);
             }
 
             public static void Render_ItemRoute(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, KMPs.KMPFormat.KMPSection.HPTI_Section HPTI, KMPs.KMPFormat.KMPSection.TPTI_Section TPTI)
@@ -200,13 +195,8 @@ namespace MK7_KMP_Editor_For_PG_
                     kMPViewportObject.ItemRoute_Rail_List.Add(KMP_ItemRoute_Rail);
                 }
 
-                #region Add Rail
-                for (int i = 0; i < kMPViewportObject.ItemRoute_Rail_List.Count; i++)
-                {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.ItemRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.ItemRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Green);
-                }
-                #endregion
+                //Add Rail
+                for (int i = 0; i < kMPViewportObject.ItemRoute_Rail_List.Count; i++) kMPViewportObject.ItemRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Green);
             }
 
             public static void Render_Checkpoint(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, KMPs.KMPFormat.KMPSection.HPKC_Section HPKC, KMPs.KMPFormat.KMPSection.TPKC_Section TPKC, double CheckpointYOffset)
@@ -214,22 +204,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int HPKCCount = 0; HPKCCount < HPKC.NumOfEntries; HPKCCount++)
                 {
                     //Checkpoint_Rails
-                    HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
-                    {
-                        Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Line = new List<LinesVisual3D>(),
-                        Checkpoint_Tube = new List<TubeVisual3D>(),
-                        Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
-                        SideWall_Left = new HTK_3DES.PathTools.SideWall
-                        {
-                            SideWallList = new List<ModelVisual3D>()
-                        },
-                        SideWall_Right = new HTK_3DES.PathTools.SideWall
-                        {
-                            SideWallList = new List<ModelVisual3D>()
-                        }
-                    };
+                    HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint();
 
                     for (int Count = 0; Count < HPKC.HPKCValue_List[HPKCCount].HPKC_Length; Count++)
                     {
@@ -358,15 +333,9 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.Checkpoint_Rail.Count; i++)
                 {
-                    List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.MV3D_List);
-                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Left, 5, Colors.Green);
-
-                    kMPViewportObject.Checkpoint_Rail[i].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
-
-                    List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.MV3D_List);
-                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Right, 5, Colors.Red);
-
-                    kMPViewportObject.Checkpoint_Rail[i].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.DrawPath_Line(UserCtrl, 5, Colors.Green);
+                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.DrawPath_Line(UserCtrl, 5, Colors.Red);
+                    kMPViewportObject.Checkpoint_Rail[i].DrawPath_SideWall(UserCtrl, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
                 }
                 #endregion
             }
@@ -463,8 +432,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.Routes_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Routes_List[i].MV3D_List);
-                    kMPViewportObject.Routes_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Blue);
+                    kMPViewportObject.Routes_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Blue);
                 }
                 #endregion
             }
@@ -646,8 +614,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.GlideRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.GlideRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.GlideRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.LightSkyBlue);
+                    kMPViewportObject.GlideRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.LightSkyBlue);
                 }
                 #endregion
             }
@@ -751,8 +718,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.EnemyRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.EnemyRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.EnemyRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Orange);
+                    kMPViewportObject.EnemyRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Orange);
                 }
                 #endregion
             }
@@ -809,8 +775,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.ItemRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.ItemRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.ItemRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Green);
+                    kMPViewportObject.ItemRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Green);
                 }
                 #endregion
             }
@@ -820,22 +785,7 @@ namespace MK7_KMP_Editor_For_PG_
                 for (int GroupCount = 0; GroupCount < Checkpoint.Groups.Count; GroupCount++)
                 {
                     //Checkpoint_Rails
-                    HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint
-                    {
-                        Checkpoint_Left = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Right = new HTK_3DES.PathTools.Rail(),
-                        Checkpoint_Line = new List<LinesVisual3D>(),
-                        Checkpoint_Tube = new List<TubeVisual3D>(),
-                        Checkpoint_SplitWallMDL = new List<ModelVisual3D>(),
-                        SideWall_Left = new HTK_3DES.PathTools.SideWall
-                        {
-                            SideWallList = new List<ModelVisual3D>()
-                        },
-                        SideWall_Right = new HTK_3DES.PathTools.SideWall
-                        {
-                            SideWallList = new List<ModelVisual3D>()
-                        }
-                    };
+                    HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = new HTK_3DES.KMP_3DCheckpointSystem.Checkpoint();
 
                     for (int PointCount = 0; PointCount < Checkpoint.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -964,15 +914,9 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.Checkpoint_Rail.Count; i++)
                 {
-                    List<Point3D> point3Ds_Left = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.MV3D_List);
-                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Left, 5, Colors.Green);
-
-                    kMPViewportObject.Checkpoint_Rail[i].SideWall_Left.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Left, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00));
-
-                    List<Point3D> point3Ds_Right = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.MV3D_List);
-                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.LV3D_List = HTK_3DES.PathTools.DrawPath_Line(UserCtrl, point3Ds_Right, 5, Colors.Red);
-
-                    kMPViewportObject.Checkpoint_Rail[i].SideWall_Right.SideWallList = HTK_3DES.PathTools.DrawPath_SideWall(UserCtrl, point3Ds_Right, System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
+                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Left.DrawPath_Line(UserCtrl, 5, Colors.Green);
+                    kMPViewportObject.Checkpoint_Rail[i].Checkpoint_Right.DrawPath_Line(UserCtrl, 5, Colors.Red);
+                    kMPViewportObject.Checkpoint_Rail[i].DrawPath_SideWall(UserCtrl, System.Windows.Media.Color.FromArgb(0x45, 0x00, 0xA0, 0x00), System.Windows.Media.Color.FromArgb(0x45, 0xA0, 0x00, 0x00));
                 }
                 #endregion
             }
@@ -1069,8 +1013,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.Routes_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.Routes_List[i].MV3D_List);
-                    kMPViewportObject.Routes_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Blue);
+                    kMPViewportObject.Routes_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Blue);
                 }
                 #endregion
             }
@@ -1252,8 +1195,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.GlideRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.GlideRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.GlideRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.LightSkyBlue);
+                    kMPViewportObject.GlideRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.LightSkyBlue);
                 }
                 #endregion
             }
@@ -1315,8 +1257,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.EnemyRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.EnemyRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.EnemyRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Orange);
+                    kMPViewportObject.EnemyRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Orange);
                 }
                 #endregion
             }
@@ -1373,8 +1314,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.ItemRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.ItemRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.ItemRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.Green);
+                    kMPViewportObject.ItemRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.Green);
                 }
                 #endregion
             }
@@ -1430,8 +1370,7 @@ namespace MK7_KMP_Editor_For_PG_
                 #region Add Rail
                 for (int i = 0; i < kMPViewportObject.GlideRoute_Rail_List.Count; i++)
                 {
-                    List<Point3D> point3Ds = HTK_3DES.PathTools.MV3DListToPoint3DList(kMPViewportObject.GlideRoute_Rail_List[i].MV3D_List);
-                    kMPViewportObject.GlideRoute_Rail_List[i].TV3D_List = HTK_3DES.PathTools.DrawPath_Tube(UserCtrl, point3Ds, 10.0, Colors.LightSkyBlue);
+                    kMPViewportObject.GlideRoute_Rail_List[i].DrawPath_Tube(UserCtrl, 10.0, Colors.LightSkyBlue);
                 }
                 #endregion
             }
@@ -1444,8 +1383,8 @@ namespace MK7_KMP_Editor_For_PG_
             public ushort SectionCount { get; set; } //0x2
             public ushort DMDCHeaderSize { get; set; } //0x2
             public uint VersionNumber { get; set; } //0x4
-            public DMDCSectionOffset DMDC_SectionOffset { get; set; }
-            public class DMDCSectionOffset
+            public KMPSection KMP_Section { get; set; }
+            public class KMPSection
             {
                 public uint TPTK_Offset { get; set; }
                 public uint TPNE_Offset { get; set; }
@@ -1466,32 +1405,6 @@ namespace MK7_KMP_Editor_For_PG_
                 public uint TPLG_Offset { get; set; }
                 public uint HPLG_Offset { get; set; }
 
-                public DMDCSectionOffset()
-                {
-                    TPTK_Offset = 0;
-                    TPNE_Offset = 0;
-                    HPNE_Offset = 0;
-                    TPTI_Offset = 0;
-                    HPTI_Offset = 0;
-                    TPKC_Offset = 0;
-                    HPKC_Offset = 0;
-                    JBOG_Offset = 0;
-                    ITOP_Offset = 0;
-                    AERA_Offset = 0;
-                    EMAC_Offset = 0;
-                    TPGJ_Offset = 0;
-                    TPNC_Offset = 0;
-                    TPSM_Offset = 0;
-                    IGTS_Offset = 0;
-                    SROC_Offset = 0;
-                    TPLG_Offset = 0;
-                    HPLG_Offset = 0;
-                }
-            }
-
-            public KMPSection KMP_Section { get; set; }
-            public class KMPSection
-            {
                 public TPTK_Section TPTK { get; set; }
                 public class TPTK_Section
                 {
@@ -1505,6 +1418,65 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D TPTK_Rotation { get; set; }
                         public ushort Player_Index { get; set; } //0x2
                         public ushort TPTK_UnkBytes { get; set; } //0x2
+
+                        public void ReadTPTKValue(BinaryReader br)
+                        {
+                            TPTK_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            TPTK_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            Player_Index = br.ReadUInt16();
+                            TPTK_UnkBytes = br.ReadUInt16();
+                        }
+
+                        public void WriteTPTKValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK_Position)[2]);
+                            bw.Write(Player_Index);
+                            bw.Write(TPTK_UnkBytes);
+                        }
+
+                        public TPTKValue()
+                        {
+                            TPTK_Position = new Vector3D(0, 0, 0);
+                            TPTK_Rotation = new Vector3D(0, 0, 0);
+                            Player_Index = 0;
+                            TPTK_UnkBytes = 0;
+                        }
+                    }
+
+                    public void ReadTPTK(BinaryReader br)
+                    {
+                        TPTKHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int TPTKCount = 0; TPTKCount < NumOfEntries; TPTKCount++)
+                        {
+                            TPTKValue TPTK_Value = new TPTKValue();
+                            TPTK_Value.ReadTPTKValue(br);
+                            TPTKValue_List.Add(TPTK_Value);
+                        }
+                    }
+
+                    public void WriteTPTK(BinaryWriter bw)
+                    {
+                        bw.Write(TPTKHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int TPTKCount = 0; TPTKCount < NumOfEntries; TPTKCount++) TPTKValue_List[TPTKCount].WriteTPTKValue(bw);
+                    }
+
+                    public TPTK_Section()
+                    {
+                        TPTKHeader = "TPTK".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPTKValue_List = new List<TPTKValue>();
                     }
                 }
 
@@ -1524,6 +1496,75 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte Flags { get; set; }
                         public short PathFindOption { get; set; }
                         public short MaxSearchYOffset { get; set; }
+
+                        public void ReadTPNEValue(BinaryReader br)
+                        {
+                            TPNE_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            Control = br.ReadSingle();
+                            MushSetting = br.ReadUInt16();
+                            DriftSetting = br.ReadByte();
+                            Flags = br.ReadByte();
+                            PathFindOption = br.ReadInt16();
+                            MaxSearchYOffset = br.ReadInt16();
+                        }
+
+                        public void WriteTPNEValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE_Position)[2]);
+                            bw.Write(Control);
+                            bw.Write(MushSetting);
+                            bw.Write(DriftSetting);
+                            bw.Write(Flags);
+                            bw.Write(PathFindOption);
+                            bw.Write(MaxSearchYOffset);
+                        }
+
+                        public TPNEValue()
+                        {
+                            TPNE_Position = new Vector3D(0, 0, 0);
+                            Control = 0f;
+                            MushSetting = 0;
+                            DriftSetting = 0x00;
+                            Flags = 0x00;
+                            PathFindOption = 0;
+                            MaxSearchYOffset = 0;
+                        } 
+                    }
+
+                    public void ReadTPNE(BinaryReader br)
+                    {
+                        TPNEHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int TPNECount = 0; TPNECount < NumOfEntries; TPNECount++)
+                        {
+                            TPNEValue TPNE_Value = new TPNEValue();
+                            TPNE_Value.ReadTPNEValue(br);
+                            TPNEValue_List.Add(TPNE_Value);
+                        }
+                    }
+
+                    public void WriteTPNE(BinaryWriter bw)
+                    {
+                        bw.Write(TPNEHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < TPNEValue_List.Count; Count++)
+                        {
+                            TPNEValue_List[Count].WriteTPNEValue(bw);
+                        }
+                    }
+
+                    public TPNE_Section()
+                    {
+                        TPNEHeader = "TPNE".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPNEValue_List = new List<TPNEValue>();
                     }
                 }
 
@@ -1558,6 +1599,66 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Prev13 { get; set; }
                             public ushort Prev14 { get; set; }
                             public ushort Prev15 { get; set; }
+
+                            public void ReadHPNEPrevValue(BinaryReader br)
+                            {
+                                Prev0 = br.ReadUInt16();
+                                Prev1 = br.ReadUInt16();
+                                Prev2 = br.ReadUInt16();
+                                Prev3 = br.ReadUInt16();
+                                Prev4 = br.ReadUInt16();
+                                Prev5 = br.ReadUInt16();
+                                Prev6 = br.ReadUInt16();
+                                Prev7 = br.ReadUInt16();
+                                Prev8 = br.ReadUInt16();
+                                Prev9 = br.ReadUInt16();
+                                Prev10 = br.ReadUInt16();
+                                Prev11 = br.ReadUInt16();
+                                Prev12 = br.ReadUInt16();
+                                Prev13 = br.ReadUInt16();
+                                Prev14 = br.ReadUInt16();
+                                Prev15 = br.ReadUInt16();
+                            }
+
+                            public void WritePrevValue(BinaryWriter bw)
+                            {
+                                bw.Write(Prev0);
+                                bw.Write(Prev1);
+                                bw.Write(Prev2);
+                                bw.Write(Prev3);
+                                bw.Write(Prev4);
+                                bw.Write(Prev5);
+                                bw.Write(Prev6);
+                                bw.Write(Prev7);
+                                bw.Write(Prev8);
+                                bw.Write(Prev9);
+                                bw.Write(Prev10);
+                                bw.Write(Prev11);
+                                bw.Write(Prev12);
+                                bw.Write(Prev13);
+                                bw.Write(Prev14);
+                                bw.Write(Prev15);
+                            }
+
+                            public HPNE_PreviewGroups()
+                            {
+                                Prev0 = 255;
+                                Prev1 = 255;
+                                Prev2 = 255;
+                                Prev3 = 255;
+                                Prev4 = 255;
+                                Prev5 = 255;
+                                Prev6 = 255;
+                                Prev7 = 255;
+                                Prev8 = 255;
+                                Prev9 = 255;
+                                Prev10 = 255;
+                                Prev11 = 255;
+                                Prev12 = 255;
+                                Prev13 = 255;
+                                Prev14 = 255;
+                                Prev15 = 255;
+                            }
                         }
 
                         public HPNE_NextGroups HPNE_NextGroup { get; set; }
@@ -1579,9 +1680,125 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Next13 { get; set; }
                             public ushort Next14 { get; set; }
                             public ushort Next15 { get; set; }
+
+                            public void ReadNextValue(BinaryReader br)
+                            {
+                                Next0 = br.ReadUInt16();
+                                Next1 = br.ReadUInt16();
+                                Next2 = br.ReadUInt16();
+                                Next3 = br.ReadUInt16();
+                                Next4 = br.ReadUInt16();
+                                Next5 = br.ReadUInt16();
+                                Next6 = br.ReadUInt16();
+                                Next7 = br.ReadUInt16();
+                                Next8 = br.ReadUInt16();
+                                Next9 = br.ReadUInt16();
+                                Next10 = br.ReadUInt16();
+                                Next11 = br.ReadUInt16();
+                                Next12 = br.ReadUInt16();
+                                Next13 = br.ReadUInt16();
+                                Next14 = br.ReadUInt16();
+                                Next15 = br.ReadUInt16();
+                            }
+
+                            public void WriteNextValue(BinaryWriter bw)
+                            {
+                                bw.Write(Next0);
+                                bw.Write(Next1);
+                                bw.Write(Next2);
+                                bw.Write(Next3);
+                                bw.Write(Next4);
+                                bw.Write(Next5);
+                                bw.Write(Next6);
+                                bw.Write(Next7);
+                                bw.Write(Next8);
+                                bw.Write(Next9);
+                                bw.Write(Next10);
+                                bw.Write(Next11);
+                                bw.Write(Next12);
+                                bw.Write(Next13);
+                                bw.Write(Next14);
+                                bw.Write(Next15);
+                            }
+
+                            public HPNE_NextGroups()
+                            {
+                                Next0 = 255;
+                                Next1 = 255;
+                                Next2 = 255;
+                                Next3 = 255;
+                                Next4 = 255;
+                                Next5 = 255;
+                                Next6 = 255;
+                                Next7 = 255;
+                                Next8 = 255;
+                                Next9 = 255;
+                                Next10 = 255;
+                                Next11 = 255;
+                                Next12 = 255;
+                                Next13 = 255;
+                                Next14 = 255;
+                                Next15 = 255;
+                            }
                         }
 
                         public uint HPNE_UnkBytes1 { get; set; }
+
+                        public void ReadHPNEValue(BinaryReader br)
+                        {
+                            HPNE_StartPoint = br.ReadUInt16();
+                            HPNE_Length = br.ReadUInt16();
+                            HPNE_PreviewGroup.ReadHPNEPrevValue(br);
+                            HPNE_NextGroup.ReadNextValue(br);
+                            HPNE_UnkBytes1 = br.ReadUInt16();
+                        }
+
+                        public void WriteHPNEValue(BinaryWriter bw)
+                        {
+                            bw.Write(HPNE_StartPoint);
+                            bw.Write(HPNE_Length);
+                            HPNE_PreviewGroup.WritePrevValue(bw);
+                            HPNE_NextGroup.WriteNextValue(bw);
+                            bw.Write(HPNE_UnkBytes1);
+                        }
+
+                        public HPNEValue()
+                        {
+                            HPNE_StartPoint = 0;
+                            HPNE_Length = 0;
+                            HPNE_PreviewGroup = new HPNE_PreviewGroups();
+                            HPNE_NextGroup = new HPNE_NextGroups();
+                            HPNE_UnkBytes1 = 0;
+                        }
+                    }
+
+                    public void ReadHPNE(BinaryReader br)
+                    {
+                        HPNEHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            HPNEValue HPNE_Value = new HPNEValue();
+                            HPNE_Value.ReadHPNEValue(br);
+                            HPNEValue_List.Add(HPNE_Value);
+                        }
+                    }
+
+                    public void WriteHPNE(BinaryWriter bw)
+                    {
+                        bw.Write(HPNEHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                        for (int Count = 0; Count < NumOfEntries; Count++) HPNEValue_List[Count].WriteHPNEValue(bw);
+                    }
+
+                    public HPNE_Section()
+                    {
+                        HPNEHeader = "HPNE".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        HPNEValue_List = new List<HPNEValue>();
                     }
                 }
 
@@ -1598,6 +1815,61 @@ namespace MK7_KMP_Editor_For_PG_
                         public float TPTI_PointSize { get; set; }
                         public ushort GravityMode { get; set; }
                         public ushort PlayerScanRadius { get; set; }
+
+                        public void ReadTPTIValue(BinaryReader br)
+                        {
+                            TPTI_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            TPTI_PointSize = br.ReadSingle();
+                            GravityMode = br.ReadUInt16();
+                            PlayerScanRadius = br.ReadUInt16();
+                        }
+
+                        public void WriteTPTIValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI_Position)[2]);
+                            bw.Write(TPTI_PointSize);
+                            bw.Write(GravityMode);
+                            bw.Write(PlayerScanRadius);
+                        }
+
+                        public TPTIValue()
+                        {
+                            TPTI_Position = new Vector3D(0, 0, 0);
+                            TPTI_PointSize = 0;
+                            GravityMode = 0;
+                            PlayerScanRadius = 0;
+                        }
+                    }
+
+                    public void ReadTPTI(BinaryReader br)
+                    {
+                        TPTIHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                        for (int TPTICount = 0; TPTICount < NumOfEntries; TPTICount++)
+                        {
+                            TPTIValue TPTI_Value = new TPTIValue();
+                            TPTI_Value.ReadTPTIValue(br);
+                            TPTIValue_List.Add(TPTI_Value);
+                        }
+                    }
+
+                    public void WriteTPTI(BinaryWriter bw)
+                    {
+                        bw.Write(TPTIHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                        for (int TPTICount = 0; TPTICount < NumOfEntries; TPTICount++) TPTIValue_List[TPTICount].WriteTPTIValue(bw);
+                    }
+
+                    public TPTI_Section()
+                    {
+                        TPTIHeader = "TPTI".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPTIValue_List = new List<TPTIValue>();
                     }
                 }
 
@@ -1622,6 +1894,36 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Prev3 { get; set; }
                             public ushort Prev4 { get; set; }
                             public ushort Prev5 { get; set; }
+
+                            public void ReadHPTIPrevGroups(BinaryReader br)
+                            {
+                                Prev0 = br.ReadUInt16();
+                                Prev1 = br.ReadUInt16();
+                                Prev2 = br.ReadUInt16();
+                                Prev3 = br.ReadUInt16();
+                                Prev4 = br.ReadUInt16();
+                                Prev5 = br.ReadUInt16();
+                            }
+
+                            public void WriteHPTIPrevGroups(BinaryWriter bw)
+                            {
+                                bw.Write(Prev0);
+                                bw.Write(Prev1);
+                                bw.Write(Prev2);
+                                bw.Write(Prev3);
+                                bw.Write(Prev4);
+                                bw.Write(Prev5);
+                            }
+
+                            public HPTI_PreviewGroups()
+                            {
+                                Prev0 = 0;
+                                Prev1 = 0;
+                                Prev2 = 0;
+                                Prev3 = 0;
+                                Prev4 = 0;
+                                Prev5 = 0;
+                            }
                         }
 
                         public HPTI_NextGroups HPTI_NextGroup { get; set; }
@@ -1633,7 +1935,90 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Next3 { get; set; }
                             public ushort Next4 { get; set; }
                             public ushort Next5 { get; set; }
+
+                            public void ReadHPTINextGroups(BinaryReader br)
+                            {
+                                Next0 = br.ReadUInt16();
+                                Next1 = br.ReadUInt16();
+                                Next2 = br.ReadUInt16();
+                                Next3 = br.ReadUInt16();
+                                Next4 = br.ReadUInt16();
+                                Next5 = br.ReadUInt16();
+                            }
+
+                            public void WriteHPTINextGroups(BinaryWriter bw)
+                            {
+                                bw.Write(Next0);
+                                bw.Write(Next1);
+                                bw.Write(Next2);
+                                bw.Write(Next3);
+                                bw.Write(Next4);
+                                bw.Write(Next5);
+                            }
+
+                            public HPTI_NextGroups()
+                            {
+                                Next0 = 0;
+                                Next1 = 0;
+                                Next2 = 0;
+                                Next3 = 0;
+                                Next4 = 0;
+                                Next5 = 0;
+                            }
                         }
+
+                        public void ReadHPTIValue(BinaryReader br)
+                        {
+                            HPTI_StartPoint = br.ReadUInt16();
+                            HPTI_Length = br.ReadUInt16();
+                            HPTI_PreviewGroup.ReadHPTIPrevGroups(br);
+                            HPTI_NextGroup.ReadHPTINextGroups(br);
+                        }
+
+                        public void WriteTPTIValue(BinaryWriter bw)
+                        {
+                            bw.Write(HPTI_StartPoint);
+                            bw.Write(HPTI_Length);
+                            HPTI_PreviewGroup.WriteHPTIPrevGroups(bw);
+                            HPTI_NextGroup.WriteHPTINextGroups(bw);
+                        }
+
+                        public HPTIValue()
+                        {
+                            HPTI_StartPoint = 0;
+                            HPTI_Length = 0;
+                            HPTI_PreviewGroup = new HPTI_PreviewGroups();
+                            HPTI_NextGroup = new HPTI_NextGroups();
+                        }
+                    }
+
+                    public void ReadHPTI(BinaryReader br)
+                    {
+                        HPTIHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            HPTIValue HPTI_Value = new HPTIValue();
+                            HPTI_Value.ReadHPTIValue(br);
+                            HPTIValue_List.Add(HPTI_Value);
+                        }
+                    }
+
+                    public void WriteHPTI(BinaryWriter bw)
+                    {
+                        bw.Write(HPTIHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                        for (int Count = 0; Count < NumOfEntries; Count++) HPTIValue_List[Count].WriteTPTIValue(bw);
+                    }
+
+                    public HPTI_Section()
+                    {
+                        HPTIHeader = "HPTI".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        HPTIValue_List = new List<HPTIValue>();
                     }
                 }
 
@@ -1656,6 +2041,79 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte TPKC_Section { get; set; }
                         public byte TPKC_UnkBytes3 { get; set; }
                         public byte TPKC_UnkBytes4 { get; set; }
+
+                        public void ReadTPKCValue(BinaryReader br)
+                        {
+                            TPKC_2DPosition_Left = KMPs.KMPHelper.Vector3DTo2DConverter.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) });
+                            TPKC_2DPosition_Right = KMPs.KMPHelper.Vector3DTo2DConverter.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) });
+                            TPKC_RespawnID = br.ReadByte();
+                            TPKC_Checkpoint_Type = br.ReadByte();
+                            TPKC_PreviousCheckPoint = br.ReadByte();
+                            TPKC_NextCheckPoint = br.ReadByte();
+                            TPKC_ClipID = br.ReadByte();
+                            TPKC_Section = br.ReadByte();
+                            TPKC_UnkBytes3 = br.ReadByte();
+                            TPKC_UnkBytes4 = br.ReadByte();
+                        }
+
+                        public void WriteTPKCValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC_2DPosition_Left)[0]);
+                            bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC_2DPosition_Left)[1]);
+                            bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC_2DPosition_Right)[0]);
+                            bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC_2DPosition_Right)[1]);
+                            bw.Write(TPKC_RespawnID);
+                            bw.Write(TPKC_Checkpoint_Type);
+                            bw.Write(TPKC_PreviousCheckPoint);
+                            bw.Write(TPKC_NextCheckPoint);
+                            bw.Write(TPKC_ClipID);
+                            bw.Write(TPKC_Section);
+                            bw.Write(TPKC_UnkBytes3);
+                            bw.Write(TPKC_UnkBytes4);
+                        }
+
+                        public TPKCValue()
+                        {
+                            TPKC_2DPosition_Left = new Vector2(0, 0);
+                            TPKC_2DPosition_Right = new Vector2(0, 0);
+                            TPKC_RespawnID = 0x00;
+                            TPKC_Checkpoint_Type = 0x00;
+                            TPKC_PreviousCheckPoint = 0x00;
+                            TPKC_NextCheckPoint = 0x00;
+                            TPKC_ClipID = 0x00;
+                            TPKC_Section = 0x00;
+                            TPKC_UnkBytes3 = 0x00;
+                            TPKC_UnkBytes4 = 0x00;
+                        }
+                    }
+
+                    public void ReadTPKC(BinaryReader br)
+                    {
+                        TPKCHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            TPKCValue TPKC_Value = new TPKCValue();
+                            TPKC_Value.ReadTPKCValue(br);
+                            TPKCValue_List.Add(TPKC_Value);
+                        }
+                    }
+
+                    public void WriteTPKC(BinaryWriter bw)
+                    {
+                        bw.Write(TPKCHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                        for (int Count = 0; Count < TPKCValue_List.Count; Count++) TPKCValue_List[Count].WriteTPKCValue(bw);
+                    }
+
+                    public TPKC_Section()
+                    {
+                        TPKCHeader = "TPKC".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPKCValue_List = new List<TPKCValue>();
                     }
                 }
 
@@ -1680,6 +2138,36 @@ namespace MK7_KMP_Editor_For_PG_
                             public byte Prev3 { get; set; }
                             public byte Prev4 { get; set; }
                             public byte Prev5 { get; set; }
+
+                            public void ReadHPKCPrevGroups(BinaryReader br)
+                            {
+                                Prev0 = br.ReadByte();
+                                Prev1 = br.ReadByte();
+                                Prev2 = br.ReadByte();
+                                Prev3 = br.ReadByte();
+                                Prev4 = br.ReadByte();
+                                Prev5 = br.ReadByte();
+                            }
+
+                            public void WriteHPKCPrevGroups(BinaryWriter bw)
+                            {
+                                bw.Write(Prev0);
+                                bw.Write(Prev1);
+                                bw.Write(Prev2);
+                                bw.Write(Prev3);
+                                bw.Write(Prev4);
+                                bw.Write(Prev5);
+                            }
+
+                            public HPKC_PreviewGroups()
+                            {
+                                Prev0 = 0x00;
+                                Prev1 = 0x00;
+                                Prev2 = 0x00;
+                                Prev3 = 0x00;
+                                Prev4 = 0x00;
+                                Prev5 = 0x00;
+                            }
                         }
 
                         public HPKC_NextGroups HPKC_NextGroup { get; set; }
@@ -1691,9 +2179,97 @@ namespace MK7_KMP_Editor_For_PG_
                             public byte Next3 { get; set; }
                             public byte Next4 { get; set; }
                             public byte Next5 { get; set; }
+
+                            public void ReadHPKCNextGroup(BinaryReader br)
+                            {
+                                Next0 = br.ReadByte();
+                                Next1 = br.ReadByte();
+                                Next2 = br.ReadByte();
+                                Next3 = br.ReadByte();
+                                Next4 = br.ReadByte();
+                                Next5 = br.ReadByte();
+                            }
+
+                            public void WriteHPKCNextGroup(BinaryWriter bw)
+                            {
+                                bw.Write(Next0);
+                                bw.Write(Next1);
+                                bw.Write(Next2);
+                                bw.Write(Next3);
+                                bw.Write(Next4);
+                                bw.Write(Next5);
+                            }
+
+                            public HPKC_NextGroups()
+                            {
+                                Next0 = 0x00;
+                                Next1 = 0x00;
+                                Next2 = 0x00;
+                                Next3 = 0x00;
+                                Next4 = 0x00;
+                                Next5 = 0x00;
+                            }
                         }
 
                         public ushort HPKC_UnkBytes1 { get; set; }
+
+                        public void ReadHPKCValue(BinaryReader br)
+                        {
+                            HPKC_StartPoint = br.ReadByte();
+                            HPKC_Length = br.ReadByte();
+                            HPKC_PreviewGroup.ReadHPKCPrevGroups(br);
+                            HPKC_NextGroup.ReadHPKCNextGroup(br);
+                            HPKC_UnkBytes1 = br.ReadUInt16();
+                        }
+
+                        public void WriteHPKCValue(BinaryWriter bw)
+                        {
+                            bw.Write(HPKC_StartPoint);
+                            bw.Write(HPKC_Length);
+                            HPKC_PreviewGroup.WriteHPKCPrevGroups(bw);
+                            HPKC_NextGroup.WriteHPKCNextGroup(bw);
+                            bw.Write(HPKC_UnkBytes1);
+                        }
+
+                        public HPKCValue()
+                        {
+                            HPKC_StartPoint = 0x00;
+                            HPKC_Length = 0x00;
+                            HPKC_PreviewGroup = new HPKC_PreviewGroups();
+                            HPKC_NextGroup = new HPKC_NextGroups();
+                            HPKC_UnkBytes1 = 0;
+                        }
+                    }
+
+                    public void ReadHPKC(BinaryReader br)
+                    {
+                        HPKCHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int HPKCCount = 0; HPKCCount < NumOfEntries; HPKCCount++)
+                        {
+                            HPKCValue HPKC_Value = new HPKCValue();
+                            HPKC_Value.ReadHPKCValue(br);
+                            HPKCValue_List.Add(HPKC_Value);
+                        }
+                    }
+
+                    public void WriteHPKC(BinaryWriter bw)
+                    {
+                        bw.Write(HPKCHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++) HPKCValue_List[Count].WriteHPKCValue(bw);
+                    }
+
+                    public HPKC_Section()
+                    {
+                        HPKCHeader = "HPKC".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        HPKCValue_List = new List<HPKCValue>();
                     }
                 }
 
@@ -1712,7 +2288,7 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D JBOG_Rotation { get; set; }
                         public Vector3D JBOG_Scale { get; set; }
                         public ushort JBOG_ITOP_RouteIDIndex { get; set; }
-                        public JBOG_SpecificSetting JOBJ_Specific_Setting { get; set; }
+                        public JBOG_SpecificSetting GOBJ_Specific_Setting { get; set; }
                         public class JBOG_SpecificSetting
                         {
                             public ushort Value0 { get; set; }
@@ -1723,10 +2299,125 @@ namespace MK7_KMP_Editor_For_PG_
                             public ushort Value5 { get; set; }
                             public ushort Value6 { get; set; }
                             public ushort Value7 { get; set; }
+
+                            public void ReadSpecificSetting(BinaryReader br)
+                            {
+                                Value0 = br.ReadUInt16();
+                                Value1 = br.ReadUInt16();
+                                Value2 = br.ReadUInt16();
+                                Value3 = br.ReadUInt16();
+                                Value4 = br.ReadUInt16();
+                                Value5 = br.ReadUInt16();
+                                Value6 = br.ReadUInt16();
+                                Value7 = br.ReadUInt16();
+                            }
+
+                            public void WriteSpecificSetting(BinaryWriter bw)
+                            {
+                                bw.Write(Value0);
+                                bw.Write(Value1);
+                                bw.Write(Value2);
+                                bw.Write(Value3);
+                                bw.Write(Value4);
+                                bw.Write(Value5);
+                                bw.Write(Value6);
+                                bw.Write(Value7);
+                            }
+
+                            public JBOG_SpecificSetting()
+                            {
+                                Value0 = 255;
+                                Value1 = 255;
+                                Value2 = 255;
+                                Value3 = 255;
+                                Value4 = 255;
+                                Value5 = 255;
+                                Value6 = 255;
+                                Value7 = 255;
+                            }
                         }
                         public ushort JBOG_PresenceSetting { get; set; }
                         public byte[] JBOG_UnkByte2 { get; set; }
                         public ushort JBOG_UnkByte3 { get; set; }
+
+                        public void ReadJBOGValue(BinaryReader br)
+                        {
+                            ObjectID = br.ReadBytes(2);
+                            JBOG_UnkByte1 = br.ReadBytes(2);
+                            JBOG_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_ITOP_RouteIDIndex = br.ReadUInt16();
+                            GOBJ_Specific_Setting.ReadSpecificSetting(br);
+                            JBOG_PresenceSetting = br.ReadUInt16();
+                            JBOG_UnkByte2 = br.ReadBytes(2);
+                            JBOG_UnkByte3 = br.ReadUInt16();
+                        }
+
+                        public void WriteJBOGValue(BinaryWriter bw)
+                        {
+                            bw.Write(ObjectID);
+                            bw.Write(JBOG_UnkByte1);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Position)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Rotation)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Rotation)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Rotation)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Scale)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Scale)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG_Scale)[2]);
+                            bw.Write(JBOG_ITOP_RouteIDIndex);
+                            GOBJ_Specific_Setting.WriteSpecificSetting(bw);
+                            bw.Write(JBOG_PresenceSetting);
+                            bw.Write(JBOG_UnkByte2);
+                            bw.Write(JBOG_UnkByte3);
+                        }
+
+                        public JBOGValue()
+                        {
+                            ObjectID = new List<byte>().ToArray();
+                            JBOG_UnkByte1 = new List<byte>().ToArray();
+                            JBOG_Position = new Vector3D(0, 0, 0);
+                            JBOG_Rotation = new Vector3D(0, 0, 0);
+                            JBOG_Scale = new Vector3D(0, 0, 0);
+                            JBOG_ITOP_RouteIDIndex = 0;
+                            GOBJ_Specific_Setting = new JBOG_SpecificSetting();
+                            JBOG_PresenceSetting = 0;
+                            JBOG_UnkByte2 = new List<byte>().ToArray();
+                            JBOG_UnkByte3 = 0;
+                        }
+                    }
+
+                    public void ReadJBOG(BinaryReader br)
+                    {
+                        JBOGHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int JBOGCount = 0; JBOGCount < NumOfEntries; JBOGCount++)
+                        {
+                            JBOGValue JBOG_Value = new JBOGValue();
+                            JBOG_Value.ReadJBOGValue(br);
+                            JBOGValue_List.Add(JBOG_Value);
+                        }
+                    }
+
+                    public void WriteJBOG(BinaryWriter bw)
+                    {
+                        bw.Write(JBOGHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++) JBOGValue_List[Count].WriteJBOGValue(bw);
+                    }
+
+                    public JBOG_Section()
+                    {
+                        JBOGHeader = "JBOG".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        JBOGValue_List = new List<JBOGValue>();
                     }
                 }
 
@@ -1748,7 +2439,98 @@ namespace MK7_KMP_Editor_For_PG_
                             public Vector3D ITOP_Point_Position { get; set; }
                             public ushort ITOP_Point_RouteSpeed { get; set; }
                             public ushort ITOP_PointSetting2 { get; set; }
+
+                            public void ReadITOP_Point(BinaryReader br)
+                            {
+                                ITOP_Point_Position = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                                ITOP_Point_RouteSpeed = br.ReadUInt16();
+                                ITOP_PointSetting2 = br.ReadUInt16();
+                            }
+
+                            public void WriteITOP_Point(BinaryWriter bw)
+                            {
+                                bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP_Point_Position)[0]);
+                                bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP_Point_Position)[1]);
+                                bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP_Point_Position)[2]);
+                                bw.Write(ITOP_Point_RouteSpeed);
+                                bw.Write(ITOP_PointSetting2);
+                            }
+
+                            public ITOP_Point()
+                            {
+                                ITOP_Point_Position = new Vector3D(0, 0, 0);
+                                ITOP_Point_RouteSpeed = 0;
+                                ITOP_PointSetting2 = 0;
+                            }
                         }
+
+                        public void ReadITOPRoute(BinaryReader br)
+                        {
+                            ITOP_Route_NumOfPoint = br.ReadUInt16();
+                            ITOP_RoopSetting = br.ReadByte();
+                            ITOP_SmoothSetting = br.ReadByte();
+
+                            for (int ITOP_PointCount = 0; ITOP_PointCount < ITOP_Route_NumOfPoint; ITOP_PointCount++)
+                            {
+                                ITOP_Point iTOP_Point = new ITOP_Point();
+                                iTOP_Point.ReadITOP_Point(br);
+                                ITOP_Point_List.Add(iTOP_Point);
+                            }
+                        }
+
+                        public void WriteITOPRoute(BinaryWriter bw)
+                        {
+                            bw.Write(ITOP_Route_NumOfPoint);
+                            bw.Write(ITOP_RoopSetting);
+                            bw.Write(ITOP_SmoothSetting);
+
+                            for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP_Route_NumOfPoint; ITOP_PointsCount++)
+                            {
+                                ITOP_Point_List[ITOP_PointsCount].WriteITOP_Point(bw);
+                            }
+                        }
+
+                        public ITOP_Route()
+                        {
+                            ITOP_Route_NumOfPoint = 0;
+                            ITOP_RoopSetting = 0x00;
+                            ITOP_SmoothSetting = 0x00;
+                            ITOP_Point_List = new List<ITOP_Point>();
+                        }
+                    }
+
+                    public void ReadITOP(BinaryReader br)
+                    {
+                        ITOPHeader = br.ReadChars(4);
+                        ITOP_NumberOfRoute = br.ReadUInt16();
+                        ITOP_NumberOfPoint = br.ReadUInt16();
+
+                        for (int ITOPRouteCount = 0; ITOPRouteCount < ITOP_NumberOfRoute; ITOPRouteCount++)
+                        {
+                            ITOP_Route iTOP_Route = new ITOP_Route();
+                            iTOP_Route.ReadITOPRoute(br);
+                            ITOP_Route_List.Add(iTOP_Route);
+                        }
+                    }
+
+                    public void WriteITOP(BinaryWriter bw)
+                    {
+                        bw.Write(ITOPHeader);
+                        bw.Write(ITOP_NumberOfRoute);
+                        bw.Write(ITOP_NumberOfPoint);
+
+                        for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP_NumberOfRoute; ITOP_RoutesCount++)
+                        {
+                            ITOP_Route_List[ITOP_RoutesCount].WriteITOPRoute(bw);
+                        }
+                    }
+
+                    public ITOP_Section()
+                    {
+                        ITOPHeader = "ITOP".ToCharArray();
+                        ITOP_NumberOfRoute = 0;
+                        ITOP_NumberOfPoint = 0;
+                        ITOP_Route_List = new List<ITOP_Route>();
                     }
                 }
 
@@ -1773,6 +2555,94 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte RouteID { get; set; }
                         public byte EnemyID { get; set; }
                         public ushort AERA_UnkByte4 { get; set; }
+
+                        public void ReadAERAValue(BinaryReader br)
+                        {
+                            AreaMode = br.ReadByte();
+                            AreaType = br.ReadByte();
+                            AERA_EMACIndex = br.ReadByte();
+                            Priority = br.ReadByte();
+                            AERA_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            AERA_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            AERA_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            AERA_Setting1 = br.ReadUInt16();
+                            AERA_Setting2 = br.ReadUInt16();
+                            RouteID = br.ReadByte();
+                            EnemyID = br.ReadByte();
+                            AERA_UnkByte4 = br.ReadUInt16();
+                        }
+
+                        public void WriteAERAValue(BinaryWriter bw)
+                        {
+                            bw.Write(AreaMode);
+                            bw.Write(AreaType);
+                            bw.Write(AERA_EMACIndex);
+                            bw.Write(Priority);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Position)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Rotation)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Rotation)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Rotation)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Scale)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Scale)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA_Scale)[2]);
+                            bw.Write(AERA_Setting1);
+                            bw.Write(AERA_Setting2);
+                            bw.Write(RouteID);
+                            bw.Write(EnemyID);
+                            bw.Write(AERA_UnkByte4);
+                        }
+
+                        public AERAValue()
+                        {
+                            AreaMode = 0x00;
+                            AreaType = 0x00;
+                            AERA_EMACIndex = 0x00;
+                            Priority = 0x00;
+                            AERA_Position = new Vector3D(0, 0, 0);
+                            AERA_Rotation = new Vector3D(0, 0, 0);
+                            AERA_Scale = new Vector3D(0, 0, 0);
+                            AERA_Setting1 = 0;
+                            AERA_Setting2 = 0;
+                            RouteID = 0x00;
+                            EnemyID = 0x00;
+                            AERA_UnkByte4 = 0;
+                        }
+                    }
+
+                    public void ReadAERA(BinaryReader br)
+                    {
+                        AERAHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int AERACount = 0; AERACount < NumOfEntries; AERACount++)
+                        {
+                            AERAValue aERAValue = new AERAValue();
+                            aERAValue.ReadAERAValue(br);
+                            AERAValue_List.Add(aERAValue);
+                        }
+                    }
+
+                    public void WriteAERA(BinaryWriter bw)
+                    {
+                        bw.Write(AERAHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            AERAValue_List[Count].WriteAERAValue(bw);
+                        }
+                    }
+
+                    public AERA_Section()
+                    {
+                        AERAHeader = "AERA".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        AERAValue_List = new List<AERAValue>();
                     }
                 }
 
@@ -1801,6 +2671,108 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D Viewpoint_Start { get; set; }
                         public Vector3D Viewpoint_Destination { get; set; }
                         public float Camera_Active_Time { get; set; }
+
+                        public void ReadEMACValue(BinaryReader br)
+                        {
+                            CameraType = br.ReadByte();
+                            NextCameraIndex = br.ReadByte();
+                            EMAC_NextVideoIndex = br.ReadByte();
+                            EMAC_ITOP_CameraIndex = br.ReadByte();
+                            RouteSpeed = br.ReadUInt16();
+                            FOVSpeed = br.ReadUInt16();
+                            ViewpointSpeed = br.ReadUInt16();
+                            EMAC_StartFlag = br.ReadByte();
+                            EMAC_VideoFlag = br.ReadByte();
+                            EMAC_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            EMAC_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            FOVAngle_Start = br.ReadSingle();
+                            FOVAngle_End = br.ReadSingle();
+                            Viewpoint_Start = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            Viewpoint_Destination = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            Camera_Active_Time = br.ReadSingle();
+                        }
+
+                        public void WriteEMACValue(BinaryWriter bw)
+                        {
+                            bw.Write(CameraType);
+                            bw.Write(NextCameraIndex);
+                            bw.Write(EMAC_NextVideoIndex);
+                            bw.Write(EMAC_ITOP_CameraIndex);
+                            bw.Write(RouteSpeed);
+                            bw.Write(FOVSpeed);
+                            bw.Write(ViewpointSpeed);
+                            bw.Write(EMAC_StartFlag);
+                            bw.Write(EMAC_VideoFlag);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Position)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Rotation)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Rotation)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC_Rotation)[2]);
+                            bw.Write(FOVAngle_Start);
+                            bw.Write(FOVAngle_End);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Start)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Start)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Start)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Destination)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Destination)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(Viewpoint_Destination)[2]);
+                            bw.Write(Camera_Active_Time);
+                        }
+
+                        public EMACValue()
+                        {
+                            CameraType = 0x00;
+                            NextCameraIndex = 0x00;
+                            EMAC_NextVideoIndex = 0x00;
+                            EMAC_ITOP_CameraIndex = 0x00;
+                            RouteSpeed = 0;
+                            FOVSpeed = 0;
+                            ViewpointSpeed = 0;
+                            EMAC_StartFlag = 0x00;
+                            EMAC_VideoFlag = 0x00;
+                            EMAC_Position = new Vector3D(0, 0, 0);
+                            EMAC_Rotation = new Vector3D(0, 0, 0);
+                            FOVAngle_Start = 0f;
+                            FOVAngle_End = 0f;
+                            Viewpoint_Start = new Vector3D(0, 0, 0);
+                            Viewpoint_Destination = new Vector3D(0, 0, 0);
+                            Camera_Active_Time = 0f;
+                        }
+                    }
+
+                    public void ReadEMAC(BinaryReader br)
+                    {
+                        EMACHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int EMACCount = 0; EMACCount < NumOfEntries; EMACCount++)
+                        {
+                            EMACValue eMACValue = new EMACValue();
+                            eMACValue.ReadEMACValue(br);
+                            EMACValue_List.Add(eMACValue);
+                        }
+                    }
+
+                    public void WriteEMAC(BinaryWriter bw)
+                    {
+                        bw.Write(EMACHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            EMACValue_List[Count].WriteEMACValue(bw);
+                        }
+                    }
+
+                    public EMAC_Section()
+                    {
+                        EMACHeader = "EMAC".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        EMACValue_List = new List<EMACValue>();
                     }
                 }
 
@@ -1817,9 +2789,72 @@ namespace MK7_KMP_Editor_For_PG_
                         public Vector3D TPGJ_Rotation { get; set; }
                         public ushort TPGJ_RespawnID { get; set; }
                         public ushort TPGJ_UnkBytes1 { get; set; }
+
+                        public void ReadTPGJValue(BinaryReader br)
+                        {
+                            TPGJ_Position = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            TPGJ_Rotation = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            TPGJ_RespawnID = br.ReadUInt16();
+                            TPGJ_UnkBytes1 = br.ReadUInt16();
+                        }
+
+                        public void WriteTPGJValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Position)[2]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Rotation)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Rotation)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ_Rotation)[2]);
+                            bw.Write(TPGJ_RespawnID);
+                            bw.Write(TPGJ_UnkBytes1);
+                        }
+
+                        public TPGJValue()
+                        {
+                            TPGJ_Position = new Vector3D(0, 0, 0);
+                            TPGJ_Rotation = new Vector3D(0, 0, 0);
+                            TPGJ_RespawnID = 0;
+                            TPGJ_UnkBytes1 = 0;
+                        }
+                    }
+
+                    public void ReadTPGJ(BinaryReader br)
+                    {
+                        TPGJHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int TPGJCount = 0; TPGJCount < NumOfEntries; TPGJCount++)
+                        {
+                            TPGJValue tPGJValue = new TPGJValue();
+                            tPGJValue.ReadTPGJValue(br);
+                            TPGJValue_List.Add(tPGJValue);
+                        }
+                    }
+
+                    public void WriteTPGJ(BinaryWriter bw)
+                    {
+                        bw.Write(TPGJHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            TPGJValue_List[Count].WriteTPGJValue(bw);
+                        }
+                    }
+
+                    public TPGJ_Section()
+                    {
+                        TPGJHeader = "TPGJ".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPGJValue_List = new List<TPGJValue>();
                     }
                 }
 
+                //Unused Section
                 public TPNC_Section TPNC { get; set; }
                 public class TPNC_Section
                 {
@@ -1831,8 +2866,30 @@ namespace MK7_KMP_Editor_For_PG_
                     //{
                     //    //Unused
                     //}
+
+                    public void ReadTPNC(BinaryReader br)
+                    {
+                        TPNCHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                    }
+
+                    public void WriteTPNC(BinaryWriter bw)
+                    {
+                        bw.Write(TPNCHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                    }
+
+                    public TPNC_Section()
+                    {
+                        TPNCHeader = "TPNC".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                    }
                 }
 
+                //Unused Section
                 public TPSM_Section TPSM { get; set; }
                 public class TPSM_Section
                 {
@@ -1844,6 +2901,27 @@ namespace MK7_KMP_Editor_For_PG_
                     //{
                     //    //Unused
                     //}
+
+                    public void ReadTPSM(BinaryReader br)
+                    {
+                        TPSMHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                    }
+
+                    public void WriteTPSM(BinaryWriter bw)
+                    {
+                        bw.Write(TPSMHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                    }
+
+                    public TPSM_Section()
+                    {
+                        TPSMHeader = "TPSM".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                    }
                 }
 
                 public IGTS_Section IGTS { get; set; }
@@ -1864,11 +2942,80 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte G { get; set; }
                         public byte B { get; set; }
                         public byte A { get; set; }
+
+                        public void ReadRGBA(BinaryReader br)
+                        {
+                            R = br.ReadByte();
+                            G = br.ReadByte();
+                            B = br.ReadByte();
+                            A = br.ReadByte();
+                        }
+
+                        public void WriteRGBA(BinaryWriter bw)
+                        {
+                            bw.Write(R);
+                            bw.Write(G);
+                            bw.Write(B);
+                            bw.Write(A);
+                        }
+
+                        public RGBA(byte ColorR = 0xFF, byte ColorG = 0xFF, byte ColorB = 0xFF, byte ColorA = 0xFF)
+                        {
+                            R = ColorR;
+                            G = ColorG;
+                            B = ColorB;
+                            A = ColorA;
+                        }
+
+                        public RGBA()
+                        {
+                            R = 255;
+                            G = 255;
+                            B = 255;
+                            A = 255;
+                        }
                     }
 
                     public uint FlareAlpha { get; set; }
+
+                    public void ReadIGTS(BinaryReader br)
+                    {
+                        IGTSHeader = br.ReadChars(4);
+                        Unknown1 = br.ReadUInt32();
+                        LapCount = br.ReadByte();
+                        PolePosition = br.ReadByte();
+                        Unknown2 = br.ReadByte();
+                        Unknown3 = br.ReadByte();
+                        RGBAColor.ReadRGBA(br);
+                        FlareAlpha = br.ReadUInt32();
+                    }
+
+                    public void WriteIGTS(BinaryWriter bw)
+                    {
+                        bw.Write(IGTSHeader);
+                        bw.Write(Unknown1);
+                        bw.Write(LapCount);
+                        bw.Write(PolePosition);
+                        bw.Write(Unknown2);
+                        bw.Write(Unknown3);
+                        RGBAColor.WriteRGBA(bw);
+                        bw.Write(FlareAlpha);
+                    }
+
+                    public IGTS_Section()
+                    {
+                        IGTSHeader = "IGTS".ToCharArray();
+                        Unknown1 = 0;
+                        LapCount = 0x00;
+                        PolePosition = 0x00;
+                        Unknown2 = 0x00;
+                        Unknown3 = 0x00;
+                        RGBAColor = new RGBA();
+                        FlareAlpha = 0;
+                    }
                 }
 
+                //Unused Section
                 public SROC_Section SROC { get; set; }
                 public class SROC_Section
                 {
@@ -1880,6 +3027,27 @@ namespace MK7_KMP_Editor_For_PG_
                     //{
                     //    //Unused
                     //}
+
+                    public void ReadSROC(BinaryReader br)
+                    {
+                        SROCHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+                    }
+
+                    public void WriteSROC(BinaryWriter bw)
+                    {
+                        bw.Write(SROCHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+                    }
+
+                    public SROC_Section()
+                    {
+                        SROCHeader = "SROC".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                    }
                 }
 
                 public TPLG_Section TPLG { get; set; }
@@ -1895,6 +3063,66 @@ namespace MK7_KMP_Editor_For_PG_
                         public float TPLG_PointScaleValue { get; set; }
                         public uint TPLG_UnkBytes1 { get; set; }
                         public uint TPLG_UnkBytes2 { get; set; }
+
+                        public void ReadTPLGValue(BinaryReader br)
+                        {
+                            TPLG_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            TPLG_PointScaleValue = br.ReadSingle();
+                            TPLG_UnkBytes1 = br.ReadUInt32();
+                            TPLG_UnkBytes2 = br.ReadUInt32();
+                        }
+
+                        public void WriteTPLGValue(BinaryWriter bw)
+                        {
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG_Position)[0]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG_Position)[1]);
+                            bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG_Position)[2]);
+                            bw.Write(TPLG_PointScaleValue);
+                            bw.Write(TPLG_UnkBytes1);
+                            bw.Write(TPLG_UnkBytes2);
+                        }
+
+                        public TPLGValue()
+                        {
+                            TPLG_Position = new Vector3D(0, 0, 0);
+                            TPLG_PointScaleValue = 0f;
+                            TPLG_UnkBytes1 = 0;
+                            TPLG_UnkBytes2 = 0;
+                        }
+                    }
+
+                    public void ReadTPLG(BinaryReader br)
+                    {
+                        TPLGHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int TPLGCount = 0; TPLGCount < NumOfEntries; TPLGCount++)
+                        {
+                            TPLGValue tPLGValue = new TPLGValue();
+                            tPLGValue.ReadTPLGValue(br);
+                            TPLGValue_List.Add(tPLGValue);
+                        }
+                    }
+
+                    public void WriteTPLG(BinaryWriter bw)
+                    {
+                        bw.Write(TPLGHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            TPLGValue_List[Count].WriteTPLGValue(bw);
+                        }
+                    }
+
+                    public TPLG_Section()
+                    {
+                        TPLGHeader = "TPLG".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        TPLGValue_List = new List<TPLGValue>();
                     }
                 }
 
@@ -1919,6 +3147,36 @@ namespace MK7_KMP_Editor_For_PG_
                             public byte Prev3 { get; set; }
                             public byte Prev4 { get; set; }
                             public byte Prev5 { get; set; }
+
+                            public void ReadHPLGPrevGroups(BinaryReader br)
+                            {
+                                Prev0 = br.ReadByte();
+                                Prev1 = br.ReadByte();
+                                Prev2 = br.ReadByte();
+                                Prev3 = br.ReadByte();
+                                Prev4 = br.ReadByte();
+                                Prev5 = br.ReadByte();
+                            }
+
+                            public void WriteHPLGPrevGroups(BinaryWriter bw)
+                            {
+                                bw.Write(Prev0);
+                                bw.Write(Prev1);
+                                bw.Write(Prev2);
+                                bw.Write(Prev3);
+                                bw.Write(Prev4);
+                                bw.Write(Prev5);
+                            }
+
+                            public HPLG_PreviewGroups()
+                            {
+                                Prev0 = 0xFF;
+                                Prev1 = 0xFF;
+                                Prev2 = 0xFF;
+                                Prev3 = 0xFF;
+                                Prev4 = 0xFF;
+                                Prev5 = 0xFF;
+                            }
                         }
 
                         public HPLG_NextGroups HPLG_NextGroup { get; set; }
@@ -1930,44 +3188,389 @@ namespace MK7_KMP_Editor_For_PG_
                             public byte Next3 { get; set; }
                             public byte Next4 { get; set; }
                             public byte Next5 { get; set; }
+
+                            public void ReadHPLGNextGroups(BinaryReader br)
+                            {
+                                Next0 = br.ReadByte();
+                                Next1 = br.ReadByte();
+                                Next2 = br.ReadByte();
+                                Next3 = br.ReadByte();
+                                Next4 = br.ReadByte();
+                                Next5 = br.ReadByte();
+                            }
+
+                            public void WriteHPLGNextGroups(BinaryWriter bw)
+                            {
+                                bw.Write(Next0);
+                                bw.Write(Next1);
+                                bw.Write(Next2);
+                                bw.Write(Next3);
+                                bw.Write(Next4);
+                                bw.Write(Next5);
+                            }
+
+                            public HPLG_NextGroups()
+                            {
+                                Next0 = 0xFF;
+                                Next1 = 0xFF;
+                                Next2 = 0xFF;
+                                Next3 = 0xFF;
+                                Next4 = 0xFF;
+                                Next5 = 0xFF;
+                            }
                         }
 
                         public uint RouteSetting { get; set; }
                         public uint HPLG_UnkBytes2 { get; set; }
+
+                        public void ReadHPLGValue(BinaryReader br)
+                        {
+                            HPLG_StartPoint = br.ReadByte();
+                            HPLG_Length = br.ReadByte();
+                            HPLG_PreviewGroup.ReadHPLGPrevGroups(br);
+                            HPLG_NextGroup.ReadHPLGNextGroups(br);
+                            RouteSetting = br.ReadUInt32();
+                            HPLG_UnkBytes2 = br.ReadUInt32();
+                        }
+
+                        public void WriteHPLGValue(BinaryWriter bw)
+                        {
+                            bw.Write(HPLG_StartPoint);
+                            bw.Write(HPLG_Length);
+                            HPLG_PreviewGroup.WriteHPLGPrevGroups(bw);
+                            HPLG_NextGroup.WriteHPLGNextGroups(bw);
+                            bw.Write(RouteSetting);
+                            bw.Write(HPLG_UnkBytes2);
+                        }
+
+                        public HPLGValue()
+                        {
+                            HPLG_StartPoint = 0x00;
+                            HPLG_Length = 0x00;
+                            HPLG_PreviewGroup = new HPLG_PreviewGroups();
+                            HPLG_NextGroup = new HPLG_NextGroups();
+                            RouteSetting = 0;
+                            HPLG_UnkBytes2 = 0;
+                        }
                     }
+
+                    public void ReadHPLG(BinaryReader br)
+                    {
+                        HPLGHeader = br.ReadChars(4);
+                        NumOfEntries = br.ReadUInt16();
+                        AdditionalValue = br.ReadUInt16();
+
+                        for (int HPLGCount = 0; HPLGCount < NumOfEntries; HPLGCount++)
+                        {
+                            HPLGValue hPLGValue = new HPLGValue();
+                            hPLGValue.ReadHPLGValue(br);
+                            HPLGValue_List.Add(hPLGValue);
+                        }
+                    }
+
+                    public void WriteHPLG(BinaryWriter bw)
+                    {
+                        bw.Write(HPLGHeader);
+                        bw.Write(NumOfEntries);
+                        bw.Write(AdditionalValue);
+
+                        for (int Count = 0; Count < NumOfEntries; Count++)
+                        {
+                            HPLGValue_List[Count].WriteHPLGValue(bw);
+                        }
+                    }
+
+                    public HPLG_Section()
+                    {
+                        HPLGHeader = "HPLG".ToCharArray();
+                        NumOfEntries = 0;
+                        AdditionalValue = 0;
+                        HPLGValue_List = new List<HPLGValue>();
+                    }
+                }
+
+                public void ReadKMPSection(BinaryReader br)
+                {
+                    TPTK_Offset = br.ReadUInt32();
+                    TPNE_Offset = br.ReadUInt32();
+                    HPNE_Offset = br.ReadUInt32();
+                    TPTI_Offset = br.ReadUInt32();
+                    HPTI_Offset = br.ReadUInt32();
+                    TPKC_Offset = br.ReadUInt32();
+                    HPKC_Offset = br.ReadUInt32();
+                    JBOG_Offset = br.ReadUInt32();
+                    ITOP_Offset = br.ReadUInt32();
+                    AERA_Offset = br.ReadUInt32();
+                    EMAC_Offset = br.ReadUInt32();
+                    TPGJ_Offset = br.ReadUInt32();
+                    TPNC_Offset = br.ReadUInt32();
+                    TPSM_Offset = br.ReadUInt32();
+                    IGTS_Offset = br.ReadUInt32();
+                    SROC_Offset = br.ReadUInt32();
+                    TPLG_Offset = br.ReadUInt32();
+                    HPLG_Offset = br.ReadUInt32();
+
+                    long KMPSectionPos = br.BaseStream.Position;
+
+                    br.BaseStream.Seek(TPTK_Offset, SeekOrigin.Current);
+                    TPTK.ReadTPTK(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPNE_Offset, SeekOrigin.Current);
+                    TPNE.ReadTPNE(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(HPNE_Offset, SeekOrigin.Current);
+                    HPNE.ReadHPNE(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPTI_Offset, SeekOrigin.Current);
+                    TPTI.ReadTPTI(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(HPTI_Offset, SeekOrigin.Current);
+                    HPTI.ReadHPTI(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPKC_Offset, SeekOrigin.Current);
+                    TPKC.ReadTPKC(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(HPKC_Offset, SeekOrigin.Current);
+                    HPKC.ReadHPKC(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(JBOG_Offset, SeekOrigin.Current);
+                    JBOG.ReadJBOG(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(ITOP_Offset, SeekOrigin.Current);
+                    ITOP.ReadITOP(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(AERA_Offset, SeekOrigin.Current);
+                    AERA.ReadAERA(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(EMAC_Offset, SeekOrigin.Current);
+                    EMAC.ReadEMAC(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPGJ_Offset, SeekOrigin.Current);
+                    TPGJ.ReadTPGJ(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPNC_Offset, SeekOrigin.Current);
+                    TPNC.ReadTPNC(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPSM_Offset, SeekOrigin.Current);
+                    TPSM.ReadTPSM(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(IGTS_Offset, SeekOrigin.Current);
+                    IGTS.ReadIGTS(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(SROC_Offset, SeekOrigin.Current);
+                    SROC.ReadSROC(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(TPLG_Offset, SeekOrigin.Current);
+                    TPLG.ReadTPLG(br);
+                    br.BaseStream.Position = KMPSectionPos;
+
+                    br.BaseStream.Seek(HPLG_Offset, SeekOrigin.Current);
+                    HPLG.ReadHPLG(br);
+                    br.BaseStream.Position = KMPSectionPos;
+                }
+
+                public void WriteKMPSection(BinaryWriter bw)
+                {
+                    long SectionOffsetBasePos = bw.BaseStream.Position;
+
+                    #region WriteOffset (Default)
+                    bw.Write(TPTK_Offset);
+                    bw.Write(TPNE_Offset);
+                    bw.Write(HPNE_Offset);
+                    bw.Write(TPTI_Offset);
+                    bw.Write(HPTI_Offset);
+                    bw.Write(TPKC_Offset);
+                    bw.Write(HPKC_Offset);
+                    bw.Write(JBOG_Offset);
+                    bw.Write(ITOP_Offset);
+                    bw.Write(AERA_Offset);
+                    bw.Write(EMAC_Offset);
+                    bw.Write(TPGJ_Offset);
+                    bw.Write(TPNC_Offset);
+                    bw.Write(TPSM_Offset);
+                    bw.Write(IGTS_Offset);
+                    bw.Write(SROC_Offset);
+                    bw.Write(TPLG_Offset);
+                    bw.Write(HPLG_Offset);
+                    #endregion
+
+                    #region Write
+                    TPTK_Offset = (uint)bw.BaseStream.Position;
+                    TPTK.WriteTPTK(bw);
+
+                    TPNE_Offset = (uint)bw.BaseStream.Position;
+                    TPNE.WriteTPNE(bw);
+
+                    HPNE_Offset = (uint)bw.BaseStream.Position;
+                    HPNE.WriteHPNE(bw);
+
+                    TPTI_Offset = (uint)bw.BaseStream.Position;
+                    TPTI.WriteTPTI(bw);
+
+                    HPTI_Offset = (uint)bw.BaseStream.Position;
+                    HPTI.WriteHPTI(bw);
+
+                    TPKC_Offset = (uint)bw.BaseStream.Position;
+                    TPKC.WriteTPKC(bw);
+
+                    HPKC_Offset = (uint)bw.BaseStream.Position;
+                    HPKC.WriteHPKC(bw);
+
+                    JBOG_Offset = (uint)bw.BaseStream.Position;
+                    JBOG.WriteJBOG(bw);
+
+                    ITOP_Offset = (uint)bw.BaseStream.Position;
+                    ITOP.WriteITOP(bw);
+
+                    AERA_Offset = (uint)bw.BaseStream.Position;
+                    AERA.WriteAERA(bw);
+
+                    EMAC_Offset = (uint)bw.BaseStream.Position;
+                    EMAC.WriteEMAC(bw);
+
+                    TPGJ_Offset = (uint)bw.BaseStream.Position;
+                    TPGJ.WriteTPGJ(bw);
+
+                    TPNC_Offset = (uint)bw.BaseStream.Position;
+                    TPNC.WriteTPNC(bw);
+
+                    TPSM_Offset = (uint)bw.BaseStream.Position;
+                    TPSM.WriteTPSM(bw);
+
+                    IGTS_Offset = (uint)bw.BaseStream.Position;
+                    IGTS.WriteIGTS(bw);
+
+                    SROC_Offset = (uint)bw.BaseStream.Position;
+                    SROC.WriteSROC(bw);
+
+                    TPLG_Offset = (uint)bw.BaseStream.Position;
+                    TPLG.WriteTPLG(bw);
+
+                    HPLG_Offset = (uint)bw.BaseStream.Position;
+                    HPLG.WriteHPLG(bw);
+                    #endregion
+
+                    //FileSize
+                    long FileEndLocation = bw.BaseStream.Position;
+
+                    bw.BaseStream.Position = SectionOffsetBasePos;
+
+                    #region WriteOffset
+                    bw.Write(TPTK_Offset - 88);
+                    bw.Write(TPNE_Offset - 88);
+                    bw.Write(HPNE_Offset - 88);
+                    bw.Write(TPTI_Offset - 88);
+                    bw.Write(HPTI_Offset - 88);
+                    bw.Write(TPKC_Offset - 88);
+                    bw.Write(HPKC_Offset - 88);
+                    bw.Write(JBOG_Offset - 88);
+                    bw.Write(ITOP_Offset - 88);
+                    bw.Write(AERA_Offset - 88);
+                    bw.Write(EMAC_Offset - 88);
+                    bw.Write(TPGJ_Offset - 88);
+                    bw.Write(TPNC_Offset - 88);
+                    bw.Write(TPSM_Offset - 88);
+                    bw.Write(IGTS_Offset - 88);
+                    bw.Write(SROC_Offset - 88);
+                    bw.Write(TPLG_Offset - 88);
+                    bw.Write(HPLG_Offset - 88);
+                    #endregion
+
+                    //Reset Position
+                    bw.BaseStream.Position = FileEndLocation;
                 }
 
                 public KMPSection()
                 {
-                    TPTK = null;
-                    TPNE = null;
-                    HPNE = null;
-                    TPTI = null;
-                    HPTI = null;
-                    TPKC = null;
-                    HPKC = null;
-                    JBOG = null;
-                    ITOP = null;
-                    AERA = null;
-                    EMAC = null;
-                    TPGJ = null;
-                    TPNC = null;
-                    TPSM = null;
-                    IGTS = null;
-                    SROC = null;
-                    TPLG = null;
-                    HPLG = null;
+                    TPTK_Offset = 0;
+                    TPNE_Offset = 0;
+                    HPNE_Offset = 0;
+                    TPTI_Offset = 0;
+                    HPTI_Offset = 0;
+                    TPKC_Offset = 0;
+                    HPKC_Offset = 0;
+                    JBOG_Offset = 0;
+                    ITOP_Offset = 0;
+                    AERA_Offset = 0;
+                    EMAC_Offset = 0;
+                    TPGJ_Offset = 0;
+                    TPNC_Offset = 0;
+                    TPSM_Offset = 0;
+                    IGTS_Offset = 0;
+                    SROC_Offset = 0;
+                    TPLG_Offset = 0;
+                    HPLG_Offset = 0;
+
+                    TPTK = new TPTK_Section();
+                    TPNE = new TPNE_Section();
+                    HPNE = new HPNE_Section();
+                    TPTI = new TPTI_Section();
+                    HPTI = new HPTI_Section();
+                    TPKC = new TPKC_Section();
+                    HPKC = new HPKC_Section();
+                    JBOG = new JBOG_Section();
+                    ITOP = new ITOP_Section();
+                    AERA = new AERA_Section();
+                    EMAC = new EMAC_Section();
+                    TPGJ = new TPGJ_Section();
+                    TPNC = new TPNC_Section();
+                    TPSM = new TPSM_Section();
+                    IGTS = new IGTS_Section();
+                    SROC = new SROC_Section();
+                    TPLG = new TPLG_Section();
+                    HPLG = new HPLG_Section();
                 }
+            }
+
+            public void ReadKMP(BinaryReader br)
+            {
+                DMDCHeader = br.ReadChars(4);
+                FileSize = br.ReadUInt32();
+                SectionCount = br.ReadUInt16();
+                DMDCHeaderSize = br.ReadUInt16();
+                VersionNumber = br.ReadUInt32();
+                KMP_Section.ReadKMPSection(br);
+            }
+
+            public void WriteKMP(BinaryWriter bw)
+            {
+                bw.Write(DMDCHeader);
+                bw.Write((uint)0); //FileSize (Default)
+
+                bw.Write(SectionCount);
+                bw.Write(DMDCHeaderSize);
+                bw.Write(VersionNumber);
+                KMP_Section.WriteKMPSection(bw);
+
+                FileSize = (uint)bw.BaseStream.Position;
+                bw.BaseStream.Seek(4, SeekOrigin.Begin);
+                bw.Write(FileSize);
             }
 
             public KMPFormat()
             {
-                DMDCHeader = new char[] { ' ', ' ', ' ', ' ' };
+                DMDCHeader = "DMDC".ToCharArray();
                 FileSize = 0;
-                SectionCount = 0;
-                DMDCHeaderSize = 0;
-                VersionNumber = 0;
-                DMDC_SectionOffset = new DMDCSectionOffset();
+                SectionCount = 18;
+                DMDCHeaderSize = 88;
+                VersionNumber = 3100;
+                KMP_Section = new KMPSection();
             }
         }
 
@@ -3206,1171 +4809,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                     }
                 }
-            }
-        }
-
-        public class KMPReader : KMPs
-        {
-            public static KMPs.KMPFormat.KMPSection.TPTK_Section Read_TPTK(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPTK_Section TPTK = new KMPs.KMPFormat.KMPSection.TPTK_Section
-                {
-                    TPTKHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPTKValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue> TPTKValue_List = new List<KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue>();
-
-                for (int TPTKCount = 0; TPTKCount < TPTK.NumOfEntries; TPTKCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue TPTK_Values = new KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue
-                    {
-                        TPTK_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPTK_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        Player_Index = br.ReadUInt16(),
-                        TPTK_UnkBytes = br.ReadUInt16()
-                    };
-
-                    TPTKValue_List.Add(TPTK_Values);
-                }
-
-                TPTK.TPTKValue_List = TPTKValue_List;
-
-                return TPTK;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPNE_Section Read_TPNE(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPNE_Section TPNE = new KMPs.KMPFormat.KMPSection.TPNE_Section
-                {
-                    TPNEHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPNEValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue> TPNEValue_List = new List<KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue>();
-
-                for (int TPNECount = 0; TPNECount < TPNE.NumOfEntries; TPNECount++)
-                {
-                    KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue TPNE_Values = new KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue
-                    {
-                        TPNE_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        Control = br.ReadSingle(),
-                        MushSetting = br.ReadUInt16(),
-                        DriftSetting = br.ReadByte(),
-                        Flags = br.ReadByte(),
-                        PathFindOption = br.ReadInt16(),
-                        MaxSearchYOffset = br.ReadInt16()
-                    };
-
-                    TPNEValue_List.Add(TPNE_Values);
-                }
-
-                TPNE.TPNEValue_List = TPNEValue_List;
-                return TPNE;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.HPNE_Section Read_HPNE(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.HPNE_Section HPNE = new KMPs.KMPFormat.KMPSection.HPNE_Section
-                {
-                    HPNEHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    HPNEValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue> HPNEValue_List = new List<KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue>();
-
-                for (int HPNECount = 0; HPNECount < HPNE.NumOfEntries; HPNECount++)
-                {
-                    KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue HPNE_Values = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue
-                    {
-                        HPNE_StartPoint = br.ReadUInt16(),
-                        HPNE_Length = br.ReadUInt16(),
-                        HPNE_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_PreviewGroups
-                        {
-                            Prev0 = br.ReadUInt16(),
-                            Prev1 = br.ReadUInt16(),
-                            Prev2 = br.ReadUInt16(),
-                            Prev3 = br.ReadUInt16(),
-                            Prev4 = br.ReadUInt16(),
-                            Prev5 = br.ReadUInt16(),
-                            Prev6 = br.ReadUInt16(),
-                            Prev7 = br.ReadUInt16(),
-                            Prev8 = br.ReadUInt16(),
-                            Prev9 = br.ReadUInt16(),
-                            Prev10 = br.ReadUInt16(),
-                            Prev11 = br.ReadUInt16(),
-                            Prev12 = br.ReadUInt16(),
-                            Prev13 = br.ReadUInt16(),
-                            Prev14 = br.ReadUInt16(),
-                            Prev15 = br.ReadUInt16()
-                        },
-                        HPNE_NextGroup = new KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_NextGroups
-                        {
-                            Next0 = br.ReadUInt16(),
-                            Next1 = br.ReadUInt16(),
-                            Next2 = br.ReadUInt16(),
-                            Next3 = br.ReadUInt16(),
-                            Next4 = br.ReadUInt16(),
-                            Next5 = br.ReadUInt16(),
-                            Next6 = br.ReadUInt16(),
-                            Next7 = br.ReadUInt16(),
-                            Next8 = br.ReadUInt16(),
-                            Next9 = br.ReadUInt16(),
-                            Next10 = br.ReadUInt16(),
-                            Next11 = br.ReadUInt16(),
-                            Next12 = br.ReadUInt16(),
-                            Next13 = br.ReadUInt16(),
-                            Next14 = br.ReadUInt16(),
-                            Next15 = br.ReadUInt16()
-                        },
-                        HPNE_UnkBytes1 = br.ReadUInt32()
-                    };
-
-                    HPNEValue_List.Add(HPNE_Values);
-                }
-
-                HPNE.HPNEValue_List = HPNEValue_List;
-                return HPNE;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPTI_Section Read_TPTI(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPTI_Section TPTI = new KMPs.KMPFormat.KMPSection.TPTI_Section
-                {
-                    TPTIHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPTIValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue> TPTIValue_List = new List<KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue>();
-
-                for (int TPTICount = 0; TPTICount < TPTI.NumOfEntries; TPTICount++)
-                {
-                    byte[] BPX = br.ReadBytes(4);
-                    byte[] BPY = br.ReadBytes(4);
-                    byte[] BPZ = br.ReadBytes(4);
-
-                    KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue TPTI_Values = new KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue
-                    {
-                        TPTI_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { BPX, BPY, BPZ }),
-                        TPTI_PointSize = br.ReadSingle(),
-                        GravityMode = br.ReadUInt16(),
-                        PlayerScanRadius = br.ReadUInt16()
-                    };
-
-                    TPTIValue_List.Add(TPTI_Values);
-                }
-
-                TPTI.TPTIValue_List = TPTIValue_List;
-                return TPTI;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.HPTI_Section Read_HPTI(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.HPTI_Section HPTI = new KMPs.KMPFormat.KMPSection.HPTI_Section
-                {
-                    HPTIHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    HPTIValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue> HPTIValue_List = new List<KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue>();
-
-                for (int HPTICount = 0; HPTICount < HPTI.NumOfEntries; HPTICount++)
-                {
-                    KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue HPTI_Values = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue
-                    {
-                        HPTI_StartPoint = br.ReadUInt16(),
-                        HPTI_Length = br.ReadUInt16(),
-                        HPTI_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_PreviewGroups
-                        {
-                            Prev0 = br.ReadUInt16(),
-                            Prev1 = br.ReadUInt16(),
-                            Prev2 = br.ReadUInt16(),
-                            Prev3 = br.ReadUInt16(),
-                            Prev4 = br.ReadUInt16(),
-                            Prev5 = br.ReadUInt16()
-                        },
-                        HPTI_NextGroup = new KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_NextGroups
-                        {
-                            Next0 = br.ReadUInt16(),
-                            Next1 = br.ReadUInt16(),
-                            Next2 = br.ReadUInt16(),
-                            Next3 = br.ReadUInt16(),
-                            Next4 = br.ReadUInt16(),
-                            Next5 = br.ReadUInt16()
-                        }
-                    };
-
-                    HPTIValue_List.Add(HPTI_Values);
-                }
-
-                HPTI.HPTIValue_List = HPTIValue_List;
-                return HPTI;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPKC_Section Read_TPKC(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPKC_Section TPKC = new KMPs.KMPFormat.KMPSection.TPKC_Section
-                {
-                    TPKCHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPKCValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue> TPKCValue_List = new List<KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue>();
-
-                for (int TPKCCount = 0; TPKCCount < TPKC.NumOfEntries; TPKCCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue TPKC_Values = new KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue
-                    {
-                        TPKC_2DPosition_Left = KMPs.KMPHelper.Vector3DTo2DConverter.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPKC_2DPosition_Right = KMPs.KMPHelper.Vector3DTo2DConverter.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPKC_RespawnID = br.ReadByte(),
-                        TPKC_Checkpoint_Type = br.ReadByte(),
-                        TPKC_PreviousCheckPoint = br.ReadByte(),
-                        TPKC_NextCheckPoint = br.ReadByte(),
-                        TPKC_ClipID = br.ReadByte(),
-                        TPKC_Section = br.ReadByte(),
-                        TPKC_UnkBytes3 = br.ReadByte(),
-                        TPKC_UnkBytes4 = br.ReadByte()
-                    };
-
-                    TPKCValue_List.Add(TPKC_Values);
-                }
-
-                TPKC.TPKCValue_List = TPKCValue_List;
-                return TPKC;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.HPKC_Section Read_HPKC(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.HPKC_Section HPKC = new KMPs.KMPFormat.KMPSection.HPKC_Section
-                {
-                    HPKCHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    HPKCValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue> HPKCValue_List = new List<KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue>();
-
-                for (int HPKCCount = 0; HPKCCount < HPKC.NumOfEntries; HPKCCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue HPKC_Values = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue
-                    {
-                        HPKC_StartPoint = br.ReadByte(),
-                        HPKC_Length = br.ReadByte(),
-                        HPKC_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_PreviewGroups
-                        {
-                            Prev0 = br.ReadByte(),
-                            Prev1 = br.ReadByte(),
-                            Prev2 = br.ReadByte(),
-                            Prev3 = br.ReadByte(),
-                            Prev4 = br.ReadByte(),
-                            Prev5 = br.ReadByte()
-                        },
-                        HPKC_NextGroup = new KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_NextGroups
-                        {
-                            Next0 = br.ReadByte(),
-                            Next1 = br.ReadByte(),
-                            Next2 = br.ReadByte(),
-                            Next3 = br.ReadByte(),
-                            Next4 = br.ReadByte(),
-                            Next5 = br.ReadByte()
-                        },
-                        HPKC_UnkBytes1 = br.ReadUInt16()
-                    };
-
-                    HPKCValue_List.Add(HPKC_Values);
-                }
-
-                HPKC.HPKCValue_List = HPKCValue_List;
-                return HPKC;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.JBOG_Section Read_JBOG(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.JBOG_Section JBOG = new KMPs.KMPFormat.KMPSection.JBOG_Section
-                {
-                    JBOGHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    JBOGValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue> JBOGValue_List = new List<KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue>();
-
-                for (int JBOGCount = 0; JBOGCount < JBOG.NumOfEntries; JBOGCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue JBOG_Values = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue
-                    {
-                        ObjectID = br.ReadBytes(2),
-                        JBOG_UnkByte1 = br.ReadBytes(2),
-                        JBOG_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        JBOG_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        JBOG_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        JBOG_ITOP_RouteIDIndex = br.ReadUInt16(),
-                        JOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
-                        {
-                            Value0 = br.ReadUInt16(),
-                            Value1 = br.ReadUInt16(),
-                            Value2 = br.ReadUInt16(),
-                            Value3 = br.ReadUInt16(),
-                            Value4 = br.ReadUInt16(),
-                            Value5 = br.ReadUInt16(),
-                            Value6 = br.ReadUInt16(),
-                            Value7 = br.ReadUInt16(),
-                        },
-                        JBOG_PresenceSetting = br.ReadUInt16(),
-                        JBOG_UnkByte2 = br.ReadBytes(2),
-                        JBOG_UnkByte3 = br.ReadUInt16()
-                    };
-
-                    JBOGValue_List.Add(JBOG_Values);
-                }
-
-                JBOG.JBOGValue_List = JBOGValue_List;
-                return JBOG;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.ITOP_Section Read_ITOP(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.ITOP_Section ITOP = new KMPs.KMPFormat.KMPSection.ITOP_Section
-                {
-                    ITOPHeader = br.ReadChars(4),
-                    ITOP_NumberOfRoute = br.ReadUInt16(),
-                    ITOP_NumberOfPoint = br.ReadUInt16(),
-                    ITOP_Route_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route> ITOP_Route_List = new List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route>();
-
-                for (int ITOPRouteCount = 0; ITOPRouteCount < ITOP.ITOP_NumberOfRoute; ITOPRouteCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route ITOP_Routes = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route
-                    {
-                        ITOP_Route_NumOfPoint = br.ReadUInt16(),
-                        ITOP_RoopSetting = br.ReadByte(),
-                        ITOP_SmoothSetting = br.ReadByte(),
-                        ITOP_Point_List = null
-                    };
-
-                    List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point> ITOP_Point_List = new List<KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point>();
-
-                    for (int ITOP_PointCount = 0; ITOP_PointCount < ITOP_Routes.ITOP_Route_NumOfPoint; ITOP_PointCount++)
-                    {
-                        KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point ITOP_Points = new KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point
-                        {
-                            ITOP_Point_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                            ITOP_Point_RouteSpeed = br.ReadUInt16(),
-                            ITOP_PointSetting2 = br.ReadUInt16()
-                        };
-
-                        ITOP_Point_List.Add(ITOP_Points);
-                    }
-
-                    ITOP_Routes.ITOP_Point_List = ITOP_Point_List;
-
-                    ITOP_Route_List.Add(ITOP_Routes);
-                }
-
-                ITOP.ITOP_Route_List = ITOP_Route_List;
-                return ITOP;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.AERA_Section Read_AERA(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.AERA_Section AERA = new KMPs.KMPFormat.KMPSection.AERA_Section
-                {
-                    AERAHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    AERAValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue> AERAValue_List = new List<KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue>();
-
-                for (int AERACount = 0; AERACount < AERA.NumOfEntries; AERACount++)
-                {
-                    KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue AERA_Values = new KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue
-                    {
-                        AreaMode = br.ReadByte(),
-                        AreaType = br.ReadByte(),
-                        AERA_EMACIndex = br.ReadByte(),
-                        Priority = br.ReadByte(),
-                        AERA_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        AERA_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        AERA_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        AERA_Setting1 = br.ReadUInt16(),
-                        AERA_Setting2 = br.ReadUInt16(),
-                        RouteID = br.ReadByte(),
-                        EnemyID = br.ReadByte(),
-                        AERA_UnkByte4 = br.ReadUInt16()
-                    };
-
-                    AERAValue_List.Add(AERA_Values);
-                }
-
-                AERA.AERAValue_List = AERAValue_List;
-                return AERA;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.EMAC_Section Read_EMAC(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.EMAC_Section EMAC = new KMPs.KMPFormat.KMPSection.EMAC_Section
-                {
-                    EMACHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    EMACValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue> EMACValue_List = new List<KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue>();
-
-                for (int EMACCount = 0; EMACCount < EMAC.NumOfEntries; EMACCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue EMAC_Values = new KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue
-                    {
-                        CameraType = br.ReadByte(),
-                        NextCameraIndex = br.ReadByte(),
-                        EMAC_NextVideoIndex = br.ReadByte(),
-                        EMAC_ITOP_CameraIndex = br.ReadByte(),
-                        RouteSpeed = br.ReadUInt16(),
-                        FOVSpeed = br.ReadUInt16(),
-                        ViewpointSpeed = br.ReadUInt16(),
-                        EMAC_StartFlag = br.ReadByte(),
-                        EMAC_VideoFlag = br.ReadByte(),
-                        EMAC_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        EMAC_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        FOVAngle_Start = br.ReadSingle(),
-                        FOVAngle_End = br.ReadSingle(),
-                        Viewpoint_Start = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        Viewpoint_Destination = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        Camera_Active_Time = br.ReadSingle()
-                    };
-
-                    EMACValue_List.Add(EMAC_Values);
-                }
-
-                EMAC.EMACValue_List = EMACValue_List;
-                return EMAC;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPGJ_Section Read_TPGJ(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPGJ_Section TPGJ = new KMPs.KMPFormat.KMPSection.TPGJ_Section
-                {
-                    TPGJHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPGJValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue> TPGJValue_List = new List<KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue>();
-
-                for (int TPGJCount = 0; TPGJCount < TPGJ.NumOfEntries; TPGJCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue TPGJ_Values = new KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue
-                    {
-                        TPGJ_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPGJ_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPGJ_RespawnID = br.ReadUInt16(),
-                        TPGJ_UnkBytes1 = br.ReadUInt16()
-                    };
-
-                    TPGJValue_List.Add(TPGJ_Values);
-                }
-
-                TPGJ.TPGJValue_List = TPGJValue_List;
-                return TPGJ;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPNC_Section Read_TPNC(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPNC_Section TPNC = new KMPs.KMPFormat.KMPSection.TPNC_Section
-                {
-                    TPNCHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                };
-
-                return TPNC;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPSM_Section Read_TPSM(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPSM_Section TPSM = new KMPs.KMPFormat.KMPSection.TPSM_Section
-                {
-                    TPSMHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                };
-
-                return TPSM;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.IGTS_Section Read_IGTS(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.IGTS_Section IGTS = new KMPs.KMPFormat.KMPSection.IGTS_Section
-                {
-                    IGTSHeader = br.ReadChars(4),
-                    Unknown1 = br.ReadUInt32(),
-                    LapCount = br.ReadByte(),
-                    PolePosition = br.ReadByte(),
-                    Unknown2 = br.ReadByte(),
-                    Unknown3 = br.ReadByte(),
-                    RGBAColor = new KMPs.KMPFormat.KMPSection.IGTS_Section.RGBA
-                    {
-                        R = br.ReadByte(),
-                        G = br.ReadByte(),
-                        B = br.ReadByte(),
-                        A = br.ReadByte()
-                    },
-                    FlareAlpha = br.ReadUInt32()
-                };
-
-                return IGTS;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.SROC_Section Read_SROC(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.SROC_Section SROC = new KMPs.KMPFormat.KMPSection.SROC_Section
-                {
-                    SROCHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                };
-
-                return SROC;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.TPLG_Section Read_TPLG(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.TPLG_Section TPLG = new KMPs.KMPFormat.KMPSection.TPLG_Section
-                {
-                    TPLGHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    TPLGValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue> TPLGValue_List = new List<KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue>();
-
-                for (int TPLGCount = 0; TPLGCount < TPLG.NumOfEntries; TPLGCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue TPLG_Values = new KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue
-                    {
-                        TPLG_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) }),
-                        TPLG_PointScaleValue = br.ReadSingle(),
-                        TPLG_UnkBytes1 = br.ReadUInt32(),
-                        TPLG_UnkBytes2 = br.ReadUInt32()
-                    };
-
-                    TPLGValue_List.Add(TPLG_Values);
-                }
-
-                TPLG.TPLGValue_List = TPLGValue_List;
-                return TPLG;
-            }
-
-            public static KMPs.KMPFormat.KMPSection.HPLG_Section Read_HPLG(BinaryReader br)
-            {
-                KMPs.KMPFormat.KMPSection.HPLG_Section HPLG = new KMPs.KMPFormat.KMPSection.HPLG_Section
-                {
-                    HPLGHeader = br.ReadChars(4),
-                    NumOfEntries = br.ReadUInt16(),
-                    AdditionalValue = br.ReadUInt16(),
-                    HPLGValue_List = null
-                };
-
-                List<KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue> HPLGValue_List = new List<KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue>();
-
-                for (int HPLGCount = 0; HPLGCount < HPLG.NumOfEntries; HPLGCount++)
-                {
-                    KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue HPLG_Values = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue
-                    {
-                        HPLG_StartPoint = br.ReadByte(),
-                        HPLG_Length = br.ReadByte(),
-                        HPLG_PreviewGroup = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_PreviewGroups
-                        {
-                            Prev0 = br.ReadByte(),
-                            Prev1 = br.ReadByte(),
-                            Prev2 = br.ReadByte(),
-                            Prev3 = br.ReadByte(),
-                            Prev4 = br.ReadByte(),
-                            Prev5 = br.ReadByte()
-                        },
-                        HPLG_NextGroup = new KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_NextGroups
-                        {
-                            Next0 = br.ReadByte(),
-                            Next1 = br.ReadByte(),
-                            Next2 = br.ReadByte(),
-                            Next3 = br.ReadByte(),
-                            Next4 = br.ReadByte(),
-                            Next5 = br.ReadByte()
-                        },
-                        RouteSetting = br.ReadUInt32(),
-                        HPLG_UnkBytes2 = br.ReadUInt32()
-                    };
-
-                    HPLGValue_List.Add(HPLG_Values);
-                }
-
-                HPLG.HPLGValue_List = HPLGValue_List;
-                return HPLG;
-            }
-        }
-
-        public class KMPWriter : KMPs
-        {
-            public static void WriteHeader(BinaryWriter bw, KMPFormat KMPHeader)
-            {
-                bw.Write(KMPHeader.DMDCHeader);
-                bw.Write(KMPHeader.FileSize);
-                bw.Write(KMPHeader.SectionCount);
-                bw.Write(KMPHeader.DMDCHeaderSize);
-                bw.Write(KMPHeader.VersionNumber);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPTK_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPNE_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.HPNE_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPTI_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.HPTI_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPKC_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.HPKC_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.JBOG_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.ITOP_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.AERA_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.EMAC_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPGJ_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPNC_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPSM_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.IGTS_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.SROC_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.TPLG_Offset);
-                bw.Write(KMPHeader.DMDC_SectionOffset.HPLG_Offset);
-            }
-
-            public static uint Write_TPTK(BinaryWriter bw, KMPFormat.KMPSection.TPTK_Section TPTK)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPTK.TPTKHeader);
-                bw.Write(TPTK.NumOfEntries);
-                bw.Write(TPTK.AdditionalValue);
-
-                for(int Count = 0; Count < TPTK.NumOfEntries; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Position)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTK.TPTKValue_List[Count].TPTK_Rotation)[2]);
-                    bw.Write(TPTK.TPTKValue_List[Count].Player_Index);
-                    bw.Write(TPTK.TPTKValue_List[Count].TPTK_UnkBytes);
-                }
-
-                return WritePosition;
-            }
-
-            public class TPNE_HPNE_WritePosition
-            {
-                public uint TPNE { get; set; }
-                public uint HPNE { get; set; }
-            }
-
-            public static TPNE_HPNE_WritePosition Write_TPNE_HPNE(BinaryWriter bw, KMPFormat.KMPSection.TPNE_Section TPNE, KMPFormat.KMPSection.HPNE_Section HPNE)
-            {
-                TPNE_HPNE_WritePosition tPNE_HPNE_WritePosition = new TPNE_HPNE_WritePosition
-                {
-                    TPNE = 0,
-                    HPNE = 0
-                };
-
-                #region TPNE
-                tPNE_HPNE_WritePosition.TPNE = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPNE.TPNEHeader);
-                bw.Write(TPNE.NumOfEntries);
-                bw.Write(TPNE.AdditionalValue);
-
-                for (int Count = 0; Count < TPNE.TPNEValue_List.Count; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPNE.TPNEValue_List[Count].TPNE_Position)[2]);
-                    bw.Write(TPNE.TPNEValue_List[Count].Control);
-                    bw.Write(TPNE.TPNEValue_List[Count].MushSetting);
-                    bw.Write(TPNE.TPNEValue_List[Count].DriftSetting);
-                    bw.Write(TPNE.TPNEValue_List[Count].Flags);
-                    bw.Write(TPNE.TPNEValue_List[Count].PathFindOption);
-                    bw.Write(TPNE.TPNEValue_List[Count].MaxSearchYOffset);
-                }
-                #endregion
-
-                #region HPNE
-                tPNE_HPNE_WritePosition.HPNE = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(HPNE.HPNEHeader);
-                bw.Write(HPNE.NumOfEntries);
-                bw.Write(HPNE.AdditionalValue);
-
-                for (int Count = 0; Count < HPNE.NumOfEntries; Count++)
-                {
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_StartPoint);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_Length);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev0);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev1);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev2);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev3);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev4);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev5);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev6);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev7);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev8);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev9);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev10);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev11);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev12);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev13);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev14);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_PreviewGroup.Prev15);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next0);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next1);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next2);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next3);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next4);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next5);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next6);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next7);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next8);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next9);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next10);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next11);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next12);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next13);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next14);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_NextGroup.Next15);
-                    bw.Write(HPNE.HPNEValue_List[Count].HPNE_UnkBytes1);
-                }
-                #endregion
-
-                return tPNE_HPNE_WritePosition;
-            }
-
-            public class TPTI_HPTI_WritePosition
-            {
-                public uint TPTI { get; set; }
-                public uint HPTI { get; set; }
-            }
-
-            public static TPTI_HPTI_WritePosition Write_TPTI_HPTI(BinaryWriter bw, KMPFormat.KMPSection.TPTI_Section TPTI, KMPFormat.KMPSection.HPTI_Section HPTI)
-            {
-                TPTI_HPTI_WritePosition tPTI_HPTI_WritePosition = new TPTI_HPTI_WritePosition
-                {
-                    TPTI = 0,
-                    HPTI = 0
-                };
-
-                #region TPTI
-                tPTI_HPTI_WritePosition.TPTI = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPTI.TPTIHeader);
-                bw.Write(TPTI.NumOfEntries);
-                bw.Write(TPTI.AdditionalValue);
-
-                for (int Count = 0; Count < TPTI.TPTIValue_List.Count; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPTI.TPTIValue_List[Count].TPTI_Position)[2]);
-                    bw.Write(TPTI.TPTIValue_List[Count].TPTI_PointSize);
-                    bw.Write(TPTI.TPTIValue_List[Count].GravityMode);
-                    bw.Write(TPTI.TPTIValue_List[Count].PlayerScanRadius);
-                }
-                #endregion
-
-                #region HPTI
-                tPTI_HPTI_WritePosition.HPTI = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(HPTI.HPTIHeader);
-                bw.Write(HPTI.NumOfEntries);
-                bw.Write(HPTI.AdditionalValue);
-
-                for (int Count = 0; Count < HPTI.NumOfEntries; Count++)
-                {
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_StartPoint);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_Length);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev0);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev1);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev2);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev3);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev4);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_PreviewGroup.Prev5);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next0);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next1);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next2);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next3);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next4);
-                    bw.Write(HPTI.HPTIValue_List[Count].HPTI_NextGroup.Next5);
-                }
-                #endregion
-
-                return tPTI_HPTI_WritePosition;
-            }
-
-            public class TPKC_HPKC_WritePosition
-            {
-                public uint TPKC { get; set; }
-                public uint HPKC { get; set; }
-            }
-
-            public static TPKC_HPKC_WritePosition Write_TPKC_HPKC(BinaryWriter bw, KMPFormat.KMPSection.TPKC_Section TPKC, KMPFormat.KMPSection.HPKC_Section HPKC)
-            {
-                TPKC_HPKC_WritePosition tPKC_HPKC_WritePosition = new TPKC_HPKC_WritePosition
-                {
-                    TPKC = 0,
-                    HPKC = 0
-                };
-
-                #region TPKC
-                tPKC_HPKC_WritePosition.TPKC = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPKC.TPKCHeader);
-                bw.Write(TPKC.NumOfEntries);
-                bw.Write(TPKC.AdditionalValue);
-
-                for (int Count = 0; Count < TPKC.TPKCValue_List.Count; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[0]);
-                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Left)[1]);
-                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[0]);
-                    bw.Write(KMPHelper.Vector3DTo2DConverter.Vector2ToByteArray(TPKC.TPKCValue_List[Count].TPKC_2DPosition_Right)[1]);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_RespawnID);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_Checkpoint_Type);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_PreviousCheckPoint);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_NextCheckPoint);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_ClipID);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_Section);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes3);
-                    bw.Write(TPKC.TPKCValue_List[Count].TPKC_UnkBytes4);
-
-                }
-                #endregion
-
-                #region HPKC
-                tPKC_HPKC_WritePosition.HPKC = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(HPKC.HPKCHeader);
-                bw.Write(HPKC.NumOfEntries);
-                bw.Write(HPKC.AdditionalValue);
-
-                for (int Count = 0; Count < HPKC.NumOfEntries; Count++)
-                {
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_StartPoint);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_Length);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev0);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev1);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev2);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev3);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev4);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_PreviewGroup.Prev5);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next0);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next1);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next2);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next3);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next4);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_NextGroup.Next5);
-                    bw.Write(HPKC.HPKCValue_List[Count].HPKC_UnkBytes1);
-                }
-                #endregion
-
-                return tPKC_HPKC_WritePosition;
-            }
-
-            public static uint Write_JBOG(BinaryWriter bw, KMPFormat.KMPSection.JBOG_Section JBOG)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(JBOG.JBOGHeader);
-                bw.Write(JBOG.NumOfEntries);
-                bw.Write(JBOG.AdditionalValue);
-
-                for (int Count = 0; Count < JBOG.NumOfEntries; Count++)
-                {
-                    bw.Write(JBOG.JBOGValue_List[Count].ObjectID);
-                    bw.Write(JBOG.JBOGValue_List[Count].JBOG_UnkByte1);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Position)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Rotation)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(JBOG.JBOGValue_List[Count].JBOG_Scale)[2]);
-                    bw.Write(JBOG.JBOGValue_List[Count].JBOG_ITOP_RouteIDIndex);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value0);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value1);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value2);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value3);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value4);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value5);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value6);
-                    bw.Write(JBOG.JBOGValue_List[Count].JOBJ_Specific_Setting.Value7);
-                    bw.Write(JBOG.JBOGValue_List[Count].JBOG_PresenceSetting);
-                    bw.Write(JBOG.JBOGValue_List[Count].JBOG_UnkByte2);
-                    bw.Write(JBOG.JBOGValue_List[Count].JBOG_UnkByte3);
-                }
-
-                return WritePosition;
-            }
-
-            public static uint Write_ITOP(BinaryWriter bw, KMPFormat.KMPSection.ITOP_Section ITOP)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(ITOP.ITOPHeader);
-                bw.Write(ITOP.ITOP_NumberOfRoute);
-                bw.Write(ITOP.ITOP_NumberOfPoint);
-
-                for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP.ITOP_NumberOfRoute; ITOP_RoutesCount++)
-                {
-                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint);
-                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RoopSetting);
-                    bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_SmoothSetting);
-
-                    for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
-                    {
-                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[0]);
-                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[1]);
-                        bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position)[2]);
-                        bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_RouteSpeed);
-                        bw.Write(ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_PointSetting2);
-                    }
-                }
-
-                return WritePosition;
-            }
-
-            public static uint Write_AERA(BinaryWriter bw, KMPFormat.KMPSection.AERA_Section AERA)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(AERA.AERAHeader);
-                bw.Write(AERA.NumOfEntries);
-                bw.Write(AERA.AdditionalValue);
-
-                for (int Count = 0; Count < AERA.NumOfEntries; Count++)
-                {
-                    bw.Write(AERA.AERAValue_List[Count].AreaMode);
-                    bw.Write(AERA.AERAValue_List[Count].AreaType);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_EMACIndex);
-                    bw.Write(AERA.AERAValue_List[Count].Priority);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Position)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Rotation)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(AERA.AERAValue_List[Count].AERA_Scale)[2]);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_Setting1);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_Setting2);
-                    bw.Write(AERA.AERAValue_List[Count].RouteID);
-                    bw.Write(AERA.AERAValue_List[Count].EnemyID);
-                    bw.Write(AERA.AERAValue_List[Count].AERA_UnkByte4);
-                }
-
-                return WritePosition;
-            }
-
-            public static uint Write_EMAC(BinaryWriter bw, KMPFormat.KMPSection.EMAC_Section EMAC)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(EMAC.EMACHeader);
-                bw.Write(EMAC.NumOfEntries);
-                bw.Write(EMAC.AdditionalValue);
-
-                for (int Count = 0; Count < EMAC.NumOfEntries; Count++)
-                {
-                    bw.Write(EMAC.EMACValue_List[Count].CameraType);
-                    bw.Write(EMAC.EMACValue_List[Count].NextCameraIndex);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_NextVideoIndex);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_ITOP_CameraIndex);
-                    bw.Write(EMAC.EMACValue_List[Count].RouteSpeed);
-                    bw.Write(EMAC.EMACValue_List[Count].FOVSpeed);
-                    bw.Write(EMAC.EMACValue_List[Count].ViewpointSpeed);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_StartFlag);
-                    bw.Write(EMAC.EMACValue_List[Count].EMAC_VideoFlag);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Position)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].EMAC_Rotation)[2]);
-                    bw.Write(EMAC.EMACValue_List[Count].FOVAngle_Start);
-                    bw.Write(EMAC.EMACValue_List[Count].FOVAngle_End);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Start)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(EMAC.EMACValue_List[Count].Viewpoint_Destination)[2]);
-                    bw.Write(EMAC.EMACValue_List[Count].Camera_Active_Time);
-                }
-
-                return WritePosition;
-            }
-
-            public static uint Write_TPGJ(BinaryWriter bw, KMPFormat.KMPSection.TPGJ_Section TPGJ)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPGJ.TPGJHeader);
-                bw.Write(TPGJ.NumOfEntries);
-                bw.Write(TPGJ.AdditionalValue);
-
-                for (int Count = 0; Count < TPGJ.NumOfEntries; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Position)[2]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPGJ.TPGJValue_List[Count].TPGJ_Rotation)[2]);
-                    bw.Write(TPGJ.TPGJValue_List[Count].TPGJ_RespawnID);
-                    bw.Write(TPGJ.TPGJValue_List[Count].TPGJ_UnkBytes1);
-                }
-
-                return WritePosition;
-            }
-
-            //Unused Section
-            public static uint Write_TPNC(BinaryWriter bw, KMPFormat.KMPSection.TPNC_Section TPNC)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPNC.TPNCHeader);
-                bw.Write(TPNC.NumOfEntries);
-                bw.Write(TPNC.AdditionalValue);
-
-                return WritePosition;
-            }
-
-            //Unused Section
-            public static uint Write_TPSM(BinaryWriter bw, KMPFormat.KMPSection.TPSM_Section TPSM)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPSM.TPSMHeader);
-                bw.Write(TPSM.NumOfEntries);
-                bw.Write(TPSM.AdditionalValue);
-
-                return WritePosition;
-            }
-
-            public static uint Write_IGTS(BinaryWriter bw, KMPFormat.KMPSection.IGTS_Section IGTS)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(IGTS.IGTSHeader);
-                bw.Write(IGTS.Unknown1);
-                bw.Write(IGTS.LapCount);
-                bw.Write(IGTS.PolePosition);
-                bw.Write(IGTS.Unknown2);
-                bw.Write(IGTS.Unknown3);
-                bw.Write(IGTS.RGBAColor.R);
-                bw.Write(IGTS.RGBAColor.G);
-                bw.Write(IGTS.RGBAColor.B);
-                bw.Write(IGTS.RGBAColor.A);
-                bw.Write(IGTS.FlareAlpha);
-                return WritePosition;
-            }
-
-            //Unused Section
-            public static uint Write_SROC(BinaryWriter bw, KMPFormat.KMPSection.SROC_Section SROC)
-            {
-                uint WritePosition = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(SROC.SROCHeader);
-                bw.Write(SROC.NumOfEntries);
-                bw.Write(SROC.AdditionalValue);
-
-                return WritePosition;
-            }
-
-            public class TPLG_HPLG_WritePosition
-            {
-                public uint TPLG { get; set; }
-                public uint HPLG { get; set; }
-            }
-
-            public static TPLG_HPLG_WritePosition Write_TPLG_HPLG(BinaryWriter bw, KMPFormat.KMPSection.TPLG_Section TPLG, KMPFormat.KMPSection.HPLG_Section HPLG)
-            {
-                TPLG_HPLG_WritePosition tPLG_HPLG_WritePosition = new TPLG_HPLG_WritePosition
-                {
-                    TPLG = 0,
-                    HPLG = 0
-                };
-
-                #region TPLG
-
-                tPLG_HPLG_WritePosition.TPLG = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(TPLG.TPLGHeader);
-                bw.Write(TPLG.NumOfEntries);
-                bw.Write(TPLG.AdditionalValue);
-
-                for (int Count = 0; Count < TPLG.NumOfEntries; Count++)
-                {
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[0]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[1]);
-                    bw.Write(KMPHelper.Vector3DToByteArrayConverter.Vector3DToByteArray(TPLG.TPLGValue_List[Count].TPLG_Position)[2]);
-                    bw.Write(TPLG.TPLGValue_List[Count].TPLG_PointScaleValue);
-                    bw.Write(TPLG.TPLGValue_List[Count].TPLG_UnkBytes1);
-                    bw.Write(TPLG.TPLGValue_List[Count].TPLG_UnkBytes2);
-                }
-                #endregion
-
-                #region HPKC
-                tPLG_HPLG_WritePosition.HPLG = Convert.ToUInt32(bw.BaseStream.Position);
-
-                bw.Write(HPLG.HPLGHeader);
-                bw.Write(HPLG.NumOfEntries);
-                bw.Write(HPLG.AdditionalValue);
-
-                for (int Count = 0; Count < HPLG.NumOfEntries; Count++)
-                {
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_StartPoint);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_Length);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev0);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev1);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev2);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev3);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev4);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_PreviewGroup.Prev5);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next0);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next1);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next2);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next3);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next4);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_NextGroup.Next5);
-                    bw.Write(HPLG.HPLGValue_List[Count].RouteSetting);
-                    bw.Write(HPLG.HPLGValue_List[Count].HPLG_UnkBytes2);
-                }
-                #endregion
-
-                return tPLG_HPLG_WritePosition;
             }
         }
     }

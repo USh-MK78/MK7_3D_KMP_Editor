@@ -685,6 +685,18 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public class Rail
             {
+                public enum RailType
+                {
+                    Line,
+                    Tube
+                }
+
+                public enum PointType
+                {
+                    Model,
+                    Point3D
+                }
+
                 public List<ModelVisual3D> MV3D_List { get; set; }
                 public List<LinesVisual3D> LV3D_List { get; set; }
                 public List<TubeVisual3D> TV3D_List { get; set; }
@@ -702,480 +714,398 @@ namespace MK7_KMP_Editor_For_PG_
                     LV3D_List = LV3DList;
                     TV3D_List = TV3DList;
                 }
-            }
 
-            public static List<Point3D> MV3DListToPoint3DList(List<ModelVisual3D> MV3DList)
-            {
-                List<Point3D> point3Ds = new List<Point3D>();
-
-                for (int i = 0; i < MV3DList.Count; i++)
+                public List<Point3D> MV3DListToPoint3DList()
                 {
-                    Model3D n = MV3DList[i].Content;
+                    List<Point3D> point3Ds = new List<Point3D>();
 
-                    Point3D p3d = new Point3D(n.Transform.Value.OffsetX, n.Transform.Value.OffsetY, n.Transform.Value.OffsetZ);
-
-                    point3Ds.Add(p3d);
-                }
-
-                return point3Ds;
-            }
-
-            public static List<LinesVisual3D> DrawPath_Line(UserControl1 UserCtrl, List<Point3D> point3Ds, double Thickness, Color color)
-            {
-                List<LinesVisual3D> linesVisual3DList_Out = new List<LinesVisual3D>();
-                if (point3Ds.Count > 1)
-                {
-                    for (int i = 1; i < point3Ds.Count; i++)
+                    for (int i = 0; i < MV3D_List.Count; i++)
                     {
-                        List<Point3D> OneLine = new List<Point3D>();
-                        OneLine.Add(point3Ds[i - 1]);
-                        OneLine.Add(point3Ds[i]);
-
-                        LinesVisual3D linesVisual3D = new LinesVisual3D
-                        {
-                            Points = new Point3DCollection(OneLine),
-                            Thickness = Thickness,
-                            Color = color
-                        };
-
-                        UserCtrl.MainViewPort.Children.Add(linesVisual3D);
-
-                        linesVisual3DList_Out.Add(linesVisual3D);
+                        Model3D n = MV3D_List[i].Content;
+                        Point3D p3d = new Point3D(n.Transform.Value.OffsetX, n.Transform.Value.OffsetY, n.Transform.Value.OffsetZ);
+                        point3Ds.Add(p3d);
                     }
+
+                    return point3Ds;
                 }
 
-                return linesVisual3DList_Out;
-            }
-
-            public static List<TubeVisual3D> DrawPath_Tube(UserControl1 UserCtrl, List<Point3D> point3Ds, double TubeDiametor, Color color)
-            {
-                List<TubeVisual3D> tubeVisual3DList_Out = new List<TubeVisual3D>();
-                if (point3Ds.Count > 1)
+                public List<LinesVisual3D> DrawPath_Line(UserControl1 UserCtrl, double Thickness, Color color)
                 {
-                    for(int i = 1; i < point3Ds.Count; i++)
+                    if (MV3DListToPoint3DList().Count > 1)
                     {
-                        //TubeVisual3Dの直径を指定
-                        double Diametor_Value = TubeDiametor;
-
-                        TubeVisual3D tubeVisual3D = new TubeVisual3D();
-                        tubeVisual3D.Fill = new SolidColorBrush(color);
-                        tubeVisual3D.Path = new Point3DCollection();
-                        tubeVisual3D.Path.Add(point3Ds[i - 1]);
-                        tubeVisual3D.Path.Add(point3Ds[i]);
-                        tubeVisual3D.Diameter = Diametor_Value;
-                        tubeVisual3D.IsPathClosed = false;
-
-                        tubeVisual3DList_Out.Add(tubeVisual3D);
-
-                        //Add Tube
-                        UserCtrl.MainViewPort.Children.Add(tubeVisual3D);
-                    }
-                }
-
-                return tubeVisual3DList_Out;
-            }
-
-            public static void MoveRails(int MDLNum, Vector3D Pos, List<TubeVisual3D> TubeVisual3D_List)
-            {
-                if (MDLNum == 0)
-                {
-                    TubeVisual3D_List[MDLNum].Path[0] = (Point3D)Pos;
-                }
-                if (MDLNum > 0 && MDLNum < TubeVisual3D_List.Count)
-                {
-                    TubeVisual3D_List[MDLNum - 1].Path[1] = (Point3D)Pos;
-                    TubeVisual3D_List[MDLNum].Path[0] = (Point3D)Pos;
-                }
-                if (MDLNum == TubeVisual3D_List.Count)
-                {
-                    TubeVisual3D_List[MDLNum - 1].Path[1] = (Point3D)Pos;
-                }
-            }
-
-            public static void MoveRails(int MDLNum, Vector3D Pos, List<LinesVisual3D> LinesVisual3D_List)
-            {
-                if (MDLNum == 0)
-                {
-                    LinesVisual3D_List[MDLNum].Points[0] = (Point3D)Pos;
-                }
-                if (MDLNum > 0 && MDLNum < LinesVisual3D_List.Count)
-                {
-                    LinesVisual3D_List[MDLNum - 1].Points[1] = (Point3D)Pos;
-                    LinesVisual3D_List[MDLNum].Points[0] = (Point3D)Pos;
-                }
-                if (MDLNum == LinesVisual3D_List.Count)
-                {
-                    LinesVisual3D_List[MDLNum - 1].Points[1] = (Point3D)Pos;
-                }
-            }
-
-            public enum RailType
-            {
-                Line,
-                Tube
-            }
-
-            public enum PointType
-            {
-                Model,
-                Point3D
-            }
-
-            public static void DeleteRailPoint(UserControl1 UserCtrl, Rail rail, int SelectedIdx, double TubeDiametor, Color color, RailType railType)
-            {
-                Point3D? SelectedIndex_Next = null;
-                Point3D? SelectedIndex_Current = null;
-                Point3D? SelectedIndex_Prev = null;
-
-                List<Point3D> point3Ds = new List<Point3D>();
-
-                #region SelectedIndex_Next
-                try
-                {
-                    SelectedIndex_Next = new Point3D(rail.MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetX, rail.MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetY, rail.MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetZ);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    SelectedIndex_Next = null;
-                }
-                #endregion
-
-                #region SelectedIndex_Current
-                try
-                {
-                    SelectedIndex_Current = new Point3D(rail.MV3D_List[SelectedIdx].Content.Transform.Value.OffsetX, rail.MV3D_List[SelectedIdx].Content.Transform.Value.OffsetY, rail.MV3D_List[SelectedIdx].Content.Transform.Value.OffsetZ);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    SelectedIndex_Current = null;
-                }
-                #endregion
-
-                #region SelectedIndex_Prev
-                try
-                {
-                    SelectedIndex_Prev = new Point3D(rail.MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetX, rail.MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetY, rail.MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetZ);
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    SelectedIndex_Prev = null;
-                }
-                #endregion
-
-                if (railType == RailType.Tube)
-                {
-                    if (SelectedIndex_Current != null)
-                    {
-                        if ((SelectedIndex_Next == null && SelectedIndex_Prev == null) == true)
+                        for (int i = 1; i < MV3DListToPoint3DList().Count; i++)
                         {
-                            UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                            rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
+                            List<Point3D> OneLine = new List<Point3D>();
+                            OneLine.Add(MV3DListToPoint3DList()[i - 1]);
+                            OneLine.Add(MV3DListToPoint3DList()[i]);
 
-                            //MessageBox.Show("Point3D Only");
-                        }
-                        else if ((SelectedIndex_Next != null && SelectedIndex_Prev != null) == true)
-                        {
-                            point3Ds.Add(SelectedIndex_Prev.Value);
-                            point3Ds.Add(SelectedIndex_Next.Value);
-
-                            //Pointを削除
-                            UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                            rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
-
-                            //Pointの両端に存在するTubeVisual3Dを削除
-                            UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[SelectedIdx]);
-                            rail.TV3D_List.Remove(rail.TV3D_List[SelectedIdx]);
-
-                            UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[SelectedIdx - 1]);
-                            rail.TV3D_List.Remove(rail.TV3D_List[SelectedIdx - 1]);
-
-                            for (int i = 0; i < rail.MV3D_List.Count; i++)
+                            LinesVisual3D linesVisual3D = new LinesVisual3D
                             {
-                                string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
-                                string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                rail.MV3D_List[i].SetName(New_MDLInfo);
-                            }
+                                Points = new Point3DCollection(OneLine),
+                                Thickness = Thickness,
+                                Color = color
+                            };
 
+                            UserCtrl.MainViewPort.Children.Add(linesVisual3D);
+
+                            LV3D_List.Add(linesVisual3D);
+                        }
+                    }
+
+                    return LV3D_List;
+                }
+
+                public List<TubeVisual3D> DrawPath_Tube(UserControl1 UserCtrl, double TubeDiametor, Color color)
+                {
+                    if (MV3DListToPoint3DList().Count > 1)
+                    {
+                        for (int i = 1; i < MV3DListToPoint3DList().Count; i++)
+                        {
                             //TubeVisual3Dの直径を指定
                             double Diametor_Value = TubeDiametor;
 
                             TubeVisual3D tubeVisual3D = new TubeVisual3D();
                             tubeVisual3D.Fill = new SolidColorBrush(color);
                             tubeVisual3D.Path = new Point3DCollection();
-                            tubeVisual3D.Path.Add(point3Ds[0]);
-                            tubeVisual3D.Path.Add(point3Ds[1]);
+                            tubeVisual3D.Path.Add(MV3DListToPoint3DList()[i - 1]);
+                            tubeVisual3D.Path.Add(MV3DListToPoint3DList()[i]);
                             tubeVisual3D.Diameter = Diametor_Value;
                             tubeVisual3D.IsPathClosed = false;
 
-                            rail.TV3D_List.Insert(SelectedIdx - 1, tubeVisual3D);
+                            TV3D_List.Add(tubeVisual3D);
 
                             //Add Tube
                             UserCtrl.MainViewPort.Children.Add(tubeVisual3D);
-
-                            //MessageBox.Show("PrevPoint and NextPoint");
                         }
-                        else if ((SelectedIndex_Next != null || SelectedIndex_Prev != null) == true)
+                    }
+
+                    return TV3D_List;
+                }
+
+                public void MoveRails(int MDLNum, Vector3D Pos, RailType railType)
+                {
+                    if (railType == RailType.Line)
+                    {
+                        if (MDLNum == 0)
                         {
-                            if (SelectedIndex_Prev == null)
+                            LV3D_List[MDLNum].Points[0] = (Point3D)Pos;
+                        }
+                        if (MDLNum > 0 && MDLNum < LV3D_List.Count)
+                        {
+                            LV3D_List[MDLNum - 1].Points[1] = (Point3D)Pos;
+                            LV3D_List[MDLNum].Points[0] = (Point3D)Pos;
+                        }
+                        if (MDLNum == LV3D_List.Count)
+                        {
+                            LV3D_List[MDLNum - 1].Points[1] = (Point3D)Pos;
+                        }
+                    }
+                    if (railType == RailType.Tube)
+                    {
+
+                        if (MDLNum == 0)
+                        {
+                            TV3D_List[MDLNum].Path[0] = (Point3D)Pos;
+                        }
+                        if (MDLNum > 0 && MDLNum < TV3D_List.Count)
+                        {
+                            TV3D_List[MDLNum - 1].Path[1] = (Point3D)Pos;
+                            TV3D_List[MDLNum].Path[0] = (Point3D)Pos;
+                        }
+                        if (MDLNum == TV3D_List.Count)
+                        {
+                            TV3D_List[MDLNum - 1].Path[1] = (Point3D)Pos;
+                        }
+                    }
+                }
+
+                public void DeleteRail(UserControl1 UserCtrl)
+                {
+                    if (TV3D_List != null)
+                    {
+                        for (int TVCount = 0; TVCount < TV3D_List.Count; TVCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(TV3D_List[TVCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        TV3D_List.Clear();
+                    }
+
+                    if (LV3D_List != null)
+                    {
+                        for (int LVCount = 0; LVCount < LV3D_List.Count; LVCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(LV3D_List[LVCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        LV3D_List.Clear();
+                    }
+
+                    if (MV3D_List != null)
+                    {
+                        for (int MV3DCount = 0; MV3DCount < MV3D_List.Count; MV3DCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(MV3D_List[MV3DCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        MV3D_List.Clear();
+                    }
+                }
+
+                public void DeleteRailPoint(UserControl1 UserCtrl, int SelectedIdx, double TubeDiametor, Color color, RailType railType)
+                {
+                    Point3D? SelectedIndex_Next = null;
+                    Point3D? SelectedIndex_Current = null;
+                    Point3D? SelectedIndex_Prev = null;
+
+                    List<Point3D> point3Ds = new List<Point3D>();
+
+                    #region SelectedIndex_Next
+                    try
+                    {
+                        SelectedIndex_Next = new Point3D(MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetX, MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetY, MV3D_List[SelectedIdx + 1].Content.Transform.Value.OffsetZ);
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        SelectedIndex_Next = null;
+                    }
+                    #endregion
+
+                    #region SelectedIndex_Current
+                    try
+                    {
+                        SelectedIndex_Current = new Point3D(MV3D_List[SelectedIdx].Content.Transform.Value.OffsetX, MV3D_List[SelectedIdx].Content.Transform.Value.OffsetY, MV3D_List[SelectedIdx].Content.Transform.Value.OffsetZ);
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        SelectedIndex_Current = null;
+                    }
+                    #endregion
+
+                    #region SelectedIndex_Prev
+                    try
+                    {
+                        SelectedIndex_Prev = new Point3D(MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetX, MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetY, MV3D_List[SelectedIdx - 1].Content.Transform.Value.OffsetZ);
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        SelectedIndex_Prev = null;
+                    }
+                    #endregion
+
+                    if (railType == RailType.Tube)
+                    {
+                        if (SelectedIndex_Current != null)
+                        {
+                            if ((SelectedIndex_Next == null && SelectedIndex_Prev == null) == true)
                             {
-                                UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                                rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
+                                UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                MV3D_List.Remove(MV3D_List[SelectedIdx]);
 
-                                UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[SelectedIdx]);
-                                rail.TV3D_List.Remove(rail.TV3D_List[SelectedIdx]);
+                                //MessageBox.Show("Point3D Only");
+                            }
+                            else if ((SelectedIndex_Next != null && SelectedIndex_Prev != null) == true)
+                            {
+                                point3Ds.Add(SelectedIndex_Prev.Value);
+                                point3Ds.Add(SelectedIndex_Next.Value);
 
-                                for (int i = 0; i < rail.MV3D_List.Count; i++)
+                                //Pointを削除
+                                UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                //Pointの両端に存在するTubeVisual3Dを削除
+                                UserCtrl.MainViewPort.Children.Remove(TV3D_List[SelectedIdx]);
+                                TV3D_List.Remove(TV3D_List[SelectedIdx]);
+
+                                UserCtrl.MainViewPort.Children.Remove(TV3D_List[SelectedIdx - 1]);
+                                TV3D_List.Remove(TV3D_List[SelectedIdx - 1]);
+
+                                for (int i = 0; i < MV3D_List.Count; i++)
                                 {
-                                    string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
+                                    string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
                                     string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                    rail.MV3D_List[i].SetName(New_MDLInfo);
+                                    MV3D_List[i].SetName(New_MDLInfo);
                                 }
 
-                                //MessageBox.Show("PrevPoint not found : FirstPoint");
+                                //TubeVisual3Dの直径を指定
+                                double Diametor_Value = TubeDiametor;
+
+                                TubeVisual3D tubeVisual3D = new TubeVisual3D();
+                                tubeVisual3D.Fill = new SolidColorBrush(color);
+                                tubeVisual3D.Path = new Point3DCollection();
+                                tubeVisual3D.Path.Add(point3Ds[0]);
+                                tubeVisual3D.Path.Add(point3Ds[1]);
+                                tubeVisual3D.Diameter = Diametor_Value;
+                                tubeVisual3D.IsPathClosed = false;
+
+                                TV3D_List.Insert(SelectedIdx - 1, tubeVisual3D);
+
+                                //Add Tube
+                                UserCtrl.MainViewPort.Children.Add(tubeVisual3D);
+
+                                //MessageBox.Show("PrevPoint and NextPoint");
                             }
-                            if (SelectedIndex_Next == null)
+                            else if ((SelectedIndex_Next != null || SelectedIndex_Prev != null) == true)
                             {
-                                UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                                rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
-
-                                UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[SelectedIdx - 1]);
-                                rail.TV3D_List.Remove(rail.TV3D_List[SelectedIdx - 1]);
-
-                                for (int i = 0; i < rail.MV3D_List.Count; i++)
+                                if (SelectedIndex_Prev == null)
                                 {
-                                    string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
+                                    UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                    MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                    UserCtrl.MainViewPort.Children.Remove(TV3D_List[SelectedIdx]);
+                                    TV3D_List.Remove(TV3D_List[SelectedIdx]);
+
+                                    for (int i = 0; i < MV3D_List.Count; i++)
+                                    {
+                                        string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
+                                        string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
+                                        MV3D_List[i].SetName(New_MDLInfo);
+                                    }
+
+                                    //MessageBox.Show("PrevPoint not found : FirstPoint");
+                                }
+                                if (SelectedIndex_Next == null)
+                                {
+                                    UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                    MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                    UserCtrl.MainViewPort.Children.Remove(TV3D_List[SelectedIdx - 1]);
+                                    TV3D_List.Remove(TV3D_List[SelectedIdx - 1]);
+
+                                    for (int i = 0; i < MV3D_List.Count; i++)
+                                    {
+                                        string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
+                                        string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
+                                        MV3D_List[i].SetName(New_MDLInfo);
+                                    }
+
+                                    //MessageBox.Show("NextPoint not found : EndPoint");
+                                }
+                            }
+                        }
+                    }
+                    if (railType == RailType.Line)
+                    {
+                        if (SelectedIndex_Current != null)
+                        {
+                            if ((SelectedIndex_Next == null && SelectedIndex_Prev == null) == true)
+                            {
+                                UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                //MessageBox.Show("Point3D Only");
+                            }
+                            else if ((SelectedIndex_Next != null && SelectedIndex_Prev != null) == true)
+                            {
+                                point3Ds.Add(SelectedIndex_Prev.Value);
+                                point3Ds.Add(SelectedIndex_Next.Value);
+
+                                //Pointを削除
+                                UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                //Pointの両端に存在するLinesVisual3Dを削除
+                                UserCtrl.MainViewPort.Children.Remove(LV3D_List[SelectedIdx]);
+                                LV3D_List.Remove(LV3D_List[SelectedIdx]);
+
+                                UserCtrl.MainViewPort.Children.Remove(LV3D_List[SelectedIdx - 1]);
+                                LV3D_List.Remove(LV3D_List[SelectedIdx - 1]);
+
+                                for (int i = 0; i < MV3D_List.Count; i++)
+                                {
+                                    string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
                                     string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                    rail.MV3D_List[i].SetName(New_MDLInfo);
+                                    MV3D_List[i].SetName(New_MDLInfo);
                                 }
 
-                                //MessageBox.Show("NextPoint not found : EndPoint");
-                            }
-                        }
-                    }
-                }
-                if (railType == RailType.Line)
-                {
-                    if (SelectedIndex_Current != null)
-                    {
-                        if ((SelectedIndex_Next == null && SelectedIndex_Prev == null) == true)
-                        {
-                            UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                            rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
+                                List<Point3D> OneLine = new List<Point3D>();
+                                OneLine.Add(point3Ds[0]);
+                                OneLine.Add(point3Ds[1]);
 
-                            //MessageBox.Show("Point3D Only");
-                        }
-                        else if ((SelectedIndex_Next != null && SelectedIndex_Prev != null) == true)
-                        {
-                            point3Ds.Add(SelectedIndex_Prev.Value);
-                            point3Ds.Add(SelectedIndex_Next.Value);
-
-                            //Pointを削除
-                            UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                            rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
-
-                            //Pointの両端に存在するLinesVisual3Dを削除
-                            UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[SelectedIdx]);
-                            rail.LV3D_List.Remove(rail.LV3D_List[SelectedIdx]);
-
-                            UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[SelectedIdx - 1]);
-                            rail.LV3D_List.Remove(rail.LV3D_List[SelectedIdx - 1]);
-
-                            for (int i = 0; i < rail.MV3D_List.Count; i++)
-                            {
-                                string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
-                                string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                rail.MV3D_List[i].SetName(New_MDLInfo);
-                            }
-
-                            List<Point3D> OneLine = new List<Point3D>();
-                            OneLine.Add(point3Ds[0]);
-                            OneLine.Add(point3Ds[1]);
-
-                            LinesVisual3D linesVisual3D = new LinesVisual3D
-                            {
-                                Points = new Point3DCollection(OneLine),
-                                Thickness = TubeDiametor,
-                                Color = color
-                            };
-
-                            rail.LV3D_List.Insert(SelectedIdx - 1, linesVisual3D);
-
-                            UserCtrl.MainViewPort.Children.Add(linesVisual3D);
-
-                            //MessageBox.Show("PrevPoint and NextPoint");
-                        }
-                        else if ((SelectedIndex_Next != null || SelectedIndex_Prev != null) == true)
-                        {
-                            if (SelectedIndex_Prev == null)
-                            {
-                                UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                                rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
-
-                                UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[SelectedIdx]);
-                                rail.LV3D_List.Remove(rail.LV3D_List[SelectedIdx]);
-
-                                for (int i = 0; i < rail.MV3D_List.Count; i++)
+                                LinesVisual3D linesVisual3D = new LinesVisual3D
                                 {
-                                    string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
-                                    string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                    rail.MV3D_List[i].SetName(New_MDLInfo);
-                                }
+                                    Points = new Point3DCollection(OneLine),
+                                    Thickness = TubeDiametor,
+                                    Color = color
+                                };
 
-                                //MessageBox.Show("PrevPoint not found : FirstPoint");
+                                LV3D_List.Insert(SelectedIdx - 1, linesVisual3D);
+
+                                UserCtrl.MainViewPort.Children.Add(linesVisual3D);
+
+                                //MessageBox.Show("PrevPoint and NextPoint");
                             }
-                            if (SelectedIndex_Next == null)
+                            else if ((SelectedIndex_Next != null || SelectedIndex_Prev != null) == true)
                             {
-                                UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[SelectedIdx]);
-                                rail.MV3D_List.Remove(rail.MV3D_List[SelectedIdx]);
-
-                                UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[SelectedIdx - 1]);
-                                rail.LV3D_List.Remove(rail.LV3D_List[SelectedIdx - 1]);
-
-                                for (int i = 0; i < rail.MV3D_List.Count; i++)
+                                if (SelectedIndex_Prev == null)
                                 {
-                                    string[] MDLInfo = rail.MV3D_List[i].GetName().Split(' ');
-                                    string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
-                                    rail.MV3D_List[i].SetName(New_MDLInfo);
-                                }
+                                    UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                    MV3D_List.Remove(MV3D_List[SelectedIdx]);
 
-                                //MessageBox.Show("NextPoint not found : EndPoint");
+                                    UserCtrl.MainViewPort.Children.Remove(LV3D_List[SelectedIdx]);
+                                    LV3D_List.Remove(LV3D_List[SelectedIdx]);
+
+                                    for (int i = 0; i < MV3D_List.Count; i++)
+                                    {
+                                        string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
+                                        string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
+                                        MV3D_List[i].SetName(New_MDLInfo);
+                                    }
+
+                                    //MessageBox.Show("PrevPoint not found : FirstPoint");
+                                }
+                                if (SelectedIndex_Next == null)
+                                {
+                                    UserCtrl.MainViewPort.Children.Remove(MV3D_List[SelectedIdx]);
+                                    MV3D_List.Remove(MV3D_List[SelectedIdx]);
+
+                                    UserCtrl.MainViewPort.Children.Remove(LV3D_List[SelectedIdx - 1]);
+                                    LV3D_List.Remove(LV3D_List[SelectedIdx - 1]);
+
+                                    for (int i = 0; i < MV3D_List.Count; i++)
+                                    {
+                                        string[] MDLInfo = MV3D_List[i].GetName().Split(' ');
+                                        string New_MDLInfo = MDLInfo[0] + " " + i.ToString() + " " + MDLInfo[2];
+                                        MV3D_List[i].SetName(New_MDLInfo);
+                                    }
+
+                                    //MessageBox.Show("NextPoint not found : EndPoint");
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            public static void DeleteRail(UserControl1 UserCtrl, Rail rail)
-            {
-                if (rail.TV3D_List != null)
+                /// <summary>
+                /// 
+                /// </summary>
+                /// <param name="UserCtrl"></param>
+                /// <param name="rail"></param>
+                /// <param name="railType"></param>
+                public void ResetRail(UserControl1 UserCtrl, RailType railType)
                 {
-                    for (int TVCount = 0; TVCount < rail.TV3D_List.Count; TVCount++)
+                    if (railType == RailType.Line)
                     {
-                        UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[TVCount]);
-                        UserCtrl.UpdateLayout();
+                        for (int i = 0; i < LV3D_List.Count; i++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(LV3D_List[i]);
+                        }
+
+                        LV3D_List.Clear();
                     }
-
-                    rail.TV3D_List.Clear();
-                }
-
-                if (rail.LV3D_List != null)
-                {
-                    for (int LVCount = 0; LVCount < rail.LV3D_List.Count; LVCount++)
+                    if (railType == RailType.Tube)
                     {
-                        UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[LVCount]);
-                        UserCtrl.UpdateLayout();
-                    }
+                        for (int i = 0; i < TV3D_List.Count; i++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(TV3D_List[i]);
+                        }
 
-                    rail.LV3D_List.Clear();
-                }
-
-                if (rail.MV3D_List != null)
-                {
-                    for (int MV3DCount = 0; MV3DCount < rail.MV3D_List.Count; MV3DCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(rail.MV3D_List[MV3DCount]);
-                        UserCtrl.UpdateLayout();
-                    }
-
-                    rail.MV3D_List.Clear();
-                }
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="UserCtrl"></param>
-            /// <param name="rail"></param>
-            /// <param name="railType"></param>
-            public static void ResetRail(UserControl1 UserCtrl, Rail rail, RailType railType)
-            {
-                if (railType == RailType.Line)
-                {
-                    for (int i = 0; i < rail.LV3D_List.Count; i++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(rail.LV3D_List[i]);
-                    }
-
-                    rail.LV3D_List.Clear();
-                }
-                if (railType == RailType.Tube)
-                {
-                    for (int i = 0; i < rail.TV3D_List.Count; i++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(rail.TV3D_List[i]);
-                    }
-
-                    rail.TV3D_List.Clear();
-                }
-            }
-
-            public class SideWall
-            {
-                public List<ModelVisual3D> SideWallList { get; set; }
-            }
-
-            public static List<ModelVisual3D> DrawPath_SideWall(UserControl1 UserCtrl, List<Point3D> point3Ds, Color color)
-            {
-                List<ModelVisual3D> modelVisual3DList_Out = new List<ModelVisual3D>();
-                if (point3Ds.Count > 1)
-                {
-                    for (int i = 1; i < point3Ds.Count; i++)
-                    {
-                        #region Memo
-                        //OneLine.Add(point3Ds[i - 1]); //1
-                        //OneLine.Add(point3Ds[i]); //3
-                        //OneLine.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
-                        //OneLine.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
-                        #endregion
-
-                        List<Point3D> OneSiideWallMDL = new List<Point3D>();
-                        OneSiideWallMDL.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
-                        OneSiideWallMDL.Add(point3Ds[i - 1]); //1
-                        OneSiideWallMDL.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
-                        OneSiideWallMDL.Add(point3Ds[i]); //3
-
-                        ModelVisual3D SideWall_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(HTK_3DES.CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallMDL), color, color);
-                        HTK_3DES.TSRSystem.SetString_MV3D(SideWall_MV3D, "SideWall -1 -1");
-                        UserCtrl.MainViewPort.Children.Add(SideWall_MV3D);
-                        modelVisual3DList_Out.Add(SideWall_MV3D);
+                        TV3D_List.Clear();
                     }
                 }
-
-                return modelVisual3DList_Out;
-            }
-
-            public static void MoveSideWalls(int MDLNum, Vector3D Pos, List<ModelVisual3D> ModelVisual3D_List)
-            {
-                if (MDLNum == 0)
-                {
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
-                }
-                if (MDLNum > 0 && MDLNum < ModelVisual3D_List.Count)
-                {
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
-
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
-                }
-                if (MDLNum == ModelVisual3D_List.Count)
-                {
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
-                    HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
-                }
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="UserCtrl"></param>
-            /// <param name="rail"></param>
-            /// <param name="railType"></param>
-            public static void ResetSideWall(UserControl1 UserCtrl, SideWall sideWall)
-            {
-                for (int i = 0; i < sideWall.SideWallList.Count; i++) UserCtrl.MainViewPort.Children.Remove(sideWall.SideWallList[i]);
-                sideWall.SideWallList.Clear();
             }
         }
 
@@ -1196,110 +1126,218 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
-        public class KMP_3DCheckpointSystem : HTK_3DES.PathTools
+        public class KMP_3DCheckpointSystem : PathTools
         {
             public class Checkpoint
             {
                 public Rail Checkpoint_Left { get; set; }
                 public Rail Checkpoint_Right { get; set; }
-                public SideWall SideWall_Left { get; set; }
-                public SideWall SideWall_Right { get; set; }
+                public List<ModelVisual3D> SideWall_Left { get; set; }
+                public List<ModelVisual3D> SideWall_Right { get; set; }
                 public List<LinesVisual3D> Checkpoint_Line { get; set; }
                 public List<TubeVisual3D> Checkpoint_Tube { get; set; }
                 public List<ModelVisual3D> Checkpoint_SplitWallMDL { get; set; }
-            }
 
-            public static void DeleteRailChk(UserControl1 UserCtrl, Checkpoint railChk)
-            {
-                if (railChk.Checkpoint_Left.MV3D_List != null)
+                public Checkpoint()
                 {
-                    for (int ChkLeftCount = 0; ChkLeftCount < railChk.Checkpoint_Left.MV3D_List.Count; ChkLeftCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Left.MV3D_List[ChkLeftCount]);
-                        UserCtrl.UpdateLayout();
-                    }
-
-                    railChk.Checkpoint_Left.MV3D_List.Clear();
+                    Checkpoint_Left = new Rail();
+                    Checkpoint_Right = new Rail();
+                    SideWall_Left = new List<ModelVisual3D>();
+                    SideWall_Right = new List<ModelVisual3D>();
+                    Checkpoint_Line = new List<LinesVisual3D>();
+                    Checkpoint_Tube = new List<TubeVisual3D>();
+                    Checkpoint_SplitWallMDL = new List<ModelVisual3D>();
                 }
-                if (railChk.Checkpoint_Right.MV3D_List != null)
-                {
-                    for (int ChkRightCount = 0; ChkRightCount < railChk.Checkpoint_Right.MV3D_List.Count; ChkRightCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Right.MV3D_List[ChkRightCount]);
-                        UserCtrl.UpdateLayout();
-                    }
 
-                    railChk.Checkpoint_Right.MV3D_List.Clear();
+                public void DrawPath_SideWall(UserControl1 UserCtrl, Color LeftWallColor, Color RightWallColor, string LeftWallText = "SideWall -1 -1", string RightWallText = "SideWall -1 -1")
+                {
+                    if (Checkpoint_Left.MV3DListToPoint3DList().Count > 1)
+                    {
+                        for (int i = 1; i < Checkpoint_Left.MV3DListToPoint3DList().Count; i++)
+                        {
+                            #region Memo
+                            //OneLine.Add(point3Ds[i - 1]); //1
+                            //OneLine.Add(point3Ds[i]); //3
+                            //OneLine.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
+                            //OneLine.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
+                            #endregion
+
+                            List<Point3D> OneSiideWallLeftMDL = new List<Point3D>();
+                            OneSiideWallLeftMDL.Add(new Point3D(Checkpoint_Left.MV3DListToPoint3DList()[i - 1].X, 0, Checkpoint_Left.MV3DListToPoint3DList()[i - 1].Z)); //0
+                            OneSiideWallLeftMDL.Add(Checkpoint_Left.MV3DListToPoint3DList()[i - 1]); //1
+                            OneSiideWallLeftMDL.Add(new Point3D(Checkpoint_Left.MV3DListToPoint3DList()[i].X, 0, Checkpoint_Left.MV3DListToPoint3DList()[i].Z)); //2
+                            OneSiideWallLeftMDL.Add(Checkpoint_Left.MV3DListToPoint3DList()[i]); //3
+
+                            ModelVisual3D SideWallLeft_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallLeftMDL), LeftWallColor, LeftWallColor);
+                            HTK_3DES.TSRSystem.SetString_MV3D(SideWallLeft_MV3D, LeftWallText);
+                            UserCtrl.MainViewPort.Children.Add(SideWallLeft_MV3D);
+                            SideWall_Left.Add(SideWallLeft_MV3D);
+                        }
+                    }
+                    if (Checkpoint_Right.MV3DListToPoint3DList().Count > 1)
+                    {
+                        for (int i = 1; i < Checkpoint_Right.MV3DListToPoint3DList().Count; i++)
+                        {
+                            #region Memo
+                            //OneLine.Add(point3Ds[i - 1]); //1
+                            //OneLine.Add(point3Ds[i]); //3
+                            //OneLine.Add(new Point3D(point3Ds[i - 1].X, 0, point3Ds[i - 1].Z)); //0
+                            //OneLine.Add(new Point3D(point3Ds[i].X, 0, point3Ds[i].Z)); //2
+                            #endregion
+
+                            List<Point3D> OneSiideWallRightMDL = new List<Point3D>();
+                            OneSiideWallRightMDL.Add(new Point3D(Checkpoint_Right.MV3DListToPoint3DList()[i - 1].X, 0, Checkpoint_Right.MV3DListToPoint3DList()[i - 1].Z)); //0
+                            OneSiideWallRightMDL.Add(Checkpoint_Right.MV3DListToPoint3DList()[i - 1]); //1
+                            OneSiideWallRightMDL.Add(new Point3D(Checkpoint_Right.MV3DListToPoint3DList()[i].X, 0, Checkpoint_Right.MV3DListToPoint3DList()[i].Z)); //2
+                            OneSiideWallRightMDL.Add(Checkpoint_Right.MV3DListToPoint3DList()[i]); //3
+
+                            ModelVisual3D SideWallRight_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallRightMDL), RightWallColor, RightWallColor);
+                            HTK_3DES.TSRSystem.SetString_MV3D(SideWallRight_MV3D, RightWallText);
+                            UserCtrl.MainViewPort.Children.Add(SideWallRight_MV3D);
+                            SideWall_Right.Add(SideWallRight_MV3D);
+                        }
+                    }
                 }
-                if (railChk.Checkpoint_Line != null)
-                {
-                    for (int ChkLineCount = 0; ChkLineCount < railChk.Checkpoint_Line.Count; ChkLineCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Line[ChkLineCount]);
-                        UserCtrl.UpdateLayout();
-                    }
 
-                    railChk.Checkpoint_Line.Clear();
+                public enum SideWallType
+                {
+                    Left,
+                    Right
                 }
-                if (railChk.Checkpoint_Tube != null)
-                {
-                    for (int ChkTubeCount = 0; ChkTubeCount < railChk.Checkpoint_Tube.Count; ChkTubeCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Tube[ChkTubeCount]);
-                        UserCtrl.UpdateLayout();
-                    }
 
-                    railChk.Checkpoint_Tube.Clear();
+                public void MoveSideWalls(int MDLNum, Vector3D Pos, SideWallType sideWallType)
+                {
+                    List<ModelVisual3D> ModelVisual3D_List = null;
+                    if (sideWallType == SideWallType.Left) ModelVisual3D_List = SideWall_Left;
+                    if (sideWallType == SideWallType.Right) ModelVisual3D_List = SideWall_Right;
+
+                    if (MDLNum == 0)
+                    {
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
+                    }
+                    if (MDLNum > 0 && MDLNum < ModelVisual3D_List.Count)
+                    {
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
+
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[0] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum].Content).Positions[1] = (Point3D)Pos;
+                    }
+                    if (MDLNum == ModelVisual3D_List.Count)
+                    {
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[2] = new Point3D(((Point3D)Pos).X, 0, ((Point3D)Pos).Z);
+                        HTK_3DES.OBJData.GetMeshGeometry3D(ModelVisual3D_List[MDLNum - 1].Content).Positions[3] = (Point3D)Pos;
+                    }
                 }
-                if (railChk.Checkpoint_Left.LV3D_List != null)
-                {
-                    for (int ChkRLineLeftCount = 0; ChkRLineLeftCount < railChk.Checkpoint_Left.LV3D_List.Count; ChkRLineLeftCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Left.LV3D_List[ChkRLineLeftCount]);
-                        UserCtrl.UpdateLayout();
-                    }
 
-                    railChk.Checkpoint_Left.LV3D_List.Clear();
+                /// <summary>
+                /// 
+                /// </summary>
+                /// <param name="UserCtrl"></param>
+                /// <param name="rail"></param>
+                /// <param name="railType"></param>
+                public void ResetSideWall(UserControl1 UserCtrl)
+                {
+                    for (int i = 0; i < SideWall_Left.Count; i++) UserCtrl.MainViewPort.Children.Remove(SideWall_Left[i]);
+                    SideWall_Left.Clear();
+
+                    for (int i = 0; i < SideWall_Right.Count; i++) UserCtrl.MainViewPort.Children.Remove(SideWall_Right[i]);
+                    SideWall_Right.Clear();
                 }
-                if (railChk.Checkpoint_Right.LV3D_List != null)
-                {
-                    for (int ChkRLineRightCount = 0; ChkRLineRightCount < railChk.Checkpoint_Right.LV3D_List.Count; ChkRLineRightCount++)
-                    {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_Right.LV3D_List[ChkRLineRightCount]);
-                        UserCtrl.UpdateLayout();
-                    }
 
-                    railChk.Checkpoint_Right.LV3D_List.Clear();
-                }
-                if(railChk.Checkpoint_SplitWallMDL != null)
+                public void DeleteRailChk(UserControl1 UserCtrl)
                 {
-                    for (int ChkSplitWallCount = 0; ChkSplitWallCount < railChk.Checkpoint_SplitWallMDL.Count; ChkSplitWallCount++)
+                    if (Checkpoint_Left.MV3D_List != null)
                     {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.Checkpoint_SplitWallMDL[ChkSplitWallCount]);
-                        UserCtrl.UpdateLayout();
-                    }
+                        for (int ChkLeftCount = 0; ChkLeftCount < Checkpoint_Left.MV3D_List.Count; ChkLeftCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Left.MV3D_List[ChkLeftCount]);
+                            UserCtrl.UpdateLayout();
+                        }
 
-                    railChk.Checkpoint_SplitWallMDL.Clear();
-                }
-                if (railChk.SideWall_Left.SideWallList != null)
-                {
-                    for (int ChkSideWallLeftCount = 0; ChkSideWallLeftCount < railChk.SideWall_Left.SideWallList.Count; ChkSideWallLeftCount++)
+                        Checkpoint_Left.MV3D_List.Clear();
+                    }
+                    if (Checkpoint_Right.MV3D_List != null)
                     {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.SideWall_Left.SideWallList[ChkSideWallLeftCount]);
-                        UserCtrl.UpdateLayout();
-                    }
+                        for (int ChkRightCount = 0; ChkRightCount < Checkpoint_Right.MV3D_List.Count; ChkRightCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Right.MV3D_List[ChkRightCount]);
+                            UserCtrl.UpdateLayout();
+                        }
 
-                    railChk.SideWall_Left.SideWallList.Clear();
-                }
-                if (railChk.SideWall_Right.SideWallList != null)
-                {
-                    for (int ChkSideWallRightCount = 0; ChkSideWallRightCount < railChk.SideWall_Right.SideWallList.Count; ChkSideWallRightCount++)
+                        Checkpoint_Right.MV3D_List.Clear();
+                    }
+                    if (Checkpoint_Line != null)
                     {
-                        UserCtrl.MainViewPort.Children.Remove(railChk.SideWall_Right.SideWallList[ChkSideWallRightCount]);
-                        UserCtrl.UpdateLayout();
-                    }
+                        for (int ChkLineCount = 0; ChkLineCount < Checkpoint_Line.Count; ChkLineCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Line[ChkLineCount]);
+                            UserCtrl.UpdateLayout();
+                        }
 
-                    railChk.SideWall_Right.SideWallList.Clear();
+                        Checkpoint_Line.Clear();
+                    }
+                    if (Checkpoint_Tube != null)
+                    {
+                        for (int ChkTubeCount = 0; ChkTubeCount < Checkpoint_Tube.Count; ChkTubeCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Tube[ChkTubeCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        Checkpoint_Tube.Clear();
+                    }
+                    if (Checkpoint_Left.LV3D_List != null)
+                    {
+                        for (int ChkRLineLeftCount = 0; ChkRLineLeftCount < Checkpoint_Left.LV3D_List.Count; ChkRLineLeftCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Left.LV3D_List[ChkRLineLeftCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        Checkpoint_Left.LV3D_List.Clear();
+                    }
+                    if (Checkpoint_Right.LV3D_List != null)
+                    {
+                        for (int ChkRLineRightCount = 0; ChkRLineRightCount < Checkpoint_Right.LV3D_List.Count; ChkRLineRightCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_Right.LV3D_List[ChkRLineRightCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        Checkpoint_Right.LV3D_List.Clear();
+                    }
+                    if (Checkpoint_SplitWallMDL != null)
+                    {
+                        for (int ChkSplitWallCount = 0; ChkSplitWallCount < Checkpoint_SplitWallMDL.Count; ChkSplitWallCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(Checkpoint_SplitWallMDL[ChkSplitWallCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        Checkpoint_SplitWallMDL.Clear();
+                    }
+                    if (SideWall_Left != null)
+                    {
+                        for (int ChkSideWallLeftCount = 0; ChkSideWallLeftCount < SideWall_Left.Count; ChkSideWallLeftCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(SideWall_Left[ChkSideWallLeftCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        SideWall_Left.Clear();
+                    }
+                    if (SideWall_Right != null)
+                    {
+                        for (int ChkSideWallRightCount = 0; ChkSideWallRightCount < SideWall_Right.Count; ChkSideWallRightCount++)
+                        {
+                            UserCtrl.MainViewPort.Children.Remove(SideWall_Right[ChkSideWallRightCount]);
+                            UserCtrl.UpdateLayout();
+                        }
+
+                        SideWall_Right.Clear();
+                    }
                 }
             }
         }
