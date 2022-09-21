@@ -64,35 +64,18 @@ namespace MK7_KMP_Editor_For_PG_
             render.MainViewPort.Children.Remove(dv3D_OBJ);
 
             #region Add Model(OBJ)
-            HTK_3DES.TSRSystem.Transform_Value OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
-            {
-                Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
-                {
-                    X = 0,
-                    Y = 0,
-                    Z = 0
-                },
-                Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
-                {
-                    X = 1,
-                    Y = 1,
-                    Z = 1
-                },
-                Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
-                {
-                    X = 0,
-                    Y = 0,
-                    Z = 0
-                }
-            };
-
             string Path = ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Path;
             dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(Path);
 
-            HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_OBJ };
-            HTK_3DES.TSRSystem.New_TransformSystem3D(OBJ_transform_Value, transformSetting);
+            HTK_3DES.TSRSystem.Transform OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform
+            {
+                Translate3D = new Vector3D(0, 0, 0),
+                Scale3D = new Vector3D(1, 1, 1),
+                Rotate3D = new Vector3D(0, 0, 0)
+            };
 
-            //HTK_3DES.TransformMV3D.Transform_MV3D(OBJ_transform_Value, dv3D_OBJ);
+            HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_OBJ, OBJ_transform_Value);
+            tSRSystem3D.TestTransform3D();
 
             render.MainViewPort.Children.Add(dv3D_OBJ);
             #endregion

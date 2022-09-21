@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace MK7_KMP_Editor_For_PG_.TestXml
 {
@@ -33,6 +34,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Z")]
                         public float Z { get; set; }
+
+                        public Vector3D ToVector3D()
+                        {
+                            return new Vector3D(X, Y, Z);
+                        }
                     }
 
                     [System.Xml.Serialization.XmlAttribute("ScaleValue")]

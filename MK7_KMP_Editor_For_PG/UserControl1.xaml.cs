@@ -193,9 +193,9 @@ namespace MK7_KMP_Editor_For_PG_
                     LookAtObj(Chkpt_Right.ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
                 }
             }
-            if (input is List<KMPPropertyGridSettings.JBOG_section.JBOGValue>)
+            if (input is List<KMPPropertyGridSettings.JBOG_Section.JBOGValue>)
             {
-                var PG_Objects = input as List<KMPPropertyGridSettings.JBOG_section.JBOGValue>;
+                var PG_Objects = input as List<KMPPropertyGridSettings.JBOG_Section.JBOGValue>;
                 LookAtObj(PG_Objects[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
             if (input is List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>)

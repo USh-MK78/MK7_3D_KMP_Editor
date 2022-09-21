@@ -304,7 +304,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_section JBOG_Section, KMPPropertyGridSettings.TPGJ_Section TPGJ_Section)
+            public static List<CheckValue> HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section JBOG_Section, KMPPropertyGridSettings.TPGJ_Section TPGJ_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -454,7 +454,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> JBOG_Check(KMPPropertyGridSettings.JBOG_section JBOG_Section, KMPPropertyGridSettings.ITOP_Section ITOP_Section)
+            public static List<CheckValue> JBOG_Check(KMPPropertyGridSettings.JBOG_Section JBOG_Section, KMPPropertyGridSettings.ITOP_Section ITOP_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 

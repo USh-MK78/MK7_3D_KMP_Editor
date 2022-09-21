@@ -51,38 +51,44 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.EnemyRoute.EnemyRoute_Group EnemyRoute_group = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group
                 {
-                    Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
-                    Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
-                    Prev2 = EnemyRouteGroups.HPNEPreviewGroups.Prev2,
-                    Prev3 = EnemyRouteGroups.HPNEPreviewGroups.Prev3,
-                    Prev4 = EnemyRouteGroups.HPNEPreviewGroups.Prev4,
-                    Prev5 = EnemyRouteGroups.HPNEPreviewGroups.Prev5,
-                    Prev6 = EnemyRouteGroups.HPNEPreviewGroups.Prev6,
-                    Prev7 = EnemyRouteGroups.HPNEPreviewGroups.Prev7,
-                    Prev8 = EnemyRouteGroups.HPNEPreviewGroups.Prev8,
-                    Prev9 = EnemyRouteGroups.HPNEPreviewGroups.Prev9,
-                    Prev10 = EnemyRouteGroups.HPNEPreviewGroups.Prev10,
-                    Prev11 = EnemyRouteGroups.HPNEPreviewGroups.Prev11,
-                    Prev12 = EnemyRouteGroups.HPNEPreviewGroups.Prev12,
-                    Prev13 = EnemyRouteGroups.HPNEPreviewGroups.Prev13,
-                    Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
-                    Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15,
-                    Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
-                    Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
-                    Next2 = EnemyRouteGroups.HPNENextGroups.Next2,
-                    Next3 = EnemyRouteGroups.HPNENextGroups.Next3,
-                    Next4 = EnemyRouteGroups.HPNENextGroups.Next4,
-                    Next5 = EnemyRouteGroups.HPNENextGroups.Next5,
-                    Next6 = EnemyRouteGroups.HPNENextGroups.Next6,
-                    Next7 = EnemyRouteGroups.HPNENextGroups.Next7,
-                    Next8 = EnemyRouteGroups.HPNENextGroups.Next8,
-                    Next9 = EnemyRouteGroups.HPNENextGroups.Next9,
-                    Next10 = EnemyRouteGroups.HPNENextGroups.Next10,
-                    Next11 = EnemyRouteGroups.HPNENextGroups.Next11,
-                    Next12 = EnemyRouteGroups.HPNENextGroups.Next12,
-                    Next13 = EnemyRouteGroups.HPNENextGroups.Next13,
-                    Next14 = EnemyRouteGroups.HPNENextGroups.Next14,
-                    Next15 = EnemyRouteGroups.HPNENextGroups.Next15,
+                    PreviousRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous
+                    {
+                        Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
+                        Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
+                        Prev2 = EnemyRouteGroups.HPNEPreviewGroups.Prev2,
+                        Prev3 = EnemyRouteGroups.HPNEPreviewGroups.Prev3,
+                        Prev4 = EnemyRouteGroups.HPNEPreviewGroups.Prev4,
+                        Prev5 = EnemyRouteGroups.HPNEPreviewGroups.Prev5,
+                        Prev6 = EnemyRouteGroups.HPNEPreviewGroups.Prev6,
+                        Prev7 = EnemyRouteGroups.HPNEPreviewGroups.Prev7,
+                        Prev8 = EnemyRouteGroups.HPNEPreviewGroups.Prev8,
+                        Prev9 = EnemyRouteGroups.HPNEPreviewGroups.Prev9,
+                        Prev10 = EnemyRouteGroups.HPNEPreviewGroups.Prev10,
+                        Prev11 = EnemyRouteGroups.HPNEPreviewGroups.Prev11,
+                        Prev12 = EnemyRouteGroups.HPNEPreviewGroups.Prev12,
+                        Prev13 = EnemyRouteGroups.HPNEPreviewGroups.Prev13,
+                        Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
+                        Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15
+                    },
+                    NextRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next
+                    {
+                        Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
+                        Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
+                        Next2 = EnemyRouteGroups.HPNENextGroups.Next2,
+                        Next3 = EnemyRouteGroups.HPNENextGroups.Next3,
+                        Next4 = EnemyRouteGroups.HPNENextGroups.Next4,
+                        Next5 = EnemyRouteGroups.HPNENextGroups.Next5,
+                        Next6 = EnemyRouteGroups.HPNENextGroups.Next6,
+                        Next7 = EnemyRouteGroups.HPNENextGroups.Next7,
+                        Next8 = EnemyRouteGroups.HPNENextGroups.Next8,
+                        Next9 = EnemyRouteGroups.HPNENextGroups.Next9,
+                        Next10 = EnemyRouteGroups.HPNENextGroups.Next10,
+                        Next11 = EnemyRouteGroups.HPNENextGroups.Next11,
+                        Next12 = EnemyRouteGroups.HPNENextGroups.Next12,
+                        Next13 = EnemyRouteGroups.HPNENextGroups.Next13,
+                        Next14 = EnemyRouteGroups.HPNENextGroups.Next14,
+                        Next15 = EnemyRouteGroups.HPNENextGroups.Next15,
+                    },
                     Unknown1 = EnemyRouteGroups.HPNE_UnkBytes1,
                     Points = null
                 };
@@ -123,18 +129,24 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group = new TestXml.KMPXml.ItemRoute.ItemRoute_Group
                 {
-                    Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
-                    Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
-                    Prev2 = ItemRouteGroups.HPTI_PreviewGroup.Prev2,
-                    Prev3 = ItemRouteGroups.HPTI_PreviewGroup.Prev3,
-                    Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
-                    Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5,
-                    Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
-                    Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
-                    Next2 = ItemRouteGroups.HPTI_NextGroup.Next2,
-                    Next3 = ItemRouteGroups.HPTI_NextGroup.Next3,
-                    Next4 = ItemRouteGroups.HPTI_NextGroup.Next4,
-                    Next5 = ItemRouteGroups.HPTI_NextGroup.Next5,
+                    PreviousRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous
+                    {
+                        Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
+                        Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
+                        Prev2 = ItemRouteGroups.HPTI_PreviewGroup.Prev2,
+                        Prev3 = ItemRouteGroups.HPTI_PreviewGroup.Prev3,
+                        Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
+                        Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5
+                    },
+                    NextRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next
+                    {
+                        Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
+                        Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
+                        Next2 = ItemRouteGroups.HPTI_NextGroup.Next2,
+                        Next3 = ItemRouteGroups.HPTI_NextGroup.Next3,
+                        Next4 = ItemRouteGroups.HPTI_NextGroup.Next4,
+                        Next5 = ItemRouteGroups.HPTI_NextGroup.Next5
+                    },
                     Points = null
                 };
 
@@ -171,18 +183,24 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group = new TestXml.KMPXml.Checkpoint.Checkpoint_Group
                 {
-                    Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
-                    Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
-                    Prev2 = CheckpointGroups.HPKC_PreviewGroup.Prev2,
-                    Prev3 = CheckpointGroups.HPKC_PreviewGroup.Prev3,
-                    Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
-                    Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5,
-                    Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
-                    Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
-                    Next2 = CheckpointGroups.HPKC_NextGroup.Next2,
-                    Next3 = CheckpointGroups.HPKC_NextGroup.Next3,
-                    Next4 = CheckpointGroups.HPKC_NextGroup.Next4,
-                    Next5 = CheckpointGroups.HPKC_NextGroup.Next5,
+                    PreviousRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous
+                    {
+                        Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
+                        Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
+                        Prev2 = CheckpointGroups.HPKC_PreviewGroup.Prev2,
+                        Prev3 = CheckpointGroups.HPKC_PreviewGroup.Prev3,
+                        Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
+                        Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5
+                    },
+                    NextRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next
+                    {
+                        Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
+                        Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
+                        Next2 = CheckpointGroups.HPKC_NextGroup.Next2,
+                        Next3 = CheckpointGroups.HPKC_NextGroup.Next3,
+                        Next4 = CheckpointGroups.HPKC_NextGroup.Next4,
+                        Next5 = CheckpointGroups.HPKC_NextGroup.Next5
+                    },
                     UnkBytes1 = CheckpointGroups.HPKC_UnkBytes1,
                     Points = null
                 };
@@ -207,8 +225,8 @@ namespace MK7_KMP_Editor_For_PG_
                         Checkpoint_Type = CheckpointPoint.TPKC_Checkpoint_Type,
                         NextCheckPoint = CheckpointPoint.TPKC_NextCheckPoint,
                         PreviousCheckPoint = CheckpointPoint.TPKC_PreviousCheckPoint,
-                        UnkBytes1 = CheckpointPoint.TPKC_ClipID,
-                        UnkBytes2 = CheckpointPoint.TPKC_Section,
+                        ClipID = CheckpointPoint.TPKC_ClipID,
+                        Section = CheckpointPoint.TPKC_Section,
                         UnkBytes3 = CheckpointPoint.TPKC_UnkBytes3,
                         UnkBytes4 = CheckpointPoint.TPKC_UnkBytes4
                     };
@@ -277,8 +295,8 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.Route.Route_Group route_Group = new TestXml.KMPXml.Route.Route_Group
                 {
-                    RouteSetting1 = RouteGroups.ITOP_Roop,
-                    RouteSetting2 = RouteGroups.ITOP_Smooth,
+                    RoopSetting = RouteGroups.ITOP_Roop,
+                    SmoothSetting = RouteGroups.ITOP_Smooth,
                     Points = null
                 };
 
@@ -336,8 +354,8 @@ namespace MK7_KMP_Editor_For_PG_
                     AreaMode = AreaValues.AreaModeSettings.AreaModeValue,
                     CameraIndex = AreaValues.AERA_EMACIndex,
                     Priority = AreaValues.Priority,
-                    UnkByte1 = AreaValues.AERA_Setting1,
-                    UnkByte2 = AreaValues.AERA_Setting2,
+                    Setting1 = AreaValues.AERA_Setting1,
+                    Setting2 = AreaValues.AERA_Setting2,
                     RouteID = AreaValues.RouteID,
                     EnemyID = AreaValues.EnemyID,
                     UnkByte4 = AreaValues.AERA_UnkByte4
@@ -391,10 +409,10 @@ namespace MK7_KMP_Editor_For_PG_
                     },
                     CameraType = CameraValues.CameraType,
                     NextCameraIndex = CameraValues.NextCameraIndex,
-                    UnkBytes1 = CameraValues.EMAC_NextVideoIndex,
+                    NextVideoIndex = CameraValues.EMAC_NextVideoIndex,
                     Route_CameraIndex = CameraValues.EMAC_ITOP_CameraIndex,
-                    UnkBytes2 = CameraValues.EMAC_StartFlag,
-                    UnkBytes3 = CameraValues.EMAC_VideoFlag,
+                    StartFlag = CameraValues.EMAC_StartFlag,
+                    VideoFlag = CameraValues.EMAC_VideoFlag,
                     CameraActiveTime = CameraValues.Camera_Active_Time
                 };
 
@@ -436,18 +454,24 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group = new TestXml.KMPXml.GlideRoute.GlideRoute_Group
                 {
-                    Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
-                    Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
-                    Prev2 = GlideRouteGroups.HPLG_PreviewGroup.Prev2,
-                    Prev3 = GlideRouteGroups.HPLG_PreviewGroup.Prev3,
-                    Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
-                    Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5,
-                    Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
-                    Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,
-                    Next2 = GlideRouteGroups.HPLG_NextGroup.Next2,
-                    Next3 = GlideRouteGroups.HPLG_NextGroup.Next3,
-                    Next4 = GlideRouteGroups.HPLG_NextGroup.Next4,
-                    Next5 = GlideRouteGroups.HPLG_NextGroup.Next5,
+                    PreviousRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous
+                    {
+                        Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
+                        Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
+                        Prev2 = GlideRouteGroups.HPLG_PreviewGroup.Prev2,
+                        Prev3 = GlideRouteGroups.HPLG_PreviewGroup.Prev3,
+                        Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
+                        Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5
+                    },
+                    NextRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next
+                    {
+                        Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
+                        Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,
+                        Next2 = GlideRouteGroups.HPLG_NextGroup.Next2,
+                        Next3 = GlideRouteGroups.HPLG_NextGroup.Next3,
+                        Next4 = GlideRouteGroups.HPLG_NextGroup.Next4,
+                        Next5 = GlideRouteGroups.HPLG_NextGroup.Next5
+                    },
                     RouteSetting = GlideRouteGroups.RouteSettings.RouteSettingValue,
                     UnkBytes2 = GlideRouteGroups.HPLG_UnkBytes2,
                     Points = null
@@ -625,38 +649,44 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.EnemyRoute.EnemyRoute_Group EnemyRoute_group = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group
                     {
-                        Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
-                        Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
-                        Prev2 = EnemyRouteGroups.HPNEPreviewGroups.Prev2,
-                        Prev3 = EnemyRouteGroups.HPNEPreviewGroups.Prev3,
-                        Prev4 = EnemyRouteGroups.HPNEPreviewGroups.Prev4,
-                        Prev5 = EnemyRouteGroups.HPNEPreviewGroups.Prev5,
-                        Prev6 = EnemyRouteGroups.HPNEPreviewGroups.Prev6,
-                        Prev7 = EnemyRouteGroups.HPNEPreviewGroups.Prev7,
-                        Prev8 = EnemyRouteGroups.HPNEPreviewGroups.Prev8,
-                        Prev9 = EnemyRouteGroups.HPNEPreviewGroups.Prev9,
-                        Prev10 = EnemyRouteGroups.HPNEPreviewGroups.Prev10,
-                        Prev11 = EnemyRouteGroups.HPNEPreviewGroups.Prev11,
-                        Prev12 = EnemyRouteGroups.HPNEPreviewGroups.Prev12,
-                        Prev13 = EnemyRouteGroups.HPNEPreviewGroups.Prev13,
-                        Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
-                        Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15,
-                        Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
-                        Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
-                        Next2 = EnemyRouteGroups.HPNENextGroups.Next2,
-                        Next3 = EnemyRouteGroups.HPNENextGroups.Next3,
-                        Next4 = EnemyRouteGroups.HPNENextGroups.Next4,
-                        Next5 = EnemyRouteGroups.HPNENextGroups.Next5,
-                        Next6 = EnemyRouteGroups.HPNENextGroups.Next6,
-                        Next7 = EnemyRouteGroups.HPNENextGroups.Next7,
-                        Next8 = EnemyRouteGroups.HPNENextGroups.Next8,
-                        Next9 = EnemyRouteGroups.HPNENextGroups.Next9,
-                        Next10 = EnemyRouteGroups.HPNENextGroups.Next10,
-                        Next11 = EnemyRouteGroups.HPNENextGroups.Next11,
-                        Next12 = EnemyRouteGroups.HPNENextGroups.Next12,
-                        Next13 = EnemyRouteGroups.HPNENextGroups.Next13,
-                        Next14 = EnemyRouteGroups.HPNENextGroups.Next14,
-                        Next15 = EnemyRouteGroups.HPNENextGroups.Next15,
+                        PreviousRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous
+                        {
+                            Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
+                            Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
+                            Prev2 = EnemyRouteGroups.HPNEPreviewGroups.Prev2,
+                            Prev3 = EnemyRouteGroups.HPNEPreviewGroups.Prev3,
+                            Prev4 = EnemyRouteGroups.HPNEPreviewGroups.Prev4,
+                            Prev5 = EnemyRouteGroups.HPNEPreviewGroups.Prev5,
+                            Prev6 = EnemyRouteGroups.HPNEPreviewGroups.Prev6,
+                            Prev7 = EnemyRouteGroups.HPNEPreviewGroups.Prev7,
+                            Prev8 = EnemyRouteGroups.HPNEPreviewGroups.Prev8,
+                            Prev9 = EnemyRouteGroups.HPNEPreviewGroups.Prev9,
+                            Prev10 = EnemyRouteGroups.HPNEPreviewGroups.Prev10,
+                            Prev11 = EnemyRouteGroups.HPNEPreviewGroups.Prev11,
+                            Prev12 = EnemyRouteGroups.HPNEPreviewGroups.Prev12,
+                            Prev13 = EnemyRouteGroups.HPNEPreviewGroups.Prev13,
+                            Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
+                            Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15
+                        },
+                        NextRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next
+                        {
+                            Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
+                            Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
+                            Next2 = EnemyRouteGroups.HPNENextGroups.Next2,
+                            Next3 = EnemyRouteGroups.HPNENextGroups.Next3,
+                            Next4 = EnemyRouteGroups.HPNENextGroups.Next4,
+                            Next5 = EnemyRouteGroups.HPNENextGroups.Next5,
+                            Next6 = EnemyRouteGroups.HPNENextGroups.Next6,
+                            Next7 = EnemyRouteGroups.HPNENextGroups.Next7,
+                            Next8 = EnemyRouteGroups.HPNENextGroups.Next8,
+                            Next9 = EnemyRouteGroups.HPNENextGroups.Next9,
+                            Next10 = EnemyRouteGroups.HPNENextGroups.Next10,
+                            Next11 = EnemyRouteGroups.HPNENextGroups.Next11,
+                            Next12 = EnemyRouteGroups.HPNENextGroups.Next12,
+                            Next13 = EnemyRouteGroups.HPNENextGroups.Next13,
+                            Next14 = EnemyRouteGroups.HPNENextGroups.Next14,
+                            Next15 = EnemyRouteGroups.HPNENextGroups.Next15
+                        },
                         Unknown1 = EnemyRouteGroups.HPNE_UnkBytes1,
                         Points = null
                     };
@@ -704,18 +734,24 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group = new TestXml.KMPXml.ItemRoute.ItemRoute_Group
                     {
-                        Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
-                        Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
-                        Prev2 = ItemRouteGroups.HPTI_PreviewGroup.Prev2,
-                        Prev3 = ItemRouteGroups.HPTI_PreviewGroup.Prev3,
-                        Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
-                        Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5,
-                        Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
-                        Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
-                        Next2 = ItemRouteGroups.HPTI_NextGroup.Next2,
-                        Next3 = ItemRouteGroups.HPTI_NextGroup.Next3,
-                        Next4 = ItemRouteGroups.HPTI_NextGroup.Next4,
-                        Next5 = ItemRouteGroups.HPTI_NextGroup.Next5,
+                        PreviousRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous
+                        {
+                            Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
+                            Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
+                            Prev2 = ItemRouteGroups.HPTI_PreviewGroup.Prev2,
+                            Prev3 = ItemRouteGroups.HPTI_PreviewGroup.Prev3,
+                            Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
+                            Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5
+                        },
+                        NextRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next
+                        {
+                            Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
+                            Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
+                            Next2 = ItemRouteGroups.HPTI_NextGroup.Next2,
+                            Next3 = ItemRouteGroups.HPTI_NextGroup.Next3,
+                            Next4 = ItemRouteGroups.HPTI_NextGroup.Next4,
+                            Next5 = ItemRouteGroups.HPTI_NextGroup.Next5
+                        },
                         Points = null
                     };
 
@@ -759,18 +795,24 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group = new TestXml.KMPXml.Checkpoint.Checkpoint_Group
                     {
-                        Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
-                        Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
-                        Prev2 = CheckpointGroups.HPKC_PreviewGroup.Prev2,
-                        Prev3 = CheckpointGroups.HPKC_PreviewGroup.Prev3,
-                        Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
-                        Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5,
-                        Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
-                        Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
-                        Next2 = CheckpointGroups.HPKC_NextGroup.Next2,
-                        Next3 = CheckpointGroups.HPKC_NextGroup.Next3,
-                        Next4 = CheckpointGroups.HPKC_NextGroup.Next4,
-                        Next5 = CheckpointGroups.HPKC_NextGroup.Next5,
+                        PreviousRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous
+                        {
+                            Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
+                            Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
+                            Prev2 = CheckpointGroups.HPKC_PreviewGroup.Prev2,
+                            Prev3 = CheckpointGroups.HPKC_PreviewGroup.Prev3,
+                            Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
+                            Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5
+                        },
+                        NextRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next
+                        {
+                            Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
+                            Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
+                            Next2 = CheckpointGroups.HPKC_NextGroup.Next2,
+                            Next3 = CheckpointGroups.HPKC_NextGroup.Next3,
+                            Next4 = CheckpointGroups.HPKC_NextGroup.Next4,
+                            Next5 = CheckpointGroups.HPKC_NextGroup.Next5
+                        },
                         UnkBytes1 = CheckpointGroups.HPKC_UnkBytes1,
                         Points = null
                     };
@@ -795,8 +837,8 @@ namespace MK7_KMP_Editor_For_PG_
                             Checkpoint_Type = CheckpointPoint.TPKC_Checkpoint_Type,
                             NextCheckPoint = CheckpointPoint.TPKC_NextCheckPoint,
                             PreviousCheckPoint = CheckpointPoint.TPKC_PreviousCheckPoint,
-                            UnkBytes1 = CheckpointPoint.TPKC_ClipID,
-                            UnkBytes2 = CheckpointPoint.TPKC_Section,
+                            ClipID = CheckpointPoint.TPKC_ClipID,
+                            Section = CheckpointPoint.TPKC_Section,
                             UnkBytes3 = CheckpointPoint.TPKC_UnkBytes3,
                             UnkBytes4 = CheckpointPoint.TPKC_UnkBytes4
                         };
@@ -879,8 +921,8 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.Route.Route_Group route_Group = new TestXml.KMPXml.Route.Route_Group
                     {
-                        RouteSetting1 = RouteGroups.ITOP_Roop,
-                        RouteSetting2 = RouteGroups.ITOP_Smooth,
+                        RoopSetting = RouteGroups.ITOP_Roop,
+                        SmoothSetting = RouteGroups.ITOP_Smooth,
                         Points = null
                     };
 
@@ -945,8 +987,8 @@ namespace MK7_KMP_Editor_For_PG_
                         AreaMode = AreaValues.AreaModeSettings.AreaModeValue,
                         CameraIndex = AreaValues.AERA_EMACIndex,
                         Priority = AreaValues.Priority,
-                        UnkByte1 = AreaValues.AERA_Setting1,
-                        UnkByte2 = AreaValues.AERA_Setting2,
+                        Setting1 = AreaValues.AERA_Setting1,
+                        Setting2 = AreaValues.AERA_Setting2,
                         RouteID = AreaValues.RouteID,
                         EnemyID = AreaValues.EnemyID,
                         UnkByte4 = AreaValues.AERA_UnkByte4
@@ -1007,10 +1049,10 @@ namespace MK7_KMP_Editor_For_PG_
                         },
                         CameraType = CameraValues.CameraType,
                         NextCameraIndex = CameraValues.NextCameraIndex,
-                        UnkBytes1 = CameraValues.EMAC_NextVideoIndex,
+                        NextVideoIndex = CameraValues.EMAC_NextVideoIndex,
                         Route_CameraIndex = CameraValues.EMAC_ITOP_CameraIndex,
-                        UnkBytes2 = CameraValues.EMAC_StartFlag,
-                        UnkBytes3 = CameraValues.EMAC_VideoFlag,
+                        StartFlag = CameraValues.EMAC_StartFlag,
+                        VideoFlag = CameraValues.EMAC_VideoFlag,
                         CameraActiveTime = CameraValues.Camera_Active_Time
                     };
 
@@ -1066,18 +1108,24 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group = new TestXml.KMPXml.GlideRoute.GlideRoute_Group
                     {
-                        Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
-                        Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
-                        Prev2 = GlideRouteGroups.HPLG_PreviewGroup.Prev2,
-                        Prev3 = GlideRouteGroups.HPLG_PreviewGroup.Prev3,
-                        Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
-                        Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5,
-                        Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
-                        Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,
-                        Next2 = GlideRouteGroups.HPLG_NextGroup.Next2,
-                        Next3 = GlideRouteGroups.HPLG_NextGroup.Next3,
-                        Next4 = GlideRouteGroups.HPLG_NextGroup.Next4,
-                        Next5 = GlideRouteGroups.HPLG_NextGroup.Next5,
+                        PreviousRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous
+                        {
+                            Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
+                            Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
+                            Prev2 = GlideRouteGroups.HPLG_PreviewGroup.Prev2,
+                            Prev3 = GlideRouteGroups.HPLG_PreviewGroup.Prev3,
+                            Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
+                            Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5
+                        },
+                        NextRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next
+                        {
+                            Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
+                            Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,
+                            Next2 = GlideRouteGroups.HPLG_NextGroup.Next2,
+                            Next3 = GlideRouteGroups.HPLG_NextGroup.Next3,
+                            Next4 = GlideRouteGroups.HPLG_NextGroup.Next4,
+                            Next5 = GlideRouteGroups.HPLG_NextGroup.Next5
+                        },
                         RouteSetting = GlideRouteGroups.RouteSettings.RouteSettingValue,
                         UnkBytes2 = GlideRouteGroups.HPLG_UnkBytes2,
                         Points = null
@@ -1285,90 +1333,55 @@ namespace MK7_KMP_Editor_For_PG_
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
 
             #region KartPoint
-            KMPPropertyGridSettings.TPTK_Section TPTK_Section = new KMPPropertyGridSettings.TPTK_Section
-            { 
-                TPTKValueList = PropertyGridClassConverterXML.ToTPTKValueList(KMP_Xml_Model.startPositions) 
-            };
-
+            KMPPropertyGridSettings.TPTK_Section TPTK_Section = new KMPPropertyGridSettings.TPTK_Section(KMP_Xml_Model.startPositions);
             KMPs.KMPViewportRenderingXML.Render_StartPosition(UserCtrl, KMPViewportObject, KMP_Xml_Model.startPositions);
             kMPPropertyGridSettings.TPTKSection = TPTK_Section;
             #endregion
 
             #region Enemy_Routes
-            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section
-            {
-                HPNEValueList = PropertyGridClassConverterXML.ToHPNEValueList(KMP_Xml_Model.EnemyRoutes)
-            };
+            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section(KMP_Xml_Model.EnemyRoutes);
             KMPs.KMPViewportRenderingXML.Render_EnemyRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.EnemyRoutes);
             kMPPropertyGridSettings.HPNE_TPNESection = HPNE_TPNE_Section;
             #endregion
 
             #region Item Routes
-            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section
-            {
-                HPTIValueList = PropertyGridClassConverterXML.ToHPTIValueList(KMP_Xml_Model.ItemRoutes)
-            };
-
+            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section(KMP_Xml_Model.ItemRoutes);
             KMPs.KMPViewportRenderingXML.Render_ItemRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.ItemRoutes);
             kMPPropertyGridSettings.HPTI_TPTISection = HPTI_TPTI_Section;
             #endregion
 
             #region CheckPoint
-            KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section
-            {
-                HPKCValueList = PropertyGridClassConverterXML.ToHPKCValueList(KMP_Xml_Model.Checkpoints)
-            };
-
+            KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section(KMP_Xml_Model.Checkpoints);
             KMPs.KMPViewportRenderingXML.Render_Checkpoint(UserCtrl, KMPViewportObject, KMP_Xml_Model.Checkpoints, Convert.ToDouble(YOffsetValue));
             kMPPropertyGridSettings.HPKC_TPKCSection = HPKC_TPKC_Section;
             #endregion
 
             #region OBJ
-            KMPPropertyGridSettings.JBOG_section JBOG_Section = new KMPPropertyGridSettings.JBOG_section
-            {
-                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects)
-            };
-
+            KMPPropertyGridSettings.JBOG_Section JBOG_Section = new KMPPropertyGridSettings.JBOG_Section(KMP_Xml_Model.Objects);
             KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml"));
             kMPPropertyGridSettings.JBOGSection = JBOG_Section;
             #endregion
 
             #region Route
-            KMPPropertyGridSettings.ITOP_Section ITOP_Section = new KMPPropertyGridSettings.ITOP_Section
-            {
-                ITOP_RouteList = PropertyGridClassConverterXML.ToITOPValueList(KMP_Xml_Model.Routes)
-            };
-
+            KMPPropertyGridSettings.ITOP_Section ITOP_Section = new KMPPropertyGridSettings.ITOP_Section(KMP_Xml_Model.Routes);
             KMPs.KMPViewportRenderingXML.Render_Route(UserCtrl, KMPViewportObject, KMP_Xml_Model.Routes);
             kMPPropertyGridSettings.ITOPSection = ITOP_Section;
             #endregion
 
             #region Area
-            KMPPropertyGridSettings.AERA_Section AERA_Section = new KMPPropertyGridSettings.AERA_Section
-            {
-                AERAValueList = PropertyGridClassConverterXML.ToAERAValueList(KMP_Xml_Model.Areas)
-            };
-
+            KMPPropertyGridSettings.AERA_Section AERA_Section = new KMPPropertyGridSettings.AERA_Section(KMP_Xml_Model.Areas);
             KMPs.KMPViewportRenderingXML.Render_Area(UserCtrl, KMPViewportObject, KMP_Xml_Model.Areas);
             kMPPropertyGridSettings.AERASection = AERA_Section;
             #endregion
 
             #region Camera
-            KMPPropertyGridSettings.EMAC_Section EMAC_Section = new KMPPropertyGridSettings.EMAC_Section
-            {
-                EMACValueList = PropertyGridClassConverterXML.ToEMACValueList(KMP_Xml_Model.Cameras)
-            };
-
+            KMPPropertyGridSettings.EMAC_Section EMAC_Section = new KMPPropertyGridSettings.EMAC_Section(KMP_Xml_Model.Cameras);
             KMPs.KMPViewportRenderingXML.Render_Camera(UserCtrl, KMPViewportObject, KMP_Xml_Model.Cameras);
             kMPPropertyGridSettings.EMACSection = EMAC_Section;
             #endregion
 
             #region JugemPoint
-            KMPPropertyGridSettings.TPGJ_Section TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section
-            {
-                TPGJValueList = PropertyGridClassConverterXML.ToTPGJValueList(KMP_Xml_Model.JugemPoints)
-            };
-
+            KMPPropertyGridSettings.TPGJ_Section TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section(KMP_Xml_Model.JugemPoints);
             KMPs.KMPViewportRenderingXML.Render_Returnpoint(UserCtrl, KMPViewportObject, KMP_Xml_Model.JugemPoints);
             kMPPropertyGridSettings.TPGJSection = TPGJ_Section;
             #endregion
@@ -1377,17 +1390,13 @@ namespace MK7_KMP_Editor_For_PG_
             //TPSM : Unused Section
 
             #region StageInfo
-            kMPPropertyGridSettings.IGTSSection = PropertyGridClassConverterXML.ToIGTSValue(KMP_Xml_Model.Stage_Info);
+            kMPPropertyGridSettings.IGTSSection = new KMPPropertyGridSettings.IGTS_Section(KMP_Xml_Model.Stage_Info);
             #endregion
 
             //SROC : Unused Section
 
             #region GlideRoute
-            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section
-            {
-                HPLGValueList = PropertyGridClassConverterXML.ToHPLGValueList(KMP_Xml_Model.GlideRoutes)
-            };
-
+            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section(KMP_Xml_Model.GlideRoutes);
             KMPs.KMPViewportRenderingXML.Render_GlideRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.GlideRoutes);
             kMPPropertyGridSettings.HPLG_TPLGSection = HPLG_TPLG_Section;
             #endregion
@@ -1398,7 +1407,7 @@ namespace MK7_KMP_Editor_For_PG_
         public static KMPPropertyGridSettings.TPTK_Section ImportKartPosition(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-            KMPPropertyGridSettings.TPTK_Section TPTK_Section = new KMPPropertyGridSettings.TPTK_Section { TPTKValueList = PropertyGridClassConverterXML.ToTPTKValueList(KMP_Xml_Model.startPositions) };
+            KMPPropertyGridSettings.TPTK_Section TPTK_Section = new KMPPropertyGridSettings.TPTK_Section(KMP_Xml_Model.startPositions);
             KMPs.KMPViewportRenderingXML.Render_StartPosition(UserCtrl, KMPViewportObject, KMP_Xml_Model.startPositions);
             return TPTK_Section;
         }
@@ -1406,125 +1415,72 @@ namespace MK7_KMP_Editor_For_PG_
         public static KMPPropertyGridSettings.HPNE_TPNE_Section ImportEnemyRoute(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section
-            {
-                HPNEValueList = PropertyGridClassConverterXML.ToHPNEValueList(KMP_Xml_Model.EnemyRoutes)
-            };
+            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section(KMP_Xml_Model.EnemyRoutes);
             KMPs.KMPViewportRenderingXML.Render_EnemyRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.EnemyRoutes);
-
             return HPNE_TPNE_Section;
         }
 
         public static KMPPropertyGridSettings.HPTI_TPTI_Section ImportItemRoute(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section
-            {
-                HPTIValueList = PropertyGridClassConverterXML.ToHPTIValueList(KMP_Xml_Model.ItemRoutes)
-            };
-
+            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section(KMP_Xml_Model.ItemRoutes);
             KMPs.KMPViewportRenderingXML.Render_ItemRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.ItemRoutes);
-
             return HPTI_TPTI_Section;
         }
 
         public static KMPPropertyGridSettings.HPKC_TPKC_Section ImportCheckpoint(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl, string YOffsetValue)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section
-            {
-                HPKCValueList = PropertyGridClassConverterXML.ToHPKCValueList(KMP_Xml_Model.Checkpoints)
-            };
-
+            KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section = new KMPPropertyGridSettings.HPKC_TPKC_Section(KMP_Xml_Model.Checkpoints);
             KMPs.KMPViewportRenderingXML.Render_Checkpoint(UserCtrl, KMPViewportObject, KMP_Xml_Model.Checkpoints, Convert.ToDouble(YOffsetValue));
-
             return HPKC_TPKC_Section;
         }
 
-        public static KMPPropertyGridSettings.JBOG_section ImportObject(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
+        public static KMPPropertyGridSettings.JBOG_Section ImportObject(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.JBOG_section JBOG_Section = new KMPPropertyGridSettings.JBOG_section
-            {
-                JBOGValueList = PropertyGridClassConverterXML.ToJBOGValueList(KMP_Xml_Model.Objects)
-            };
-
+            KMPPropertyGridSettings.JBOG_Section JBOG_Section = new KMPPropertyGridSettings.JBOG_Section(KMP_Xml_Model.Objects);
             KMPs.KMPViewportRenderingXML.Render_Object(UserCtrl, KMPViewportObject, KMP_Xml_Model.Objects, KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml"));
-
             return JBOG_Section;
         }
 
         public static KMPPropertyGridSettings.ITOP_Section ImportRoute(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.ITOP_Section ITOP_Section = new KMPPropertyGridSettings.ITOP_Section
-            {
-                ITOP_RouteList = PropertyGridClassConverterXML.ToITOPValueList(KMP_Xml_Model.Routes)
-            };
-
+            KMPPropertyGridSettings.ITOP_Section ITOP_Section = new KMPPropertyGridSettings.ITOP_Section(KMP_Xml_Model.Routes);
             KMPs.KMPViewportRenderingXML.Render_Route(UserCtrl, KMPViewportObject, KMP_Xml_Model.Routes);
-
             return ITOP_Section;
         }
 
         public static KMPPropertyGridSettings.AERA_Section ImportArea(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.AERA_Section AERA_Section = new KMPPropertyGridSettings.AERA_Section
-            {
-                AERAValueList = PropertyGridClassConverterXML.ToAERAValueList(KMP_Xml_Model.Areas)
-            };
-
+            KMPPropertyGridSettings.AERA_Section AERA_Section = new KMPPropertyGridSettings.AERA_Section(KMP_Xml_Model.Areas);
             KMPs.KMPViewportRenderingXML.Render_Area(UserCtrl, KMPViewportObject, KMP_Xml_Model.Areas);
-
             return AERA_Section;
         }
 
         public static KMPPropertyGridSettings.EMAC_Section ImportCamera(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.EMAC_Section EMAC_Section = new KMPPropertyGridSettings.EMAC_Section
-            {
-                EMACValueList = PropertyGridClassConverterXML.ToEMACValueList(KMP_Xml_Model.Cameras)
-            };
-
+            KMPPropertyGridSettings.EMAC_Section EMAC_Section = new KMPPropertyGridSettings.EMAC_Section(KMP_Xml_Model.Cameras);
             KMPs.KMPViewportRenderingXML.Render_Camera(UserCtrl, KMPViewportObject, KMP_Xml_Model.Cameras);
-
             return EMAC_Section;
         }
 
         public static KMPPropertyGridSettings.TPGJ_Section ImportJugemPoint(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.TPGJ_Section TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section
-            {
-                TPGJValueList = PropertyGridClassConverterXML.ToTPGJValueList(KMP_Xml_Model.JugemPoints)
-            };
-
+            KMPPropertyGridSettings.TPGJ_Section TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section(KMP_Xml_Model.JugemPoints);
             KMPs.KMPViewportRenderingXML.Render_Returnpoint(UserCtrl, KMPViewportObject, KMP_Xml_Model.JugemPoints);
-
             return TPGJ_Section;
         }
 
         public static KMPPropertyGridSettings.HPLG_TPLG_Section ImportGlideRoute(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.KMPXml KMP_Xml_Model = XMLImport<TestXml.KMPXml>(Path);
-
-            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section
-            {
-                HPLGValueList = PropertyGridClassConverterXML.ToHPLGValueList(KMP_Xml_Model.GlideRoutes)
-            };
-
+            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section(KMP_Xml_Model.GlideRoutes);
             KMPs.KMPViewportRenderingXML.Render_GlideRoute(UserCtrl, KMPViewportObject, KMP_Xml_Model.GlideRoutes);
-
             return HPLG_TPLG_Section;
         }
 
@@ -1532,42 +1488,24 @@ namespace MK7_KMP_Editor_For_PG_
         public static KMPPropertyGridSettings.HPNE_TPNE_Section ImportEnemyRoutePositionAndScaleOnly(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.XXXXRouteXml XXXXRouteXml_Model = XMLImport<TestXml.XXXXRouteXml>(Path);
-
-            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section
-            {
-                HPNEValueList = PropertyGridClassConverterXML_XXXXRoute.ToHPNEValueList(XXXXRouteXml_Model.XXXXRoutes)
-            };
-
+            KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section = new KMPPropertyGridSettings.HPNE_TPNE_Section(XXXXRouteXml_Model.XXXXRoutes);
             KMPs.KMPViewportRenderingXML_XXXXRoute.Render_EnemyRoute(UserCtrl, KMPViewportObject, XXXXRouteXml_Model.XXXXRoutes);
-
             return HPNE_TPNE_Section;
         }
 
         public static KMPPropertyGridSettings.HPTI_TPTI_Section ImportItemRoutePositionAndScaleOnly(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.XXXXRouteXml XXXXRouteXml_Model = XMLImport<TestXml.XXXXRouteXml>(Path);
-
-            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section
-            {
-                HPTIValueList = PropertyGridClassConverterXML_XXXXRoute.ToHPTIValueList(XXXXRouteXml_Model.XXXXRoutes)
-            };
-
+            KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section = new KMPPropertyGridSettings.HPTI_TPTI_Section(XXXXRouteXml_Model.XXXXRoutes);
             KMPs.KMPViewportRenderingXML_XXXXRoute.Render_ItemRoute(UserCtrl, KMPViewportObject, XXXXRouteXml_Model.XXXXRoutes);
-
             return HPTI_TPTI_Section;
         }
 
         public static KMPPropertyGridSettings.HPLG_TPLG_Section ImportGlideRoutePositionAndScaleOnly(KMPs.KMPViewportObject KMPViewportObject, string Path, UserControl1 UserCtrl)
         {
             TestXml.XXXXRouteXml XXXXRouteXml_Model = XMLImport<TestXml.XXXXRouteXml>(Path);
-
-            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section
-            {
-                HPLGValueList = PropertyGridClassConverterXML_XXXXRoute.ToHPLGValueList(XXXXRouteXml_Model.XXXXRoutes)
-            };
-
+            KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section(XXXXRouteXml_Model.XXXXRoutes);
             KMPs.KMPViewportRenderingXML_XXXXRoute.Render_GlideRoute(UserCtrl, KMPViewportObject, XXXXRouteXml_Model.XXXXRoutes);
-
             return HPLG_TPLG_Section;
         }
         #endregion

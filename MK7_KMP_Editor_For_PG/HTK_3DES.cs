@@ -15,95 +15,12 @@ namespace MK7_KMP_Editor_For_PG_
     {
         public class TSRSystem
         {
-            public Transform_Value GetTransform_Value { get; set; }
-
-            /// <summary>
-            /// Translate,Scale,Rotateの値を格納するクラス
-            /// </summary>
-            public class Transform_Value
+            public class Transform
             {
-                public Translate Translate_Value { get; set; }
-                public class Translate
-                {
-                    public double X { get; set; }
-                    public double Y { get; set; }
-                    public double Z { get; set; }
-
-                    public Translate()
-                    {
-                        X = 0;
-                        Y = 0;
-                        Z = 0;
-                    }
-
-                    public Translate(Vector3D vector3D)
-                    {
-                        X = vector3D.X;
-                        Y = vector3D.Y;
-                        Z = vector3D.Z;
-                    }
-
-                    public Vector3D ToVector3D()
-                    {
-                        return new Vector3D(X, Y, Z);
-                    }
-                }
-
-                public Scale Scale_Value { get; set; }
-                public class Scale
-                {
-                    public double X { get; set; }
-                    public double Y { get; set; }
-                    public double Z { get; set; }
-
-                    public Scale()
-                    {
-                        X = 0;
-                        Y = 0;
-                        Z = 0;
-                    }
-
-                    public Scale(Vector3D vector3D, double ScaleFactor = 1)
-                    {
-                        X = vector3D.X * ScaleFactor;
-                        Y = vector3D.Y * ScaleFactor;
-                        Z = vector3D.Z * ScaleFactor;
-                    }
-
-                    public Vector3D ToVector3D()
-                    {
-                        return new Vector3D(X, Y, Z);
-                    }
-                }
-
-                public Rotate Rotate_Value { get; set; }
-                public class Rotate
-                {
-                    public double X { get; set; }
-                    public double Y { get; set; }
-                    public double Z { get; set; }
-
-                    public Rotate()
-                    {
-                        X = 0;
-                        Y = 0;
-                        Z = 0;
-                    }
-
-                    public Rotate(Vector3D vector3D)
-                    {
-                        X = vector3D.X;
-                        Y = vector3D.Y;
-                        Z = vector3D.Z;
-                    }
-
-                    public Vector3D ToVector3D()
-                    {
-                        return new Vector3D(X, Y, Z);
-                    }
-                }
+                public Vector3D Rotate3D { get; set; }
+                public Vector3D Scale3D { get; set; }
+                public Vector3D Translate3D { get; set; }
             }
-
             /// <summary>
             /// objファイルを読み込み、ModelVisual3Dを返すメソッド
             /// </summary>
@@ -165,11 +82,14 @@ namespace MK7_KMP_Editor_For_PG_
                 MV3D.SetName(InputString);
             }
 
-            public class Transform
+            public static Vector3D ScaleFactor(Vector3D InputVector3D, double ScaleFactor)
             {
-                public Vector3D Rotate3D { get; set; }
-                public Vector3D Scale3D { get; set; }
-                public Vector3D Translate3D { get; set; }
+                return new Vector3D(InputVector3D.X * ScaleFactor, InputVector3D.Y * ScaleFactor, InputVector3D.Z * ScaleFactor);
+            }
+
+            public static Vector3D ScaleFactor(float PointSize, double ScaleFactor)
+            {
+                return new Vector3D(PointSize * ScaleFactor, PointSize * ScaleFactor, PointSize * ScaleFactor);
             }
 
             /// <summary>
@@ -229,57 +149,64 @@ namespace MK7_KMP_Editor_For_PG_
                 return new Vector3D(v.X / Factor, v.Y / Factor, v.Z / Factor);
             }
 
-            public enum RotationSetting
-            {
-                Angle,
-                Radian
-            }
 
-            public class TransformSetting
+            public class TSRSystem3D
             {
-                public bool IsContent { get; set; } = true;
-                public ModelVisual3D InputMV3D { get; set; } = null;
-                public Model3D InputM3D
+                public Transform Transform { get; } = new Transform();
+                public ModelVisual3D InputMV3D { get; }
+                public Model3D InputM3D;
+                public bool IsContent;
+
+                //public ModelVisual3D InputMV3D;
+                //public Model3D M3D
+                //{
+                //    get
+                //    {
+                //        return InputMV3D.Content ?? null;
+                //    }
+                //    set
+                //    {
+                //        InputMV3D = new ModelVisual3D { Content = M3D };
+                //    }
+                //}
+
+                public TSRSystem3D()
                 {
-                    set
-                    {
-                        if (InputMV3D == null) this.InputM3D = value;
-                        if (InputMV3D != null)
-                        {
-                            if (IsContent == true) this.InputM3D = InputMV3D.Content;
-                            if (IsContent == false) this.InputM3D = null; //return
-                        }
-                    }
-                    get
-                    {
-                        Model3D model3D = null;
-                        if (InputMV3D == null) model3D = this.InputM3D;
-                        if (InputMV3D != null)
-                        {
-                            if (IsContent == true) model3D = InputMV3D.Content;
-                            if (IsContent == false) model3D = null;
-                        }
-
-                        return model3D;
-                    }
+                    return;
                 }
 
-                public RotationSetting RotationSetting { get; set; } = RotationSetting.Angle;
-
-                public ScaleTransformSetting ScaleTransformSettings { get; set; } = new ScaleTransformSetting();
-                public class ScaleTransformSetting
+                /// <summary>
+                /// TSRSystem3Dの初期化
+                /// </summary>
+                /// <param name="MV3D"></param>
+                /// <param name="transform"></param>
+                public TSRSystem3D(ModelVisual3D MV3D, Transform transform)
                 {
-                    public Point3D ScaleCenter { get; set; } = new Point3D(0, 0, 0);
-                    public double Scalefactor { get; set; } = 1;
-
-                    public ScaleTransformSetting()
-                    {
-                        ScaleCenter = new Point3D(0, 0, 0);
-                        Scalefactor = 2;
-                    }
+                    InputMV3D = MV3D;
+                    InputM3D = null;
+                    Transform = transform;
+                    IsContent = MV3D.Content != null ? true : false;
                 }
 
-                public RotationCenterSetting RotationCenterSettings { get; set; } = new RotationCenterSetting();
+                /// <summary>
+                /// TSRSystem3Dの初期化
+                /// </summary>
+                /// <param name="MV3D"></param>
+                /// <param name="transform"></param>
+                public TSRSystem3D(Model3D M3D, Transform transform)
+                {
+                    InputMV3D = null;
+                    InputM3D = M3D;
+                    Transform = transform;
+                    IsContent = true;
+                }
+
+                #region Rotation
+                public RotateTransform3D Rotate_X { get; } = new RotateTransform3D();
+                public RotateTransform3D Rotate_Y { get; } = new RotateTransform3D();
+                public RotateTransform3D Rotate_Z { get; } = new RotateTransform3D();
+
+                public RotationCenterSetting RotationCenterSettings { get; }
                 public class RotationCenterSetting
                 {
                     public Vector3D RotationX { get; set; } = new Vector3D(1, 0, 0);
@@ -293,176 +220,360 @@ namespace MK7_KMP_Editor_For_PG_
                         RotationZ = new Vector3D(0, 0, 1);
                     }
                 }
+
+                public enum RotationType
+                {
+                    Angle,
+                    Radian
+                }
+
+                public void TSR_Rotate(RotationCenterSetting RotationCenterSettings, RotationType RotationSettings = RotationType.Angle)
+                {
+                    double RotateX = new double();
+                    double RotateY = new double();
+                    double RotateZ = new double();
+
+                    if (RotationSettings == RotationType.Angle)
+                    {
+                        RotateX = Transform.Rotate3D.X;
+                        RotateY = Transform.Rotate3D.Y;
+                        RotateZ = Transform.Rotate3D.Z;
+                    }
+                    if (RotationSettings == RotationType.Radian)
+                    {
+                        RotateX = RadianToAngle(Transform.Rotate3D.X);
+                        RotateY = RadianToAngle(Transform.Rotate3D.Y);
+                        RotateZ = RadianToAngle(Transform.Rotate3D.Z);
+                    }
+
+                    Rotate_X.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationX, RotateX));
+                    Rotate_Y.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationY, RotateY));
+                    Rotate_Z.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationZ, RotateZ));
+                }
+                #endregion
+
+                #region Scale
+                public ScaleTransform3D ScaleTransform3D;
+
+                /// <summary>
+                /// 
+                /// </summary>
+                /// <param name="ScaleFactor"></param>
+                /// <param name="Center"></param>
+                public void TSR_Scale3D(double ScaleFactorValue = 2, Point3D? Center = null, bool CenterFlag = false)
+                {
+                    if (CenterFlag == true) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue), Center ?? new Point3D(0, 0, 0));
+                    if (CenterFlag == false) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue));
+                }
+                #endregion
+
+                #region Translate
+                public TranslateTransform3D TranslateTransform3D;
+                public void TSR_Translate3D()
+                {
+                    TranslateTransform3D = new TranslateTransform3D(Transform.Translate3D);
+                }
+                #endregion
+
+                #region Transform
+                public ContentType GetContentType
+                {
+                    get
+                    {
+                        ContentType contentType = new ContentType();
+                        if ((InputMV3D != null && InputM3D == null) == true) contentType = ContentType.ModelVisual3D;
+                        if ((InputMV3D == null && InputM3D != null) == true) contentType = ContentType.Model3D;
+                        return contentType;
+                    }
+                }
+
+                public enum ContentType
+                {
+                    ModelVisual3D,
+                    Model3D
+                }
+
+                public void StartTransform()
+                {
+                    Transform3DCollection T3D_Collection = new Transform3DCollection();
+                    T3D_Collection.Add(ScaleTransform3D);
+                    T3D_Collection.Add(Rotate_X);
+                    T3D_Collection.Add(Rotate_Y);
+                    T3D_Collection.Add(Rotate_Z);
+                    T3D_Collection.Add(TranslateTransform3D);
+
+                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+
+                    if (GetContentType == ContentType.ModelVisual3D)
+                    {
+                        if (IsContent == true) InputMV3D.Content.Transform = T3DGroup;
+                        if (IsContent == false) InputMV3D.Transform = T3DGroup;
+                    }
+                    if (GetContentType == ContentType.Model3D)
+                    {
+                        InputM3D.Transform = T3DGroup;
+                    }
+                }
+
+                public void TestTransform3D()
+                {
+                    TSRSystem3D tSRSystem3D = null;
+                    if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
+                    if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
+                    tSRSystem3D.TSR_Rotate(new RotationCenterSetting(), RotationType.Angle);
+                    tSRSystem3D.TSR_Scale3D();
+                    tSRSystem3D.TSR_Translate3D();
+                    tSRSystem3D.StartTransform();
+                }
+
+                public void TestTransform3D(RotationCenterSetting rotationCenterSetting, RotationType rotationType, double ScaleFactor = 2, Point3D? Center = null, bool CenterFlag = false)
+                {
+                    TSRSystem3D tSRSystem3D = null;
+                    if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
+                    if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
+                    tSRSystem3D.TSR_Rotate(rotationCenterSetting, rotationType);
+                    tSRSystem3D.TSR_Scale3D(ScaleFactor, Center, CenterFlag);
+                    tSRSystem3D.TSR_Translate3D();
+                    tSRSystem3D.StartTransform();
+                }
+                #endregion
             }
 
-            public static void New_TransformSystem3D(Transform transform, TransformSetting transformSetting)
-            {
-                double RotateX = new double();
-                double RotateY = new double();
-                double RotateZ = new double();
 
-                if (transformSetting.IsContent == true)
-                {
-                    if (transformSetting.RotationSetting == RotationSetting.Angle)
-                    {
-                        RotateX = transform.Rotate3D.X;
-                        RotateY = transform.Rotate3D.Y;
-                        RotateZ = transform.Rotate3D.Z;
-                    }
-                    if (transformSetting.RotationSetting == RotationSetting.Radian)
-                    {
-                        RotateX = RadianToAngle(transform.Rotate3D.X);
-                        RotateY = RadianToAngle(transform.Rotate3D.Y);
-                        RotateZ = RadianToAngle(transform.Rotate3D.Z);
-                    }
+            //public enum RotationSetting
+            //{
+            //    Angle,
+            //    Radian
+            //}
 
-                    var Rotate3D_X = new RotateTransform3D();
-                    Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
+            //public class TransformSetting
+            //{
+            //    public bool IsContent { get; set; } = true;
+            //    public ModelVisual3D InputMV3D { get; set; } = null;
+            //    public Model3D InputM3D
+            //    {
+            //        set
+            //        {
+            //            if (InputMV3D == null) this.InputM3D = value;
+            //            if (InputMV3D != null)
+            //            {
+            //                if (IsContent == true) this.InputM3D = InputMV3D.Content;
+            //                if (IsContent == false) this.InputM3D = null; //return
+            //            }
+            //        }
+            //        get
+            //        {
+            //            Model3D model3D = null;
+            //            if (InputMV3D == null) model3D = this.InputM3D;
+            //            if (InputMV3D != null)
+            //            {
+            //                if (IsContent == true) model3D = InputMV3D.Content;
+            //                if (IsContent == false) model3D = null;
+            //            }
 
-                    var Rotate3D_Y = new RotateTransform3D();
-                    Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
+            //            return model3D;
+            //        }
+            //    }
 
-                    var Rotate3D_Z = new RotateTransform3D();
-                    Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+            //    public RotationSetting RotationSetting { get; set; } = RotationSetting.Angle;
 
-                    var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor));
-                    var Translate3D = new TranslateTransform3D(transform.Translate3D);
+            //    public ScaleTransformSetting ScaleTransformSettings { get; set; } = new ScaleTransformSetting();
+            //    public class ScaleTransformSetting
+            //    {
+            //        public Point3D ScaleCenter { get; set; } = new Point3D(0, 0, 0);
+            //        public double Scalefactor { get; set; } = 1;
 
-                    Transform3DCollection T3D_Collection = new Transform3DCollection();
-                    T3D_Collection.Add(Scale3D);
-                    T3D_Collection.Add(Rotate3D_X);
-                    T3D_Collection.Add(Rotate3D_Y);
-                    T3D_Collection.Add(Rotate3D_Z);
-                    T3D_Collection.Add(Translate3D);
+            //        public ScaleTransformSetting()
+            //        {
+            //            ScaleCenter = new Point3D(0, 0, 0);
+            //            Scalefactor = 2;
+            //        }
+            //    }
 
-                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-                    transformSetting.InputM3D.Transform = T3DGroup;
-                }
-                if (transformSetting.IsContent == false)
-                {
-                    if (transformSetting.RotationSetting == RotationSetting.Angle)
-                    {
-                        RotateX = transform.Rotate3D.X;
-                        RotateY = transform.Rotate3D.Y;
-                        RotateZ = transform.Rotate3D.Z;
-                    }
-                    if (transformSetting.RotationSetting == RotationSetting.Radian)
-                    {
-                        RotateX = RadianToAngle(transform.Rotate3D.X);
-                        RotateY = RadianToAngle(transform.Rotate3D.Y);
-                        RotateZ = RadianToAngle(transform.Rotate3D.Z);
-                    }
+            //    public RotationCenterSetting RotationCenterSettings { get; set; } = new RotationCenterSetting();
+            //    public class RotationCenterSetting
+            //    {
+            //        public Vector3D RotationX { get; set; } = new Vector3D(1, 0, 0);
+            //        public Vector3D RotationY { get; set; } = new Vector3D(0, 1, 0);
+            //        public Vector3D RotationZ { get; set; } = new Vector3D(0, 0, 1);
 
-                    //Model3D Model = MV3D.Content;
-                    var Rotate3D_X = new RotateTransform3D();
-                    Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
+            //        public RotationCenterSetting()
+            //        {
+            //            RotationX = new Vector3D(1, 0, 0);
+            //            RotationY = new Vector3D(0, 1, 0);
+            //            RotationZ = new Vector3D(0, 0, 1);
+            //        }
+            //    }
+            //}
 
-                    var Rotate3D_Y = new RotateTransform3D();
-                    Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
+            //public static void New_TransformSystem3D(Transform transform, TransformSetting transformSetting)
+            //{
+            //    double RotateX = new double();
+            //    double RotateY = new double();
+            //    double RotateZ = new double();
 
-                    var Rotate3D_Z = new RotateTransform3D();
-                    Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+            //    if (transformSetting.IsContent == true)
+            //    {
+            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
+            //        {
+            //            RotateX = transform.Rotate3D.X;
+            //            RotateY = transform.Rotate3D.Y;
+            //            RotateZ = transform.Rotate3D.Z;
+            //        }
+            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
+            //        {
+            //            RotateX = RadianToAngle(transform.Rotate3D.X);
+            //            RotateY = RadianToAngle(transform.Rotate3D.Y);
+            //            RotateZ = RadianToAngle(transform.Rotate3D.Z);
+            //        }
 
-                    //CalculateModelCenterPoint(Model)
-                    var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor), transformSetting.ScaleTransformSettings.ScaleCenter);
-                    var Translate3D = new TranslateTransform3D(transform.Translate3D);
+            //        var Rotate3D_X = new RotateTransform3D();
+            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
 
-                    Transform3DCollection T3D_Collection = new Transform3DCollection();
-                    T3D_Collection.Add(Scale3D);
-                    T3D_Collection.Add(Rotate3D_X);
-                    T3D_Collection.Add(Rotate3D_Y);
-                    T3D_Collection.Add(Rotate3D_Z);
-                    T3D_Collection.Add(Translate3D);
+            //        var Rotate3D_Y = new RotateTransform3D();
+            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
 
-                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-                    transformSetting.InputMV3D.Transform = T3DGroup;
-                }
-            }
+            //        var Rotate3D_Z = new RotateTransform3D();
+            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
 
-            public static void New_TransformSystem3D(Transform_Value transform, TransformSetting transformSetting)
-            {
-                double RotateX = new double();
-                double RotateY = new double();
-                double RotateZ = new double();
+            //        var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor));
+            //        var Translate3D = new TranslateTransform3D(transform.Translate3D);
 
-                if (transformSetting.IsContent == true)
-                {
-                    if (transformSetting.RotationSetting == RotationSetting.Angle)
-                    {
-                        RotateX = transform.Rotate_Value.X;
-                        RotateY = transform.Rotate_Value.Y;
-                        RotateZ = transform.Rotate_Value.Z;
-                    }
-                    if (transformSetting.RotationSetting == RotationSetting.Radian)
-                    {
-                        RotateX = RadianToAngle(transform.Rotate_Value.X);
-                        RotateY = RadianToAngle(transform.Rotate_Value.Y);
-                        RotateZ = RadianToAngle(transform.Rotate_Value.Z);
-                    }
+            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
+            //        T3D_Collection.Add(Scale3D);
+            //        T3D_Collection.Add(Rotate3D_X);
+            //        T3D_Collection.Add(Rotate3D_Y);
+            //        T3D_Collection.Add(Rotate3D_Z);
+            //        T3D_Collection.Add(Translate3D);
 
-                    var Rotate3D_X = new RotateTransform3D();
-                    Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
+            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+            //        transformSetting.InputM3D.Transform = T3DGroup;
+            //    }
+            //    if (transformSetting.IsContent == false)
+            //    {
+            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
+            //        {
+            //            RotateX = transform.Rotate3D.X;
+            //            RotateY = transform.Rotate3D.Y;
+            //            RotateZ = transform.Rotate3D.Z;
+            //        }
+            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
+            //        {
+            //            RotateX = RadianToAngle(transform.Rotate3D.X);
+            //            RotateY = RadianToAngle(transform.Rotate3D.Y);
+            //            RotateZ = RadianToAngle(transform.Rotate3D.Z);
+            //        }
 
-                    var Rotate3D_Y = new RotateTransform3D();
-                    Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
+            //        //Model3D Model = MV3D.Content;
+            //        var Rotate3D_X = new RotateTransform3D();
+            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
 
-                    var Rotate3D_Z = new RotateTransform3D();
-                    Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+            //        var Rotate3D_Y = new RotateTransform3D();
+            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
 
-                    var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
-                    var Scale3D = new ScaleTransform3D(Scale);
-                    var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+            //        var Rotate3D_Z = new RotateTransform3D();
+            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
 
-                    Transform3DCollection T3D_Collection = new Transform3DCollection();
-                    T3D_Collection.Add(Scale3D);
-                    T3D_Collection.Add(Rotate3D_X);
-                    T3D_Collection.Add(Rotate3D_Y);
-                    T3D_Collection.Add(Rotate3D_Z);
-                    T3D_Collection.Add(Translate3D);
+            //        //CalculateModelCenterPoint(Model)
+            //        var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor), transformSetting.ScaleTransformSettings.ScaleCenter);
+            //        var Translate3D = new TranslateTransform3D(transform.Translate3D);
 
-                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-                    transformSetting.InputM3D.Transform = T3DGroup;
-                }
-                if (transformSetting.IsContent == false)
-                {
-                    if (transformSetting.RotationSetting == RotationSetting.Angle)
-                    {
-                        RotateX = transform.Rotate_Value.X;
-                        RotateY = transform.Rotate_Value.Y;
-                        RotateZ = transform.Rotate_Value.Z;
-                    }
-                    if (transformSetting.RotationSetting == RotationSetting.Radian)
-                    {
-                        RotateX = RadianToAngle(transform.Rotate_Value.X);
-                        RotateY = RadianToAngle(transform.Rotate_Value.Y);
-                        RotateZ = RadianToAngle(transform.Rotate_Value.Z);
-                    }
+            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
+            //        T3D_Collection.Add(Scale3D);
+            //        T3D_Collection.Add(Rotate3D_X);
+            //        T3D_Collection.Add(Rotate3D_Y);
+            //        T3D_Collection.Add(Rotate3D_Z);
+            //        T3D_Collection.Add(Translate3D);
 
-                    var Rotate3D_X = new RotateTransform3D();
-                    Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
+            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+            //        transformSetting.InputMV3D.Transform = T3DGroup;
+            //    }
+            //}
 
-                    var Rotate3D_Y = new RotateTransform3D();
-                    Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
+            //public static void New_TransformSystem3D(Transform_Value transform, TransformSetting transformSetting)
+            //{
+            //    double RotateX = new double();
+            //    double RotateY = new double();
+            //    double RotateZ = new double();
 
-                    var Rotate3D_Z = new RotateTransform3D();
-                    Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+            //    if (transformSetting.IsContent == true)
+            //    {
+            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
+            //        {
+            //            RotateX = transform.Rotate_Value.X;
+            //            RotateY = transform.Rotate_Value.Y;
+            //            RotateZ = transform.Rotate_Value.Z;
+            //        }
+            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
+            //        {
+            //            RotateX = RadianToAngle(transform.Rotate_Value.X);
+            //            RotateY = RadianToAngle(transform.Rotate_Value.Y);
+            //            RotateZ = RadianToAngle(transform.Rotate_Value.Z);
+            //        }
 
-                    //CalculateModelCenterPoint(Model)
-                    var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
-                    var Scale3D = new ScaleTransform3D(Scale, transformSetting.ScaleTransformSettings.ScaleCenter);
-                    var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+            //        var Rotate3D_X = new RotateTransform3D();
+            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
 
-                    Transform3DCollection T3D_Collection = new Transform3DCollection();
-                    T3D_Collection.Add(Scale3D);
-                    T3D_Collection.Add(Rotate3D_X);
-                    T3D_Collection.Add(Rotate3D_Y);
-                    T3D_Collection.Add(Rotate3D_Z);
-                    T3D_Collection.Add(Translate3D);
+            //        var Rotate3D_Y = new RotateTransform3D();
+            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
 
-                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-                    transformSetting.InputMV3D.Transform = T3DGroup;
-                }
-            }
+            //        var Rotate3D_Z = new RotateTransform3D();
+            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+
+            //        var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
+            //        var Scale3D = new ScaleTransform3D(Scale);
+            //        var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+
+            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
+            //        T3D_Collection.Add(Scale3D);
+            //        T3D_Collection.Add(Rotate3D_X);
+            //        T3D_Collection.Add(Rotate3D_Y);
+            //        T3D_Collection.Add(Rotate3D_Z);
+            //        T3D_Collection.Add(Translate3D);
+
+            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+            //        transformSetting.InputM3D.Transform = T3DGroup;
+            //    }
+            //    if (transformSetting.IsContent == false)
+            //    {
+            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
+            //        {
+            //            RotateX = transform.Rotate_Value.X;
+            //            RotateY = transform.Rotate_Value.Y;
+            //            RotateZ = transform.Rotate_Value.Z;
+            //        }
+            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
+            //        {
+            //            RotateX = RadianToAngle(transform.Rotate_Value.X);
+            //            RotateY = RadianToAngle(transform.Rotate_Value.Y);
+            //            RotateZ = RadianToAngle(transform.Rotate_Value.Z);
+            //        }
+
+            //        var Rotate3D_X = new RotateTransform3D();
+            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
+
+            //        var Rotate3D_Y = new RotateTransform3D();
+            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
+
+            //        var Rotate3D_Z = new RotateTransform3D();
+            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
+
+            //        //CalculateModelCenterPoint(Model)
+            //        var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
+            //        var Scale3D = new ScaleTransform3D(Scale, transformSetting.ScaleTransformSettings.ScaleCenter);
+            //        var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
+
+            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
+            //        T3D_Collection.Add(Scale3D);
+            //        T3D_Collection.Add(Rotate3D_X);
+            //        T3D_Collection.Add(Rotate3D_Y);
+            //        T3D_Collection.Add(Rotate3D_Z);
+            //        T3D_Collection.Add(Translate3D);
+
+            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+            //        transformSetting.InputMV3D.Transform = T3DGroup;
+            //    }
+            //}
         }
 
         public class Line3DSystem : TSRSystem
@@ -1779,9 +1890,12 @@ namespace MK7_KMP_Editor_For_PG_
                     Translate3D = new Vector3D(0, -0.1, 0)
                 };
 
-                HTK_3DES.TSRSystem.TransformSetting transformSetting = new TSRSystem.TransformSetting { InputMV3D = arrowVisual3D };
+                HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new TSRSystem.TSRSystem3D(arrowVisual3D, transform);
+                tSRSystem3D.TestTransform3D();
 
-                HTK_3DES.TSRSystem.New_TransformSystem3D(transform, transformSetting);
+                //HTK_3DES.TSRSystem.TransformSetting transformSetting = new TSRSystem.TransformSetting { InputMV3D = arrowVisual3D };
+
+                //HTK_3DES.TSRSystem.New_TransformSystem3D(transform, transformSetting);
 
                 //HTK_3DES.TransformMV3D.Transform_MV3D(transform, arrowVisual3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
 

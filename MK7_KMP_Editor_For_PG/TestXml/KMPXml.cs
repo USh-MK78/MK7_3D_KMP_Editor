@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace MK7_KMP_Editor_For_PG_.TestXml
 {
@@ -29,6 +31,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Rotation")]
@@ -43,6 +50,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlAttribute("Player_Index")]
@@ -61,105 +73,111 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public List<EnemyRoute_Group> Groups { get; set; }
             public class EnemyRoute_Group
             {
-                #region Prev
-                [System.Xml.Serialization.XmlAttribute("Prev0")]
-                public ushort Prev0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Previous")]
+                public Previous PreviousRouteID { get; set; }
+                public class Previous
+                {
+                    [System.Xml.Serialization.XmlAttribute("Prev0")]
+                    public ushort Prev0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev1")]
-                public ushort Prev1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev1")]
+                    public ushort Prev1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev2")]
-                public ushort Prev2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev2")]
+                    public ushort Prev2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev3")]
-                public ushort Prev3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev3")]
+                    public ushort Prev3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev4")]
-                public ushort Prev4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev4")]
+                    public ushort Prev4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev5")]
-                public ushort Prev5 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev5")]
+                    public ushort Prev5 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev6")]
-                public ushort Prev6 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev6")]
+                    public ushort Prev6 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev7")]
-                public ushort Prev7 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev7")]
+                    public ushort Prev7 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev8")]
-                public ushort Prev8 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev8")]
+                    public ushort Prev8 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev9")]
-                public ushort Prev9 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev9")]
+                    public ushort Prev9 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev10")]
-                public ushort Prev10 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev10")]
+                    public ushort Prev10 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev11")]
-                public ushort Prev11 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev11")]
+                    public ushort Prev11 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev12")]
-                public ushort Prev12 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev12")]
+                    public ushort Prev12 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev13")]
-                public ushort Prev13 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev13")]
+                    public ushort Prev13 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev14")]
-                public ushort Prev14 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev14")]
+                    public ushort Prev14 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev15")]
-                public ushort Prev15 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Prev15")]
+                    public ushort Prev15 { get; set; }
+                }
 
-                #region Next
-                [System.Xml.Serialization.XmlAttribute("Next0")]
-                public ushort Next0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Next")]
+                public Next NextRouteID { get; set; }
+                public class Next
+                {
+                    [System.Xml.Serialization.XmlAttribute("Next0")]
+                    public ushort Next0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next1")]
-                public ushort Next1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next1")]
+                    public ushort Next1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next2")]
-                public ushort Next2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next2")]
+                    public ushort Next2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next3")]
-                public ushort Next3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next3")]
+                    public ushort Next3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next4")]
-                public ushort Next4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next4")]
+                    public ushort Next4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next5")]
-                public ushort Next5 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next5")]
+                    public ushort Next5 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next6")]
-                public ushort Next6 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next6")]
+                    public ushort Next6 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next7")]
-                public ushort Next7 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next7")]
+                    public ushort Next7 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next8")]
-                public ushort Next8 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next8")]
+                    public ushort Next8 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next9")]
-                public ushort Next9 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next9")]
+                    public ushort Next9 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next10")]
-                public ushort Next10 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next10")]
+                    public ushort Next10 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next11")]
-                public ushort Next11 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next11")]
+                    public ushort Next11 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next12")]
-                public ushort Next12 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next12")]
+                    public ushort Next12 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next13")]
-                public ushort Next13 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next13")]
+                    public ushort Next13 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next14")]
-                public ushort Next14 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next14")]
+                    public ushort Next14 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next15")]
-                public ushort Next15 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Next15")]
+                    public ushort Next15 { get; set; }
+                }
 
                 [System.Xml.Serialization.XmlAttribute("Unknown1")]
                 public uint Unknown1 { get; set; }
@@ -180,6 +198,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Z")]
                         public float Z { get; set; }
+
+                        public Vector3D ToVector3D()
+                        {
+                            return new Vector3D(X, Y, Z);
+                        }
                     }
 
                     [System.Xml.Serialization.XmlAttribute("MushSetting")]
@@ -211,45 +234,51 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public List<ItemRoute_Group> Groups { get; set; }
             public class ItemRoute_Group
             {
-                #region Prev
-                [System.Xml.Serialization.XmlAttribute("Prev0")]
-                public ushort Prev0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Previous")]
+                public Previous PreviousRouteID { get; set; }
+                public class Previous
+                {
+                    [System.Xml.Serialization.XmlAttribute("Prev0")]
+                    public ushort Prev0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev1")]
-                public ushort Prev1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev1")]
+                    public ushort Prev1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev2")]
-                public ushort Prev2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev2")]
+                    public ushort Prev2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev3")]
-                public ushort Prev3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev3")]
+                    public ushort Prev3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev4")]
-                public ushort Prev4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev4")]
+                    public ushort Prev4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev5")]
-                public ushort Prev5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Prev5")]
+                    public ushort Prev5 { get; set; }
+                }
 
-                #region Next
-                [System.Xml.Serialization.XmlAttribute("Next0")]
-                public ushort Next0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Next")]
+                public Next NextRouteID { get; set; }
+                public class Next
+                {
+                    [System.Xml.Serialization.XmlAttribute("Next0")]
+                    public ushort Next0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next1")]
-                public ushort Next1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next1")]
+                    public ushort Next1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next2")]
-                public ushort Next2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next2")]
+                    public ushort Next2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next3")]
-                public ushort Next3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next3")]
+                    public ushort Next3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next4")]
-                public ushort Next4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next4")]
+                    public ushort Next4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next5")]
-                public ushort Next5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Next5")]
+                    public ushort Next5 { get; set; }
+                }
 
                 [System.Xml.Serialization.XmlElement("Point")]
                 public List<ItemRoute_Point> Points { get; set; }
@@ -267,6 +296,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Z")]
                         public float Z { get; set; }
+
+                        public Vector3D ToVector3D()
+                        {
+                            return new Vector3D(X, Y, Z);
+                        }
                     }
 
                     [System.Xml.Serialization.XmlAttribute("GravityMode")]
@@ -289,45 +323,51 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public List<Checkpoint_Group> Groups { get; set; }
             public class Checkpoint_Group
             {
-                #region Prev
-                [System.Xml.Serialization.XmlAttribute("Prev0")]
-                public byte Prev0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Previous")]
+                public Previous PreviousRouteID { get; set; }
+                public class Previous
+                {
+                    [System.Xml.Serialization.XmlAttribute("Prev0")]
+                    public byte Prev0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev1")]
-                public byte Prev1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev1")]
+                    public byte Prev1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev2")]
-                public byte Prev2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev2")]
+                    public byte Prev2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev3")]
-                public byte Prev3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev3")]
+                    public byte Prev3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev4")]
-                public byte Prev4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev4")]
+                    public byte Prev4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev5")]
-                public byte Prev5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Prev5")]
+                    public byte Prev5 { get; set; }
+                }
 
-                #region Next
-                [System.Xml.Serialization.XmlAttribute("Next0")]
-                public byte Next0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Next")]
+                public Next NextRouteID { get; set; }
+                public class Next
+                {
+                    [System.Xml.Serialization.XmlAttribute("Next0")]
+                    public byte Next0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next1")]
-                public byte Next1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next1")]
+                    public byte Next1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next2")]
-                public byte Next2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next2")]
+                    public byte Next2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next3")]
-                public byte Next3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next3")]
+                    public byte Next3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next4")]
-                public byte Next4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next4")]
+                    public byte Next4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next5")]
-                public byte Next5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Next5")]
+                    public byte Next5 { get; set; }
+                }
 
                 [System.Xml.Serialization.XmlAttribute("UnkBytes1")]
                 public ushort UnkBytes1 { get; set; }
@@ -345,6 +385,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Y")]
                         public float Y { get; set; }
+
+                        public Vector2 ToVector2()
+                        {
+                            return new Vector2(X, Y);
+                        }
                     }
 
                     [System.Xml.Serialization.XmlElement("Position2DRight")]
@@ -356,6 +401,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Y")]
                         public float Y { get; set; }
+
+                        public Vector2 ToVector2()
+                        {
+                            return new Vector2(X, Y);
+                        }
                     }
 
                     [System.Xml.Serialization.XmlAttribute("RespawnID")]
@@ -370,11 +420,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                     [System.Xml.Serialization.XmlAttribute("NextCheckPoint")]
                     public byte NextCheckPoint { get; set; }
 
-                    [System.Xml.Serialization.XmlAttribute("UnkBytes1")]
-                    public byte UnkBytes1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("ClipID")]
+                    public byte ClipID { get; set; }
 
-                    [System.Xml.Serialization.XmlAttribute("UnkBytes2")]
-                    public byte UnkBytes2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Section")]
+                    public byte Section { get; set; }
 
                     [System.Xml.Serialization.XmlAttribute("UnkBytes3")]
                     public byte UnkBytes3 { get; set; }
@@ -405,6 +455,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Rotation")]
@@ -419,6 +474,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Scale")]
@@ -433,6 +493,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("SpecificSetting")]
@@ -492,11 +557,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public List<Route_Group> Groups { get; set; }
             public class Route_Group
             {
-                [System.Xml.Serialization.XmlAttribute("RouteSetting1")]
-                public byte RouteSetting1 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("Roop")]
+                public byte RoopSetting { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("RouteSetting2")]
-                public byte RouteSetting2 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("Smooth")]
+                public byte SmoothSetting { get; set; }
 
                 [System.Xml.Serialization.XmlElement("Point")]
                 public List<Route_Point> Points { get; set; }
@@ -520,6 +585,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlAttribute("Z")]
                         public float Z { get; set; }
+
+                        public Vector3D ToVector3D()
+                        {
+                            return new Vector3D(X, Y, Z);
+                        }
                     }
                 }
             }
@@ -545,11 +615,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 [System.Xml.Serialization.XmlAttribute("Priority")]
                 public byte Priority { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkByte1")]
-                public ushort UnkByte1 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("Setting1")]
+                public ushort Setting1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkByte2")]
-                public ushort UnkByte2 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("Setting2")]
+                public ushort Setting2 { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("RouteID")]
                 public byte RouteID { get; set; }
@@ -572,6 +642,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Rotation")]
@@ -586,6 +661,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Scale")]
@@ -600,6 +680,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
             }
         }
@@ -618,17 +703,17 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 [System.Xml.Serialization.XmlAttribute("NextCameraIndex")]
                 public byte NextCameraIndex { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkBytes1")]
-                public byte UnkBytes1 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("NextVideoIndex")]
+                public byte NextVideoIndex { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("Route_CameraIndex")]
                 public byte Route_CameraIndex { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkBytes2")]
-                public byte UnkBytes2 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("StartFlag")]
+                public byte StartFlag { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkBytes3")]
-                public byte UnkBytes3 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("VideoFlag")]
+                public byte VideoFlag { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("CameraActiveTime")]
                 public float CameraActiveTime { get; set; }
@@ -659,6 +744,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Rotation")]
@@ -673,6 +763,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("FOVAngle")]
@@ -698,6 +793,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("ViewpointDestination")]
@@ -712,6 +812,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
             }
         }
@@ -742,6 +847,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
 
                 [System.Xml.Serialization.XmlElement("Rotation")]
@@ -756,6 +866,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                     [System.Xml.Serialization.XmlAttribute("Z")]
                     public float Z { get; set; }
+
+                    public Vector3D ToVector3D()
+                    {
+                        return new Vector3D(X, Y, Z);
+                    }
                 }
             }
         }
@@ -808,45 +923,51 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public List<GlideRoute_Group> Groups { get; set; }
             public class GlideRoute_Group
             {
-                #region Prev
-                [System.Xml.Serialization.XmlAttribute("Prev0")]
-                public byte Prev0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Previous")]
+                public Previous PreviousRouteID { get; set; }
+                public class Previous
+                {
+                    [System.Xml.Serialization.XmlAttribute("Prev0")]
+                    public byte Prev0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev1")]
-                public byte Prev1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev1")]
+                    public byte Prev1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev2")]
-                public byte Prev2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev2")]
+                    public byte Prev2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev3")]
-                public byte Prev3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev3")]
+                    public byte Prev3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev4")]
-                public byte Prev4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Prev4")]
+                    public byte Prev4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Prev5")]
-                public byte Prev5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Prev5")]
+                    public byte Prev5 { get; set; }
+                }
 
-                #region Next
-                [System.Xml.Serialization.XmlAttribute("Next0")]
-                public byte Next0 { get; set; }
+                [System.Xml.Serialization.XmlElement("Next")]
+                public Next NextRouteID { get; set; }
+                public class Next
+                {
+                    [System.Xml.Serialization.XmlAttribute("Next0")]
+                    public byte Next0 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next1")]
-                public byte Next1 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next1")]
+                    public byte Next1 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next2")]
-                public byte Next2 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next2")]
+                    public byte Next2 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next3")]
-                public byte Next3 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next3")]
+                    public byte Next3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next4")]
-                public byte Next4 { get; set; }
+                    [System.Xml.Serialization.XmlAttribute("Next4")]
+                    public byte Next4 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Next5")]
-                public byte Next5 { get; set; }
-                #endregion
+                    [System.Xml.Serialization.XmlAttribute("Next5")]
+                    public byte Next5 { get; set; }
+                }
 
                 [System.Xml.Serialization.XmlAttribute("RouteSetting")]
                 public uint RouteSetting { get; set; }
@@ -879,6 +1000,11 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
 
                         [System.Xml.Serialization.XmlElement("Z")]
                         public float Z { get; set; }
+
+                        public Vector3D ToVector3D()
+                        {
+                            return new Vector3D(X, Y, Z);
+                        }
                     }
                 }
             }

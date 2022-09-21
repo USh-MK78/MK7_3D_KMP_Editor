@@ -65,6 +65,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Position(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -119,6 +126,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Rotation(Vector3D vector3D)
+                    {
+                        _X = HTK_3DES.TSRSystem.RadianToAngle(vector3D.X);
+                        _Y = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Y);
+                        _Z = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Z);
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -137,10 +151,52 @@ namespace MK7_KMP_Editor_For_PG_
                 public ushort Player_Index { get; set; }
                 public ushort TPTK_UnkBytes { get; set; }
 
+                public TPTKValue(Vector3D Pos, int InputID)
+                {
+                    ID = InputID;
+                    Position_Value = new Position(Pos);
+                    Rotate_Value = new Rotation();
+                    Player_Index = 0;
+                    TPTK_UnkBytes = 0;
+                }
+
+                public TPTKValue(KMPs.KMPFormat.KMPSection.TPTK_Section.TPTKValue tPTKValue, int InputID)
+                {
+                    ID = InputID;
+                    Position_Value = new Position(tPTKValue.TPTK_Position);
+                    Rotate_Value = new Rotation(tPTKValue.TPTK_Rotation);
+                    Player_Index = tPTKValue.Player_Index;
+                    TPTK_UnkBytes = tPTKValue.TPTK_UnkBytes;
+                }
+
+                public TPTKValue(TestXml.KMPXml.StartPosition.StartPosition_Value startPosition_Value, int InputID)
+                {
+                    ID = InputID;
+                    Position_Value = new Position(startPosition_Value.Position.ToVector3D());
+                    Rotate_Value = new Rotation(startPosition_Value.Rotation.ToVector3D());
+                    Player_Index = startPosition_Value.Player_Index;
+                    TPTK_UnkBytes = startPosition_Value.TPTK_UnkBytes;
+                }
+
                 public override string ToString()
                 {
                     return "Kart Point " + ID;
                 }
+            }
+
+            public TPTK_Section()
+            {
+                TPTKValueList = new List<TPTKValue>();
+            }
+
+            public TPTK_Section(KMPs.KMPFormat.KMPSection.TPTK_Section tPTK_Section)
+            {
+                for (int i = 0; i < tPTK_Section.NumOfEntries; i++) TPTKValueList.Add(new TPTKValue(tPTK_Section.TPTKValue_List[i], i));
+            }
+
+            public TPTK_Section(TestXml.KMPXml.StartPosition startPosition)
+            {
+                for (int i = 0; i < startPosition.startPosition_Value.Count; i++) TPTKValueList.Add(new TPTKValue(startPosition.startPosition_Value[i], i));
             }
         }
 
@@ -196,6 +252,46 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev15 = 65535;
                     }
 
+                    public HPNE_PreviewGroups(KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_PreviewGroups HPNE_PreviewGroup)
+                    {
+                        Prev0 = HPNE_PreviewGroup.Prev0;
+                        Prev1 = HPNE_PreviewGroup.Prev1;
+                        Prev2 = HPNE_PreviewGroup.Prev2;
+                        Prev3 = HPNE_PreviewGroup.Prev3;
+                        Prev4 = HPNE_PreviewGroup.Prev4;
+                        Prev5 = HPNE_PreviewGroup.Prev5;
+                        Prev6 = HPNE_PreviewGroup.Prev6;
+                        Prev7 = HPNE_PreviewGroup.Prev7;
+                        Prev8 = HPNE_PreviewGroup.Prev8;
+                        Prev9 = HPNE_PreviewGroup.Prev9;
+                        Prev10 = HPNE_PreviewGroup.Prev10;
+                        Prev11 = HPNE_PreviewGroup.Prev11;
+                        Prev12 = HPNE_PreviewGroup.Prev12;
+                        Prev13 = HPNE_PreviewGroup.Prev13;
+                        Prev14 = HPNE_PreviewGroup.Prev14;
+                        Prev15 = HPNE_PreviewGroup.Prev15;
+                    }
+
+                    public HPNE_PreviewGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous previous)
+                    {
+                        Prev0 = previous.Prev0;
+                        Prev1 = previous.Prev1;
+                        Prev2 = previous.Prev2;
+                        Prev3 = previous.Prev3;
+                        Prev4 = previous.Prev4;
+                        Prev5 = previous.Prev5;
+                        Prev6 = previous.Prev6;
+                        Prev7 = previous.Prev7;
+                        Prev8 = previous.Prev8;
+                        Prev9 = previous.Prev9;
+                        Prev10 = previous.Prev10;
+                        Prev11 = previous.Prev11;
+                        Prev12 = previous.Prev12;
+                        Prev13 = previous.Prev13;
+                        Prev14 = previous.Prev14;
+                        Prev15 = previous.Prev15;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -241,6 +337,46 @@ namespace MK7_KMP_Editor_For_PG_
                         Next13 = 65535;
                         Next14 = 65535;
                         Next15 = 65535;
+                    }
+
+                    public HPNE_NextGroups(KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue.HPNE_NextGroups HPNE_NextGroup)
+                    {
+                        Next0 = HPNE_NextGroup.Next0;
+                        Next1 = HPNE_NextGroup.Next1;
+                        Next2 = HPNE_NextGroup.Next2;
+                        Next3 = HPNE_NextGroup.Next3;
+                        Next4 = HPNE_NextGroup.Next4;
+                        Next5 = HPNE_NextGroup.Next5;
+                        Next6 = HPNE_NextGroup.Next6;
+                        Next7 = HPNE_NextGroup.Next7;
+                        Next8 = HPNE_NextGroup.Next8;
+                        Next9 = HPNE_NextGroup.Next9;
+                        Next10 = HPNE_NextGroup.Next10;
+                        Next11 = HPNE_NextGroup.Next11;
+                        Next12 = HPNE_NextGroup.Next12;
+                        Next13 = HPNE_NextGroup.Next13;
+                        Next14 = HPNE_NextGroup.Next14;
+                        Next15 = HPNE_NextGroup.Next15;
+                    }
+
+                    public HPNE_NextGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next next)
+                    {
+                        Next0 = next.Next0;
+                        Next1 = next.Next1;
+                        Next2 = next.Next2;
+                        Next3 = next.Next3;
+                        Next4 = next.Next4;
+                        Next5 = next.Next5;
+                        Next6 = next.Next6;
+                        Next7 = next.Next7;
+                        Next8 = next.Next8;
+                        Next9 = next.Next9;
+                        Next10 = next.Next10;
+                        Next11 = next.Next11;
+                        Next12 = next.Next12;
+                        Next13 = next.Next13;
+                        Next14 = next.Next14;
+                        Next15 = next.Next15;
                     }
 
                     public override string ToString()
@@ -300,6 +436,13 @@ namespace MK7_KMP_Editor_For_PG_
                             _X = X;
                             _Y = Y;
                             _Z = Z;
+                        }
+
+                        public Position(Vector3D vector3D)
+                        {
+                            _X = (float)vector3D.X;
+                            _Y = (float)vector3D.Y;
+                            _Z = (float)vector3D.Z;
                         }
 
                         public Vector3D GetVector3D()
@@ -502,15 +645,144 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
+                    public TPNEValue(Vector3D Pos, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(Pos);
+                        Control = 1;
+                        MushSettings.MushSettingValue = 0;
+                        DriftSettings.DriftSettingValue = 0;
+                        FlagSettings.Flags = 0x00;
+                        PathFindOptions.PathFindOptionValue = 0;
+                        MaxSearchYOffset.MaxSearchYOffsetValue = 0;
+                    }
+
+                    public TPNEValue(KMPs.KMPFormat.KMPSection.TPNE_Section.TPNEValue TPNEValue, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(TPNEValue.TPNE_Position);
+                        Control = TPNEValue.Control;
+                        MushSettings.MushSettingValue = TPNEValue.MushSetting;
+                        DriftSettings.DriftSettingValue = TPNEValue.DriftSetting;
+                        FlagSettings.Flags = TPNEValue.Flags;
+                        PathFindOptions.PathFindOptionValue = TPNEValue.PathFindOption;
+                        MaxSearchYOffset.MaxSearchYOffsetValue = TPNEValue.MaxSearchYOffset;
+                    }
+
+                    public TPNEValue(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.EnemyRoute_Point enemyRoute_Point, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(enemyRoute_Point.Position.ToVector3D());
+                        Control = enemyRoute_Point.Control;
+                        MushSettings.MushSettingValue = enemyRoute_Point.MushSetting;
+                        DriftSettings.DriftSettingValue = enemyRoute_Point.DriftSetting;
+                        FlagSettings.Flags = enemyRoute_Point.Flags;
+                        PathFindOptions.PathFindOptionValue = enemyRoute_Point.PathFindOption;
+                        MaxSearchYOffset.MaxSearchYOffsetValue = enemyRoute_Point.MaxSearchYOffset;
+                    }
+
+                    public TPNEValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(pointData.Position.ToVector3D());
+                        Control = pointData.ScaleValue;
+                        MushSettings.MushSettingValue = 0;
+                        DriftSettings.DriftSettingValue = 0;
+                        FlagSettings.Flags = 0;
+                        PathFindOptions.PathFindOptionValue = 0;
+                        MaxSearchYOffset.MaxSearchYOffsetValue = 0;
+                    }
+
                     public override string ToString()
                     {
                         return "EnemyRoute Point " + ID;
                     }
                 }
 
+                public HPNEValue(int InputID)
+                {
+                    GroupID = InputID;
+                    HPNENextGroups = new HPNE_NextGroups();
+                    HPNEPreviewGroups = new HPNE_PreviewGroups();
+                    HPNE_UnkBytes1 = 65535;
+                    TPNEValueList = new List<TPNEValue>();
+                }
+
+                public HPNEValue(KMPs.KMPFormat.KMPSection.HPNE_Section.HPNEValue HPNEValue, KMPs.KMPFormat.KMPSection.TPNE_Section TPNE, int InputID)
+                {
+                    GroupID = InputID;
+                    HPNEPreviewGroups = new HPNE_PreviewGroups(HPNEValue.HPNE_PreviewGroup);
+                    HPNENextGroups = new HPNE_NextGroups(HPNEValue.HPNE_NextGroup);
+                    HPNE_UnkBytes1 = HPNEValue.HPNE_UnkBytes1;
+                    
+                    for (int i = 0; i < HPNEValue.HPNE_Length; i++)
+                    {
+                        TPNEValueList.Add(new TPNEValue(TPNE.TPNEValue_List[i + HPNEValue.HPNE_StartPoint], InputID, i));
+                    }
+                }
+
+                public HPNEValue(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group enemyRoute_Group, int InputID)
+                {
+                    GroupID = InputID;
+                    HPNEPreviewGroups = new HPNE_PreviewGroups(enemyRoute_Group.PreviousRouteID);
+                    HPNENextGroups = new HPNE_NextGroups(enemyRoute_Group.NextRouteID);
+                    HPNE_UnkBytes1 = enemyRoute_Group.Unknown1;
+
+                    for (int i = 0; i < enemyRoute_Group.Points.Count; i++)
+                    {
+                        TPNEValueList.Add(new TPNEValue(enemyRoute_Group.Points[i], InputID, i));
+                    }
+                }
+
+                public HPNEValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData groupData, int InputID)
+                {
+                    GroupID = InputID;
+                    HPNEPreviewGroups = new HPNE_PreviewGroups();
+                    HPNENextGroups = new HPNE_NextGroups();
+                    HPNE_UnkBytes1 = 65535;
+
+                    for (int i = 0; i < groupData.Points.Count; i++)
+                    {
+                        TPNEValueList.Add(new TPNEValue(groupData.Points[i], InputID, i));
+                    }
+                }
+
                 public override string ToString()
                 {
                     return "Enemy Route " + GroupID;
+                }
+            }
+
+            public HPNE_TPNE_Section()
+            {
+                HPNEValueList = new List<HPNEValue>();
+            }
+
+            public HPNE_TPNE_Section(KMPs.KMPFormat.KMPSection.HPNE_Section HPNE, KMPs.KMPFormat.KMPSection.TPNE_Section TPNE)
+            {
+                for (int i = 0; i < HPNE.NumOfEntries; i++)
+                {
+                    HPNEValueList.Add(new HPNEValue(HPNE.HPNEValue_List[i], TPNE, i));
+                }
+            }
+
+            public HPNE_TPNE_Section(TestXml.KMPXml.EnemyRoute enemyRoute)
+            {
+                for (int i = 0; i < enemyRoute.Groups.Count; i++)
+                {
+                    HPNEValueList.Add(new HPNEValue(enemyRoute.Groups[i], i));
+                }
+            }
+
+            public HPNE_TPNE_Section(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
+            {
+                for (int i = 0; i < xXXXRoute.Groups.Count; i++)
+                {
+                    HPNEValueList.Add(new HPNEValue(xXXXRoute.Groups[i], i));
                 }
             }
         }
@@ -547,6 +819,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = 65535;
                     }
 
+                    public HPTI_PreviewGroups(KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_PreviewGroups HPTI_PreviewGroup)
+                    {
+                        Prev0 = HPTI_PreviewGroup.Prev0;
+                        Prev1 = HPTI_PreviewGroup.Prev1;
+                        Prev2 = HPTI_PreviewGroup.Prev2;
+                        Prev3 = HPTI_PreviewGroup.Prev3;
+                        Prev4 = HPTI_PreviewGroup.Prev4;
+                        Prev5 = HPTI_PreviewGroup.Prev5;
+                    }
+
+                    public HPTI_PreviewGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous previous)
+                    {
+                        Prev0 = previous.Prev0;
+                        Prev1 = previous.Prev1;
+                        Prev2 = previous.Prev2;
+                        Prev3 = previous.Prev3;
+                        Prev4 = previous.Prev4;
+                        Prev5 = previous.Prev5;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -572,6 +864,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Next3 = 65535;
                         Next4 = 65535;
                         Next5 = 65535;
+                    }
+
+                    public HPTI_NextGroups(KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue.HPTI_NextGroups HPTI_NextGroup)
+                    {
+                        Next0 = HPTI_NextGroup.Next0;
+                        Next1 = HPTI_NextGroup.Next1;
+                        Next2 = HPTI_NextGroup.Next2;
+                        Next3 = HPTI_NextGroup.Next3;
+                        Next4 = HPTI_NextGroup.Next4;
+                        Next5 = HPTI_NextGroup.Next5;
+                    }
+
+                    public HPTI_NextGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next next)
+                    {
+                        Next0 = next.Next0;
+                        Next1 = next.Next1;
+                        Next2 = next.Next2;
+                        Next3 = next.Next3;
+                        Next4 = next.Next4;
+                        Next5 = next.Next5;
                     }
 
                     public override string ToString()
@@ -631,6 +943,13 @@ namespace MK7_KMP_Editor_For_PG_
                             _Z = Z;
                         }
 
+                        public TPTI_Position(Vector3D vector3D)
+                        {
+                            _X = (float)vector3D.X;
+                            _Y = (float)vector3D.Y;
+                            _Z = (float)vector3D.Z;
+                        }
+
                         public Vector3D GetVector3D()
                         {
                             double X = Convert.ToDouble(_X);
@@ -684,15 +1003,128 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
+                    public TPTIValue(Vector3D Pos, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        TPTI_Positions = new TPTI_Position(Pos);
+                        TPTI_PointSize = 1;
+                        GravityModeSettings.GravityModeValue = 0;
+                        PlayerScanRadiusSettings.PlayerScanRadiusValue = 0;
+                    }
+
+                    public TPTIValue(KMPs.KMPFormat.KMPSection.TPTI_Section.TPTIValue TPTIValue, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        TPTI_Positions = new TPTI_Position(TPTIValue.TPTI_Position);
+                        TPTI_PointSize = TPTIValue.TPTI_PointSize;
+                        GravityModeSettings.GravityModeValue = TPTIValue.GravityMode;
+                        PlayerScanRadiusSettings.PlayerScanRadiusValue = TPTIValue.PlayerScanRadius;
+                    }
+
+                    public TPTIValue(TestXml.KMPXml.ItemRoute.ItemRoute_Group.ItemRoute_Point itemRoute_Point, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        TPTI_Positions = new TPTI_Position(itemRoute_Point.Position.ToVector3D());
+                        TPTI_PointSize = itemRoute_Point.PointSize;
+                        GravityModeSettings.GravityModeValue = itemRoute_Point.GravityMode;
+                        PlayerScanRadiusSettings.PlayerScanRadiusValue = itemRoute_Point.PlayerScanRadius;
+                    }
+
+                    public TPTIValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        TPTI_Positions = new TPTI_Position(pointData.Position.ToVector3D());
+                        TPTI_PointSize = pointData.ScaleValue;
+                        GravityModeSettings.GravityModeValue = 0;
+                        PlayerScanRadiusSettings.PlayerScanRadiusValue = 0;
+                    }
+
                     public override string ToString()
                     {
                         return "ItemRoute Point " + ID;
                     }
                 }
 
+                public HPTIValue(int InputID)
+                {
+                    GroupID = InputID;
+                    HPTI_PreviewGroup = new HPTI_PreviewGroups();
+                    HPTI_NextGroup = new HPTI_NextGroups();
+                    TPTIValueList = new List<TPTIValue>();
+                }
+
+                public HPTIValue(KMPs.KMPFormat.KMPSection.HPTI_Section.HPTIValue HPTIValue, KMPs.KMPFormat.KMPSection.TPTI_Section TPTI, int InputID)
+                {
+                    GroupID = InputID;
+                    HPTI_PreviewGroup = new HPTI_PreviewGroups(HPTIValue.HPTI_PreviewGroup);
+                    HPTI_NextGroup = new HPTI_NextGroups(HPTIValue.HPTI_NextGroup);
+
+                    for (int i = 0; i < HPTIValue.HPTI_Length; i++)
+                    {
+                        TPTIValueList.Add(new TPTIValue(TPTI.TPTIValue_List[i + HPTIValue.HPTI_StartPoint], InputID, i));
+                    }
+                }
+
+                public HPTIValue(TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group, int InputID)
+                {
+                    GroupID = InputID;
+                    HPTI_PreviewGroup = new HPTI_PreviewGroups(itemRoute_Group.PreviousRouteID);
+                    HPTI_NextGroup = new HPTI_NextGroups(itemRoute_Group.NextRouteID);
+
+                    for (int i = 0; i < itemRoute_Group.Points.Count; i++)
+                    {
+                        TPTIValueList.Add(new TPTIValue(itemRoute_Group.Points[i], InputID, i));
+                    }
+                }
+
+                public HPTIValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData groupData, int InputID)
+                {
+                    GroupID = InputID;
+                    HPTI_PreviewGroup = new HPTI_PreviewGroups();
+                    HPTI_NextGroup = new HPTI_NextGroups();
+
+                    for (int i = 0; i < groupData.Points.Count; i++)
+                    {
+                        TPTIValueList.Add(new TPTIValue(groupData.Points[i], InputID, i));
+                    }
+                }
+
                 public override string ToString()
                 {
                     return "ItemRoute " + GroupID;
+                }
+            }
+
+            public HPTI_TPTI_Section()
+            {
+                HPTIValueList = new List<HPTIValue>();
+            }
+
+            public HPTI_TPTI_Section(KMPs.KMPFormat.KMPSection.HPTI_Section HPTI, KMPs.KMPFormat.KMPSection.TPTI_Section TPTI)
+            {
+                for (int i = 0; i < HPTI.NumOfEntries; i++)
+                {
+                    HPTIValueList.Add(new HPTIValue(HPTI.HPTIValue_List[i], TPTI, i));
+                }
+            }
+
+            public HPTI_TPTI_Section(TestXml.KMPXml.ItemRoute itemRoute)
+            {
+                for (int i = 0; i < itemRoute.Groups.Count; i++)
+                {
+                    HPTIValueList.Add(new HPTIValue(itemRoute.Groups[i], i));
+                }
+            }
+
+            public HPTI_TPTI_Section(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
+            {
+                for (int i = 0; i < xXXXRoute.Groups.Count; i++)
+                {
+                    HPTIValueList.Add(new HPTIValue(xXXXRoute.Groups[i], i));
                 }
             }
         }
@@ -729,6 +1161,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = 255;
                     }
 
+                    public HPKC_PreviewGroups(KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_PreviewGroups HPKC_PreviewGroup)
+                    {
+                        Prev0 = HPKC_PreviewGroup.Prev0;
+                        Prev1 = HPKC_PreviewGroup.Prev1;
+                        Prev2 = HPKC_PreviewGroup.Prev2;
+                        Prev3 = HPKC_PreviewGroup.Prev3;
+                        Prev4 = HPKC_PreviewGroup.Prev4;
+                        Prev5 = HPKC_PreviewGroup.Prev5;
+                    }
+
+                    public HPKC_PreviewGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous previous)
+                    {
+                        Prev0 = previous.Prev0;
+                        Prev1 = previous.Prev1;
+                        Prev2 = previous.Prev2;
+                        Prev3 = previous.Prev3;
+                        Prev4 = previous.Prev4;
+                        Prev5 = previous.Prev5;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -754,6 +1206,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Next3 = 255;
                         Next4 = 255;
                         Next5 = 255;
+                    }
+
+                    public HPKC_NextGroups(KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue.HPKC_NextGroups HPKC_NextGroup)
+                    {
+                        Next0 = HPKC_NextGroup.Next0;
+                        Next1 = HPKC_NextGroup.Next1;
+                        Next2 = HPKC_NextGroup.Next2;
+                        Next3 = HPKC_NextGroup.Next3;
+                        Next4 = HPKC_NextGroup.Next4;
+                        Next5 = HPKC_NextGroup.Next5;
+                    }
+
+                    public HPKC_NextGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next next)
+                    {
+                        Next0 = next.Next0;
+                        Next1 = next.Next1;
+                        Next2 = next.Next2;
+                        Next3 = next.Next3;
+                        Next4 = next.Next4;
+                        Next5 = next.Next5;
                     }
 
                     public override string ToString()
@@ -795,6 +1267,12 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = Left_Y;
                         }
 
+                        public Position2D_Left(Vector2 vector2)
+                        {
+                            X = (float)vector2.X;
+                            Y = (float)vector2.Y;
+                        }
+
                         public Vector2 GetVector2()
                         {
                             return new Vector2(this.X, this.Y);
@@ -825,6 +1303,12 @@ namespace MK7_KMP_Editor_For_PG_
                             Y = Right_Y;
                         }
 
+                        public Position2D_Right(Vector2 vector2)
+                        {
+                            X = (float)vector2.X;
+                            Y = (float)vector2.Y;
+                        }
+
                         public Vector2 GetVector2()
                         {
                             return new Vector2(this.X, this.Y);
@@ -845,9 +1329,92 @@ namespace MK7_KMP_Editor_For_PG_
                     public byte TPKC_UnkBytes3 { get; set; }
                     public byte TPKC_UnkBytes4 { get; set; }
 
+                    public TPKCValue(Vector2 LeftPos, Vector2 RightPos, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Position_2D_Left = new Position2D_Left(LeftPos);
+                        Position_2D_Right = new Position2D_Right(RightPos);
+                        TPKC_RespawnID = 0xFF;
+                        TPKC_Checkpoint_Type = 0;
+                        TPKC_NextCheckPoint = 0xFF;
+                        TPKC_PreviousCheckPoint = 0xFF;
+                        TPKC_ClipID = 255;
+                        TPKC_Section = 0;
+                        TPKC_UnkBytes3 = 0;
+                        TPKC_UnkBytes4 = 0;
+                    }
+
+                    public TPKCValue(KMPs.KMPFormat.KMPSection.TPKC_Section.TPKCValue TPKCValue, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Position_2D_Left = new Position2D_Left(TPKCValue.TPKC_2DPosition_Left);
+                        Position_2D_Right = new Position2D_Right(TPKCValue.TPKC_2DPosition_Right);
+                        TPKC_RespawnID = TPKCValue.TPKC_RespawnID;
+                        TPKC_Checkpoint_Type = TPKCValue.TPKC_Checkpoint_Type;
+                        TPKC_NextCheckPoint = TPKCValue.TPKC_NextCheckPoint;
+                        TPKC_PreviousCheckPoint = TPKCValue.TPKC_PreviousCheckPoint;
+                        TPKC_ClipID = TPKCValue.TPKC_ClipID;
+                        TPKC_Section = TPKCValue.TPKC_Section;
+                        TPKC_UnkBytes3 = TPKCValue.TPKC_UnkBytes3;
+                        TPKC_UnkBytes4 = TPKCValue.TPKC_UnkBytes4;
+                    }
+
+                    public TPKCValue(TestXml.KMPXml.Checkpoint.Checkpoint_Group.Checkpoint_Point checkpoint_Point, int GroupID, int InputID)
+                    {
+                        Group_ID = GroupID;
+                        ID = InputID;
+                        Position_2D_Left = new Position2D_Left(checkpoint_Point.Position_2D_Left.ToVector2());
+                        Position_2D_Right = new Position2D_Right(checkpoint_Point.Position_2D_Right.ToVector2());
+                        TPKC_RespawnID = checkpoint_Point.RespawnID;
+                        TPKC_Checkpoint_Type = checkpoint_Point.Checkpoint_Type;
+                        TPKC_NextCheckPoint = checkpoint_Point.NextCheckPoint;
+                        TPKC_PreviousCheckPoint = checkpoint_Point.PreviousCheckPoint;
+                        TPKC_ClipID = checkpoint_Point.ClipID;
+                        TPKC_Section = checkpoint_Point.Section;
+                        TPKC_UnkBytes3 = checkpoint_Point.UnkBytes3;
+                        TPKC_UnkBytes4 = checkpoint_Point.UnkBytes4;
+                    }
+
                     public override string ToString()
                     {
                         return "CheckPoint Point " + ID;
+                    }
+                }
+
+                public HPKCValue(int InputID)
+                {
+                    GroupID = InputID;
+                    HPKC_PreviewGroup = new HPKC_PreviewGroups();
+                    HPKC_NextGroup = new HPKC_NextGroups();
+                    HPKC_UnkBytes1 = 0;
+                    TPKCValueList = new List<TPKCValue>();
+                }
+
+                public HPKCValue(KMPs.KMPFormat.KMPSection.HPKC_Section.HPKCValue HPKCValue, KMPs.KMPFormat.KMPSection.TPKC_Section TPKC, int InputID)
+                {
+                    GroupID = InputID;
+                    HPKC_PreviewGroup = new HPKC_PreviewGroups(HPKCValue.HPKC_PreviewGroup);
+                    HPKC_NextGroup = new HPKC_NextGroups(HPKCValue.HPKC_NextGroup);
+                    HPKC_UnkBytes1 = HPKCValue.HPKC_UnkBytes1;
+
+                    for (int i = 0; i < HPKCValue.HPKC_Length; i++)
+                    {
+                        TPKCValueList.Add(new TPKCValue(TPKC.TPKCValue_List[i + HPKCValue.HPKC_StartPoint], InputID, i));
+                    }
+                }
+
+                public HPKCValue(TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group, int InputID)
+                {
+                    GroupID = InputID;
+                    HPKC_PreviewGroup = new HPKC_PreviewGroups(checkpoint_Group.PreviousRouteID);
+                    HPKC_NextGroup = new HPKC_NextGroups(checkpoint_Group.NextRouteID);
+                    HPKC_UnkBytes1 = checkpoint_Group.UnkBytes1;
+
+                    for (int i = 0; i < checkpoint_Group.Points.Count; i++)
+                    {
+                        TPKCValueList.Add(new TPKCValue(checkpoint_Group.Points[i], InputID, i));
                     }
                 }
 
@@ -856,10 +1423,31 @@ namespace MK7_KMP_Editor_For_PG_
                     return "CheckPoint " + GroupID;
                 }
             }
+
+            public HPKC_TPKC_Section()
+            {
+                HPKCValueList = new List<HPKCValue>();
+            }
+
+            public HPKC_TPKC_Section(KMPs.KMPFormat.KMPSection.HPKC_Section HPKC, KMPs.KMPFormat.KMPSection.TPKC_Section TPKC)
+            {
+                for (int i = 0; i < HPKC.NumOfEntries; i++)
+                {
+                    HPKCValueList.Add(new HPKCValue(HPKC.HPKCValue_List[i], TPKC, i));
+                }
+            }
+
+            public HPKC_TPKC_Section(TestXml.KMPXml.Checkpoint checkpoint)
+            {
+                for (int i = 0; i < checkpoint.Groups.Count; i++)
+                {
+                    HPKCValueList.Add(new HPKCValue(checkpoint.Groups[i], i));
+                }
+            }
         }
 
-        public JBOG_section JBOGSection { get; set; }
-        public class JBOG_section
+        public JBOG_Section JBOGSection { get; set; }
+        public class JBOG_Section
         {
             public List<JBOGValue> JBOGValue_List = new List<JBOGValue>();
             public List<JBOGValue> JBOGValueList { get => JBOGValue_List; set => JBOGValue_List = value; }
@@ -911,6 +1499,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _X = X;
                         _Y = Y;
                         _Z = Z;
+                    }
+
+                    public Position(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -967,6 +1562,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Rotation(Vector3D vector3D)
+                    {
+                        _X = HTK_3DES.TSRSystem.RadianToAngle(vector3D.X);
+                        _Y = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Y);
+                        _Z = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Z);
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1009,9 +1611,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     public Scale()
                     {
-                        _X = 0;
-                        _Y = 0;
-                        _Z = 0;
+                        _X = 1;
+                        _Y = 1;
+                        _Z = 1;
                     }
 
                     public Scale(float X, float Y, float Z)
@@ -1019,6 +1621,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _X = X;
                         _Y = Y;
                         _Z = Z;
+                    }
+
+                    public Scale(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1063,6 +1672,30 @@ namespace MK7_KMP_Editor_For_PG_
                         Value7 = 0;
                     }
 
+                    public JBOG_SpecificSetting(KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting jBOG_SpecificSetting)
+                    {
+                        Value0 = jBOG_SpecificSetting.Value0;
+                        Value1 = jBOG_SpecificSetting.Value1;
+                        Value2 = jBOG_SpecificSetting.Value2;
+                        Value3 = jBOG_SpecificSetting.Value3;
+                        Value4 = jBOG_SpecificSetting.Value4;
+                        Value5 = jBOG_SpecificSetting.Value5;
+                        Value6 = jBOG_SpecificSetting.Value6;
+                        Value7 = jBOG_SpecificSetting.Value7;
+                    }
+
+                    public JBOG_SpecificSetting(TestXml.KMPXml.Object.Object_Value.SpecificSettings SpecificSettings)
+                    {
+                        Value0 = SpecificSettings.Value0;
+                        Value1 = SpecificSettings.Value1;
+                        Value2 = SpecificSettings.Value2;
+                        Value3 = SpecificSettings.Value3;
+                        Value4 = SpecificSettings.Value4;
+                        Value5 = SpecificSettings.Value5;
+                        Value6 = SpecificSettings.Value6;
+                        Value7 = SpecificSettings.Value7;
+                    }
+
                     public override string ToString()
                     {
                         return "Obj Params";
@@ -1072,10 +1705,77 @@ namespace MK7_KMP_Editor_For_PG_
                 public string JBOG_UnkByte2 { get; set; }
                 public ushort JBOG_UnkByte3 { get; set; }
 
+                public JBOGValue(string Name, string ObjID, Vector3D Pos,int InputID)
+                {
+                    ID = InputID;
+                    ObjectName = Name;
+                    ObjectID = ObjID;
+                    JBOG_ITOP_RouteIDIndex = 65535;
+                    JBOG_PresenceSetting = 7;
+                    JBOG_UnkByte1 = "0000";
+                    JBOG_UnkByte2 = "FFFF";
+                    JBOG_UnkByte3 = 0;
+                    Positions = new Position(Pos);
+                    Scales = new Scale();
+                    Rotations = new Rotation();
+                    JOBJ_Specific_Setting = new JBOG_SpecificSetting();
+                }
+
+                public JBOGValue(KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue jBOGValue, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB, int InputID)
+                {
+                    string Name = ObjFlowDB.Find(x => x.ObjectID == BitConverter.ToString(jBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
+
+                    ID = InputID;
+                    ObjectName = Name;
+                    ObjectID = BitConverter.ToString(jBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
+                    JBOG_ITOP_RouteIDIndex = jBOGValue.JBOG_ITOP_RouteIDIndex;
+                    JBOG_PresenceSetting = jBOGValue.JBOG_PresenceSetting;
+                    JBOG_UnkByte1 = BitConverter.ToString(jBOGValue.JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty);
+                    JBOG_UnkByte2 = BitConverter.ToString(jBOGValue.JBOG_UnkByte2.Reverse().ToArray()).Replace("-", string.Empty);
+                    JBOG_UnkByte3 = jBOGValue.JBOG_UnkByte3;
+                    Positions = new Position(jBOGValue.JBOG_Position);
+                    Scales = new Scale(jBOGValue.JBOG_Scale);
+                    Rotations = new Rotation(jBOGValue.JBOG_Rotation);
+                    JOBJ_Specific_Setting = new JBOG_SpecificSetting(jBOGValue.GOBJ_Specific_Setting);
+                }
+
+                public JBOGValue(TestXml.KMPXml.Object.Object_Value object_Value, int InputID)
+                {
+                    List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB_FindName = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                    string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == object_Value.ObjectID).ObjectName;
+
+                    ID = InputID;
+                    ObjectID = object_Value.ObjectID;
+                    JBOG_ITOP_RouteIDIndex = object_Value.RouteIDIndex;
+                    JBOG_PresenceSetting = object_Value.PresenceSetting;
+                    JBOG_UnkByte1 = object_Value.UnkByte1;
+                    JBOG_UnkByte2 = object_Value.UnkByte2;
+                    JBOG_UnkByte3 = object_Value.UnkByte3;
+                    Positions = new Position(object_Value.Position.ToVector3D());
+                    Scales = new Scale(object_Value.Scale.ToVector3D());
+                    Rotations = new Rotation(object_Value.Rotation.ToVector3D());
+                    JOBJ_Specific_Setting = new JBOG_SpecificSetting(object_Value.SpecificSetting);
+                }
+
                 public override string ToString()
                 {
                     return "Object " + ID + " [" + "OBJID : " + ObjectID + "]";
                 }
+            }
+
+            public JBOG_Section()
+            {
+                JBOGValueList = new List<JBOGValue>();
+            }
+
+            public JBOG_Section(KMPs.KMPFormat.KMPSection.JBOG_Section jBOG_Section, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB)
+            {
+                for (int i = 0; i < jBOG_Section.NumOfEntries; i++) JBOGValueList.Add(new JBOGValue(jBOG_Section.JBOGValue_List[i], ObjFlowDB, i));
+            }
+
+            public JBOG_Section(TestXml.KMPXml.Object obj)
+            {
+                for (int i = 0; i < obj.Object_Values.Count; i++) JBOGValueList.Add(new JBOGValue(obj.Object_Values[i], i));
             }
         }
 
@@ -1144,6 +1844,13 @@ namespace MK7_KMP_Editor_For_PG_
                             _Z = Z;
                         }
 
+                        public Position(Vector3D vector3D)
+                        {
+                            _X = (float)vector3D.X;
+                            _Y = (float)vector3D.Y;
+                            _Z = (float)vector3D.Z;
+                        }
+
                         public Vector3D GetVector3D()
                         {
                             double X = Convert.ToDouble(_X);
@@ -1162,15 +1869,95 @@ namespace MK7_KMP_Editor_For_PG_
                     public ushort ITOP_Point_RouteSpeed { get; set; }
                     public ushort ITOP_PointSetting2 { get; set; }
 
+                    public ITOP_Point(Vector3D Pos, int Group_ID, int InputID)
+                    {
+                        GroupID = Group_ID;
+                        ID = InputID;
+                        Positions = new Position(Pos);
+                        ITOP_Point_RouteSpeed = 0;
+                        ITOP_PointSetting2 = 0;
+                    }
+
+                    public ITOP_Point(KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route.ITOP_Point iTOP_Point, int Group_ID, int InputID)
+                    {
+                        GroupID = Group_ID;
+                        ID = InputID;
+                        Positions = new Position(iTOP_Point.ITOP_Point_Position);
+                        ITOP_Point_RouteSpeed = iTOP_Point.ITOP_Point_RouteSpeed;
+                        ITOP_PointSetting2 = iTOP_Point.ITOP_PointSetting2;
+                    }
+
+                    public ITOP_Point(TestXml.KMPXml.Route.Route_Group.Route_Point route_Point, int Group_ID, int InputID)
+                    {
+                        GroupID = Group_ID;
+                        ID = InputID;
+                        Positions = new Position(route_Point.Position.ToVector3D());
+                        ITOP_Point_RouteSpeed = route_Point.RouteSpeed;
+                        ITOP_PointSetting2 = route_Point.PointSetting2;
+                    }
+
                     public override string ToString()
                     {
                         return "Point " + ID;
                     }
                 }
 
+                public ITOP_Route(int InputID)
+                {
+                    GroupID = InputID;
+                    ITOP_Roop = 0;
+                    ITOP_Smooth = 0;
+                    ITOP_Point_List = new List<ITOP_Point>();
+                }
+
+                public ITOP_Route(KMPs.KMPFormat.KMPSection.ITOP_Section.ITOP_Route iTOP_Route, int InputID)
+                {
+                    GroupID = InputID;
+                    ITOP_Roop = iTOP_Route.ITOP_RoopSetting;
+                    ITOP_Smooth = iTOP_Route.ITOP_SmoothSetting;
+
+                    for (int i = 0; i < iTOP_Route.ITOP_Route_NumOfPoint; i++)
+                    {
+                        ITOP_Point_List.Add(new ITOP_Point(iTOP_Route.ITOP_Point_List[i], InputID, i));
+                    }
+                }
+
+                public ITOP_Route(TestXml.KMPXml.Route.Route_Group route_Group, int InputID)
+                {
+                    GroupID = InputID;
+                    ITOP_Roop = route_Group.RoopSetting;
+                    ITOP_Smooth = route_Group.SmoothSetting;
+
+                    for (int i = 0; i < route_Group.Points.Count; i++)
+                    {
+                        ITOP_Point_List.Add(new ITOP_Point(route_Group.Points[i], InputID, i));
+                    }
+                }
+
                 public override string ToString()
                 {
                     return "Route " + GroupID;
+                }
+            }
+
+            public ITOP_Section()
+            {
+                ITOP_RouteList = new List<ITOP_Route>();
+            }
+
+            public ITOP_Section(KMPs.KMPFormat.KMPSection.ITOP_Section iTOP_Section)
+            {
+                for (int i = 0; i < iTOP_Section.ITOP_Route_List.Count; i++)
+                {
+                    ITOP_Route_List.Add(new ITOP_Route(iTOP_Section.ITOP_Route_List[i], i));
+                }
+            }
+
+            public ITOP_Section(TestXml.KMPXml.Route route)
+            {
+                for (int i = 0; i < route.Groups.Count; i++)
+                {
+                    ITOP_RouteList.Add(new ITOP_Route(route.Groups[i], i));
                 }
             }
         }
@@ -1248,6 +2035,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Position(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1302,6 +2096,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Rotation(Vector3D vector3D)
+                    {
+                        _X = HTK_3DES.TSRSystem.RadianToAngle(vector3D.X);
+                        _Y = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Y);
+                        _Z = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Z);
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1344,9 +2145,9 @@ namespace MK7_KMP_Editor_For_PG_
 
                     public Scale()
                     {
-                        _X = 0;
-                        _Y = 0;
-                        _Z = 0;
+                        _X = 1;
+                        _Y = 1;
+                        _Z = 1;
                     }
 
                     public Scale(float X, float Y, float Z)
@@ -1354,6 +2155,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _X = X;
                         _Y = Y;
                         _Z = Z;
+                    }
+
+                    public Scale(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1377,10 +2185,76 @@ namespace MK7_KMP_Editor_For_PG_
                 public byte EnemyID { get; set; }
                 public ushort AERA_UnkByte4 { get; set; }
 
+                public AERAValue(Vector3D Pos, int InputID)
+                {
+                    ID = InputID;
+                    AreaType = 0;
+                    AreaModeSettings.AreaModeValue = 0;
+                    AERA_EMACIndex = 0;
+                    Priority = 0;
+                    Positions = new Position(Pos);
+                    Rotations = new Rotation();
+                    Scales = new Scale();
+                    AERA_Setting1 = 0;
+                    AERA_Setting2 = 0;
+                    RouteID = 0;
+                    EnemyID = 0;
+                    AERA_UnkByte4 = 0;
+                }
+
+                public AERAValue(KMPs.KMPFormat.KMPSection.AERA_Section.AERAValue aERAValue, int InputID)
+                {
+                    ID = InputID;
+                    AreaType = aERAValue.AreaType;
+                    AreaModeSettings.AreaModeValue = aERAValue.AreaMode;
+                    AERA_EMACIndex = aERAValue.AERA_EMACIndex;
+                    Priority = aERAValue.Priority;
+                    Positions = new Position(aERAValue.AERA_Position);
+                    Rotations = new Rotation(aERAValue.AERA_Rotation);
+                    Scales = new Scale(aERAValue.AERA_Scale);
+                    AERA_Setting1 = aERAValue.AERA_Setting1;
+                    AERA_Setting2 = aERAValue.AERA_Setting2;
+                    RouteID = aERAValue.RouteID;
+                    EnemyID = aERAValue.EnemyID;
+                    AERA_UnkByte4 = aERAValue.AERA_UnkByte4;
+                }
+
+                public AERAValue(TestXml.KMPXml.Area.Area_Value area_Value, int InputID)
+                {
+                    ID = InputID;
+                    AreaType = area_Value.AreaType;
+                    AreaModeSettings.AreaModeValue = area_Value.AreaMode;
+                    AERA_EMACIndex = area_Value.CameraIndex;
+                    Priority = area_Value.Priority;
+                    Positions = new Position(area_Value.Position.ToVector3D());
+                    Rotations = new Rotation(area_Value.Rotation.ToVector3D());
+                    Scales = new Scale(area_Value.Scale.ToVector3D());
+                    AERA_Setting1 = area_Value.Setting1;
+                    AERA_Setting2 = area_Value.Setting2;
+                    RouteID = area_Value.RouteID;
+                    EnemyID = area_Value.EnemyID;
+                    AERA_UnkByte4 = area_Value.UnkByte4;
+                }
+
                 public override string ToString()
                 {
                     return "Area " + ID;
                 }
+            }
+
+            public AERA_Section()
+            {
+                AERAValueList = new List<AERAValue>();
+            }
+
+            public AERA_Section(KMPs.KMPFormat.KMPSection.AERA_Section aERA_Section)
+            {
+                for (int i = 0; i < aERA_Section.NumOfEntries; i++) AERAValueList.Add(new AERAValue(aERA_Section.AERAValue_List[i], i));
+            }
+
+            public AERA_Section(TestXml.KMPXml.Area area)
+            {
+                for (int i = 0; i < area.Area_Values.Count; i++) AERAValueList.Add(new AERAValue(area.Area_Values[i], i));
             }
         }
 
@@ -1413,6 +2287,13 @@ namespace MK7_KMP_Editor_For_PG_
                         RouteSpeed = 0;
                         FOVSpeed = 0;
                         ViewpointSpeed = 0;
+                    }
+
+                    public SpeedSetting(ushort RouteSpd, ushort FOVSpd, ushort ViewpointSpd)
+                    {
+                        RouteSpeed = RouteSpd;
+                        FOVSpeed = FOVSpd;
+                        ViewpointSpeed = ViewpointSpd;
                     }
 
                     public override string ToString()
@@ -1463,6 +2344,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Position(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1515,6 +2403,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _X = X;
                         _Y = Y;
                         _Z = Z;
+                    }
+
+                    public Rotation(Vector3D vector3D)
+                    {
+                        _X = HTK_3DES.TSRSystem.RadianToAngle(vector3D.X);
+                        _Y = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Y);
+                        _Z = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Z);
                     }
 
                     public Vector3D GetVector3D()
@@ -1579,6 +2474,13 @@ namespace MK7_KMP_Editor_For_PG_
                         Z = VPS_Z;
                     }
 
+                    public ViewpointStart(Vector3D vector3D)
+                    {
+                        X = (float)vector3D.X;
+                        Y = (float)vector3D.Y;
+                        Z = (float)vector3D.Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X_ = Convert.ToDouble(X);
@@ -1616,6 +2518,13 @@ namespace MK7_KMP_Editor_For_PG_
                         Z = VPD_Z;
                     }
 
+                    public ViewpointDestination(Vector3D vector3D)
+                    {
+                        X = (float)vector3D.X;
+                        Y = (float)vector3D.Y;
+                        Z = (float)vector3D.Z;
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X_ = Convert.ToDouble(X);
@@ -1633,10 +2542,79 @@ namespace MK7_KMP_Editor_For_PG_
 
                 public float Camera_Active_Time { get; set; }
 
+                public EMACValue(Vector3D Pos, int InputID)
+                {
+                    ID = InputID;
+                    CameraType = 0;
+                    NextCameraIndex = 0;
+                    EMAC_NextVideoIndex = 0;
+                    EMAC_ITOP_CameraIndex = 0;
+                    SpeedSettings = new SpeedSetting();
+                    EMAC_StartFlag = 0;
+                    EMAC_VideoFlag = 0;
+                    Positions = new Position(Pos);
+                    Rotations = new Rotation();
+                    FOVAngleSettings = new FOVAngleSetting();
+                    Viewpoint_Destination = new ViewpointDestination();
+                    Viewpoint_Start = new ViewpointStart();
+                    Camera_Active_Time = 0;
+                }
+
+                public EMACValue(KMPs.KMPFormat.KMPSection.EMAC_Section.EMACValue eMACValue, int InputID)
+                {
+                    ID = InputID;
+                    CameraType = eMACValue.CameraType;
+                    NextCameraIndex = eMACValue.NextCameraIndex;
+                    EMAC_NextVideoIndex = eMACValue.EMAC_NextVideoIndex;
+                    EMAC_ITOP_CameraIndex = eMACValue.EMAC_ITOP_CameraIndex;
+                    SpeedSettings = new SpeedSetting(eMACValue.RouteSpeed, eMACValue.FOVSpeed, eMACValue.ViewpointSpeed);
+                    EMAC_StartFlag = eMACValue.EMAC_StartFlag;
+                    EMAC_VideoFlag = eMACValue.EMAC_VideoFlag;
+                    Positions = new Position(eMACValue.EMAC_Position);
+                    Rotations = new Rotation(eMACValue.EMAC_Rotation);
+                    FOVAngleSettings = new FOVAngleSetting(eMACValue.FOVAngle_Start, eMACValue.FOVAngle_End);
+                    Viewpoint_Destination = new ViewpointDestination(eMACValue.Viewpoint_Destination);
+                    Viewpoint_Start = new ViewpointStart(eMACValue.Viewpoint_Start);
+                    Camera_Active_Time = eMACValue.Camera_Active_Time;
+                }
+
+                public EMACValue(TestXml.KMPXml.Camera.Camera_Value camera_Value, int InputID)
+                {
+                    ID = InputID;
+                    CameraType = camera_Value.CameraType;
+                    NextCameraIndex = camera_Value.NextCameraIndex;
+                    EMAC_NextVideoIndex = camera_Value.NextVideoIndex;
+                    EMAC_ITOP_CameraIndex = camera_Value.Route_CameraIndex;
+                    SpeedSettings = new SpeedSetting(camera_Value.SpeedSetting.RouteSpeed, camera_Value.SpeedSetting.FOVSpeed, camera_Value.SpeedSetting.ViewpointSpeed);
+                    EMAC_StartFlag = camera_Value.StartFlag;
+                    EMAC_VideoFlag = camera_Value.VideoFlag;
+                    Positions = new Position(camera_Value.Position.ToVector3D());
+                    Rotations = new Rotation(camera_Value.Rotation.ToVector3D());
+                    FOVAngleSettings = new FOVAngleSetting(camera_Value.FOVAngleSettings.Start, camera_Value.FOVAngleSettings.End);
+                    Viewpoint_Destination = new ViewpointDestination(camera_Value.ViewpointDestination.ToVector3D());
+                    Viewpoint_Start = new ViewpointStart(camera_Value.ViewpointStart.ToVector3D());
+                    Camera_Active_Time = camera_Value.CameraActiveTime;
+                }
+
                 public override string ToString()
                 {
                     return "Camera " + ID;
                 }
+            }
+
+            public EMAC_Section()
+            {
+                EMACValueList = new List<EMACValue>();
+            }
+
+            public EMAC_Section(KMPs.KMPFormat.KMPSection.EMAC_Section eMAC_Section)
+            {
+                for (int i = 0; i < eMAC_Section.NumOfEntries; i++) EMACValueList.Add(new EMACValue(eMAC_Section.EMACValue_List[i], i));
+            }
+
+            public EMAC_Section(TestXml.KMPXml.Camera camera)
+            {
+                for (int i = 0; i < camera.Values.Count; i++) EMACValueList.Add(new EMACValue(camera.Values[i], i));
             }
         }
 
@@ -1688,6 +2666,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _X = X;
                         _Y = Y;
                         _Z = Z;
+                    }
+
+                    public Position(Vector3D vector3D)
+                    {
+                        _X = (float)vector3D.X;
+                        _Y = (float)vector3D.Y;
+                        _Z = (float)vector3D.Z;
                     }
 
                     public Vector3D GetVector3D()
@@ -1744,6 +2729,13 @@ namespace MK7_KMP_Editor_For_PG_
                         _Z = Z;
                     }
 
+                    public Rotation(Vector3D vector3D)
+                    {
+                        _X = HTK_3DES.TSRSystem.RadianToAngle(vector3D.X);
+                        _Y = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Y);
+                        _Z = HTK_3DES.TSRSystem.RadianToAngle(vector3D.Z);
+                    }
+
                     public Vector3D GetVector3D()
                     {
                         double X = Convert.ToDouble(_X);
@@ -1762,10 +2754,52 @@ namespace MK7_KMP_Editor_For_PG_
                 public ushort TPGJ_RespawnID { get; set; }
                 public ushort TPGJ_UnkBytes1 { get; set; }
 
+                public TPGJValue(Vector3D Pos, int InputID)
+                {
+                    ID = InputID;
+                    TPGJ_RespawnID = 65535;
+                    Positions = new Position(Pos);
+                    Rotations = new Rotation();
+                    TPGJ_UnkBytes1 = 0;
+                }
+
+                public TPGJValue(KMPs.KMPFormat.KMPSection.TPGJ_Section.TPGJValue tPGJValue, int InputID)
+                {
+                    ID = InputID;
+                    TPGJ_RespawnID = tPGJValue.TPGJ_RespawnID;
+                    Positions = new Position(tPGJValue.TPGJ_Position);
+                    Rotations = new Rotation(tPGJValue.TPGJ_Rotation);
+                    TPGJ_UnkBytes1 = tPGJValue.TPGJ_UnkBytes1;
+                }
+
+                public TPGJValue(TestXml.KMPXml.JugemPoint.JugemPoint_Value jugemPoint_Value, int InputID)
+                {
+                    ID = InputID;
+                    TPGJ_RespawnID = jugemPoint_Value.RespawnID;
+                    Positions = new Position(jugemPoint_Value.Position.ToVector3D());
+                    Rotations = new Rotation(jugemPoint_Value.Rotation.ToVector3D());
+                    TPGJ_UnkBytes1 = jugemPoint_Value.UnkBytes1;
+                }
+
                 public override string ToString()
                 {
                     return "Jugem Point " + ID;
                 }
+            }
+
+            public TPGJ_Section()
+            {
+                TPGJValueList = new List<TPGJValue>();
+            }
+
+            public TPGJ_Section(KMPs.KMPFormat.KMPSection.TPGJ_Section tPGJ_Section)
+            {
+                for (int i = 0; i < tPGJ_Section.NumOfEntries; i++) TPGJValueList.Add(new TPGJValue(tPGJ_Section.TPGJValue_List[i], i));
+            }
+
+            public TPGJ_Section(TestXml.KMPXml.JugemPoint jugemPoint)
+            {
+                for (int i = 0; i < jugemPoint.Values.Count; i++) TPGJValueList.Add(new TPGJValue(jugemPoint.Values[i], i));
             }
         }
 
@@ -1792,6 +2826,22 @@ namespace MK7_KMP_Editor_For_PG_
                 public byte B { get; set; }
                 public byte A { get; set; }
 
+                public RGBA()
+                {
+                    R = 0;
+                    G = 0;
+                    B = 0;
+                    A = 0;
+                }
+
+                public RGBA(byte In_R, byte In_G, byte In_B, byte In_A)
+                {
+                    R = In_R;
+                    G = In_G;
+                    B = In_B;
+                    A = In_A;
+                }
+
                 public override string ToString()
                 {
                     return "RGBA Color";
@@ -1799,6 +2849,39 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             public uint FlareAlpha { get; set; }
+
+            public IGTS_Section()
+            {
+                Unknown1 = 0;
+                LapCount = 3;
+                PolePosition = 0;
+                Unknown2 = 0;
+                Unknown3 = 0;
+                RGBAColor = new RGBA(255, 255, 255, 0);
+                FlareAlpha = 75;
+            }
+
+            public IGTS_Section(KMPs.KMPFormat.KMPSection.IGTS_Section iGTS_Section)
+            {
+                Unknown1 = iGTS_Section.Unknown1;
+                LapCount = iGTS_Section.LapCount;
+                PolePosition = iGTS_Section.PolePosition;
+                Unknown2 = iGTS_Section.Unknown2;
+                Unknown3 = iGTS_Section.Unknown3;
+                RGBAColor = new RGBA(iGTS_Section.RGBAColor.R, iGTS_Section.RGBAColor.G, iGTS_Section.RGBAColor.B, iGTS_Section.RGBAColor.A);
+                FlareAlpha = iGTS_Section.FlareAlpha;
+            }
+
+            public IGTS_Section(TestXml.KMPXml.StageInfo stageInfo)
+            {
+                Unknown1 = stageInfo.Unknown1;
+                LapCount = stageInfo.LapCount;
+                PolePosition = stageInfo.PolePosition;
+                Unknown2 = stageInfo.Unknown2;
+                Unknown3 = stageInfo.Unknown3;
+                RGBAColor = new RGBA(stageInfo.RGBAColor.R, stageInfo.RGBAColor.G, stageInfo.RGBAColor.B, stageInfo.RGBAColor.A);
+                FlareAlpha = stageInfo.RGBAColor.FlareAlpha;
+            }
         }
 
         //SROC = null
@@ -1835,6 +2918,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = 255;
                     }
 
+                    public HPLG_PreviewGroups(KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_PreviewGroups HPLG_PreviewGroup)
+                    {
+                        Prev0 = HPLG_PreviewGroup.Prev0;
+                        Prev1 = HPLG_PreviewGroup.Prev1;
+                        Prev2 = HPLG_PreviewGroup.Prev2;
+                        Prev3 = HPLG_PreviewGroup.Prev3;
+                        Prev4 = HPLG_PreviewGroup.Prev4;
+                        Prev5 = HPLG_PreviewGroup.Prev5;
+                    }
+
+                    public HPLG_PreviewGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous previous)
+                    {
+                        Prev0 = previous.Prev0;
+                        Prev1 = previous.Prev1;
+                        Prev2 = previous.Prev2;
+                        Prev3 = previous.Prev3;
+                        Prev4 = previous.Prev4;
+                        Prev5 = previous.Prev5;
+                    }
+
                     public override string ToString()
                     {
                         return "Preview";
@@ -1860,6 +2963,26 @@ namespace MK7_KMP_Editor_For_PG_
                         Next3 = 255;
                         Next4 = 255;
                         Next5 = 255;
+                    }
+
+                    public HPLG_NextGroups(KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue.HPLG_NextGroups HPLG_NextGroup)
+                    {
+                        Next0 = HPLG_NextGroup.Next0;
+                        Next1 = HPLG_NextGroup.Next1;
+                        Next2 = HPLG_NextGroup.Next2;
+                        Next3 = HPLG_NextGroup.Next3;
+                        Next4 = HPLG_NextGroup.Next4;
+                        Next5 = HPLG_NextGroup.Next5;
+                    }
+
+                    public HPLG_NextGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next next)
+                    {
+                        Next0 = next.Next0;
+                        Next1 = next.Next1;
+                        Next2 = next.Next2;
+                        Next3 = next.Next3;
+                        Next4 = next.Next4;
+                        Next5 = next.Next5;
                     }
 
                     public override string ToString()
@@ -1972,6 +3095,13 @@ namespace MK7_KMP_Editor_For_PG_
                             _Z = Z;
                         }
 
+                        public Position(Vector3D vector3D)
+                        {
+                            _X = (float)vector3D.X;
+                            _Y = (float)vector3D.Y;
+                            _Z = (float)vector3D.Z;
+                        }
+
                         public Vector3D GetVector3D()
                         {
                             double X = Convert.ToDouble(_X);
@@ -1992,9 +3122,101 @@ namespace MK7_KMP_Editor_For_PG_
                     public uint TPLG_UnkBytes1 { get; set; }
                     public uint TPLG_UnkBytes2 { get; set; }
 
+                    public TPLGValue(Vector3D Pos, int GroupID, int InputID)
+                    {
+                        this.GroupID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(Pos);
+                        TPLG_PointScaleValue = 1;
+                        TPLG_UnkBytes1 = 0;
+                        TPLG_UnkBytes2 = 0;
+                    }
+
+                    public TPLGValue(KMPs.KMPFormat.KMPSection.TPLG_Section.TPLGValue TPLGValue, int GroupID, int InputID)
+                    {
+                        this.GroupID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(TPLGValue.TPLG_Position);
+                        TPLG_PointScaleValue = TPLGValue.TPLG_PointScaleValue;
+                        TPLG_UnkBytes1 = TPLGValue.TPLG_UnkBytes1;
+                        TPLG_UnkBytes2 = TPLGValue.TPLG_UnkBytes2;
+                    }
+
+                    public TPLGValue(TestXml.KMPXml.GlideRoute.GlideRoute_Group.GlideRoute_Point glideRoute_Point, int GroupID, int InputID)
+                    {
+                        this.GroupID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(glideRoute_Point.Position.ToVector3D());
+                        TPLG_PointScaleValue = glideRoute_Point.PointScale;
+                        TPLG_UnkBytes1 = glideRoute_Point.UnkBytes1;
+                        TPLG_UnkBytes2 = glideRoute_Point.UnkBytes2;
+                    }
+
+                    public TPLGValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                    {
+                        this.GroupID = GroupID;
+                        ID = InputID;
+                        Positions = new Position(pointData.Position.ToVector3D());
+                        TPLG_PointScaleValue = pointData.ScaleValue;
+                        TPLG_UnkBytes1 = 0;
+                        TPLG_UnkBytes2 = 0;
+                    }
+
                     public override string ToString()
                     {
                         return "Glide Point " + ID;
+                    }
+                }
+
+                public HPLGValue(int InputID)
+                {
+                    GroupID = InputID;
+                    HPLG_PreviewGroup = new HPLG_PreviewGroups();
+                    HPLG_NextGroup = new HPLG_NextGroups();
+                    RouteSettings.RouteSettingValue = 0;
+                    HPLG_UnkBytes2 = 0;
+                    TPLGValueList = new List<TPLGValue>();
+                }
+
+                public HPLGValue(KMPs.KMPFormat.KMPSection.HPLG_Section.HPLGValue HPLGValue, KMPs.KMPFormat.KMPSection.TPLG_Section TPLG, int InputID)
+                {
+                    GroupID = InputID;
+                    HPLG_PreviewGroup = new HPLG_PreviewGroups(HPLGValue.HPLG_PreviewGroup);
+                    HPLG_NextGroup = new HPLG_NextGroups(HPLGValue.HPLG_NextGroup);
+                    RouteSettings.RouteSettingValue = HPLGValue.RouteSetting;
+                    HPLG_UnkBytes2 = HPLGValue.HPLG_UnkBytes2;
+
+                    for (int i = 0; i < HPLGValue.HPLG_Length; i++)
+                    {
+                        TPLGValueList.Add(new TPLGValue(TPLG.TPLGValue_List[i + HPLGValue.HPLG_StartPoint], InputID, i));
+                    }
+                }
+
+                public HPLGValue(TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group, int InputID)
+                {
+                    GroupID = InputID;
+                    HPLG_PreviewGroup = new HPLG_PreviewGroups(glideRoute_Group.PreviousRouteID);
+                    HPLG_NextGroup = new HPLG_NextGroups(glideRoute_Group.NextRouteID);
+                    RouteSettings.RouteSettingValue = glideRoute_Group.RouteSetting;
+                    HPLG_UnkBytes2 = glideRoute_Group.UnkBytes2;
+
+                    for (int i = 0; i < glideRoute_Group.Points.Count; i++)
+                    {
+                        TPLGValueList.Add(new TPLGValue(glideRoute_Group.Points[i], InputID, i));
+                    }
+                }
+
+                public HPLGValue(TestXml.XXXXRouteXml.XXXXRoute.GroupData groupData, int InputID)
+                {
+                    GroupID = InputID;
+                    HPLG_PreviewGroup = new HPLG_PreviewGroups();
+                    HPLG_NextGroup = new HPLG_NextGroups();
+                    RouteSettings.RouteSettingValue = 0;
+                    HPLG_UnkBytes2 = 0;
+
+                    for (int i = 0; i < groupData.Points.Count; i++)
+                    {
+                        TPLGValueList.Add(new TPLGValue(groupData.Points[i], InputID, i));
                     }
                 }
 
@@ -2003,610 +3225,35 @@ namespace MK7_KMP_Editor_For_PG_
                     return "Glide Route " + GroupID;
                 }
             }
-        }
-    }
 
-    public class PropertyGridClassConverter
-    {
-        public static List<KMPPropertyGridSettings.TPTK_Section.TPTKValue> ToTPTKValueList(KMPs.KMPFormat.KMPSection.TPTK_Section TPTK)
-        {
-            List<KMPPropertyGridSettings.TPTK_Section.TPTKValue> TPTKValues_List = new List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>();
-
-            for (int i = 0; i < TPTK.NumOfEntries; i++)
+            public HPLG_TPLG_Section()
             {
-                KMPPropertyGridSettings.TPTK_Section.TPTKValue tPTKValue = new KMPPropertyGridSettings.TPTK_Section.TPTKValue
-                {
-                    ID = i,
-                    Position_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Position
-                    {
-                        X = (float)TPTK.TPTKValue_List[i].TPTK_Position.X,
-                        Y = (float)TPTK.TPTKValue_List[i].TPTK_Position.Y,
-                        Z = (float)TPTK.TPTKValue_List[i].TPTK_Position.Z
-                    },
-                    Rotate_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Rotation
-                    {
-                        X = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.X),
-                        Y = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.Y),
-                        Z = HTK_3DES.TSRSystem.RadianToAngle(TPTK.TPTKValue_List[i].TPTK_Rotation.Z)
-                    },
-                    Player_Index = TPTK.TPTKValue_List[i].Player_Index,
-                    TPTK_UnkBytes = TPTK.TPTKValue_List[i].TPTK_UnkBytes
-                };
-
-                TPTKValues_List.Add(tPTKValue);
+                HPLGValueList = new List<HPLGValue>();
             }
 
-            return TPTKValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> ToHPNEValueList(KMPs.KMPFormat.KMPSection.HPNE_Section HPNE, KMPs.KMPFormat.KMPSection.TPNE_Section TPNE)
-        {
-            KMPs.KMPHelper.FlagConverter.EnemyRoute EnemyRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.EnemyRoute();
-
-            List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> HPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>();
-
-            for (int i = 0; i < HPNE.NumOfEntries; i++)
+            public HPLG_TPLG_Section(KMPs.KMPFormat.KMPSection.HPLG_Section HPLG, KMPs.KMPFormat.KMPSection.TPLG_Section TPLG)
             {
-                KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue hPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue
+                for (int i = 0; i < HPLG.NumOfEntries; i++)
                 {
-                    GroupID = i,
-                    HPNEPreviewGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_PreviewGroups
-                    {
-                        Prev0 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev0,
-                        Prev1 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev1,
-                        Prev2 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev2,
-                        Prev3 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev3,
-                        Prev4 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev4,
-                        Prev5 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev5,
-                        Prev6 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev6,
-                        Prev7 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev7,
-                        Prev8 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev8,
-                        Prev9 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev9,
-                        Prev10 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev10,
-                        Prev11 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev11,
-                        Prev12 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev12,
-                        Prev13 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev13,
-                        Prev14 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev14,
-                        Prev15 = HPNE.HPNEValue_List[i].HPNE_PreviewGroup.Prev15,
-                    },
-                    HPNENextGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_NextGroups
-                    {
-                        Next0 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next0,
-                        Next1 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next1,
-                        Next2 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next2,
-                        Next3 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next3,
-                        Next4 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next4,
-                        Next5 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next5,
-                        Next6 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next6,
-                        Next7 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next7,
-                        Next8 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next8,
-                        Next9 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next9,
-                        Next10 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next10,
-                        Next11 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next11,
-                        Next12 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next12,
-                        Next13 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next13,
-                        Next14 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next14,
-                        Next15 = HPNE.HPNEValue_List[i].HPNE_NextGroup.Next15,
-                    },
-                    HPNE_UnkBytes1 = HPNE.HPNEValue_List[i].HPNE_UnkBytes1,
-                    TPNEValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue> TPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue>();
-
-                for (int Count = 0; Count < HPNE.HPNEValue_List[i].HPNE_Length; Count++)
-                {
-                    KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue tPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue
-                    {
-                        Group_ID = i,
-                        ID = Count,
-                        Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
-                        {
-                            X = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.X,
-                            Y = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Y,
-                            Z = (float)TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].TPNE_Position.Z
-                        },
-                        Control = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Control,
-                        MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
-                        {
-                            MushSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MushSetting
-                        },
-                        DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
-                        {
-                            DriftSettingValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].DriftSetting
-                        },
-                        FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
-                        {
-                            WideTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.WideTurn),
-                            NormalTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NormalTurn),
-                            SharpTurn = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.SharpTurn),
-                            TricksForbidden = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.TricksForbidden),
-                            StickToRoute = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
-                            BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
-                            ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
-                        },
-                        PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
-                        {
-                            PathFindOptionValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].PathFindOption
-                        },
-                        MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
-                        {
-                            MaxSearchYOffsetValue = TPNE.TPNEValue_List[Count + HPNE.HPNEValue_List[i].HPNE_StartPoint].MaxSearchYOffset
-                        }
-                    };
-
-                    TPNEValues_List.Add(tPNEValue);
+                    HPLGValueList.Add(new HPLGValue(HPLG.HPLGValue_List[i], TPLG, i));
                 }
-
-                hPNEValue.TPNEValueList = TPNEValues_List;
-
-                HPNEValues_List.Add(hPNEValue);
             }
 
-            return HPNEValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> ToHPTIValueList(KMPs.KMPFormat.KMPSection.HPTI_Section HPTI, KMPs.KMPFormat.KMPSection.TPTI_Section TPTI)
-        {
-            List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> HPTIValues_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>();
-
-            for (int HPTICount = 0; HPTICount < HPTI.NumOfEntries; HPTICount++)
+            public HPLG_TPLG_Section(TestXml.KMPXml.GlideRoute glideRoute)
             {
-                KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue hPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue
+                for (int i = 0; i < glideRoute.Groups.Count; i++)
                 {
-                    GroupID = HPTICount,
-                    HPTI_PreviewGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_PreviewGroups
-                    {
-                        Prev0 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev0,
-                        Prev1 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev1,
-                        Prev2 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev2,
-                        Prev3 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev3,
-                        Prev4 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev4,
-                        Prev5 = HPTI.HPTIValue_List[HPTICount].HPTI_PreviewGroup.Prev5
-                    },
-                    HPTI_NextGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_NextGroups
-                    {
-                        Next0 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next0,
-                        Next1 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next1,
-                        Next2 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next2,
-                        Next3 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next3,
-                        Next4 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next4,
-                        Next5 = HPTI.HPTIValue_List[HPTICount].HPTI_NextGroup.Next5
-                    },
-                    TPTIValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue> TPTIVales_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue>();
-
-                for (int Count = 0; Count < HPTI.HPTIValue_List[HPTICount].HPTI_Length; Count++)
-                {
-                    KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue tPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue
-                    {
-                        Group_ID = HPTICount,
-                        ID = Count,
-                        TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
-                        {
-                            X = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.X,
-                            Y = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Y,
-                            Z = (float)TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_Position.Z
-                        },
-                        TPTI_PointSize = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].TPTI_PointSize,
-                        GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
-                        {
-                            GravityModeValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].GravityMode
-                        },
-                        PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
-                        {
-                            PlayerScanRadiusValue = TPTI.TPTIValue_List[Count + HPTI.HPTIValue_List[HPTICount].HPTI_StartPoint].PlayerScanRadius
-                        }
-                    };
-
-                    TPTIVales_List.Add(tPTIValue);
+                    HPLGValueList.Add(new HPLGValue(glideRoute.Groups[i], i));
                 }
-
-                hPTIValue.TPTIValueList = TPTIVales_List;
-
-                HPTIValues_List.Add(hPTIValue);
             }
 
-            return HPTIValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue> ToHPKCValueList(KMPs.KMPFormat.KMPSection.HPKC_Section HPKC, KMPs.KMPFormat.KMPSection.TPKC_Section TPKC)
-        {
-            List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue> HPKCValues_List = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>();
-
-            for (int HPKCCount = 0; HPKCCount < HPKC.NumOfEntries; HPKCCount++)
+            public HPLG_TPLG_Section(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
             {
-                KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue hPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue
+                for (int i = 0; i < xXXXRoute.Groups.Count; i++)
                 {
-                    GroupID = HPKCCount,
-                    HPKC_PreviewGroup = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.HPKC_PreviewGroups
-                    {
-                        Prev0 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev0,
-                        Prev1 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev1,
-                        Prev2 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev2,
-                        Prev3 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev3,
-                        Prev4 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev4,
-                        Prev5 = HPKC.HPKCValue_List[HPKCCount].HPKC_PreviewGroup.Prev5
-                    },
-                    HPKC_NextGroup = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.HPKC_NextGroups
-                    {
-                        Next0 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next0,
-                        Next1 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next1,
-                        Next2 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next2,
-                        Next3 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next3,
-                        Next4 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next4,
-                        Next5 = HPKC.HPKCValue_List[HPKCCount].HPKC_NextGroup.Next5
-                    },
-                    HPKC_UnkBytes1 = HPKC.HPKCValue_List[HPKCCount].HPKC_UnkBytes1,
-                    TPKCValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue> TPKCValues_List = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue>();
-
-                for (int Count = 0; Count < HPKC.HPKCValue_List[HPKCCount].HPKC_Length; Count++)
-                {
-                    KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue tPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue
-                    {
-                        Group_ID = HPKCCount,
-                        ID = Count,
-                        Position_2D_Left = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Left
-                        {
-                            X = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.X,
-                            Y = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Left.Y
-                        },
-                        Position_2D_Right = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Right
-                        {
-                            X = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.X,
-                            Y = (float)TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_2DPosition_Right.Y
-                        },
-                        TPKC_RespawnID = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_RespawnID,
-                        TPKC_Checkpoint_Type = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_Checkpoint_Type,
-                        TPKC_PreviousCheckPoint = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_PreviousCheckPoint,
-                        TPKC_NextCheckPoint = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_NextCheckPoint,
-                        TPKC_ClipID = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_ClipID,
-                        TPKC_Section = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_Section,
-                        TPKC_UnkBytes3 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes3,
-                        TPKC_UnkBytes4 = TPKC.TPKCValue_List[Count + HPKC.HPKCValue_List[HPKCCount].HPKC_StartPoint].TPKC_UnkBytes4
-                    };
-
-                    TPKCValues_List.Add(tPKCValue);
+                    HPLGValueList.Add(new HPLGValue(xXXXRoute.Groups[i], i));
                 }
-
-                hPKCValue.TPKCValueList = TPKCValues_List;
-
-                HPKCValues_List.Add(hPKCValue);
             }
-
-            return HPKCValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(KMPs.KMPFormat.KMPSection.JBOG_Section JBOG, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB)
-        {
-            List<KMPPropertyGridSettings.JBOG_section.JBOGValue> JBOGValues_List = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>();
-
-            for (int Count = 0; Count < JBOG.NumOfEntries; Count++)
-            {
-                string Name = ObjFlowDB.Find(x => x.ObjectID == BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
-
-                KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
-                {
-                    ID = Count,
-                    ObjectName = Name,
-                    ObjectID = BitConverter.ToString(JBOG.JBOGValue_List[Count].ObjectID.Reverse().ToArray()).Replace("-", string.Empty),
-                    JBOG_UnkByte1 = BitConverter.ToString(JBOG.JBOGValue_List[Count].JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty),
-                    Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
-                    {
-                        X = (float)JBOG.JBOGValue_List[Count].JBOG_Position.X,
-                        Y = (float)JBOG.JBOGValue_List[Count].JBOG_Position.Y,
-                        Z = (float)JBOG.JBOGValue_List[Count].JBOG_Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Rotation
-                    {
-                        X = HTK_3DES.TSRSystem.RadianToAngle(JBOG.JBOGValue_List[Count].JBOG_Rotation.X),
-                        Y = HTK_3DES.TSRSystem.RadianToAngle(JBOG.JBOGValue_List[Count].JBOG_Rotation.Y),
-                        Z = HTK_3DES.TSRSystem.RadianToAngle(JBOG.JBOGValue_List[Count].JBOG_Rotation.Z)
-                    },
-                    Scales = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Scale
-                    {
-                        X = (float)JBOG.JBOGValue_List[Count].JBOG_Scale.X,
-                        Y = (float)JBOG.JBOGValue_List[Count].JBOG_Scale.Y,
-                        Z = (float)JBOG.JBOGValue_List[Count].JBOG_Scale.Z
-                    },
-                    JBOG_ITOP_RouteIDIndex = JBOG.JBOGValue_List[Count].JBOG_ITOP_RouteIDIndex,
-                    JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
-                    {
-                        Value0 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value0,
-                        Value1 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value1,
-                        Value2 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value2,
-                        Value3 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value3,
-                        Value4 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value4,
-                        Value5 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value5,
-                        Value6 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value6,
-                        Value7 = JBOG.JBOGValue_List[Count].GOBJ_Specific_Setting.Value7
-                    },
-                    JBOG_PresenceSetting = JBOG.JBOGValue_List[Count].JBOG_PresenceSetting,
-                    JBOG_UnkByte2 = BitConverter.ToString(JBOG.JBOGValue_List[Count].JBOG_UnkByte2.Reverse().ToArray()).Replace("-", string.Empty),
-                    JBOG_UnkByte3 = JBOG.JBOGValue_List[Count].JBOG_UnkByte3
-                };
-
-                JBOGValues_List.Add(jBOGValue);
-            }
-
-            return JBOGValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route> ToITOPValueList(KMPs.KMPFormat.KMPSection.ITOP_Section ITOP)
-        {
-            List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route> ITOPRoutes_List = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>();
-
-            for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP.ITOP_NumberOfRoute; ITOP_RoutesCount++)
-            {
-                KMPPropertyGridSettings.ITOP_Section.ITOP_Route ITOPRoute = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route
-                {
-                    GroupID = ITOP_RoutesCount,
-                    ITOP_Roop = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_RoopSetting,
-                    ITOP_Smooth = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_SmoothSetting,
-                    ITOP_PointList = null
-                };
-
-                List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point> ITOPPoints_List = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point>();
-
-                for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
-                {
-                    KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point ITOPPoint = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point
-                    {
-                        GroupID = ITOP_RoutesCount,
-                        ID = ITOP_PointsCount,
-                        Positions = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point.Position
-                        {
-                            X = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.X,
-                            Y = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Y,
-                            Z = (float)ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_Position.Z
-                        },
-                        ITOP_Point_RouteSpeed = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_Point_RouteSpeed,
-                        ITOP_PointSetting2 = ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Point_List[ITOP_PointsCount].ITOP_PointSetting2
-                    };
-
-                    ITOPPoints_List.Add(ITOPPoint);
-
-                }
-
-                ITOPRoute.ITOP_PointList = ITOPPoints_List;
-                ITOPRoutes_List.Add(ITOPRoute);
-            }
-
-            return ITOPRoutes_List;
-        }
-
-        public static List<KMPPropertyGridSettings.AERA_Section.AERAValue> ToAERAValueList(KMPs.KMPFormat.KMPSection.AERA_Section AERA)
-        {
-            List<KMPPropertyGridSettings.AERA_Section.AERAValue> AERAValues_List = new List<KMPPropertyGridSettings.AERA_Section.AERAValue>();
-
-            for (int AERACount = 0; AERACount < AERA.NumOfEntries; AERACount++)
-            {
-                KMPPropertyGridSettings.AERA_Section.AERAValue AERAValue = new KMPPropertyGridSettings.AERA_Section.AERAValue
-                {
-                    ID = AERACount,
-                    AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
-                    {
-                        AreaModeValue = AERA.AERAValue_List[AERACount].AreaMode
-                    },
-                    AreaType = AERA.AERAValue_List[AERACount].AreaType,
-                    AERA_EMACIndex = AERA.AERAValue_List[AERACount].AERA_EMACIndex,
-                    Priority = AERA.AERAValue_List[AERACount].Priority,
-                    Positions = new KMPPropertyGridSettings.AERA_Section.AERAValue.Position
-                    {
-                        X = (float)AERA.AERAValue_List[AERACount].AERA_Position.X,
-                        Y = (float)AERA.AERAValue_List[AERACount].AERA_Position.Y,
-                        Z = (float)AERA.AERAValue_List[AERACount].AERA_Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.AERA_Section.AERAValue.Rotation
-                    {
-                        X = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.X),
-                        Y = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.Y),
-                        Z = HTK_3DES.TSRSystem.RadianToAngle(AERA.AERAValue_List[AERACount].AERA_Rotation.Z)
-                    },
-                    Scales = new KMPPropertyGridSettings.AERA_Section.AERAValue.Scale
-                    {
-                        X = (float)AERA.AERAValue_List[AERACount].AERA_Scale.X,
-                        Y = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Y,
-                        Z = (float)AERA.AERAValue_List[AERACount].AERA_Scale.Z
-                    },
-                    AERA_Setting1 = AERA.AERAValue_List[AERACount].AERA_Setting1,
-                    AERA_Setting2 = AERA.AERAValue_List[AERACount].AERA_Setting2,
-                    RouteID = AERA.AERAValue_List[AERACount].RouteID,
-                    EnemyID = AERA.AERAValue_List[AERACount].EnemyID,
-                    AERA_UnkByte4 = AERA.AERAValue_List[AERACount].AERA_UnkByte4
-                };
-
-                AERAValues_List.Add(AERAValue);
-            }
-
-            return AERAValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.EMAC_Section.EMACValue> ToEMACValueList(KMPs.KMPFormat.KMPSection.EMAC_Section EMAC)
-        {
-            List<KMPPropertyGridSettings.EMAC_Section.EMACValue> EMACValues_List = new List<KMPPropertyGridSettings.EMAC_Section.EMACValue>();
-
-            for (int EMACCount = 0; EMACCount < EMAC.NumOfEntries; EMACCount++)
-            {
-                KMPPropertyGridSettings.EMAC_Section.EMACValue EMACValue = new KMPPropertyGridSettings.EMAC_Section.EMACValue
-                {
-                    ID = EMACCount,
-                    CameraType = EMAC.EMACValue_List[EMACCount].CameraType,
-                    NextCameraIndex = EMAC.EMACValue_List[EMACCount].NextCameraIndex,
-                    EMAC_NextVideoIndex = EMAC.EMACValue_List[EMACCount].EMAC_NextVideoIndex,
-                    EMAC_ITOP_CameraIndex = EMAC.EMACValue_List[EMACCount].EMAC_ITOP_CameraIndex,
-                    SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
-                    {
-                        RouteSpeed = EMAC.EMACValue_List[EMACCount].RouteSpeed,
-                        FOVSpeed = EMAC.EMACValue_List[EMACCount].FOVSpeed,
-                        ViewpointSpeed = EMAC.EMACValue_List[EMACCount].ViewpointSpeed
-                    },
-                    EMAC_StartFlag = EMAC.EMACValue_List[EMACCount].EMAC_StartFlag,
-                    EMAC_VideoFlag = EMAC.EMACValue_List[EMACCount].EMAC_VideoFlag,
-                    Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
-                    {
-                        X = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.X,
-                        Y = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.Y,
-                        Z = (float)EMAC.EMACValue_List[EMACCount].EMAC_Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation
-                    {
-                        X = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.X),
-                        Y = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Y),
-                        Z = HTK_3DES.TSRSystem.RadianToAngle(EMAC.EMACValue_List[EMACCount].EMAC_Rotation.Z)
-                    },
-                    FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
-                    {
-                        FOVAngle_Start = EMAC.EMACValue_List[EMACCount].FOVAngle_Start,
-                        FOVAngle_End = EMAC.EMACValue_List[EMACCount].FOVAngle_End
-                    },
-                    Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
-                    {
-                        X = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.X,
-                        Y = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Y,
-                        Z = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Start.Z
-                    },
-                    Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
-                    {
-                        X = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.X,
-                        Y = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Y,
-                        Z = (float)EMAC.EMACValue_List[EMACCount].Viewpoint_Destination.Z
-                    },
-                    Camera_Active_Time = EMAC.EMACValue_List[EMACCount].Camera_Active_Time
-                };
-
-                EMACValues_List.Add(EMACValue);
-            }
-
-            return EMACValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue> ToTPGJValueList(KMPs.KMPFormat.KMPSection.TPGJ_Section TPGJ)
-        {
-            List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue> TPGJValues_List = new List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>();
-
-            for (int TPGJCount = 0; TPGJCount < TPGJ.NumOfEntries; TPGJCount++)
-            {
-                KMPPropertyGridSettings.TPGJ_Section.TPGJValue TPGJValue = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue
-                {
-                    ID = TPGJCount,
-                    TPGJ_RespawnID = TPGJ.TPGJValue_List[TPGJCount].TPGJ_RespawnID,
-                    Positions = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Position
-                    {
-                        X = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.X,
-                        Y = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Y,
-                        Z = (float)TPGJ.TPGJValue_List[TPGJCount].TPGJ_Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Rotation
-                    {
-                        X = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.X),
-                        Y = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Y),
-                        Z = HTK_3DES.TSRSystem.RadianToAngle(TPGJ.TPGJValue_List[TPGJCount].TPGJ_Rotation.Z)
-                    },
-                    TPGJ_UnkBytes1 = TPGJ.TPGJValue_List[TPGJCount].TPGJ_UnkBytes1
-                };
-
-                TPGJValues_List.Add(TPGJValue);
-            }
-
-            return TPGJValues_List;
-        }
-
-        public static KMPPropertyGridSettings.IGTS_Section ToIGTSValue(KMPs.KMPFormat.KMPSection.IGTS_Section IGTS)
-        {
-            KMPPropertyGridSettings.IGTS_Section IGTS_Section = new KMPPropertyGridSettings.IGTS_Section
-            {
-                Unknown1 = IGTS.Unknown1,
-                LapCount = IGTS.LapCount,
-                PolePosition = IGTS.PolePosition,
-                Unknown2 = IGTS.Unknown2,
-                Unknown3 = IGTS.Unknown3,
-                RGBAColor = new KMPPropertyGridSettings.IGTS_Section.RGBA
-                {
-                    R = IGTS.RGBAColor.R,
-                    G = IGTS.RGBAColor.G,
-                    B = IGTS.RGBAColor.B,
-                    A = IGTS.RGBAColor.A
-                },
-                FlareAlpha = IGTS.FlareAlpha
-            };
-
-            return IGTS_Section;
-        }
-
-        public static List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> ToHPLGValueList(KMPs.KMPFormat.KMPSection.HPLG_Section HPLG, KMPs.KMPFormat.KMPSection.TPLG_Section TPLG)
-        {
-            KMPs.KMPHelper.FlagConverter.GlideRoute GlideRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.GlideRoute();
-
-            List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> HPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>();
-
-            for (int i = 0; i < HPLG.NumOfEntries; i++)
-            {
-                KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue HPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue
-                {
-                    GroupID = i,
-                    HPLG_PreviewGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_PreviewGroups
-                    {
-                        Prev0 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev0,
-                        Prev1 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev1,
-                        Prev2 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev2,
-                        Prev3 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev3,
-                        Prev4 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev4,
-                        Prev5 = HPLG.HPLGValue_List[i].HPLG_PreviewGroup.Prev5
-                    },
-                    HPLG_NextGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_NextGroups
-                    {
-                        Next0 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next0,
-                        Next1 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next1,
-                        Next2 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next2,
-                        Next3 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next3,
-                        Next4 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next4,
-                        Next5 = HPLG.HPLGValue_List[i].HPLG_NextGroup.Next5
-                    },
-                    RouteSettings = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.RouteSetting
-                    {
-                        ForceToRoute = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.ForceToRoute),
-                        CannonSection = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.CannonSection),
-                        PreventRaising = GlideRouteFlagConverter.ConvertFlags(HPLG.HPLGValue_List[i].RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.PreventRaising),
-                    },
-                    HPLG_UnkBytes2 = HPLG.HPLGValue_List[i].HPLG_UnkBytes2,
-                    TPLGValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue> TPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue>();
-
-                for (int Count = 0; Count < HPLG.HPLGValue_List[i].HPLG_Length; Count++)
-                {
-                    KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue TPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue
-                    {
-                        GroupID = i,
-                        ID = Count,
-                        Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
-                        {
-                            X = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.X,
-                            Y = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Y,
-                            Z = (float)TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_Position.Z
-                        },
-                        TPLG_PointScaleValue = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_PointScaleValue,
-                        TPLG_UnkBytes1 = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_UnkBytes1,
-                        TPLG_UnkBytes2 = TPLG.TPLGValue_List[Count + HPLG.HPLGValue_List[i].HPLG_StartPoint].TPLG_UnkBytes2
-                    };
-
-                    TPLGValues_List.Add(TPLGValue);
-                }
-
-                HPLGValue.TPLGValueList = TPLGValues_List;
-
-                HPLGValues_List.Add(HPLGValue);
-            }
-
-            return HPLGValues_List;
         }
     }
 
@@ -3010,7 +3657,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
-        public static KMPs.KMPFormat.KMPSection.JBOG_Section ToJBOG_Section(KMPPropertyGridSettings.JBOG_section JBOG_Section)
+        public static KMPs.KMPFormat.KMPSection.JBOG_Section ToJBOG_Section(KMPPropertyGridSettings.JBOG_Section JBOG_Section)
         {
             KMPs.KMPFormat.KMPSection.JBOG_Section JBOG = new KMPs.KMPFormat.KMPSection.JBOG_Section
             {
@@ -3401,859 +4048,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                 return hPLG_TPLGData;
             }
-        }
-    }
-
-    public class PropertyGridClassConverterXML
-    {
-        public static List<KMPPropertyGridSettings.TPTK_Section.TPTKValue> ToTPTKValueList(TestXml.KMPXml.StartPosition TPTK)
-        {
-            List<KMPPropertyGridSettings.TPTK_Section.TPTKValue> TPTKValues_List = new List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>();
-
-            foreach (var StartPosition in TPTK.startPosition_Value.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.TPTK_Section.TPTKValue tPTKValue = new KMPPropertyGridSettings.TPTK_Section.TPTKValue
-                {
-                    ID = StartPosition.index,
-                    Position_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Position
-                    {
-                        X = StartPosition.value.Position.X,
-                        Y = StartPosition.value.Position.Y,
-                        Z = StartPosition.value.Position.Z
-                    },
-                    Rotate_Value = new KMPPropertyGridSettings.TPTK_Section.TPTKValue.Rotation
-                    {
-                        X = StartPosition.value.Rotation.X,
-                        Y = StartPosition.value.Rotation.Y,
-                        Z = StartPosition.value.Rotation.Z
-                    },
-                    Player_Index = StartPosition.value.Player_Index,
-                    TPTK_UnkBytes = StartPosition.value.TPTK_UnkBytes
-                };
-
-                TPTKValues_List.Add(tPTKValue);
-
-            }
-
-            return TPTKValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> ToHPNEValueList(TestXml.KMPXml.EnemyRoute enemyRoute)
-        {
-            KMPs.KMPHelper.FlagConverter.EnemyRoute EnemyRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.EnemyRoute();
-
-            List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> HPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>();
-
-            foreach (var EnemyRoute in enemyRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue hPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue
-                {
-                    GroupID = EnemyRoute.index,
-                    HPNEPreviewGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_PreviewGroups
-                    {
-                        Prev0 = EnemyRoute.value.Prev0,
-                        Prev1 = EnemyRoute.value.Prev1,
-                        Prev2 = EnemyRoute.value.Prev2,
-                        Prev3 = EnemyRoute.value.Prev3,
-                        Prev4 = EnemyRoute.value.Prev4,
-                        Prev5 = EnemyRoute.value.Prev5,
-                        Prev6 = EnemyRoute.value.Prev6,
-                        Prev7 = EnemyRoute.value.Prev7,
-                        Prev8 = EnemyRoute.value.Prev8,
-                        Prev9 = EnemyRoute.value.Prev9,
-                        Prev10 = EnemyRoute.value.Prev10,
-                        Prev11 = EnemyRoute.value.Prev11,
-                        Prev12 = EnemyRoute.value.Prev12,
-                        Prev13 = EnemyRoute.value.Prev13,
-                        Prev14 = EnemyRoute.value.Prev14,
-                        Prev15 = EnemyRoute.value.Prev15,
-                    },
-                    HPNENextGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_NextGroups
-                    {
-                        Next0 = EnemyRoute.value.Next0,
-                        Next1 = EnemyRoute.value.Next1,
-                        Next2 = EnemyRoute.value.Next2,
-                        Next3 = EnemyRoute.value.Next3,
-                        Next4 = EnemyRoute.value.Next4,
-                        Next5 = EnemyRoute.value.Next5,
-                        Next6 = EnemyRoute.value.Next6,
-                        Next7 = EnemyRoute.value.Next7,
-                        Next8 = EnemyRoute.value.Next8,
-                        Next9 = EnemyRoute.value.Next9,
-                        Next10 = EnemyRoute.value.Next10,
-                        Next11 = EnemyRoute.value.Next11,
-                        Next12 = EnemyRoute.value.Next12,
-                        Next13 = EnemyRoute.value.Next13,
-                        Next14 = EnemyRoute.value.Next14,
-                        Next15 = EnemyRoute.value.Next15,
-                    },
-                    HPNE_UnkBytes1 = EnemyRoute.value.Unknown1,
-                    TPNEValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue> TPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue>();
-
-                foreach (var EnemyPoint in EnemyRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue tPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue
-                    {
-                        Group_ID = EnemyRoute.index,
-                        ID = EnemyPoint.index,
-                        Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
-                        {
-                            X = EnemyPoint.value.Position.X,
-                            Y = EnemyPoint.value.Position.Y,
-                            Z = EnemyPoint.value.Position.Z
-                        },
-                        Control = EnemyPoint.value.Control,
-                        MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
-                        {
-                            MushSettingValue = EnemyPoint.value.MushSetting
-                        },
-                        DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
-                        {
-                            DriftSettingValue = EnemyPoint.value.DriftSetting
-                        },
-                        FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
-                        {
-                            WideTurn = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.WideTurn),
-                            NormalTurn = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NormalTurn),
-                            SharpTurn = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.SharpTurn),
-                            TricksForbidden = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.TricksForbidden),
-                            StickToRoute = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
-                            BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
-                            ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(EnemyPoint.value.Flags, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
-                        },
-                        PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
-                        {
-                            PathFindOptionValue = EnemyPoint.value.PathFindOption
-                        },
-                        MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
-                        {
-                            MaxSearchYOffsetValue = EnemyPoint.value.MaxSearchYOffset
-                        }
-                    };
-
-                    TPNEValues_List.Add(tPNEValue);
-                }
-
-                hPNEValue.TPNEValueList = TPNEValues_List;
-
-                HPNEValues_List.Add(hPNEValue);
-            }
-
-            return HPNEValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> ToHPTIValueList(TestXml.KMPXml.ItemRoute itemRoute)
-        {
-            List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> HPTIValues_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>();
-
-            foreach (var ItemRoute in itemRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue hPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue
-                {
-                    GroupID = ItemRoute.index,
-                    HPTI_PreviewGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_PreviewGroups
-                    {
-                        Prev0 = ItemRoute.value.Prev0,
-                        Prev1 = ItemRoute.value.Prev1,
-                        Prev2 = ItemRoute.value.Prev2,
-                        Prev3 = ItemRoute.value.Prev3,
-                        Prev4 = ItemRoute.value.Prev4,
-                        Prev5 = ItemRoute.value.Prev5
-                    },
-                    HPTI_NextGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_NextGroups
-                    {
-                        Next0 = ItemRoute.value.Next0,
-                        Next1 = ItemRoute.value.Next1,
-                        Next2 = ItemRoute.value.Next2,
-                        Next3 = ItemRoute.value.Next3,
-                        Next4 = ItemRoute.value.Next4,
-                        Next5 = ItemRoute.value.Next5
-                    },
-                    TPTIValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue> TPTIVales_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue>();
-
-                foreach (var ItemPoint in ItemRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue tPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue
-                    {
-                        Group_ID = ItemRoute.index,
-                        ID = ItemPoint.index,
-                        TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
-                        {
-                            X = ItemPoint.value.Position.X,
-                            Y = ItemPoint.value.Position.Y,
-                            Z = ItemPoint.value.Position.Z
-                        },
-                        TPTI_PointSize = ItemPoint.value.PointSize,
-                        GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
-                        {
-                            GravityModeValue = ItemPoint.value.GravityMode
-                        },
-                        PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
-                        {
-                            PlayerScanRadiusValue = ItemPoint.value.PlayerScanRadius
-                        }
-                    };
-
-                    TPTIVales_List.Add(tPTIValue);
-                }
-
-                hPTIValue.TPTIValueList = TPTIVales_List;
-
-                HPTIValues_List.Add(hPTIValue);
-            }
-
-            return HPTIValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue> ToHPKCValueList(TestXml.KMPXml.Checkpoint checkpoint)
-        {
-            List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue> HPKCValues_List = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>();
-
-            foreach (var Checkpoint_Group in checkpoint.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue hPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue
-                {
-                    GroupID = Checkpoint_Group.index,
-                    HPKC_PreviewGroup = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.HPKC_PreviewGroups
-                    {
-                        Prev0 = Checkpoint_Group.value.Prev0,
-                        Prev1 = Checkpoint_Group.value.Prev1,
-                        Prev2 = Checkpoint_Group.value.Prev2,
-                        Prev3 = Checkpoint_Group.value.Prev3,
-                        Prev4 = Checkpoint_Group.value.Prev4,
-                        Prev5 = Checkpoint_Group.value.Prev5
-                    },
-                    HPKC_NextGroup = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.HPKC_NextGroups
-                    {
-                        Next0 = Checkpoint_Group.value.Next0,
-                        Next1 = Checkpoint_Group.value.Next1,
-                        Next2 = Checkpoint_Group.value.Next2,
-                        Next3 = Checkpoint_Group.value.Next3,
-                        Next4 = Checkpoint_Group.value.Next4,
-                        Next5 = Checkpoint_Group.value.Next5
-                    },
-                    HPKC_UnkBytes1 = Checkpoint_Group.value.UnkBytes1,
-                    TPKCValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue> TPKCValues_List = new List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue>();
-
-                foreach (var Checkpoint_Point in Checkpoint_Group.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue tPKCValue = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue
-                    {
-                        Group_ID = Checkpoint_Group.index,
-                        ID = Checkpoint_Point.index,
-                        Position_2D_Left = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Left
-                        {
-                            X = Checkpoint_Point.value.Position_2D_Left.X,
-                            Y = Checkpoint_Point.value.Position_2D_Left.Y
-                        },
-                        Position_2D_Right = new KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue.TPKCValue.Position2D_Right
-                        {
-                            X = Checkpoint_Point.value.Position_2D_Right.X,
-                            Y = Checkpoint_Point.value.Position_2D_Right.Y
-                        },
-                        TPKC_RespawnID = Checkpoint_Point.value.RespawnID,
-                        TPKC_Checkpoint_Type = Checkpoint_Point.value.Checkpoint_Type,
-                        TPKC_PreviousCheckPoint = Checkpoint_Point.value.PreviousCheckPoint,
-                        TPKC_NextCheckPoint = Checkpoint_Point.value.NextCheckPoint,
-                        TPKC_ClipID = Checkpoint_Point.value.UnkBytes1,
-                        TPKC_Section = Checkpoint_Point.value.UnkBytes2,
-                        TPKC_UnkBytes3 = Checkpoint_Point.value.UnkBytes3,
-                        TPKC_UnkBytes4 = Checkpoint_Point.value.UnkBytes4
-                    };
-
-                    TPKCValues_List.Add(tPKCValue);
-                }
-
-                hPKCValue.TPKCValueList = TPKCValues_List;
-
-                HPKCValues_List.Add(hPKCValue);
-            }
-
-            return HPKCValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.JBOG_section.JBOGValue> ToJBOGValueList(TestXml.KMPXml.Object Objects)
-        {
-            List<KMPPropertyGridSettings.JBOG_section.JBOGValue> JBOGValues_List = new List<KMPPropertyGridSettings.JBOG_section.JBOGValue>();
-
-            foreach (var Object in Objects.Object_Values.Select((value, index) => new { value, index }))
-            {
-                List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> ObjFlowDB_FindName = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
-                string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == Object.value.ObjectID).ObjectName;
-
-                KMPPropertyGridSettings.JBOG_section.JBOGValue jBOGValue = new KMPPropertyGridSettings.JBOG_section.JBOGValue
-                {
-                    ID = Object.index,
-                    ObjectName = Name,
-                    ObjectID = Object.value.ObjectID,
-                    JBOG_UnkByte1 = Object.value.UnkByte1,
-                    Positions = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Position
-                    {
-                        X = Object.value.Position.X,
-                        Y = Object.value.Position.Y,
-                        Z = Object.value.Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Rotation
-                    {
-                        X = Object.value.Rotation.X,
-                        Y = Object.value.Rotation.Y,
-                        Z = Object.value.Rotation.Z
-                    },
-                    Scales = new KMPPropertyGridSettings.JBOG_section.JBOGValue.Scale
-                    {
-                        X = Object.value.Scale.X,
-                        Y = Object.value.Scale.Y,
-                        Z = Object.value.Scale.Z
-                    },
-                    JBOG_ITOP_RouteIDIndex = Object.value.RouteIDIndex,
-                    JOBJ_Specific_Setting = new KMPPropertyGridSettings.JBOG_section.JBOGValue.JBOG_SpecificSetting
-                    {
-                        Value0 = Object.value.SpecificSetting.Value0,
-                        Value1 = Object.value.SpecificSetting.Value1,
-                        Value2 = Object.value.SpecificSetting.Value2,
-                        Value3 = Object.value.SpecificSetting.Value3,
-                        Value4 = Object.value.SpecificSetting.Value4,
-                        Value5 = Object.value.SpecificSetting.Value5,
-                        Value6 = Object.value.SpecificSetting.Value6,
-                        Value7 = Object.value.SpecificSetting.Value7
-                    },
-                    JBOG_PresenceSetting = Object.value.PresenceSetting,
-                    JBOG_UnkByte2 = Object.value.UnkByte2,
-                    JBOG_UnkByte3 = Object.value.UnkByte3
-                };
-
-                JBOGValues_List.Add(jBOGValue);
-            }
-
-            return JBOGValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route> ToITOPValueList(TestXml.KMPXml.Route route)
-        {
-            List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route> ITOPRoutes_List = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>();
-
-            foreach (var Route_Group in route.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.ITOP_Section.ITOP_Route ITOPRoute = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route
-                {
-                    GroupID = Route_Group.index,
-                    ITOP_Roop = Route_Group.value.RouteSetting1,
-                    ITOP_Smooth = Route_Group.value.RouteSetting2,
-                    ITOP_PointList = null
-                };
-
-                List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point> ITOPPoints_List = new List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point>();
-
-                foreach (var Route_Point in Route_Group.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point ITOPPoint = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point
-                    {
-                        GroupID = Route_Group.index,
-                        ID = Route_Point.index,
-                        Positions = new KMPPropertyGridSettings.ITOP_Section.ITOP_Route.ITOP_Point.Position
-                        {
-                            X = Route_Point.value.Position.X,
-                            Y = Route_Point.value.Position.Y,
-                            Z = Route_Point.value.Position.Z
-                        },
-                        ITOP_Point_RouteSpeed = Route_Point.value.RouteSpeed,
-                        ITOP_PointSetting2 = Route_Point.value.PointSetting2
-                    };
-
-                    ITOPPoints_List.Add(ITOPPoint);
-                }
-
-                ITOPRoute.ITOP_PointList = ITOPPoints_List;
-                ITOPRoutes_List.Add(ITOPRoute);
-            }
-
-            return ITOPRoutes_List;
-        }
-
-        public static List<KMPPropertyGridSettings.AERA_Section.AERAValue> ToAERAValueList(TestXml.KMPXml.Area area)
-        {
-            List<KMPPropertyGridSettings.AERA_Section.AERAValue> AERAValues_List = new List<KMPPropertyGridSettings.AERA_Section.AERAValue>();
-
-            foreach (var Area in area.Area_Values.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.AERA_Section.AERAValue AERAValue = new KMPPropertyGridSettings.AERA_Section.AERAValue
-                {
-                    ID = Area.index,
-                    AreaModeSettings = new KMPPropertyGridSettings.AERA_Section.AERAValue.AreaModeSetting
-                    {
-                        AreaModeValue = Area.value.AreaMode
-                    },
-                    AreaType = Area.value.AreaType,
-                    AERA_EMACIndex = Area.value.CameraIndex,
-                    Priority = Area.value.Priority,
-                    Positions = new KMPPropertyGridSettings.AERA_Section.AERAValue.Position
-                    {
-                        X = Area.value.Position.X,
-                        Y = Area.value.Position.Y,
-                        Z = Area.value.Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.AERA_Section.AERAValue.Rotation
-                    {
-                        X = Area.value.Rotation.X,
-                        Y = Area.value.Rotation.Y,
-                        Z = Area.value.Rotation.Z
-                    },
-                    Scales = new KMPPropertyGridSettings.AERA_Section.AERAValue.Scale
-                    {
-                        X = Area.value.Scale.X,
-                        Y = Area.value.Scale.Y,
-                        Z = Area.value.Scale.Z
-                    },
-                    AERA_Setting1 = Area.value.UnkByte1,
-                    AERA_Setting2 = Area.value.UnkByte2,
-                    RouteID = Area.value.RouteID,
-                    EnemyID = Area.value.EnemyID,
-                    AERA_UnkByte4 = Area.value.UnkByte4
-                };
-
-                AERAValues_List.Add(AERAValue);
-            }
-
-            return AERAValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.EMAC_Section.EMACValue> ToEMACValueList(TestXml.KMPXml.Camera camera)
-        {
-            List<KMPPropertyGridSettings.EMAC_Section.EMACValue> EMACValues_List = new List<KMPPropertyGridSettings.EMAC_Section.EMACValue>();
-
-            foreach (var Camera in camera.Values.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.EMAC_Section.EMACValue EMACValue = new KMPPropertyGridSettings.EMAC_Section.EMACValue
-                {
-                    ID = Camera.index,
-                    CameraType = Camera.value.CameraType,
-                    NextCameraIndex = Camera.value.NextCameraIndex,
-                    EMAC_NextVideoIndex = Camera.value.UnkBytes1,
-                    EMAC_ITOP_CameraIndex = Camera.value.Route_CameraIndex,
-                    SpeedSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.SpeedSetting
-                    {
-                        RouteSpeed = Camera.value.SpeedSetting.RouteSpeed,
-                        FOVSpeed = Camera.value.SpeedSetting.FOVSpeed,
-                        ViewpointSpeed = Camera.value.SpeedSetting.ViewpointSpeed
-                    },
-                    EMAC_StartFlag = Camera.value.UnkBytes2,
-                    EMAC_VideoFlag = Camera.value.UnkBytes3,
-                    Positions = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Position
-                    {
-                        X = Camera.value.Position.X,
-                        Y = Camera.value.Position.Y,
-                        Z = Camera.value.Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.EMAC_Section.EMACValue.Rotation
-                    {
-                        X = Camera.value.Rotation.X,
-                        Y = Camera.value.Rotation.Y,
-                        Z = Camera.value.Rotation.Z
-                    },
-                    FOVAngleSettings = new KMPPropertyGridSettings.EMAC_Section.EMACValue.FOVAngleSetting
-                    {
-                        FOVAngle_Start = Camera.value.FOVAngleSettings.Start,
-                        FOVAngle_End = Camera.value.FOVAngleSettings.End
-                    },
-                    Viewpoint_Start = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointStart
-                    {
-                        X = Camera.value.ViewpointStart.X,
-                        Y = Camera.value.ViewpointStart.Y,
-                        Z = Camera.value.ViewpointStart.Z
-                    },
-                    Viewpoint_Destination = new KMPPropertyGridSettings.EMAC_Section.EMACValue.ViewpointDestination
-                    {
-                        X = Camera.value.ViewpointDestination.X,
-                        Y = Camera.value.ViewpointDestination.Y,
-                        Z = Camera.value.ViewpointDestination.Z
-                    },
-                    Camera_Active_Time = Camera.value.CameraActiveTime
-                };
-
-                EMACValues_List.Add(EMACValue);
-            }
-
-            return EMACValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue> ToTPGJValueList(TestXml.KMPXml.JugemPoint jugemPoint)
-        {
-            List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue> TPGJValues_List = new List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>();
-
-            foreach (var JugemPoint in jugemPoint.Values.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.TPGJ_Section.TPGJValue TPGJValue = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue
-                {
-                    ID = JugemPoint.index,
-                    TPGJ_RespawnID = JugemPoint.value.RespawnID,
-                    Positions = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Position
-                    {
-                        X = JugemPoint.value.Position.X,
-                        Y = JugemPoint.value.Position.Y,
-                        Z = JugemPoint.value.Position.Z
-                    },
-                    Rotations = new KMPPropertyGridSettings.TPGJ_Section.TPGJValue.Rotation
-                    {
-                        X = JugemPoint.value.Rotation.X,
-                        Y = JugemPoint.value.Rotation.Y,
-                        Z = JugemPoint.value.Rotation.Z
-                    },
-                    TPGJ_UnkBytes1 = JugemPoint.value.UnkBytes1
-                };
-
-                TPGJValues_List.Add(TPGJValue);
-            }
-
-            return TPGJValues_List;
-        }
-
-        public static KMPPropertyGridSettings.IGTS_Section ToIGTSValue(TestXml.KMPXml.StageInfo stageInfo)
-        {
-            KMPPropertyGridSettings.IGTS_Section IGTS_Section = new KMPPropertyGridSettings.IGTS_Section
-            {
-                Unknown1 = stageInfo.Unknown1,
-                LapCount = stageInfo.LapCount,
-                PolePosition = stageInfo.PolePosition,
-                Unknown2 = stageInfo.Unknown2,
-                Unknown3 = stageInfo.Unknown3,
-                RGBAColor = new KMPPropertyGridSettings.IGTS_Section.RGBA
-                {
-                    R = stageInfo.RGBAColor.R,
-                    G = stageInfo.RGBAColor.G,
-                    B = stageInfo.RGBAColor.B,
-                    A = stageInfo.RGBAColor.A
-                },
-                FlareAlpha = stageInfo.RGBAColor.FlareAlpha
-            };
-
-            return IGTS_Section;
-        }
-
-        public static List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> ToHPLGValueList(TestXml.KMPXml.GlideRoute glideRoute)
-        {
-            KMPs.KMPHelper.FlagConverter.GlideRoute GlideRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.GlideRoute();
-
-            List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> HPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>();
-
-            foreach (var GlideRoute in glideRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue HPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue
-                {
-                    GroupID = GlideRoute.index,
-                    HPLG_PreviewGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_PreviewGroups
-                    {
-                        Prev0 = GlideRoute.value.Prev0,
-                        Prev1 = GlideRoute.value.Prev1,
-                        Prev2 = GlideRoute.value.Prev2,
-                        Prev3 = GlideRoute.value.Prev3,
-                        Prev4 = GlideRoute.value.Prev4,
-                        Prev5 = GlideRoute.value.Prev5
-                    },
-                    HPLG_NextGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_NextGroups
-                    {
-                        Next0 = GlideRoute.value.Next0,
-                        Next1 = GlideRoute.value.Next1,
-                        Next2 = GlideRoute.value.Next2,
-                        Next3 = GlideRoute.value.Next3,
-                        Next4 = GlideRoute.value.Next4,
-                        Next5 = GlideRoute.value.Next5
-                    },
-                    RouteSettings = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.RouteSetting
-                    {
-                        ForceToRoute = GlideRouteFlagConverter.ConvertFlags(GlideRoute.value.RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.ForceToRoute),
-                        CannonSection = GlideRouteFlagConverter.ConvertFlags(GlideRoute.value.RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.CannonSection),
-                        PreventRaising = GlideRouteFlagConverter.ConvertFlags(GlideRoute.value.RouteSetting, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.PreventRaising),
-                    },
-                    HPLG_UnkBytes2 = GlideRoute.value.UnkBytes2,
-                    TPLGValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue> TPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue>();
-
-                foreach (var GlidePoint in GlideRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue TPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue
-                    {
-                        GroupID = GlideRoute.index,
-                        ID = GlidePoint.index,
-                        Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
-                        {
-                            X = GlidePoint.value.Position.X,
-                            Y = GlidePoint.value.Position.Y,
-                            Z = GlidePoint.value.Position.Z
-                        },
-                        TPLG_PointScaleValue = GlidePoint.value.PointScale,
-                        TPLG_UnkBytes1 = GlidePoint.value.UnkBytes1,
-                        TPLG_UnkBytes2 = GlidePoint.value.UnkBytes2
-                    };
-
-                    TPLGValues_List.Add(TPLGValue);
-                }
-
-                HPLGValue.TPLGValueList = TPLGValues_List;
-
-                HPLGValues_List.Add(HPLGValue);
-
-            }
-
-            return HPLGValues_List;
-        }
-    }
-
-    public class PropertyGridClassConverterXML_XXXXRoute
-    {
-        public static List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> ToHPNEValueList(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
-        {
-            KMPs.KMPHelper.FlagConverter.EnemyRoute EnemyRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.EnemyRoute();
-
-            List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue> HPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>();
-
-            foreach (var XXXXRoute in xXXXRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue hPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue
-                {
-                    GroupID = XXXXRoute.index,
-                    HPNEPreviewGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_PreviewGroups
-                    {
-                        Prev0 = 255,
-                        Prev1 = 255,
-                        Prev2 = 255,
-                        Prev3 = 255,
-                        Prev4 = 255,
-                        Prev5 = 255,
-                        Prev6 = 255,
-                        Prev7 = 255,
-                        Prev8 = 255,
-                        Prev9 = 255,
-                        Prev10 = 255,
-                        Prev11 = 255,
-                        Prev12 = 255,
-                        Prev13 = 255,
-                        Prev14 = 255,
-                        Prev15 = 255
-                    },
-                    HPNENextGroups = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.HPNE_NextGroups
-                    {
-                        Next0 = 255,
-                        Next1 = 255,
-                        Next2 = 255,
-                        Next3 = 255,
-                        Next4 = 255,
-                        Next5 = 255,
-                        Next6 = 255,
-                        Next7 = 255,
-                        Next8 = 255,
-                        Next9 = 255,
-                        Next10 = 255,
-                        Next11 = 255,
-                        Next12 = 255,
-                        Next13 = 255,
-                        Next14 = 255,
-                        Next15 = 255
-                    },
-                    HPNE_UnkBytes1 = 0,
-                    TPNEValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue> TPNEValues_List = new List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue>();
-
-                foreach (var EnemyPoint in XXXXRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue tPNEValue = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue
-                    {
-                        Group_ID = XXXXRoute.index,
-                        ID = EnemyPoint.index,
-                        Positions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.Position
-                        {
-                            X = EnemyPoint.value.Position.X,
-                            Y = EnemyPoint.value.Position.Y,
-                            Z = EnemyPoint.value.Position.Z
-                        },
-                        Control = EnemyPoint.value.ScaleValue,
-                        MushSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MushSetting
-                        {
-                            MushSettingValue = 0
-                        },
-                        DriftSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.DriftSetting
-                        {
-                            DriftSettingValue = 0
-                        },
-                        FlagSettings = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.FlagSetting
-                        {
-                            WideTurn = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.WideTurn),
-                            NormalTurn = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NormalTurn),
-                            SharpTurn = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.SharpTurn),
-                            TricksForbidden = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.TricksForbidden),
-                            StickToRoute = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.StickToRoute),
-                            BouncyMushSection = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.BouncyMushSection),
-                            ForceDefaultSpeed = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.ForceDefaultSpeed),
-                            NoPathSwitch = EnemyRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.EnemyRoute.FlagType.NoPathSwitch),
-                        },
-                        PathFindOptions = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.PathFindOption
-                        {
-                            PathFindOptionValue = 0
-                        },
-                        MaxSearchYOffset = new KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue.TPNEValue.MaxSearch_YOffset
-                        {
-                            MaxSearchYOffsetValue = 0
-                        }
-                    };
-
-                    TPNEValues_List.Add(tPNEValue);
-                }
-
-                hPNEValue.TPNEValueList = TPNEValues_List;
-
-                HPNEValues_List.Add(hPNEValue);
-            }
-
-            return HPNEValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> ToHPTIValueList(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
-        {
-            List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue> HPTIValues_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>();
-
-            foreach (var ItemRoute in xXXXRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue hPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue
-                {
-                    GroupID = ItemRoute.index,
-                    HPTI_PreviewGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_PreviewGroups
-                    {
-                        Prev0 = 255,
-                        Prev1 = 255,
-                        Prev2 = 255,
-                        Prev3 = 255,
-                        Prev4 = 255,
-                        Prev5 = 255
-                    },
-                    HPTI_NextGroup = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.HPTI_NextGroups
-                    {
-                        Next0 = 255,
-                        Next1 = 255,
-                        Next2 = 255,
-                        Next3 = 255,
-                        Next4 = 255,
-                        Next5 = 255
-                    },
-                    TPTIValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue> TPTIVales_List = new List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue>();
-
-                foreach (var ItemPoint in ItemRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue tPTIValue = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue
-                    {
-                        Group_ID = ItemRoute.index,
-                        ID = ItemPoint.index,
-                        TPTI_Positions = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.TPTI_Position
-                        {
-                            X = ItemPoint.value.Position.X,
-                            Y = ItemPoint.value.Position.Y,
-                            Z = ItemPoint.value.Position.Z
-                        },
-                        TPTI_PointSize = ItemPoint.value.ScaleValue,
-                        GravityModeSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.GravityModeSetting
-                        {
-                            GravityModeValue = 0
-                        },
-                        PlayerScanRadiusSettings = new KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue.TPTIValue.PlayerScanRadiusSetting
-                        {
-                            PlayerScanRadiusValue = 0
-                        }
-                    };
-
-                    TPTIVales_List.Add(tPTIValue);
-                }
-
-                hPTIValue.TPTIValueList = TPTIVales_List;
-
-                HPTIValues_List.Add(hPTIValue);
-            }
-
-            return HPTIValues_List;
-        }
-
-        public static List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> ToHPLGValueList(TestXml.XXXXRouteXml.XXXXRoute xXXXRoute)
-        {
-            KMPs.KMPHelper.FlagConverter.GlideRoute GlideRouteFlagConverter = new KMPs.KMPHelper.FlagConverter.GlideRoute();
-
-            List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue> HPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>();
-
-            foreach (var GlideRoute in xXXXRoute.Groups.Select((value, index) => new { value, index }))
-            {
-                KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue HPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue
-                {
-                    GroupID = GlideRoute.index,
-                    HPLG_PreviewGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_PreviewGroups
-                    {
-                        Prev0 = 255,
-                        Prev1 = 255,
-                        Prev2 = 255,
-                        Prev3 = 255,
-                        Prev4 = 255,
-                        Prev5 = 255
-                    },
-                    HPLG_NextGroup = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.HPLG_NextGroups
-                    {
-                        Next0 = 255,
-                        Next1 = 255,
-                        Next2 = 255,
-                        Next3 = 255,
-                        Next4 = 255,
-                        Next5 = 255
-                    },
-                    RouteSettings = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.RouteSetting
-                    {
-                        ForceToRoute = GlideRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.ForceToRoute),
-                        CannonSection = GlideRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.CannonSection),
-                        PreventRaising = GlideRouteFlagConverter.ConvertFlags(0, KMPs.KMPHelper.FlagConverter.GlideRoute.FlagType.PreventRaising),
-                    },
-                    HPLG_UnkBytes2 = 0,
-                    TPLGValueList = null
-                };
-
-                List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue> TPLGValues_List = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue>();
-
-                foreach (var GlidePoint in GlideRoute.value.Points.Select((value, index) => new { value, index }))
-                {
-                    KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue TPLGValue = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue
-                    {
-                        GroupID = GlideRoute.index,
-                        ID = GlidePoint.index,
-                        Positions = new KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue.TPLGValue.Position
-                        {
-                            X = GlidePoint.value.Position.X,
-                            Y = GlidePoint.value.Position.Y,
-                            Z = GlidePoint.value.Position.Z
-                        },
-                        TPLG_PointScaleValue = GlidePoint.value.ScaleValue,
-                        TPLG_UnkBytes1 = 0,
-                        TPLG_UnkBytes2 = 0
-                    };
-
-                    TPLGValues_List.Add(TPLGValue);
-                }
-
-                HPLGValue.TPLGValueList = TPLGValues_List;
-
-                HPLGValues_List.Add(HPLGValue);
-
-            }
-
-            return HPLGValues_List;
         }
     }
 
