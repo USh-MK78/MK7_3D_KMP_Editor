@@ -74,8 +74,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public class EnemyRoute_Group
             {
                 [System.Xml.Serialization.XmlElement("Previous")]
-                public Previous PreviousRouteID { get; set; }
-                public class Previous
+                public ER_PreviousGroup PreviousGroups { get; set; }
+                public class ER_PreviousGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Prev0")]
                     public ushort Prev0 { get; set; }
@@ -127,8 +127,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 }
 
                 [System.Xml.Serialization.XmlElement("Next")]
-                public Next NextRouteID { get; set; }
-                public class Next
+                public ER_NextGroup NextGroups { get; set; }
+                public class ER_NextGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Next0")]
                     public ushort Next0 { get; set; }
@@ -235,8 +235,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public class ItemRoute_Group
             {
                 [System.Xml.Serialization.XmlElement("Previous")]
-                public Previous PreviousRouteID { get; set; }
-                public class Previous
+                public IR_PreviousGroup PreviousGroups { get; set; }
+                public class IR_PreviousGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Prev0")]
                     public ushort Prev0 { get; set; }
@@ -258,8 +258,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 }
 
                 [System.Xml.Serialization.XmlElement("Next")]
-                public Next NextRouteID { get; set; }
-                public class Next
+                public IR_NextGroup NextGroups { get; set; }
+                public class IR_NextGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Next0")]
                     public ushort Next0 { get; set; }
@@ -324,8 +324,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public class Checkpoint_Group
             {
                 [System.Xml.Serialization.XmlElement("Previous")]
-                public Previous PreviousRouteID { get; set; }
-                public class Previous
+                public CP_PreviousGroup PreviousGroups { get; set; }
+                public class CP_PreviousGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Prev0")]
                     public byte Prev0 { get; set; }
@@ -347,8 +347,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 }
 
                 [System.Xml.Serialization.XmlElement("Next")]
-                public Next NextRouteID { get; set; }
-                public class Next
+                public CP_NextGroup NextGroups { get; set; }
+                public class CP_NextGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Next0")]
                     public byte Next0 { get; set; }
@@ -924,8 +924,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
             public class GlideRoute_Group
             {
                 [System.Xml.Serialization.XmlElement("Previous")]
-                public Previous PreviousRouteID { get; set; }
-                public class Previous
+                public GR_PreviousGroup PreviousGroups { get; set; }
+                public class GR_PreviousGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Prev0")]
                     public byte Prev0 { get; set; }
@@ -947,8 +947,8 @@ namespace MK7_KMP_Editor_For_PG_.TestXml
                 }
 
                 [System.Xml.Serialization.XmlElement("Next")]
-                public Next NextRouteID { get; set; }
-                public class Next
+                public GR_NextGroup NextGroups { get; set; }
+                public class GR_NextGroup
                 {
                     [System.Xml.Serialization.XmlAttribute("Next0")]
                     public byte Next0 { get; set; }

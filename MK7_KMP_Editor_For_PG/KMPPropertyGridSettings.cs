@@ -272,7 +272,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev15 = HPNE_PreviewGroup.Prev15;
                     }
 
-                    public HPNE_PreviewGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous previous)
+                    public HPNE_PreviewGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_PreviousGroup previous)
                     {
                         Prev0 = previous.Prev0;
                         Prev1 = previous.Prev1;
@@ -359,7 +359,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Next15 = HPNE_NextGroup.Next15;
                     }
 
-                    public HPNE_NextGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next next)
+                    public HPNE_NextGroups(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_NextGroup next)
                     {
                         Next0 = next.Next0;
                         Next1 = next.Next1;
@@ -728,8 +728,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public HPNEValue(TestXml.KMPXml.EnemyRoute.EnemyRoute_Group enemyRoute_Group, int InputID)
                 {
                     GroupID = InputID;
-                    HPNEPreviewGroups = new HPNE_PreviewGroups(enemyRoute_Group.PreviousRouteID);
-                    HPNENextGroups = new HPNE_NextGroups(enemyRoute_Group.NextRouteID);
+                    HPNEPreviewGroups = new HPNE_PreviewGroups(enemyRoute_Group.PreviousGroups);
+                    HPNENextGroups = new HPNE_NextGroups(enemyRoute_Group.NextGroups);
                     HPNE_UnkBytes1 = enemyRoute_Group.Unknown1;
 
                     for (int i = 0; i < enemyRoute_Group.Points.Count; i++)
@@ -829,7 +829,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = HPTI_PreviewGroup.Prev5;
                     }
 
-                    public HPTI_PreviewGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous previous)
+                    public HPTI_PreviewGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_PreviousGroup previous)
                     {
                         Prev0 = previous.Prev0;
                         Prev1 = previous.Prev1;
@@ -876,7 +876,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Next5 = HPTI_NextGroup.Next5;
                     }
 
-                    public HPTI_NextGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next next)
+                    public HPTI_NextGroups(TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_NextGroup next)
                     {
                         Next0 = next.Next0;
                         Next1 = next.Next1;
@@ -1072,8 +1072,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public HPTIValue(TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group, int InputID)
                 {
                     GroupID = InputID;
-                    HPTI_PreviewGroup = new HPTI_PreviewGroups(itemRoute_Group.PreviousRouteID);
-                    HPTI_NextGroup = new HPTI_NextGroups(itemRoute_Group.NextRouteID);
+                    HPTI_PreviewGroup = new HPTI_PreviewGroups(itemRoute_Group.PreviousGroups);
+                    HPTI_NextGroup = new HPTI_NextGroups(itemRoute_Group.NextGroups);
 
                     for (int i = 0; i < itemRoute_Group.Points.Count; i++)
                     {
@@ -1171,7 +1171,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = HPKC_PreviewGroup.Prev5;
                     }
 
-                    public HPKC_PreviewGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous previous)
+                    public HPKC_PreviewGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_PreviousGroup previous)
                     {
                         Prev0 = previous.Prev0;
                         Prev1 = previous.Prev1;
@@ -1218,7 +1218,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Next5 = HPKC_NextGroup.Next5;
                     }
 
-                    public HPKC_NextGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next next)
+                    public HPKC_NextGroups(TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_NextGroup next)
                     {
                         Next0 = next.Next0;
                         Next1 = next.Next1;
@@ -1408,8 +1408,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public HPKCValue(TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group, int InputID)
                 {
                     GroupID = InputID;
-                    HPKC_PreviewGroup = new HPKC_PreviewGroups(checkpoint_Group.PreviousRouteID);
-                    HPKC_NextGroup = new HPKC_NextGroups(checkpoint_Group.NextRouteID);
+                    HPKC_PreviewGroup = new HPKC_PreviewGroups(checkpoint_Group.PreviousGroups);
+                    HPKC_NextGroup = new HPKC_NextGroups(checkpoint_Group.NextGroups);
                     HPKC_UnkBytes1 = checkpoint_Group.UnkBytes1;
 
                     for (int i = 0; i < checkpoint_Group.Points.Count; i++)
@@ -2928,7 +2928,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev5 = HPLG_PreviewGroup.Prev5;
                     }
 
-                    public HPLG_PreviewGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous previous)
+                    public HPLG_PreviewGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_PreviousGroup previous)
                     {
                         Prev0 = previous.Prev0;
                         Prev1 = previous.Prev1;
@@ -2975,7 +2975,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Next5 = HPLG_NextGroup.Next5;
                     }
 
-                    public HPLG_NextGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next next)
+                    public HPLG_NextGroups(TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_NextGroup next)
                     {
                         Next0 = next.Next0;
                         Next1 = next.Next1;
@@ -3195,8 +3195,8 @@ namespace MK7_KMP_Editor_For_PG_
                 public HPLGValue(TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group, int InputID)
                 {
                     GroupID = InputID;
-                    HPLG_PreviewGroup = new HPLG_PreviewGroups(glideRoute_Group.PreviousRouteID);
-                    HPLG_NextGroup = new HPLG_NextGroups(glideRoute_Group.NextRouteID);
+                    HPLG_PreviewGroup = new HPLG_PreviewGroups(glideRoute_Group.PreviousGroups);
+                    HPLG_NextGroup = new HPLG_NextGroups(glideRoute_Group.NextGroups);
                     RouteSettings.RouteSettingValue = glideRoute_Group.RouteSetting;
                     HPLG_UnkBytes2 = glideRoute_Group.UnkBytes2;
 

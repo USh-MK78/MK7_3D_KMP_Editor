@@ -51,7 +51,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.EnemyRoute.EnemyRoute_Group EnemyRoute_group = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group
                 {
-                    PreviousRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous
+                    PreviousGroups = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_PreviousGroup
                     {
                         Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
                         Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
@@ -70,7 +70,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
                         Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15
                     },
-                    NextRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next
+                    NextGroups = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_NextGroup
                     {
                         Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
                         Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
@@ -129,7 +129,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group = new TestXml.KMPXml.ItemRoute.ItemRoute_Group
                 {
-                    PreviousRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous
+                    PreviousGroups = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_PreviousGroup
                     {
                         Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
                         Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
@@ -138,7 +138,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
                         Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5
                     },
-                    NextRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next
+                    NextGroups = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_NextGroup
                     {
                         Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
                         Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
@@ -183,7 +183,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group = new TestXml.KMPXml.Checkpoint.Checkpoint_Group
                 {
-                    PreviousRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous
+                    PreviousGroups = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_PreviousGroup
                     {
                         Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
                         Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
@@ -192,7 +192,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
                         Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5
                     },
-                    NextRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next
+                    NextGroups = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_NextGroup
                     {
                         Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
                         Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
@@ -454,7 +454,7 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group = new TestXml.KMPXml.GlideRoute.GlideRoute_Group
                 {
-                    PreviousRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous
+                    PreviousGroups = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_PreviousGroup
                     {
                         Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
                         Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
@@ -463,7 +463,7 @@ namespace MK7_KMP_Editor_For_PG_
                         Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
                         Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5
                     },
-                    NextRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next
+                    NextGroups = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_NextGroup
                     {
                         Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
                         Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,
@@ -649,7 +649,7 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.EnemyRoute.EnemyRoute_Group EnemyRoute_group = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group
                     {
-                        PreviousRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Previous
+                        PreviousGroups = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_PreviousGroup
                         {
                             Prev0 = EnemyRouteGroups.HPNEPreviewGroups.Prev0,
                             Prev1 = EnemyRouteGroups.HPNEPreviewGroups.Prev1,
@@ -668,7 +668,7 @@ namespace MK7_KMP_Editor_For_PG_
                             Prev14 = EnemyRouteGroups.HPNEPreviewGroups.Prev14,
                             Prev15 = EnemyRouteGroups.HPNEPreviewGroups.Prev15
                         },
-                        NextRouteID = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.Next
+                        NextGroups = new TestXml.KMPXml.EnemyRoute.EnemyRoute_Group.ER_NextGroup
                         {
                             Next0 = EnemyRouteGroups.HPNENextGroups.Next0,
                             Next1 = EnemyRouteGroups.HPNENextGroups.Next1,
@@ -734,7 +734,7 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.ItemRoute.ItemRoute_Group itemRoute_Group = new TestXml.KMPXml.ItemRoute.ItemRoute_Group
                     {
-                        PreviousRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Previous
+                        PreviousGroups = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_PreviousGroup
                         {
                             Prev0 = ItemRouteGroups.HPTI_PreviewGroup.Prev0,
                             Prev1 = ItemRouteGroups.HPTI_PreviewGroup.Prev1,
@@ -743,7 +743,7 @@ namespace MK7_KMP_Editor_For_PG_
                             Prev4 = ItemRouteGroups.HPTI_PreviewGroup.Prev4,
                             Prev5 = ItemRouteGroups.HPTI_PreviewGroup.Prev5
                         },
-                        NextRouteID = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.Next
+                        NextGroups = new TestXml.KMPXml.ItemRoute.ItemRoute_Group.IR_NextGroup
                         {
                             Next0 = ItemRouteGroups.HPTI_NextGroup.Next0,
                             Next1 = ItemRouteGroups.HPTI_NextGroup.Next1,
@@ -795,7 +795,7 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.Checkpoint.Checkpoint_Group checkpoint_Group = new TestXml.KMPXml.Checkpoint.Checkpoint_Group
                     {
-                        PreviousRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Previous
+                        PreviousGroups = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_PreviousGroup
                         {
                             Prev0 = CheckpointGroups.HPKC_PreviewGroup.Prev0,
                             Prev1 = CheckpointGroups.HPKC_PreviewGroup.Prev1,
@@ -804,7 +804,7 @@ namespace MK7_KMP_Editor_For_PG_
                             Prev4 = CheckpointGroups.HPKC_PreviewGroup.Prev4,
                             Prev5 = CheckpointGroups.HPKC_PreviewGroup.Prev5
                         },
-                        NextRouteID = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.Next
+                        NextGroups = new TestXml.KMPXml.Checkpoint.Checkpoint_Group.CP_NextGroup
                         {
                             Next0 = CheckpointGroups.HPKC_NextGroup.Next0,
                             Next1 = CheckpointGroups.HPKC_NextGroup.Next1,
@@ -1108,7 +1108,7 @@ namespace MK7_KMP_Editor_For_PG_
                 {
                     TestXml.KMPXml.GlideRoute.GlideRoute_Group glideRoute_Group = new TestXml.KMPXml.GlideRoute.GlideRoute_Group
                     {
-                        PreviousRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Previous
+                        PreviousGroups = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_PreviousGroup
                         {
                             Prev0 = GlideRouteGroups.HPLG_PreviewGroup.Prev0,
                             Prev1 = GlideRouteGroups.HPLG_PreviewGroup.Prev1,
@@ -1117,7 +1117,7 @@ namespace MK7_KMP_Editor_For_PG_
                             Prev4 = GlideRouteGroups.HPLG_PreviewGroup.Prev4,
                             Prev5 = GlideRouteGroups.HPLG_PreviewGroup.Prev5
                         },
-                        NextRouteID = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.Next
+                        NextGroups = new TestXml.KMPXml.GlideRoute.GlideRoute_Group.GR_NextGroup
                         {
                             Next0 = GlideRouteGroups.HPLG_NextGroup.Next0,
                             Next1 = GlideRouteGroups.HPLG_NextGroup.Next1,

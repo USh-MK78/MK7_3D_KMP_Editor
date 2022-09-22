@@ -3455,10 +3455,9 @@ namespace MK7_KMP_Editor_For_PG_
             EMAC_Section = new KMPPropertyGridSettings.EMAC_Section();
             TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section();
             IGTS_Section = new KMPPropertyGridSettings.IGTS_Section();
+            HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section();
 
             propertyGrid_KMP_StageInfo.SelectedObject = IGTS_Section;
-
-            HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section { HPLGValueList = new List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>() };
 
             if (KMPSectionComboBox.Items.Count == 0)
             {
@@ -3467,7 +3466,6 @@ namespace MK7_KMP_Editor_For_PG_
             }
 
             KMPSectionComboBox.SelectedIndex = 0;
-
             writeBinaryToolStripMenuItem.Enabled = true;
             closeKMPToolStripMenuItem.Enabled = true;
             exportToolStripMenuItem.Enabled = true;
