@@ -373,7 +373,7 @@ namespace MK7_KMP_Editor_For_PG_
                             transform_Value = new HTK_3DES.TSRSystem.Transform
                             {
                                 Translate3D = AERA_Section.AERAValueList[MDLNum].Positions.GetVector3D(),
-                                Scale3D = HTK_3DES.TSRSystem.ScaleFactor(AERA_Section.AERAValueList[MDLNum].Scales.GetVector3D(), 1000),
+                                Scale3D = HTK_3DES.TSRSystem.ScaleFactor(AERA_Section.AERAValueList[MDLNum].Scales.GetVector3D(), 2000),
                                 Rotate3D = AERA_Section.AERAValueList[MDLNum].Rotations.GetVector3D()
                             };
 
@@ -829,7 +829,7 @@ namespace MK7_KMP_Editor_For_PG_
                         HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                         {
                             Translate3D = aERAValue.Positions.GetVector3D(),
-                            Scale3D = HTK_3DES.TSRSystem.ScaleFactor(aERAValue.Scales.GetVector3D(), 1000),
+                            Scale3D = HTK_3DES.TSRSystem.ScaleFactor(aERAValue.Scales.GetVector3D(), 2000),
                             Rotate3D = aERAValue.Rotations.GetVector3D()
                         };
 
@@ -1916,7 +1916,7 @@ namespace MK7_KMP_Editor_For_PG_
                         HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                         {
                             Translate3D = aERAValue.Positions.GetVector3D(),
-                            Scale3D = HTK_3DES.TSRSystem.ScaleFactor(aERAValue.Scales.GetVector3D(), 1000),
+                            Scale3D = HTK_3DES.TSRSystem.ScaleFactor(aERAValue.Scales.GetVector3D(), 2000),
                             Rotate3D = aERAValue.Rotations.GetVector3D()
                         };
 
@@ -3295,7 +3295,7 @@ namespace MK7_KMP_Editor_For_PG_
                 HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                 {
                     Translate3D = GetAERAValue.Positions.GetVector3D(),
-                    Scale3D = HTK_3DES.TSRSystem.ScaleFactor(GetAERAValue.Scales.GetVector3D(), 1000),
+                    Scale3D = HTK_3DES.TSRSystem.ScaleFactor(GetAERAValue.Scales.GetVector3D(), 2000),
                     Rotate3D = GetAERAValue.Rotations.GetVector3D()
                 };
 

@@ -350,7 +350,7 @@ namespace MK7_KMP_Editor_For_PG_
                     HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
                         Translate3D = AERA.AERAValue_List[AERACount].AERA_Position,
-                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(AERA.AERAValue_List[AERACount].AERA_Scale, 1000),
+                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(AERA.AERAValue_List[AERACount].AERA_Scale, 2000),
                         Rotate3D = AERA.AERAValue_List[AERACount].AERA_Rotation
                     };
 
@@ -790,7 +790,7 @@ namespace MK7_KMP_Editor_For_PG_
                     HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
                         Translate3D = area.Area_Values[Count].Position.ToVector3D(),
-                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(area.Area_Values[Count].Scale.ToVector3D(), 1000),
+                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(area.Area_Values[Count].Scale.ToVector3D(), 2000),
                         Rotate3D = area.Area_Values[Count].Rotation.ToVector3D()
                     };
 
