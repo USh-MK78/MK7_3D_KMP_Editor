@@ -3657,7 +3657,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
-        public static KMPs.KMPFormat.KMPSection.JBOG_Section ToJBOG_Section(KMPPropertyGridSettings.JBOG_Section JBOG_Section)
+        public static KMPs.KMPFormat.KMPSection.JBOG_Section ToJBOG_Section(KMPPropertyGridSettings.JBOG_Section JBOG_Section, uint KMP_Version)
         {
             KMPs.KMPFormat.KMPSection.JBOG_Section JBOG = new KMPs.KMPFormat.KMPSection.JBOG_Section
             {
@@ -3675,29 +3675,37 @@ namespace MK7_KMP_Editor_For_PG_
                 double RY = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Y);
                 double RZ = HTK_3DES.TSRSystem.AngleToRadian(JBOG_Section.JBOGValueList[Count].Rotations.Z);
 
-                KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue JBOG_Values = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue
+                KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue JBOG_Values = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue();
+
+                JBOG_Values.ObjectID = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].ObjectID);
+                JBOG_Values.JBOG_UnkByte1 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte1);
+                JBOG_Values.JBOG_Position = JBOG_Section.JBOGValueList[Count].Positions.GetVector3D();
+                JBOG_Values.JBOG_Rotation = new Vector3D(RX, RY, RZ);
+                JBOG_Values.JBOG_Scale = JBOG_Section.JBOGValueList[Count].Scales.GetVector3D();
+                JBOG_Values.JBOG_ITOP_RouteIDIndex = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_ITOP_RouteIDIndex);
+                JBOG_Values.GOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
                 {
-                    ObjectID = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].ObjectID),
-                    JBOG_UnkByte1 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte1),
-                    JBOG_Position = JBOG_Section.JBOGValueList[Count].Positions.GetVector3D(),
-                    JBOG_Rotation = new Vector3D(RX, RY, RZ),
-                    JBOG_Scale = JBOG_Section.JBOGValueList[Count].Scales.GetVector3D(),
-                    JBOG_ITOP_RouteIDIndex = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_ITOP_RouteIDIndex),
-                    GOBJ_Specific_Setting = new KMPs.KMPFormat.KMPSection.JBOG_Section.JBOGValue.JBOG_SpecificSetting
-                    {
-                        Value0 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value0),
-                        Value1 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value1),
-                        Value2 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value2),
-                        Value3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value3),
-                        Value4 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value4),
-                        Value5 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value5),
-                        Value6 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value6),
-                        Value7 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value7)
-                    },
-                    JBOG_PresenceSetting = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_PresenceSetting),
-                    JBOG_UnkByte2 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte2),
-                    JBOG_UnkByte3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte3)
+                    Value0 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value0),
+                    Value1 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value1),
+                    Value2 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value2),
+                    Value3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value3),
+                    Value4 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value4),
+                    Value5 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value5),
+                    Value6 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value6),
+                    Value7 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JOBJ_Specific_Setting.Value7)
                 };
+                JBOG_Values.JBOG_PresenceSetting = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_PresenceSetting);
+
+                if (KMP_Version == 3100)
+                {
+                    JBOG_Values.JBOG_UnkByte2 = KMPs.KMPHelper.Byte2StringConverter.OBJIDStrToByteArray(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte2);
+                    JBOG_Values.JBOG_UnkByte3 = Convert.ToUInt16(JBOG_Section.JBOGValueList[Count].JBOG_UnkByte3);
+                }
+                if (KMP_Version == 3000)
+                {
+                    JBOG_Values.JBOG_UnkByte2 = new byte[] { 0x00, 0x00 };
+                    JBOG_Values.JBOG_UnkByte3 = new ushort();
+                }
 
                 JBOG_Value_List.Add(JBOG_Values);
             }

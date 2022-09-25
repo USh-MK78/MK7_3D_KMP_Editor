@@ -38,6 +38,8 @@ namespace MK7_KMP_Editor_For_PG_
             this.ST_Name2_LBL = new System.Windows.Forms.Label();
             this.ST_Desc_LBL = new System.Windows.Forms.Label();
             this.MK73DKMPEditorImgBox = new System.Windows.Forms.PictureBox();
+            this.ST_Name3_LBL = new System.Windows.Forms.Label();
+            this.B_SquoTCRFLink_LBL = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.MK73DKMPEditorImgBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@ namespace MK7_KMP_Editor_For_PG_
             // AuthorLBL
             // 
             this.AuthorLBL.AutoSize = true;
-            this.AuthorLBL.Location = new System.Drawing.Point(113, 43);
+            this.AuthorLBL.Location = new System.Drawing.Point(113, 41);
             this.AuthorLBL.Name = "AuthorLBL";
             this.AuthorLBL.Size = new System.Drawing.Size(104, 12);
             this.AuthorLBL.TabIndex = 1;
@@ -64,7 +66,7 @@ namespace MK7_KMP_Editor_For_PG_
             // 
             this.ST_Name1_LBL.AutoSize = true;
             this.ST_Name1_LBL.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ST_Name1_LBL.Location = new System.Drawing.Point(50, 99);
+            this.ST_Name1_LBL.Location = new System.Drawing.Point(31, 88);
             this.ST_Name1_LBL.Name = "ST_Name1_LBL";
             this.ST_Name1_LBL.Size = new System.Drawing.Size(101, 12);
             this.ST_Name1_LBL.TabIndex = 2;
@@ -73,19 +75,19 @@ namespace MK7_KMP_Editor_For_PG_
             // MH_GithubLink_LinkLBL
             // 
             this.MH_GithubLink_LinkLBL.AutoSize = true;
-            this.MH_GithubLink_LinkLBL.Location = new System.Drawing.Point(151, 99);
+            this.MH_GithubLink_LinkLBL.Location = new System.Drawing.Point(132, 88);
             this.MH_GithubLink_LinkLBL.Name = "MH_GithubLink_LinkLBL";
             this.MH_GithubLink_LinkLBL.Size = new System.Drawing.Size(141, 12);
             this.MH_GithubLink_LinkLBL.TabIndex = 3;
             this.MH_GithubLink_LinkLBL.TabStop = true;
             this.MH_GithubLink_LinkLBL.Text = "(Github : Commit 2ac239a)";
-            this.MH_GithubLink_LinkLBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.MH_GithubLink_LinkLBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.MH_GithubLink_LinkLBL_LinkClicked);
             // 
             // ST_LBL
             // 
             this.ST_LBL.AutoSize = true;
             this.ST_LBL.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ST_LBL.Location = new System.Drawing.Point(110, 78);
+            this.ST_LBL.Location = new System.Drawing.Point(110, 67);
             this.ST_LBL.Name = "ST_LBL";
             this.ST_LBL.Size = new System.Drawing.Size(114, 12);
             this.ST_LBL.TabIndex = 4;
@@ -96,7 +98,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.ST_Name2_LBL.AutoSize = true;
             this.ST_Name2_LBL.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ST_Name2_LBL.ForeColor = System.Drawing.Color.Red;
-            this.ST_Name2_LBL.Location = new System.Drawing.Point(134, 136);
+            this.ST_Name2_LBL.Location = new System.Drawing.Point(134, 139);
             this.ST_Name2_LBL.Name = "ST_Name2_LBL";
             this.ST_Name2_LBL.Size = new System.Drawing.Size(63, 12);
             this.ST_Name2_LBL.TabIndex = 5;
@@ -121,11 +123,34 @@ namespace MK7_KMP_Editor_For_PG_
             this.MK73DKMPEditorImgBox.TabIndex = 7;
             this.MK73DKMPEditorImgBox.TabStop = false;
             // 
+            // ST_Name3_LBL
+            // 
+            this.ST_Name3_LBL.AutoSize = true;
+            this.ST_Name3_LBL.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ST_Name3_LBL.Location = new System.Drawing.Point(84, 109);
+            this.ST_Name3_LBL.Name = "ST_Name3_LBL";
+            this.ST_Name3_LBL.Size = new System.Drawing.Size(48, 12);
+            this.ST_Name3_LBL.TabIndex = 8;
+            this.ST_Name3_LBL.Text = "B_Squo";
+            // 
+            // B_SquoTCRFLink_LBL
+            // 
+            this.B_SquoTCRFLink_LBL.AutoSize = true;
+            this.B_SquoTCRFLink_LBL.Location = new System.Drawing.Point(132, 109);
+            this.B_SquoTCRFLink_LBL.Name = "B_SquoTCRFLink_LBL";
+            this.B_SquoTCRFLink_LBL.Size = new System.Drawing.Size(192, 12);
+            this.B_SquoTCRFLink_LBL.TabIndex = 9;
+            this.B_SquoTCRFLink_LBL.TabStop = true;
+            this.B_SquoTCRFLink_LBL.Text = "(Information about the KMP Version)";
+            this.B_SquoTCRFLink_LBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.B_SquoTCRFLink_LBL_LinkClicked);
+            // 
             // KMP3DEditorInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 191);
+            this.Controls.Add(this.B_SquoTCRFLink_LBL);
+            this.Controls.Add(this.ST_Name3_LBL);
             this.Controls.Add(this.MK73DKMPEditorImgBox);
             this.Controls.Add(this.ST_Desc_LBL);
             this.Controls.Add(this.ST_Name2_LBL);
@@ -157,5 +182,7 @@ namespace MK7_KMP_Editor_For_PG_
         private System.Windows.Forms.Label ST_Name2_LBL;
         private System.Windows.Forms.Label ST_Desc_LBL;
         private System.Windows.Forms.PictureBox MK73DKMPEditorImgBox;
+        private System.Windows.Forms.Label ST_Name3_LBL;
+        private System.Windows.Forms.LinkLabel B_SquoTCRFLink_LBL;
     }
 }

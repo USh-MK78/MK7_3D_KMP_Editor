@@ -1325,6 +1325,8 @@ namespace MK7_KMP_Editor_For_PG_
             KMPs.KMPFormat KMP_Section = new KMPs.KMPFormat();
             KMP_Section.ReadKMP(br1);
 
+            KMPVersion_TXT.Text = KMP_Section.VersionNumber.ToString();
+
             #region Add PropertyGrid
             TPTK_Section = new KMPPropertyGridSettings.TPTK_Section(KMP_Section.KMP_Section.TPTK);
             KMPs.KMPViewportRendering.Render_StartPosition(render, KMPViewportObject, KMP_Section.KMP_Section.TPTK);
@@ -1413,7 +1415,8 @@ namespace MK7_KMP_Editor_For_PG_
             System.IO.FileStream fs1 = new FileStream(Save_KMP.FileName, FileMode.Create, FileAccess.Write);
             BinaryWriter bw1 = new BinaryWriter(fs1);
 
-            KMPs.KMPFormat kMPFormat = new KMPs.KMPFormat();
+            KMPs.KMPFormat kMPFormat = new KMPs.KMPFormat(Convert.ToUInt32(KMPVersion_TXT.Text));
+            //KMPs.KMPFormat kMPFormat = new KMPs.KMPFormat();
             kMPFormat.KMP_Section.TPTK = PropertyGridClassToBinaryConverter.ToTPTK_Section(TPTK_Section);
             kMPFormat.KMP_Section.TPNE = PropertyGridClassToBinaryConverter.HPNE_TPNESection.ToHPNE_TPNE_Section(HPNE_TPNE_Section).TPNE_Section;
             kMPFormat.KMP_Section.HPNE = PropertyGridClassToBinaryConverter.HPNE_TPNESection.ToHPNE_TPNE_Section(HPNE_TPNE_Section).HPNE_Section;
@@ -1421,7 +1424,7 @@ namespace MK7_KMP_Editor_For_PG_
             kMPFormat.KMP_Section.HPTI = PropertyGridClassToBinaryConverter.HPTI_TPTISection.ToHPTI_TPTI_Section(HPTI_TPTI_Section).HPTI_Section;
             kMPFormat.KMP_Section.TPKC = PropertyGridClassToBinaryConverter.HPKC_TPKCSection.ToHPKC_TPKC_Section(HPKC_TPKC_Section).TPKC_Section;
             kMPFormat.KMP_Section.HPKC = PropertyGridClassToBinaryConverter.HPKC_TPKCSection.ToHPKC_TPKC_Section(HPKC_TPKC_Section).HPKC_Section;
-            kMPFormat.KMP_Section.JBOG = PropertyGridClassToBinaryConverter.ToJBOG_Section(JBOG_Section);
+            kMPFormat.KMP_Section.JBOG = PropertyGridClassToBinaryConverter.ToJBOG_Section(JBOG_Section, kMPFormat.VersionNumber);
             kMPFormat.KMP_Section.ITOP = PropertyGridClassToBinaryConverter.ToITOP_Section(ITOP_Section);
             kMPFormat.KMP_Section.AERA = PropertyGridClassToBinaryConverter.ToAERA_section(AERA_Section);
             kMPFormat.KMP_Section.EMAC = PropertyGridClassToBinaryConverter.ToEMAC_Section(EMAC_Section);
@@ -1452,7 +1455,6 @@ namespace MK7_KMP_Editor_For_PG_
 
                 //Disable the ability to rotate the camera by dragging the Viewport
                 render.MainViewPort.CameraController.IsRotationEnabled = false;
-
             }
             if(Viewport_Type_3D.Checked == false)
             {
@@ -3419,6 +3421,7 @@ namespace MK7_KMP_Editor_For_PG_
             propertyGrid_KMP_Group.SelectedObject = null;
             propertyGrid_KMP_Path.SelectedObject = null;
             propertyGrid_KMP_StageInfo.SelectedObject = null;
+            KMPVersion_TXT.Text = "";
             KMPSectionComboBox.Items.Clear();
 
             writeBinaryToolStripMenuItem.Enabled = false;
@@ -3456,6 +3459,8 @@ namespace MK7_KMP_Editor_For_PG_
             TPGJ_Section = new KMPPropertyGridSettings.TPGJ_Section();
             IGTS_Section = new KMPPropertyGridSettings.IGTS_Section();
             HPLG_TPLG_Section = new KMPPropertyGridSettings.HPLG_TPLG_Section();
+
+            KMPVersion_TXT.Text = "3100";
 
             propertyGrid_KMP_StageInfo.SelectedObject = IGTS_Section;
 

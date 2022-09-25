@@ -344,9 +344,6 @@ namespace MK7_KMP_Editor_For_PG_
                     //モデルの名前と番号を文字列に格納(情報化)
                     HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + AERACount + " " + -1);
 
-                    //HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_AreaOBJ, RotationSetting = HTK_3DES.TSRSystem.RotationSetting.Radian };
-                    //HTK_3DES.TSRSystem.New_TransformSystem3D(Area_transform_Value, transformSetting);
-
                     HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
                         Translate3D = AERA.AERAValue_List[AERACount].AERA_Position,
@@ -371,7 +368,8 @@ namespace MK7_KMP_Editor_For_PG_
                     ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
 
                     //モデルの名前と番号を文字列に格納(情報化)
-     
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + EMACCount + " " + -1);
+
                     HTK_3DES.TSRSystem.Transform Camera_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
                         Translate3D = EMAC.EMACValue_List[EMACCount].EMAC_Position,
@@ -463,35 +461,10 @@ namespace MK7_KMP_Editor_For_PG_
             {
                 for (int i = 0; i < startPosition.startPosition_Value.Count; i++)
                 {
-                    //HTK_3DES.TSRSystem.Transform_Value StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform_Value
-                    //{
-                    //    Translate_Value = new HTK_3DES.TSRSystem.Transform_Value.Translate
-                    //    {
-                    //        X = startPosition.startPosition_Value[i].Position.X,
-                    //        Y = startPosition.startPosition_Value[i].Position.Y,
-                    //        Z = startPosition.startPosition_Value[i].Position.Z
-                    //    },
-                    //    Scale_Value = new HTK_3DES.TSRSystem.Transform_Value.Scale
-                    //    {
-                    //        X = 20,
-                    //        Y = 20,
-                    //        Z = 20
-                    //    },
-                    //    Rotate_Value = new HTK_3DES.TSRSystem.Transform_Value.Rotate
-                    //    {
-                    //        X = startPosition.startPosition_Value[i].Rotation.X,
-                    //        Y = startPosition.startPosition_Value[i].Rotation.Y,
-                    //        Z = startPosition.startPosition_Value[i].Rotation.Z
-                    //    }
-                    //};
-
                     ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
 
                     //モデルの名前と番号を文字列に格納(情報化)
                     HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + i + " " + -1);
-
-                    //HTK_3DES.TSRSystem.TransformSetting transformSetting = new HTK_3DES.TSRSystem.TransformSetting { InputMV3D = dv3D_StartPositionOBJ };
-                    //HTK_3DES.TSRSystem.New_TransformSystem3D(StartPosition_transform_Value, transformSetting);
 
                     HTK_3DES.TSRSystem.Transform StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
@@ -1992,21 +1965,26 @@ namespace MK7_KMP_Editor_For_PG_
                         public byte[] JBOG_UnkByte2 { get; set; }
                         public ushort JBOG_UnkByte3 { get; set; }
 
-                        public void ReadJBOGValue(BinaryReader br)
+                        public void ReadJBOGValue(BinaryReader br, uint Version)
                         {
                             ObjectID = br.ReadBytes(2);
                             JBOG_UnkByte1 = br.ReadBytes(2);
-                            JBOG_Position = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
-                            JBOG_Rotation = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
-                            JBOG_Scale = KMPs.KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_Position = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_Rotation = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
+                            JBOG_Scale = KMPHelper.ByteArrayToVector3DConverter.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
                             JBOG_ITOP_RouteIDIndex = br.ReadUInt16();
                             GOBJ_Specific_Setting.ReadSpecificSetting(br);
                             JBOG_PresenceSetting = br.ReadUInt16();
-                            JBOG_UnkByte2 = br.ReadBytes(2);
-                            JBOG_UnkByte3 = br.ReadUInt16();
+
+                            if (Version == 3100) 
+                            {
+                                JBOG_UnkByte2 = br.ReadBytes(2);
+                                JBOG_UnkByte3 = br.ReadUInt16();
+                            }
+                            if (Version == 3000) return;
                         }
 
-                        public void WriteJBOGValue(BinaryWriter bw)
+                        public void WriteJBOGValue(BinaryWriter bw, uint Version)
                         {
                             bw.Write(ObjectID);
                             bw.Write(JBOG_UnkByte1);
@@ -2022,8 +2000,13 @@ namespace MK7_KMP_Editor_For_PG_
                             bw.Write(JBOG_ITOP_RouteIDIndex);
                             GOBJ_Specific_Setting.WriteSpecificSetting(bw);
                             bw.Write(JBOG_PresenceSetting);
-                            bw.Write(JBOG_UnkByte2);
-                            bw.Write(JBOG_UnkByte3);
+
+                            if (Version == 3100)
+                            {
+                                bw.Write(JBOG_UnkByte2);
+                                bw.Write(JBOG_UnkByte3);
+                            }
+                            if (Version == 3000) return;
                         }
 
                         public JBOGValue()
@@ -2041,7 +2024,7 @@ namespace MK7_KMP_Editor_For_PG_
                         }
                     }
 
-                    public void ReadJBOG(BinaryReader br)
+                    public void ReadJBOG(BinaryReader br, uint Version)
                     {
                         JBOGHeader = br.ReadChars(4);
                         NumOfEntries = br.ReadUInt16();
@@ -2050,18 +2033,18 @@ namespace MK7_KMP_Editor_For_PG_
                         for (int JBOGCount = 0; JBOGCount < NumOfEntries; JBOGCount++)
                         {
                             JBOGValue JBOG_Value = new JBOGValue();
-                            JBOG_Value.ReadJBOGValue(br);
+                            JBOG_Value.ReadJBOGValue(br, Version);
                             JBOGValue_List.Add(JBOG_Value);
                         }
                     }
 
-                    public void WriteJBOG(BinaryWriter bw)
+                    public void WriteJBOG(BinaryWriter bw, uint Version)
                     {
                         bw.Write(JBOGHeader);
                         bw.Write(NumOfEntries);
                         bw.Write(AdditionalValue);
 
-                        for (int Count = 0; Count < NumOfEntries; Count++) JBOGValue_List[Count].WriteJBOGValue(bw);
+                        for (int Count = 0; Count < NumOfEntries; Count++) JBOGValue_List[Count].WriteJBOGValue(bw, Version);
                     }
 
                     public JBOG_Section()
@@ -2941,7 +2924,7 @@ namespace MK7_KMP_Editor_For_PG_
                     }
                 }
 
-                public void ReadKMPSection(BinaryReader br)
+                public void ReadKMPSection(BinaryReader br, uint Version)
                 {
                     TPTK_Offset = br.ReadUInt32();
                     TPNE_Offset = br.ReadUInt32();
@@ -2993,7 +2976,7 @@ namespace MK7_KMP_Editor_For_PG_
                     br.BaseStream.Position = KMPSectionPos;
 
                     br.BaseStream.Seek(JBOG_Offset, SeekOrigin.Current);
-                    JBOG.ReadJBOG(br);
+                    JBOG.ReadJBOG(br, Version);
                     br.BaseStream.Position = KMPSectionPos;
 
                     br.BaseStream.Seek(ITOP_Offset, SeekOrigin.Current);
@@ -3037,7 +3020,7 @@ namespace MK7_KMP_Editor_For_PG_
                     br.BaseStream.Position = KMPSectionPos;
                 }
 
-                public void WriteKMPSection(BinaryWriter bw)
+                public void WriteKMPSection(BinaryWriter bw, uint Version)
                 {
                     long SectionOffsetBasePos = bw.BaseStream.Position;
 
@@ -3085,7 +3068,7 @@ namespace MK7_KMP_Editor_For_PG_
                     HPKC.WriteHPKC(bw);
 
                     JBOG_Offset = (uint)bw.BaseStream.Position;
-                    JBOG.WriteJBOG(bw);
+                    JBOG.WriteJBOG(bw, Version);
 
                     ITOP_Offset = (uint)bw.BaseStream.Position;
                     ITOP.WriteITOP(bw);
@@ -3197,7 +3180,7 @@ namespace MK7_KMP_Editor_For_PG_
                 SectionCount = br.ReadUInt16();
                 DMDCHeaderSize = br.ReadUInt16();
                 VersionNumber = br.ReadUInt32();
-                KMP_Section.ReadKMPSection(br);
+                KMP_Section.ReadKMPSection(br, VersionNumber); //3000 : Divide (Unused (?)), 3100 : Normal
             }
 
             public void WriteKMP(BinaryWriter bw)
@@ -3208,20 +3191,20 @@ namespace MK7_KMP_Editor_For_PG_
                 bw.Write(SectionCount);
                 bw.Write(DMDCHeaderSize);
                 bw.Write(VersionNumber);
-                KMP_Section.WriteKMPSection(bw);
+                KMP_Section.WriteKMPSection(bw, VersionNumber); //3000 : Divide (Unused (?)), 3100 : Normal
 
                 FileSize = (uint)bw.BaseStream.Position;
                 bw.BaseStream.Seek(4, SeekOrigin.Begin);
                 bw.Write(FileSize);
             }
 
-            public KMPFormat()
+            public KMPFormat(uint Version = 3100)
             {
                 DMDCHeader = "DMDC".ToCharArray();
                 FileSize = 0;
                 SectionCount = 18;
                 DMDCHeaderSize = 88;
-                VersionNumber = 3100;
+                VersionNumber = Version;
                 KMP_Section = new KMPSection();
             }
         }

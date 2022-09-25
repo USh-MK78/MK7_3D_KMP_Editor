@@ -123,6 +123,11 @@
   <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>139, 17</value>
   </metadata>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Note:
+Do not change the version number unless there is a specific reason (default value : 3100).
+If you want to edit (or create) a KMP file for Gctr_MarioCircuit_Divide, please change the version number to 3000.</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>63</value>
   </metadata>
