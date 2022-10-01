@@ -338,411 +338,69 @@ namespace MK7_KMP_Editor_For_PG_
                 }
                 #endregion
             }
-
-
-            //public enum RotationSetting
-            //{
-            //    Angle,
-            //    Radian
-            //}
-
-            //public class TransformSetting
-            //{
-            //    public bool IsContent { get; set; } = true;
-            //    public ModelVisual3D InputMV3D { get; set; } = null;
-            //    public Model3D InputM3D
-            //    {
-            //        set
-            //        {
-            //            if (InputMV3D == null) this.InputM3D = value;
-            //            if (InputMV3D != null)
-            //            {
-            //                if (IsContent == true) this.InputM3D = InputMV3D.Content;
-            //                if (IsContent == false) this.InputM3D = null; //return
-            //            }
-            //        }
-            //        get
-            //        {
-            //            Model3D model3D = null;
-            //            if (InputMV3D == null) model3D = this.InputM3D;
-            //            if (InputMV3D != null)
-            //            {
-            //                if (IsContent == true) model3D = InputMV3D.Content;
-            //                if (IsContent == false) model3D = null;
-            //            }
-
-            //            return model3D;
-            //        }
-            //    }
-
-            //    public RotationSetting RotationSetting { get; set; } = RotationSetting.Angle;
-
-            //    public ScaleTransformSetting ScaleTransformSettings { get; set; } = new ScaleTransformSetting();
-            //    public class ScaleTransformSetting
-            //    {
-            //        public Point3D ScaleCenter { get; set; } = new Point3D(0, 0, 0);
-            //        public double Scalefactor { get; set; } = 1;
-
-            //        public ScaleTransformSetting()
-            //        {
-            //            ScaleCenter = new Point3D(0, 0, 0);
-            //            Scalefactor = 2;
-            //        }
-            //    }
-
-            //    public RotationCenterSetting RotationCenterSettings { get; set; } = new RotationCenterSetting();
-            //    public class RotationCenterSetting
-            //    {
-            //        public Vector3D RotationX { get; set; } = new Vector3D(1, 0, 0);
-            //        public Vector3D RotationY { get; set; } = new Vector3D(0, 1, 0);
-            //        public Vector3D RotationZ { get; set; } = new Vector3D(0, 0, 1);
-
-            //        public RotationCenterSetting()
-            //        {
-            //            RotationX = new Vector3D(1, 0, 0);
-            //            RotationY = new Vector3D(0, 1, 0);
-            //            RotationZ = new Vector3D(0, 0, 1);
-            //        }
-            //    }
-            //}
-
-            //public static void New_TransformSystem3D(Transform transform, TransformSetting transformSetting)
-            //{
-            //    double RotateX = new double();
-            //    double RotateY = new double();
-            //    double RotateZ = new double();
-
-            //    if (transformSetting.IsContent == true)
-            //    {
-            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
-            //        {
-            //            RotateX = transform.Rotate3D.X;
-            //            RotateY = transform.Rotate3D.Y;
-            //            RotateZ = transform.Rotate3D.Z;
-            //        }
-            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
-            //        {
-            //            RotateX = RadianToAngle(transform.Rotate3D.X);
-            //            RotateY = RadianToAngle(transform.Rotate3D.Y);
-            //            RotateZ = RadianToAngle(transform.Rotate3D.Z);
-            //        }
-
-            //        var Rotate3D_X = new RotateTransform3D();
-            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
-
-            //        var Rotate3D_Y = new RotateTransform3D();
-            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
-
-            //        var Rotate3D_Z = new RotateTransform3D();
-            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
-
-            //        var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor));
-            //        var Translate3D = new TranslateTransform3D(transform.Translate3D);
-
-            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
-            //        T3D_Collection.Add(Scale3D);
-            //        T3D_Collection.Add(Rotate3D_X);
-            //        T3D_Collection.Add(Rotate3D_Y);
-            //        T3D_Collection.Add(Rotate3D_Z);
-            //        T3D_Collection.Add(Translate3D);
-
-            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-            //        transformSetting.InputM3D.Transform = T3DGroup;
-            //    }
-            //    if (transformSetting.IsContent == false)
-            //    {
-            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
-            //        {
-            //            RotateX = transform.Rotate3D.X;
-            //            RotateY = transform.Rotate3D.Y;
-            //            RotateZ = transform.Rotate3D.Z;
-            //        }
-            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
-            //        {
-            //            RotateX = RadianToAngle(transform.Rotate3D.X);
-            //            RotateY = RadianToAngle(transform.Rotate3D.Y);
-            //            RotateZ = RadianToAngle(transform.Rotate3D.Z);
-            //        }
-
-            //        //Model3D Model = MV3D.Content;
-            //        var Rotate3D_X = new RotateTransform3D();
-            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
-
-            //        var Rotate3D_Y = new RotateTransform3D();
-            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
-
-            //        var Rotate3D_Z = new RotateTransform3D();
-            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
-
-            //        //CalculateModelCenterPoint(Model)
-            //        var Scale3D = new ScaleTransform3D(Scalefactor(transform.Scale3D, transformSetting.ScaleTransformSettings.Scalefactor), transformSetting.ScaleTransformSettings.ScaleCenter);
-            //        var Translate3D = new TranslateTransform3D(transform.Translate3D);
-
-            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
-            //        T3D_Collection.Add(Scale3D);
-            //        T3D_Collection.Add(Rotate3D_X);
-            //        T3D_Collection.Add(Rotate3D_Y);
-            //        T3D_Collection.Add(Rotate3D_Z);
-            //        T3D_Collection.Add(Translate3D);
-
-            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-            //        transformSetting.InputMV3D.Transform = T3DGroup;
-            //    }
-            //}
-
-            //public static void New_TransformSystem3D(Transform_Value transform, TransformSetting transformSetting)
-            //{
-            //    double RotateX = new double();
-            //    double RotateY = new double();
-            //    double RotateZ = new double();
-
-            //    if (transformSetting.IsContent == true)
-            //    {
-            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
-            //        {
-            //            RotateX = transform.Rotate_Value.X;
-            //            RotateY = transform.Rotate_Value.Y;
-            //            RotateZ = transform.Rotate_Value.Z;
-            //        }
-            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
-            //        {
-            //            RotateX = RadianToAngle(transform.Rotate_Value.X);
-            //            RotateY = RadianToAngle(transform.Rotate_Value.Y);
-            //            RotateZ = RadianToAngle(transform.Rotate_Value.Z);
-            //        }
-
-            //        var Rotate3D_X = new RotateTransform3D();
-            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
-
-            //        var Rotate3D_Y = new RotateTransform3D();
-            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
-
-            //        var Rotate3D_Z = new RotateTransform3D();
-            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
-
-            //        var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
-            //        var Scale3D = new ScaleTransform3D(Scale);
-            //        var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
-
-            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
-            //        T3D_Collection.Add(Scale3D);
-            //        T3D_Collection.Add(Rotate3D_X);
-            //        T3D_Collection.Add(Rotate3D_Y);
-            //        T3D_Collection.Add(Rotate3D_Z);
-            //        T3D_Collection.Add(Translate3D);
-
-            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-            //        transformSetting.InputM3D.Transform = T3DGroup;
-            //    }
-            //    if (transformSetting.IsContent == false)
-            //    {
-            //        if (transformSetting.RotationSetting == RotationSetting.Angle)
-            //        {
-            //            RotateX = transform.Rotate_Value.X;
-            //            RotateY = transform.Rotate_Value.Y;
-            //            RotateZ = transform.Rotate_Value.Z;
-            //        }
-            //        if (transformSetting.RotationSetting == RotationSetting.Radian)
-            //        {
-            //            RotateX = RadianToAngle(transform.Rotate_Value.X);
-            //            RotateY = RadianToAngle(transform.Rotate_Value.Y);
-            //            RotateZ = RadianToAngle(transform.Rotate_Value.Z);
-            //        }
-
-            //        var Rotate3D_X = new RotateTransform3D();
-            //        Rotate3D_X.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationX, RotateX));
-
-            //        var Rotate3D_Y = new RotateTransform3D();
-            //        Rotate3D_Y.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationY, RotateY));
-
-            //        var Rotate3D_Z = new RotateTransform3D();
-            //        Rotate3D_Z.Rotation = new QuaternionRotation3D(new Quaternion(transformSetting.RotationCenterSettings.RotationZ, RotateZ));
-
-            //        //CalculateModelCenterPoint(Model)
-            //        var Scale = Scalefactor(new Vector3D(transform.Scale_Value.X, transform.Scale_Value.Y, transform.Scale_Value.Z), transformSetting.ScaleTransformSettings.Scalefactor);
-            //        var Scale3D = new ScaleTransform3D(Scale, transformSetting.ScaleTransformSettings.ScaleCenter);
-            //        var Translate3D = new TranslateTransform3D(transform.Translate_Value.X, transform.Translate_Value.Y, transform.Translate_Value.Z);
-
-            //        Transform3DCollection T3D_Collection = new Transform3DCollection();
-            //        T3D_Collection.Add(Scale3D);
-            //        T3D_Collection.Add(Rotate3D_X);
-            //        T3D_Collection.Add(Rotate3D_Y);
-            //        T3D_Collection.Add(Rotate3D_Z);
-            //        T3D_Collection.Add(Translate3D);
-
-            //        Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-            //        transformSetting.InputMV3D.Transform = T3DGroup;
-            //    }
-            //}
         }
 
-        public class Line3DSystem : TSRSystem
+        public class UnionModel3D : TSRSystem
         {
-            /// <summary>
-            /// Point3Dの値を格納するクラス
-            /// </summary>
-            public class DrawLine_Value
-            {
-                public Start_Point3D StartPoint3D { get; set; }
-                public class Start_Point3D
-                {
-                    public double X { get; set; }
-                    public double Y { get; set; }
-                    public double Z { get; set; }
-                }
+            ///// <summary>
+            ///// Point3DのListからModelVisual3Dを生成
+            ///// </summary>
+            ///// <param name="P3DList">Point3D_List</param>
+            ///// <param name="LV3D_List">LineVisual3D_List</param>
+            ///// <param name="colors">Set Color</param>
+            ///// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
+            //public List<ModelVisual3D> CustomModelCreate(List<Point3D> P3DList, List<LinesVisual3D> LV3D_List, System.Windows.Media.Color colors)
+            //{
+            //    //List<Point3D>を使用して線を描く
+            //    for (int i = 0; i < P3DList.Count; i++)
+            //    {
+            //        LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(P3DList), Color = colors });
+            //    }
 
-                public End_Point3D EndPoint3D { get; set; }
-                public class End_Point3D
-                {
-                    public double X { get; set; }
-                    public double Y { get; set; }
-                    public double Z { get; set; }
-                }
-            }
+            //    List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
 
-            /// <summary>
-            /// List<DrawLine_Value>を使用してLinesVisual3Dを生成、ModelVisual3Dに変換する
-            /// </summary>
-            /// <param name="DrawLine_Value_List">Point3D_List</param>
-            /// <param name="colors">Set Color</param>
-            /// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
-            public List<ModelVisual3D> DrawLinesVisual3D(List<DrawLine_Value> DrawLine_Value_List, List<LinesVisual3D> LV3D_List, System.Windows.Media.Color colors)
-            {
-                List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
-                
-                //List<Point3D>を使用して線を描く
-                for (int i = 0; i < DrawLine_Value_List.Count; i++)
-                {
-                    List<Point3D> p3d = new List<Point3D>();
-                    p3d.Add(new Point3D(DrawLine_Value_List[i].StartPoint3D.X, DrawLine_Value_List[i].StartPoint3D.Y, DrawLine_Value_List[i].StartPoint3D.Z));
-                    p3d.Add(new Point3D(DrawLine_Value_List[i].EndPoint3D.X, DrawLine_Value_List[i].EndPoint3D.Y, DrawLine_Value_List[i].EndPoint3D.Z));
+            //    for (int LV3DCount = 0; LV3DCount < LV3D_List.Count; LV3DCount++)
+            //    {
+            //        //LinesVisual3DをModel3Dに変換
+            //        Model3D LV3DToM3D = LV3D_List[LV3DCount].Content;
+            //        ModelVisual3D M3DToMV3D = new ModelVisual3D { Content = LV3DToM3D };
 
-                    LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(p3d), Color = colors });
-                    ConvertLV3DToMV3D_List.Add(LV3D_List[i]);
-                }
+            //        //Add
+            //        ConvertLV3DToMV3D_List.Add(M3DToMV3D);
+            //    }
 
-                return ConvertLV3DToMV3D_List;
-            }
+            //    return ConvertLV3DToMV3D_List;
+            //}
 
-            /// <summary>
-            /// List<DrawLine_Value>を使用してLinesVisual3Dを生成、ModelVisual3Dに変換する
-            /// </summary>
-            /// <param name="DrawLine_Value_List">Point3D_List</param>
-            /// <param name="colors">Set Color</param>
-            /// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
-            public List<ModelVisual3D> DrawLinesVisual3D(List<DrawLine_Value> DrawLine_Value_List, System.Windows.Media.Color colors)
-            {
-                List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
-                List<LinesVisual3D> LV3D_List = new List<LinesVisual3D>();
-
-
-                //List<Point3D>を使用して線を描く
-                for (int i = 0; i < DrawLine_Value_List.Count; i++)
-                {
-                    List<Point3D> p3d = new List<Point3D>();
-                    p3d.Add(new Point3D(DrawLine_Value_List[i].StartPoint3D.X, DrawLine_Value_List[i].StartPoint3D.Y, DrawLine_Value_List[i].StartPoint3D.Z));
-                    p3d.Add(new Point3D(DrawLine_Value_List[i].EndPoint3D.X, DrawLine_Value_List[i].EndPoint3D.Y, DrawLine_Value_List[i].EndPoint3D.Z));
-
-                    LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(p3d), Color = colors });
-                    ConvertLV3DToMV3D_List.Add(LV3D_List[i]);
-                }
-
-                return ConvertLV3DToMV3D_List;
-            }
-
-            /// <summary>
-            /// List<Point3D>を使用してLinesVisual3Dを生成、ModelVisual3Dに変換する
-            /// </summary>
-            /// <param name="P3DList">Point3D_List</param>
-            /// <param name="LV3D_List">LineVisual3D_List</param>
-            /// <param name="colors">Set Color</param>
-            /// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
-            public List<ModelVisual3D> DrawLinesVisual3D(List<Point3D> P3DList, List<LinesVisual3D> LV3D_List, System.Windows.Media.Color colors)
-            {
-                List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
-
-                //List<Point3D>を使用して線を描く
-                for (int i = 0; i < P3DList.Count; i++)
-                {
-                    LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(P3DList), Color = colors });
-                    ConvertLV3DToMV3D_List.Add(LV3D_List[i]);
-                }
-
-                return ConvertLV3DToMV3D_List;
-            }
-
-            /// <summary>
-            /// List<Point3D>を使用してLinesVisual3Dを生成、ModelVisual3Dに変換する
-            /// </summary>
-            /// <param name="P3DList">Point3D_List</param>
-            /// <param name="LV3D_List">LineVisual3D_List</param>
-            /// <param name="colors">Set Color</param>
-            /// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
-            public List<ModelVisual3D> DrawLinesVisual3D(List<Point3D> P3DList, System.Windows.Media.Color colors)
-            {
-                List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
-                List<LinesVisual3D> LV3D_List = new List<LinesVisual3D>();
-
-                //List<Point3D>を使用して線を描く
-                for (int i = 0; i < P3DList.Count; i++)
-                {
-                    LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(P3DList), Color = colors });
-                    ConvertLV3DToMV3D_List.Add(LV3D_List[i]);
-                }
-
-                return ConvertLV3DToMV3D_List;
-            }
-        }
-
-        public class CustomModelMV3D : TSRSystem
-        {
-            /// <summary>
-            /// Point3DのListからModelVisual3Dを生成
-            /// </summary>
-            /// <param name="P3DList">Point3D_List</param>
-            /// <param name="LV3D_List">LineVisual3D_List</param>
-            /// <param name="colors">Set Color</param>
-            /// <returns>List<ModelVisual3D>List<ModelVisual3D></returns>
-            public List<ModelVisual3D> CustomModelCreate(List<Point3D> P3DList, List<LinesVisual3D> LV3D_List, System.Windows.Media.Color colors)
-            {
-                //List<Point3D>を使用して線を描く
-                for (int i = 0; i < P3DList.Count; i++)
-                {
-                    LV3D_List.Add(new LinesVisual3D { Points = new Point3DCollection(P3DList), Color = colors });
-                }
-
-                List<ModelVisual3D> ConvertLV3DToMV3D_List = new List<ModelVisual3D>();
-
-                for (int LV3DCount = 0; LV3DCount < LV3D_List.Count; LV3DCount++)
-                {
-                    //LinesVisual3DをModel3Dに変換
-                    Model3D LV3DToM3D = LV3D_List[LV3DCount].Content;
-                    ModelVisual3D M3DToMV3D = new ModelVisual3D { Content = LV3DToM3D };
-
-                    //Add
-                    ConvertLV3DToMV3D_List.Add(M3DToMV3D);
-                }
-
-                return ConvertLV3DToMV3D_List;
-            }
+            public Model3DGroup UnionModelVisual3DGroup;
+            public List<ModelVisual3D> InputModelVisual3DList { get; set; }
 
             /// <summary>
             /// List<ModelVisual3D>を1つのModelVisual3Dに結合する
             /// </summary>
             /// <param name="MV3D_List"></param>
             /// <returns>ModelVisual3D</returns>
-            public ModelVisual3D UnionModelVisual3D(List<ModelVisual3D> MV3D_List)
+            public ModelVisual3D UnionModelVisual3D()
             {
-                Model3DGroup UnionModelVisual3DGroup = new Model3DGroup();
-
-                for (int ModelVisual3DCount = 0; ModelVisual3DCount < MV3D_List.Count; ModelVisual3DCount++)
-                {
-                    UnionModelVisual3DGroup.Children.Add(MV3D_List[ModelVisual3DCount].Content);
-                }
-
+                for (int Count = 0; Count < InputModelVisual3DList.Count; Count++) UnionModelVisual3DGroup.Children.Add(InputModelVisual3DList[Count].Content);
                 ModelVisual3D JoinedMV3D = new ModelVisual3D { Content = UnionModelVisual3DGroup };
-
                 return JoinedMV3D;
+            }
+
+            public void UpdateModel3DGroup(Model3DGroup model3DGroup)
+            {
+                UnionModelVisual3DGroup = model3DGroup;
+            }
+
+            public Model3DGroup GetModel3DGroup()
+            {
+                return UnionModelVisual3DGroup;
+            }
+
+            public UnionModel3D(List<ModelVisual3D> InputMV3DList)
+            {
+                UnionModelVisual3DGroup = new Model3DGroup();
+                InputModelVisual3DList = InputMV3DList;
             }
         }
 

@@ -196,7 +196,7 @@ namespace MK7_KMP_Editor_For_PG_
 
             public TPTK_Section(TestXml.KMPXml.StartPosition startPosition)
             {
-                for (int i = 0; i < startPosition.startPosition_Value.Count; i++) TPTKValueList.Add(new TPTKValue(startPosition.startPosition_Value[i], i));
+                for (int i = 0; i < startPosition.StartPositionValues.Count; i++) TPTKValueList.Add(new TPTKValue(startPosition.StartPositionValues[i], i));
             }
         }
 

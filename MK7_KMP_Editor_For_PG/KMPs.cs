@@ -459,18 +459,18 @@ namespace MK7_KMP_Editor_For_PG_
         {
             public static void Render_StartPosition(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.StartPosition startPosition)
             {
-                for (int i = 0; i < startPosition.startPosition_Value.Count; i++)
+                for (int ValueCount = 0; ValueCount < startPosition.StartPositionValues.Count; ValueCount++)
                 {
                     ModelVisual3D dv3D_StartPositionOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0x80, 0xED, 0xFF, 0x03), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0xFF, 0x00, 0x00, 0xFF), Color.FromArgb(0x80, 0x03, 0xFF, 0x60), Color.FromArgb(0x80, 0x03, 0xFF, 0x60));
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + i + " " + -1);
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_StartPositionOBJ, "StartPosition " + ValueCount + " " + -1);
 
                     HTK_3DES.TSRSystem.Transform StartPosition_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
-                        Translate3D = startPosition.startPosition_Value[i].Position.ToVector3D(),
+                        Translate3D = startPosition.StartPositionValues[ValueCount].Position.ToVector3D(),
                         Scale3D = new Vector3D(20, 20, 20),
-                        Rotate3D = startPosition.startPosition_Value[i].Rotation.ToVector3D()
+                        Rotate3D = startPosition.StartPositionValues[ValueCount].Rotation.ToVector3D()
                     };
 
                     HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_StartPositionOBJ, StartPosition_transform_Value);
@@ -486,24 +486,24 @@ namespace MK7_KMP_Editor_For_PG_
 
             public static void Render_EnemyRoute(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.EnemyRoute enemyRoute)
             {
-                for (int i = 0; i < enemyRoute.Groups.Count; i++)
+                for (int GroupCount = 0; GroupCount < enemyRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
                     HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
 
-                    for (int Count = 0; Count < enemyRoute.Groups[i].Points.Count; Count++)
+                    for (int PointCount = 0; PointCount < enemyRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
                         #region Add Model(EnemyRoutes)
                         ModelVisual3D dv3D_EnemyPathOBJ = HTK_3DES.CustomModelCreateHelper.CustomSphereVisual3D(30, 10, 1, Color.FromArgb(0x80, 0xFF, 0x9B, 0x34), Color.FromArgb(0x80, 0xFF, 0x9B, 0x34));
 
                         //モデルの名前と番号を文字列に格納(情報化)
-                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + Count + " " + i);
+                        HTK_3DES.TSRSystem.SetString_MV3D(dv3D_EnemyPathOBJ, "EnemyRoute " + PointCount + " " + GroupCount);
 
                         HTK_3DES.TSRSystem.Transform EnemyPoint_transform_Value = new HTK_3DES.TSRSystem.Transform
                         {
-                            Translate3D = enemyRoute.Groups[i].Points[Count].Position.ToVector3D(),
-                            Scale3D = new Vector3D(20, 20, 20),
-                            Rotate3D = enemyRoute.Groups[i].Points[Count].Position.ToVector3D()
+                            Translate3D = enemyRoute.Groups[GroupCount].Points[PointCount].Position.ToVector3D(),
+                            Scale3D = HTK_3DES.TSRSystem.ScaleFactor(enemyRoute.Groups[GroupCount].Points[PointCount].Control, 100),
+                            Rotate3D = new Vector3D(0, 0, 0)
                         };
 
                         HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_EnemyPathOBJ, EnemyPoint_transform_Value);
@@ -683,19 +683,19 @@ namespace MK7_KMP_Editor_For_PG_
 
             public static void Render_Object(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.Object Object, List<KMPs.KMPHelper.ObjFlowReader.Xml.ObjFlowDB> objFlowDataXml)
             {
-                for (int Count = 0; Count < Object.Object_Values.Count; Count++)
+                for (int ValueCount = 0; ValueCount < Object.Object_Values.Count; ValueCount++)
                 {
-                    string ObjectPath = objFlowDataXml.Find(x => x.ObjectID == Object.Object_Values[Count].ObjectID).Path;
+                    string ObjectPath = objFlowDataXml.Find(x => x.ObjectID == Object.Object_Values[ValueCount].ObjectID).Path;
                     ModelVisual3D dv3D_OBJ = HTK_3DES.TSRSystem.OBJReader(ObjectPath);
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + Count + " " + -1);
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_OBJ, "OBJ " + ValueCount + " " + -1);
 
                     HTK_3DES.TSRSystem.Transform OBJ_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
-                        Translate3D = Object.Object_Values[Count].Position.ToVector3D(),
-                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(Object.Object_Values[Count].Scale.ToVector3D(), 2),
-                        Rotate3D = Object.Object_Values[Count].Rotation.ToVector3D()
+                        Translate3D = Object.Object_Values[ValueCount].Position.ToVector3D(),
+                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(Object.Object_Values[ValueCount].Scale.ToVector3D(), 2),
+                        Rotate3D = Object.Object_Values[ValueCount].Rotation.ToVector3D()
                     };
 
                     HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_OBJ, OBJ_transform_Value);
@@ -750,21 +750,21 @@ namespace MK7_KMP_Editor_For_PG_
 
             public static void Render_Area(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.Area area)
             {
-                for (int Count = 0; Count < area.Area_Values.Count; Count++)
+                for (int ValueCount = 0; ValueCount < area.Area_Values.Count; ValueCount++)
                 {
                     ModelVisual3D dv3D_AreaOBJ = null;
-                    if (area.Area_Values[Count].AreaMode == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
-                    if (area.Area_Values[Count].AreaMode == 1) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomCylinderVisual3D(Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
-                    if (area.Area_Values[Count].AreaMode > 1) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
+                    if (area.Area_Values[ValueCount].AreaMode == 0) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
+                    if (area.Area_Values[ValueCount].AreaMode == 1) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomCylinderVisual3D(Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
+                    if (area.Area_Values[ValueCount].AreaMode > 1) dv3D_AreaOBJ = HTK_3DES.CustomModelCreateHelper.CustomBoxVisual3D(new Vector3D(1, 1, 1), new Point3D(0, 0, 0), Color.FromArgb(0x80, 0xFF, 0x00, 0x00), Color.FromArgb(0x80, 0xFF, 0x00, 0x00));
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + Count + " " + -1);
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_AreaOBJ, "Area " + ValueCount + " " + -1);
 
                     HTK_3DES.TSRSystem.Transform Area_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
-                        Translate3D = area.Area_Values[Count].Position.ToVector3D(),
-                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(area.Area_Values[Count].Scale.ToVector3D(), 2000),
-                        Rotate3D = area.Area_Values[Count].Rotation.ToVector3D()
+                        Translate3D = area.Area_Values[ValueCount].Position.ToVector3D(),
+                        Scale3D = HTK_3DES.TSRSystem.ScaleFactor(area.Area_Values[ValueCount].Scale.ToVector3D(), 2000),
+                        Rotate3D = area.Area_Values[ValueCount].Rotation.ToVector3D()
                     };
 
                     HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_AreaOBJ, Area_transform_Value);
@@ -779,18 +779,18 @@ namespace MK7_KMP_Editor_For_PG_
 
             public static void Render_Camera(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.Camera camera)
             {
-                for (int Count = 0; Count < camera.Values.Count; Count++)
+                for (int ValueCount = 0; ValueCount < camera.Values.Count; ValueCount++)
                 {
                     ModelVisual3D dv3D_CameraOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0x80, 0xFA, 0xFF, 0x00), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0xFF, 0x00, 0x53, 0xF2), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF), Color.FromArgb(0x80, 0x00, 0xE7, 0xFF));
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + Count + " " + -1);
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_CameraOBJ, "Camera " + ValueCount + " " + -1);
 
                     HTK_3DES.TSRSystem.Transform Camera_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
-                        Translate3D = camera.Values[Count].Position.ToVector3D(),
+                        Translate3D = camera.Values[ValueCount].Position.ToVector3D(),
                         Scale3D = new Vector3D(20, 20, 20),
-                        Rotate3D = camera.Values[Count].Rotation.ToVector3D()
+                        Rotate3D = camera.Values[ValueCount].Rotation.ToVector3D()
                     };
 
                     HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_CameraOBJ, Camera_transform_Value);
@@ -805,18 +805,18 @@ namespace MK7_KMP_Editor_For_PG_
 
             public static void Render_Returnpoint(UserControl1 UserCtrl, KMPViewportObject kMPViewportObject, TestXml.KMPXml.JugemPoint jugemPoint)
             {
-                for (int Count = 0; Count < jugemPoint.Values.Count; Count++)
+                for (int ValueCount = 0; ValueCount < jugemPoint.Values.Count; ValueCount++)
                 {
                     ModelVisual3D dv3D_RespawnPointOBJ = HTK_3DES.CustomModelCreateHelper.CustomPointVector3D(Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0x80, 0x5A, 0x1F, 0x97), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0xFF, 0xFF, 0x06, 0x2B), Color.FromArgb(0x80, 0x00, 0xFF, 0x73), Color.FromArgb(0x80, 0x00, 0xFF, 0x73));
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + Count + " " + -1);
+                    HTK_3DES.TSRSystem.SetString_MV3D(dv3D_RespawnPointOBJ, "RespawnPoint " + ValueCount + " " + -1);
 
                     HTK_3DES.TSRSystem.Transform RespawnPoint_transform_Value = new HTK_3DES.TSRSystem.Transform
                     {
-                        Translate3D = jugemPoint.Values[Count].Position.ToVector3D(),
+                        Translate3D = jugemPoint.Values[ValueCount].Position.ToVector3D(),
                         Scale3D = new Vector3D(20, 20, 20),
-                        Rotate3D = jugemPoint.Values[Count].Rotation.ToVector3D()
+                        Rotate3D = jugemPoint.Values[ValueCount].Rotation.ToVector3D()
                     };
 
                     HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem.TSRSystem3D(dv3D_RespawnPointOBJ, RespawnPoint_transform_Value);
