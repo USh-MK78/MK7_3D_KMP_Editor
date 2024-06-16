@@ -1,5 +1,5 @@
 ﻿
-namespace MK7_KMP_Editor_For_PG_
+namespace MK7_3D_KMP_Editor
 {
     partial class AddKMPObjectForm
     {
@@ -35,7 +35,7 @@ namespace MK7_KMP_Editor_For_PG_
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.userControl21 = new MK7_KMP_Editor_For_PG_.UserControl2();
+            this.userControl21 = new MK7_3D_KMP_Editor.UserControl2();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 

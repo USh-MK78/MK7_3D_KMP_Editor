@@ -1,4 +1,4 @@
-﻿namespace MK7_KMP_Editor_For_PG_
+﻿namespace MK7_3D_KMP_Editor
 {
     partial class Form1
     {
@@ -62,21 +62,27 @@
             this.KMP_Main_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.AddKMPSection = new System.Windows.Forms.Button();
             this.DeleteKMPSection = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.KMPSection_Main_TabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.KMP_Group_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.KMP_Group_ListBox = new System.Windows.Forms.ListBox();
             this.propertyGrid_KMP_Group = new System.Windows.Forms.PropertyGrid();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.KMP_Path_SplitContainer = new System.Windows.Forms.SplitContainer();
-            this.KMP_Path_ListBox = new System.Windows.Forms.ListBox();
+            this.KMP_Point_ListBox = new System.Windows.Forms.ListBox();
             this.propertyGrid_KMP_Path = new System.Windows.Forms.PropertyGrid();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.propertyGrid_KMP_StageInfo = new System.Windows.Forms.PropertyGrid();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.KMPVersion_LBL = new System.Windows.Forms.Label();
+            this.KMPVersion_TXT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.KMPSectionComboBox = new System.Windows.Forms.ComboBox();
             this.KMP_Viewport_SplitContainer = new System.Windows.Forms.SplitContainer();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.userControl11 = new MK7_3D_KMP_Editor.UserControl1();
+            this.KMP_Viewport_TabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.CH_KMPGroupPoint = new System.Windows.Forms.CheckBox();
@@ -110,18 +116,16 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.KMPVersion_TXT = new System.Windows.Forms.TextBox();
-            this.KMPVersion_LBL = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.userControl11 = new MK7_KMP_Editor_For_PG_.UserControl1();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.OnElementPos_RadioBtn = new System.Windows.Forms.RadioButton();
+            this.MouseCursor_RadioBtn = new System.Windows.Forms.RadioButton();
+            this.CameraPosition_RadioBtn = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
             this.KMP_Main_SplitContainer.Panel2.SuspendLayout();
             this.KMP_Main_SplitContainer.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.KMPSection_Main_TabCtrl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Group_SplitContainer)).BeginInit();
             this.KMP_Group_SplitContainer.Panel1.SuspendLayout();
@@ -133,12 +137,13 @@
             this.KMP_Path_SplitContainer.Panel2.SuspendLayout();
             this.KMP_Path_SplitContainer.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Viewport_SplitContainer)).BeginInit();
             this.KMP_Viewport_SplitContainer.Panel1.SuspendLayout();
             this.KMP_Viewport_SplitContainer.Panel2.SuspendLayout();
             this.KMP_Viewport_SplitContainer.SuspendLayout();
-            this.tabControl2.SuspendLayout();
+            this.KMP_Viewport_TabCtrl.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -148,7 +153,7 @@
             this.tabPage6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -248,7 +253,7 @@
             // ViewportTypeChange
             // 
             this.ViewportTypeChange.Name = "ViewportTypeChange";
-            this.ViewportTypeChange.Size = new System.Drawing.Size(126, 22);
+            this.ViewportTypeChange.Size = new System.Drawing.Size(180, 22);
             this.ViewportTypeChange.Text = "3D <->2D";
             this.ViewportTypeChange.Click += new System.EventHandler(this.ViewportTypeChange_TSM_Click);
             // 
@@ -394,7 +399,7 @@
             // 
             this.KMP_Main_SplitContainer.Panel1.Controls.Add(this.AddKMPSection);
             this.KMP_Main_SplitContainer.Panel1.Controls.Add(this.DeleteKMPSection);
-            this.KMP_Main_SplitContainer.Panel1.Controls.Add(this.tabControl1);
+            this.KMP_Main_SplitContainer.Panel1.Controls.Add(this.KMPSection_Main_TabCtrl);
             this.KMP_Main_SplitContainer.Panel1.Controls.Add(this.groupBox1);
             this.KMP_Main_SplitContainer.Panel1MinSize = 245;
             // 
@@ -428,21 +433,21 @@
             this.DeleteKMPSection.UseVisualStyleBackColor = true;
             this.DeleteKMPSection.Click += new System.EventHandler(this.DeleteKMPSection_Click);
             // 
-            // tabControl1
+            // KMPSection_Main_TabCtrl
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.KMPSection_Main_TabCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Location = new System.Drawing.Point(4, 53);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(238, 504);
-            this.tabControl1.TabIndex = 7;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.KMPSection_Main_TabCtrl.Controls.Add(this.tabPage1);
+            this.KMPSection_Main_TabCtrl.Controls.Add(this.tabPage2);
+            this.KMPSection_Main_TabCtrl.Controls.Add(this.tabPage3);
+            this.KMPSection_Main_TabCtrl.Controls.Add(this.tabPage7);
+            this.KMPSection_Main_TabCtrl.Location = new System.Drawing.Point(4, 53);
+            this.KMPSection_Main_TabCtrl.Name = "KMPSection_Main_TabCtrl";
+            this.KMPSection_Main_TabCtrl.SelectedIndex = 0;
+            this.KMPSection_Main_TabCtrl.Size = new System.Drawing.Size(238, 504);
+            this.KMPSection_Main_TabCtrl.TabIndex = 7;
+            this.KMPSection_Main_TabCtrl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -502,7 +507,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(230, 478);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Path";
+            this.tabPage2.Text = "Point";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // KMP_Path_SplitContainer
@@ -514,7 +519,7 @@
             // 
             // KMP_Path_SplitContainer.Panel1
             // 
-            this.KMP_Path_SplitContainer.Panel1.Controls.Add(this.KMP_Path_ListBox);
+            this.KMP_Path_SplitContainer.Panel1.Controls.Add(this.KMP_Point_ListBox);
             // 
             // KMP_Path_SplitContainer.Panel2
             // 
@@ -523,17 +528,17 @@
             this.KMP_Path_SplitContainer.SplitterDistance = 214;
             this.KMP_Path_SplitContainer.TabIndex = 0;
             // 
-            // KMP_Path_ListBox
+            // KMP_Point_ListBox
             // 
-            this.KMP_Path_ListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.KMP_Path_ListBox.FormattingEnabled = true;
-            this.KMP_Path_ListBox.ItemHeight = 12;
-            this.KMP_Path_ListBox.Location = new System.Drawing.Point(0, 0);
-            this.KMP_Path_ListBox.Name = "KMP_Path_ListBox";
-            this.KMP_Path_ListBox.Size = new System.Drawing.Size(224, 214);
-            this.KMP_Path_ListBox.TabIndex = 0;
-            this.KMP_Path_ListBox.SelectedIndexChanged += new System.EventHandler(this.KMP_Path_ListBox_SelectedIndexChanged);
-            this.KMP_Path_ListBox.DoubleClick += new System.EventHandler(this.KMP_Path_ListBox_DoubleClick);
+            this.KMP_Point_ListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.KMP_Point_ListBox.FormattingEnabled = true;
+            this.KMP_Point_ListBox.ItemHeight = 12;
+            this.KMP_Point_ListBox.Location = new System.Drawing.Point(0, 0);
+            this.KMP_Point_ListBox.Name = "KMP_Point_ListBox";
+            this.KMP_Point_ListBox.Size = new System.Drawing.Size(224, 214);
+            this.KMP_Point_ListBox.TabIndex = 0;
+            this.KMP_Point_ListBox.SelectedIndexChanged += new System.EventHandler(this.KMP_Path_ListBox_SelectedIndexChanged);
+            this.KMP_Point_ListBox.DoubleClick += new System.EventHandler(this.KMP_Path_ListBox_DoubleClick);
             // 
             // propertyGrid_KMP_Path
             // 
@@ -562,6 +567,47 @@
             this.propertyGrid_KMP_StageInfo.Name = "propertyGrid_KMP_StageInfo";
             this.propertyGrid_KMP_StageInfo.Size = new System.Drawing.Size(224, 472);
             this.propertyGrid_KMP_StageInfo.TabIndex = 0;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.label1);
+            this.tabPage7.Controls.Add(this.KMPVersion_LBL);
+            this.tabPage7.Controls.Add(this.KMPVersion_TXT);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(230, 478);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "KMP Version";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.ForeColor = System.Drawing.Color.Navy;
+            this.label1.Location = new System.Drawing.Point(6, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(218, 107);
+            this.label1.TabIndex = 2;
+            this.label1.Text = resources.GetString("label1.Text");
+            // 
+            // KMPVersion_LBL
+            // 
+            this.KMPVersion_LBL.AutoSize = true;
+            this.KMPVersion_LBL.Location = new System.Drawing.Point(10, 16);
+            this.KMPVersion_LBL.Name = "KMPVersion_LBL";
+            this.KMPVersion_LBL.Size = new System.Drawing.Size(77, 12);
+            this.KMPVersion_LBL.TabIndex = 1;
+            this.KMPVersion_LBL.Text = "KMP Version :";
+            // 
+            // KMPVersion_TXT
+            // 
+            this.KMPVersion_TXT.Location = new System.Drawing.Point(93, 13);
+            this.KMPVersion_TXT.Name = "KMPVersion_TXT";
+            this.KMPVersion_TXT.Size = new System.Drawing.Size(126, 19);
+            this.KMPVersion_TXT.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -599,22 +645,32 @@
             // 
             // KMP_Viewport_SplitContainer.Panel2
             // 
-            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.tabControl2);
+            this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.KMP_Viewport_TabCtrl);
             this.KMP_Viewport_SplitContainer.Panel2.Controls.Add(this.groupBox4);
             this.KMP_Viewport_SplitContainer.Size = new System.Drawing.Size(816, 591);
             this.KMP_Viewport_SplitContainer.SplitterDistance = 604;
             this.KMP_Viewport_SplitContainer.TabIndex = 0;
             // 
-            // tabControl2
+            // elementHost1
             // 
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Location = new System.Drawing.Point(3, 3);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(204, 479);
-            this.tabControl2.TabIndex = 14;
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(0, 0);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(604, 591);
+            this.elementHost1.TabIndex = 6;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.userControl11;
+            // 
+            // KMP_Viewport_TabCtrl
+            // 
+            this.KMP_Viewport_TabCtrl.Controls.Add(this.tabPage4);
+            this.KMP_Viewport_TabCtrl.Controls.Add(this.tabPage5);
+            this.KMP_Viewport_TabCtrl.Controls.Add(this.tabPage6);
+            this.KMP_Viewport_TabCtrl.Location = new System.Drawing.Point(3, 3);
+            this.KMP_Viewport_TabCtrl.Name = "KMP_Viewport_TabCtrl";
+            this.KMP_Viewport_TabCtrl.SelectedIndex = 0;
+            this.KMP_Viewport_TabCtrl.Size = new System.Drawing.Size(204, 479);
+            this.KMP_Viewport_TabCtrl.TabIndex = 14;
             // 
             // tabPage4
             // 
@@ -845,6 +901,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBox8);
             this.tabPage6.Controls.Add(this.groupBox5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
@@ -981,56 +1038,52 @@
             this.Label_SectionName.TabIndex = 0;
             this.Label_SectionName.Text = "SectionName :";
             // 
-            // tabPage7
+            // groupBox8
             // 
-            this.tabPage7.Controls.Add(this.label1);
-            this.tabPage7.Controls.Add(this.KMPVersion_LBL);
-            this.tabPage7.Controls.Add(this.KMPVersion_TXT);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(230, 478);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "KMP Version";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.groupBox8.Controls.Add(this.CameraPosition_RadioBtn);
+            this.groupBox8.Controls.Add(this.MouseCursor_RadioBtn);
+            this.groupBox8.Controls.Add(this.OnElementPos_RadioBtn);
+            this.groupBox8.Location = new System.Drawing.Point(6, 123);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(187, 100);
+            this.groupBox8.TabIndex = 19;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Add Objcet Position Setting";
             // 
-            // KMPVersion_TXT
+            // OnElementPos_RadioBtn
             // 
-            this.KMPVersion_TXT.Location = new System.Drawing.Point(93, 13);
-            this.KMPVersion_TXT.Name = "KMPVersion_TXT";
-            this.KMPVersion_TXT.Size = new System.Drawing.Size(126, 19);
-            this.KMPVersion_TXT.TabIndex = 0;
+            this.OnElementPos_RadioBtn.AutoSize = true;
+            this.OnElementPos_RadioBtn.Checked = true;
+            this.OnElementPos_RadioBtn.Location = new System.Drawing.Point(6, 18);
+            this.OnElementPos_RadioBtn.Name = "OnElementPos_RadioBtn";
+            this.OnElementPos_RadioBtn.Size = new System.Drawing.Size(78, 16);
+            this.OnElementPos_RadioBtn.TabIndex = 0;
+            this.OnElementPos_RadioBtn.TabStop = true;
+            this.OnElementPos_RadioBtn.Text = "OnElement";
+            this.OnElementPos_RadioBtn.UseVisualStyleBackColor = true;
+            this.OnElementPos_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
             // 
-            // KMPVersion_LBL
+            // MouseCursor_RadioBtn
             // 
-            this.KMPVersion_LBL.AutoSize = true;
-            this.KMPVersion_LBL.Location = new System.Drawing.Point(10, 16);
-            this.KMPVersion_LBL.Name = "KMPVersion_LBL";
-            this.KMPVersion_LBL.Size = new System.Drawing.Size(77, 12);
-            this.KMPVersion_LBL.TabIndex = 1;
-            this.KMPVersion_LBL.Text = "KMP Version :";
+            this.MouseCursor_RadioBtn.AutoSize = true;
+            this.MouseCursor_RadioBtn.Location = new System.Drawing.Point(6, 40);
+            this.MouseCursor_RadioBtn.Name = "MouseCursor_RadioBtn";
+            this.MouseCursor_RadioBtn.Size = new System.Drawing.Size(90, 16);
+            this.MouseCursor_RadioBtn.TabIndex = 1;
+            this.MouseCursor_RadioBtn.Text = "MouseCursor";
+            this.MouseCursor_RadioBtn.UseVisualStyleBackColor = true;
+            this.MouseCursor_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
             // 
-            // label1
+            // CameraPosition_RadioBtn
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(6, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(218, 107);
-            this.label1.TabIndex = 2;
-            this.label1.Text = resources.GetString("label1.Text");
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(0, 0);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(604, 591);
-            this.elementHost1.TabIndex = 6;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.userControl11;
+            this.CameraPosition_RadioBtn.AutoSize = true;
+            this.CameraPosition_RadioBtn.Location = new System.Drawing.Point(6, 62);
+            this.CameraPosition_RadioBtn.Name = "CameraPosition_RadioBtn";
+            this.CameraPosition_RadioBtn.Size = new System.Drawing.Size(103, 16);
+            this.CameraPosition_RadioBtn.TabIndex = 2;
+            this.CameraPosition_RadioBtn.Text = "CameraPosition";
+            this.CameraPosition_RadioBtn.UseVisualStyleBackColor = true;
+            this.CameraPosition_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
             // 
             // Form1
             // 
@@ -1050,7 +1103,7 @@
             this.KMP_Main_SplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).EndInit();
             this.KMP_Main_SplitContainer.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.KMPSection_Main_TabCtrl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.KMP_Group_SplitContainer.Panel1.ResumeLayout(false);
             this.KMP_Group_SplitContainer.Panel2.ResumeLayout(false);
@@ -1062,12 +1115,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Path_SplitContainer)).EndInit();
             this.KMP_Path_SplitContainer.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.KMP_Viewport_SplitContainer.Panel1.ResumeLayout(false);
             this.KMP_Viewport_SplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Viewport_SplitContainer)).EndInit();
             this.KMP_Viewport_SplitContainer.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
+            this.KMP_Viewport_TabCtrl.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
@@ -1083,8 +1138,8 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1109,7 +1164,7 @@
         private System.Windows.Forms.PropertyGrid propertyGrid_KMP_Path;
         private System.Windows.Forms.Button AddKMPSection;
         private System.Windows.Forms.Button DeleteKMPSection;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl KMPSection_Main_TabCtrl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.SplitContainer KMP_Group_SplitContainer;
         private System.Windows.Forms.ListBox KMP_Group_ListBox;
@@ -1137,7 +1192,7 @@
         private System.Windows.Forms.Label Label_GroupID;
         private System.Windows.Forms.Label Label_SectionName;
         public System.Windows.Forms.ComboBox KMPSectionComboBox;
-        public System.Windows.Forms.ListBox KMP_Path_ListBox;
+        public System.Windows.Forms.ListBox KMP_Point_ListBox;
         private System.Windows.Forms.ToolStripMenuItem oBJFlowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objFlowXmlEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeKMPToolStripMenuItem;
@@ -1152,7 +1207,7 @@
         private System.Windows.Forms.ToolStripMenuItem outputXXXXAsXmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inputXmlAsXXXXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xXXXRouteImporterToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl KMP_Viewport_TabCtrl;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -1178,6 +1233,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label KMPVersion_LBL;
         private System.Windows.Forms.TextBox KMPVersion_TXT;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.RadioButton CameraPosition_RadioBtn;
+        private System.Windows.Forms.RadioButton MouseCursor_RadioBtn;
+        private System.Windows.Forms.RadioButton OnElementPos_RadioBtn;
     }
 }
 

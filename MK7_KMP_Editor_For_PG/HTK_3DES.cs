@@ -9,338 +9,361 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace MK7_KMP_Editor_For_PG_
+namespace MK7_3D_KMP_Editor
 {
     public class HTK_3DES
     {
-        public class TSRSystem
+        #region static
+        /// <summary>
+        /// objファイルを読み込み、ModelVisual3Dを返すメソッド
+        /// </summary>
+        /// <param name="Path">Model Path</param>
+        /// <returns>ModelVisual3D</returns>
+        public static ModelVisual3D OBJReader(string Path)
         {
-            public class Transform
+            ModelVisual3D ModelVisual3D = new ModelVisual3D();
+            ObjReader objRead = new ObjReader();
+            ModelVisual3D.Content = objRead.Read(Path);
+
+            return ModelVisual3D;
+        }
+
+        /// <summary>
+        /// ガベージコレクション
+        /// </summary>
+        public static void GC_Dispose(object f)
+        {
+            int GCNum = GC.GetGeneration(f);
+
+            GC.Collect(GCNum);
+            GC.WaitForPendingFinalizers();
+        }
+
+        /// <summary>
+        /// ModelVisual3Dに文字列を関連付けて新しいModelVisual3Dを生成する
+        /// </summary>
+        /// <param name="MV3D">Input ModelVisual3D</param>
+        /// <param name="InputString">Input String</param>
+        /// <returns></returns>
+        public static ModelVisual3D SetStringAndNewMV3D(ModelVisual3D MV3D, string InputString)
+        {
+            MV3D.SetName(InputString);
+            return MV3D;
+        }
+
+        /// <summary>
+        /// ModelVisual3Dに文字列を関連付ける
+        /// </summary>
+        /// <param name="MV3D">Input ModelVisual3D</param>
+        /// <param name="InputString">Input String</param>
+        public static void SetString_MV3D(ModelVisual3D MV3D, string InputString)
+        {
+            MV3D.SetName(InputString);
+        }
+
+        public static Vector3D ScaleFactor(Vector3D InputVector3D, double ScaleFactor)
+        {
+            return new Vector3D(InputVector3D.X * ScaleFactor, InputVector3D.Y * ScaleFactor, InputVector3D.Z * ScaleFactor);
+        }
+
+        public static Vector3D ScaleFactor(float PointSize, double ScaleFactor)
+        {
+            return new Vector3D(PointSize * ScaleFactor, PointSize * ScaleFactor, PointSize * ScaleFactor);
+        }
+
+        /// <summary>
+        /// Radianを角度に変換
+        /// </summary>
+        /// <param name="Radian"></param>
+        /// <returns></returns>
+        public static float RadianToAngle(double Radian)
+        {
+            return (float)(Radian * (180 / Math.PI));
+        }
+
+        /// <summary>
+        /// 角度をRadianに変換
+        /// </summary>
+        /// <param name="Angle"></param>
+        /// <returns></returns>
+        public static double AngleToRadian(double Angle)
+        {
+            return (float)(Angle * (Math.PI / 180));
+        }
+
+        public static Vector3D RadianToAngleVector3D(Vector3D vector3D)
+        {
+            return new Vector3D((float)(vector3D.X * (180 / Math.PI)), (float)(vector3D.Y * (180 / Math.PI)), (float)(vector3D.Z * (180 / Math.PI)));
+        }
+
+        public static Vector3D AngleToRadianVector3D(Vector3D vector3D)
+        {
+            return new Vector3D((float)(vector3D.X * (Math.PI / 180)), (float)(vector3D.Y * (Math.PI / 180)), (float)(vector3D.Z * (Math.PI / 180)));
+        }
+
+        public static Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
+        {
+            Rect3D r = MV3D.Content.Bounds;
+            double cX = r.X + r.SizeX / 2;
+            double cY = r.Y + r.SizeY / 2;
+            double cZ = r.Z + r.SizeZ / 2;
+            Point3D P3 = new Point3D(cX, cY, cZ);
+
+            return P3;
+        }
+
+        public static Point3D CalculateModelCenterPoint(Model3D MV3D)
+        {
+            Rect3D r = MV3D.Bounds;
+            double cX = r.X + r.SizeX / 2;
+            double cY = r.Y + r.SizeY / 2;
+            double cZ = r.Z + r.SizeZ / 2;
+            Point3D P3 = new Point3D(cX, cY, cZ);
+
+            return P3;
+        }
+
+        public static Vector3D Scalefactor(Vector3D v, double Factor)
+        {
+            return new Vector3D(v.X / Factor, v.Y / Factor, v.Z / Factor);
+        }
+        #endregion
+
+        #region Transform
+        public class Transform
+        {
+            public Vector3D Rotate3D { get; set; }
+            public Vector3D Scale3D { get; set; }
+            public Vector3D Translate3D { get; set; }
+
+            public Transform(Vector3D Rotate, Vector3D Scale, Vector3D Translate)
             {
-                public Vector3D Rotate3D { get; set; }
-                public Vector3D Scale3D { get; set; }
-                public Vector3D Translate3D { get; set; }
+                Rotate3D = Rotate;
+                Scale3D = Scale;
+                Translate3D = Translate;
             }
+
+            public Transform() { }
+        }
+
+        public class TSRSystem3D
+        {
+            public Transform Transform { get; set; } = new Transform();
+            public ModelVisual3D InputMV3D { get; set; }
+            public Model3D InputM3D;
+            public bool IsContent;
+
+            //public ModelVisual3D InputMV3D;
+            //public Model3D M3D
+            //{
+            //    get
+            //    {
+            //        return InputMV3D.Content ?? null;
+            //    }
+            //    set
+            //    {
+            //        InputMV3D = new ModelVisual3D { Content = M3D };
+            //    }
+            //}
+
+            public TSRSystem3D()
+            {
+                return;
+            }
+
             /// <summary>
-            /// objファイルを読み込み、ModelVisual3Dを返すメソッド
+            /// TSRSystem3Dの初期化
             /// </summary>
-            /// <param name="Path">Model Path</param>
-            /// <returns>ModelVisual3D</returns>
-            public static ModelVisual3D OBJReader(string Path)
+            /// <param name="MV3D"></param>
+            /// <param name="transform"></param>
+            public TSRSystem3D(ModelVisual3D MV3D, Transform transform)
             {
-                ModelVisual3D dv3D = new ModelVisual3D();
-                ObjReader objRead = new ObjReader();
-                dv3D.Content = objRead.Read(Path);
-
-                #region delcode(?)
-                //ObjReader objRead = new ObjReader();
-
-                //SortingVisual3D sortingVisual3D = new SortingVisual3D
-                //{
-                //    Method = SortingMethod.BoundingSphereSurface,
-                //    SortingFrequency = 2,
-                //    Content = objRead.Read(Path)
-                //};
-
-                //ModelVisual3D dv3D = sortingVisual3D;
-                #endregion
-
-                return dv3D;
+                InputMV3D = MV3D;
+                InputM3D = null;
+                Transform = transform;
+                IsContent = MV3D.Content != null ? true : false;
             }
 
             /// <summary>
-            /// ガベージコレクション
+            /// TSRSystem3Dの初期化
             /// </summary>
-            public static void GC_Dispose(object f)
+            /// <param name="MV3D"></param>
+            /// <param name="transform"></param>
+            public TSRSystem3D(Model3D M3D, Transform transform)
             {
-                int GCNum = GC.GetGeneration(f);
-
-                GC.Collect(GCNum);
-                GC.WaitForPendingFinalizers();
-                //GC.Collect();
+                InputMV3D = null;
+                InputM3D = M3D;
+                Transform = transform;
+                IsContent = true;
             }
 
-            /// <summary>
-            /// ModelVisual3Dに文字列を関連付けて新しいModelVisual3Dを生成する
-            /// </summary>
-            /// <param name="MV3D">Input ModelVisual3D</param>
-            /// <param name="InputString">Input String</param>
-            /// <returns></returns>
-            public static ModelVisual3D SetStringAndNewMV3D(ModelVisual3D MV3D, string InputString)
+            #region Rotation
+            public RotateTransform3D Rotate_X { get; set; } = new RotateTransform3D();
+            public RotateTransform3D Rotate_Y { get; set; } = new RotateTransform3D();
+            public RotateTransform3D Rotate_Z { get; set; } = new RotateTransform3D();
+
+            //public RotationCenterSetting RotationCenterSettings { get; }
+            public class RotationCenterSetting
             {
-                MV3D.SetName(InputString);
-                return MV3D;
-            }
+                public Vector3D RotationX { get; set; } = new Vector3D(1, 0, 0);
+                public Vector3D RotationY { get; set; } = new Vector3D(0, 1, 0);
+                public Vector3D RotationZ { get; set; } = new Vector3D(0, 0, 1);
 
-            /// <summary>
-            /// ModelVisual3Dに文字列を関連付ける
-            /// </summary>
-            /// <param name="MV3D">Input ModelVisual3D</param>
-            /// <param name="InputString">Input String</param>
-            public static void SetString_MV3D(ModelVisual3D MV3D, string InputString)
-            {
-                MV3D.SetName(InputString);
-            }
-
-            public static Vector3D ScaleFactor(Vector3D InputVector3D, double ScaleFactor)
-            {
-                return new Vector3D(InputVector3D.X * ScaleFactor, InputVector3D.Y * ScaleFactor, InputVector3D.Z * ScaleFactor);
-            }
-
-            public static Vector3D ScaleFactor(float PointSize, double ScaleFactor)
-            {
-                return new Vector3D(PointSize * ScaleFactor, PointSize * ScaleFactor, PointSize * ScaleFactor);
-            }
-
-            /// <summary>
-            /// Radianを角度に変換
-            /// </summary>
-            /// <param name="Radian"></param>
-            /// <returns></returns>
-            public static float RadianToAngle(double Radian)
-            {
-                return (float)(Radian * (180 / Math.PI));
-            }
-
-            /// <summary>
-            /// 角度をRadianに変換
-            /// </summary>
-            /// <param name="Angle"></param>
-            /// <returns></returns>
-            public static double AngleToRadian(double Angle)
-            {
-                return (float)(Angle * (Math.PI / 180));
-            }
-
-            public static Vector3D RadianToAngleVector3D(Vector3D vector3D)
-            {
-                return new Vector3D((float)(vector3D.X * (180 / Math.PI)), (float)(vector3D.Y * (180 / Math.PI)), (float)(vector3D.Z * (180 / Math.PI)));
-            }
-
-            public static Vector3D AngleToRadianVector3D(Vector3D vector3D)
-            {
-                return new Vector3D((float)(vector3D.X * (Math.PI / 180)), (float)(vector3D.Y * (Math.PI / 180)), (float)(vector3D.Z * (Math.PI / 180)));
-            }
-
-            public static Point3D CalculateModelCenterPoint(ModelVisual3D MV3D)
-            {
-                Rect3D r = MV3D.Content.Bounds;
-                double cX = r.X + r.SizeX / 2;
-                double cY = r.Y + r.SizeY / 2;
-                double cZ = r.Z + r.SizeZ / 2;
-                Point3D P3 = new Point3D(cX, cY, cZ);
-
-                return P3;
-            }
-
-            public static Point3D CalculateModelCenterPoint(Model3D MV3D)
-            {
-                Rect3D r = MV3D.Bounds;
-                double cX = r.X + r.SizeX / 2;
-                double cY = r.Y + r.SizeY / 2;
-                double cZ = r.Z + r.SizeZ / 2;
-                Point3D P3 = new Point3D(cX, cY, cZ);
-
-                return P3;
-            }
-
-            public static Vector3D Scalefactor(Vector3D v, double Factor)
-            {
-                return new Vector3D(v.X / Factor, v.Y / Factor, v.Z / Factor);
-            }
-
-
-            public class TSRSystem3D
-            {
-                public Transform Transform { get; } = new Transform();
-                public ModelVisual3D InputMV3D { get; }
-                public Model3D InputM3D;
-                public bool IsContent;
-
-                //public ModelVisual3D InputMV3D;
-                //public Model3D M3D
-                //{
-                //    get
-                //    {
-                //        return InputMV3D.Content ?? null;
-                //    }
-                //    set
-                //    {
-                //        InputMV3D = new ModelVisual3D { Content = M3D };
-                //    }
-                //}
-
-                public TSRSystem3D()
+                public RotationCenterSetting(Vector3D Rotation_X, Vector3D Rotation_Y, Vector3D Rotation_Z)
                 {
-                    return;
+                    RotationX = Rotation_X;
+                    RotationY = Rotation_Y;
+                    RotationZ = Rotation_Z;
                 }
-
-                /// <summary>
-                /// TSRSystem3Dの初期化
-                /// </summary>
-                /// <param name="MV3D"></param>
-                /// <param name="transform"></param>
-                public TSRSystem3D(ModelVisual3D MV3D, Transform transform)
-                {
-                    InputMV3D = MV3D;
-                    InputM3D = null;
-                    Transform = transform;
-                    IsContent = MV3D.Content != null ? true : false;
-                }
-
-                /// <summary>
-                /// TSRSystem3Dの初期化
-                /// </summary>
-                /// <param name="MV3D"></param>
-                /// <param name="transform"></param>
-                public TSRSystem3D(Model3D M3D, Transform transform)
-                {
-                    InputMV3D = null;
-                    InputM3D = M3D;
-                    Transform = transform;
-                    IsContent = true;
-                }
-
-                #region Rotation
-                public RotateTransform3D Rotate_X { get; } = new RotateTransform3D();
-                public RotateTransform3D Rotate_Y { get; } = new RotateTransform3D();
-                public RotateTransform3D Rotate_Z { get; } = new RotateTransform3D();
-
-                public RotationCenterSetting RotationCenterSettings { get; }
-                public class RotationCenterSetting
-                {
-                    public Vector3D RotationX { get; set; } = new Vector3D(1, 0, 0);
-                    public Vector3D RotationY { get; set; } = new Vector3D(0, 1, 0);
-                    public Vector3D RotationZ { get; set; } = new Vector3D(0, 0, 1);
-
-                    public RotationCenterSetting()
-                    {
-                        RotationX = new Vector3D(1, 0, 0);
-                        RotationY = new Vector3D(0, 1, 0);
-                        RotationZ = new Vector3D(0, 0, 1);
-                    }
-                }
-
-                public enum RotationType
-                {
-                    Angle,
-                    Radian
-                }
-
-                public void TSR_Rotate(RotationCenterSetting RotationCenterSettings, RotationType RotationSettings = RotationType.Angle)
-                {
-                    double RotateX = new double();
-                    double RotateY = new double();
-                    double RotateZ = new double();
-
-                    if (RotationSettings == RotationType.Angle)
-                    {
-                        RotateX = Transform.Rotate3D.X;
-                        RotateY = Transform.Rotate3D.Y;
-                        RotateZ = Transform.Rotate3D.Z;
-                    }
-                    if (RotationSettings == RotationType.Radian)
-                    {
-                        RotateX = RadianToAngle(Transform.Rotate3D.X);
-                        RotateY = RadianToAngle(Transform.Rotate3D.Y);
-                        RotateZ = RadianToAngle(Transform.Rotate3D.Z);
-                    }
-
-                    Rotate_X.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationX, RotateX));
-                    Rotate_Y.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationY, RotateY));
-                    Rotate_Z.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationZ, RotateZ));
-                }
-                #endregion
-
-                #region Scale
-                public ScaleTransform3D ScaleTransform3D;
 
                 /// <summary>
                 /// 
                 /// </summary>
-                /// <param name="ScaleFactor"></param>
-                /// <param name="Center"></param>
-                public void TSR_Scale3D(double ScaleFactorValue = 2, Point3D? Center = null, bool CenterFlag = false)
+                /// <returns></returns>
+                public static RotationCenterSetting DefaultCenterSetting()
                 {
-                    if (CenterFlag == true) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue), Center ?? new Point3D(0, 0, 0));
-                    if (CenterFlag == false) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue));
-                }
-                #endregion
-
-                #region Translate
-                public TranslateTransform3D TranslateTransform3D;
-                public void TSR_Translate3D()
-                {
-                    TranslateTransform3D = new TranslateTransform3D(Transform.Translate3D);
-                }
-                #endregion
-
-                #region Transform
-                public ContentType GetContentType
-                {
-                    get
-                    {
-                        ContentType contentType = new ContentType();
-                        if ((InputMV3D != null && InputM3D == null) == true) contentType = ContentType.ModelVisual3D;
-                        if ((InputMV3D == null && InputM3D != null) == true) contentType = ContentType.Model3D;
-                        return contentType;
-                    }
+                    return new RotationCenterSetting(new Vector3D(1, 0, 0), new Vector3D(0, 1, 0), new Vector3D(0, 0, 1));
                 }
 
-                public enum ContentType
+                public RotationCenterSetting()
                 {
-                    ModelVisual3D,
-                    Model3D
+                    RotationX = new Vector3D(1, 0, 0);
+                    RotationY = new Vector3D(0, 1, 0);
+                    RotationZ = new Vector3D(0, 0, 1);
                 }
-
-                public void StartTransform()
-                {
-                    Transform3DCollection T3D_Collection = new Transform3DCollection();
-                    T3D_Collection.Add(ScaleTransform3D);
-                    T3D_Collection.Add(Rotate_X);
-                    T3D_Collection.Add(Rotate_Y);
-                    T3D_Collection.Add(Rotate_Z);
-                    T3D_Collection.Add(TranslateTransform3D);
-
-                    Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
-
-                    if (GetContentType == ContentType.ModelVisual3D)
-                    {
-                        if (IsContent == true) InputMV3D.Content.Transform = T3DGroup;
-                        if (IsContent == false) InputMV3D.Transform = T3DGroup;
-                    }
-                    if (GetContentType == ContentType.Model3D)
-                    {
-                        InputM3D.Transform = T3DGroup;
-                    }
-                }
-
-                public void TestTransform3D()
-                {
-                    TSRSystem3D tSRSystem3D = null;
-                    if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
-                    if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
-                    tSRSystem3D.TSR_Rotate(new RotationCenterSetting(), RotationType.Angle);
-                    tSRSystem3D.TSR_Scale3D();
-                    tSRSystem3D.TSR_Translate3D();
-                    tSRSystem3D.StartTransform();
-                }
-
-                public void TestTransform3D(RotationCenterSetting rotationCenterSetting, RotationType rotationType, double ScaleFactor = 2, Point3D? Center = null, bool CenterFlag = false)
-                {
-                    TSRSystem3D tSRSystem3D = null;
-                    if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
-                    if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
-                    tSRSystem3D.TSR_Rotate(rotationCenterSetting, rotationType);
-                    tSRSystem3D.TSR_Scale3D(ScaleFactor, Center, CenterFlag);
-                    tSRSystem3D.TSR_Translate3D();
-                    tSRSystem3D.StartTransform();
-                }
-                #endregion
             }
-        }
 
-        public class UnionModel3D : TSRSystem
+            public enum RotationType
+            {
+                Angle,
+                Radian
+            }
+
+            public void TSR_Rotate(RotationCenterSetting RotationCenterSettings, RotationType RotationSettings = RotationType.Angle)
+            {
+                double RotateX = new double();
+                double RotateY = new double();
+                double RotateZ = new double();
+
+                if (RotationSettings == RotationType.Angle)
+                {
+                    RotateX = Transform.Rotate3D.X;
+                    RotateY = Transform.Rotate3D.Y;
+                    RotateZ = Transform.Rotate3D.Z;
+                }
+                if (RotationSettings == RotationType.Radian)
+                {
+                    RotateX = RadianToAngle(Transform.Rotate3D.X);
+                    RotateY = RadianToAngle(Transform.Rotate3D.Y);
+                    RotateZ = RadianToAngle(Transform.Rotate3D.Z);
+                }
+
+                Rotate_X.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationX, RotateX));
+                Rotate_Y.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationY, RotateY));
+                Rotate_Z.Rotation = new QuaternionRotation3D(new Quaternion(RotationCenterSettings.RotationZ, RotateZ));
+            }
+            #endregion
+
+            #region Scale
+            public ScaleTransform3D ScaleTransform3D;
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="ScaleFactor"></param>
+            /// <param name="Center"></param>
+            public void TSR_Scale3D(double ScaleFactorValue = 2, Point3D? Center = null, bool CenterFlag = false)
+            {
+                if (CenterFlag == true) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue), Center ?? new Point3D(0, 0, 0));
+                if (CenterFlag == false) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue));
+            }
+            #endregion
+
+            #region Translate
+            public TranslateTransform3D TranslateTransform3D;
+            public void TSR_Translate3D()
+            {
+                TranslateTransform3D = new TranslateTransform3D(Transform.Translate3D);
+            }
+            #endregion
+
+            #region Transform
+            public ContentType GetContentType
+            {
+                get
+                {
+                    ContentType contentType = new ContentType();
+                    if ((InputMV3D != null && InputM3D == null) == true) contentType = ContentType.ModelVisual3D;
+                    else if ((InputMV3D == null && InputM3D != null) == true) contentType = ContentType.Model3D;
+                    return contentType;
+                }
+            }
+
+            public enum ContentType
+            {
+                ModelVisual3D,
+                Model3D
+            }
+
+            public void StartTransform()
+            {
+                Transform3DCollection T3D_Collection = new Transform3DCollection();
+                T3D_Collection.Add(ScaleTransform3D);
+                T3D_Collection.Add(Rotate_X);
+                T3D_Collection.Add(Rotate_Y);
+                T3D_Collection.Add(Rotate_Z);
+                T3D_Collection.Add(TranslateTransform3D);
+
+                Transform3DGroup T3DGroup = new Transform3DGroup { Children = T3D_Collection };
+
+                if (GetContentType == ContentType.ModelVisual3D)
+                {
+                    if (IsContent == true) InputMV3D.Content.Transform = T3DGroup;
+                    else if (IsContent == false) InputMV3D.Transform = T3DGroup;
+                }
+                else if (GetContentType == ContentType.Model3D)
+                {
+                    InputM3D.Transform = T3DGroup;
+                }
+            }
+
+            //public void TestTransform3D()
+            //{
+            //    TSRSystem3D tSRSystem3D = null;
+            //    if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
+            //    else if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
+            //    tSRSystem3D.TSR_Rotate(new RotationCenterSetting(), RotationType.Angle);
+            //    tSRSystem3D.TSR_Scale3D();
+            //    tSRSystem3D.TSR_Translate3D();
+            //    tSRSystem3D.StartTransform();
+            //}
+
+            public void Transform3D(RotationCenterSetting rotationCenterSetting, RotationType rotationType = RotationType.Angle)
+            {
+                TSRSystem3D tSRSystem3D = null;
+                if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
+                else if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
+                tSRSystem3D.TSR_Rotate(rotationCenterSetting, rotationType);
+                tSRSystem3D.TSR_Scale3D();
+                tSRSystem3D.TSR_Translate3D();
+                tSRSystem3D.StartTransform();
+            }
+
+            public void Transform3D(RotationCenterSetting rotationCenterSetting, RotationType rotationType, double ScaleFactor = 2, Point3D? Center = null, bool CenterFlag = false)
+            {
+                TSRSystem3D tSRSystem3D = null;
+                if (GetContentType == ContentType.ModelVisual3D) tSRSystem3D = new TSRSystem3D(InputMV3D, Transform);
+                else if (GetContentType == ContentType.Model3D) tSRSystem3D = new TSRSystem3D(InputM3D, Transform);
+                tSRSystem3D.TSR_Rotate(rotationCenterSetting, rotationType);
+                tSRSystem3D.TSR_Scale3D(ScaleFactor, Center, CenterFlag);
+                tSRSystem3D.TSR_Translate3D();
+                tSRSystem3D.StartTransform();
+            }
+            #endregion
+        }
+        #endregion
+
+        public class UnionModel3D
         {
             ///// <summary>
             ///// Point3DのListからModelVisual3Dを生成
@@ -450,7 +473,7 @@ namespace MK7_KMP_Editor_For_PG_
 
         }
 
-        public class PathTools : TSRSystem
+        public class PathTools
         {
             public class Rail
             {
@@ -878,7 +901,7 @@ namespace MK7_KMP_Editor_For_PG_
             }
         }
 
-        public class Point3DSystem : TSRSystem
+        public class Point3DSystem
         {
             /// <summary>
             /// List<DrawLine_Value>を使用してLinesVisual3Dを生成、ModelVisual3Dに変換する
@@ -938,7 +961,7 @@ namespace MK7_KMP_Editor_For_PG_
                             OneSiideWallLeftMDL.Add(Checkpoint_Left.MV3DListToPoint3DList()[i]); //3
 
                             ModelVisual3D SideWallLeft_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallLeftMDL), LeftWallColor, LeftWallColor);
-                            HTK_3DES.TSRSystem.SetString_MV3D(SideWallLeft_MV3D, LeftWallText);
+                            HTK_3DES.SetString_MV3D(SideWallLeft_MV3D, LeftWallText);
                             UserCtrl.MainViewPort.Children.Add(SideWallLeft_MV3D);
                             SideWall_Left.Add(SideWallLeft_MV3D);
                         }
@@ -961,7 +984,7 @@ namespace MK7_KMP_Editor_For_PG_
                             OneSiideWallRightMDL.Add(Checkpoint_Right.MV3DListToPoint3DList()[i]); //3
 
                             ModelVisual3D SideWallRight_MV3D = CustomModelCreateHelper.CustomRectanglePlane3D(CustomModelCreateHelper.ToPoint3DCollection(OneSiideWallRightMDL), RightWallColor, RightWallColor);
-                            HTK_3DES.TSRSystem.SetString_MV3D(SideWallRight_MV3D, RightWallText);
+                            HTK_3DES.SetString_MV3D(SideWallRight_MV3D, RightWallText);
                             UserCtrl.MainViewPort.Children.Add(SideWallRight_MV3D);
                             SideWall_Right.Add(SideWallRight_MV3D);
                         }
@@ -1541,21 +1564,21 @@ namespace MK7_KMP_Editor_For_PG_
                 //BoxVisual3D boxVisual3D = (BoxVisual3D)CustomBoxVisual3D(new Vector3D(0.3, 0.3, 2.5), new Point3D(0, 0, 1.65), BoxColor, BoxBackColor);
                 ArrowVisual3D arrowVisual3D = (ArrowVisual3D)CustomArrowVisual3D(0.3, 5, 1, new Vector3D(0, 1, 0), new Point3D(0, -0.5, 0), ArrowColor, ArrowBackColor);
 
-                HTK_3DES.TSRSystem.Transform transform = new HTK_3DES.TSRSystem.Transform
+                Transform transform = new Transform
                 {
                     Rotate3D = new Vector3D(0, 0, 0),
                     Scale3D = new Vector3D(1, 1, 1),
                     Translate3D = new Vector3D(0, -0.1, 0)
                 };
 
-                HTK_3DES.TSRSystem.TSRSystem3D tSRSystem3D = new TSRSystem.TSRSystem3D(arrowVisual3D, transform);
-                tSRSystem3D.TestTransform3D();
+                TSRSystem3D tSRSystem3D = new TSRSystem3D(arrowVisual3D, transform);
+                tSRSystem3D.Transform3D(TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), TSRSystem3D.RotationType.Radian);
 
-                //HTK_3DES.TSRSystem.TransformSetting transformSetting = new TSRSystem.TransformSetting { InputMV3D = arrowVisual3D };
+                //HTK_3DES.TransformSetting transformSetting = new TSRSystem.TransformSetting { InputMV3D = arrowVisual3D };
 
-                //HTK_3DES.TSRSystem.New_TransformSystem3D(transform, transformSetting);
+                //HTK_3DES.New_TransformSystem3D(transform, transformSetting);
 
-                //HTK_3DES.TransformMV3D.Transform_MV3D(transform, arrowVisual3D, HTK_3DES.TSRSystem.RotationSetting.Angle);
+                //HTK_3DES.TransformMV3D.Transform_MV3D(transform, arrowVisual3D, HTK_3DES.RotationSetting.Angle);
 
                 Model3DGroup model3DGroup = new Model3DGroup();
                 model3DGroup.Children.Add(CustomBoxVisual3D(new Vector3D(0.3, 0.3, 5), new Point3D(0, 0, 2.65), BoxColor, BoxBackColor).Content);

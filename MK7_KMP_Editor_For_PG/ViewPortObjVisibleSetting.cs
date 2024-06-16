@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Collections;
 using HelixToolkit.Wpf;
 
-namespace MK7_KMP_Editor_For_PG_
+namespace MK7_3D_KMP_Editor
 {
     class ViewPortObjVisibleSetting
     {
@@ -24,13 +24,13 @@ namespace MK7_KMP_Editor_For_PG_
             //非表示にする
             if (Visible == true)
             {
-                UserCtrl.MainViewPort.Children.Remove((Visual3D)MV3D);
+                UserCtrl.MainViewPort.Children.Remove(MV3D);
             }
             //表示する
             if (Visible == false)
             {
                 if (UserCtrl.MainViewPort.Children.Contains(MV3D) == true) return;
-                else UserCtrl.MainViewPort.Children.Add((Visual3D)MV3D);
+                else UserCtrl.MainViewPort.Children.Add(MV3D);
             }
         }
 

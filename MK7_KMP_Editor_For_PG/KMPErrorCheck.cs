@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KMPLibrary.KMPHelper;
+using MK7_3D_KMP_Editor.PropertyGridObject;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MK7_KMP_Editor_For_PG_
+namespace MK7_3D_KMP_Editor
 {
     public partial class KMPErrorCheck : Form
     {
@@ -30,7 +32,7 @@ namespace MK7_KMP_Editor_For_PG_
             public CheckValueType CheckValueType { get; set; }
         }
 
-        public KMPPropertyGridSettings KMPPropertyGridSettings { get; set; }
+        public KMP_Main_PGS KMPPropertyGridSettings { get; set; }
 
         public KMPErrorCheck(string Section_Name, object KMP_Props)
         {
@@ -40,9 +42,9 @@ namespace MK7_KMP_Editor_For_PG_
 
             SectionName = Section_Name;
 
-            if (KMP_Props is KMPPropertyGridSettings)
+            if (KMP_Props is KMP_Main_PGS)
             {
-                KMPPropertyGridSettings = KMP_Props as KMPPropertyGridSettings;
+                KMPPropertyGridSettings = KMP_Props as KMP_Main_PGS;
             }
         }
 
@@ -58,72 +60,72 @@ namespace MK7_KMP_Editor_For_PG_
         {
             if (SectionName == "All")
             {
-                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTKSection));
-                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNESection));
-                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTISection));
-                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKCSection, KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.TPGJSection));
-                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.ITOPSection));
-                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOPSection));
-                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERASection, KMPPropertyGridSettings.ITOPSection, KMPPropertyGridSettings.EMACSection));
-                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMACSection, KMPPropertyGridSettings.ITOPSection));
-                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJSection));
-                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLGSection));
+                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
+                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
+                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
+                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
+                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
             }
             if (SectionName == "Kart Point")
             {
-                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTKSection));
+                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
                 tabControl1.SelectedIndex = 0;
             }
             if (SectionName == "Enemy Route")
             {
-                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNESection));
+                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
                 tabControl1.SelectedIndex = 1;
             }
             if (SectionName == "Item Route")
             {
-                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTISection));
+                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
                 tabControl1.SelectedIndex = 2;
             }
             if (SectionName == "Checkpoint")
             {
-                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKCSection, KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.TPGJSection));
+                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
                 tabControl1.SelectedIndex = 3;
             }
             if (SectionName == "Object")
             {
-                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.ITOPSection));
+                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 4;
             }
             if (SectionName == "Route")
             {
-                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOPSection));
+                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 5;
             }
             if (SectionName == "Area")
             {
-                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERASection, KMPPropertyGridSettings.ITOPSection, KMPPropertyGridSettings.EMACSection));
+                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
                 tabControl1.SelectedIndex = 6;
             }
             if (SectionName == "Camera")
             {
-                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMACSection, KMPPropertyGridSettings.ITOPSection));
+                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 7;
             }
             if (SectionName == "Jugem Point")
             {
-                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJSection));
+                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
                 tabControl1.SelectedIndex = 8;
             }
             if (SectionName == "Glide Route")
             {
-                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLGSection));
+                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
                 tabControl1.SelectedIndex = 9;
             }
         }
 
         public class KMPCheck
         {
-            public static List<CheckValue> TPTK_Check(KMPPropertyGridSettings.TPTK_Section TPTK_Section)
+            public static List<CheckValue> TPTK_Check(KartPoint_PGS TPTK_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -166,7 +168,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section HPNE_TPNE_Section)
+            public static List<CheckValue> HPNE_TPNE_Check(EnemyRoute_PGS HPNE_TPNE_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -235,7 +237,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section HPTI_TPTI_Section)
+            public static List<CheckValue> HPTI_TPTI_Check(ItemRoute_PGS HPTI_TPTI_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -304,7 +306,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section JBOG_Section, KMPPropertyGridSettings.TPGJ_Section TPGJ_Section)
+            public static List<CheckValue> HPKC_TPKC_Check(Checkpoint_PGS HPKC_TPKC_Section, KMPObject_PGS JBOG_Section, RespawnPoint_PGS TPGJ_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -454,11 +456,11 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> JBOG_Check(KMPPropertyGridSettings.JBOG_Section JBOG_Section, KMPPropertyGridSettings.ITOP_Section ITOP_Section)
+            public static List<CheckValue> JBOG_Check(KMPObject_PGS JBOG_Section, Route_PGS ITOP_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
-                var r = KMPs.KMPHelper.ObjFlowReader.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                var r = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
 
                 for (int bn = 0; bn < JBOG_Section.JBOGValueList.Count; bn++)
                 {
@@ -543,7 +545,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> ITOP_Check(KMPPropertyGridSettings.ITOP_Section ITOP_Section)
+            public static List<CheckValue> ITOP_Check(Route_PGS ITOP_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -553,7 +555,7 @@ namespace MK7_KMP_Editor_For_PG_
                     {
                         GroupNum = i,
                         ValueNum = -1,
-                        Description = "Loop : " + ITOP_Section.ITOP_RouteList[i].ITOP_Roop + " | " + "Smooth : " + ITOP_Section.ITOP_RouteList[i].ITOP_Smooth,
+                        Description = "Loop : " + ITOP_Section.ITOP_RouteList[i].ITOP_Loop + " | " + "Smooth : " + ITOP_Section.ITOP_RouteList[i].ITOP_Smooth,
                         CheckValueType = CheckValueType.Info
                     };
 
@@ -563,7 +565,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> AERA_Check(KMPPropertyGridSettings.AERA_Section AERA_Section, KMPPropertyGridSettings.ITOP_Section ITOP_Section, KMPPropertyGridSettings.EMAC_Section EMAC_Section)
+            public static List<CheckValue> AERA_Check(Area_PGS AERA_Section, Route_PGS ITOP_Section, Camera_PGS EMAC_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -638,7 +640,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> EMAC_Check(KMPPropertyGridSettings.EMAC_Section EMAC_Section, KMPPropertyGridSettings.ITOP_Section ITOP_Section)
+            public static List<CheckValue> EMAC_Check(Camera_PGS EMAC_Section, Route_PGS ITOP_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -738,18 +740,18 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section TPGJ_Section)
+            public static List<CheckValue> TPGJ_Check(RespawnPoint_PGS TPGJ_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
                 for (int i = 0; i < TPGJ_Section.TPGJValueList.Count; i++)
                 {
-                    if (TPGJ_Section.TPGJValueList[i].TPGJ_UnkBytes1 < 65535)
+                    if (TPGJ_Section.TPGJValueList[i].TPGJ_UnknownData1 < 65535)
                     {
                         CheckValue checkValue = new CheckValue
                         {
                             GroupNum = -1,
                             ValueNum = TPGJ_Section.TPGJValueList[i].ID,
-                            Description = "UnkByte1 Value : " + TPGJ_Section.TPGJValueList[i].TPGJ_UnkBytes1,
+                            Description = "UnkByte1 Value : " + TPGJ_Section.TPGJValueList[i].TPGJ_UnknownData1,
                             CheckValueType = CheckValueType.Info
                         };
 
@@ -760,7 +762,7 @@ namespace MK7_KMP_Editor_For_PG_
                 return ch;
             }
 
-            public static List<CheckValue> HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section HPLG_TPLG_Section)
+            public static List<CheckValue> HPLG_TPLG_Check(GlideRoute_PGS HPLG_TPLG_Section)
             {
                 List<CheckValue> ch = new List<CheckValue>();
 
@@ -855,56 +857,56 @@ namespace MK7_KMP_Editor_For_PG_
         {
             if (SectionName == "All")
             {
-                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTKSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNESection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTISection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKCSection, KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.TPGJSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERASection, KMPPropertyGridSettings.ITOPSection, KMPPropertyGridSettings.EMACSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMACSection, KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJSection), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLGSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Kart Point")
             {
-                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTKSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Enemy Route")
             {
-                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNESection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Item Route")
             {
-                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTISection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Checkpoint")
             {
-                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKCSection, KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.TPGJSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Object")
             {
-                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOGSection, KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Route")
             {
-                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Area")
             {
-                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERASection, KMPPropertyGridSettings.ITOPSection, KMPPropertyGridSettings.EMACSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Camera")
             {
-                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMACSection, KMPPropertyGridSettings.ITOPSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Jugem Point")
             {
-                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Glide Route")
             {
-                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLGSection), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
         }
     }

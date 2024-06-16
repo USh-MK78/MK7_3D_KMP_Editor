@@ -14,8 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HelixToolkit.Wpf;
 using System.Windows.Media.Media3D;
+using MK7_3D_KMP_Editor.PropertyGridObject;
 
-namespace MK7_KMP_Editor_For_PG_
+namespace MK7_3D_KMP_Editor
 {
     /// <summary>
     /// UserControl1.xaml の相互作用ロジック
@@ -105,12 +106,12 @@ namespace MK7_KMP_Editor_For_PG_
                 //CameraPosition
                 PosMode = MainViewPort.Camera.Position;
             }
-            if (PositionMode == PositionMode.MouseCursor)
+            else if (PositionMode == PositionMode.MouseCursor)
             {
                 //CursorPosition
                 PosMode = (Point3D)MainViewPort.CursorPosition;
             }
-            if (PositionMode == PositionMode.ElementPosition)
+            else if (PositionMode == PositionMode.ElementPosition)
             {
                 PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
             }
@@ -126,7 +127,7 @@ namespace MK7_KMP_Editor_For_PG_
         }
 
         /// <summary>
-        /// LookAtObj() ; CameraViewType
+        /// LookAtObj() : CameraViewType
         /// </summary>
         public enum CameraViewType
         {
@@ -162,24 +163,24 @@ namespace MK7_KMP_Editor_For_PG_
 
         public void FindObject(object input, int ValueIndex, int GroupIndex = -1, CheckpointSearchOption checkpointSearchOption = CheckpointSearchOption.Null, double ChkptYOffsetValue = 0)
         {
-            if (input is List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>)
+            if (input is List<KartPoint_PGS.TPTKValue>)
             {
-                var PG_KartPositions = input as List<KMPPropertyGridSettings.TPTK_Section.TPTKValue>;
+                var PG_KartPositions = input as List<KartPoint_PGS.TPTKValue>;
                 LookAtObj(PG_KartPositions[ValueIndex].Position_Value.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>)
+            if (input is List<EnemyRoute_PGS.HPNEValue>)
             {
-                var PG_EnemyPoints = input as List<KMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValue>;
+                var PG_EnemyPoints = input as List<EnemyRoute_PGS.HPNEValue>;
                 LookAtObj(PG_EnemyPoints[GroupIndex].TPNEValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>)
+            if (input is List<ItemRoute_PGS.HPTIValue>)
             {
-                var PG_ItemPoints = input as List<KMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValue>;
+                var PG_ItemPoints = input as List<ItemRoute_PGS.HPTIValue>;
                 LookAtObj(PG_ItemPoints[GroupIndex].TPTIValueList[ValueIndex].TPTI_Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>)
+            if (input is List<Checkpoint_PGS.HPKCValue>)
             {
-                var PG_Checkpoints = input as List<KMPPropertyGridSettings.HPKC_TPKC_Section.HPKCValue>;
+                var PG_Checkpoints = input as List<Checkpoint_PGS.HPKCValue>;
                 if (checkpointSearchOption == CheckpointSearchOption.Left)
                 {
                     var p_Left = PG_Checkpoints[GroupIndex].TPKCValueList[ValueIndex].Position_2D_Left;
@@ -193,34 +194,34 @@ namespace MK7_KMP_Editor_For_PG_
                     LookAtObj(Chkpt_Right.ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
                 }
             }
-            if (input is List<KMPPropertyGridSettings.JBOG_Section.JBOGValue>)
+            if (input is List<KMPObject_PGS.JBOGValue>)
             {
-                var PG_Objects = input as List<KMPPropertyGridSettings.JBOG_Section.JBOGValue>;
+                var PG_Objects = input as List<KMPObject_PGS.JBOGValue>;
                 LookAtObj(PG_Objects[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>)
+            if (input is List<Route_PGS.ITOP_Route>)
             {
-                var PG_Routes = input as List<KMPPropertyGridSettings.ITOP_Section.ITOP_Route>;
+                var PG_Routes = input as List<Route_PGS.ITOP_Route>;
                 LookAtObj(PG_Routes[GroupIndex].ITOP_PointList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.AERA_Section.AERAValue>)
+            if (input is List<Area_PGS.AERAValue>)
             {
-                var PG_Areas = input as List<KMPPropertyGridSettings.AERA_Section.AERAValue>;
+                var PG_Areas = input as List<Area_PGS.AERAValue>;
                 LookAtObj(PG_Areas[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.EMAC_Section.EMACValue>)
+            if (input is List<Camera_PGS.EMACValue>)
             {
-                var PG_Cameras = input as List<KMPPropertyGridSettings.EMAC_Section.EMACValue>;
+                var PG_Cameras = input as List<Camera_PGS.EMACValue>;
                 LookAtObj(PG_Cameras[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>)
+            if (input is List<RespawnPoint_PGS.TPGJValue>)
             {
-                var PG_JugemPoints = input as List<KMPPropertyGridSettings.TPGJ_Section.TPGJValue>;
+                var PG_JugemPoints = input as List<RespawnPoint_PGS.TPGJValue>;
                 LookAtObj(PG_JugemPoints[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>)
+            if (input is List<GlideRoute_PGS.HPLGValue>)
             {
-                var PG_GlideRoutes = input as List<KMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValue>;
+                var PG_GlideRoutes = input as List<GlideRoute_PGS.HPLGValue>;
                 LookAtObj(PG_GlideRoutes[GroupIndex].TPLGValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
         }

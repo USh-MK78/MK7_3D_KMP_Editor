@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MK7_KMP_Editor_For_PG", "MK7_KMP_Editor_For_PG\MK7_KMP_Editor_For_PG.csproj", "{BC61ADE0-036D-4676-8E7C-2A4964A2CB6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMPLibrary", "KMPLibrary\KMPLibrary.csproj", "{37138D36-6D64-47E6-B09C-35650EA350BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBOCLibrary", "FBOCLibrary\FBOCLibrary.csproj", "{38A14F4F-9BE0-4B02-A50B-0F64E78A763B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{BC61ADE0-036D-4676-8E7C-2A4964A2CB6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC61ADE0-036D-4676-8E7C-2A4964A2CB6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC61ADE0-036D-4676-8E7C-2A4964A2CB6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37138D36-6D64-47E6-B09C-35650EA350BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37138D36-6D64-47E6-B09C-35650EA350BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37138D36-6D64-47E6-B09C-35650EA350BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37138D36-6D64-47E6-B09C-35650EA350BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A14F4F-9BE0-4B02-A50B-0F64E78A763B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A14F4F-9BE0-4B02-A50B-0F64E78A763B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A14F4F-9BE0-4B02-A50B-0F64E78A763B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A14F4F-9BE0-4B02-A50B-0F64E78A763B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
