@@ -81,14 +81,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Prev5 = HPKC_PreviewGroup.Prev5;
                 }
 
-                public HPKC_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.CP_PreviousGroup previous)
+                public HPKC_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.CP_PreviousGroup Previous)
                 {
-                    Prev0 = previous.Prev0;
-                    Prev1 = previous.Prev1;
-                    Prev2 = previous.Prev2;
-                    Prev3 = previous.Prev3;
-                    Prev4 = previous.Prev4;
-                    Prev5 = previous.Prev5;
+                    Prev0 = Previous.Prev0;
+                    Prev1 = Previous.Prev1;
+                    Prev2 = Previous.Prev2;
+                    Prev3 = Previous.Prev3;
+                    Prev4 = Previous.Prev4;
+                    Prev5 = Previous.Prev5;
                 }
 
                 public override string ToString()
@@ -143,14 +143,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Next5 = HPKC_NextGroup.Next5;
                 }
 
-                public HPKC_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.CP_NextGroup next)
+                public HPKC_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.CP_NextGroup Next)
                 {
-                    Next0 = next.Next0;
-                    Next1 = next.Next1;
-                    Next2 = next.Next2;
-                    Next3 = next.Next3;
-                    Next4 = next.Next4;
-                    Next5 = next.Next5;
+                    Next0 = Next.Next0;
+                    Next1 = Next.Next1;
+                    Next2 = Next.Next2;
+                    Next3 = Next.Next3;
+                    Next4 = Next.Next4;
+                    Next5 = Next.Next5;
                 }
 
                 public override string ToString()
@@ -251,8 +251,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 public byte TPKC_NextCheckPoint { get; set; }
                 public byte TPKC_ClipID { get; set; }
                 public byte TPKC_Section { get; set; }
-                public byte TPKC_UnkBytes3 { get; set; }
-                public byte TPKC_UnkBytes4 { get; set; }
+                public byte TPKC_UnknownData3 { get; set; }
+                public byte TPKC_UnknownData4 { get; set; }
 
                 public TPKCValue(Vector2 LeftPos, Vector2 RightPos, int GroupID, int InputID)
                 {
@@ -266,8 +266,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     TPKC_PreviousCheckPoint = 0xFF;
                     TPKC_ClipID = 255;
                     TPKC_Section = 0;
-                    TPKC_UnkBytes3 = 0;
-                    TPKC_UnkBytes4 = 0;
+                    TPKC_UnknownData3 = 0;
+                    TPKC_UnknownData4 = 0;
                 }
 
                 public TPKCValue(TPKC.TPKCValue TPKCValue, int GroupID, int InputID)
@@ -282,24 +282,24 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     TPKC_PreviousCheckPoint = TPKCValue.TPKC_PreviousCheckPoint;
                     TPKC_ClipID = TPKCValue.TPKC_ClipID;
                     TPKC_Section = TPKCValue.TPKC_Section;
-                    TPKC_UnkBytes3 = TPKCValue.TPKC_UnkBytes3;
-                    TPKC_UnkBytes4 = TPKCValue.TPKC_UnkBytes4;
+                    TPKC_UnknownData3 = TPKCValue.TPKC_UnknownData3;
+                    TPKC_UnknownData4 = TPKCValue.TPKC_UnknownData4;
                 }
 
-                public TPKCValue(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.Checkpoint_Point checkpoint_Point, int GroupID, int InputID)
+                public TPKCValue(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group.Checkpoint_Point Checkpoint_Point, int GroupID, int InputID)
                 {
                     Group_ID = GroupID;
                     ID = InputID;
-                    Position_2D_Left = new Position2D_Left(checkpoint_Point.Position_2D_Left.ToVector2());
-                    Position_2D_Right = new Position2D_Right(checkpoint_Point.Position_2D_Right.ToVector2());
-                    TPKC_RespawnID = checkpoint_Point.RespawnID;
-                    TPKC_Checkpoint_Type = checkpoint_Point.Checkpoint_Type;
-                    TPKC_NextCheckPoint = checkpoint_Point.NextCheckPoint;
-                    TPKC_PreviousCheckPoint = checkpoint_Point.PreviousCheckPoint;
-                    TPKC_ClipID = checkpoint_Point.ClipID;
-                    TPKC_Section = checkpoint_Point.Section;
-                    TPKC_UnkBytes3 = checkpoint_Point.UnkBytes3;
-                    TPKC_UnkBytes4 = checkpoint_Point.UnkBytes4;
+                    Position_2D_Left = new Position2D_Left(Checkpoint_Point.Position_2D_Left.ToVector2());
+                    Position_2D_Right = new Position2D_Right(Checkpoint_Point.Position_2D_Right.ToVector2());
+                    TPKC_RespawnID = Checkpoint_Point.RespawnID;
+                    TPKC_Checkpoint_Type = Checkpoint_Point.Checkpoint_Type;
+                    TPKC_NextCheckPoint = Checkpoint_Point.NextCheckPoint;
+                    TPKC_PreviousCheckPoint = Checkpoint_Point.PreviousCheckPoint;
+                    TPKC_ClipID = Checkpoint_Point.ClipID;
+                    TPKC_Section = Checkpoint_Point.Section;
+                    TPKC_UnknownData3 = Checkpoint_Point.UnknownData3;
+                    TPKC_UnknownData4 = Checkpoint_Point.UnknownData4;
                 }
 
                 public override string ToString()
@@ -330,16 +330,16 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
             }
 
-            public HPKCValue(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group checkpoint_Group, int InputID)
+            public HPKCValue(KMPLibrary.XMLConvert.KMPData.SectionData.Checkpoint.Checkpoint_Group Checkpoint_Group, int InputID)
             {
                 GroupID = InputID;
-                HPKC_PreviewGroup = new HPKC_PreviewGroups(checkpoint_Group.PreviousGroups);
-                HPKC_NextGroup = new HPKC_NextGroups(checkpoint_Group.NextGroups);
-                HPKC_UnknownData1 = checkpoint_Group.UnknownData1;
+                HPKC_PreviewGroup = new HPKC_PreviewGroups(Checkpoint_Group.PreviousGroups);
+                HPKC_NextGroup = new HPKC_NextGroups(Checkpoint_Group.NextGroups);
+                HPKC_UnknownData1 = Checkpoint_Group.UnknownData1;
 
-                for (int i = 0; i < checkpoint_Group.Points.Count; i++)
+                for (int i = 0; i < Checkpoint_Group.Points.Count; i++)
                 {
-                    TPKCValueList.Add(new TPKCValue(checkpoint_Group.Points[i], InputID, i));
+                    TPKCValueList.Add(new TPKCValue(Checkpoint_Group.Points[i], InputID, i));
                 }
             }
 
@@ -372,7 +372,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public HPKC_TPKCData ToHPKC_TPKCData()
         {
-            HPKC_TPKCData hPKC_TPKCData = null;
+            HPKC_TPKCData HPKC_TPKC_Data = null;
 
             if (HPKCValueList.Count != 0)
             {
@@ -389,24 +389,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                         HPKC_PreviewGroup = new HPKC.HPKCValue.HPKC_PreviewGroups(HPKCValueList[HPKCCount].HPKC_PreviewGroup.GetPrevGroupArray()),
                         HPKC_NextGroup = new HPKC.HPKCValue.HPKC_NextGroups(HPKCValueList[HPKCCount].HPKC_NextGroup.GetNextGroupArray()),
                         HPKC_UnknownShortData1 = HPKCValueList[HPKCCount].HPKC_UnknownData1
-                        //HPKC_PreviewGroup = new HPKC.HPKCValue.HPKC_PreviewGroups
-                        //{
-                        //    Prev0 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev0,
-                        //    Prev1 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev1,
-                        //    Prev2 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev2,
-                        //    Prev3 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev3,
-                        //    Prev4 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev4,
-                        //    Prev5 = HPKCValueList[HPKCCount].HPKC_PreviewGroup.Prev5,
-                        //},
-                        //HPKC_NextGroup = new HPKC.HPKCValue.HPKC_NextGroups
-                        //{
-                        //    Next0 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next0,
-                        //    Next1 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next1,
-                        //    Next2 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next2,
-                        //    Next3 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next3,
-                        //    Next4 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next4,
-                        //    Next5 = HPKCValueList[HPKCCount].HPKC_NextGroup.Next5,
-                        //}
                     };
 
                     HPKC_Values_List.Add(HPKC_Values);
@@ -424,8 +406,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                             TPKC_NextCheckPoint = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_NextCheckPoint,
                             TPKC_ClipID = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_ClipID,
                             TPKC_Section = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Section,
-                            TPKC_UnkBytes3 = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes3,
-                            TPKC_UnkBytes4 = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnkBytes4
+                            TPKC_UnknownData3 = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnknownData3,
+                            TPKC_UnknownData4 = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_UnknownData4
                         };
 
                         TPKC_Values_List.Add(TPKC_Values);
@@ -437,49 +419,17 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPKC TPKC = new TPKC(TPKC_Values_List);
                 HPKC HPKC = new HPKC(HPKC_Values_List);
 
-                //TPKC TPKC = new TPKC
-                //{
-                //    TPKCHeader = new char[] { 'T', 'P', 'K', 'C' },
-                //    NumOfEntries = Convert.ToUInt16(TPKC_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    TPKCValue_List = TPKC_Values_List
-                //};
-
-                //HPKC HPKC = new HPKC
-                //{
-                //    HPKCHeader = new char[] { 'H', 'P', 'K', 'C' },
-                //    NumOfEntries = Convert.ToUInt16(HPKC_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    HPKCValue_List = HPKC_Values_List
-                //};
-
-                hPKC_TPKCData = new HPKC_TPKCData(HPKC, TPKC);
+                HPKC_TPKC_Data = new HPKC_TPKCData(HPKC, TPKC);
             }
             if (HPKCValueList.Count == 0)
             {
-                //TPKC TPKC = new TPKC
-                //{
-                //    TPKCHeader = new char[] { 'T', 'P', 'K', 'C' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    TPKCValue_List = new List<TPKC.TPKCValue>()
-                //};
-
-                //HPKC HPKC = new HPKC
-                //{
-                //    HPKCHeader = new char[] { 'H', 'P', 'K', 'C' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    HPKCValue_List = new List<HPKC.HPKCValue>()
-                //};
-
                 TPKC TPKC = new TPKC(new List<TPKC.TPKCValue>());
                 HPKC HPKC = new HPKC(new List<HPKC.HPKCValue>());
 
-                hPKC_TPKCData = new HPKC_TPKCData(HPKC, TPKC);
+                HPKC_TPKC_Data = new HPKC_TPKCData(HPKC, TPKC);
             }
 
-            return hPKC_TPKCData;
+            return HPKC_TPKC_Data;
         }
     }
 }

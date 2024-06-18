@@ -75,8 +75,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             [System.Xml.Serialization.XmlAttribute("Player_Index")]
             public ushort Player_Index { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("TPTK_UnkBytes")]
-            public ushort TPTK_UnkBytes { get; set; }
+            [System.Xml.Serialization.XmlAttribute("TPTK_UnknownData")]
+            public ushort TPTK_UnknownData { get; set; }
 
             public StartPosition_Value() { }
 
@@ -85,7 +85,7 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 Position = new StartPosition_Position(StartPositionValue.TPTK_Position);
                 Rotation = new StartPosition_Rotation(StartPositionValue.TPTK_Rotation);
                 Player_Index = StartPositionValue.Player_Index;
-                TPTK_UnkBytes = StartPositionValue.TPTK_UnknownData;
+                TPTK_UnknownData = StartPositionValue.TPTK_UnknownData;
             }
         }
 

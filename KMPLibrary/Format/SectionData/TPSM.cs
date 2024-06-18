@@ -49,5 +49,4 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
         }
     }
-
 }

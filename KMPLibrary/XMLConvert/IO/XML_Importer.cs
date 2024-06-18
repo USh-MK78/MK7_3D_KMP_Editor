@@ -13,9 +13,9 @@ namespace KMPLibrary.XMLConvert.IO
     {
         public static T XMLImport<T>(string Path)
         {
-            System.IO.FileStream fs1 = new FileStream(Path, FileMode.Open, FileAccess.Read);
-            System.Xml.Serialization.XmlSerializer s1 = new System.Xml.Serialization.XmlSerializer(typeof(T));
-            return (T)s1.Deserialize(fs1);
+            System.IO.FileStream fs = new FileStream(Path, FileMode.Open, FileAccess.Read);
+            System.Xml.Serialization.XmlSerializer Serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+            return (T)Serializer.Deserialize(fs);
         }
 
         #region DELETE

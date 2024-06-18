@@ -81,14 +81,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Prev5 = HPTI_PreviewGroup.Prev5;
                 }
 
-                public HPTI_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.IR_PreviousGroup previous)
+                public HPTI_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.IR_PreviousGroup Previous)
                 {
-                    Prev0 = previous.Prev0;
-                    Prev1 = previous.Prev1;
-                    Prev2 = previous.Prev2;
-                    Prev3 = previous.Prev3;
-                    Prev4 = previous.Prev4;
-                    Prev5 = previous.Prev5;
+                    Prev0 = Previous.Prev0;
+                    Prev1 = Previous.Prev1;
+                    Prev2 = Previous.Prev2;
+                    Prev3 = Previous.Prev3;
+                    Prev4 = Previous.Prev4;
+                    Prev5 = Previous.Prev5;
                 }
 
                 public override string ToString()
@@ -143,14 +143,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Next5 = HPTI_NextGroup.Next5;
                 }
 
-                public HPTI_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.IR_NextGroup next)
+                public HPTI_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.IR_NextGroup Next)
                 {
-                    Next0 = next.Next0;
-                    Next1 = next.Next1;
-                    Next2 = next.Next2;
-                    Next3 = next.Next3;
-                    Next4 = next.Next4;
-                    Next5 = next.Next5;
+                    Next0 = Next.Next0;
+                    Next1 = Next.Next1;
+                    Next2 = Next.Next2;
+                    Next3 = Next.Next3;
+                    Next4 = Next.Next4;
+                    Next5 = Next.Next5;
                 }
 
                 public override string ToString()
@@ -290,22 +290,22 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     PlayerScanRadiusSettings.PlayerScanRadiusValue = TPTIValue.PlayerScanRadiusValue;
                 }
 
-                public TPTIValue(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.ItemRoute_Point itemRoute_Point, int GroupID, int InputID)
+                public TPTIValue(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group.ItemRoute_Point ItemRoute_Point, int GroupID, int InputID)
                 {
                     Group_ID = GroupID;
                     ID = InputID;
-                    TPTI_Positions = new TPTI_Position(itemRoute_Point.Position.ToVector3D());
-                    TPTI_PointSize = itemRoute_Point.PointSize;
-                    GravityModeSettings.GravityModeValue = itemRoute_Point.GravityMode;
-                    PlayerScanRadiusSettings.PlayerScanRadiusValue = itemRoute_Point.PlayerScanRadius;
+                    TPTI_Positions = new TPTI_Position(ItemRoute_Point.Position.ToVector3D());
+                    TPTI_PointSize = ItemRoute_Point.PointSize;
+                    GravityModeSettings.GravityModeValue = ItemRoute_Point.GravityMode;
+                    PlayerScanRadiusSettings.PlayerScanRadiusValue = ItemRoute_Point.PlayerScanRadius;
                 }
 
-                public TPTIValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                public TPTIValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData PointData, int GroupID, int InputID)
                 {
                     Group_ID = GroupID;
                     ID = InputID;
-                    TPTI_Positions = new TPTI_Position(pointData.Position.ToVector3D());
-                    TPTI_PointSize = pointData.ScaleValue;
+                    TPTI_Positions = new TPTI_Position(PointData.Position.ToVector3D());
+                    TPTI_PointSize = PointData.ScaleValue;
                     GravityModeSettings.GravityModeValue = 0;
                     PlayerScanRadiusSettings.PlayerScanRadiusValue = 0;
                 }
@@ -336,27 +336,27 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
             }
 
-            public HPTIValue(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group itemRoute_Group, int InputID)
+            public HPTIValue(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute.ItemRoute_Group ItemRoute_Group, int InputID)
             {
                 GroupID = InputID;
-                HPTI_PreviewGroup = new HPTI_PreviewGroups(itemRoute_Group.PreviousGroups);
-                HPTI_NextGroup = new HPTI_NextGroups(itemRoute_Group.NextGroups);
+                HPTI_PreviewGroup = new HPTI_PreviewGroups(ItemRoute_Group.PreviousGroups);
+                HPTI_NextGroup = new HPTI_NextGroups(ItemRoute_Group.NextGroups);
 
-                for (int i = 0; i < itemRoute_Group.Points.Count; i++)
+                for (int i = 0; i < ItemRoute_Group.Points.Count; i++)
                 {
-                    TPTIValueList.Add(new TPTIValue(itemRoute_Group.Points[i], InputID, i));
+                    TPTIValueList.Add(new TPTIValue(ItemRoute_Group.Points[i], InputID, i));
                 }
             }
 
-            public HPTIValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData, int InputID)
+            public HPTIValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData GroupData, int InputID)
             {
                 GroupID = InputID;
                 HPTI_PreviewGroup = new HPTI_PreviewGroups();
                 HPTI_NextGroup = new HPTI_NextGroups();
 
-                for (int i = 0; i < groupData.Points.Count; i++)
+                for (int i = 0; i < GroupData.Points.Count; i++)
                 {
-                    TPTIValueList.Add(new TPTIValue(groupData.Points[i], InputID, i));
+                    TPTIValueList.Add(new TPTIValue(GroupData.Points[i], InputID, i));
                 }
             }
 
@@ -374,19 +374,19 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public ItemRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute itemRoute)
+        public ItemRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.ItemRoute ItemRoute)
         {
-            for (int i = 0; i < itemRoute.Groups.Count; i++)
+            for (int i = 0; i < ItemRoute.Groups.Count; i++)
             {
-                HPTIValueList.Add(new HPTIValue(itemRoute.Groups[i], i));
+                HPTIValueList.Add(new HPTIValue(ItemRoute.Groups[i], i));
             }
         }
 
-        public ItemRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute xXXXRoute)
+        public ItemRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute XXXXRoute)
         {
-            for (int i = 0; i < xXXXRoute.Groups.Count; i++)
+            for (int i = 0; i < XXXXRoute.Groups.Count; i++)
             {
-                HPTIValueList.Add(new HPTIValue(xXXXRoute.Groups[i], i));
+                HPTIValueList.Add(new HPTIValue(XXXXRoute.Groups[i], i));
             }
         }
 
@@ -397,7 +397,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public HPTI_TPTIData ToHPTI_TPTIData()
         {
-            HPTI_TPTIData hPTI_TPTIData = null;
+            HPTI_TPTIData HPTI_TPTI_Data = null;
 
             if (HPTIValueList.Count != 0)
             {
@@ -413,24 +413,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                         HPTI_Length = Convert.ToUInt16(HPTIValueList[HPTICount].TPTIValueList.Count),
                         HPTI_PreviewGroup = new HPTI.HPTIValue.HPTI_PreviewGroups(HPTIValueList[HPTICount].HPTI_PreviewGroup.GetPrevGroupArray()),
                         HPTI_NextGroup = new HPTI.HPTIValue.HPTI_NextGroups(HPTIValueList[HPTICount].HPTI_NextGroup.GetNextGroupArray())
-                        //HPTI_PreviewGroup = new HPTI.HPTIValue.HPTI_PreviewGroups
-                        //{
-                        //    Prev0 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev0),
-                        //    Prev1 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev1),
-                        //    Prev2 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev2),
-                        //    Prev3 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev3),
-                        //    Prev4 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev4),
-                        //    Prev5 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_PreviewGroup.Prev5),
-                        //},
-                        //HPTI_NextGroup = new HPTI.HPTIValue.HPTI_NextGroups
-                        //{
-                        //    Next0 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next0),
-                        //    Next1 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next1),
-                        //    Next2 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next2),
-                        //    Next3 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next3),
-                        //    Next4 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next4),
-                        //    Next5 = Convert.ToUInt16(HPTIValueList[HPTICount].HPTI_NextGroup.Next5),
-                        //}
                     };
                     HPTI_Values_List.Add(HPTI_Values);
 
@@ -453,49 +435,17 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPTI TPTI = new TPTI(TPTI_Values_List);
                 HPTI HPTI = new HPTI(HPTI_Values_List);
 
-                //TPTI TPTI = new TPTI
-                //{
-                //    TPTIHeader = new char[] { 'T', 'P', 'T', 'I' },
-                //    NumOfEntries = Convert.ToUInt16(TPTI_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    TPTIValue_List = TPTI_Values_List
-                //};
-
-                //HPTI HPTI = new HPTI
-                //{
-                //    HPTIHeader = new char[] { 'H', 'P', 'T', 'I' },
-                //    NumOfEntries = Convert.ToUInt16(HPTI_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    HPTIValue_List = HPTI_Values_List
-                //};
-
-                hPTI_TPTIData = new HPTI_TPTIData(HPTI, TPTI);
+                HPTI_TPTI_Data = new HPTI_TPTIData(HPTI, TPTI);
             }
             if (HPTIValueList.Count == 0)
             {
-                //TPTI TPTI = new TPTI
-                //{
-                //    TPTIHeader = new char[] { 'T', 'P', 'T', 'I' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    TPTIValue_List = new List<TPTI.TPTIValue>()
-                //};
-
-                //HPTI HPTI = new HPTI
-                //{
-                //    HPTIHeader = new char[] { 'H', 'P', 'T', 'I' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    HPTIValue_List = new List<HPTI.HPTIValue>()
-                //};
-
                 TPTI TPTI = new TPTI(new List<TPTI.TPTIValue>());
                 HPTI HPTI = new HPTI(new List<HPTI.HPTIValue>());
 
-                hPTI_TPTIData = new HPTI_TPTIData(HPTI, TPTI);
+                HPTI_TPTI_Data = new HPTI_TPTIData(HPTI, TPTI);
             }
 
-            return hPTI_TPTIData;
+            return HPTI_TPTI_Data;
         }
     }
 }

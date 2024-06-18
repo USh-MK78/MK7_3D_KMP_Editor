@@ -157,22 +157,22 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPGJ_UnknownData1 = 0;
             }
 
-            public TPGJValue(TPGJ.TPGJValue tPGJValue, int InputID)
+            public TPGJValue(TPGJ.TPGJValue TPGJValue, int InputID)
             {
                 ID = InputID;
-                TPGJ_RespawnID = tPGJValue.TPGJ_RespawnID;
-                Positions = new Position(tPGJValue.TPGJ_Position);
-                Rotations = new Rotation(tPGJValue.TPGJ_Rotation);
-                TPGJ_UnknownData1 = tPGJValue.TPGJ_UnknownData1;
+                TPGJ_RespawnID = TPGJValue.TPGJ_RespawnID;
+                Positions = new Position(TPGJValue.TPGJ_Position);
+                Rotations = new Rotation(TPGJValue.TPGJ_Rotation);
+                TPGJ_UnknownData1 = TPGJValue.TPGJ_UnknownData1;
             }
 
-            public TPGJValue(KMPLibrary.XMLConvert.KMPData.SectionData.JugemPoint.JugemPoint_Value jugemPoint_Value, int InputID)
+            public TPGJValue(KMPLibrary.XMLConvert.KMPData.SectionData.JugemPoint.JugemPoint_Value JugemPoint_Value, int InputID)
             {
                 ID = InputID;
-                TPGJ_RespawnID = jugemPoint_Value.RespawnID;
-                Positions = new Position(jugemPoint_Value.Position.ToVector3D());
-                Rotations = new Rotation(jugemPoint_Value.Rotation.ToVector3D());
-                TPGJ_UnknownData1 = jugemPoint_Value.UnkBytes1;
+                TPGJ_RespawnID = JugemPoint_Value.RespawnID;
+                Positions = new Position(JugemPoint_Value.Position.ToVector3D());
+                Rotations = new Rotation(JugemPoint_Value.Rotation.ToVector3D());
+                TPGJ_UnknownData1 = JugemPoint_Value.UnknownData1;
             }
 
             public override string ToString()
@@ -181,14 +181,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public RespawnPoint_PGS(TPGJ tPGJ_Section)
+        public RespawnPoint_PGS(TPGJ TPGJ_Section)
         {
-            for (int i = 0; i < tPGJ_Section.NumOfEntries; i++) TPGJValueList.Add(new TPGJValue(tPGJ_Section.TPGJValue_List[i], i));
+            for (int i = 0; i < TPGJ_Section.NumOfEntries; i++) TPGJValueList.Add(new TPGJValue(TPGJ_Section.TPGJValue_List[i], i));
         }
 
-        public RespawnPoint_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.JugemPoint jugemPoint)
+        public RespawnPoint_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.JugemPoint JugemPoint)
         {
-            for (int i = 0; i < jugemPoint.Values.Count; i++) TPGJValueList.Add(new TPGJValue(jugemPoint.Values[i], i));
+            for (int i = 0; i < JugemPoint.Values.Count; i++) TPGJValueList.Add(new TPGJValue(JugemPoint.Values[i], i));
         }
 
         public RespawnPoint_PGS()
@@ -198,14 +198,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public TPGJ ToTPGJ()
         {
-            //TPGJ TPGJ = new TPGJ
-            //{
-            //    TPGJHeader = "TPGJ".ToCharArray(),
-            //    NumOfEntries = Convert.ToUInt16(TPGJValueList.Count),
-            //    AdditionalValue = 0,
-            //    TPGJValue_List = null
-            //};
-
             List<TPGJ.TPGJValue> TPGJ_Value_List = new List<TPGJ.TPGJValue>();
 
             for (int TPGJCount = 0; TPGJCount < TPGJValueList.Count; TPGJCount++)
@@ -226,10 +218,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
 
             return new TPGJ(TPGJ_Value_List);
-
-            //TPGJ.TPGJValue_List = TPGJ_Value_List;
-
-            //return TPGJ;
         }
     }
 }

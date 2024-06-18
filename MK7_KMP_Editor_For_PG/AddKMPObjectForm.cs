@@ -45,7 +45,7 @@ namespace MK7_3D_KMP_Editor
 
         private void AddKMPObjectForm_Load(object sender, EventArgs e)
         {
-            ObjFlowDictionary = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+            ObjFlowDictionary = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
 
             AutoCompleteStringCollection ACS_ObjFlowCollection = new AutoCompleteStringCollection();
 
@@ -89,24 +89,24 @@ namespace MK7_3D_KMP_Editor
                             "Object Name : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).ObjectName + "\r\n" +
                             "Object Path : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Path + "\r\n" +
                             "Use KCL : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).UseKCL + "\r\n" +
-                            "ColType : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Commons.ColType + "\r\n" +
-                            "PathType : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Commons.PathType + "\r\n" +
-                            "ModelSetting : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Commons.ModelSetting + "\r\n" +
-                            "Unknown : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Commons.Unknown1 + "\r\n" +
+                            "ColType : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).CommonData.ColType + "\r\n" +
+                            "PathType : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).CommonData.PathType + "\r\n" +
+                            "ModelSetting : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).CommonData.ModelSetting + "\r\n" +
+                            "Unknown : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).CommonData.Unknown1 + "\r\n" +
                             "LOD : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LOD + "\r\n" +
-                            "LOD Low Poly : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODLPoly + "\r\n" +
-                            "LOD High Poly : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODHPoly + "\r\n" +
-                            "LOD Default : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODDef + "\r\n" +
-                            "Main Name : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Names.Main + "\r\n" +
-                            "Sub Name : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).Names.Sub + "\r\n" +
-                            "Default Value 0 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[0].Description + "\r\n" +
-                            "Default Value 1 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[1].Description + "\r\n" +
-                            "Default Value 2 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[2].Description + "\r\n" +
-                            "Default Value 3 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[3].Description + "\r\n" +
-                            "Default Value 4 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[4].Description + "\r\n" +
-                            "Default Value 5 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[5].Description + "\r\n" +
-                            "Default Value 6 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[6].Description + "\r\n" +
-                            "Default Value 7 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValues.Values[7].Description + "\r\n";
+                            "LOD Low Poly : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODLowPoly + "\r\n" +
+                            "LOD High Poly : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODHighPoly + "\r\n" +
+                            "LOD Default : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).LODSetting.LODDefault + "\r\n" +
+                            "Main Name : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).NameData.Main + "\r\n" +
+                            "Sub Name : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).NameData.Sub + "\r\n" +
+                            "Default Value 0 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[0].Description + "\r\n" +
+                            "Default Value 1 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[1].Description + "\r\n" +
+                            "Default Value 2 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[2].Description + "\r\n" +
+                            "Default Value 3 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[3].Description + "\r\n" +
+                            "Default Value 4 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[4].Description + "\r\n" +
+                            "Default Value 5 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[5].Description + "\r\n" +
+                            "Default Value 6 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[6].Description + "\r\n" +
+                            "Default Value 7 : " + ObjFlowDictionary.Find(x => x.ObjectID == comboBox1.Text.Split(',')[1]).DefaultValueData.Values[7].Description + "\r\n";
         }
     }
 }

@@ -86,14 +86,6 @@ namespace KMPLibrary.Format.SectionData
                 }
             }
 
-            //public ITOP_Route(ushort NumOfPoint, byte LoopSetting, byte SmoothSetting, List<ITOP_Point> ITOP_Point_List)
-            //{
-            //    ITOP_Route_NumOfPoint = NumOfPoint;
-            //    ITOP_LoopSetting = LoopSetting;
-            //    ITOP_SmoothSetting = SmoothSetting;
-            //    this.ITOP_Point_List = ITOP_Point_List;
-            //}
-
             public ITOP_Route(byte LoopSetting, byte SmoothSetting, List<ITOP_Point> ITOP_Point_List)
             {
                 ITOP_Route_NumOfPoint = Convert.ToUInt16(ITOP_Point_List.Count);
@@ -154,13 +146,5 @@ namespace KMPLibrary.Format.SectionData
             ITOP_NumberOfPoint = 0;
             ITOP_Route_List = new List<ITOP_Route>();
         }
-
-        //public ITOP()
-        //{
-        //    ITOPHeader = "ITOP".ToCharArray();
-        //    ITOP_NumberOfRoute = 0;
-        //    ITOP_NumberOfPoint = 0;
-        //    ITOP_Route_List = new List<ITOP_Route>();
-        //}
     }
 }

@@ -95,8 +95,6 @@ namespace KMPLibrary.KMPHelper
 
             return new byte[][] { Byte_X, Byte_Y, Byte_Z };
         }
-
-
     }
 
     public class Converter2D
@@ -249,5 +247,4 @@ namespace KMPLibrary.KMPHelper
             return Str2byte;
         }
     }
-
 }

@@ -156,13 +156,5 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
             EMACValue_List = new List<EMACValue>();
         }
-
-        //public EMAC()
-        //{
-        //    EMACHeader = "EMAC".ToCharArray();
-        //    NumOfEntries = 0;
-        //    AdditionalValue = 0;
-        //    EMACValue_List = new List<EMACValue>();
-        //}
     }
 }

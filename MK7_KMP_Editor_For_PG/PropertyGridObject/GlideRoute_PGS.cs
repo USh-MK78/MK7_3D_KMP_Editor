@@ -81,14 +81,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Prev5 = HPLG_PreviewGroup.Prev5;
                 }
 
-                public HPLG_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GR_PreviousGroup previous)
+                public HPLG_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GR_PreviousGroup Previous)
                 {
-                    Prev0 = previous.Prev0;
-                    Prev1 = previous.Prev1;
-                    Prev2 = previous.Prev2;
-                    Prev3 = previous.Prev3;
-                    Prev4 = previous.Prev4;
-                    Prev5 = previous.Prev5;
+                    Prev0 = Previous.Prev0;
+                    Prev1 = Previous.Prev1;
+                    Prev2 = Previous.Prev2;
+                    Prev3 = Previous.Prev3;
+                    Prev4 = Previous.Prev4;
+                    Prev5 = Previous.Prev5;
                 }
 
                 public override string ToString()
@@ -143,14 +143,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Next5 = HPLG_NextGroup.Next5;
                 }
 
-                public HPLG_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GR_NextGroup next)
+                public HPLG_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GR_NextGroup Next)
                 {
-                    Next0 = next.Next0;
-                    Next1 = next.Next1;
-                    Next2 = next.Next2;
-                    Next3 = next.Next3;
-                    Next4 = next.Next4;
-                    Next5 = next.Next5;
+                    Next0 = Next.Next0;
+                    Next1 = Next.Next1;
+                    Next2 = Next.Next2;
+                    Next3 = Next.Next3;
+                    Next4 = Next.Next4;
+                    Next5 = Next.Next5;
                 }
 
                 public override string ToString()
@@ -310,22 +310,22 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     TPLG_UnknownData2 = TPLGValue.TPLG_UnknownData2;
                 }
 
-                public TPLGValue(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GlideRoute_Point glideRoute_Point, int GroupID, int InputID)
+                public TPLGValue(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group.GlideRoute_Point GlideRoute_Point, int GroupID, int InputID)
                 {
                     this.GroupID = GroupID;
                     ID = InputID;
-                    Positions = new Position(glideRoute_Point.Position.ToVector3D());
-                    TPLG_PointScaleValue = glideRoute_Point.PointScale;
-                    TPLG_UnknownData1 = glideRoute_Point.UnknownData1;
-                    TPLG_UnknownData2 = glideRoute_Point.UnknownData2;
+                    Positions = new Position(GlideRoute_Point.Position.ToVector3D());
+                    TPLG_PointScaleValue = GlideRoute_Point.PointScale;
+                    TPLG_UnknownData1 = GlideRoute_Point.UnknownData1;
+                    TPLG_UnknownData2 = GlideRoute_Point.UnknownData2;
                 }
 
-                public TPLGValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                public TPLGValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData PointData, int GroupID, int InputID)
                 {
                     this.GroupID = GroupID;
                     ID = InputID;
-                    Positions = new Position(pointData.Position.ToVector3D());
-                    TPLG_PointScaleValue = pointData.ScaleValue;
+                    Positions = new Position(PointData.Position.ToVector3D());
+                    TPLG_PointScaleValue = PointData.ScaleValue;
                     TPLG_UnknownData1 = 0;
                     TPLG_UnknownData2 = 0;
                 }
@@ -360,21 +360,21 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
             }
 
-            public HPLGValue(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group glideRoute_Group, int InputID)
+            public HPLGValue(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute.GlideRoute_Group GlideRoute_Group, int InputID)
             {
                 GroupID = InputID;
-                HPLG_PreviewGroup = new HPLG_PreviewGroups(glideRoute_Group.PreviousGroups);
-                HPLG_NextGroup = new HPLG_NextGroups(glideRoute_Group.NextGroups);
-                RouteSettings.RouteSettingValue = glideRoute_Group.RouteSetting;
-                HPLG_UnknownData2 = glideRoute_Group.UnknownData2;
+                HPLG_PreviewGroup = new HPLG_PreviewGroups(GlideRoute_Group.PreviousGroups);
+                HPLG_NextGroup = new HPLG_NextGroups(GlideRoute_Group.NextGroups);
+                RouteSettings.RouteSettingValue = GlideRoute_Group.RouteSetting;
+                HPLG_UnknownData2 = GlideRoute_Group.UnknownData2;
 
-                for (int i = 0; i < glideRoute_Group.Points.Count; i++)
+                for (int i = 0; i < GlideRoute_Group.Points.Count; i++)
                 {
-                    TPLGValueList.Add(new TPLGValue(glideRoute_Group.Points[i], InputID, i));
+                    TPLGValueList.Add(new TPLGValue(GlideRoute_Group.Points[i], InputID, i));
                 }
             }
 
-            public HPLGValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData, int InputID)
+            public HPLGValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData GroupData, int InputID)
             {
                 GroupID = InputID;
                 HPLG_PreviewGroup = new HPLG_PreviewGroups();
@@ -382,9 +382,9 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 RouteSettings.RouteSettingValue = 0;
                 HPLG_UnknownData2 = 0;
 
-                for (int i = 0; i < groupData.Points.Count; i++)
+                for (int i = 0; i < GroupData.Points.Count; i++)
                 {
-                    TPLGValueList.Add(new TPLGValue(groupData.Points[i], InputID, i));
+                    TPLGValueList.Add(new TPLGValue(GroupData.Points[i], InputID, i));
                 }
             }
 
@@ -402,19 +402,19 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public GlideRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute glideRoute)
+        public GlideRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.GlideRoute GlideRoute)
         {
-            for (int i = 0; i < glideRoute.Groups.Count; i++)
+            for (int i = 0; i < GlideRoute.Groups.Count; i++)
             {
-                HPLGValueList.Add(new HPLGValue(glideRoute.Groups[i], i));
+                HPLGValueList.Add(new HPLGValue(GlideRoute.Groups[i], i));
             }
         }
 
-        public GlideRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute xXXXRoute)
+        public GlideRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute XXXXRoute)
         {
-            for (int i = 0; i < xXXXRoute.Groups.Count; i++)
+            for (int i = 0; i < XXXXRoute.Groups.Count; i++)
             {
-                HPLGValueList.Add(new HPLGValue(xXXXRoute.Groups[i], i));
+                HPLGValueList.Add(new HPLGValue(XXXXRoute.Groups[i], i));
             }
         }
 
@@ -425,7 +425,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public HPLG_TPLGData ToHPLG_TPLGData()
         {
-            HPLG_TPLGData hPLG_TPLGData = null;
+            HPLG_TPLGData HPLG_TPLG_Data = null;
 
             if (HPLGValueList.Count != 0)
             {
@@ -441,24 +441,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                         HPLG_Length = Convert.ToByte(HPLGValueList[HPLGCount].TPLGValueList.Count),
                         HPLG_PreviewGroup = new HPLG.HPLGValue.HPLG_PreviewGroups(HPLGValueList[HPLGCount].HPLG_PreviewGroup.GetPrevGroupArray()),
                         HPLG_NextGroup = new HPLG.HPLGValue.HPLG_NextGroups(HPLGValueList[HPLGCount].HPLG_NextGroup.GetNextGroupArray()),
-                        //HPLG_PreviewGroup = new HPLG.HPLGValue.HPLG_PreviewGroups
-                        //{
-                        //    Prev0 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev0),
-                        //    Prev1 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev1),
-                        //    Prev2 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev2),
-                        //    Prev3 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev3),
-                        //    Prev4 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev4),
-                        //    Prev5 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_PreviewGroup.Prev5),
-                        //},
-                        //HPLG_NextGroup = new HPLG.HPLGValue.HPLG_NextGroups
-                        //{
-                        //    Next0 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next0),
-                        //    Next1 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next1),
-                        //    Next2 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next2),
-                        //    Next3 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next3),
-                        //    Next4 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next4),
-                        //    Next5 = Convert.ToByte(HPLGValueList[HPLGCount].HPLG_NextGroup.Next5),
-                        //},
                         RouteSetting = Convert.ToUInt32(HPLGValueList[HPLGCount].RouteSettings.RouteSettingValue),
                         HPLG_UnknownData2 = Convert.ToUInt32(HPLGValueList[HPLGCount].HPLG_UnknownData2)
                     };
@@ -483,49 +465,17 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPLG TPLG = new TPLG(TPLG_Values_List);
                 HPLG HPLG = new HPLG(HPLG_Values_List);
 
-                //TPLG TPLG = new TPLG
-                //{
-                //    TPLGHeader = new char[] { 'T', 'P', 'L', 'G' },
-                //    NumOfEntries = Convert.ToUInt16(TPLG_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    TPLGValue_List = TPLG_Values_List
-                //};
-
-                //HPLG HPLG = new HPLG
-                //{
-                //    HPLGHeader = new char[] { 'H', 'P', 'L', 'G' },
-                //    NumOfEntries = Convert.ToUInt16(HPLG_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    HPLGValue_List = HPLG_Values_List
-                //};
-
-                hPLG_TPLGData = new HPLG_TPLGData(HPLG, TPLG);
+                HPLG_TPLG_Data = new HPLG_TPLGData(HPLG, TPLG);
             }
             if (HPLGValueList.Count == 0)
             {
-                //TPLG TPLG = new TPLG
-                //{
-                //    TPLGHeader = new char[] { 'T', 'P', 'L', 'G' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    TPLGValue_List = new List<TPLG.TPLGValue>()
-                //};
-
-                //HPLG HPLG = new HPLG
-                //{
-                //    HPLGHeader = new char[] { 'H', 'P', 'L', 'G' },
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    HPLGValue_List = new List<HPLG.HPLGValue>()
-                //};
-
                 TPLG TPLG = new TPLG(new List<TPLG.TPLGValue>());
                 HPLG HPLG = new HPLG(new List<HPLG.HPLGValue>());
 
-                hPLG_TPLGData = new HPLG_TPLGData(HPLG, TPLG);
+                HPLG_TPLG_Data = new HPLG_TPLGData(HPLG, TPLG);
             }
 
-            return hPLG_TPLGData;
+            return HPLG_TPLG_Data;
         }
     }
 }

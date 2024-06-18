@@ -252,38 +252,38 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 AERA_UnknownData1 = 0;
             }
 
-            public AERAValue(AERA.AERAValue aERAValue, int InputID)
+            public AERAValue(AERA.AERAValue AERAValue, int InputID)
             {
                 ID = InputID;
-                AreaType = aERAValue.AreaType;
-                AreaModeSettings.AreaModeValue = aERAValue.AreaModeValue;
-                AERA_EMACIndex = aERAValue.AERA_EMACIndex;
-                Priority = aERAValue.Priority;
-                Positions = new Position(aERAValue.AERA_Position);
-                Rotations = new Rotation(aERAValue.AERA_Rotation);
-                Scales = new Scale(aERAValue.AERA_Scale);
-                AERA_Setting1 = aERAValue.AERA_Setting1;
-                AERA_Setting2 = aERAValue.AERA_Setting2;
-                RouteID = aERAValue.RouteID;
-                EnemyID = aERAValue.EnemyID;
-                AERA_UnknownData1 = aERAValue.AERA_UnknownData1;
+                AreaType = AERAValue.AreaType;
+                AreaModeSettings.AreaModeValue = AERAValue.AreaModeValue;
+                AERA_EMACIndex = AERAValue.AERA_EMACIndex;
+                Priority = AERAValue.Priority;
+                Positions = new Position(AERAValue.AERA_Position);
+                Rotations = new Rotation(AERAValue.AERA_Rotation);
+                Scales = new Scale(AERAValue.AERA_Scale);
+                AERA_Setting1 = AERAValue.AERA_Setting1;
+                AERA_Setting2 = AERAValue.AERA_Setting2;
+                RouteID = AERAValue.RouteID;
+                EnemyID = AERAValue.EnemyID;
+                AERA_UnknownData1 = AERAValue.AERA_UnknownData1;
             }
 
-            public AERAValue(KMPLibrary.XMLConvert.KMPData.SectionData.Area.Area_Value area_Value, int InputID)
+            public AERAValue(KMPLibrary.XMLConvert.KMPData.SectionData.Area.Area_Value Area_Value, int InputID)
             {
                 ID = InputID;
-                AreaType = area_Value.AreaType;
-                AreaModeSettings.AreaModeValue = area_Value.AreaMode;
-                AERA_EMACIndex = area_Value.CameraIndex;
-                Priority = area_Value.Priority;
-                Positions = new Position(area_Value.Position.ToVector3D());
-                Rotations = new Rotation(area_Value.Rotation.ToVector3D());
-                Scales = new Scale(area_Value.Scale.ToVector3D());
-                AERA_Setting1 = area_Value.Setting1;
-                AERA_Setting2 = area_Value.Setting2;
-                RouteID = area_Value.RouteID;
-                EnemyID = area_Value.EnemyID;
-                AERA_UnknownData1 = area_Value.UnknownData1;
+                AreaType = Area_Value.AreaType;
+                AreaModeSettings.AreaModeValue = Area_Value.AreaMode;
+                AERA_EMACIndex = Area_Value.CameraIndex;
+                Priority = Area_Value.Priority;
+                Positions = new Position(Area_Value.Position.ToVector3D());
+                Rotations = new Rotation(Area_Value.Rotation.ToVector3D());
+                Scales = new Scale(Area_Value.Scale.ToVector3D());
+                AERA_Setting1 = Area_Value.Setting1;
+                AERA_Setting2 = Area_Value.Setting2;
+                RouteID = Area_Value.RouteID;
+                EnemyID = Area_Value.EnemyID;
+                AERA_UnknownData1 = Area_Value.UnknownData1;
             }
 
             public override string ToString()
@@ -292,14 +292,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public Area_PGS(AERA aERA_Section)
+        public Area_PGS(AERA AERA_Section)
         {
-            for (int i = 0; i < aERA_Section.NumOfEntries; i++) AERAValueList.Add(new AERAValue(aERA_Section.AERAValue_List[i], i));
+            for (int i = 0; i < AERA_Section.NumOfEntries; i++) AERAValueList.Add(new AERAValue(AERA_Section.AERAValue_List[i], i));
         }
 
-        public Area_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Area area)
+        public Area_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Area Area)
         {
-            for (int i = 0; i < area.Area_Values.Count; i++) AERAValueList.Add(new AERAValue(area.Area_Values[i], i));
+            for (int i = 0; i < Area.Area_Values.Count; i++) AERAValueList.Add(new AERAValue(Area.Area_Values[i], i));
         }
 
         public Area_PGS()
@@ -309,14 +309,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public AERA ToAERA()
         {
-            //AERA AERA = new AERA
-            //{
-            //    AERAHeader = new char[] { 'A', 'E', 'R', 'A' },
-            //    NumOfEntries = Convert.ToUInt16(AERAValueList.Count),
-            //    AdditionalValue = 0,
-            //    AERAValue_List = null
-            //};
-
             List<AERA.AERAValue> AERA_Value_List = new List<AERA.AERAValue>();
 
             for (int Count = 0; Count < AERAValueList.Count; Count++)
@@ -345,10 +337,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
 
             return new AERA(AERA_Value_List);
-
-            //AERA.AERAValue_List = AERA_Value_List;
-
-            //return AERA;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             HPNE_TPNE_Section = new EnemyRoute_PGS(KMP.KMP_Section.HPNE, KMP.KMP_Section.TPNE);
             HPTI_TPTI_Section = new ItemRoute_PGS(KMP.KMP_Section.HPTI, KMP.KMP_Section.TPTI);
             HPKC_TPKC_Section = new Checkpoint_PGS(KMP.KMP_Section.HPKC, KMP.KMP_Section.TPKC);
-            JBOG_Section = new KMPObject_PGS(KMP.KMP_Section.JBOG, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml"));
+            JBOG_Section = new KMPObject_PGS(KMP.KMP_Section.JBOG, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
             ITOP_Section = new Route_PGS(KMP.KMP_Section.ITOP);
             AERA_Section = new Area_PGS(KMP.KMP_Section.AERA);
             EMAC_Section = new Camera_PGS(KMP.KMP_Section.EMAC);
@@ -117,29 +117,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             };
 
             return new KMP(KMPSection, Version);
-
-
-
-            //KMP kMPFormat = new KMP(Version);
-            //kMPFormat.KMP_Section.TPTK = TPTK_Section.ToTPTK();
-            //kMPFormat.KMP_Section.TPNE = HPNE_TPNE_Section.ToHPNE_TPNEData().TPNE_Section;
-            //kMPFormat.KMP_Section.HPNE = HPNE_TPNE_Section.ToHPNE_TPNEData().HPNE_Section;
-            //kMPFormat.KMP_Section.TPTI = HPTI_TPTI_Section.ToHPTI_TPTIData().TPTI_Section;
-            //kMPFormat.KMP_Section.HPTI = HPTI_TPTI_Section.ToHPTI_TPTIData().HPTI_Section;
-            //kMPFormat.KMP_Section.TPKC = HPKC_TPKC_Section.ToHPKC_TPKCData().TPKC_Section;
-            //kMPFormat.KMP_Section.HPKC = HPKC_TPKC_Section.ToHPKC_TPKCData().HPKC_Section;
-            //kMPFormat.KMP_Section.JBOG = JBOG_Section.ToJBOG(kMPFormat.VersionNumber);
-            //kMPFormat.KMP_Section.ITOP = ITOP_Section.ToITOP();
-            //kMPFormat.KMP_Section.AERA = AERA_Section.ToAERA();
-            //kMPFormat.KMP_Section.EMAC = EMAC_Section.ToEMAC();
-            //kMPFormat.KMP_Section.TPGJ = TPGJ_Section.ToTPGJ();
-            //kMPFormat.KMP_Section.TPNC = KMPLibrary.Format.SectionData.TPNC.ToTPNC_Section();
-            //kMPFormat.KMP_Section.TPSM = KMPLibrary.Format.SectionData.TPSM.ToTPSM_Section();
-            //kMPFormat.KMP_Section.IGTS = IGTS_Section.ToIGTS();
-            //kMPFormat.KMP_Section.SROC = KMPLibrary.Format.SectionData.SROC.ToSROC_Section();
-            //kMPFormat.KMP_Section.TPLG = HPLG_TPLG_Section.ToHPLG_TPLGData().TPLG_Section;
-            //kMPFormat.KMP_Section.HPLG = HPLG_TPLG_Section.ToHPLG_TPLGData().HPLG_Section;
-            //return kMPFormat;
         }
     }
 }

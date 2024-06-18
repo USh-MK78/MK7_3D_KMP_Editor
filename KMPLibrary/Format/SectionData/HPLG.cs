@@ -253,14 +253,5 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
             HPLGValue_List = new List<HPLGValue>();
         }
-
-        //public HPLG()
-        //{
-        //    HPLGHeader = "HPLG".ToCharArray();
-        //    NumOfEntries = 0;
-        //    AdditionalValue = 0;
-        //    HPLGValue_List = new List<HPLGValue>();
-        //}
     }
-
 }

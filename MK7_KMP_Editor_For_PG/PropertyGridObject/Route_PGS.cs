@@ -111,22 +111,22 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     ITOP_PointSetting2 = 0;
                 }
 
-                public ITOP_Point(ITOP.ITOP_Route.ITOP_Point iTOP_Point, int Group_ID, int InputID)
+                public ITOP_Point(ITOP.ITOP_Route.ITOP_Point ITOP_Point, int Group_ID, int InputID)
                 {
                     GroupID = Group_ID;
                     ID = InputID;
-                    Positions = new Position(iTOP_Point.ITOP_Point_Position);
-                    ITOP_Point_RouteSpeed = iTOP_Point.ITOP_Point_RouteSpeed;
-                    ITOP_PointSetting2 = iTOP_Point.ITOP_PointSetting2;
+                    Positions = new Position(ITOP_Point.ITOP_Point_Position);
+                    ITOP_Point_RouteSpeed = ITOP_Point.ITOP_Point_RouteSpeed;
+                    ITOP_PointSetting2 = ITOP_Point.ITOP_PointSetting2;
                 }
 
-                public ITOP_Point(KMPLibrary.XMLConvert.KMPData.SectionData.Route.Route_Group.Route_Point route_Point, int Group_ID, int InputID)
+                public ITOP_Point(KMPLibrary.XMLConvert.KMPData.SectionData.Route.Route_Group.Route_Point Route_Point, int Group_ID, int InputID)
                 {
                     GroupID = Group_ID;
                     ID = InputID;
-                    Positions = new Position(route_Point.Position.ToVector3D());
-                    ITOP_Point_RouteSpeed = route_Point.RouteSpeed;
-                    ITOP_PointSetting2 = route_Point.PointSetting2;
+                    Positions = new Position(Route_Point.Position.ToVector3D());
+                    ITOP_Point_RouteSpeed = Route_Point.RouteSpeed;
+                    ITOP_PointSetting2 = Route_Point.PointSetting2;
                 }
 
                 public override string ToString()
@@ -143,27 +143,27 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 ITOP_Point_List = new List<ITOP_Point>();
             }
 
-            public ITOP_Route(ITOP.ITOP_Route iTOP_Route, int InputID)
+            public ITOP_Route(ITOP.ITOP_Route ITOP_Route, int InputID)
             {
                 GroupID = InputID;
-                ITOP_Loop = iTOP_Route.ITOP_LoopSetting;
-                ITOP_Smooth = iTOP_Route.ITOP_SmoothSetting;
+                ITOP_Loop = ITOP_Route.ITOP_LoopSetting;
+                ITOP_Smooth = ITOP_Route.ITOP_SmoothSetting;
 
-                for (int i = 0; i < iTOP_Route.ITOP_Route_NumOfPoint; i++)
+                for (int i = 0; i < ITOP_Route.ITOP_Route_NumOfPoint; i++)
                 {
-                    ITOP_Point_List.Add(new ITOP_Point(iTOP_Route.ITOP_Point_List[i], InputID, i));
+                    ITOP_Point_List.Add(new ITOP_Point(ITOP_Route.ITOP_Point_List[i], InputID, i));
                 }
             }
 
-            public ITOP_Route(KMPLibrary.XMLConvert.KMPData.SectionData.Route.Route_Group route_Group, int InputID)
+            public ITOP_Route(KMPLibrary.XMLConvert.KMPData.SectionData.Route.Route_Group Route_Group, int InputID)
             {
                 GroupID = InputID;
-                ITOP_Loop = route_Group.LoopSetting;
-                ITOP_Smooth = route_Group.SmoothSetting;
+                ITOP_Loop = Route_Group.LoopSetting;
+                ITOP_Smooth = Route_Group.SmoothSetting;
 
-                for (int i = 0; i < route_Group.Points.Count; i++)
+                for (int i = 0; i < Route_Group.Points.Count; i++)
                 {
-                    ITOP_Point_List.Add(new ITOP_Point(route_Group.Points[i], InputID, i));
+                    ITOP_Point_List.Add(new ITOP_Point(Route_Group.Points[i], InputID, i));
                 }
             }
 
@@ -173,19 +173,19 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public Route_PGS(ITOP iTOP_Section)
+        public Route_PGS(ITOP ITOP_Section)
         {
-            for (int i = 0; i < iTOP_Section.ITOP_Route_List.Count; i++)
+            for (int i = 0; i < ITOP_Section.ITOP_Route_List.Count; i++)
             {
-                ITOP_Route_List.Add(new ITOP_Route(iTOP_Section.ITOP_Route_List[i], i));
+                ITOP_Route_List.Add(new ITOP_Route(ITOP_Section.ITOP_Route_List[i], i));
             }
         }
 
-        public Route_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Route route)
+        public Route_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Route Route)
         {
-            for (int i = 0; i < route.Groups.Count; i++)
+            for (int i = 0; i < Route.Groups.Count; i++)
             {
-                ITOP_RouteList.Add(new ITOP_Route(route.Groups[i], i));
+                ITOP_RouteList.Add(new ITOP_Route(Route.Groups[i], i));
             }
         }
 
@@ -196,26 +196,10 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public ITOP ToITOP()
         {
-            //ITOP ITOP = new ITOP
-            //{
-            //    ITOPHeader = "ITOP".ToCharArray(),
-            //    ITOP_NumberOfRoute = Convert.ToUInt16(ITOP_RouteList.Count),
-            //    ITOP_NumberOfPoint = Convert.ToUInt16(ITOP_RouteList.Select(x => x.ITOP_PointList.Count).Sum()),
-            //    ITOP_Route_List = null
-            //};
-
             List<ITOP.ITOP_Route> ITOP_Route_List = new List<ITOP.ITOP_Route>();
 
             for (int ITOPRouteCount = 0; ITOPRouteCount < ITOP_RouteList.Count; ITOPRouteCount++)
             {
-                //ITOP.ITOP_Route ITOP_Routes = new ITOP.ITOP_Route
-                //{
-                //    ITOP_Route_NumOfPoint = Convert.ToUInt16(ITOP_RouteList[ITOPRouteCount].ITOP_PointList.Count),
-                //    ITOP_LoopSetting = ITOP_RouteList[ITOPRouteCount].ITOP_Loop,
-                //    ITOP_SmoothSetting = ITOP_RouteList[ITOPRouteCount].ITOP_Smooth,
-                //    ITOP_Point_List = null
-                //};
-
                 List<ITOP.ITOP_Route.ITOP_Point> ITOP_Point_List = new List<ITOP.ITOP_Route.ITOP_Point>();
 
                 for (int ITOP_PointCount = 0; ITOP_PointCount < ITOP_RouteList[ITOPRouteCount].ITOP_PointList.Count; ITOP_PointCount++)
@@ -232,24 +216,10 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
                 ITOP.ITOP_Route ITOP_Route = new ITOP.ITOP_Route(ITOP_RouteList[ITOPRouteCount].ITOP_Loop, ITOP_RouteList[ITOPRouteCount].ITOP_Smooth, ITOP_Point_List);
 
-                //ITOP.ITOP_Route ITOP_Route = new ITOP.ITOP_Route
-                //{
-                //    ITOP_Route_NumOfPoint = Convert.ToUInt16(ITOP_RouteList[ITOPRouteCount].ITOP_PointList.Count),
-                //    ITOP_LoopSetting = ITOP_RouteList[ITOPRouteCount].ITOP_Loop,
-                //    ITOP_SmoothSetting = ITOP_RouteList[ITOPRouteCount].ITOP_Smooth,
-                //    ITOP_Point_List = ITOP_Point_List
-                //};
-
-                //ITOP_Routes.ITOP_Point_List = ITOP_Point_List;
-
                 ITOP_Route_List.Add(ITOP_Route);
             }
 
             return new ITOP(ITOP_Route_List);
-
-            //ITOP.ITOP_Route_List = ITOP_Route_List;
-
-            //return ITOP;
         }
     }
 }

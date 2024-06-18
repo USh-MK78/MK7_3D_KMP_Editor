@@ -121,24 +121,24 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Prev15 = HPNE_PreviewGroup.Prev15;
                 }
 
-                public HPNE_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.ER_PreviousGroup previous)
+                public HPNE_PreviewGroups(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.ER_PreviousGroup Previous)
                 {
-                    Prev0 = previous.Prev0;
-                    Prev1 = previous.Prev1;
-                    Prev2 = previous.Prev2;
-                    Prev3 = previous.Prev3;
-                    Prev4 = previous.Prev4;
-                    Prev5 = previous.Prev5;
-                    Prev6 = previous.Prev6;
-                    Prev7 = previous.Prev7;
-                    Prev8 = previous.Prev8;
-                    Prev9 = previous.Prev9;
-                    Prev10 = previous.Prev10;
-                    Prev11 = previous.Prev11;
-                    Prev12 = previous.Prev12;
-                    Prev13 = previous.Prev13;
-                    Prev14 = previous.Prev14;
-                    Prev15 = previous.Prev15;
+                    Prev0 = Previous.Prev0;
+                    Prev1 = Previous.Prev1;
+                    Prev2 = Previous.Prev2;
+                    Prev3 = Previous.Prev3;
+                    Prev4 = Previous.Prev4;
+                    Prev5 = Previous.Prev5;
+                    Prev6 = Previous.Prev6;
+                    Prev7 = Previous.Prev7;
+                    Prev8 = Previous.Prev8;
+                    Prev9 = Previous.Prev9;
+                    Prev10 = Previous.Prev10;
+                    Prev11 = Previous.Prev11;
+                    Prev12 = Previous.Prev12;
+                    Prev13 = Previous.Prev13;
+                    Prev14 = Previous.Prev14;
+                    Prev15 = Previous.Prev15;
                 }
 
                 public override string ToString()
@@ -233,24 +233,24 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Next15 = HPNE_NextGroup.Next15;
                 }
 
-                public HPNE_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.ER_NextGroup next)
+                public HPNE_NextGroups(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.ER_NextGroup Next)
                 {
-                    Next0 = next.Next0;
-                    Next1 = next.Next1;
-                    Next2 = next.Next2;
-                    Next3 = next.Next3;
-                    Next4 = next.Next4;
-                    Next5 = next.Next5;
-                    Next6 = next.Next6;
-                    Next7 = next.Next7;
-                    Next8 = next.Next8;
-                    Next9 = next.Next9;
-                    Next10 = next.Next10;
-                    Next11 = next.Next11;
-                    Next12 = next.Next12;
-                    Next13 = next.Next13;
-                    Next14 = next.Next14;
-                    Next15 = next.Next15;
+                    Next0 = Next.Next0;
+                    Next1 = Next.Next1;
+                    Next2 = Next.Next2;
+                    Next3 = Next.Next3;
+                    Next4 = Next.Next4;
+                    Next5 = Next.Next5;
+                    Next6 = Next.Next6;
+                    Next7 = Next.Next7;
+                    Next8 = Next.Next8;
+                    Next9 = Next.Next9;
+                    Next10 = Next.Next10;
+                    Next11 = Next.Next11;
+                    Next12 = Next.Next12;
+                    Next13 = Next.Next13;
+                    Next14 = Next.Next14;
+                    Next15 = Next.Next15;
                 }
 
                 public override string ToString()
@@ -546,25 +546,25 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     MaxSearchYOffset.MaxSearchYOffsetValue = TPNEValue.MaxSearchYOffsetValue;
                 }
 
-                public TPNEValue(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.EnemyRoute_Point enemyRoute_Point, int GroupID, int InputID)
+                public TPNEValue(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group.EnemyRoute_Point EnemyRoute_Point, int GroupID, int InputID)
                 {
                     Group_ID = GroupID;
                     ID = InputID;
-                    Positions = new Position(enemyRoute_Point.Position.ToVector3D());
-                    Control = enemyRoute_Point.Control;
-                    MushSettings.MushSettingValue = enemyRoute_Point.MushSetting;
-                    DriftSettings.DriftSettingValue = enemyRoute_Point.DriftSetting;
-                    FlagSettings.Flags = enemyRoute_Point.Flags;
-                    PathFindOptions.PathFindOptionValue = enemyRoute_Point.PathFindOption;
-                    MaxSearchYOffset.MaxSearchYOffsetValue = enemyRoute_Point.MaxSearchYOffset;
+                    Positions = new Position(EnemyRoute_Point.Position.ToVector3D());
+                    Control = EnemyRoute_Point.Control;
+                    MushSettings.MushSettingValue = EnemyRoute_Point.MushSetting;
+                    DriftSettings.DriftSettingValue = EnemyRoute_Point.DriftSetting;
+                    FlagSettings.Flags = EnemyRoute_Point.Flags;
+                    PathFindOptions.PathFindOptionValue = EnemyRoute_Point.PathFindOption;
+                    MaxSearchYOffset.MaxSearchYOffsetValue = EnemyRoute_Point.MaxSearchYOffset;
                 }
 
-                public TPNEValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData, int GroupID, int InputID)
+                public TPNEValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData PointData, int GroupID, int InputID)
                 {
                     Group_ID = GroupID;
                     ID = InputID;
-                    Positions = new Position(pointData.Position.ToVector3D());
-                    Control = pointData.ScaleValue;
+                    Positions = new Position(PointData.Position.ToVector3D());
+                    Control = PointData.ScaleValue;
                     MushSettings.MushSettingValue = 0;
                     DriftSettings.DriftSettingValue = 0;
                     FlagSettings.Flags = 0;
@@ -603,21 +603,21 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
             }
 
-            public HPNEValue(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group enemyRoute_Group, int InputID)
+            public HPNEValue(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute.EnemyRoute_Group EnemyRoute_Group, int InputID)
             {
                 GroupID = InputID;
-                HPNEPreviewGroups = new HPNE_PreviewGroups(enemyRoute_Group.PreviousGroups);
-                HPNENextGroups = new HPNE_NextGroups(enemyRoute_Group.NextGroups);
-                UnknwonData1 = enemyRoute_Group.Unknown1;
-                UnknownData2 = enemyRoute_Group.Unknown2;
+                HPNEPreviewGroups = new HPNE_PreviewGroups(EnemyRoute_Group.PreviousGroups);
+                HPNENextGroups = new HPNE_NextGroups(EnemyRoute_Group.NextGroups);
+                UnknwonData1 = EnemyRoute_Group.Unknown1;
+                UnknownData2 = EnemyRoute_Group.Unknown2;
 
-                for (int i = 0; i < enemyRoute_Group.Points.Count; i++)
+                for (int i = 0; i < EnemyRoute_Group.Points.Count; i++)
                 {
-                    TPNEValueList.Add(new TPNEValue(enemyRoute_Group.Points[i], InputID, i));
+                    TPNEValueList.Add(new TPNEValue(EnemyRoute_Group.Points[i], InputID, i));
                 }
             }
 
-            public HPNEValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData, int InputID)
+            public HPNEValue(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData GroupData, int InputID)
             {
                 GroupID = InputID;
                 HPNEPreviewGroups = new HPNE_PreviewGroups();
@@ -625,9 +625,9 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 UnknwonData1 = 65535;
                 UnknownData2 = 65535;
 
-                for (int i = 0; i < groupData.Points.Count; i++)
+                for (int i = 0; i < GroupData.Points.Count; i++)
                 {
-                    TPNEValueList.Add(new TPNEValue(groupData.Points[i], InputID, i));
+                    TPNEValueList.Add(new TPNEValue(GroupData.Points[i], InputID, i));
                 }
             }
 
@@ -645,19 +645,19 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public EnemyRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute enemyRoute)
+        public EnemyRoute_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.EnemyRoute EnemyRoute)
         {
-            for (int i = 0; i < enemyRoute.Groups.Count; i++)
+            for (int i = 0; i < EnemyRoute.Groups.Count; i++)
             {
-                HPNEValueList.Add(new HPNEValue(enemyRoute.Groups[i], i));
+                HPNEValueList.Add(new HPNEValue(EnemyRoute.Groups[i], i));
             }
         }
 
-        public EnemyRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute xXXXRoute)
+        public EnemyRoute_PGS(KMPLibrary.XMLConvert.XXXXRouteData.XXXXRoute_XML.XXXXRoute XXXXRoute)
         {
-            for (int i = 0; i < xXXXRoute.Groups.Count; i++)
+            for (int i = 0; i < XXXXRoute.Groups.Count; i++)
             {
-                HPNEValueList.Add(new HPNEValue(xXXXRoute.Groups[i], i));
+                HPNEValueList.Add(new HPNEValue(XXXXRoute.Groups[i], i));
             }
         }
 
@@ -668,7 +668,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public HPNE_TPNEData ToHPNE_TPNEData()
         {
-            HPNE_TPNEData HPNE_TPNEData = null;
+            HPNE_TPNEData HPNE_TPNE_Data = null;
 
             if (HPNEValueList.Count != 0)
             {
@@ -684,48 +684,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                         HPNE_Length = Convert.ToUInt16(HPNEValueList[HPNECount].TPNEValueList.Count),
                         HPNE_PreviewGroup = new HPNE.HPNEValue.HPNE_PreviewGroups(HPNEValueList[HPNECount].HPNEPreviewGroups.GetPrevGroupValueArray()),
                         HPNE_NextGroup = new HPNE.HPNEValue.HPNE_NextGroups(HPNEValueList[HPNECount].HPNENextGroups.GetNextGroupValueArray()),
-
-                        #region DELETE (?)
-                        //HPNE_PreviewGroup = new HPNE.HPNEValue.HPNE_PreviewGroups
-                        //{
-                        //    Prev0 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev0,
-                        //    Prev1 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev1,
-                        //    Prev2 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev2,
-                        //    Prev3 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev3,
-                        //    Prev4 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev4,
-                        //    Prev5 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev5,
-                        //    Prev6 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev6,
-                        //    Prev7 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev7,
-                        //    Prev8 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev8,
-                        //    Prev9 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev9,
-                        //    Prev10 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev10,
-                        //    Prev11 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev11,
-                        //    Prev12 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev12,
-                        //    Prev13 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev13,
-                        //    Prev14 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev14,
-                        //    Prev15 = HPNEValueList[HPNECount].HPNEPreviewGroups.Prev15
-                        //},
-                        //HPNE_NextGroup = new HPNE.HPNEValue.HPNE_NextGroups
-                        //{
-                        //    Next0 = HPNEValueList[HPNECount].HPNENextGroups.Next0,
-                        //    Next1 = HPNEValueList[HPNECount].HPNENextGroups.Next1,
-                        //    Next2 = HPNEValueList[HPNECount].HPNENextGroups.Next2,
-                        //    Next3 = HPNEValueList[HPNECount].HPNENextGroups.Next3,
-                        //    Next4 = HPNEValueList[HPNECount].HPNENextGroups.Next4,
-                        //    Next5 = HPNEValueList[HPNECount].HPNENextGroups.Next5,
-                        //    Next6 = HPNEValueList[HPNECount].HPNENextGroups.Next6,
-                        //    Next7 = HPNEValueList[HPNECount].HPNENextGroups.Next7,
-                        //    Next8 = HPNEValueList[HPNECount].HPNENextGroups.Next8,
-                        //    Next9 = HPNEValueList[HPNECount].HPNENextGroups.Next9,
-                        //    Next10 = HPNEValueList[HPNECount].HPNENextGroups.Next10,
-                        //    Next11 = HPNEValueList[HPNECount].HPNENextGroups.Next11,
-                        //    Next12 = HPNEValueList[HPNECount].HPNENextGroups.Next12,
-                        //    Next13 = HPNEValueList[HPNECount].HPNENextGroups.Next13,
-                        //    Next14 = HPNEValueList[HPNECount].HPNENextGroups.Next14,
-                        //    Next15 = HPNEValueList[HPNECount].HPNENextGroups.Next15
-                        //},
-                        #endregion
-
                         UnknownShortData1 = HPNEValueList[HPNECount].UnknwonData1,
                         UnknownShortData2 = HPNEValueList[HPNECount].UnknownData2
                     };
@@ -753,49 +711,17 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPNE TPNE = new TPNE(TPNE_Values_List);
                 HPNE HPNE = new HPNE(HPNE_Values_List);
 
-                //TPNE TPNE = new TPNE
-                //{
-                //    TPNEHeader = "TPNE".ToCharArray(),
-                //    NumOfEntries = Convert.ToUInt16(TPNE_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    TPNEValue_List = TPNE_Values_List
-                //};
-
-                //HPNE HPNE = new HPNE
-                //{
-                //    HPNEHeader = "HPNE".ToCharArray(),
-                //    NumOfEntries = Convert.ToUInt16(HPNE_Values_List.Count),
-                //    AdditionalValue = 0,
-                //    HPNEValue_List = HPNE_Values_List
-                //};
-
-                HPNE_TPNEData = new HPNE_TPNEData(HPNE, TPNE);
+                HPNE_TPNE_Data = new HPNE_TPNEData(HPNE, TPNE);
             }
             if (HPNEValueList.Count == 0)
             {
                 TPNE TPNE = new TPNE(new List<TPNE.TPNEValue>());
                 HPNE HPNE = new HPNE(new List<HPNE.HPNEValue>());
 
-                //TPNE TPNE = new TPNE
-                //{
-                //    TPNEHeader = "TPNE".ToCharArray(),
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    TPNEValue_List = new List<TPNE.TPNEValue>()
-                //};
-
-                //HPNE HPNE = new HPNE
-                //{
-                //    HPNEHeader = "HPNE".ToCharArray(),
-                //    NumOfEntries = 0,
-                //    AdditionalValue = 0,
-                //    HPNEValue_List = new List<HPNE.HPNEValue>()
-                //};
-
-                HPNE_TPNEData = new HPNE_TPNEData(HPNE, TPNE);
+                HPNE_TPNE_Data = new HPNE_TPNEData(HPNE, TPNE);
             }
 
-            return HPNE_TPNEData;
+            return HPNE_TPNE_Data;
         }
     }
 }

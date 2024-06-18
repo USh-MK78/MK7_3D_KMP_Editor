@@ -314,40 +314,40 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 Camera_Active_Time = 0;
             }
 
-            public EMACValue(EMAC.EMACValue eMACValue, int InputID)
+            public EMACValue(EMAC.EMACValue EMACValue, int InputID)
             {
                 ID = InputID;
-                CameraType = eMACValue.CameraType;
-                NextCameraIndex = eMACValue.NextCameraIndex;
-                EMAC_NextVideoIndex = eMACValue.EMAC_NextVideoIndex;
-                EMAC_ITOP_CameraIndex = eMACValue.EMAC_ITOP_CameraIndex;
-                SpeedSettings = new SpeedSetting(eMACValue.RouteSpeed, eMACValue.FOVSpeed, eMACValue.ViewpointSpeed);
-                EMAC_StartFlag = eMACValue.EMAC_StartFlag;
-                EMAC_VideoFlag = eMACValue.EMAC_VideoFlag;
-                Positions = new Position(eMACValue.EMAC_Position);
-                Rotations = new Rotation(eMACValue.EMAC_Rotation);
-                FOVAngleSettings = new FOVAngleSetting(eMACValue.FOVAngle_Start, eMACValue.FOVAngle_End);
-                Viewpoint_Destination = new ViewpointDestination(eMACValue.Viewpoint_Destination);
-                Viewpoint_Start = new ViewpointStart(eMACValue.Viewpoint_Start);
-                Camera_Active_Time = eMACValue.Camera_Active_Time;
+                CameraType = EMACValue.CameraType;
+                NextCameraIndex = EMACValue.NextCameraIndex;
+                EMAC_NextVideoIndex = EMACValue.EMAC_NextVideoIndex;
+                EMAC_ITOP_CameraIndex = EMACValue.EMAC_ITOP_CameraIndex;
+                SpeedSettings = new SpeedSetting(EMACValue.RouteSpeed, EMACValue.FOVSpeed, EMACValue.ViewpointSpeed);
+                EMAC_StartFlag = EMACValue.EMAC_StartFlag;
+                EMAC_VideoFlag = EMACValue.EMAC_VideoFlag;
+                Positions = new Position(EMACValue.EMAC_Position);
+                Rotations = new Rotation(EMACValue.EMAC_Rotation);
+                FOVAngleSettings = new FOVAngleSetting(EMACValue.FOVAngle_Start, EMACValue.FOVAngle_End);
+                Viewpoint_Destination = new ViewpointDestination(EMACValue.Viewpoint_Destination);
+                Viewpoint_Start = new ViewpointStart(EMACValue.Viewpoint_Start);
+                Camera_Active_Time = EMACValue.Camera_Active_Time;
             }
 
-            public EMACValue(KMPLibrary.XMLConvert.KMPData.SectionData.Camera.Camera_Value camera_Value, int InputID)
+            public EMACValue(KMPLibrary.XMLConvert.KMPData.SectionData.Camera.Camera_Value Camera_Value, int InputID)
             {
                 ID = InputID;
-                CameraType = camera_Value.CameraType;
-                NextCameraIndex = camera_Value.NextCameraIndex;
-                EMAC_NextVideoIndex = camera_Value.NextVideoIndex;
-                EMAC_ITOP_CameraIndex = camera_Value.Route_CameraIndex;
-                SpeedSettings = new SpeedSetting(camera_Value.SpeedSetting.RouteSpeed, camera_Value.SpeedSetting.FOVSpeed, camera_Value.SpeedSetting.ViewpointSpeed);
-                EMAC_StartFlag = camera_Value.StartFlag;
-                EMAC_VideoFlag = camera_Value.VideoFlag;
-                Positions = new Position(camera_Value.Position.ToVector3D());
-                Rotations = new Rotation(camera_Value.Rotation.ToVector3D());
-                FOVAngleSettings = new FOVAngleSetting(camera_Value.FOVAngleSettings.Start, camera_Value.FOVAngleSettings.End);
-                Viewpoint_Destination = new ViewpointDestination(camera_Value.ViewpointDestination.ToVector3D());
-                Viewpoint_Start = new ViewpointStart(camera_Value.ViewpointStart.ToVector3D());
-                Camera_Active_Time = camera_Value.CameraActiveTime;
+                CameraType = Camera_Value.CameraType;
+                NextCameraIndex = Camera_Value.NextCameraIndex;
+                EMAC_NextVideoIndex = Camera_Value.NextVideoIndex;
+                EMAC_ITOP_CameraIndex = Camera_Value.Route_CameraIndex;
+                SpeedSettings = new SpeedSetting(Camera_Value.SpeedSetting.RouteSpeed, Camera_Value.SpeedSetting.FOVSpeed, Camera_Value.SpeedSetting.ViewpointSpeed);
+                EMAC_StartFlag = Camera_Value.StartFlag;
+                EMAC_VideoFlag = Camera_Value.VideoFlag;
+                Positions = new Position(Camera_Value.Position.ToVector3D());
+                Rotations = new Rotation(Camera_Value.Rotation.ToVector3D());
+                FOVAngleSettings = new FOVAngleSetting(Camera_Value.FOVAngleSettings.Start, Camera_Value.FOVAngleSettings.End);
+                Viewpoint_Destination = new ViewpointDestination(Camera_Value.ViewpointDestination.ToVector3D());
+                Viewpoint_Start = new ViewpointStart(Camera_Value.ViewpointStart.ToVector3D());
+                Camera_Active_Time = Camera_Value.CameraActiveTime;
             }
 
             public override string ToString()
@@ -356,14 +356,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public Camera_PGS(EMAC eMAC_Section)
+        public Camera_PGS(EMAC EMAC_Section)
         {
-            for (int i = 0; i < eMAC_Section.NumOfEntries; i++) EMACValueList.Add(new EMACValue(eMAC_Section.EMACValue_List[i], i));
+            for (int i = 0; i < EMAC_Section.NumOfEntries; i++) EMACValueList.Add(new EMACValue(EMAC_Section.EMACValue_List[i], i));
         }
 
-        public Camera_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Camera camera)
+        public Camera_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Camera Camera)
         {
-            for (int i = 0; i < camera.Values.Count; i++) EMACValueList.Add(new EMACValue(camera.Values[i], i));
+            for (int i = 0; i < Camera.Values.Count; i++) EMACValueList.Add(new EMACValue(Camera.Values[i], i));
         }
 
         public Camera_PGS()
@@ -373,14 +373,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public EMAC ToEMAC()
         {
-            //EMAC EMAC = new EMAC
-            //{
-            //    EMACHeader = new char[] { 'E', 'M', 'A', 'C' },
-            //    NumOfEntries = Convert.ToUInt16(EMACValueList.Count),
-            //    AdditionalValue = 65535, //0xFFFF
-            //    EMACValue_List = null
-            //};
-
             List<EMAC.EMACValue> EMAC_Value_List = new List<EMAC.EMACValue>();
 
             for (int EMACCount = 0; EMACCount < EMACValueList.Count; EMACCount++)
@@ -413,10 +405,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
 
             return new EMAC(EMAC_Value_List);
-
-            //EMAC.EMACValue_List = EMAC_Value_List;
-
-            //return EMAC;
         }
     }
 }

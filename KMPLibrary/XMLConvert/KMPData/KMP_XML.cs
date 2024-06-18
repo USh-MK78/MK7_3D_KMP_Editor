@@ -93,11 +93,7 @@ namespace KMPLibrary.XMLConvert.KMPData
             Stage_Info = new SectionData.StageInfo();
             GlideRoutes = new SectionData.GlideRoute();
         }
-
-        //public KMP_XML() { }
     }
-
-
 
     public class KMPXmlSetting
     {

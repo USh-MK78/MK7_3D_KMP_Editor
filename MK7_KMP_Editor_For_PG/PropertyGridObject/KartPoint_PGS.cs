@@ -157,22 +157,22 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 TPTK_UnknownData = 0;
             }
 
-            public TPTKValue(TPTK.TPTKValue tPTKValue, int InputID)
+            public TPTKValue(TPTK.TPTKValue TPTKValue, int InputID)
             {
                 ID = InputID;
-                Position_Value = new Position(tPTKValue.TPTK_Position);
-                Rotate_Value = new Rotation(tPTKValue.TPTK_Rotation);
-                Player_Index = tPTKValue.Player_Index;
-                TPTK_UnknownData = tPTKValue.TPTK_UnknownData;
+                Position_Value = new Position(TPTKValue.TPTK_Position);
+                Rotate_Value = new Rotation(TPTKValue.TPTK_Rotation);
+                Player_Index = TPTKValue.Player_Index;
+                TPTK_UnknownData = TPTKValue.TPTK_UnknownData;
             }
 
-            public TPTKValue(KMPLibrary.XMLConvert.KMPData.SectionData.StartPosition.StartPosition_Value startPosition_Value, int InputID)
+            public TPTKValue(KMPLibrary.XMLConvert.KMPData.SectionData.StartPosition.StartPosition_Value StartPosition_Value, int InputID)
             {
                 ID = InputID;
-                Position_Value = new Position(startPosition_Value.Position.ToVector3D());
-                Rotate_Value = new Rotation(startPosition_Value.Rotation.ToVector3D());
-                Player_Index = startPosition_Value.Player_Index;
-                TPTK_UnknownData = startPosition_Value.TPTK_UnkBytes;
+                Position_Value = new Position(StartPosition_Value.Position.ToVector3D());
+                Rotate_Value = new Rotation(StartPosition_Value.Rotation.ToVector3D());
+                Player_Index = StartPosition_Value.Player_Index;
+                TPTK_UnknownData = StartPosition_Value.TPTK_UnknownData;
             }
 
             public override string ToString()
@@ -181,14 +181,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public KartPoint_PGS(TPTK tPTK_Section)
+        public KartPoint_PGS(TPTK TPTK_Section)
         {
-            for (int i = 0; i < tPTK_Section.NumOfEntries; i++) TPTKValueList.Add(new TPTKValue(tPTK_Section.TPTKValue_List[i], i));
+            for (int i = 0; i < TPTK_Section.NumOfEntries; i++) TPTKValueList.Add(new TPTKValue(TPTK_Section.TPTKValue_List[i], i));
         }
 
-        public KartPoint_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.StartPosition startPosition)
+        public KartPoint_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.StartPosition StartPosition)
         {
-            for (int i = 0; i < startPosition.StartPositionValues.Count; i++) TPTKValueList.Add(new TPTKValue(startPosition.StartPositionValues[i], i));
+            for (int i = 0; i < StartPosition.StartPositionValues.Count; i++) TPTKValueList.Add(new TPTKValue(StartPosition.StartPositionValues[i], i));
         }
 
         public KartPoint_PGS()
@@ -198,14 +198,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public TPTK ToTPTK()
         {
-            //TPTK TPTK = new TPTK
-            //{
-            //    TPTKHeader = new char[] { 'T', 'P', 'T', 'K' },
-            //    NumOfEntries = Convert.ToUInt16(TPTKValueList.Count),
-            //    AdditionalValue = 0,
-            //    TPTKValue_List = null
-            //};
-
             List<TPTK.TPTKValue> TPTK_Value_List = new List<TPTK.TPTKValue>();
 
             for (int Count = 0; Count < TPTKValueList.Count; Count++)
@@ -216,24 +208,9 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
                 TPTK.TPTKValue TPTK_Values = new TPTK.TPTKValue(TPTKValueList[Count].Position_Value.GetVector3D(), new Vector3D(RX, RY, RZ), TPTKValueList[Count].Player_Index, TPTKValueList[Count].TPTK_UnknownData);
                 TPTK_Value_List.Add(TPTK_Values);
-
-                //TPTK.TPTKValue TPTK_Values = new TPTK.TPTKValue
-                //{
-                //    TPTK_Position = TPTKValueList[Count].Position_Value.GetVector3D(),
-                //    TPTK_Rotation = new Vector3D(RX, RY, RZ),
-                //    Player_Index = Convert.ToUInt16(TPTKValueList[Count].Player_Index),
-                //    TPTK_UnknownData = Convert.ToUInt16(TPTKValueList[Count].TPTK_UnkBytes)
-                //};
-
-                //TPTK_Value_List.Add(TPTK_Values);
             }
 
-            //TPTK.TPTKValue_List = TPTK_Value_List;
-
-            TPTK TPTK = new TPTK(TPTK_Value_List);
-
-            return TPTK;
+            return new TPTK(TPTK_Value_List);
         }
-
     }
 }

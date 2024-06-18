@@ -17,8 +17,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             [System.Xml.Serialization.XmlAttribute("RespawnID")]
             public ushort RespawnID { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("UnkBytes1")]
-            public ushort UnkBytes1 { get; set; }
+            [System.Xml.Serialization.XmlAttribute("UnknownData1")]
+            public ushort UnknownData1 { get; set; }
 
             [System.Xml.Serialization.XmlElement("Position")]
             public JugemPoint_Position Position { get; set; }
@@ -83,7 +83,7 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 Position = new JugemPoint_Position(JugemPointValue.TPGJ_Position);
                 Rotation = new JugemPoint_Rotation(JugemPointValue.TPGJ_Rotation);
                 RespawnID = JugemPointValue.TPGJ_RespawnID;
-                UnkBytes1 = JugemPointValue.TPGJ_UnknownData1;
+                UnknownData1 = JugemPointValue.TPGJ_UnknownData1;
             }
         }
 

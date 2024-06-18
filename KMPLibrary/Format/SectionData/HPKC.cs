@@ -203,13 +203,5 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
             HPKCValue_List = new List<HPKCValue>();
         }
-
-        //public HPKC()
-        //{
-        //    HPKCHeader = "HPKC".ToCharArray();
-        //    NumOfEntries = 0;
-        //    AdditionalValue = 0;
-        //    HPKCValue_List = new List<HPKCValue>();
-        //}
     }
 }

@@ -159,13 +159,5 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
             AERAValue_List = new List<AERAValue>();
         }
-
-        //public AERA()
-        //{
-        //    AERAHeader = "AERA".ToCharArray();
-        //    NumOfEntries = 0;
-        //    AdditionalValue = 0;
-        //    AERAValue_List = new List<AERAValue>();
-        //}
     }
 }

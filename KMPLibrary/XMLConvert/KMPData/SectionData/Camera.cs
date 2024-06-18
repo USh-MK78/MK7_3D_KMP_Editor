@@ -215,5 +215,4 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             foreach (var CameraValue in eMAC_Section.EMACValue_List) Values.Add(new Camera_Value(CameraValue));
         }
     }
-
 }

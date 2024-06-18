@@ -1,4 +1,5 @@
 ﻿using KMPLibrary.KMPHelper;
+using KMPLibrary.XMLConvert.ObjFlowData;
 using MK7_3D_KMP_Editor.PropertyGridObject;
 using System;
 using System.Collections.Generic;
@@ -60,65 +61,65 @@ namespace MK7_3D_KMP_Editor
         {
             if (SectionName == "All")
             {
-                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
-                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
-                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
-                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
-                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
-                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
-                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
-                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
-                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
-                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
+                AddCheckValue(KartPointListBox, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
+                AddCheckValue(EnemyRouteListBox, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
+                AddCheckValue(ItemRouteListBox, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
+                AddCheckValue(CheckpointListBox, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(ObjectListBox, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(RouteListBox, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(AreaListBox, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
+                AddCheckValue(CameraListBox, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(JugemPointListBox, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(GlideRouteListBox, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
             }
             if (SectionName == "Kart Point")
             {
-                AddCheckValue(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
+                AddCheckValue(KartPointListBox, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
                 tabControl1.SelectedIndex = 0;
             }
             if (SectionName == "Enemy Route")
             {
-                AddCheckValue(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
+                AddCheckValue(EnemyRouteListBox, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
                 tabControl1.SelectedIndex = 1;
             }
             if (SectionName == "Item Route")
             {
-                AddCheckValue(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
+                AddCheckValue(ItemRouteListBox, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
                 tabControl1.SelectedIndex = 2;
             }
             if (SectionName == "Checkpoint")
             {
-                AddCheckValue(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(CheckpointListBox, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
                 tabControl1.SelectedIndex = 3;
             }
             if (SectionName == "Object")
             {
-                AddCheckValue(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(ObjectListBox, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 4;
             }
             if (SectionName == "Route")
             {
-                AddCheckValue(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(RouteListBox, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 5;
             }
             if (SectionName == "Area")
             {
-                AddCheckValue(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
+                AddCheckValue(AreaListBox, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
                 tabControl1.SelectedIndex = 6;
             }
             if (SectionName == "Camera")
             {
-                AddCheckValue(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
+                AddCheckValue(CameraListBox, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
                 tabControl1.SelectedIndex = 7;
             }
             if (SectionName == "Jugem Point")
             {
-                AddCheckValue(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
+                AddCheckValue(JugemPointListBox, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
                 tabControl1.SelectedIndex = 8;
             }
             if (SectionName == "Glide Route")
             {
-                AddCheckValue(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
+                AddCheckValue(GlideRouteListBox, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
                 tabControl1.SelectedIndex = 9;
             }
         }
@@ -127,7 +128,7 @@ namespace MK7_3D_KMP_Editor
         {
             public static List<CheckValue> TPTK_Check(KartPoint_PGS TPTK_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 //if (Values.TPKC_Checkpoint_Type < 255)
                 //{
@@ -161,16 +162,16 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Error
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> HPNE_TPNE_Check(EnemyRoute_PGS HPNE_TPNE_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 if (HPNE_TPNE_Section.HPNEValueList.Count != 0)
                 {
@@ -189,7 +190,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (NextGrpAry[Num] < 65535 && HPNE_TPNE_Section.HPNEValueList.Select(x => x.GroupID).ToList().Contains(NextGrpAry[Num]) == false)
                             {
@@ -200,7 +201,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
@@ -217,7 +218,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (PrevGrpAry[Num] < 65535 && HPNE_TPNE_Section.HPNEValueList.Select(x => x.GroupID).ToList().Contains(PrevGrpAry[Num]) == false)
                             {
@@ -228,18 +229,18 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> HPTI_TPTI_Check(ItemRoute_PGS HPTI_TPTI_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 if (HPTI_TPTI_Section.HPTIValueList.Count != 0)
                 {
@@ -258,7 +259,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (NextGrpAry[Num] < 65535 && HPTI_TPTI_Section.HPTIValueList.Select(x => x.GroupID).ToList().Contains(NextGrpAry[Num]) == false)
                             {
@@ -269,7 +270,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
@@ -286,7 +287,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (PrevGrpAry[Num] < 65535 && HPTI_TPTI_Section.HPTIValueList.Select(x => x.GroupID).ToList().Contains(PrevGrpAry[Num]) == false)
                             {
@@ -297,18 +298,18 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> HPKC_TPKC_Check(Checkpoint_PGS HPKC_TPKC_Section, KMPObject_PGS JBOG_Section, RespawnPoint_PGS TPGJ_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 if (HPKC_TPKC_Section.HPKCValueList.Count != 0)
                 {
@@ -327,7 +328,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (NextGrpAry[Num] < 255 && HPKC_TPKC_Section.HPKCValueList.Select(x => x.GroupID).ToList().Contains(NextGrpAry[Num]) == false)
                             {
@@ -338,7 +339,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
@@ -355,7 +356,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (PrevGrpAry[Num] < 255 && HPKC_TPKC_Section.HPKCValueList.Select(x => x.GroupID).ToList().Contains(PrevGrpAry[Num]) == false)
                             {
@@ -366,32 +367,32 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
-                        for (int j = 0; j < HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList.Count; j++)
+                        for (int TPKCValueCount = 0; TPKCValueCount < HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList.Count; TPKCValueCount++)
                         {
                             //RespawnID, Key, ClipID, Section Check
-                            var Values = HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList[j];
+                            var Values = HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList[TPKCValueCount];
                             if (Values.TPKC_ClipID < 255)
                             {
                                 var yh = JBOG_Section.JBOGValueList.Select(x => x.ObjectID == "001E").ToList().Count;
                                 if (yh != 0)
                                 {
-                                    var f = JBOG_Section.JBOGValueList.Where(x => x.ObjectID == "001E").ToList().Find(y => y.JOBJ_Specific_Setting.Value0 == Values.TPKC_ClipID);
+                                    var f = JBOG_Section.JBOGValueList.Where(x => x.ObjectID == "001E").ToList().Find(y => y.JBOG_Specific_Setting.Value0 == Values.TPKC_ClipID);
 
                                     if (f == null)
                                     {
                                         CheckValue checkValue = new CheckValue
                                         {
                                             GroupNum = i,
-                                            ValueNum = j,
+                                            ValueNum = TPKCValueCount,
                                             Description = "ClipID \"" + (int)Values.TPKC_ClipID + "\" is not set in \"Specific value 0\" of the Culling Handler [001E] object.",
                                             CheckValueType = CheckValueType.Error
                                         };
 
-                                        ch.Add(checkValue);
+                                        CheckValueList.Add(checkValue);
                                     }
                                 }
                                 if (yh == 0)
@@ -399,12 +400,12 @@ namespace MK7_3D_KMP_Editor
                                     CheckValue checkValue = new CheckValue
                                     {
                                         GroupNum = i,
-                                        ValueNum = j,
+                                        ValueNum = TPKCValueCount,
                                         Description = "To use ClipID, you need a Culling Handler[001E] object. | Culling Handler[001E] : Specific value 0 = " + (int)Values.TPKC_ClipID,
                                         CheckValueType = CheckValueType.Error
                                     };
 
-                                    ch.Add(checkValue);
+                                    CheckValueList.Add(checkValue);
                                 }
                             }
 
@@ -417,12 +418,12 @@ namespace MK7_3D_KMP_Editor
                                     CheckValue checkValue = new CheckValue
                                     {
                                         GroupNum = i,
-                                        ValueNum = j,
+                                        ValueNum = TPKCValueCount,
                                         Description = "Duplicate Number : " + Values.TPKC_Checkpoint_Type,
                                         CheckValueType = CheckValueType.Error
                                     };
 
-                                    ch.Add(checkValue);
+                                    CheckValueList.Add(checkValue);
                                 }
                             }
 
@@ -434,47 +435,47 @@ namespace MK7_3D_KMP_Editor
                                     CheckValue checkValue = new CheckValue
                                     {
                                         GroupNum = i,
-                                        ValueNum = j,
+                                        ValueNum = TPKCValueCount,
                                         Description = "Respawn ID \"" + Values.TPKC_RespawnID + "\" does not exist.",
                                         CheckValueType = CheckValueType.Error
                                     };
 
-                                    ch.Add(checkValue);
+                                    CheckValueList.Add(checkValue);
                                 }
                             }
 
                             //if (Values.TPKC_NextCheckPoint < 255)
                             //{
                             //    var cd = Values.TPKC_NextCheckPoint == HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList[j + 1].ID ? true : false;
-
-
                             //}
                         }
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> JBOG_Check(KMPObject_PGS JBOG_Section, Route_PGS ITOP_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
-                var r = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                var ObjFlowXml = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                List<ObjFlowData_XML.ObjFlow> ObjFlowList = ObjFlowXml.ObjFlows;
 
-                for (int bn = 0; bn < JBOG_Section.JBOGValueList.Count; bn++)
+                for (int Count = 0; Count < JBOG_Section.JBOGValueList.Count; Count++)
                 {
-                    var q = JBOG_Section.JBOGValueList[bn].JOBJ_Specific_Setting;
-                    ushort[] JBOG_Specific_ValueAry = new ushort[] { q.Value0, q.Value1, q.Value2, q.Value3, q.Value4, q.Value5, q.Value6, q.Value7 };
+                    var Specific_Setting = JBOG_Section.JBOGValueList[Count].JBOG_Specific_Setting;
+                    ushort[] JBOG_Specific_ValueAry = Specific_Setting.GetSpecificSettingArray();
+                    //ushort[] JBOG_Specific_ValueAry = new ushort[] { Specific_Setting.Value0, Specific_Setting.Value1, Specific_Setting.Value2, Specific_Setting.Value3, Specific_Setting.Value4, Specific_Setting.Value5, Specific_Setting.Value6, Specific_Setting.Value7 };
 
-                    for (int s = 0; s < JBOG_Specific_ValueAry.ToList().Count; s++)
+                    for (int ValueCount = 0; ValueCount < JBOG_Specific_ValueAry.ToList().Count; ValueCount++)
                     {
-                        bool b = r.Find(x => x.ObjectID == JBOG_Section.JBOGValueList[bn].ObjectID).DefaultValues.Values[s].DefaultObjectValue != -1 ? true : false;
+                        bool b = ObjFlowList.Find(x => x.ObjectID == JBOG_Section.JBOGValueList[Count].ObjectID).DefaultValueData.Values[ValueCount].DefaultObjectValue != -1 ? true : false;
 
                         if (b == true)
                         {
                             //Value
-                            bool b2 = JBOG_Specific_ValueAry[s] < 65535 ? true : false;
+                            bool b2 = JBOG_Specific_ValueAry[ValueCount] < 65535 ? true : false;
 
                             if (b2 == true) continue;
                             if (b2 == false)
@@ -482,36 +483,36 @@ namespace MK7_3D_KMP_Editor
                                 CheckValue checkValue = new CheckValue
                                 {
                                     GroupNum = -1,
-                                    ValueNum = JBOG_Section.JBOGValueList[bn].ID,
-                                    Description = "Invalid value (ID : " + JBOG_Section.JBOGValueList[bn].ID + ") : The Specific value " + JBOG_Specific_ValueAry[s] + "cannot be 65535(-1). Be sure to enter a valid value.",
+                                    ValueNum = JBOG_Section.JBOGValueList[Count].ID,
+                                    Description = "Invalid value (ID : " + JBOG_Section.JBOGValueList[Count].ID + ") : The Specific value " + JBOG_Specific_ValueAry[ValueCount] + "cannot be 65535(-1). Be sure to enter a valid value.",
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
 
                         }
                         if (b == false)
                         {
-                            bool b2 = JBOG_Specific_ValueAry[s] < 65535 ? true : false;
+                            bool b2 = JBOG_Specific_ValueAry[ValueCount] < 65535 ? true : false;
 
                             if (b2 == true)
                             {
                                 CheckValue checkValue = new CheckValue
                                 {
                                     GroupNum = -1,
-                                    ValueNum = JBOG_Section.JBOGValueList[bn].ID,
-                                    Description = "Invalid value (ID : " + JBOG_Section.JBOGValueList[bn].ID + ") : The Specific value " + JBOG_Specific_ValueAry[s] + " is unused, so -1 is always used.",
+                                    ValueNum = JBOG_Section.JBOGValueList[Count].ID,
+                                    Description = "Invalid value (ID : " + JBOG_Section.JBOGValueList[Count].ID + ") : The Specific value " + JBOG_Specific_ValueAry[ValueCount] + " is unused, so -1 is always used.",
                                     CheckValueType = CheckValueType.Info
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (b2 == false) continue;
                         }
                     }
 
-                    var RouteID = JBOG_Section.JBOGValueList[bn].JBOG_ITOP_RouteIDIndex;
+                    var RouteID = JBOG_Section.JBOGValueList[Count].JBOG_ITOP_RouteIDIndex;
                     if (RouteID < 65535)
                     {
                         var qb = ITOP_Section.ITOP_RouteList.Select(x => x.GroupID).ToList().Contains(RouteID) ? true : false;
@@ -520,12 +521,12 @@ namespace MK7_3D_KMP_Editor
                             CheckValue checkValue = new CheckValue
                             {
                                 GroupNum = -1,
-                                ValueNum = JBOG_Section.JBOGValueList[bn].ID,
+                                ValueNum = JBOG_Section.JBOGValueList[Count].ID,
                                 Description = "Route ID \"" + RouteID + "\" does not exist.",
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (RouteID == 65535)
@@ -533,21 +534,21 @@ namespace MK7_3D_KMP_Editor
                         CheckValue checkValue = new CheckValue
                         {
                             GroupNum = -1,
-                            ValueNum = JBOG_Section.JBOGValueList[bn].ID,
+                            ValueNum = JBOG_Section.JBOGValueList[Count].ID,
                             Description = "Route ID : 65535 (-1)",
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> ITOP_Check(Route_PGS ITOP_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 for (int i = 0; i < ITOP_Section.ITOP_RouteList.Count; i++)
                 {
@@ -559,15 +560,15 @@ namespace MK7_3D_KMP_Editor
                         CheckValueType = CheckValueType.Info
                     };
 
-                    ch.Add(checkValue);
+                    CheckValueList.Add(checkValue);
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> AERA_Check(Area_PGS AERA_Section, Route_PGS ITOP_Section, Camera_PGS EMAC_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 for (int i = 0; i < AERA_Section.AERAValueList.Count; i++)
                 {
@@ -585,7 +586,7 @@ namespace MK7_3D_KMP_Editor
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (RouteID == 255)
@@ -598,7 +599,7 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
 
                     var CameraID = AERA_Section.AERAValueList[i].AERA_EMACIndex;
@@ -620,7 +621,7 @@ namespace MK7_3D_KMP_Editor
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (CameraID == 255)
@@ -633,16 +634,16 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> EMAC_Check(Camera_PGS EMAC_Section, Route_PGS ITOP_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 for (int i = 0; i < EMAC_Section.EMACValueList.Count; i++)
                 {
@@ -660,7 +661,7 @@ namespace MK7_3D_KMP_Editor
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (NCameraIdx == 255)
@@ -673,7 +674,7 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
 
                     var NVideoIdx = EMAC_Section.EMACValueList[i].EMAC_NextVideoIndex;
@@ -690,7 +691,7 @@ namespace MK7_3D_KMP_Editor
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (NVideoIdx == 255)
@@ -703,7 +704,7 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
 
                     var RouteID = EMAC_Section.EMACValueList[i].EMAC_ITOP_CameraIndex;
@@ -720,7 +721,7 @@ namespace MK7_3D_KMP_Editor
                                 CheckValueType = CheckValueType.Error
                             };
 
-                            ch.Add(checkValue);
+                            CheckValueList.Add(checkValue);
                         }
                     }
                     if (RouteID == 255)
@@ -733,16 +734,16 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> TPGJ_Check(RespawnPoint_PGS TPGJ_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
                 for (int i = 0; i < TPGJ_Section.TPGJValueList.Count; i++)
                 {
                     if (TPGJ_Section.TPGJValueList[i].TPGJ_UnknownData1 < 65535)
@@ -755,16 +756,16 @@ namespace MK7_3D_KMP_Editor
                             CheckValueType = CheckValueType.Info
                         };
 
-                        ch.Add(checkValue);
+                        CheckValueList.Add(checkValue);
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
 
             public static List<CheckValue> HPLG_TPLG_Check(GlideRoute_PGS HPLG_TPLG_Section)
             {
-                List<CheckValue> ch = new List<CheckValue>();
+                List<CheckValue> CheckValueList = new List<CheckValue>();
 
                 if (HPLG_TPLG_Section.HPLGValueList.Count != 0)
                 {
@@ -783,7 +784,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (NextGrpAry[Num] < 255 && HPLG_TPLG_Section.HPLGValueList.Select(x => x.GroupID).ToList().Contains(NextGrpAry[Num]) == false)
                             {
@@ -794,7 +795,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
@@ -811,7 +812,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Warning
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                             if (PrevGrpAry[Num] < 255 && HPLG_TPLG_Section.HPLGValueList.Select(x => x.GroupID).ToList().Contains(PrevGrpAry[Num]) == false)
                             {
@@ -822,7 +823,7 @@ namespace MK7_3D_KMP_Editor
                                     CheckValueType = CheckValueType.Error
                                 };
 
-                                ch.Add(checkValue);
+                                CheckValueList.Add(checkValue);
                             }
                         }
 
@@ -834,7 +835,7 @@ namespace MK7_3D_KMP_Editor
                     }
                 }
 
-                return ch;
+                return CheckValueList;
             }
         }
 
@@ -857,56 +858,56 @@ namespace MK7_3D_KMP_Editor
         {
             if (SectionName == "All")
             {
-                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
-                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(KartPointListBox, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(EnemyRouteListBox, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(ItemRouteListBox, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(CheckpointListBox, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(ObjectListBox, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(RouteListBox, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(AreaListBox, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(CameraListBox, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(JugemPointListBox, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(GlideRouteListBox, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Kart Point")
             {
-                ChangeErrorChkType(listBox1, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(KartPointListBox, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Enemy Route")
             {
-                ChangeErrorChkType(listBox2, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(EnemyRouteListBox, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Item Route")
             {
-                ChangeErrorChkType(listBox3, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(ItemRouteListBox, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Checkpoint")
             {
-                ChangeErrorChkType(listBox4, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(CheckpointListBox, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Object")
             {
-                ChangeErrorChkType(listBox5, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(ObjectListBox, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Route")
             {
-                ChangeErrorChkType(listBox6, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(RouteListBox, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Area")
             {
-                ChangeErrorChkType(listBox7, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(AreaListBox, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Camera")
             {
-                ChangeErrorChkType(listBox8, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(CameraListBox, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Jugem Point")
             {
-                ChangeErrorChkType(listBox9, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(JugemPointListBox, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
             if (SectionName == "Glide Route")
             {
-                ChangeErrorChkType(listBox10, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
+                ChangeErrorChkType(GlideRouteListBox, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section), Chk_Info, Chk_Warning, Chk_Error);
             }
         }
     }

@@ -10,78 +10,128 @@ namespace KMPLibrary.XMLConvert.IO
 {
     public class XML_Exporter
     {
+        /// <summary>
+        /// XmlNamespaces
+        /// </summary>
+        public class XMLNameSpace
+        {
+            public string prefix { get; set; }
+            public string ns { get; set; }
+
+            public XMLNameSpace EmptyXmlNamespace()
+            {
+                return new XMLNameSpace(string.Empty, string.Empty);
+            }
+
+            public XMLNameSpace(string prefix, string ns)
+            {
+                this.prefix = prefix;
+                this.ns = ns;
+            }
+        }
+
+        /// <summary>
+        /// Delete Namespaces
+        /// </summary>
+        /// <returns></returns>
+        public static XmlSerializerNamespaces EmptyXmlSerializerNamespaces()
+        {
+            var xns = new XmlSerializerNamespaces();
+            xns.Add(string.Empty, string.Empty);
+            return xns;
+        }
+
+        /// <summary>
+        /// Create XmlSerializerNamespaces
+        /// </summary>
+        /// <param name="NamespaceArray">XMLNameSpace[]</param>
+        /// <returns>XmlSerializerNamespaces</returns>
+        public XmlSerializerNamespaces CreateXmlSerializerNamespaces(XMLNameSpace[] NamespaceArray)
+        {
+            var xns = new XmlSerializerNamespaces();
+
+            foreach (var items in NamespaceArray)
+            {
+                xns.Add(items.prefix, items.ns);
+            }
+
+            xns.Add(string.Empty, string.Empty);
+            return xns;
+        }
+
+        /// <summary>
+        /// Export XML
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="Path">File Path</param>
+        /// <param name="XMLData">XMLData</param>
+        /// <param name="xns">XmlSerializerNamespaces (Empty => EmptyXmlSerializerNamespaces())</param>
+        public static void XMLExport<T>(string Path, T XMLData, XmlSerializerNamespaces xns)
+        {
+            System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(T));
+            System.IO.StreamWriter sw = new StreamWriter(Path, false, new System.Text.UTF8Encoding(false));
+            serializer.Serialize(sw, XMLData, xns);
+            sw.Close();
+        }
+
+        /// <summary>
+        /// Export all KMP data (XML) 
+        /// </summary>
+        /// <param name="KMPData"></param>
+        /// <param name="Path">FilePath</param>
         public static void ExportAll(Format.KMP KMPData, string Path)
         {
             KMPData.KMP_XML KMP_XML = new KMPData.KMP_XML(KMPData);
 
-            //Delete Namespaces
-            var xns = new XmlSerializerNamespaces();
-            xns.Add(string.Empty, string.Empty);
+            XmlSerializerNamespaces xns = EmptyXmlSerializerNamespaces();
+            XMLExport<KMPData.KMP_XML>(Path + "_All.xml", KMP_XML, xns);
 
-            System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(KMPData.KMP_XML));
-            System.IO.StreamWriter sw = new StreamWriter(Path + "_All.xml", false, new System.Text.UTF8Encoding(false));
-            serializer.Serialize(sw, KMP_XML, xns);
-            sw.Close();
+            #region DELETE
+            ////Delete Namespaces
+            //var xns = new XmlSerializerNamespaces();
+            //xns.Add(string.Empty, string.Empty);
+
+            //System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(KMPData.KMP_XML));
+            //System.IO.StreamWriter sw = new StreamWriter(Path + "_All.xml", false, new System.Text.UTF8Encoding(false));
+            //serializer.Serialize(sw, KMP_XML, xns);
+            //sw.Close();
+            #endregion
         }
 
-        public static void ExportSection(Format.KMP kMPPropertyGridSettings, string Path, KMPData.KMPXmlSetting.Section section)
+        /// <summary>
+        /// Export KMP Section (XML)
+        /// </summary>
+        /// <param name="KMP">KMPData</param>
+        /// <param name="Path">FilePath</param>
+        /// <param name="SectionType">SectionType</param>
+        public static void ExportSection(Format.KMP KMP, string Path, KMPData.KMPXmlSetting.Section SectionType)
         {
-            #region DELETE
-            //KMPData.KMP_XML KMP_Xml = new KMPData.KMP_XML
-            //{
-            //    startPositions = null,
-            //    EnemyRoutes = null,
-            //    ItemRoutes = null,
-            //    Checkpoints = null,
-            //    Objects = null,
-            //    Routes = null,
-            //    Areas = null,
-            //    Cameras = null,
-            //    JugemPoints = null,
-            //    Stage_Info = null,
-            //    #region Hide
-            //    //Stage_Info = new TestXml.KMPXml.StageInfo
-            //    //{
-            //    //    Unknown1 = kMPPropertyGridSettings.IGTSSection.Unknown1,
-            //    //    LapCount = kMPPropertyGridSettings.IGTSSection.LapCount,
-            //    //    PolePosition = kMPPropertyGridSettings.IGTSSection.PolePosition,
-            //    //    Unknown2 = kMPPropertyGridSettings.IGTSSection.Unknown2,
-            //    //    Unknown3 = kMPPropertyGridSettings.IGTSSection.Unknown3,
-            //    //    RGBAColor = new TestXml.KMPXml.StageInfo.RGBA
-            //    //    {
-            //    //        R = kMPPropertyGridSettings.IGTSSection.RGBAColor.R,
-            //    //        G = kMPPropertyGridSettings.IGTSSection.RGBAColor.G,
-            //    //        B = kMPPropertyGridSettings.IGTSSection.RGBAColor.B,
-            //    //        A = kMPPropertyGridSettings.IGTSSection.RGBAColor.A,
-            //    //        FlareAlpha = kMPPropertyGridSettings.IGTSSection.FlareAlpha
-            //    //    }
-            //    //},
-            //    #endregion
-            //    GlideRoutes = null
-            //};
-            #endregion
-
             KMPData.KMP_XML KMP_Xml = KMPData.KMP_XML.CreateNullDefault();
 
-            if (section == KMPData.KMPXmlSetting.Section.KartPoint) KMP_Xml.startPositions = new KMPData.SectionData.StartPosition(kMPPropertyGridSettings.KMP_Section.TPTK);
-            else if (section == KMPData.KMPXmlSetting.Section.EnemyRoutes) KMP_Xml.EnemyRoutes = new KMPData.SectionData.EnemyRoute(kMPPropertyGridSettings.KMP_Section.HPNE, kMPPropertyGridSettings.KMP_Section.TPNE);
-            else if (section == KMPData.KMPXmlSetting.Section.ItemRoutes) KMP_Xml.ItemRoutes = new KMPData.SectionData.ItemRoute(kMPPropertyGridSettings.KMP_Section.HPTI, kMPPropertyGridSettings.KMP_Section.TPTI);
-            else if (section == KMPData.KMPXmlSetting.Section.CheckPoint) KMP_Xml.Checkpoints = new KMPData.SectionData.Checkpoint(kMPPropertyGridSettings.KMP_Section.HPKC, kMPPropertyGridSettings.KMP_Section.TPKC);
-            else if (section == KMPData.KMPXmlSetting.Section.Obj) KMP_Xml.Objects = new KMPData.SectionData.Object(kMPPropertyGridSettings.KMP_Section.JBOG);
-            else if (section == KMPData.KMPXmlSetting.Section.Route) KMP_Xml.Routes = new KMPData.SectionData.Route(kMPPropertyGridSettings.KMP_Section.ITOP);
-            else if (section == KMPData.KMPXmlSetting.Section.Area) KMP_Xml.Areas = new KMPData.SectionData.Area(kMPPropertyGridSettings.KMP_Section.AERA);
-            else if (section == KMPData.KMPXmlSetting.Section.Camera) KMP_Xml.Cameras = new KMPData.SectionData.Camera(kMPPropertyGridSettings.KMP_Section.EMAC);
-            else if (section == KMPData.KMPXmlSetting.Section.JugemPoint) KMP_Xml.JugemPoints = new KMPData.SectionData.JugemPoint(kMPPropertyGridSettings.KMP_Section.TPGJ);
-            else if (section == KMPData.KMPXmlSetting.Section.GlideRoutes) KMP_Xml.GlideRoutes = new KMPData.SectionData.GlideRoute(kMPPropertyGridSettings.KMP_Section.HPLG, kMPPropertyGridSettings.KMP_Section.TPLG);
+            if (SectionType == KMPData.KMPXmlSetting.Section.KartPoint) KMP_Xml.startPositions = new KMPData.SectionData.StartPosition(KMP.KMP_Section.TPTK);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.EnemyRoutes) KMP_Xml.EnemyRoutes = new KMPData.SectionData.EnemyRoute(KMP.KMP_Section.HPNE, KMP.KMP_Section.TPNE);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.ItemRoutes) KMP_Xml.ItemRoutes = new KMPData.SectionData.ItemRoute(KMP.KMP_Section.HPTI, KMP.KMP_Section.TPTI);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.CheckPoint) KMP_Xml.Checkpoints = new KMPData.SectionData.Checkpoint(KMP.KMP_Section.HPKC, KMP.KMP_Section.TPKC);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.Obj) KMP_Xml.Objects = new KMPData.SectionData.Object(KMP.KMP_Section.JBOG);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.Route) KMP_Xml.Routes = new KMPData.SectionData.Route(KMP.KMP_Section.ITOP);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.Area) KMP_Xml.Areas = new KMPData.SectionData.Area(KMP.KMP_Section.AERA);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.Camera) KMP_Xml.Cameras = new KMPData.SectionData.Camera(KMP.KMP_Section.EMAC);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.JugemPoint) KMP_Xml.JugemPoints = new KMPData.SectionData.JugemPoint(KMP.KMP_Section.TPGJ);
+            else if (SectionType == KMPData.KMPXmlSetting.Section.GlideRoutes) KMP_Xml.GlideRoutes = new KMPData.SectionData.GlideRoute(KMP.KMP_Section.HPLG, KMP.KMP_Section.TPLG);
 
-            //Delete Namespaces
-            var xns = new XmlSerializerNamespaces();
-            xns.Add(string.Empty, string.Empty);
+            XmlSerializerNamespaces xns = EmptyXmlSerializerNamespaces();
+            XMLExport<KMPData.KMP_XML>(Path + "_" + SectionType.ToString() + ".xml", KMP_Xml, xns);
 
-            System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(KMPData.KMP_XML));
-            System.IO.StreamWriter sw = new StreamWriter(Path + "_" + section.ToString() + ".xml", false, new System.Text.UTF8Encoding(false));
-            serializer.Serialize(sw, KMP_Xml, xns);
-            sw.Close();
+            #region DELETE
+            ////Delete Namespaces
+            //var xns = new XmlSerializerNamespaces();
+            //xns.Add(string.Empty, string.Empty);
+
+            //System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(KMPData.KMP_XML));
+            //System.IO.StreamWriter sw = new StreamWriter(Path + "_" + section.ToString() + ".xml", false, new System.Text.UTF8Encoding(false));
+            //serializer.Serialize(sw, KMP_Xml, xns);
+            //sw.Close();
+            #endregion
         }
 
         /// <summary>
@@ -89,160 +139,36 @@ namespace KMPLibrary.XMLConvert.IO
         /// </summary>
         /// <param name="KMPData"></param>
         /// <param name="Path"></param>
-        /// <param name="routeType"></param>
-        public static void ExportXXXXRoute(Format.KMP KMPData, string Path, XXXXRouteData.XXXXRouteXmlSetting.RouteType routeType)
+        /// <param name="RouteType"></param>
+        public static void ExportXXXXRoute(Format.KMP KMPData, string Path, XXXXRouteData.XXXXRouteXmlSetting.RouteType RouteType)
         {
             XXXXRouteData.XXXXRoute_XML XXXXRoute_XML = new XXXXRouteData.XXXXRoute_XML();
-            if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.EnemyRoute)
+            if (RouteType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.EnemyRoute)
             {
                 XXXXRoute_XML = new XXXXRouteData.XXXXRoute_XML(new XXXXRouteData.XXXXRoute_XML.XXXXRoute(KMPData.KMP_Section.HPNE, KMPData.KMP_Section.TPNE));
             }
-            else if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.ItemRoute)
+            else if (RouteType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.ItemRoute)
             {
                 XXXXRoute_XML = new XXXXRouteData.XXXXRoute_XML(new XXXXRouteData.XXXXRoute_XML.XXXXRoute(KMPData.KMP_Section.HPTI, KMPData.KMP_Section.TPTI));
             }
-            else if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.GlideRoute)
+            else if (RouteType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.GlideRoute)
             {
                 XXXXRoute_XML = new XXXXRouteData.XXXXRoute_XML(new XXXXRouteData.XXXXRoute_XML.XXXXRoute(KMPData.KMP_Section.HPLG, KMPData.KMP_Section.TPLG));
             }
 
-            //Delete Namespaces
-            var xns = new XmlSerializerNamespaces();
-            xns.Add(string.Empty, string.Empty);
+            XmlSerializerNamespaces xns = EmptyXmlSerializerNamespaces();
+            XMLExport<XXXXRouteData.XXXXRoute_XML>(Path + "_PositionAndScaleOnly" + ".xml", XXXXRoute_XML, xns);
 
-            System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(XXXXRouteData.XXXXRoute_XML));
-            System.IO.StreamWriter sw = new StreamWriter(Path + "_PositionAndScaleOnly" + ".xml", false, new System.Text.UTF8Encoding(false));
-            serializer.Serialize(sw, XXXXRoute_XML, xns);
-            sw.Close();
+            #region DELETE
+            ////Delete Namespaces
+            //var xns = new XmlSerializerNamespaces();
+            //xns.Add(string.Empty, string.Empty);
+
+            //System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(XXXXRouteData.XXXXRoute_XML));
+            //System.IO.StreamWriter sw = new StreamWriter(Path + "_PositionAndScaleOnly" + ".xml", false, new System.Text.UTF8Encoding(false));
+            //serializer.Serialize(sw, XXXXRoute_XML, xns);
+            //sw.Close();
+            #endregion
         }
-
-        //public static void ExportXXXXRoute(KMP_Main_PGS kMPPropertyGridSettings, string Path, XXXXRouteData.XXXXRouteXmlSetting.RouteType routeType)
-        //{
-        //    XXXXRouteData.XXXXRoute_XML XXXXRoute_Xml = new XXXXRouteData.XXXXRoute_XML
-        //    {
-        //        XXXXRoutes = new XXXXRouteData.XXXXRoute_XML.XXXXRoute
-        //        {
-        //            Groups = null
-        //        }
-        //    };
-
-        //    if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.EnemyRoute)
-        //    {
-        //        List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData> groupDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData>();
-
-        //        foreach (var Groups in kMPPropertyGridSettings.HPNE_TPNE_Section.HPNEValueList)
-        //        {
-        //            XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData
-        //            {
-        //                Points = null
-        //            };
-
-        //            List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData> pointDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData>();
-
-        //            foreach (var Points in Groups.TPNEValueList)
-        //            {
-        //                XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData
-        //                {
-        //                    Position = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData.PositionData
-        //                    {
-        //                        X = Points.Positions.X,
-        //                        Y = Points.Positions.Y,
-        //                        Z = Points.Positions.Z
-        //                    },
-        //                    ScaleValue = Points.Control
-        //                };
-
-        //                pointDatas.Add(pointData);
-        //            }
-
-        //            groupData.Points = pointDatas;
-
-        //            groupDatas.Add(groupData);
-        //        }
-
-        //        XXXXRoute_Xml.XXXXRoutes.Groups = groupDatas;
-        //    }
-        //    if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.ItemRoute)
-        //    {
-        //        List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData> groupDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData>();
-
-        //        foreach (var Groups in kMPPropertyGridSettings.HPTI_TPTI_Section.HPTIValueList)
-        //        {
-        //            XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData
-        //            {
-        //                Points = null
-        //            };
-
-        //            List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData> pointDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData>();
-
-        //            foreach (var Points in Groups.TPTIValueList)
-        //            {
-        //                XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData
-        //                {
-        //                    Position = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData.PositionData
-        //                    {
-        //                        X = Points.TPTI_Positions.X,
-        //                        Y = Points.TPTI_Positions.Y,
-        //                        Z = Points.TPTI_Positions.Z
-        //                    },
-        //                    ScaleValue = Points.TPTI_PointSize
-        //                };
-
-        //                pointDatas.Add(pointData);
-        //            }
-
-        //            groupData.Points = pointDatas;
-
-        //            groupDatas.Add(groupData);
-        //        }
-
-        //        XXXXRoute_Xml.XXXXRoutes.Groups = groupDatas;
-        //    }
-        //    if (routeType == XXXXRouteData.XXXXRouteXmlSetting.RouteType.GlideRoute)
-        //    {
-        //        List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData> groupDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData>();
-
-        //        foreach (var Groups in kMPPropertyGridSettings.HPLG_TPLG_Section.HPLGValueList)
-        //        {
-        //            XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData groupData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData
-        //            {
-        //                Points = null
-        //            };
-
-        //            List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData> pointDatas = new List<XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData>();
-
-        //            foreach (var Points in Groups.TPLGValueList)
-        //            {
-        //                XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData pointData = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData
-        //                {
-        //                    Position = new XXXXRouteData.XXXXRoute_XML.XXXXRoute.GroupData.PointData.PositionData
-        //                    {
-        //                        X = Points.Positions.X,
-        //                        Y = Points.Positions.Y,
-        //                        Z = Points.Positions.Z
-        //                    },
-        //                    ScaleValue = Points.TPLG_PointScaleValue
-        //                };
-
-        //                pointDatas.Add(pointData);
-        //            }
-
-        //            groupData.Points = pointDatas;
-
-        //            groupDatas.Add(groupData);
-        //        }
-
-        //        XXXXRoute_Xml.XXXXRoutes.Groups = groupDatas;
-        //    }
-
-        //    //Delete Namespaces
-        //    var xns = new XmlSerializerNamespaces();
-        //    xns.Add(string.Empty, string.Empty);
-
-        //    System.Xml.Serialization.XmlSerializer serializer = new XmlSerializer(typeof(XXXXRouteData.XXXXRoute_XML));
-        //    System.IO.StreamWriter sw = new StreamWriter(Path + "_PositionAndScaleOnly" + ".xml", false, new System.Text.UTF8Encoding(false));
-        //    serializer.Serialize(sw, XXXXRoute_Xml, xns);
-        //    sw.Close();
-        //}
     }
 }

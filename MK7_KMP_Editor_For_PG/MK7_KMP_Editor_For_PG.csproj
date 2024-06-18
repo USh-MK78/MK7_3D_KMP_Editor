@@ -92,9 +92,6 @@
     <Compile Include="KMPErrorCheck.Designer.cs">
       <DependentUpon>KMPErrorCheck.cs</DependentUpon>
     </Compile>
-    <Compile Include="KMPPropertyGridSettings.cs" />
-    <Compile Include="KMPs.cs" />
-    <Compile Include="KMPXMLImportExport.cs" />
     <Compile Include="ModelVisibilityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,9 +120,6 @@
     <Compile Include="PropertyGridObject\Route_PGS.cs" />
     <Compile Include="PropertyGridObject\StageInfo_PGS.cs" />
     <Compile Include="Render\KMPRendering.cs" />
-    <Compile Include="TestXml\KMPXml.cs" />
-    <Compile Include="TestXml\ObjFlowXml.cs" />
-    <Compile Include="TestXml\XXXXRouteXml.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>

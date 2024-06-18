@@ -27,7 +27,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public string ObjectName { get; set; }
             public string ObjectID { get; set; }
-            public string JBOG_UnkByte1 { get; set; }
+            public string JBOG_UnknownData1 { get; set; }
 
             [TypeConverter(typeof(ExpandableObjectConverter))]
             public Position Positions { get; set; } = new Position();
@@ -215,7 +215,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             public ushort JBOG_ITOP_RouteIDIndex { get; set; }
 
             [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
-            public JBOG_SpecificSetting JOBJ_Specific_Setting { get; set; } = new JBOG_SpecificSetting();
+            public JBOG_SpecificSetting JBOG_Specific_Setting { get; set; } = new JBOG_SpecificSetting();
             public class JBOG_SpecificSetting
             {
                 public ushort Value0 { get; set; }
@@ -256,16 +256,16 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Value7 = 0;
                 }
 
-                public JBOG_SpecificSetting(JBOG.JBOGValue.JBOG_SpecificSetting jBOG_SpecificSetting)
+                public JBOG_SpecificSetting(JBOG.JBOGValue.JBOG_SpecificSetting JBOG_SpecificSetting)
                 {
-                    Value0 = jBOG_SpecificSetting.Value0;
-                    Value1 = jBOG_SpecificSetting.Value1;
-                    Value2 = jBOG_SpecificSetting.Value2;
-                    Value3 = jBOG_SpecificSetting.Value3;
-                    Value4 = jBOG_SpecificSetting.Value4;
-                    Value5 = jBOG_SpecificSetting.Value5;
-                    Value6 = jBOG_SpecificSetting.Value6;
-                    Value7 = jBOG_SpecificSetting.Value7;
+                    Value0 = JBOG_SpecificSetting.Value0;
+                    Value1 = JBOG_SpecificSetting.Value1;
+                    Value2 = JBOG_SpecificSetting.Value2;
+                    Value3 = JBOG_SpecificSetting.Value3;
+                    Value4 = JBOG_SpecificSetting.Value4;
+                    Value5 = JBOG_SpecificSetting.Value5;
+                    Value6 = JBOG_SpecificSetting.Value6;
+                    Value7 = JBOG_SpecificSetting.Value7;
                 }
 
                 public JBOG_SpecificSetting(KMPLibrary.XMLConvert.KMPData.SectionData.Object.Object_Value.SpecificSettings SpecificSettings)
@@ -286,59 +286,59 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
             }
             public ushort JBOG_PresenceSetting { get; set; }
-            public string JBOG_UnkByte2 { get; set; }
-            public ushort JBOG_UnkByte3 { get; set; }
+            public string JBOG_UnknownData2 { get; set; }
+            public ushort JBOG_UnknownData3 { get; set; }
 
-            public JBOGValue(string Name, string ObjID, Vector3D Pos, int InputID)
+            public JBOGValue(string Name, string ObjectID, Vector3D Pos, int InputID)
             {
                 ID = InputID;
                 ObjectName = Name;
-                ObjectID = ObjID;
+                this.ObjectID = ObjectID;
                 JBOG_ITOP_RouteIDIndex = 65535;
                 JBOG_PresenceSetting = 7;
-                JBOG_UnkByte1 = "0000";
-                JBOG_UnkByte2 = "FFFF";
-                JBOG_UnkByte3 = 0;
+                JBOG_UnknownData1 = "0000";
+                JBOG_UnknownData2 = "FFFF";
+                JBOG_UnknownData3 = 0;
                 Positions = new Position(Pos);
                 Scales = new Scale();
                 Rotations = new Rotation();
-                JOBJ_Specific_Setting = new JBOG_SpecificSetting();
+                JBOG_Specific_Setting = new JBOG_SpecificSetting();
             }
 
-            public JBOGValue(JBOG.JBOGValue jBOGValue, List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB, int InputID)
+            public JBOGValue(JBOG.JBOGValue JBOGValue, List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB, int InputID)
             {
-                string Name = ObjFlowDB.Find(x => x.ObjectID == BitConverter.ToString(jBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
+                string Name = ObjFlowDB.Find(x => x.ObjectID == BitConverter.ToString(JBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty)).ObjectName;
 
                 ID = InputID;
                 ObjectName = Name;
-                ObjectID = BitConverter.ToString(jBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
-                JBOG_ITOP_RouteIDIndex = jBOGValue.JBOG_ITOP_RouteIDIndex;
-                JBOG_PresenceSetting = jBOGValue.JBOG_PresenceSetting;
-                JBOG_UnkByte1 = BitConverter.ToString(jBOGValue.JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty);
-                JBOG_UnkByte2 = BitConverter.ToString(jBOGValue.JBOG_UnkByte2.Reverse().ToArray()).Replace("-", string.Empty);
-                JBOG_UnkByte3 = jBOGValue.JBOG_UnkByte3;
-                Positions = new Position(jBOGValue.JBOG_Position);
-                Scales = new Scale(jBOGValue.JBOG_Scale);
-                Rotations = new Rotation(jBOGValue.JBOG_Rotation);
-                JOBJ_Specific_Setting = new JBOG_SpecificSetting(jBOGValue.GOBJ_Specific_Setting);
+                ObjectID = BitConverter.ToString(JBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
+                JBOG_ITOP_RouteIDIndex = JBOGValue.JBOG_ITOP_RouteIDIndex;
+                JBOG_PresenceSetting = JBOGValue.JBOG_PresenceSetting;
+                JBOG_UnknownData1 = BitConverter.ToString(JBOGValue.JBOG_UnknownData1.Reverse().ToArray()).Replace("-", string.Empty);
+                JBOG_UnknownData2 = BitConverter.ToString(JBOGValue.JBOG_UnknownData2.Reverse().ToArray()).Replace("-", string.Empty);
+                JBOG_UnknownData3 = JBOGValue.JBOG_UnknownData3;
+                Positions = new Position(JBOGValue.JBOG_Position);
+                Scales = new Scale(JBOGValue.JBOG_Scale);
+                Rotations = new Rotation(JBOGValue.JBOG_Rotation);
+                JBOG_Specific_Setting = new JBOG_SpecificSetting(JBOGValue.GOBJ_Specific_Setting);
             }
 
-            public JBOGValue(KMPLibrary.XMLConvert.KMPData.SectionData.Object.Object_Value object_Value, int InputID)
+            public JBOGValue(KMPLibrary.XMLConvert.KMPData.SectionData.Object.Object_Value Object_Value, int InputID)
             {
-                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
-                string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == object_Value.ObjectID).ObjectName;
+                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
+                string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == Object_Value.ObjectID).ObjectName;
 
                 ID = InputID;
-                ObjectID = object_Value.ObjectID;
-                JBOG_ITOP_RouteIDIndex = object_Value.RouteIDIndex;
-                JBOG_PresenceSetting = object_Value.PresenceSetting;
-                JBOG_UnkByte1 = object_Value.UnkByte1;
-                JBOG_UnkByte2 = object_Value.UnkByte2;
-                JBOG_UnkByte3 = object_Value.UnkByte3;
-                Positions = new Position(object_Value.Position.ToVector3D());
-                Scales = new Scale(object_Value.Scale.ToVector3D());
-                Rotations = new Rotation(object_Value.Rotation.ToVector3D());
-                JOBJ_Specific_Setting = new JBOG_SpecificSetting(object_Value.SpecificSetting);
+                ObjectID = Object_Value.ObjectID;
+                JBOG_ITOP_RouteIDIndex = Object_Value.RouteIDIndex;
+                JBOG_PresenceSetting = Object_Value.PresenceSetting;
+                JBOG_UnknownData1 = Object_Value.UnknownData1;
+                JBOG_UnknownData2 = Object_Value.UnknownData2;
+                JBOG_UnknownData3 = Object_Value.UnknownData3;
+                Positions = new Position(Object_Value.Position.ToVector3D());
+                Scales = new Scale(Object_Value.Scale.ToVector3D());
+                Rotations = new Rotation(Object_Value.Rotation.ToVector3D());
+                JBOG_Specific_Setting = new JBOG_SpecificSetting(Object_Value.SpecificSetting);
             }
 
             public override string ToString()
@@ -347,14 +347,14 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             }
         }
 
-        public KMPObject_PGS(JBOG jBOG_Section, List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB)
+        public KMPObject_PGS(JBOG JBOG_Section, List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB)
         {
-            for (int i = 0; i < jBOG_Section.NumOfEntries; i++) JBOGValueList.Add(new JBOGValue(jBOG_Section.JBOGValue_List[i], ObjFlowDB, i));
+            for (int i = 0; i < JBOG_Section.NumOfEntries; i++) JBOGValueList.Add(new JBOGValue(JBOG_Section.JBOGValue_List[i], ObjFlowDB, i));
         }
 
-        public KMPObject_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Object obj)
+        public KMPObject_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.Object Object)
         {
-            for (int i = 0; i < obj.Object_Values.Count; i++) JBOGValueList.Add(new JBOGValue(obj.Object_Values[i], i));
+            for (int i = 0; i < Object.Object_Values.Count; i++) JBOGValueList.Add(new JBOGValue(Object.Object_Values[i], i));
         }
 
         public KMPObject_PGS()
@@ -364,14 +364,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public JBOG ToJBOG(uint KMP_Version)
         {
-            //JBOG JBOG = new JBOG
-            //{
-            //    JBOGHeader = "JBOG".ToCharArray(),
-            //    NumOfEntries = Convert.ToUInt16(JBOGValueList.Count),
-            //    AdditionalValue = 0,
-            //    JBOGValue_List = null
-            //};
-
             List<JBOG.JBOGValue> JBOG_Value_List = new List<JBOG.JBOGValue>();
 
             for (int Count = 0; Count < JBOGValueList.Count; Count++)
@@ -383,48 +375,29 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 JBOG.JBOGValue JBOG_Values = new JBOG.JBOGValue();
 
                 JBOG_Values.ObjectID = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].ObjectID);
-                JBOG_Values.JBOG_UnkByte1 = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].JBOG_UnkByte1);
+                JBOG_Values.JBOG_UnknownData1 = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].JBOG_UnknownData1);
                 JBOG_Values.JBOG_Position = JBOGValueList[Count].Positions.GetVector3D();
                 JBOG_Values.JBOG_Rotation = new Vector3D(RX, RY, RZ);
                 JBOG_Values.JBOG_Scale = JBOGValueList[Count].Scales.GetVector3D();
                 JBOG_Values.JBOG_ITOP_RouteIDIndex = JBOGValueList[Count].JBOG_ITOP_RouteIDIndex;
-                JBOG_Values.GOBJ_Specific_Setting = new JBOG.JBOGValue.JBOG_SpecificSetting(JBOGValueList[Count].JOBJ_Specific_Setting.GetSpecificSettingArray());
-
-                #region DELETE
-                //JBOG_Values.GOBJ_Specific_Setting = new JBOG.JBOGValue.JBOG_SpecificSetting
-                //{
-                //    Value0 = JBOGValueList[Count].JOBJ_Specific_Setting.Value0,
-                //    Value1 = JBOGValueList[Count].JOBJ_Specific_Setting.Value1,
-                //    Value2 = JBOGValueList[Count].JOBJ_Specific_Setting.Value2,
-                //    Value3 = JBOGValueList[Count].JOBJ_Specific_Setting.Value3,
-                //    Value4 = JBOGValueList[Count].JOBJ_Specific_Setting.Value4,
-                //    Value5 = JBOGValueList[Count].JOBJ_Specific_Setting.Value5,
-                //    Value6 = JBOGValueList[Count].JOBJ_Specific_Setting.Value6,
-                //    Value7 = JBOGValueList[Count].JOBJ_Specific_Setting.Value7
-                //};
-                #endregion
-
+                JBOG_Values.GOBJ_Specific_Setting = new JBOG.JBOGValue.JBOG_SpecificSetting(JBOGValueList[Count].JBOG_Specific_Setting.GetSpecificSettingArray());
                 JBOG_Values.JBOG_PresenceSetting = JBOGValueList[Count].JBOG_PresenceSetting;
 
                 if (KMP_Version == 3100)
                 {
-                    JBOG_Values.JBOG_UnkByte2 = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].JBOG_UnkByte2);
-                    JBOG_Values.JBOG_UnkByte3 = JBOGValueList[Count].JBOG_UnkByte3;
+                    JBOG_Values.JBOG_UnknownData2 = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].JBOG_UnknownData2);
+                    JBOG_Values.JBOG_UnknownData3 = JBOGValueList[Count].JBOG_UnknownData3;
                 }
                 else if (KMP_Version == 3000)
                 {
-                    JBOG_Values.JBOG_UnkByte2 = new byte[] { 0x00, 0x00 };
-                    JBOG_Values.JBOG_UnkByte3 = new ushort();
+                    JBOG_Values.JBOG_UnknownData2 = new byte[] { 0x00, 0x00 };
+                    JBOG_Values.JBOG_UnknownData3 = new ushort();
                 }
 
                 JBOG_Value_List.Add(JBOG_Values);
             }
 
             return new JBOG(JBOG_Value_List);
-
-            //JBOG.JBOGValue_List = JBOG_Value_List;
-
-            //return JBOG;
         }
     }
 }

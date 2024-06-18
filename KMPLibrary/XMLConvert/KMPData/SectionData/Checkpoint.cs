@@ -158,11 +158,11 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 [System.Xml.Serialization.XmlAttribute("Section")]
                 public byte Section { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkBytes3")]
-                public byte UnkBytes3 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("UnknownData3")]
+                public byte UnknownData3 { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("UnkBytes4")]
-                public byte UnkBytes4 { get; set; }
+                [System.Xml.Serialization.XmlAttribute("UnknownData4")]
+                public byte UnknownData4 { get; set; }
 
                 public Checkpoint_Point(TPKC.TPKCValue TPKCValue)
                 {
@@ -174,8 +174,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                     PreviousCheckPoint = TPKCValue.TPKC_PreviousCheckPoint;
                     ClipID = TPKCValue.TPKC_ClipID;
                     Section = TPKCValue.TPKC_Section;
-                    UnkBytes3 = TPKCValue.TPKC_UnkBytes3;
-                    UnkBytes4 = TPKCValue.TPKC_UnkBytes4;
+                    UnknownData3 = TPKCValue.TPKC_UnknownData3;
+                    UnknownData4 = TPKCValue.TPKC_UnknownData4;
                 }
 
                 public Checkpoint_Point() { }
@@ -206,5 +206,4 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
 
         public Checkpoint() { }
     }
-
 }

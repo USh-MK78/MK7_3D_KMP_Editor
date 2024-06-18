@@ -30,27 +30,27 @@ namespace MK7_3D_KMP_Editor
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KMPErrorCheck));
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.KartPointListBox = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.EnemyRouteListBox = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.ItemRouteListBox = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.CheckpointListBox = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.listBox5 = new System.Windows.Forms.ListBox();
+            this.ObjectListBox = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.listBox6 = new System.Windows.Forms.ListBox();
+            this.RouteListBox = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.listBox7 = new System.Windows.Forms.ListBox();
+            this.AreaListBox = new System.Windows.Forms.ListBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.listBox8 = new System.Windows.Forms.ListBox();
+            this.CameraListBox = new System.Windows.Forms.ListBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.listBox9 = new System.Windows.Forms.ListBox();
+            this.JugemPointListBox = new System.Windows.Forms.ListBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.listBox10 = new System.Windows.Forms.ListBox();
+            this.GlideRouteListBox = new System.Windows.Forms.ListBox();
             this.Chk_Info = new System.Windows.Forms.CheckBox();
             this.Chk_Warning = new System.Windows.Forms.CheckBox();
             this.Chk_Error = new System.Windows.Forms.CheckBox();
@@ -67,15 +67,15 @@ namespace MK7_3D_KMP_Editor
             this.tabPage10.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox1
+            // KartPointListBox
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(406, 337);
-            this.listBox1.TabIndex = 0;
+            this.KartPointListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.KartPointListBox.FormattingEnabled = true;
+            this.KartPointListBox.ItemHeight = 12;
+            this.KartPointListBox.Location = new System.Drawing.Point(0, 0);
+            this.KartPointListBox.Name = "KartPointListBox";
+            this.KartPointListBox.Size = new System.Drawing.Size(406, 337);
+            this.KartPointListBox.TabIndex = 0;
             // 
             // tabControl1
             // 
@@ -100,7 +100,7 @@ namespace MK7_3D_KMP_Editor
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.listBox1);
+            this.tabPage1.Controls.Add(this.KartPointListBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(406, 337);
@@ -110,7 +110,7 @@ namespace MK7_3D_KMP_Editor
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listBox2);
+            this.tabPage2.Controls.Add(this.EnemyRouteListBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(406, 337);
@@ -118,19 +118,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage2.Text = "Enemy Route";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // listBox2
+            // EnemyRouteListBox
             // 
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(0, 0);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(406, 337);
-            this.listBox2.TabIndex = 1;
+            this.EnemyRouteListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EnemyRouteListBox.FormattingEnabled = true;
+            this.EnemyRouteListBox.ItemHeight = 12;
+            this.EnemyRouteListBox.Location = new System.Drawing.Point(0, 0);
+            this.EnemyRouteListBox.Name = "EnemyRouteListBox";
+            this.EnemyRouteListBox.Size = new System.Drawing.Size(406, 337);
+            this.EnemyRouteListBox.TabIndex = 1;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.listBox3);
+            this.tabPage3.Controls.Add(this.ItemRouteListBox);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(406, 337);
@@ -138,19 +138,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage3.Text = "Item Route";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // listBox3
+            // ItemRouteListBox
             // 
-            this.listBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 12;
-            this.listBox3.Location = new System.Drawing.Point(0, 0);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(406, 337);
-            this.listBox3.TabIndex = 2;
+            this.ItemRouteListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ItemRouteListBox.FormattingEnabled = true;
+            this.ItemRouteListBox.ItemHeight = 12;
+            this.ItemRouteListBox.Location = new System.Drawing.Point(0, 0);
+            this.ItemRouteListBox.Name = "ItemRouteListBox";
+            this.ItemRouteListBox.Size = new System.Drawing.Size(406, 337);
+            this.ItemRouteListBox.TabIndex = 2;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.listBox4);
+            this.tabPage4.Controls.Add(this.CheckpointListBox);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(406, 337);
@@ -158,19 +158,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage4.Text = "Checkpoint";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // listBox4
+            // CheckpointListBox
             // 
-            this.listBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 12;
-            this.listBox4.Location = new System.Drawing.Point(0, 0);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(406, 337);
-            this.listBox4.TabIndex = 2;
+            this.CheckpointListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CheckpointListBox.FormattingEnabled = true;
+            this.CheckpointListBox.ItemHeight = 12;
+            this.CheckpointListBox.Location = new System.Drawing.Point(0, 0);
+            this.CheckpointListBox.Name = "CheckpointListBox";
+            this.CheckpointListBox.Size = new System.Drawing.Size(406, 337);
+            this.CheckpointListBox.TabIndex = 2;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.listBox5);
+            this.tabPage5.Controls.Add(this.ObjectListBox);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(406, 337);
@@ -178,19 +178,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage5.Text = "Object";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // listBox5
+            // ObjectListBox
             // 
-            this.listBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 12;
-            this.listBox5.Location = new System.Drawing.Point(0, 0);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(406, 337);
-            this.listBox5.TabIndex = 1;
+            this.ObjectListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ObjectListBox.FormattingEnabled = true;
+            this.ObjectListBox.ItemHeight = 12;
+            this.ObjectListBox.Location = new System.Drawing.Point(0, 0);
+            this.ObjectListBox.Name = "ObjectListBox";
+            this.ObjectListBox.Size = new System.Drawing.Size(406, 337);
+            this.ObjectListBox.TabIndex = 1;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.listBox6);
+            this.tabPage6.Controls.Add(this.RouteListBox);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(406, 337);
@@ -198,19 +198,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage6.Text = "Route";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // listBox6
+            // RouteListBox
             // 
-            this.listBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.ItemHeight = 12;
-            this.listBox6.Location = new System.Drawing.Point(0, 0);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(406, 337);
-            this.listBox6.TabIndex = 2;
+            this.RouteListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RouteListBox.FormattingEnabled = true;
+            this.RouteListBox.ItemHeight = 12;
+            this.RouteListBox.Location = new System.Drawing.Point(0, 0);
+            this.RouteListBox.Name = "RouteListBox";
+            this.RouteListBox.Size = new System.Drawing.Size(406, 337);
+            this.RouteListBox.TabIndex = 2;
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.listBox7);
+            this.tabPage7.Controls.Add(this.AreaListBox);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Size = new System.Drawing.Size(406, 337);
@@ -218,19 +218,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage7.Text = "Area";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // listBox7
+            // AreaListBox
             // 
-            this.listBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox7.FormattingEnabled = true;
-            this.listBox7.ItemHeight = 12;
-            this.listBox7.Location = new System.Drawing.Point(0, 0);
-            this.listBox7.Name = "listBox7";
-            this.listBox7.Size = new System.Drawing.Size(406, 337);
-            this.listBox7.TabIndex = 3;
+            this.AreaListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AreaListBox.FormattingEnabled = true;
+            this.AreaListBox.ItemHeight = 12;
+            this.AreaListBox.Location = new System.Drawing.Point(0, 0);
+            this.AreaListBox.Name = "AreaListBox";
+            this.AreaListBox.Size = new System.Drawing.Size(406, 337);
+            this.AreaListBox.TabIndex = 3;
             // 
             // tabPage8
             // 
-            this.tabPage8.Controls.Add(this.listBox8);
+            this.tabPage8.Controls.Add(this.CameraListBox);
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(406, 337);
@@ -238,19 +238,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage8.Text = "Camera";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // listBox8
+            // CameraListBox
             // 
-            this.listBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox8.FormattingEnabled = true;
-            this.listBox8.ItemHeight = 12;
-            this.listBox8.Location = new System.Drawing.Point(0, 0);
-            this.listBox8.Name = "listBox8";
-            this.listBox8.Size = new System.Drawing.Size(406, 337);
-            this.listBox8.TabIndex = 4;
+            this.CameraListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CameraListBox.FormattingEnabled = true;
+            this.CameraListBox.ItemHeight = 12;
+            this.CameraListBox.Location = new System.Drawing.Point(0, 0);
+            this.CameraListBox.Name = "CameraListBox";
+            this.CameraListBox.Size = new System.Drawing.Size(406, 337);
+            this.CameraListBox.TabIndex = 4;
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.listBox9);
+            this.tabPage9.Controls.Add(this.JugemPointListBox);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(406, 337);
@@ -258,19 +258,19 @@ namespace MK7_3D_KMP_Editor
             this.tabPage9.Text = "Jugem Point";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
-            // listBox9
+            // JugemPointListBox
             // 
-            this.listBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox9.FormattingEnabled = true;
-            this.listBox9.ItemHeight = 12;
-            this.listBox9.Location = new System.Drawing.Point(0, 0);
-            this.listBox9.Name = "listBox9";
-            this.listBox9.Size = new System.Drawing.Size(406, 337);
-            this.listBox9.TabIndex = 5;
+            this.JugemPointListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.JugemPointListBox.FormattingEnabled = true;
+            this.JugemPointListBox.ItemHeight = 12;
+            this.JugemPointListBox.Location = new System.Drawing.Point(0, 0);
+            this.JugemPointListBox.Name = "JugemPointListBox";
+            this.JugemPointListBox.Size = new System.Drawing.Size(406, 337);
+            this.JugemPointListBox.TabIndex = 5;
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.listBox10);
+            this.tabPage10.Controls.Add(this.GlideRouteListBox);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Size = new System.Drawing.Size(406, 337);
@@ -278,15 +278,15 @@ namespace MK7_3D_KMP_Editor
             this.tabPage10.Text = "Glide Route";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
-            // listBox10
+            // GlideRouteListBox
             // 
-            this.listBox10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox10.FormattingEnabled = true;
-            this.listBox10.ItemHeight = 12;
-            this.listBox10.Location = new System.Drawing.Point(0, 0);
-            this.listBox10.Name = "listBox10";
-            this.listBox10.Size = new System.Drawing.Size(406, 337);
-            this.listBox10.TabIndex = 6;
+            this.GlideRouteListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GlideRouteListBox.FormattingEnabled = true;
+            this.GlideRouteListBox.ItemHeight = 12;
+            this.GlideRouteListBox.Location = new System.Drawing.Point(0, 0);
+            this.GlideRouteListBox.Name = "GlideRouteListBox";
+            this.GlideRouteListBox.Size = new System.Drawing.Size(406, 337);
+            this.GlideRouteListBox.TabIndex = 6;
             // 
             // Chk_Info
             // 
@@ -364,29 +364,29 @@ namespace MK7_3D_KMP_Editor
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox KartPointListBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox EnemyRouteListBox;
         private System.Windows.Forms.CheckBox Chk_Info;
         private System.Windows.Forms.CheckBox Chk_Warning;
         private System.Windows.Forms.CheckBox Chk_Error;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox ItemRouteListBox;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.ListBox CheckpointListBox;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.ListBox listBox5;
+        private System.Windows.Forms.ListBox ObjectListBox;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.ListBox listBox6;
+        private System.Windows.Forms.ListBox RouteListBox;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.ListBox listBox7;
+        private System.Windows.Forms.ListBox AreaListBox;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.ListBox listBox8;
+        private System.Windows.Forms.ListBox CameraListBox;
         private System.Windows.Forms.TabPage tabPage9;
-        private System.Windows.Forms.ListBox listBox9;
+        private System.Windows.Forms.ListBox JugemPointListBox;
         private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.ListBox listBox10;
+        private System.Windows.Forms.ListBox GlideRouteListBox;
     }
 }

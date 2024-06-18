@@ -196,13 +196,5 @@ namespace KMPLibrary.Format.SectionData
             AdditionalValue = 0;
             HPTIValue_List = new List<HPTIValue>();
         }
-
-        //public HPTI()
-        //{
-        //    HPTIHeader = "HPTI".ToCharArray();
-        //    NumOfEntries = 0;
-        //    AdditionalValue = 0;
-        //    HPTIValue_List = new List<HPTIValue>();
-        //}
     }
 }

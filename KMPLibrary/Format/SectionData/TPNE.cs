@@ -200,60 +200,6 @@ namespace KMPLibrary.Format.SectionData
                     Flags = (byte)((Flags & ~(1 << 1)) | ((value ? 1 : 0) << 1));
                 }
             }
-
-            #region Delete (?)
-            //public enum FlagType
-            //{
-            //    WideTurn,
-            //    NormalTurn,
-            //    SharpTurn,
-            //    TricksForbidden,
-            //    StickToRoute,
-            //    BouncyMushSection,
-            //    ForceDefaultSpeed,
-            //    NoPathSwitch
-            //}
-
-            //public bool ConvertFlags(FlagType flagType)
-            //{
-            //    bool FlagValue = new bool();
-            //    if (flagType == FlagType.WideTurn)
-            //    {
-            //        FlagValue = WideTurn;
-            //    }
-            //    if (flagType == FlagType.NormalTurn)
-            //    {
-            //        FlagValue = NormalTurn;
-            //    }
-            //    if (flagType == FlagType.SharpTurn)
-            //    {
-            //        FlagValue = SharpTurn;
-            //    }
-            //    if (flagType == FlagType.TricksForbidden)
-            //    {
-            //        FlagValue = TricksForbidden;
-            //    }
-            //    if (flagType == FlagType.StickToRoute)
-            //    {
-            //        FlagValue = StickToRoute;
-            //    }
-            //    if (flagType == FlagType.BouncyMushSection)
-            //    {
-            //        FlagValue = BouncyMushSection;
-            //    }
-            //    if (flagType == FlagType.ForceDefaultSpeed)
-            //    {
-            //        FlagValue = ForceDefaultSpeed;
-            //    }
-            //    if (flagType == FlagType.NoPathSwitch)
-            //    {
-            //        FlagValue = UnknownFlag;
-            //    }
-
-            //    return FlagValue;
-            //}
-            #endregion
-
             #endregion
 
             public PathFindOption PathFindOptionType;

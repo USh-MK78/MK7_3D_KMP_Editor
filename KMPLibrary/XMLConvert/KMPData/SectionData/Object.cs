@@ -143,8 +143,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             [System.Xml.Serialization.XmlAttribute("ObjectID")]
             public string ObjectID { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("UnkByte1")]
-            public string UnkByte1 { get; set; }
+            [System.Xml.Serialization.XmlAttribute("UnknownData1")]
+            public string UnknownData1 { get; set; }
 
             [System.Xml.Serialization.XmlAttribute("RouteIDIndex")]
             public ushort RouteIDIndex { get; set; }
@@ -152,11 +152,11 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             [System.Xml.Serialization.XmlAttribute("PresenceSetting")]
             public ushort PresenceSetting { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("UnkByte2")]
-            public string UnkByte2 { get; set; }
+            [System.Xml.Serialization.XmlAttribute("UnknownData2")]
+            public string UnknownData2 { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("UnkByte3")]
-            public ushort UnkByte3 { get; set; }
+            [System.Xml.Serialization.XmlAttribute("UnknownData3")]
+            public ushort UnknownData3 { get; set; }
 
             public Object_Value() { }
 
@@ -169,9 +169,9 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 ObjectID = BitConverter.ToString(ObjectValues.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
                 RouteIDIndex = ObjectValues.JBOG_ITOP_RouteIDIndex;
                 PresenceSetting = ObjectValues.JBOG_PresenceSetting;
-                UnkByte1 = BitConverter.ToString(ObjectValues.JBOG_UnkByte1.Reverse().ToArray()).Replace("-", string.Empty);
-                UnkByte2 = BitConverter.ToString(ObjectValues.JBOG_UnkByte2.Reverse().ToArray()).Replace("-", string.Empty);
-                UnkByte3 = ObjectValues.JBOG_UnkByte3;
+                UnknownData1 = BitConverter.ToString(ObjectValues.JBOG_UnknownData1.Reverse().ToArray()).Replace("-", string.Empty);
+                UnknownData2 = BitConverter.ToString(ObjectValues.JBOG_UnknownData2.Reverse().ToArray()).Replace("-", string.Empty);
+                UnknownData3 = ObjectValues.JBOG_UnknownData3;
             }
         }
 
@@ -182,5 +182,4 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             foreach (var Object in jBOG_Section.JBOGValue_List) Object_Values.Add(new Object_Value(Object));
         }
     }
-
 }

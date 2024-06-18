@@ -145,10 +145,9 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
 
         public Area() { }
 
-        public Area(Format.SectionData.AERA aERA_Section)
+        public Area(Format.SectionData.AERA AERA_Section)
         {
-            foreach (var AREAValue in aERA_Section.AERAValue_List) Area_Values.Add(new Area_Value(AREAValue));
+            foreach (var AREAValue in AERA_Section.AERAValue_List) Area_Values.Add(new Area_Value(AREAValue));
         }
     }
-
 }

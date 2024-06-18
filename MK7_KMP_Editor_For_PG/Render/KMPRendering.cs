@@ -6,10 +6,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-//using static MK7_KMP_Editor_For_PG_.KMPs;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
-
 using KMPLibrary.KMPHelper;
 
 namespace MK7_3D_KMP_Editor.Render

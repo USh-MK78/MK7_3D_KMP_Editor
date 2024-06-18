@@ -44,8 +44,8 @@ namespace MK7_3D_KMP_Editor
         public Dictionary<string, ArrayList> MV3D_Dictionary = new Dictionary<string, ArrayList>();
         #endregion
 
-
         public KMP KMPData { get; set; }
+        public KMP_Main_PGS KMP_Main_PGS { get; set; }
 
         //public KMP_Main_PGS KMP_Main_PGS
         //{
@@ -58,8 +58,6 @@ namespace MK7_3D_KMP_Editor
         //        KMPData = value.ToKMP(Convert.ToUInt32(KMPVersion_TXT.Text));
         //    }
         //}
-
-        public KMP_Main_PGS KMP_Main_PGS { get; set; }
 
         public Form1()
         {
@@ -163,7 +161,6 @@ namespace MK7_3D_KMP_Editor
 
         HitTestResult HTR = null;
         ModelVisual3D FindMV3D = null;
-        //HTK_3DES.Transform_Value transform_Value = null;
         HTK_3DES.Transform transform_Value = null;
 
         private void Render_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -745,7 +742,7 @@ namespace MK7_3D_KMP_Editor
                     if (KMP_Point_ListBox.Items.Count != 0)
                     {
                         #region Add Model(OBJ)
-                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
                         string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
@@ -1326,7 +1323,7 @@ namespace MK7_3D_KMP_Editor
                 Render.KMPRendering.KMPViewportRendering.Render_EnemyRoute(render, KMPViewportObject, KMPData.KMP_Section.HPNE, KMPData.KMP_Section.TPNE);
                 Render.KMPRendering.KMPViewportRendering.Render_ItemRoute(render, KMPViewportObject, KMPData.KMP_Section.HPTI, KMPData.KMP_Section.TPTI);
                 Render.KMPRendering.KMPViewportRendering.Render_Checkpoint(render, KMPViewportObject, KMPData.KMP_Section.HPKC, KMPData.KMP_Section.TPKC, Convert.ToDouble(textBox1.Text));
-                Render.KMPRendering.KMPViewportRendering.Render_Object(render, KMPViewportObject, KMPData.KMP_Section.JBOG, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml"));
+                Render.KMPRendering.KMPViewportRendering.Render_Object(render, KMPViewportObject, KMPData.KMP_Section.JBOG, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
                 Render.KMPRendering.KMPViewportRendering.Render_Route(render, KMPViewportObject, KMPData.KMP_Section.ITOP);
                 Render.KMPRendering.KMPViewportRendering.Render_Area(render, KMPViewportObject, KMPData.KMP_Section.AERA);
                 Render.KMPRendering.KMPViewportRendering.Render_Camera(render, KMPViewportObject, KMPData.KMP_Section.EMAC);
@@ -1802,7 +1799,7 @@ namespace MK7_3D_KMP_Editor
                     if (KMP_Point_ListBox.Items.Count != 0)
                     {
                         #region Add Model(OBJ)
-                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
                         string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
@@ -3092,7 +3089,7 @@ namespace MK7_3D_KMP_Editor
                         fs.Close();
 
                         //var FBOCFormat = KMPs.KMPHelper.ObjFlowReader.Binary.Read("ObjFlow.bin");
-                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> objFlowValues = ObjFlowConverter.ConvertTo.ToObjFlowDB(FBOCFormat);
+                        List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> objFlowValues = ObjFlowConverter.ConvertTo.ToObjFlowDB_XML(FBOCFormat);
                         ObjFlowConverter.Xml.CreateXml(objFlowValues, "KMPObjectFlow", "KMP_OBJ\\OBJ\\OBJ.obj", "ObjFlowData.xml");
 
                         ObjFlowXmlEditor objFlowXmlEditor = new ObjFlowXmlEditor();
@@ -3128,7 +3125,7 @@ namespace MK7_3D_KMP_Editor
             if (Open_ObjFlowDataXml.ShowDialog() == DialogResult.OK)
 			{
                 var ObjFlowDB = ObjFlowConverter.Xml.ReadObjFlowXml(Open_ObjFlowDataXml.FileName);
-                FBOCLibrary.FBOC FBOC = ObjFlowConverter.ConvertTo.ToFBOC(ObjFlowDB);
+                FBOCLibrary.FBOC FBOC = ObjFlowConverter.ConvertTo.ToFBOC(ObjFlowDB.ObjFlows);
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog()
                 {
@@ -3279,7 +3276,7 @@ namespace MK7_3D_KMP_Editor
 
                 KMPObject_PGS.JBOGValue GetJBOGValue = KMP_Main_PGS.JBOG_Section.JBOGValueList[KMP_Point_ListBox.SelectedIndex];
 
-                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
                 string ObjectName = ObjFlowDB_FindName.Find(x => x.ObjectID == GetJBOGValue.ObjectID).ObjectName;
                 KMP_Main_PGS.JBOG_Section.JBOGValueList[KMP_Point_ListBox.SelectedIndex].ObjectName = ObjectName;
 
@@ -3291,7 +3288,7 @@ namespace MK7_3D_KMP_Editor
                     Rotate3D = GetJBOGValue.Rotations.GetVector3D()
                 };
 
-                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
                 string Path = ObjFlowDB.Find(x => x.ObjectID == GetJBOGValue.ObjectID).Path;
                 ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
@@ -3595,7 +3592,7 @@ namespace MK7_3D_KMP_Editor
                 Render.KMPRendering.KMPViewportRenderingXML.Render_EnemyRoute(render, KMPViewportObject, KMP_Xml_Model.EnemyRoutes);
                 Render.KMPRendering.KMPViewportRenderingXML.Render_ItemRoute(render, KMPViewportObject, KMP_Xml_Model.ItemRoutes);
                 Render.KMPRendering.KMPViewportRenderingXML.Render_Checkpoint(render, KMPViewportObject, KMP_Xml_Model.Checkpoints, Convert.ToDouble(textBox1.Text));
-                Render.KMPRendering.KMPViewportRenderingXML.Render_Object(render, KMPViewportObject, KMP_Xml_Model.Objects, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml"));
+                Render.KMPRendering.KMPViewportRenderingXML.Render_Object(render, KMPViewportObject, KMP_Xml_Model.Objects, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
                 Render.KMPRendering.KMPViewportRenderingXML.Render_Route(render, KMPViewportObject, KMP_Xml_Model.Routes);
                 Render.KMPRendering.KMPViewportRenderingXML.Render_Area(render, KMPViewportObject, KMP_Xml_Model.Areas);
                 Render.KMPRendering.KMPViewportRenderingXML.Render_Camera(render, KMPViewportObject, KMP_Xml_Model.Cameras);
@@ -3690,7 +3687,7 @@ namespace MK7_3D_KMP_Editor
                     KMPViewportObject.OBJ_MV3DList.Clear();
 
                     KMPViewportObject.OBJ_MV3DList = new List<ModelVisual3D>();
-                    Render.KMPRendering.KMPViewportRenderingXML.Render_Object(render, KMPViewportObject, KMP_Xml_Model.Objects, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml"));
+                    Render.KMPRendering.KMPViewportRenderingXML.Render_Object(render, KMPViewportObject, KMP_Xml_Model.Objects, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
                     KMP_Main_PGS.JBOG_Section = new KMPObject_PGS(KMP_Xml_Model.Objects);
                 }
                 else if (KMPSectionComboBox.Text == "Route")
@@ -3908,13 +3905,13 @@ namespace MK7_3D_KMP_Editor
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
             }
-            else  if (KMPSectionComboBox.Text == "JugemPoint")
+            else if (KMPSectionComboBox.Text == "JugemPoint")
             {
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = false;
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = true;
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 2) CH_KMPGroupPoint.Enabled = false;
             }
-            if (KMPSectionComboBox.Text == "GlideRoutes")
+            else if (KMPSectionComboBox.Text == "GlideRoutes")
             {
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 0) CH_KMPGroupPoint.Enabled = true;
                 if (KMPSection_Main_TabCtrl.SelectedIndex == 1) CH_KMPGroupPoint.Enabled = false;
@@ -3924,61 +3921,67 @@ namespace MK7_3D_KMP_Editor
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("All", KMP_Main_PGS);
-            kMPErrorCheck.Show();
+            if (KMP_Main_PGS != null)
+            {
+                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("All", KMP_Main_PGS);
+                kMPErrorCheck.Show();
+            }
         }
 
         private void thisSectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (KMPSectionComboBox.Text == "KartPoint")
+            if (KMP_Main_PGS != null)
             {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Kart Point", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "EnemyRoutes")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Enemy Route", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "ItemRoutes")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Item Route", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "CheckPoint")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Checkpoint", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "Obj")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Object", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "Route")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Route", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "Area")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Area", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "Camera")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Camera", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "JugemPoint")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Jugem Point", KMP_Main_PGS);
-                kMPErrorCheck.Show();
-            }
-            else if (KMPSectionComboBox.Text == "GlideRoutes")
-            {
-                KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Glide Route", KMP_Main_PGS);
-                kMPErrorCheck.Show();
+                if (KMPSectionComboBox.Text == "KartPoint")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Kart Point", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "EnemyRoutes")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Enemy Route", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "ItemRoutes")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Item Route", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "CheckPoint")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Checkpoint", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "Obj")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Object", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "Route")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Route", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "Area")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Area", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "Camera")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Camera", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "JugemPoint")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Jugem Point", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
+                else if (KMPSectionComboBox.Text == "GlideRoutes")
+                {
+                    KMPErrorCheck kMPErrorCheck = new KMPErrorCheck("Glide Route", KMP_Main_PGS);
+                    kMPErrorCheck.Show();
+                }
             }
         }
 

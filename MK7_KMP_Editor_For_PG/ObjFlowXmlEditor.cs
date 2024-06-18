@@ -15,7 +15,8 @@ namespace MK7_3D_KMP_Editor
 {
     public partial class ObjFlowXmlEditor : Form
     {
-        public List<ObjFlowData_XML.ObjFlow> objFlowDataXml_List;
+        //public List<ObjFlowData_XML.ObjFlow> objFlowDataXml_List;
+        public ObjFlowData_XML objFlowDataXml_List;
 
         public PropertyGridObject.ObjFlow.ObjFlow_PGS ObjFlowXmlPropertyGridSettings;
 
@@ -27,73 +28,89 @@ namespace MK7_3D_KMP_Editor
         private void ObjFlowXmlEditor_Load(object sender, EventArgs e)
         {
             objFlowDataXml_List = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.Xml");
-
-            ObjFlowXmlPropertyGridSettings = new PropertyGridObject.ObjFlow.ObjFlow_PGS
+            
+            List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow> objFlows = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow>();
+            foreach (var f in objFlowDataXml_List.ObjFlows)
             {
-                ObjFlowsList = null
-            };
-
-            List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow> objFlows = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow>();  
-
-            foreach (var f in objFlowDataXml_List)
-            {
-                PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow
-                {
-                    ObjectID = f.ObjectID,
-                    ObjectName = f.ObjectName,
-                    Path = f.Path,
-                    UseKCL = f.UseKCL,
-                    ObjectType = f.ObjectType,
-                    Commons = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Common
-                    {
-                        ColType = f.Commons.ColType,
-                        PathType = f.Commons.PathType,
-                        ModelSetting = f.Commons.ModelSetting,
-                        Unknown1 = f.Commons.Unknown1
-                    },
-                    LODSetting = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.LOD_Setting
-                    {
-                        LOD = f.LODSetting.LOD,
-                        LODHPoly = f.LODSetting.LODHPoly,
-                        LODLPoly = f.LODSetting.LODLPoly,
-                        LODDef = f.LODSetting.LODDef
-                    },
-                    Scales = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Scale
-                    {
-                        X = f.Scales.X,
-                        Y = f.Scales.Y,
-                        Z = f.Scales.Z
-                    },
-                    Names = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Name
-                    {
-                        Main = f.Names.Main,
-                        Sub = f.Names.Sub
-                    },
-                    DefaultValues = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values
-                    {
-                        ValuesList = null
-                    }
-                };
-
-                List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value> values_List = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value>();
-
-                foreach (var ds in f.DefaultValues.Values)
-                {
-                    PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value value = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                    {
-                        DefaultObjectValue = ds.DefaultObjectValue,
-                        Description = ds.Description
-                    };
-
-                    values_List.Add(value);
-                }
-
-                objFlow.DefaultValues.ValuesList = values_List;
-
+                PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow(f);
                 objFlows.Add(objFlow);
-
                 listBox1.Items.Add(objFlow);
             }
+
+            ObjFlowXmlPropertyGridSettings = new PropertyGridObject.ObjFlow.ObjFlow_PGS(objFlowDataXml_List);
+
+            //ObjFlowXmlPropertyGridSettings = new PropertyGridObject.ObjFlow.ObjFlow_PGS
+            //{
+            //    ObjFlowsList = objFlows
+            //};
+
+
+            //ObjFlowXmlPropertyGridSettings = new PropertyGridObject.ObjFlow.ObjFlow_PGS
+            //{
+            //    ObjFlowsList = null
+            //};
+
+            //List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow> objFlows = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow>();  
+
+            //foreach (var f in objFlowDataXml_List)
+            //{
+            //    PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow
+            //    {
+            //        ObjectID = f.ObjectID,
+            //        ObjectName = f.ObjectName,
+            //        Path = f.Path,
+            //        UseKCL = f.UseKCL,
+            //        ObjectType = f.ObjectType,
+            //        CommonData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Common
+            //        {
+            //            ColType = f.CommonData.ColType,
+            //            PathType = f.CommonData.PathType,
+            //            ModelSetting = f.CommonData.ModelSetting,
+            //            Unknown1 = f.CommonData.Unknown1
+            //        },
+            //        LODSetting = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.LOD_Setting
+            //        {
+            //            LOD = f.LODSetting.LOD,
+            //            LODHighPoly = f.LODSetting.LODHighPoly,
+            //            LODLowPoly = f.LODSetting.LODLowPoly,
+            //            LODDefault = f.LODSetting.LODDefault
+            //        },
+            //        ScaleData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Scale
+            //        {
+            //            X = f.ScaleData.X,
+            //            Y = f.ScaleData.Y,
+            //            Z = f.ScaleData.Z
+            //        },
+            //        NameData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Name
+            //        {
+            //            Main = f.NameData.Main,
+            //            Sub = f.NameData.Sub
+            //        },
+            //        DefaultValueData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values
+            //        {
+            //            ValuesList = null
+            //        }
+            //    };
+
+            //    List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value> values_List = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value>();
+
+            //    foreach (var ds in f.DefaultValueData.Values)
+            //    {
+            //        PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value value = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value
+            //        {
+            //            DefaultObjectValue = ds.DefaultObjectValue,
+            //            Description = ds.Description
+            //        };
+
+            //        values_List.Add(value);
+            //    }
+
+            //    objFlow.DefaultValueData.ValuesList = values_List;
+
+            //    objFlows.Add(objFlow);
+
+            //    listBox1.Items.Add(objFlow);
+            //}
 
             ObjFlowXmlPropertyGridSettings.ObjFlowsList = objFlows;
         }
@@ -118,85 +135,34 @@ namespace MK7_3D_KMP_Editor
 
         private void AddObjFlowXmlData_Click(object sender, EventArgs e)
         {
-            PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow
-            {
-                ObjectID = "0000",
-                ObjectName = "TestObject",
-                Path = "",
-                UseKCL = false,
-                ObjectType = "Undefined Type",
-                Commons = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Common
-                {
-                    ColType = "",
-                    PathType = "",
-                    ModelSetting = "",
-                    Unknown1 = ""
-                },
-                LODSetting = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.LOD_Setting
-                {
-                    LOD = 0,
-                    LODHPoly = 0,
-                    LODLPoly = 0,
-                    LODDef = 0
-                },
-                Scales = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Scale
-                {
-                    X = 0,
-                    Y = 0,
-                    Z = 0
-                },
-                Names = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Name
-                {
-                    Main = "Main",
-                    Sub = "Sub"
-                },
-                DefaultValues = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values
-                {
-                    ValuesList = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value>()
-                    {
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        },
-                        new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Default_Values.Value
-                        {
-                            DefaultObjectValue = 0,
-                            Description = "Text"
-                        }
-                    }
-                }
-            };
+            //PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow
+            //{
+            //    ObjectID = "0000",
+            //    ObjectName = "TestObject",
+            //    Path = "",
+            //    UseKCL = false,
+            //    ObjectType = "Undefined Type",
+            //    CommonData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Common("", "", "", ""),
+            //    LODSetting = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.LOD_Setting(0, 0, 0, 0),
+            //    ScaleData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Scale(0, 0, 0),
+            //    NameData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.Name("Main", "Sub"),
+            //    DefaultValueData = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue
+            //    {
+            //        ValuesList = new List<PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value>()
+            //        {
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text"),
+            //            new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow.DefaultValue.Value(0, "Text")
+            //        }
+            //    }
+            //};
+
+            PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow objFlow = new PropertyGridObject.ObjFlow.ObjFlow_PGS.ObjFlow();
 
             listBox1.Items.Add(objFlow);
             ObjFlowXmlPropertyGridSettings.ObjFlowsList.Add(objFlow);
@@ -220,42 +186,42 @@ namespace MK7_3D_KMP_Editor
                     Path = ObjFlowData.Path,
                     UseKCL = ObjFlowData.UseKCL,
                     ObjectType = ObjFlowData.ObjectType,
-                    Commons = new ObjFlowData_XML.ObjFlow.Common
+                    CommonData = new ObjFlowData_XML.ObjFlow.Common
                     {
-                        ColType = ObjFlowData.Commons.ColType,
-                        PathType = ObjFlowData.Commons.PathType,
-                        ModelSetting = ObjFlowData.Commons.ModelSetting,
-                        Unknown1 = ObjFlowData.Commons.Unknown1
+                        ColType = ObjFlowData.CommonData.ColType,
+                        PathType = ObjFlowData.CommonData.PathType,
+                        ModelSetting = ObjFlowData.CommonData.ModelSetting,
+                        Unknown1 = ObjFlowData.CommonData.Unknown1
                     },
                     LODSetting = new ObjFlowData_XML.ObjFlow.LOD_Setting
                     {
                         LOD = ObjFlowData.LODSetting.LOD,
-                        LODHPoly = ObjFlowData.LODSetting.LODHPoly,
-                        LODLPoly = ObjFlowData.LODSetting.LODLPoly,
-                        LODDef = ObjFlowData.LODSetting.LODDef
+                        LODHighPoly = ObjFlowData.LODSetting.LODHighPoly,
+                        LODLowPoly = ObjFlowData.LODSetting.LODLowPoly,
+                        LODDefault = ObjFlowData.LODSetting.LODDefault
                     },
-                    Scales = new ObjFlowData_XML.ObjFlow.Scale
+                    ScaleData = new ObjFlowData_XML.ObjFlow.Scale
                     {
-                        X = (int)ObjFlowData.Scales.X,
-                        Y = (int)ObjFlowData.Scales.Y,
-                        Z = (int)ObjFlowData.Scales.Z
+                        X = (int)ObjFlowData.ScaleData.X,
+                        Y = (int)ObjFlowData.ScaleData.Y,
+                        Z = (int)ObjFlowData.ScaleData.Z
                     },
-                    Names = new ObjFlowData_XML.ObjFlow.Name
+                    NameData = new ObjFlowData_XML.ObjFlow.Name
                     {
-                        Main = ObjFlowData.Names.Main,
-                        Sub = ObjFlowData.Names.Sub
+                        Main = ObjFlowData.NameData.Main,
+                        Sub = ObjFlowData.NameData.Sub
                     },
-                    DefaultValues = new ObjFlowData_XML.ObjFlow.Default_Values
+                    DefaultValueData = new ObjFlowData_XML.ObjFlow.DefaultValue
                     {
                         Values = null
                     }
                 };
 
-                List<ObjFlowData_XML.ObjFlow.Default_Values.Value> valueList = new List<ObjFlowData_XML.ObjFlow.Default_Values.Value>();
+                List<ObjFlowData_XML.ObjFlow.DefaultValue.Value> valueList = new List<ObjFlowData_XML.ObjFlow.DefaultValue.Value>();
 
-                foreach (var ObjFlowDataValue in ObjFlowData.DefaultValues.ValuesList)
+                foreach (var ObjFlowDataValue in ObjFlowData.DefaultValueData.ValuesList)
                 {
-                    ObjFlowData_XML.ObjFlow.Default_Values.Value value = new ObjFlowData_XML.ObjFlow.Default_Values.Value
+                    ObjFlowData_XML.ObjFlow.DefaultValue.Value value = new ObjFlowData_XML.ObjFlow.DefaultValue.Value
                     {
                         DefaultObjectValue = ObjFlowDataValue.DefaultObjectValue,
                         Description = ObjFlowDataValue.Description
@@ -264,7 +230,7 @@ namespace MK7_3D_KMP_Editor
                     valueList.Add(value);
                 }
 
-                ObjFlowDB.DefaultValues.Values = valueList;
+                ObjFlowDB.DefaultValueData.Values = valueList;
 
                 ObjFlowDBList.Add(ObjFlowDB);
 

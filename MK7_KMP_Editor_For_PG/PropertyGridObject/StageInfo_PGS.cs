@@ -54,26 +54,26 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
         public uint FlareAlpha { get; set; }
 
-        public StageInfo_PGS(IGTS iGTS_Section)
+        public StageInfo_PGS(IGTS IGTS_Section)
         {
-            Unknown1 = iGTS_Section.Unknown1;
-            LapCount = iGTS_Section.LapCount;
-            PolePosition = iGTS_Section.PolePosition;
-            Unknown2 = iGTS_Section.Unknown2;
-            Unknown3 = iGTS_Section.Unknown3;
-            RGBAColor = new RGBA(iGTS_Section.RGBAColor.R, iGTS_Section.RGBAColor.G, iGTS_Section.RGBAColor.B, iGTS_Section.RGBAColor.A);
-            FlareAlpha = iGTS_Section.FlareAlpha;
+            Unknown1 = IGTS_Section.Unknown1;
+            LapCount = IGTS_Section.LapCount;
+            PolePosition = IGTS_Section.PolePosition;
+            Unknown2 = IGTS_Section.Unknown2;
+            Unknown3 = IGTS_Section.Unknown3;
+            RGBAColor = new RGBA(IGTS_Section.RGBAColor.R, IGTS_Section.RGBAColor.G, IGTS_Section.RGBAColor.B, IGTS_Section.RGBAColor.A);
+            FlareAlpha = IGTS_Section.FlareAlpha;
         }
 
-        public StageInfo_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.StageInfo stageInfo)
+        public StageInfo_PGS(KMPLibrary.XMLConvert.KMPData.SectionData.StageInfo StageInfo)
         {
-            Unknown1 = stageInfo.Unknown1;
-            LapCount = stageInfo.LapCount;
-            PolePosition = stageInfo.PolePosition;
-            Unknown2 = stageInfo.Unknown2;
-            Unknown3 = stageInfo.Unknown3;
-            RGBAColor = new RGBA(stageInfo.RGBAColor.R, stageInfo.RGBAColor.G, stageInfo.RGBAColor.B, stageInfo.RGBAColor.A);
-            FlareAlpha = stageInfo.RGBAColor.FlareAlpha;
+            Unknown1 = StageInfo.Unknown1;
+            LapCount = StageInfo.LapCount;
+            PolePosition = StageInfo.PolePosition;
+            Unknown2 = StageInfo.Unknown2;
+            Unknown3 = StageInfo.Unknown3;
+            RGBAColor = new RGBA(StageInfo.RGBAColor.R, StageInfo.RGBAColor.G, StageInfo.RGBAColor.B, StageInfo.RGBAColor.A);
+            FlareAlpha = StageInfo.RGBAColor.FlareAlpha;
         }
 
         public StageInfo_PGS()
@@ -91,27 +91,6 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
         {
             IGTS.RGBA RGBA = new IGTS.RGBA(RGBAColor.R, RGBAColor.G, RGBAColor.B, RGBAColor.A);
             return new IGTS(Unknown1, LapCount, PolePosition, Unknown2, Unknown3, RGBA, FlareAlpha);
-
-
-            //IGTS IGTS = new IGTS
-            //{
-            //    IGTSHeader = new char[] { 'I', 'G', 'T', 'S' },
-            //    Unknown1 = Unknown1,
-            //    LapCount = LapCount,
-            //    PolePosition = PolePosition,
-            //    Unknown2 = Unknown2,
-            //    Unknown3 = Unknown3,
-            //    RGBAColor = new IGTS.RGBA
-            //    {
-            //        R = RGBAColor.R,
-            //        G = RGBAColor.G,
-            //        B = RGBAColor.B,
-            //        A = RGBAColor.A
-            //    },
-            //    FlareAlpha = FlareAlpha
-            //};
-
-            //return IGTS;
         }
     }
 }

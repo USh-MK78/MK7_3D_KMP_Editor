@@ -20,7 +20,7 @@ namespace KMPLibrary.Format.SectionData
         public class JBOGValue
         {
             public byte[] ObjectID { get; set; }
-            public byte[] JBOG_UnkByte1 { get; set; }
+            public byte[] JBOG_UnknownData1 { get; set; }
             public Vector3D JBOG_Position { get; set; }
             public Vector3D JBOG_Rotation { get; set; }
             public Vector3D JBOG_Scale { get; set; }
@@ -91,13 +91,13 @@ namespace KMPLibrary.Format.SectionData
                 }
             }
             public ushort JBOG_PresenceSetting { get; set; }
-            public byte[] JBOG_UnkByte2 { get; set; }
-            public ushort JBOG_UnkByte3 { get; set; }
+            public byte[] JBOG_UnknownData2 { get; set; }
+            public ushort JBOG_UnknownData3 { get; set; }
 
             public void ReadJBOGValue(BinaryReader br, uint Version)
             {
                 ObjectID = br.ReadBytes(2);
-                JBOG_UnkByte1 = br.ReadBytes(2);
+                JBOG_UnknownData1 = br.ReadBytes(2);
                 JBOG_Position = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
                 JBOG_Rotation = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
                 JBOG_Scale = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
@@ -107,8 +107,8 @@ namespace KMPLibrary.Format.SectionData
 
                 if (Version == 3100)
                 {
-                    JBOG_UnkByte2 = br.ReadBytes(2);
-                    JBOG_UnkByte3 = br.ReadUInt16();
+                    JBOG_UnknownData2 = br.ReadBytes(2);
+                    JBOG_UnknownData3 = br.ReadUInt16();
                 }
                 else if (Version == 3000) return;
             }
@@ -116,7 +116,7 @@ namespace KMPLibrary.Format.SectionData
             public void WriteJBOGValue(BinaryWriter bw, uint Version)
             {
                 bw.Write(ObjectID);
-                bw.Write(JBOG_UnkByte1);
+                bw.Write(JBOG_UnknownData1);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[0]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[1]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[2]);
@@ -132,8 +132,8 @@ namespace KMPLibrary.Format.SectionData
 
                 if (Version == 3100)
                 {
-                    bw.Write(JBOG_UnkByte2);
-                    bw.Write(JBOG_UnkByte3);
+                    bw.Write(JBOG_UnknownData2);
+                    bw.Write(JBOG_UnknownData3);
                 }
                 else if (Version == 3000) return;
             }
@@ -141,15 +141,15 @@ namespace KMPLibrary.Format.SectionData
             public JBOGValue()
             {
                 ObjectID = new byte[2];
-                JBOG_UnkByte1 = new byte[2];
+                JBOG_UnknownData1 = new byte[2];
                 JBOG_Position = new Vector3D(0, 0, 0);
                 JBOG_Rotation = new Vector3D(0, 0, 0);
                 JBOG_Scale = new Vector3D(0, 0, 0);
                 JBOG_ITOP_RouteIDIndex = 0;
                 GOBJ_Specific_Setting = new JBOG_SpecificSetting();
                 JBOG_PresenceSetting = 0;
-                JBOG_UnkByte2 = new byte[2];
-                JBOG_UnkByte3 = 0;
+                JBOG_UnknownData2 = new byte[2];
+                JBOG_UnknownData3 = 0;
             }
         }
 

@@ -27,8 +27,8 @@ namespace KMPLibrary.Format.SectionData
             public byte TPKC_NextCheckPoint { get; set; }
             public byte TPKC_ClipID { get; set; }
             public byte TPKC_Section { get; set; }
-            public byte TPKC_UnkBytes3 { get; set; }
-            public byte TPKC_UnkBytes4 { get; set; }
+            public byte TPKC_UnknownData3 { get; set; }
+            public byte TPKC_UnknownData4 { get; set; }
 
             public void ReadTPKCValue(BinaryReader br)
             {
@@ -40,8 +40,8 @@ namespace KMPLibrary.Format.SectionData
                 TPKC_NextCheckPoint = br.ReadByte();
                 TPKC_ClipID = br.ReadByte();
                 TPKC_Section = br.ReadByte();
-                TPKC_UnkBytes3 = br.ReadByte();
-                TPKC_UnkBytes4 = br.ReadByte();
+                TPKC_UnknownData3 = br.ReadByte();
+                TPKC_UnknownData4 = br.ReadByte();
             }
 
             public void WriteTPKCValue(BinaryWriter bw)
@@ -56,8 +56,8 @@ namespace KMPLibrary.Format.SectionData
                 bw.Write(TPKC_NextCheckPoint);
                 bw.Write(TPKC_ClipID);
                 bw.Write(TPKC_Section);
-                bw.Write(TPKC_UnkBytes3);
-                bw.Write(TPKC_UnkBytes4);
+                bw.Write(TPKC_UnknownData3);
+                bw.Write(TPKC_UnknownData4);
             }
 
             public TPKCValue()
@@ -70,8 +70,8 @@ namespace KMPLibrary.Format.SectionData
                 TPKC_NextCheckPoint = 0x00;
                 TPKC_ClipID = 0x00;
                 TPKC_Section = 0x00;
-                TPKC_UnkBytes3 = 0x00;
-                TPKC_UnkBytes4 = 0x00;
+                TPKC_UnknownData3 = 0x00;
+                TPKC_UnknownData4 = 0x00;
             }
         }
 
