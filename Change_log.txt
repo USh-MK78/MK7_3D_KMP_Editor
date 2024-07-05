@@ -1,0 +1,101 @@
+Change log
+
+[Change date and time unknown]
+・Added KMP3DEditorInfoForm
+・Fixed to select the element of listBox when the item of comboBox is selected.
+・Fixed a bug that StageInfo data is not created when creating new KMP data
+
+[2021/6/30]
+・Changed the display of rotation values from radians to angles, and fixed or deleted some code.
+・Fixed the code so that LinesVisual3D and TubeVisual3D cannot be selected.
+
+[2021/8/20]
+・Added the function to fix the axis and move the object when moving the object in Viewport.
+・Updated KMPObjectFlow.zip.
+・Fixed a bug where rotation values were converted using radians when moving objects.
+
+[2021/8/27]
+・A function has been added to search for the target object by double-clicking the element of listBox.
+
+[Xml(Export)]
+・Added "Export-> All Section"
+・Added "Export-> Output XXXX as Xml"
+・Added "Export-> XXXX Route Exporter"
+
+[Xml(Import)]
+・Added "Import-> All Section"
+・Added "Import-> Input Xml as XXXX"
+・Added "Import-> XXXX Route Importer"
+
+"XXXX Route Exporter" provides a function to convert the location data and scale values of a section into a format that can be read by other sections.
+The "XXXX Route Importer" provides the ability to import the data output by the "XXXX Route Exporter" into the target section.
+
+Note : "XXXX Route Exporter / XXXX Route Importer" only works with XXXXRoute (EnemyRoute, ItemRoute, GlideRoute).
+
+[2021/9/7]
+Search for target object(Checkpoint)
+・A function has been added to search for the target object(Checkpoint) by double-clicking the element of listBox.
+
+[2021/9/12]
+Show / Hide XXXXRoutes(Group), Checkpoint and objects.
+・Show / Hide XXXXRoutes(Group) [XXXX Route, Checkpoint]
+・Show / Hide objects (Kartpoint, Obj, Area, Camera, Returnpoint)
+・Fixed some code
+
+[2021/12/5]
+・Fix flag names in TPNE section (thanks MichaelHinrichs [https://github.com/MichaelHinrichs/MK7_3D_KMP_Editor/commit/2ac239a870d673651056f7d5b57faed77817073e]).
+・Obj Section : Added autocomplete feature to the comboBox of AddKMPObjectForm.
+
+[2021/12/19]
+・Improved visibility of Checkpoint sections
+・Bug fix (object search)
+
+[2021/12/29]
+・Internally generate objects to be used in representing KMP sections (only Object sections remain unchanged)
+・Fixed some code
+・Improved loading speed (Viewport)
+
+[2022/1/2]
+・Fixed some code (Checkpoint section)
+・Remove unnecessary code
+
+[2022/2/6]
+・SplitContainer can now be used to change the boundary between PropertyGrid and Viewport.
+・Optimization of program code
+
+[2022/3/7]
+・Added ability to check for errors in KMP files (KMPErrorCheck)
+・Fixed a bug that caused a portion of Checkpoint to remain in the viewport when the current file was closed and another file was opened.
+
+[2022/5/30]
+・Added the ability to convert ObjFlowData.xml to ObjFlow.bin
+
+[2022/9/22]
+・Deletion of unnecessary codes and modification of some codes
+
+[2022/9/23]
+・Fixed KMPXml.cs
+
+[2022/9/25]
+・Fixed the scale factor used in the model for the Area section from 1000 to 2000.
+
+[2022/9/26]
+・KMP version 3000 files can now be edited (except for reading and writing Xml).
+・EMAC section: missing codes have been re-added.
+
+[2024/6/17]
+・Code optimization, modification and organization
+・NET Framework version changed to 4.8.1
+
+[2024/6/19]
+・Deleted unnecessary file, folder and comment lines
+
+[2024/7/5]
+・Added the functions of insert Group, Point
+・Added the functions of multiple selection and batch processing
+・Changed the Object item "OBJ" and "Obj" to "GameObject" and "Object"
+・Displays the path of the open file
+・Move the functions to show/hide Groups and Points individually to PropertyGrid (CH_KMPGroupPoint has been removed with this change)
+・Added the functions to create a settings file and specify a default folder (Other -> Settings)
+・Fixed bug that occurs after deleting Checkpoint points
+・Fixed bug that occurs when closing and reopening a file
