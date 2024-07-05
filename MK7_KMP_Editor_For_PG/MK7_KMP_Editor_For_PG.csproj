@@ -73,6 +73,14 @@
       <DependentUpon>AddKMPObjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomPropertyGridClassConverter.cs" />
+    <Compile Include="EditorSettings\EditorSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorSettings\EditorSettingForm.Designer.cs">
+      <DependentUpon>EditorSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorSettings\EditorSettingXML.cs" />
+    <Compile Include="EditorSettings\EditorThemeXML.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +137,9 @@
     <Compile Include="ViewPortObjVisibleSetting.cs" />
     <EmbeddedResource Include="AddKMPObjectForm.resx">
       <DependentUpon>AddKMPObjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorSettings\EditorSettingForm.resx">
+      <DependentUpon>EditorSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -197,4 +208,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -75,52 +75,52 @@ namespace MK7_3D_KMP_Editor
             if (SectionName == "Kart Point")
             {
                 AddCheckValue(KartPointListBox, KMPCheck.TPTK_Check(KMPPropertyGridSettings.TPTK_Section));
-                tabControl1.SelectedIndex = 0;
+                KMPErrorCheckTabControl.SelectedIndex = 0;
             }
             if (SectionName == "Enemy Route")
             {
                 AddCheckValue(EnemyRouteListBox, KMPCheck.HPNE_TPNE_Check(KMPPropertyGridSettings.HPNE_TPNE_Section));
-                tabControl1.SelectedIndex = 1;
+                KMPErrorCheckTabControl.SelectedIndex = 1;
             }
             if (SectionName == "Item Route")
             {
                 AddCheckValue(ItemRouteListBox, KMPCheck.HPTI_TPTI_Check(KMPPropertyGridSettings.HPTI_TPTI_Section));
-                tabControl1.SelectedIndex = 2;
+                KMPErrorCheckTabControl.SelectedIndex = 2;
             }
             if (SectionName == "Checkpoint")
             {
                 AddCheckValue(CheckpointListBox, KMPCheck.HPKC_TPKC_Check(KMPPropertyGridSettings.HPKC_TPKC_Section, KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.TPGJ_Section));
-                tabControl1.SelectedIndex = 3;
+                KMPErrorCheckTabControl.SelectedIndex = 3;
             }
             if (SectionName == "Object")
             {
                 AddCheckValue(ObjectListBox, KMPCheck.JBOG_Check(KMPPropertyGridSettings.JBOG_Section, KMPPropertyGridSettings.ITOP_Section));
-                tabControl1.SelectedIndex = 4;
+                KMPErrorCheckTabControl.SelectedIndex = 4;
             }
             if (SectionName == "Route")
             {
                 AddCheckValue(RouteListBox, KMPCheck.ITOP_Check(KMPPropertyGridSettings.ITOP_Section));
-                tabControl1.SelectedIndex = 5;
+                KMPErrorCheckTabControl.SelectedIndex = 5;
             }
             if (SectionName == "Area")
             {
                 AddCheckValue(AreaListBox, KMPCheck.AERA_Check(KMPPropertyGridSettings.AERA_Section, KMPPropertyGridSettings.ITOP_Section, KMPPropertyGridSettings.EMAC_Section));
-                tabControl1.SelectedIndex = 6;
+                KMPErrorCheckTabControl.SelectedIndex = 6;
             }
             if (SectionName == "Camera")
             {
                 AddCheckValue(CameraListBox, KMPCheck.EMAC_Check(KMPPropertyGridSettings.EMAC_Section, KMPPropertyGridSettings.ITOP_Section));
-                tabControl1.SelectedIndex = 7;
+                KMPErrorCheckTabControl.SelectedIndex = 7;
             }
             if (SectionName == "Jugem Point")
             {
                 AddCheckValue(JugemPointListBox, KMPCheck.TPGJ_Check(KMPPropertyGridSettings.TPGJ_Section));
-                tabControl1.SelectedIndex = 8;
+                KMPErrorCheckTabControl.SelectedIndex = 8;
             }
             if (SectionName == "Glide Route")
             {
                 AddCheckValue(GlideRouteListBox, KMPCheck.HPLG_TPLG_Check(KMPPropertyGridSettings.HPLG_TPLG_Section));
-                tabControl1.SelectedIndex = 9;
+                KMPErrorCheckTabControl.SelectedIndex = 9;
             }
         }
 
@@ -459,14 +459,13 @@ namespace MK7_3D_KMP_Editor
             {
                 List<CheckValue> CheckValueList = new List<CheckValue>();
 
-                var ObjFlowXml = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml");
+                var ObjFlowXml = KMPLibrary.XMLConvert.Statics.ObjFlow.ReadObjFlowXml("ObjFlowData.xml");
                 List<ObjFlowData_XML.ObjFlow> ObjFlowList = ObjFlowXml.ObjFlows;
 
                 for (int Count = 0; Count < JBOG_Section.JBOGValueList.Count; Count++)
                 {
                     var Specific_Setting = JBOG_Section.JBOGValueList[Count].JBOG_Specific_Setting;
                     ushort[] JBOG_Specific_ValueAry = Specific_Setting.GetSpecificSettingArray();
-                    //ushort[] JBOG_Specific_ValueAry = new ushort[] { Specific_Setting.Value0, Specific_Setting.Value1, Specific_Setting.Value2, Specific_Setting.Value3, Specific_Setting.Value4, Specific_Setting.Value5, Specific_Setting.Value6, Specific_Setting.Value7 };
 
                     for (int ValueCount = 0; ValueCount < JBOG_Specific_ValueAry.ToList().Count; ValueCount++)
                     {

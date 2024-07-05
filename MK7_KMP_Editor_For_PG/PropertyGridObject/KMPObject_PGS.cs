@@ -26,6 +26,9 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
             [ReadOnly(true)]
             public string ObjectName { get; set; }
+
+            public bool IsViewportVisible { get; set; } = true;
+
             public string ObjectID { get; set; }
             public string JBOG_UnknownData1 { get; set; }
 
@@ -282,7 +285,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
                 public override string ToString()
                 {
-                    return "Obj Params";
+                    return "Object Params";
                 }
             }
             public ushort JBOG_PresenceSetting { get; set; }
@@ -325,7 +328,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
             public JBOGValue(KMPLibrary.XMLConvert.KMPData.SectionData.Object.Object_Value Object_Value, int InputID)
             {
-                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
+                List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDB_FindName = KMPLibrary.XMLConvert.Statics.ObjFlow.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
                 string Name = ObjFlowDB_FindName.Find(x => x.ObjectID == Object_Value.ObjectID).ObjectName;
 
                 ID = InputID;
@@ -343,7 +346,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
             public override string ToString()
             {
-                return "Object " + ID + " [" + "OBJID : " + ObjectID + "]";
+                return "Object " + ID + " [" + "ObjectID : " + ObjectID + "]";
             }
         }
 

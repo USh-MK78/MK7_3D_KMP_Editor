@@ -31,7 +31,7 @@ namespace MK7_3D_KMP_Editor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KMPErrorCheck));
             this.KartPointListBox = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.KMPErrorCheckTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.EnemyRouteListBox = new System.Windows.Forms.ListBox();
@@ -54,7 +54,7 @@ namespace MK7_3D_KMP_Editor
             this.Chk_Info = new System.Windows.Forms.CheckBox();
             this.Chk_Warning = new System.Windows.Forms.CheckBox();
             this.Chk_Error = new System.Windows.Forms.CheckBox();
-            this.tabControl1.SuspendLayout();
+            this.KMPErrorCheckTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -77,26 +77,26 @@ namespace MK7_3D_KMP_Editor
             this.KartPointListBox.Size = new System.Drawing.Size(406, 337);
             this.KartPointListBox.TabIndex = 0;
             // 
-            // tabControl1
+            // KMPErrorCheckTabControl
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.KMPErrorCheckTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Controls.Add(this.tabPage10);
-            this.tabControl1.Location = new System.Drawing.Point(2, 2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(414, 363);
-            this.tabControl1.TabIndex = 1;
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage1);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage2);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage3);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage4);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage5);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage6);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage7);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage8);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage9);
+            this.KMPErrorCheckTabControl.Controls.Add(this.tabPage10);
+            this.KMPErrorCheckTabControl.Location = new System.Drawing.Point(2, 2);
+            this.KMPErrorCheckTabControl.Name = "KMPErrorCheckTabControl";
+            this.KMPErrorCheckTabControl.SelectedIndex = 0;
+            this.KMPErrorCheckTabControl.Size = new System.Drawing.Size(414, 363);
+            this.KMPErrorCheckTabControl.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -341,12 +341,12 @@ namespace MK7_3D_KMP_Editor
             this.Controls.Add(this.Chk_Error);
             this.Controls.Add(this.Chk_Warning);
             this.Controls.Add(this.Chk_Info);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.KMPErrorCheckTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KMPErrorCheck";
             this.Text = "KMPErrorCheck";
             this.Load += new System.EventHandler(this.KMPErrorCheck_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.KMPErrorCheckTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -365,7 +365,7 @@ namespace MK7_3D_KMP_Editor
         #endregion
 
         private System.Windows.Forms.ListBox KartPointListBox;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl KMPErrorCheckTabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ListBox EnemyRouteListBox;

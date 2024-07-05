@@ -23,6 +23,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public int ID { get; set; }
 
+            public bool IsViewportVisible { get; set; } = true;
+
             public byte AreaType { get; set; }
 
             [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]

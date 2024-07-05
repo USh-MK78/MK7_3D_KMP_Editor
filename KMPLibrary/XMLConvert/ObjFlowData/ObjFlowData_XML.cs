@@ -47,6 +47,14 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
 
                 public Common() { }
 
+                public Common(string ColType, string PathType, string ModelSetting, string Unknown1)
+                {
+                    this.ColType = ColType;
+                    this.PathType = PathType;
+                    this.ModelSetting = ModelSetting;
+                    this.Unknown1 = Unknown1;
+                }
+
                 public Common(FBOC.ObjFlowData CommonData)
                 {
                     ColType = BitConverter.ToString(CommonData.CollisionType.Reverse().ToArray()).Replace("-", string.Empty);
@@ -74,6 +82,14 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
 
                 public LOD_Setting() { }
 
+                public LOD_Setting(int LOD, int High, int Low, int Default)
+                {
+                    this.LOD = LOD;
+                    this.LODHighPoly = High;
+                    this.LODLowPoly = Low;
+                    this.LODDefault = Default;
+                }
+
                 public LOD_Setting(FBOC.ObjFlowData.LODSetting LODSetting)
                 {
                     LOD = LODSetting.LOD;
@@ -98,6 +114,13 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
 
                 public Scale() { }
 
+                public Scale(int X, int Y, int Z)
+                {
+                    this.X = X;
+                    this.Y = Y;
+                    this.Z = Z;
+                }
+
                 public Scale(FBOC.ObjFlowData.ObjFlowScaleSetting ObjFlowScaleSetting)
                 {
                     X = ObjFlowScaleSetting.X;
@@ -117,6 +140,12 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
                 public string Sub { get; set; }
 
                 public Name() { }
+
+                public Name(string Main, string Sub)
+                {
+                    this.Main = Main;
+                    this.Sub = Sub;
+                }
 
                 public Name(FBOC.ObjFlowData NameData)
                 {
@@ -182,6 +211,20 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
 
             public ObjFlow() { }
 
+            public ObjFlow(string ObjectID, string ObjectName, string Path, bool UseKCL, string ObjectType, Common Common, LOD_Setting LOD_Setting, Scale Scale, Name Name, DefaultValue defaultValue)
+            {
+                this.ObjectID = ObjectID;
+                this.ObjectName = ObjectName;
+                this.Path = Path;
+                this.UseKCL = UseKCL;
+                this.ObjectType = ObjectType;
+                this.CommonData = Common;
+                this.LODSetting = LOD_Setting;
+                this.ScaleData = Scale;
+                this.NameData = Name;
+                this.DefaultValueData = defaultValue;
+            }
+
             public ObjFlow(FBOC.ObjFlowData ObjFlowData)
             {
                 ObjectID = BitConverter.ToString(ObjFlowData.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
@@ -198,6 +241,11 @@ namespace KMPLibrary.XMLConvert.ObjFlowData
         }
 
         public ObjFlowData_XML() { }
+
+        public ObjFlowData_XML(List<ObjFlow> objFlows)
+        {
+            ObjFlows = objFlows;
+        }
 
         public ObjFlowData_XML(FBOC FBOC)
         {

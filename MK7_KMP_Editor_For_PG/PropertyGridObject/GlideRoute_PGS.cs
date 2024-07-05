@@ -35,6 +35,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public int GroupID { get; set; }
 
+            public bool IsViewportVisible { get; set; } = true;
+
             [TypeConverter(typeof(CustomExpandableObjectSortTypeConverter))]
             public HPLG_PreviewGroups HPLG_PreviewGroup { get; set; } = new HPLG_PreviewGroups();
             public class HPLG_PreviewGroups

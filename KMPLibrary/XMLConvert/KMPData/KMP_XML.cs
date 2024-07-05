@@ -103,7 +103,7 @@ namespace KMPLibrary.XMLConvert.KMPData
             EnemyRoutes,
             ItemRoutes,
             CheckPoint,
-            Obj,
+            Object,
             Route,
             Area,
             Camera,

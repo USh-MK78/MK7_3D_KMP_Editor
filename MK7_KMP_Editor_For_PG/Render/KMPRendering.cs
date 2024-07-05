@@ -23,11 +23,10 @@ namespace MK7_3D_KMP_Editor.Render
             public List<HTK_3DES.PathTools.Rail> Routes_List { get; set; }
             public List<HTK_3DES.PathTools.Rail> GlideRoute_Rail_List { get; set; }
             public List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint> Checkpoint_Rail { get; set; }
-            public List<ModelVisual3D> OBJ_MV3DList { get; set; }
+            public List<ModelVisual3D> GameObject_MV3DList { get; set; }
             public List<ModelVisual3D> RespawnPoint_MV3DList { get; set; }
             public List<ModelVisual3D> StartPosition_MV3DList { get; set; }
 
-            //new KMPViewportObject();
             public KMPViewportObject()
             {
                 Area_MV3DList = new List<ModelVisual3D>();
@@ -37,7 +36,7 @@ namespace MK7_3D_KMP_Editor.Render
                 GlideRoute_Rail_List = new List<HTK_3DES.PathTools.Rail>();
                 Routes_List = new List<HTK_3DES.PathTools.Rail>();
                 Checkpoint_Rail = new List<HTK_3DES.KMP_3DCheckpointSystem.Checkpoint>();
-                OBJ_MV3DList = new List<ModelVisual3D>();
+                GameObject_MV3DList = new List<ModelVisual3D>();
                 RespawnPoint_MV3DList = new List<ModelVisual3D>();
                 StartPosition_MV3DList = new List<ModelVisual3D>();
             }
@@ -79,7 +78,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int i = 0; i < HPNE.NumOfEntries; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int Count = 0; Count < HPNE.HPNEValue_List[i].HPNE_Length; Count++)
                     {
@@ -99,8 +98,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_EnemyPathOBJ, EnemyPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_EnemyRoute_Rail.MV3D_List.Add(dv3D_EnemyPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_EnemyRoute_Rail.BasePointModelList.Add(dv3D_EnemyPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
                         #endregion
@@ -119,7 +118,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int HPTICount = 0; HPTICount < HPTI.NumOfEntries; HPTICount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int Count = 0; Count < HPTI.HPTIValue_List[HPTICount].HPTI_Length; Count++)
                     {
@@ -138,8 +137,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_ItemPathOBJ, ItemPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_ItemRoute_Rail.MV3D_List.Add(dv3D_ItemPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_ItemRoute_Rail.BasePointModelList.Add(dv3D_ItemPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
                     }
@@ -183,7 +182,7 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D_P2DLeft = new HTK_3DES.TSRSystem3D(dv3D_CheckpointLeftOBJ, P2DLeft_transform_Value);
                         tSRSystem3D_P2DLeft.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        checkpoint.Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
+                        checkpoint.Checkpoint_Left.BasePointModelList.Add(dv3D_CheckpointLeftOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
 
@@ -211,7 +210,7 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D_P2DRight = new HTK_3DES.TSRSystem3D(dv3D_CheckpointRightOBJ, P2DRight_transform_Value);
                         tSRSystem3D_P2DRight.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        checkpoint.Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
+                        checkpoint.Checkpoint_Right.BasePointModelList.Add(dv3D_CheckpointRightOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
 
@@ -271,7 +270,7 @@ namespace MK7_3D_KMP_Editor.Render
                     ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.SetString_MV3D(dv3D_OBJ, "OBJ " + Count + " " + -1);
+                    HTK_3DES.SetString_MV3D(dv3D_OBJ, "GameObject " + Count + " " + -1);
 
                     HTK_3DES.Transform OBJ_transform_Value = new HTK_3DES.Transform
                     {
@@ -283,7 +282,7 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_OBJ, OBJ_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    kMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
+                    kMPViewportObject.GameObject_MV3DList.Add(dv3D_OBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_OBJ);
                 }
@@ -294,7 +293,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int ITOP_RoutesCount = 0; ITOP_RoutesCount < ITOP.ITOP_NumberOfRoute; ITOP_RoutesCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int ITOP_PointsCount = 0; ITOP_PointsCount < ITOP.ITOP_Route_List[ITOP_RoutesCount].ITOP_Route_NumOfPoint; ITOP_PointsCount++)
                     {
@@ -314,7 +313,7 @@ namespace MK7_3D_KMP_Editor.Render
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //AddMDL
-                        Route_Rail.MV3D_List.Add(dv3D_RouteOBJ);
+                        Route_Rail.BasePointModelList.Add(dv3D_RouteOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_RouteOBJ);
                     }
@@ -416,7 +415,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int i = 0; i < HPLG.NumOfEntries; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int Count = 0; Count < HPLG.HPLGValue_List[i].HPLG_Length; Count++)
                     {
@@ -436,7 +435,7 @@ namespace MK7_3D_KMP_Editor.Render
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //Add model
-                        GlideRoute_Rail.MV3D_List.Add(dv3D_GliderPathOBJ);
+                        GlideRoute_Rail.BasePointModelList.Add(dv3D_GliderPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
                     }
@@ -487,7 +486,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < enemyRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointCount = 0; PointCount < enemyRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -507,8 +506,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_EnemyPathOBJ, EnemyPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_EnemyRoute_Rail.MV3D_List.Add(dv3D_EnemyPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_EnemyRoute_Rail.BasePointModelList.Add(dv3D_EnemyPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
                         #endregion
@@ -531,7 +530,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < itemRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointCount = 0; PointCount < itemRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -550,8 +549,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_ItemPathOBJ, ItemPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_ItemRoute_Rail.MV3D_List.Add(dv3D_ItemPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_ItemRoute_Rail.BasePointModelList.Add(dv3D_ItemPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
                     }
@@ -599,7 +598,7 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D_P2DLeft = new HTK_3DES.TSRSystem3D(dv3D_CheckpointLeftOBJ, P2DLeft_transform_Value);
                         tSRSystem3D_P2DLeft.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        checkpoint.Checkpoint_Left.MV3D_List.Add(dv3D_CheckpointLeftOBJ);
+                        checkpoint.Checkpoint_Left.BasePointModelList.Add(dv3D_CheckpointLeftOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_CheckpointLeftOBJ);
 
@@ -627,7 +626,7 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D_P2DRight = new HTK_3DES.TSRSystem3D(dv3D_CheckpointRightOBJ, P2DRight_transform_Value);
                         tSRSystem3D_P2DRight.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        checkpoint.Checkpoint_Right.MV3D_List.Add(dv3D_CheckpointRightOBJ);
+                        checkpoint.Checkpoint_Right.BasePointModelList.Add(dv3D_CheckpointRightOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_CheckpointRightOBJ);
 
@@ -687,7 +686,7 @@ namespace MK7_3D_KMP_Editor.Render
                     ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(ObjectPath);
 
                     //モデルの名前と番号を文字列に格納(情報化)
-                    HTK_3DES.SetString_MV3D(dv3D_OBJ, "OBJ " + ValueCount + " " + -1);
+                    HTK_3DES.SetString_MV3D(dv3D_OBJ, "GameObject " + ValueCount + " " + -1);
 
                     HTK_3DES.Transform OBJ_transform_Value = new HTK_3DES.Transform
                     {
@@ -699,7 +698,7 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_OBJ, OBJ_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    kMPViewportObject.OBJ_MV3DList.Add(dv3D_OBJ);
+                    kMPViewportObject.GameObject_MV3DList.Add(dv3D_OBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_OBJ);
                 }
@@ -710,7 +709,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < route.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail Route_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointsCount = 0; PointsCount < route.Groups[GroupCount].Points.Count; PointsCount++)
                     {
@@ -730,7 +729,7 @@ namespace MK7_3D_KMP_Editor.Render
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //AddMDL
-                        Route_Rail.MV3D_List.Add(dv3D_RouteOBJ);
+                        Route_Rail.BasePointModelList.Add(dv3D_RouteOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_RouteOBJ);
                     }
@@ -832,7 +831,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < glideRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointCount = 0; PointCount < glideRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -852,7 +851,7 @@ namespace MK7_3D_KMP_Editor.Render
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //Add model
-                        GlideRoute_Rail.MV3D_List.Add(dv3D_GliderPathOBJ);
+                        GlideRoute_Rail.BasePointModelList.Add(dv3D_GliderPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
                     }
@@ -876,7 +875,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int i = 0; i < xXXXRoute.Groups.Count; i++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_EnemyRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int Count = 0; Count < xXXXRoute.Groups[i].Points.Count; Count++)
                     {
@@ -896,8 +895,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_EnemyPathOBJ, EnemyPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_EnemyRoute_Rail.MV3D_List.Add(dv3D_EnemyPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_EnemyRoute_Rail.BasePointModelList.Add(dv3D_EnemyPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_EnemyPathOBJ);
                         #endregion
@@ -920,7 +919,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < xXXXRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail KMP_ItemRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointCount = 0; PointCount < xXXXRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -939,8 +938,8 @@ namespace MK7_3D_KMP_Editor.Render
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_ItemPathOBJ, ItemPoint_transform_Value);
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                        //Add Rail => MV3DList
-                        KMP_ItemRoute_Rail.MV3D_List.Add(dv3D_ItemPathOBJ);
+                        //Add Rail => BasePointModelList
+                        KMP_ItemRoute_Rail.BasePointModelList.Add(dv3D_ItemPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_ItemPathOBJ);
                     }
@@ -962,7 +961,7 @@ namespace MK7_3D_KMP_Editor.Render
                 for (int GroupCount = 0; GroupCount < xXXXRoute.Groups.Count; GroupCount++)
                 {
                     //Rail
-                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), null, new List<TubeVisual3D>());
+                    HTK_3DES.PathTools.Rail GlideRoute_Rail = new HTK_3DES.PathTools.Rail(new List<ModelVisual3D>(), HTK_3DES.PathTools.Rail.RailType.Tube);
 
                     for (int PointCount = 0; PointCount < xXXXRoute.Groups[GroupCount].Points.Count; PointCount++)
                     {
@@ -982,7 +981,7 @@ namespace MK7_3D_KMP_Editor.Render
                         tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //Add model
-                        GlideRoute_Rail.MV3D_List.Add(dv3D_GliderPathOBJ);
+                        GlideRoute_Rail.BasePointModelList.Add(dv3D_GliderPathOBJ);
 
                         UserCtrl.MainViewPort.Children.Add(dv3D_GliderPathOBJ);
                     }

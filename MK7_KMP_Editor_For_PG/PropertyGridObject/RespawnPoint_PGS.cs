@@ -23,6 +23,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public int ID { get; set; }
 
+            public bool IsViewportVisible { get; set; } = true;
+
             [TypeConverter(typeof(ExpandableObjectConverter))]
             public Position Positions { get; set; } = new Position();
             public class Position

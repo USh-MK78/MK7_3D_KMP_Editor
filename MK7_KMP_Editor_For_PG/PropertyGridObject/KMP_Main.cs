@@ -38,7 +38,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             HPNE_TPNE_Section = new EnemyRoute_PGS(KMP.KMP_Section.HPNE, KMP.KMP_Section.TPNE);
             HPTI_TPTI_Section = new ItemRoute_PGS(KMP.KMP_Section.HPTI, KMP.KMP_Section.TPTI);
             HPKC_TPKC_Section = new Checkpoint_PGS(KMP.KMP_Section.HPKC, KMP.KMP_Section.TPKC);
-            JBOG_Section = new KMPObject_PGS(KMP.KMP_Section.JBOG, ObjFlowConverter.Xml.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
+            JBOG_Section = new KMPObject_PGS(KMP.KMP_Section.JBOG, KMPLibrary.XMLConvert.Statics.ObjFlow.ReadObjFlowXml("ObjFlowData.xml").ObjFlows);
             ITOP_Section = new Route_PGS(KMP.KMP_Section.ITOP);
             AERA_Section = new Area_PGS(KMP.KMP_Section.AERA);
             EMAC_Section = new Camera_PGS(KMP.KMP_Section.EMAC);

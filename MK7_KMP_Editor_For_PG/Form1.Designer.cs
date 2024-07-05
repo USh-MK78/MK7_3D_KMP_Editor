@@ -84,15 +84,13 @@
             this.userControl11 = new MK7_3D_KMP_Editor.UserControl1();
             this.KMP_Viewport_TabCtrl = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.CH_KMPGroupPoint = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CH_GlideRoutes = new System.Windows.Forms.CheckBox();
             this.CH_Returnpoints = new System.Windows.Forms.CheckBox();
             this.CH_Camera = new System.Windows.Forms.CheckBox();
             this.CH_Area = new System.Windows.Forms.CheckBox();
             this.CH_Routes = new System.Windows.Forms.CheckBox();
-            this.CH_OBJ = new System.Windows.Forms.CheckBox();
+            this.CH_GameObject = new System.Windows.Forms.CheckBox();
             this.CH_Checkpoint = new System.Windows.Forms.CheckBox();
             this.CH_ItemRoutes = new System.Windows.Forms.CheckBox();
             this.CH_EnemyRoutes = new System.Windows.Forms.CheckBox();
@@ -102,8 +100,12 @@
             this.KMPChkpt_RDTBtn_R = new System.Windows.Forms.RadioButton();
             this.KMPChkpt_RDTBtn_L = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.KMP_CheckpointHeightOffset_TXT = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.CameraPosition_RadioBtn = new System.Windows.Forms.RadioButton();
+            this.MouseCursor_RadioBtn = new System.Windows.Forms.RadioButton();
+            this.OnElementPos_RadioBtn = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.Rad_AxisZ = new System.Windows.Forms.RadioButton();
             this.Rad_AxisY = new System.Windows.Forms.RadioButton();
@@ -116,10 +118,7 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.OnElementPos_RadioBtn = new System.Windows.Forms.RadioButton();
-            this.MouseCursor_RadioBtn = new System.Windows.Forms.RadioButton();
-            this.CameraPosition_RadioBtn = new System.Windows.Forms.RadioButton();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -145,15 +144,14 @@
             this.KMP_Viewport_SplitContainer.SuspendLayout();
             this.KMP_Viewport_TabCtrl.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -253,7 +251,7 @@
             // ViewportTypeChange
             // 
             this.ViewportTypeChange.Name = "ViewportTypeChange";
-            this.ViewportTypeChange.Size = new System.Drawing.Size(180, 22);
+            this.ViewportTypeChange.Size = new System.Drawing.Size(126, 22);
             this.ViewportTypeChange.Text = "3D <->2D";
             this.ViewportTypeChange.Click += new System.EventHandler(this.ViewportTypeChange_TSM_Click);
             // 
@@ -377,7 +375,8 @@
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.infoToolStripMenuItem1});
+            this.infoToolStripMenuItem1,
+            this.settingsToolStripMenuItem});
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             this.infoToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.infoToolStripMenuItem.Text = "Other";
@@ -385,7 +384,7 @@
             // infoToolStripMenuItem1
             // 
             this.infoToolStripMenuItem1.Name = "infoToolStripMenuItem1";
-            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(95, 22);
+            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.infoToolStripMenuItem1.Text = "Info";
             this.infoToolStripMenuItem1.Click += new System.EventHandler(this.infoToolStripMenuItem1_Click);
             // 
@@ -447,7 +446,6 @@
             this.KMPSection_Main_TabCtrl.SelectedIndex = 0;
             this.KMPSection_Main_TabCtrl.Size = new System.Drawing.Size(238, 504);
             this.KMPSection_Main_TabCtrl.TabIndex = 7;
-            this.KMPSection_Main_TabCtrl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -498,6 +496,7 @@
             this.propertyGrid_KMP_Group.Name = "propertyGrid_KMP_Group";
             this.propertyGrid_KMP_Group.Size = new System.Drawing.Size(224, 253);
             this.propertyGrid_KMP_Group.TabIndex = 9;
+            this.propertyGrid_KMP_Group.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_KMP_Group_PropertyValueChanged);
             // 
             // tabPage2
             // 
@@ -674,7 +673,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.groupBox7);
             this.tabPage4.Controls.Add(this.groupBox3);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -684,27 +682,6 @@
             this.tabPage4.Text = "Visibility";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.CH_KMPGroupPoint);
-            this.groupBox7.Location = new System.Drawing.Point(5, 253);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(188, 50);
-            this.groupBox7.TabIndex = 13;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Visibility (Group, Point)";
-            // 
-            // CH_KMPGroupPoint
-            // 
-            this.CH_KMPGroupPoint.AutoSize = true;
-            this.CH_KMPGroupPoint.Location = new System.Drawing.Point(5, 22);
-            this.CH_KMPGroupPoint.Name = "CH_KMPGroupPoint";
-            this.CH_KMPGroupPoint.Size = new System.Drawing.Size(47, 16);
-            this.CH_KMPGroupPoint.TabIndex = 0;
-            this.CH_KMPGroupPoint.Text = "Hide";
-            this.CH_KMPGroupPoint.UseVisualStyleBackColor = true;
-            this.CH_KMPGroupPoint.CheckedChanged += new System.EventHandler(this.KMPVisibilityGroupPoint_CheckedChanged);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.CH_GlideRoutes);
@@ -712,7 +689,7 @@
             this.groupBox3.Controls.Add(this.CH_Camera);
             this.groupBox3.Controls.Add(this.CH_Area);
             this.groupBox3.Controls.Add(this.CH_Routes);
-            this.groupBox3.Controls.Add(this.CH_OBJ);
+            this.groupBox3.Controls.Add(this.CH_GameObject);
             this.groupBox3.Controls.Add(this.CH_Checkpoint);
             this.groupBox3.Controls.Add(this.CH_ItemRoutes);
             this.groupBox3.Controls.Add(this.CH_EnemyRoutes);
@@ -779,16 +756,16 @@
             this.CH_Routes.UseVisualStyleBackColor = true;
             this.CH_Routes.CheckedChanged += new System.EventHandler(this.KMPVisibility_CheckedChanged);
             // 
-            // CH_OBJ
+            // CH_GameObject
             // 
-            this.CH_OBJ.AutoSize = true;
-            this.CH_OBJ.Location = new System.Drawing.Point(6, 110);
-            this.CH_OBJ.Name = "CH_OBJ";
-            this.CH_OBJ.Size = new System.Drawing.Size(41, 16);
-            this.CH_OBJ.TabIndex = 16;
-            this.CH_OBJ.Text = "Obj";
-            this.CH_OBJ.UseVisualStyleBackColor = true;
-            this.CH_OBJ.CheckedChanged += new System.EventHandler(this.KMPVisibility_CheckedChanged);
+            this.CH_GameObject.AutoSize = true;
+            this.CH_GameObject.Location = new System.Drawing.Point(6, 110);
+            this.CH_GameObject.Name = "CH_GameObject";
+            this.CH_GameObject.Size = new System.Drawing.Size(86, 16);
+            this.CH_GameObject.TabIndex = 16;
+            this.CH_GameObject.Text = "GameObject";
+            this.CH_GameObject.UseVisualStyleBackColor = true;
+            this.CH_GameObject.CheckedChanged += new System.EventHandler(this.KMPVisibility_CheckedChanged);
             // 
             // CH_Checkpoint
             // 
@@ -881,7 +858,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.KMP_CheckpointHeightOffset_TXT);
             this.groupBox2.Location = new System.Drawing.Point(4, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(189, 49);
@@ -889,15 +866,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Checkpoint height";
             // 
-            // textBox1
+            // KMP_CheckpointHeightOffset_TXT
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 19);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "500";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.KMP_CheckpointHeightOffset_TXT.Location = new System.Drawing.Point(6, 18);
+            this.KMP_CheckpointHeightOffset_TXT.Name = "KMP_CheckpointHeightOffset_TXT";
+            this.KMP_CheckpointHeightOffset_TXT.Size = new System.Drawing.Size(174, 19);
+            this.KMP_CheckpointHeightOffset_TXT.TabIndex = 0;
+            this.KMP_CheckpointHeightOffset_TXT.Text = "500";
+            this.KMP_CheckpointHeightOffset_TXT.TextChanged += new System.EventHandler(this.KMP_CheckpointHeightOffset_TXT_TextChanged);
+            this.KMP_CheckpointHeightOffset_TXT.Leave += new System.EventHandler(this.KMP_CheckpointHeightOffset_TXT_Leave);
             // 
             // tabPage6
             // 
@@ -910,6 +887,53 @@
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Viewport Setting";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.CameraPosition_RadioBtn);
+            this.groupBox8.Controls.Add(this.MouseCursor_RadioBtn);
+            this.groupBox8.Controls.Add(this.OnElementPos_RadioBtn);
+            this.groupBox8.Location = new System.Drawing.Point(6, 123);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(187, 100);
+            this.groupBox8.TabIndex = 19;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Add Objcet Position Setting";
+            // 
+            // CameraPosition_RadioBtn
+            // 
+            this.CameraPosition_RadioBtn.AutoSize = true;
+            this.CameraPosition_RadioBtn.Location = new System.Drawing.Point(6, 62);
+            this.CameraPosition_RadioBtn.Name = "CameraPosition_RadioBtn";
+            this.CameraPosition_RadioBtn.Size = new System.Drawing.Size(103, 16);
+            this.CameraPosition_RadioBtn.TabIndex = 2;
+            this.CameraPosition_RadioBtn.Text = "CameraPosition";
+            this.CameraPosition_RadioBtn.UseVisualStyleBackColor = true;
+            this.CameraPosition_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
+            // 
+            // MouseCursor_RadioBtn
+            // 
+            this.MouseCursor_RadioBtn.AutoSize = true;
+            this.MouseCursor_RadioBtn.Location = new System.Drawing.Point(6, 40);
+            this.MouseCursor_RadioBtn.Name = "MouseCursor_RadioBtn";
+            this.MouseCursor_RadioBtn.Size = new System.Drawing.Size(90, 16);
+            this.MouseCursor_RadioBtn.TabIndex = 1;
+            this.MouseCursor_RadioBtn.Text = "MouseCursor";
+            this.MouseCursor_RadioBtn.UseVisualStyleBackColor = true;
+            this.MouseCursor_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
+            // 
+            // OnElementPos_RadioBtn
+            // 
+            this.OnElementPos_RadioBtn.AutoSize = true;
+            this.OnElementPos_RadioBtn.Checked = true;
+            this.OnElementPos_RadioBtn.Location = new System.Drawing.Point(6, 18);
+            this.OnElementPos_RadioBtn.Name = "OnElementPos_RadioBtn";
+            this.OnElementPos_RadioBtn.Size = new System.Drawing.Size(78, 16);
+            this.OnElementPos_RadioBtn.TabIndex = 0;
+            this.OnElementPos_RadioBtn.TabStop = true;
+            this.OnElementPos_RadioBtn.Text = "OnElement";
+            this.OnElementPos_RadioBtn.UseVisualStyleBackColor = true;
+            this.OnElementPos_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
             // 
             // groupBox5
             // 
@@ -1038,52 +1062,12 @@
             this.Label_SectionName.TabIndex = 0;
             this.Label_SectionName.Text = "SectionName :";
             // 
-            // groupBox8
+            // settingsToolStripMenuItem
             // 
-            this.groupBox8.Controls.Add(this.CameraPosition_RadioBtn);
-            this.groupBox8.Controls.Add(this.MouseCursor_RadioBtn);
-            this.groupBox8.Controls.Add(this.OnElementPos_RadioBtn);
-            this.groupBox8.Location = new System.Drawing.Point(6, 123);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(187, 100);
-            this.groupBox8.TabIndex = 19;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Add Objcet Position Setting";
-            // 
-            // OnElementPos_RadioBtn
-            // 
-            this.OnElementPos_RadioBtn.AutoSize = true;
-            this.OnElementPos_RadioBtn.Checked = true;
-            this.OnElementPos_RadioBtn.Location = new System.Drawing.Point(6, 18);
-            this.OnElementPos_RadioBtn.Name = "OnElementPos_RadioBtn";
-            this.OnElementPos_RadioBtn.Size = new System.Drawing.Size(78, 16);
-            this.OnElementPos_RadioBtn.TabIndex = 0;
-            this.OnElementPos_RadioBtn.TabStop = true;
-            this.OnElementPos_RadioBtn.Text = "OnElement";
-            this.OnElementPos_RadioBtn.UseVisualStyleBackColor = true;
-            this.OnElementPos_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
-            // 
-            // MouseCursor_RadioBtn
-            // 
-            this.MouseCursor_RadioBtn.AutoSize = true;
-            this.MouseCursor_RadioBtn.Location = new System.Drawing.Point(6, 40);
-            this.MouseCursor_RadioBtn.Name = "MouseCursor_RadioBtn";
-            this.MouseCursor_RadioBtn.Size = new System.Drawing.Size(90, 16);
-            this.MouseCursor_RadioBtn.TabIndex = 1;
-            this.MouseCursor_RadioBtn.Text = "MouseCursor";
-            this.MouseCursor_RadioBtn.UseVisualStyleBackColor = true;
-            this.MouseCursor_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
-            // 
-            // CameraPosition_RadioBtn
-            // 
-            this.CameraPosition_RadioBtn.AutoSize = true;
-            this.CameraPosition_RadioBtn.Location = new System.Drawing.Point(6, 62);
-            this.CameraPosition_RadioBtn.Name = "CameraPosition_RadioBtn";
-            this.CameraPosition_RadioBtn.Size = new System.Drawing.Size(103, 16);
-            this.CameraPosition_RadioBtn.TabIndex = 2;
-            this.CameraPosition_RadioBtn.Text = "CameraPosition";
-            this.CameraPosition_RadioBtn.UseVisualStyleBackColor = true;
-            this.CameraPosition_RadioBtn.CheckedChanged += new System.EventHandler(this.AddObjectPosSetting_CheckedChanged);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1124,8 +1108,6 @@
             this.KMP_Viewport_SplitContainer.ResumeLayout(false);
             this.KMP_Viewport_TabCtrl.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
@@ -1134,12 +1116,12 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1179,7 +1161,7 @@
         private System.Windows.Forms.CheckBox CH_Camera;
         private System.Windows.Forms.CheckBox CH_Area;
         private System.Windows.Forms.CheckBox CH_Routes;
-        private System.Windows.Forms.CheckBox CH_OBJ;
+        private System.Windows.Forms.CheckBox CH_GameObject;
         private System.Windows.Forms.CheckBox CH_Checkpoint;
         private System.Windows.Forms.CheckBox CH_ItemRoutes;
         private System.Windows.Forms.CheckBox CH_EnemyRoutes;
@@ -1214,15 +1196,13 @@
         private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_R;
         private System.Windows.Forms.RadioButton KMPChkpt_RDTBtn_L;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox KMP_CheckpointHeightOffset_TXT;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.RadioButton Rad_AxisZ;
         private System.Windows.Forms.RadioButton Rad_AxisY;
         private System.Windows.Forms.RadioButton Rad_AxisX;
         private System.Windows.Forms.RadioButton Rad_AxisAll;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.CheckBox CH_KMPGroupPoint;
         private System.Windows.Forms.ToolStripMenuItem errorCheckToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thisSectionToolStripMenuItem;
@@ -1237,6 +1217,7 @@
         private System.Windows.Forms.RadioButton CameraPosition_RadioBtn;
         private System.Windows.Forms.RadioButton MouseCursor_RadioBtn;
         private System.Windows.Forms.RadioButton OnElementPos_RadioBtn;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

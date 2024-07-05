@@ -23,6 +23,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public int GroupID { get; set; }
 
+            public bool IsViewportVisible { get; set; } = true;
+
             public byte ITOP_Loop { get; set; }
             public byte ITOP_Smooth { get; set; }
 

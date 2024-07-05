@@ -23,6 +23,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             [ReadOnly(true)]
             public int ID { get; set; }
 
+            public bool IsViewportVisible { get; set; } = true;
+
             public byte CameraType { get; set; }
             public byte NextCameraIndex { get; set; }
             public byte EMAC_NextVideoIndex { get; set; }

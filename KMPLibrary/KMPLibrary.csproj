@@ -80,6 +80,7 @@
     <Compile Include="XMLConvert\KMPData\SectionData\StageInfo.cs" />
     <Compile Include="XMLConvert\KMPData\SectionData\StartPosition.cs" />
     <Compile Include="XMLConvert\ObjFlowData\ObjFlowData_XML.cs" />
+    <Compile Include="XMLConvert\Statics.cs" />
     <Compile Include="XMLConvert\XXXXRouteData\XXXXRoute_XML.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,6 +28,75 @@ namespace MK7_3D_KMP_Editor
             InitializeComponent();
         }
 
+        #region ViewPortControl
+        public void AddItem(Visual3D visual3D)
+        {
+            MainViewPort.Children.Add(visual3D);
+            UpdateViewport();
+        }
+
+        public void RemoveItem(Visual3D visual3D)
+        {
+            MainViewPort.Children.Remove(visual3D);
+            UpdateViewport();
+        }
+
+        public void RemoveItemAt(int index)
+        {
+            MainViewPort.Children.RemoveAt(index);
+            UpdateViewport();
+        }
+
+        public void VpItemAddRange(List<ModelVisual3D> values)
+        {
+            foreach (var i in values) MainViewPort.Children.Add(i);
+            UpdateViewport();
+        }
+
+        public void VpItemDeleteRange(List<ModelVisual3D> values)
+        {
+            foreach (var i in values) MainViewPort.Children.Remove(i);
+            UpdateViewport();
+        }
+
+        public void UpdateViewport()
+        {
+            MainViewPort.UpdateLayout();
+        }
+
+        //public void VpItemAddRange<T>(List<T> values)
+        //{
+        //    if (values.Count != 0)
+        //    {
+        //        foreach (var i in values)
+        //        {
+        //            Visual3D v = (Visual3D)(object)i;
+        //            render.MainViewPort.Children.Add(v);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        System.Windows.MessageBox.Show("Error");
+        //    }
+        //}
+
+        //public void VpItemDeleteRange<T>(List<T> values)
+        //{
+        //    if (values.Count != 0)
+        //    {
+        //        foreach (var i in values)
+        //        {
+        //            Visual3D v = (Visual3D)(object)i;
+        //            render.MainViewPort.Children.Remove(v);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        System.Windows.MessageBox.Show("Error");
+        //    }
+        //}
+        #endregion
+
         public Vector3D Drag(Vector3D InputVector3D, System.Windows.Input.MouseEventArgs e)
         {
             Point p = e.GetPosition(MainViewPort);
@@ -113,7 +182,10 @@ namespace MK7_3D_KMP_Editor
             }
             else if (PositionMode == PositionMode.ElementPosition)
             {
-                PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
+                if (MainViewPort.CursorOnElementPosition != null) PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
+                else if (MainViewPort.CursorOnElementPosition == null) PosMode = (Point3D)MainViewPort.CursorPosition;
+
+                //PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
             }
 
             return PosMode;
@@ -161,65 +233,65 @@ namespace MK7_3D_KMP_Editor
             if (CameraType.Name == "OrthographicCamera") MainViewPort.Camera.LookAt(point3D, animationTime);
         }
 
-        public void FindObject(object input, int ValueIndex, int GroupIndex = -1, CheckpointSearchOption checkpointSearchOption = CheckpointSearchOption.Null, double ChkptYOffsetValue = 0)
+        public void FindObject(object input, int ValueIndex, int GroupIndex = -1, CheckpointSearchOption checkpointSearchOption = CheckpointSearchOption.Null, double CheckpointYOffsetValue = 0)
         {
             if (input is List<KartPoint_PGS.TPTKValue>)
             {
                 var PG_KartPositions = input as List<KartPoint_PGS.TPTKValue>;
                 LookAtObj(PG_KartPositions[ValueIndex].Position_Value.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<EnemyRoute_PGS.HPNEValue>)
+            else if (input is List<EnemyRoute_PGS.HPNEValue>)
             {
                 var PG_EnemyPoints = input as List<EnemyRoute_PGS.HPNEValue>;
                 LookAtObj(PG_EnemyPoints[GroupIndex].TPNEValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<ItemRoute_PGS.HPTIValue>)
+            else if (input is List<ItemRoute_PGS.HPTIValue>)
             {
                 var PG_ItemPoints = input as List<ItemRoute_PGS.HPTIValue>;
                 LookAtObj(PG_ItemPoints[GroupIndex].TPTIValueList[ValueIndex].TPTI_Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<Checkpoint_PGS.HPKCValue>)
+            else if (input is List<Checkpoint_PGS.HPKCValue>)
             {
                 var PG_Checkpoints = input as List<Checkpoint_PGS.HPKCValue>;
                 if (checkpointSearchOption == CheckpointSearchOption.Left)
                 {
                     var p_Left = PG_Checkpoints[GroupIndex].TPKCValueList[ValueIndex].Position_2D_Left;
-                    Vector3D Chkpt_Left = new Vector3D(p_Left.X, ChkptYOffsetValue, p_Left.Y);
+                    Vector3D Chkpt_Left = new Vector3D(p_Left.X, CheckpointYOffsetValue, p_Left.Y);
                     LookAtObj(Chkpt_Left.ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
                 }
-                if (checkpointSearchOption == CheckpointSearchOption.Right)
+                else if (checkpointSearchOption == CheckpointSearchOption.Right)
                 {
                     var p_Right = PG_Checkpoints[GroupIndex].TPKCValueList[ValueIndex].Position_2D_Right;
-                    Vector3D Chkpt_Right = new Vector3D(p_Right.X, ChkptYOffsetValue, p_Right.Y);
+                    Vector3D Chkpt_Right = new Vector3D(p_Right.X, CheckpointYOffsetValue, p_Right.Y);
                     LookAtObj(Chkpt_Right.ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
                 }
             }
-            if (input is List<KMPObject_PGS.JBOGValue>)
+            else if (input is List<KMPObject_PGS.JBOGValue>)
             {
                 var PG_Objects = input as List<KMPObject_PGS.JBOGValue>;
                 LookAtObj(PG_Objects[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<Route_PGS.ITOP_Route>)
+            else if (input is List<Route_PGS.ITOP_Route>)
             {
                 var PG_Routes = input as List<Route_PGS.ITOP_Route>;
                 LookAtObj(PG_Routes[GroupIndex].ITOP_PointList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<Area_PGS.AERAValue>)
+            else if (input is List<Area_PGS.AERAValue>)
             {
                 var PG_Areas = input as List<Area_PGS.AERAValue>;
                 LookAtObj(PG_Areas[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<Camera_PGS.EMACValue>)
+            else if (input is List<Camera_PGS.EMACValue>)
             {
                 var PG_Cameras = input as List<Camera_PGS.EMACValue>;
                 LookAtObj(PG_Cameras[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<RespawnPoint_PGS.TPGJValue>)
+            else if (input is List<RespawnPoint_PGS.TPGJValue>)
             {
                 var PG_JugemPoints = input as List<RespawnPoint_PGS.TPGJValue>;
                 LookAtObj(PG_JugemPoints[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
             }
-            if (input is List<GlideRoute_PGS.HPLGValue>)
+            else if (input is List<GlideRoute_PGS.HPLGValue>)
             {
                 var PG_GlideRoutes = input as List<GlideRoute_PGS.HPLGValue>;
                 LookAtObj(PG_GlideRoutes[GroupIndex].TPLGValueList[ValueIndex].Positions.GetVector3D().ToPoint3D(), 500, 1000, MainViewPort.Camera.GetType());
