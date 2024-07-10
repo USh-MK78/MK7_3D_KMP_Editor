@@ -7,9 +7,6 @@ This program is for editing KMP files of "Mario Kart 7".
 This project was originally created to understand how to work with 3D data using Helix Toolkit.  
 I chose the KMP file because of my pure curiosity, "I want to express this file in 3D," and the merit of being able to achieve my original purpose by reading this file.  
   
-*Future Task*  
-Enable Ctrl + S to save : Priority (Medium)  
-  
 *how to use*  
 To actually use this program, you need to build a project.  
   

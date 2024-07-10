@@ -99,3 +99,10 @@ Show / Hide XXXXRoutes(Group), Checkpoint and objects.
 ・Added the functions to create a settings file and specify a default folder (Other -> Settings)
 ・Fixed bug that occurs after deleting Checkpoint points
 ・Fixed bug that occurs when closing and reopening a file
+
+[2024/7/10]
+・Added the functions to save files when exiting
+・[Object] Added the functions to temporarily save information at the time of addition so that it can be automatically specified when adding again
+・[Object] Added functions to set elements to be selected by default when added
+・Changed angle notation from radian to degree (PropertyGrid)
+・Fixed the Position value was included in the Rotation value
