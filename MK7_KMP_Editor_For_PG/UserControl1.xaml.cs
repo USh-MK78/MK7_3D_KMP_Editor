@@ -97,6 +97,43 @@ namespace MK7_3D_KMP_Editor
         //}
         #endregion
 
+        //public Vector3D Drag(System.Windows.Input.MouseEventArgs e, Vector3D InputVector3D, bool EnableOnElementPosition = false)
+        //{
+        //    Vector3D? pos = null;
+        //    if (EnableOnElementPosition == true)
+        //    {
+        //        if (MainViewPort.CursorOnElementPosition != null)
+        //        {
+        //            Point p = e.GetPosition(MainViewPort);
+        //            pos = MainViewPort.Viewport.UnProject(p, MainViewPort.CursorOnElementPosition.Value, new Vector3D(0, 0, -1)).Value.ToVector3D();
+        //            //if (pos.HasValue)
+        //            //{
+        //            //    //Vector3D vec = pos.Value.ToVector3D();
+        //            //    pos.Value.X = Math.Round(pos.Value.X, 3, MidpointRounding.AwayFromZero);
+        //            //    pos.Value.Y = Math.Round(pos.Value.Y, 3, MidpointRounding.AwayFromZero);
+        //            //    pos.Z = Math.Round(pos.Value.Z, 3, MidpointRounding.AwayFromZero);
+        //            //    //return vec;
+        //            //}
+        //        }
+        //        else if (MainViewPort.CursorOnElementPosition == null)
+        //        {
+        //            pos = Drag(InputVector3D, e);
+        //        }
+        //    }
+        //    else if (EnableOnElementPosition == false)
+        //    {
+        //        pos = Drag(InputVector3D, e);
+        //    }
+
+        //    return (Vector3D)pos;
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="InputVector3D"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public Vector3D Drag(Vector3D InputVector3D, System.Windows.Input.MouseEventArgs e)
         {
             Point p = e.GetPosition(MainViewPort);
@@ -112,7 +149,7 @@ namespace MK7_3D_KMP_Editor
             return pos.Value.ToVector3D();
         }
 
-        #region MouseMoveRotateSystem(WIP)
+        #region MouseMoveRotateSystem(DELETE)
         //public double Degress(double d)
         //{
         //    double Degress_Val = new double();
@@ -132,7 +169,7 @@ namespace MK7_3D_KMP_Editor
         //            //Degress_Val = Math.Min(-3.141, d);
 
         //        }
-        //        if (signcheck == 1)
+        //        else if (signcheck == 1)
         //        {
         //            //符号なし
         //            Degress_Val = 3.141;
@@ -184,8 +221,6 @@ namespace MK7_3D_KMP_Editor
             {
                 if (MainViewPort.CursorOnElementPosition != null) PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
                 else if (MainViewPort.CursorOnElementPosition == null) PosMode = (Point3D)MainViewPort.CursorPosition;
-
-                //PosMode = (Point3D)MainViewPort.CursorOnElementPosition;
             }
 
             return PosMode;

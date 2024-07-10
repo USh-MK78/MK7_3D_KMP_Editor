@@ -37,9 +37,9 @@ namespace KMPLibrary.Format.SectionData
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[0]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[1]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[2]);
-                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[0]);
-                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[1]);
-                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Position)[2]);
+                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Rotation)[0]);
+                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Rotation)[1]);
+                bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(TPTK_Rotation)[2]);
                 bw.Write(Player_Index);
                 bw.Write(TPTK_UnknownData);
             }

@@ -74,6 +74,16 @@ namespace MK7_3D_KMP_Editor
         }
 
         /// <summary>
+        /// 角度をRadianに変換
+        /// </summary>
+        /// <param name="Angle"></param>
+        /// <returns></returns>
+        public static double AngleToRadian(double Angle)
+        {
+            return (float)(Math.PI * Angle / 180);
+        }
+
+        /// <summary>
         /// Radianを角度に変換
         /// </summary>
         /// <param name="Radian"></param>
@@ -83,15 +93,7 @@ namespace MK7_3D_KMP_Editor
             return (float)(Radian * (180 / Math.PI));
         }
 
-        /// <summary>
-        /// 角度をRadianに変換
-        /// </summary>
-        /// <param name="Angle"></param>
-        /// <returns></returns>
-        public static double AngleToRadian(double Angle)
-        {
-            return (float)(Angle * (Math.PI / 180));
-        }
+
 
         public static Vector3D RadianToAngleVector3D(Vector3D vector3D)
         {
@@ -253,7 +255,7 @@ namespace MK7_3D_KMP_Editor
                     RotateY = Transform.Rotate3D.Y;
                     RotateZ = Transform.Rotate3D.Z;
                 }
-                if (RotationSettings == RotationType.Radian)
+                else if (RotationSettings == RotationType.Radian)
                 {
                     RotateX = RadianToAngle(Transform.Rotate3D.X);
                     RotateY = RadianToAngle(Transform.Rotate3D.Y);
@@ -277,7 +279,7 @@ namespace MK7_3D_KMP_Editor
             public void TSR_Scale3D(double ScaleFactorValue = 2, Point3D? Center = null, bool CenterFlag = false)
             {
                 if (CenterFlag == true) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue), Center ?? new Point3D(0, 0, 0));
-                if (CenterFlag == false) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue));
+                else if (CenterFlag == false) ScaleTransform3D = new ScaleTransform3D(Scalefactor(Transform.Scale3D, ScaleFactorValue));
             }
             #endregion
 
@@ -1628,7 +1630,6 @@ namespace MK7_3D_KMP_Editor
 
             public static ModelVisual3D CustomPointVector3D(Color BoxColor, Color BoxBackColor, Color ArrowColor, Color ArrowBackColor, Color SphereColor, Color SphereBackColor)
             {
-                //BoxVisual3D boxVisual3D = (BoxVisual3D)CustomBoxVisual3D(new Vector3D(0.3, 0.3, 2.5), new Point3D(0, 0, 1.65), BoxColor, BoxBackColor);
                 ArrowVisual3D arrowVisual3D = (ArrowVisual3D)CustomArrowVisual3D(0.3, 5, 1, new Vector3D(0, 1, 0), new Point3D(0, -0.5, 0), ArrowColor, ArrowBackColor);
 
                 Transform transform = new Transform
@@ -1640,12 +1641,6 @@ namespace MK7_3D_KMP_Editor
 
                 TSRSystem3D tSRSystem3D = new TSRSystem3D(arrowVisual3D, transform);
                 tSRSystem3D.Transform3D(TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), TSRSystem3D.RotationType.Radian);
-
-                //HTK_3DES.TransformSetting transformSetting = new TSRSystem.TransformSetting { InputMV3D = arrowVisual3D };
-
-                //HTK_3DES.New_TransformSystem3D(transform, transformSetting);
-
-                //HTK_3DES.TransformMV3D.Transform_MV3D(transform, arrowVisual3D, HTK_3DES.RotationSetting.Angle);
 
                 Model3DGroup model3DGroup = new Model3DGroup();
                 model3DGroup.Children.Add(CustomBoxVisual3D(new Vector3D(0.3, 0.3, 5), new Point3D(0, 0, 2.65), BoxColor, BoxBackColor).Content);

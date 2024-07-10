@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MK7_3D_KMP_Editor.CustomPropertyGridClassConverter;
+using static MK7_3D_KMP_Editor.PropertyGridObject.CustomPropertyGridClassConverter;
 
 namespace MK7_3D_KMP_Editor.PropertyGridObject.ObjFlow
 {

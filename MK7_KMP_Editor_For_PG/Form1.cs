@@ -29,6 +29,7 @@ using KMPLibrary.XMLConvert.XXXXRouteData;
 using MK7_3D_KMP_Editor.Render;
 using MK7_3D_KMP_Editor.PropertyGridObject;
 using KMPLibrary.XMLConvert.IO;
+using static MK7_3D_KMP_Editor.HTK_3DES;
 
 namespace MK7_3D_KMP_Editor
 {
@@ -50,6 +51,7 @@ namespace MK7_3D_KMP_Editor
         public KMP KMPData { get; set; }
         public KMP_Main_PGS KMP_Main_PGS { get; set; }
         public ViewPortObjVisibleSetting.KMPSectionVisibility KMPSection_Visibility { get; set; } = ViewPortObjVisibleSetting.KMPSectionVisibility.DefaultSetting();
+        public AddKMPObjectForm.SelectedKMPObjectInfo SelectedKMPObjectInfo { get; set; }
 
         #region Property
         /// <summary>
@@ -937,13 +939,13 @@ namespace MK7_3D_KMP_Editor
                 }
                 else if (KMPSectionComboBox.Text == "Object")
                 {
-                    AddKMPObjectForm addKMPObjectForm = new AddKMPObjectForm();
+                    AddKMPObjectForm addKMPObjectForm = new AddKMPObjectForm(SelectedKMPObjectInfo, EditorSetting.GeneralSetting.DefaultValueObjectID);
                     addKMPObjectForm.ShowDialog();
-                    var data = addKMPObjectForm.SelectedKMPObject_Info;
+                    SelectedKMPObjectInfo = addKMPObjectForm.SelectedKMPObject_Info;
 
                     int Index = (KMP_Point_ListBox.Items.Count == 0) ? 0 : (KMP_Point_ListBox.Items.Count >= 1 ? KMP_Point_ListBox.SelectedIndex + 1 : 0);
 
-                    KMPObject_PGS.JBOGValue JBOGValue = new KMPObject_PGS.JBOGValue(data.Name, data.ObjID, Pos.ToVector3D(), Index);
+                    KMPObject_PGS.JBOGValue JBOGValue = new KMPObject_PGS.JBOGValue(SelectedKMPObjectInfo.ObjectName, SelectedKMPObjectInfo.ObjectID, Pos.ToVector3D(), Index);
                     KMP_Main_PGS.JBOG_Section.JBOGValueList.Insert(Index, JBOGValue);
 
                     ReInputID(KMP_Main_PGS.JBOG_Section.JBOGValueList, "ID");
@@ -952,7 +954,7 @@ namespace MK7_3D_KMP_Editor
                     {
                         #region Add Model(OBJ)
                         List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = KMPLibrary.XMLConvert.Statics.ObjFlow.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
-                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
+                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == SelectedKMPObjectInfo.ObjectID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
                         HTK_3DES.Transform OBJ_transform_Value = new HTK_3DES.Transform
@@ -1221,7 +1223,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.TPTK_Section.TPTKValueList[MDLNum].Position_Value = new KartPoint_PGS.TPTKValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = KMP_Main_PGS.TPTK_Section.TPTKValueList[MDLNum];
@@ -1242,7 +1244,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.HPNE_TPNE_Section.HPNEValueList[GroupNum].TPNEValueList[MDLNum].Positions = new EnemyRoute_PGS.HPNEValue.TPNEValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.EnemyRoute_Rail_List[GroupNum];
@@ -1267,7 +1269,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.HPTI_TPTI_Section.HPTIValueList[GroupNum].TPTIValueList[MDLNum].TPTI_Positions = new ItemRoute_PGS.HPTIValue.TPTIValue.TPTI_Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.ItemRoute_Rail_List[GroupNum];
@@ -1293,7 +1295,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Left.Y = (float)transform_Value.Translate3D.Z;
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更(機能の追加)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = KMPViewportObject.Checkpoint_Rail[GroupNum];
@@ -1327,7 +1329,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.HPKC_TPKC_Section.HPKCValueList[GroupNum].TPKCValueList[MDLNum].Position_2D_Right.Y = (float)transform_Value.Translate3D.Z;
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更(機能の追加)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint = KMPViewportObject.Checkpoint_Rail[GroupNum];
@@ -1361,7 +1363,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.JBOG_Section.JBOGValueList[MDLNum].Positions = new KMPObject_PGS.JBOGValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = KMP_Main_PGS.JBOG_Section.JBOGValueList[MDLNum];
@@ -1383,7 +1385,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.ITOP_Section.ITOP_RouteList[GroupNum].ITOP_PointList[MDLNum].Positions = new Route_PGS.ITOP_Route.ITOP_Point.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.Routes_List[GroupNum];
@@ -1409,7 +1411,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.AERA_Section.AERAValueList[MDLNum].Positions = new Area_PGS.AERAValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = KMP_Main_PGS.AERA_Section.AERAValueList[MDLNum];
@@ -1431,7 +1433,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.EMAC_Section.EMACValueList[MDLNum].Positions = new Camera_PGS.EMACValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = KMP_Main_PGS.EMAC_Section.EMACValueList[MDLNum];
@@ -1453,7 +1455,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.TPGJ_Section.TPGJValueList[MDLNum].Positions = new RespawnPoint_PGS.TPGJValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //PropertyGridにPropertyを表示させる
                         propertyGrid_KMP_Path.SelectedObject = KMP_Main_PGS.TPGJ_Section.TPGJValueList[MDLNum];
@@ -1475,7 +1477,7 @@ namespace MK7_3D_KMP_Editor
                         KMP_Main_PGS.HPLG_TPLG_Section.HPLGValueList[GroupNum].TPLGValueList[MDLNum].Positions = new GlideRoute_PGS.HPLGValue.TPLGValue.Position(transform_Value.Translate3D);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(FindMV3D, transform_Value);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
                         //パスの形を変更
                         HTK_3DES.PathTools.Rail rail = KMPViewportObject.GlideRoute_Rail_List[GroupNum];
@@ -1491,16 +1493,16 @@ namespace MK7_3D_KMP_Editor
 
         public void render_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            //Panel制御
-            bool SBool = KMP_Viewport_SplitContainer.Panel2Collapsed;
             if (Keyboard.IsKeyDown(Key.T) == true)
             {
+                //Panel制御
+                bool SBool = KMP_Viewport_SplitContainer.Panel2Collapsed;
                 if (SBool == true)
                 {
                     KMP_Viewport_SplitContainer.Panel2Collapsed = false;
                     KMP_Viewport_SplitContainer.Panel2.Show();
                 }
-                if (SBool == false)
+                else if (SBool == false)
                 {
                     KMP_Viewport_SplitContainer.Panel2Collapsed = true;
                     KMP_Viewport_SplitContainer.Panel2.Hide();
@@ -2031,13 +2033,13 @@ namespace MK7_3D_KMP_Editor
                 }
                 else if (KMPSectionComboBox.Text == "Object")
                 {
+                    AddKMPObjectForm addKMPObjectForm = new AddKMPObjectForm(SelectedKMPObjectInfo, EditorSetting.GeneralSetting.DefaultValueObjectID);
+                    addKMPObjectForm.ShowDialog();
+                    SelectedKMPObjectInfo = addKMPObjectForm.SelectedKMPObject_Info;
+
                     int Index = (KMP_Point_ListBox.Items.Count == 0) ? 0 : (KMP_Point_ListBox.Items.Count >= 1 ? KMP_Point_ListBox.SelectedIndex + 1 : 0);
 
-                    AddKMPObjectForm addKMPObjectForm = new AddKMPObjectForm();
-                    addKMPObjectForm.ShowDialog();
-                    var data = addKMPObjectForm.SelectedKMPObject_Info;
-
-                    KMPObject_PGS.JBOGValue JBOGValue = new KMPObject_PGS.JBOGValue(data.Name, data.ObjID, Pos.ToVector3D(), Index);
+                    KMPObject_PGS.JBOGValue JBOGValue = new KMPObject_PGS.JBOGValue(SelectedKMPObjectInfo.ObjectName, SelectedKMPObjectInfo.ObjectID, Pos.ToVector3D(), Index);
                     KMP_Main_PGS.JBOG_Section.JBOGValueList.Insert(Index, JBOGValue);
 
                     ReInputID(KMP_Main_PGS.JBOG_Section.JBOGValueList, "ID");
@@ -2046,7 +2048,7 @@ namespace MK7_3D_KMP_Editor
                     {
                         #region Add Model(OBJ)
                         List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDataXml_List = KMPLibrary.XMLConvert.Statics.ObjFlow.ReadObjFlowXml("ObjFlowData.xml").ObjFlows;
-                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == data.ObjID).Path;
+                        string Path = ObjFlowDataXml_List.Find(x => x.ObjectID == SelectedKMPObjectInfo.ObjectID).Path;
                         ModelVisual3D dv3D_OBJ = HTK_3DES.OBJReader(Path);
 
                         HTK_3DES.Transform OBJ_transform_Value = new HTK_3DES.Transform
@@ -3315,7 +3317,7 @@ namespace MK7_3D_KMP_Editor
                     };
 
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.StartPosition_MV3DList[Index], t);
-                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
 
                     //VisibleCheck
                     ViewPortObjVisibleSetting.ViewportObj_Visibility(GetTPTKValue.IsViewportVisible, render, KMPViewportObject.StartPosition_MV3DList[Index]);
@@ -3342,7 +3344,7 @@ namespace MK7_3D_KMP_Editor
                         if (rail.TV3D_List.Count != 0) rail.MoveRails(Index, t.Translate3D, HTK_3DES.PathTools.Rail.RailType.Tube);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.EnemyRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].BasePointModelList[Index], t);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
                     }
                 }
                 else
@@ -3371,7 +3373,7 @@ namespace MK7_3D_KMP_Editor
                         if (rail.TV3D_List.Count != 0) rail.MoveRails(Index, t.Translate3D, HTK_3DES.PathTools.Rail.RailType.Tube);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.ItemRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].BasePointModelList[Index], t);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
                     }
                 }
                 else
@@ -3397,7 +3399,7 @@ namespace MK7_3D_KMP_Editor
                         };
 
                         HTK_3DES.TSRSystem3D tSRSystem3D_tLeft = new HTK_3DES.TSRSystem3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Left.BasePointModelList[Index], t_Left);
-                        tSRSystem3D_tLeft.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D_tLeft.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
 
                         //パスの形を変更(Green)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint_Left = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex];
@@ -3421,7 +3423,7 @@ namespace MK7_3D_KMP_Editor
                         };
 
                         HTK_3DES.TSRSystem3D tSRSystem3D_tRight = new HTK_3DES.TSRSystem3D(KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex].Checkpoint_Right.BasePointModelList[Index], t_Right);
-                        tSRSystem3D_tRight.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D_tRight.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
 
                         //パスの形を変更(Red)
                         HTK_3DES.KMP_3DCheckpointSystem.Checkpoint checkpoint_Right = KMPViewportObject.Checkpoint_Rail[KMP_Group_ListBox.SelectedIndex];
@@ -3468,7 +3470,7 @@ namespace MK7_3D_KMP_Editor
                     HTK_3DES.SetString_MV3D(dv3D_OBJ, "GameObject " + Index + " " + -1);
 
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_OBJ, OBJ_transform_Value);
-                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian); //Using Radian value
 
                     KMPViewportObject.GameObject_MV3DList.Insert(Index, dv3D_OBJ);
                     render.MainViewPort.Children.Insert(Index, dv3D_OBJ);
@@ -3505,7 +3507,7 @@ namespace MK7_3D_KMP_Editor
                         if (rail.TV3D_List.Count != 0) rail.MoveRails(Index, t.Translate3D, HTK_3DES.PathTools.Rail.RailType.Tube);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.Routes_List[KMP_Group_ListBox.SelectedIndex].BasePointModelList[Index], t);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
                     }
                 }
                 else
@@ -3540,7 +3542,7 @@ namespace MK7_3D_KMP_Editor
                     HTK_3DES.SetString_MV3D(dv3D_AreaOBJ, "Area " + Index + " " + -1);
 
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_AreaOBJ, Area_transform_Value);
-                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian); //Using Radian value
 
                     KMPViewportObject.Area_MV3DList.Insert(Index, dv3D_AreaOBJ);
                     render.MainViewPort.Children.Insert(Index, dv3D_AreaOBJ);
@@ -3565,7 +3567,7 @@ namespace MK7_3D_KMP_Editor
                     };
 
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.Camera_MV3DList[Index], t);
-                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
 
                     //VisibleCheck
                     ViewPortObjVisibleSetting.ViewportObj_Visibility(GetEMACValue.IsViewportVisible, render, KMPViewportObject.Camera_MV3DList[Index]);
@@ -3586,7 +3588,7 @@ namespace MK7_3D_KMP_Editor
                     };
 
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.RespawnPoint_MV3DList[Index], t);
-                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                    tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
 
                     //VisibleCheck
                     ViewPortObjVisibleSetting.ViewportObj_Visibility(GetTPGJValue.IsViewportVisible, render, KMPViewportObject.RespawnPoint_MV3DList[Index]);
@@ -3613,7 +3615,7 @@ namespace MK7_3D_KMP_Editor
                         if (rail.TV3D_List.Count != 0) rail.MoveRails(Index, t.Translate3D, HTK_3DES.PathTools.Rail.RailType.Tube);
 
                         HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(KMPViewportObject.GlideRoute_Rail_List[KMP_Group_ListBox.SelectedIndex].BasePointModelList[Index], t);
-                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
+                        tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Angle);
                     }
                 }
                 else
@@ -3824,7 +3826,7 @@ namespace MK7_3D_KMP_Editor
                 KMPSectionComboBox.Items.Clear();
                 KMP_Main_PGS = null;
 
-                var KMP_Xml_Model = KMPLibrary.XMLConvert.IO.XML_Importer.XMLImport<KMPLibrary.XMLConvert.KMPData.KMP_XML>(Open_KMPXML.FileName);
+                var KMP_Xml_Model = XML_Importer.XMLImport<KMPLibrary.XMLConvert.KMPData.KMP_XML>(Open_KMPXML.FileName);
 
                 KMP_Main_PGS = new KMP_Main_PGS(KMP_Xml_Model);
 
@@ -4200,6 +4202,50 @@ namespace MK7_3D_KMP_Editor
             else if ((Directory.Exists(CD + "\\Settings") == true && File.Exists(CD + "\\Settings\\EditorSetting.xml") == false) == true)
             {
                 XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (KMP_Main_PGS != null && (FilePath != "" && FilePath != null) == true)
+            {
+                DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Save \"" + FilePath + "\" ?", "Save file", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    System.IO.FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.Write);
+                    BinaryWriter bw = new BinaryWriter(fs);
+
+                    KMP.KMPSection KMPSection = new KMP.KMPSection
+                    {
+                        TPTK = KMP_Main_PGS.TPTK_Section.ToTPTK(),
+                        TPNE = KMP_Main_PGS.HPNE_TPNE_Section.ToHPNE_TPNEData().TPNE_Section,
+                        HPNE = KMP_Main_PGS.HPNE_TPNE_Section.ToHPNE_TPNEData().HPNE_Section,
+                        TPTI = KMP_Main_PGS.HPTI_TPTI_Section.ToHPTI_TPTIData().TPTI_Section,
+                        HPTI = KMP_Main_PGS.HPTI_TPTI_Section.ToHPTI_TPTIData().HPTI_Section,
+                        TPKC = KMP_Main_PGS.HPKC_TPKC_Section.ToHPKC_TPKCData().TPKC_Section,
+                        HPKC = KMP_Main_PGS.HPKC_TPKC_Section.ToHPKC_TPKCData().HPKC_Section,
+                        JBOG = KMP_Main_PGS.JBOG_Section.ToJBOG(Convert.ToUInt32(KMPVersion_TXT.Text)),
+                        ITOP = KMP_Main_PGS.ITOP_Section.ToITOP(),
+                        AERA = KMP_Main_PGS.AERA_Section.ToAERA(),
+                        EMAC = KMP_Main_PGS.EMAC_Section.ToEMAC(),
+                        TPGJ = KMP_Main_PGS.TPGJ_Section.ToTPGJ(),
+                        TPNC = new KMPLibrary.Format.SectionData.TPNC(),
+                        TPSM = new KMPLibrary.Format.SectionData.TPSM(),
+                        IGTS = KMP_Main_PGS.IGTS_Section.ToIGTS(),
+                        SROC = new KMPLibrary.Format.SectionData.SROC(),
+                        TPLG = KMP_Main_PGS.HPLG_TPLG_Section.ToHPLG_TPLGData().TPLG_Section,
+                        HPLG = KMP_Main_PGS.HPLG_TPLG_Section.ToHPLG_TPLGData().HPLG_Section,
+                    };
+
+                    KMP kMPFormat = new KMP(KMPSection, Convert.ToUInt32(KMPVersion_TXT.Text));
+                    kMPFormat.WriteKMP(bw);
+
+                    bw.Close();
+                    fs.Close();
+
+                    System.Windows.MessageBox.Show("KMP file has been saved : " + FilePath);
+                }
+                else if (dialogResult == DialogResult.No) return;
             }
         }
     }

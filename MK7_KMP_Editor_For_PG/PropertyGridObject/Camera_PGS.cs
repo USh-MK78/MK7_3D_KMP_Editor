@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using KMPLibrary.Format.SectionData;
-using static MK7_3D_KMP_Editor.CustomPropertyGridClassConverter;
+using static MK7_3D_KMP_Editor.PropertyGridObject.CustomPropertyGridClassConverter;
 
 namespace MK7_3D_KMP_Editor.PropertyGridObject
 {
@@ -127,24 +127,24 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             public class Rotation
             {
                 private float _X;
-                public float X
+                public double X
                 {
-                    get { return _X; }
-                    set { _X = value; }
+                    get { return (double)HTK_3DES.RadianToAngle(_X); }
+                    set { _X = (float)HTK_3DES.AngleToRadian(value); }
                 }
 
                 private float _Y;
-                public float Y
+                public double Y
                 {
-                    get { return _Y; }
-                    set { _Y = value; }
+                    get { return (double)HTK_3DES.RadianToAngle(_Y); }
+                    set { _Y = (float)HTK_3DES.AngleToRadian(value); }
                 }
 
                 private float _Z;
-                public float Z
+                public double Z
                 {
-                    get { return _Z; }
-                    set { _Z = value; }
+                    get { return (double)HTK_3DES.RadianToAngle(_Z); }
+                    set { _Z = (float)HTK_3DES.AngleToRadian(value); }
                 }
 
                 public Rotation()
@@ -163,9 +163,9 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
 
                 public Rotation(Vector3D vector3D)
                 {
-                    _X = HTK_3DES.RadianToAngle(vector3D.X);
-                    _Y = HTK_3DES.RadianToAngle(vector3D.Y);
-                    _Z = HTK_3DES.RadianToAngle(vector3D.Z);
+                    _X = (float)vector3D.X;
+                    _Y = (float)vector3D.Y;
+                    _Z = (float)vector3D.Z;
                 }
 
                 public Vector3D GetVector3D()

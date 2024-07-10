@@ -22,9 +22,27 @@ namespace MK7_3D_KMP_Editor
         public List<KMPLibrary.XMLConvert.ObjFlowData.ObjFlowData_XML.ObjFlow> ObjFlowDictionary { get; set; }
         ModelVisual3D MV3D_OBJ = null;
 
-        public int ids = -1;
+        public string DefaultObjectID { get; set; }
 
-        public AddKMPObjectForm()
+        public SelectedKMPObjectInfo SelectedKMPObject_Info { get; set; }
+        public class SelectedKMPObjectInfo
+        {
+            public string ObjectName { get; set; }
+            public string ObjectID { get; set; }
+
+            public SelectedKMPObjectInfo(string ObjectName, string ObjectID)
+            {
+                this.ObjectName = ObjectName;
+                this.ObjectID = ObjectID;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedKMPObjectInfo"></param>
+        /// <param name="DefaultObjectID">DefaultObjectID (Setting)</param>
+        public AddKMPObjectForm(SelectedKMPObjectInfo selectedKMPObjectInfo, string DefaultObjectID)
         {
             InitializeComponent();
             elementHost1.Child = render;
@@ -34,13 +52,9 @@ namespace MK7_3D_KMP_Editor
 
             ObjFlowItemComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             ObjFlowItemComboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
 
-        public SelectedKMPObjectInfo SelectedKMPObject_Info { get; set; } = new SelectedKMPObjectInfo();
-        public class SelectedKMPObjectInfo
-        {
-            public string Name { get; set; }
-            public string ObjID { get; set; }
+            this.DefaultObjectID = DefaultObjectID;
+            SelectedKMPObject_Info = selectedKMPObjectInfo;
         }
 
         private void AddKMPObjectForm_Load(object sender, EventArgs e)
@@ -57,7 +71,15 @@ namespace MK7_3D_KMP_Editor
 
             ObjFlowItemComboBox.AutoCompleteCustomSource = ACS_ObjFlowCollection;
 
-            ObjFlowItemComboBox.SelectedIndex = 0;
+            if (SelectedKMPObject_Info == null)
+            {
+                var Item = ObjFlowDictionary.Find(x => x.ObjectID == DefaultObjectID);
+                ObjFlowItemComboBox.SelectedIndex = ObjFlowItemComboBox.FindStringExact(Item.ObjectName + "," + Item.ObjectID);
+            }
+            else if (SelectedKMPObject_Info != null)
+            {
+                ObjFlowItemComboBox.SelectedIndex = ObjFlowItemComboBox.FindStringExact(SelectedKMPObject_Info.ObjectName + "," + SelectedKMPObject_Info.ObjectID);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,8 +99,8 @@ namespace MK7_3D_KMP_Editor
             render.MainViewPort.Children.Add(MV3D_OBJ);
             #endregion
 
-            SelectedKMPObject_Info.Name = ObjFlowDictionary.Find(x => x.ObjectID == ObjFlowItemComboBox.Text.Split(',')[1]).ObjectName;
-            SelectedKMPObject_Info.ObjID = ObjFlowDictionary.Find(x => x.ObjectID == ObjFlowItemComboBox.Text.Split(',')[1]).ObjectID;
+            var Data = ObjFlowDictionary.Find(x => x.ObjectID == ObjFlowItemComboBox.Text.Split(',')[1]);
+            SelectedKMPObject_Info = new SelectedKMPObjectInfo(Data.ObjectName, Data.ObjectID);
 
             ObjFlowXMLInfo_TXT.Text = "Object ID : " + ObjFlowDictionary.Find(x => x.ObjectID == ObjFlowItemComboBox.Text.Split(',')[1]).ObjectID + "\r\n" +
                                       "Object Name : " + ObjFlowDictionary.Find(x => x.ObjectID == ObjFlowItemComboBox.Text.Split(',')[1]).ObjectName + "\r\n" +

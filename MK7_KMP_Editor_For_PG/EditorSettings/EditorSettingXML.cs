@@ -34,9 +34,30 @@ namespace MK7_3D_KMP_Editor.EditorSettings
             public FilePath() { }
         }
 
-        public EditorSettingXML(FilePath FilePathSetting)
+        [System.Xml.Serialization.XmlElement("General")]
+        public General GeneralSetting { get; set; } = new General();
+        public class General
+        {
+
+            [System.Xml.Serialization.XmlElement("DefaultObjectID")]
+            public string DefaultValueObjectID { get; set; } = "0005";
+
+            /// <summary>
+            /// General
+            /// </summary>
+            /// <param name="DefaultValueObjectID">DefaultObjectID</param>
+            public General(string DefaultValueObjectID)
+            {
+                this.DefaultValueObjectID = DefaultValueObjectID;
+            }
+
+            public General() { }
+        }
+
+        public EditorSettingXML(FilePath FilePathSetting, General GeneralSetting)
         {
             this.FilePathSetting = FilePathSetting;
+            this.GeneralSetting = GeneralSetting;
         }
 
         public EditorSettingXML() { }

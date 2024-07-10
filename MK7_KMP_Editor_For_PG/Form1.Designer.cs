@@ -58,6 +58,7 @@
             this.thisSectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.KMP_Main_SplitContainer = new System.Windows.Forms.SplitContainer();
             this.AddKMPSection = new System.Windows.Forms.Button();
@@ -118,7 +119,6 @@
             this.Label_ID = new System.Windows.Forms.Label();
             this.Label_GroupID = new System.Windows.Forms.Label();
             this.Label_SectionName = new System.Windows.Forms.Label();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KMP_Main_SplitContainer)).BeginInit();
             this.KMP_Main_SplitContainer.Panel1.SuspendLayout();
@@ -222,21 +222,21 @@
             // readObjToolStripMenuItem
             // 
             this.readObjToolStripMenuItem.Name = "readObjToolStripMenuItem";
-            this.readObjToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.readObjToolStripMenuItem.Text = "Read Obj";
+            this.readObjToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readObjToolStripMenuItem.Text = "Read Course Model";
             this.readObjToolStripMenuItem.Click += new System.EventHandler(this.readObjToolStripMenuItem_Click);
             // 
             // closeObjToolStripMenuItem
             // 
             this.closeObjToolStripMenuItem.Name = "closeObjToolStripMenuItem";
-            this.closeObjToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.closeObjToolStripMenuItem.Text = "Close Obj";
+            this.closeObjToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeObjToolStripMenuItem.Text = "Close Course Model";
             this.closeObjToolStripMenuItem.Click += new System.EventHandler(this.closeObjToolStripMenuItem_Click);
             // 
             // visibilityToolStripMenuItem
             // 
             this.visibilityToolStripMenuItem.Name = "visibilityToolStripMenuItem";
-            this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.visibilityToolStripMenuItem.Text = "Visibility";
             this.visibilityToolStripMenuItem.Click += new System.EventHandler(this.visibilityToolStripMenuItem_Click);
             // 
@@ -251,7 +251,7 @@
             // ViewportTypeChange
             // 
             this.ViewportTypeChange.Name = "ViewportTypeChange";
-            this.ViewportTypeChange.Size = new System.Drawing.Size(126, 22);
+            this.ViewportTypeChange.Size = new System.Drawing.Size(180, 22);
             this.ViewportTypeChange.Text = "3D <->2D";
             this.ViewportTypeChange.Click += new System.EventHandler(this.ViewportTypeChange_TSM_Click);
             // 
@@ -384,9 +384,16 @@
             // infoToolStripMenuItem1
             // 
             this.infoToolStripMenuItem1.Name = "infoToolStripMenuItem1";
-            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.infoToolStripMenuItem1.Text = "Info";
             this.infoToolStripMenuItem1.Click += new System.EventHandler(this.infoToolStripMenuItem1_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // KMP_Main_SplitContainer
             // 
@@ -1062,13 +1069,6 @@
             this.Label_SectionName.TabIndex = 0;
             this.Label_SectionName.Text = "SectionName :";
             // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1080,6 +1080,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "MK7 3D KMP Editor - U5h_MK78";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

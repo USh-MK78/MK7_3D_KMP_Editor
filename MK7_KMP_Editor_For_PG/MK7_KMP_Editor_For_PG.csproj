@@ -117,6 +117,7 @@
     <Compile Include="PropertyGridObject\Area_PGS.cs" />
     <Compile Include="PropertyGridObject\Camera_PGS.cs" />
     <Compile Include="PropertyGridObject\CheckPoint_PGS.cs" />
+    <Compile Include="PropertyGridObject\CustomPropertyGridClassConverter.cs" />
     <Compile Include="PropertyGridObject\EnemyRoute_PGS.cs" />
     <Compile Include="PropertyGridObject\GlideRoute_PGS.cs" />
     <Compile Include="PropertyGridObject\ItemRoute_PGS.cs" />

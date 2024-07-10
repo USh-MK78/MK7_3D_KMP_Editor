@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorSettingForm));
             this.EditorSettingTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -38,13 +39,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.DefaultDirectoryTXT = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DefaultObjectID_TXT = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.EditorSettingTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // EditorSettingTabControl
             // 
+            this.EditorSettingTabControl.Controls.Add(this.tabPage3);
             this.EditorSettingTabControl.Controls.Add(this.tabPage1);
             this.EditorSettingTabControl.Controls.Add(this.tabPage2);
             this.EditorSettingTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,10 +149,38 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(416, 346);
+            this.tabPage2.Size = new System.Drawing.Size(387, 346);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Theme";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.DefaultObjectID_TXT);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(387, 346);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "General";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // DefaultObjectID_TXT
+            // 
+            this.DefaultObjectID_TXT.Location = new System.Drawing.Point(110, 9);
+            this.DefaultObjectID_TXT.Name = "DefaultObjectID_TXT";
+            this.DefaultObjectID_TXT.Size = new System.Drawing.Size(76, 19);
+            this.DefaultObjectID_TXT.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 12);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Default ObjectID :";
             // 
             // EditorSettingForm
             // 
@@ -154,6 +188,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(395, 372);
             this.Controls.Add(this.EditorSettingTabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditorSettingForm";
             this.Text = "EditorSettingForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorSettingForm_FormClosing);
@@ -163,6 +198,8 @@
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -179,5 +216,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox DefaultNameKMP_TXT;
         private System.Windows.Forms.TextBox DefaultNameXML_TXT;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox DefaultObjectID_TXT;
     }
 }

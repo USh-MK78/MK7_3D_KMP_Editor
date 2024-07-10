@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using KMPLibrary.Format.SectionData;
-using static MK7_3D_KMP_Editor.CustomPropertyGridClassConverter;
+using static MK7_3D_KMP_Editor.PropertyGridObject.CustomPropertyGridClassConverter;
 
 namespace MK7_3D_KMP_Editor.PropertyGridObject
 {

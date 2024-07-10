@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
 using KMPLibrary.KMPHelper;
+using static MK7_3D_KMP_Editor.HTK_3DES;
 
 namespace MK7_3D_KMP_Editor.Render
 {
@@ -403,7 +404,6 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_RespawnPointOBJ, GliderPoint_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
                     kMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);
@@ -767,7 +767,6 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_AreaOBJ, Area_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    //Area_MV3D_List.Add(dv3D_AreaOBJ);
                     kMPViewportObject.Area_MV3DList.Add(dv3D_AreaOBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_AreaOBJ);
@@ -793,7 +792,6 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_CameraOBJ, Camera_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    //Camera_MV3D_List.Add(dv3D_CameraOBJ);
                     kMPViewportObject.Camera_MV3DList.Add(dv3D_CameraOBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_CameraOBJ);
@@ -819,7 +817,6 @@ namespace MK7_3D_KMP_Editor.Render
                     HTK_3DES.TSRSystem3D tSRSystem3D = new HTK_3DES.TSRSystem3D(dv3D_RespawnPointOBJ, RespawnPoint_transform_Value);
                     tSRSystem3D.Transform3D(HTK_3DES.TSRSystem3D.RotationCenterSetting.DefaultCenterSetting(), HTK_3DES.TSRSystem3D.RotationType.Radian);
 
-                    //RespawnPoint_MV3D_List.Add(dv3D_RespawnPointOBJ);
                     kMPViewportObject.RespawnPoint_MV3DList.Add(dv3D_RespawnPointOBJ);
 
                     UserCtrl.MainViewPort.Children.Add(dv3D_RespawnPointOBJ);

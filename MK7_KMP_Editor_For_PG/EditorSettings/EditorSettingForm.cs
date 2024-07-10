@@ -27,6 +27,8 @@ namespace MK7_3D_KMP_Editor.EditorSettings
             DefaultDirectoryTXT.Text = EditorSettingXML.FilePathSetting.DefaultDirectory;
             DefaultNameKMP_TXT.Text = EditorSettingXML.FilePathSetting.DefaultKMPFileName;
             DefaultNameXML_TXT.Text = EditorSettingXML.FilePathSetting.DefaultXMLFileName;
+
+            DefaultObjectID_TXT.Text = EditorSettingXML.GeneralSetting.DefaultValueObjectID;
         }
 
         private void EditorSettingForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -34,6 +36,8 @@ namespace MK7_3D_KMP_Editor.EditorSettings
             EditorSettingXML.FilePathSetting.DefaultDirectory = DefaultDirectoryTXT.Text;
             EditorSettingXML.FilePathSetting.DefaultKMPFileName = DefaultNameKMP_TXT.Text;
             EditorSettingXML.FilePathSetting.DefaultXMLFileName = DefaultNameXML_TXT.Text;
+
+            EditorSettingXML.GeneralSetting.DefaultValueObjectID = DefaultObjectID_TXT.Text;
         }
 
         public void EditDefaultDirectoryTXT()
