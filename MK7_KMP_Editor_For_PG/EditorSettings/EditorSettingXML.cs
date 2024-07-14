@@ -38,7 +38,6 @@ namespace MK7_3D_KMP_Editor.EditorSettings
         public General GeneralSetting { get; set; } = new General();
         public class General
         {
-
             [System.Xml.Serialization.XmlElement("DefaultObjectID")]
             public string DefaultValueObjectID { get; set; } = "0005";
 

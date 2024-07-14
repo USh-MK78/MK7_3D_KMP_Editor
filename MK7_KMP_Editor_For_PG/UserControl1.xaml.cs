@@ -105,15 +105,19 @@ namespace MK7_3D_KMP_Editor
         //        if (MainViewPort.CursorOnElementPosition != null)
         //        {
         //            Point p = e.GetPosition(MainViewPort);
-        //            pos = MainViewPort.Viewport.UnProject(p, MainViewPort.CursorOnElementPosition.Value, new Vector3D(0, 0, -1)).Value.ToVector3D();
-        //            //if (pos.HasValue)
-        //            //{
-        //            //    //Vector3D vec = pos.Value.ToVector3D();
-        //            //    pos.Value.X = Math.Round(pos.Value.X, 3, MidpointRounding.AwayFromZero);
-        //            //    pos.Value.Y = Math.Round(pos.Value.Y, 3, MidpointRounding.AwayFromZero);
-        //            //    pos.Z = Math.Round(pos.Value.Z, 3, MidpointRounding.AwayFromZero);
-        //            //    //return vec;
-        //            //}
+        //            pos = MainViewPort.CursorOnElementPosition.GetValueOrDefault().ToVector3D();
+        //            //var f = MainViewPort.Viewport.Point3DtoPoint2D(MainViewPort.CursorOnElementPosition.Value);
+        //            //pos = MainViewPort.Viewport.Point2DtoRay3D(f).Origin.ToVector3D();
+
+        //            //pos = MainViewPort.Viewport.UnProject(p, MainViewPort.CursorOnElementPosition.Value, new Vector3D(0, 0, 0)).Value.ToVector3D();
+        //            ////if (pos.HasValue)
+        //            ////{
+        //            ////    //Vector3D vec = pos.Value.ToVector3D();
+        //            ////    pos.Value.X = Math.Round(pos.Value.X, 3, MidpointRounding.AwayFromZero);
+        //            ////    pos.Value.Y = Math.Round(pos.Value.Y, 3, MidpointRounding.AwayFromZero);
+        //            ////    pos.Z = Math.Round(pos.Value.Z, 3, MidpointRounding.AwayFromZero);
+        //            ////    //return vec;
+        //            ////}
         //        }
         //        else if (MainViewPort.CursorOnElementPosition == null)
         //        {

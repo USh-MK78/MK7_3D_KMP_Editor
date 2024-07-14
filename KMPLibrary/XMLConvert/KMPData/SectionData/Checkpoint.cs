@@ -143,8 +143,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 [System.Xml.Serialization.XmlAttribute("RespawnID")]
                 public byte RespawnID { get; set; }
 
-                [System.Xml.Serialization.XmlAttribute("Checkpoint_Type")]
-                public byte Checkpoint_Type { get; set; }
+                [System.Xml.Serialization.XmlAttribute("KeyID")]
+                public byte TPKC_Checkpoint_KeyID { get; set; }
 
                 [System.Xml.Serialization.XmlAttribute("PreviousCheckPoint")]
                 public byte PreviousCheckPoint { get; set; }
@@ -169,7 +169,7 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                     Position_2D_Left = new Position2D_Left(TPKCValue.TPKC_2DPosition_Left.X, TPKCValue.TPKC_2DPosition_Left.Y);
                     Position_2D_Right = new Position2D_Right(TPKCValue.TPKC_2DPosition_Right.X, TPKCValue.TPKC_2DPosition_Right.Y);
                     RespawnID = TPKCValue.TPKC_RespawnID;
-                    Checkpoint_Type = TPKCValue.TPKC_Checkpoint_Type;
+                    TPKC_Checkpoint_KeyID = TPKCValue.TPKC_Checkpoint_KeyID;
                     NextCheckPoint = TPKCValue.TPKC_NextCheckPoint;
                     PreviousCheckPoint = TPKCValue.TPKC_PreviousCheckPoint;
                     ClipID = TPKCValue.TPKC_ClipID;

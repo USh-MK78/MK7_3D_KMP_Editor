@@ -47,6 +47,7 @@ namespace MK7_3D_KMP_Editor
         public string FormTitle { get; set; } = "MK7 3D KMP Editor - U5h_MK78";
         public string FilePath { get; set; }
         public EditorSettings.EditorSettingXML EditorSetting { get; set; }
+        public EditorSettings.EditorThemeXML EditorTheme { get; set; }
 
         public KMP KMPData { get; set; }
         public KMP_Main_PGS KMP_Main_PGS { get; set; }
@@ -212,6 +213,40 @@ namespace MK7_3D_KMP_Editor
             CH_GlideRoutes.Checked = b;
         }
 
+        #region Theme
+        public EditorSettings.EditorThemeXML CreateDefaultTheme()
+        {
+            EditorSettings.EditorThemeXML.MainForm mainForm = new EditorSettings.EditorThemeXML.MainForm(this.BackColor, this.ForeColor);
+
+            EditorSettings.EditorThemeXML.MainSplitContainer mainSplitContainer = new EditorSettings.EditorThemeXML.MainSplitContainer
+            {
+                Panel1_BaseColor = new EditorSettings.ColorXML(KMP_Viewport_SplitContainer.Panel1.BackColor),
+                Panel1_TextColor = new EditorSettings.ColorXML(KMP_Viewport_SplitContainer.Panel1.ForeColor),
+                Panel2_BaseColor = new EditorSettings.ColorXML(KMP_Viewport_SplitContainer.Panel2.BackColor),
+                Panel2_TextColor = new EditorSettings.ColorXML(KMP_Viewport_SplitContainer.Panel2.ForeColor)
+            };
+
+            List<EditorSettings.EditorThemeXML.MainTab> mainTabs = new List<EditorSettings.EditorThemeXML.MainTab>();
+            foreach (TabPage i in KMPSection_Main_TabCtrl.TabPages)
+            {
+                mainTabs.Add(new EditorSettings.EditorThemeXML.MainTab(i.BackColor, i.ForeColor));
+            }
+
+            EditorSettings.EditorThemeXML editorThemeXML = new EditorSettings.EditorThemeXML(mainForm, mainSplitContainer, mainTabs);
+
+            return editorThemeXML;
+        }
+
+        public void SetEditorTheme()
+        {
+            KMP_Main_SplitContainer.Panel1.BackColor = EditorTheme.MainSplitContainerTheme.Panel1_BaseColor.ToColor();
+            KMP_Main_SplitContainer.Panel1.ForeColor = EditorTheme.MainSplitContainerTheme.Panel1_TextColor.ToColor();
+
+            KMP_Main_SplitContainer.Panel2.BackColor = EditorTheme.MainSplitContainerTheme.Panel2_BaseColor.ToColor();
+            KMP_Main_SplitContainer.Panel2.ForeColor = EditorTheme.MainSplitContainerTheme.Panel2_TextColor.ToColor();
+        }
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -236,8 +271,6 @@ namespace MK7_3D_KMP_Editor
             SectionVisibleCheck(true);
             KMPSection_Visibility = ViewPortObjVisibleSetting.KMPSectionVisibility.DefaultSetting();
 
-            //Setting
-            EditorSetting = new EditorSettings.EditorSettingXML();
             this.Text = FormTitle;
 
             //Panelの固定および非表示
@@ -258,12 +291,33 @@ namespace MK7_3D_KMP_Editor
             string CD = System.IO.Directory.GetCurrentDirectory();
             if (Directory.Exists(CD + "\\Settings") == false)
             {
+                EditorSetting = new EditorSettings.EditorSettingXML();
+                EditorTheme = CreateDefaultTheme();
+
                 Directory.CreateDirectory(CD + "\\Settings");
                 XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+                EditorSetting = XML_Importer.XMLImport<EditorSettings.EditorSettingXML>(CD + "\\Settings\\EditorSetting.xml");
+
+                XML_Exporter.XMLExport(CD + "\\Settings\\EditorTheme.xml", EditorTheme, XML_Exporter.EmptyXmlSerializerNamespaces());
+                EditorTheme = XML_Importer.XMLImport<EditorSettings.EditorThemeXML>(CD + "\\Settings\\EditorTheme.xml");
+                SetEditorTheme();
             }
-            else if ((Directory.Exists(CD + "\\Settings") == true && File.Exists(CD + "\\Settings\\EditorSetting.xml") == false) == true)
+            else if (Directory.Exists(CD + "\\Settings") == true)
             {
-                XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+                if (File.Exists(CD + "\\Settings\\EditorSetting.xml") == false)
+                {
+                    EditorSetting = new EditorSettings.EditorSettingXML();
+                    XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+                }
+                if (File.Exists(CD + "\\Settings\\EditorTheme.xml") == false)
+                {
+                    EditorTheme = CreateDefaultTheme();
+                    XML_Exporter.XMLExport(CD + "\\Settings\\EditorTheme.xml", EditorTheme, XML_Exporter.EmptyXmlSerializerNamespaces());
+                }
+
+                EditorSetting = XML_Importer.XMLImport<EditorSettings.EditorSettingXML>(CD + "\\Settings\\EditorSetting.xml");
+                EditorTheme = XML_Importer.XMLImport<EditorSettings.EditorThemeXML>(CD + "\\Settings\\EditorTheme.xml");
+                SetEditorTheme();
             }
 
             if (Directory.Exists(CD + "\\KMP_OBJ") == false)
@@ -4188,20 +4242,27 @@ namespace MK7_3D_KMP_Editor
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditorSettings.EditorSettingForm editorSettingForm = new EditorSettings.EditorSettingForm(EditorSetting);
+            EditorSettings.EditorSettingForm editorSettingForm = new EditorSettings.EditorSettingForm(EditorSetting, EditorTheme);
             editorSettingForm.ShowDialog();
 
             EditorSetting = editorSettingForm.EditorSettingXML;
+            EditorTheme = editorSettingForm.EditorThemeXML;
 
             string CD = System.IO.Directory.GetCurrentDirectory();
             if (Directory.Exists(CD + "\\Settings") == false)
             {
                 Directory.CreateDirectory(CD + "\\Settings");
                 XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+                XML_Exporter.XMLExport(CD + "\\Settings\\EditorTheme.xml", EditorTheme, XML_Exporter.EmptyXmlSerializerNamespaces());
             }
-            else if ((Directory.Exists(CD + "\\Settings") == true && File.Exists(CD + "\\Settings\\EditorSetting.xml") == false) == true)
+            else if (Directory.Exists(CD + "\\Settings") == true)
             {
                 XML_Exporter.XMLExport(CD + "\\Settings\\EditorSetting.xml", EditorSetting, XML_Exporter.EmptyXmlSerializerNamespaces());
+                EditorSetting = XML_Importer.XMLImport<EditorSettings.EditorSettingXML>(CD + "\\Settings\\EditorSetting.xml");
+
+                XML_Exporter.XMLExport(CD + "\\Settings\\EditorTheme.xml", EditorTheme, XML_Exporter.EmptyXmlSerializerNamespaces());
+                EditorTheme = XML_Importer.XMLImport<EditorSettings.EditorThemeXML>(CD + "\\Settings\\EditorTheme.xml");
+                SetEditorTheme();
             }
         }
 

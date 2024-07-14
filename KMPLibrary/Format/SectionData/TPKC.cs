@@ -22,7 +22,7 @@ namespace KMPLibrary.Format.SectionData
             public Vector2 TPKC_2DPosition_Left { get; set; }
             public Vector2 TPKC_2DPosition_Right { get; set; }
             public byte TPKC_RespawnID { get; set; }
-            public byte TPKC_Checkpoint_Type { get; set; }
+            public byte TPKC_Checkpoint_KeyID { get; set; } //Checkpoint_KeyID
             public byte TPKC_PreviousCheckPoint { get; set; }
             public byte TPKC_NextCheckPoint { get; set; }
             public byte TPKC_ClipID { get; set; }
@@ -35,7 +35,7 @@ namespace KMPLibrary.Format.SectionData
                 TPKC_2DPosition_Left = KMPHelper.Converter2D.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) });
                 TPKC_2DPosition_Right = KMPHelper.Converter2D.ByteArrayToVector2D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4) });
                 TPKC_RespawnID = br.ReadByte();
-                TPKC_Checkpoint_Type = br.ReadByte();
+                TPKC_Checkpoint_KeyID = br.ReadByte();
                 TPKC_PreviousCheckPoint = br.ReadByte();
                 TPKC_NextCheckPoint = br.ReadByte();
                 TPKC_ClipID = br.ReadByte();
@@ -51,7 +51,7 @@ namespace KMPLibrary.Format.SectionData
                 bw.Write(KMPHelper.Converter2D.Vector2ToByteArray(TPKC_2DPosition_Right)[0]);
                 bw.Write(KMPHelper.Converter2D.Vector2ToByteArray(TPKC_2DPosition_Right)[1]);
                 bw.Write(TPKC_RespawnID);
-                bw.Write(TPKC_Checkpoint_Type);
+                bw.Write(TPKC_Checkpoint_KeyID);
                 bw.Write(TPKC_PreviousCheckPoint);
                 bw.Write(TPKC_NextCheckPoint);
                 bw.Write(TPKC_ClipID);
@@ -64,12 +64,12 @@ namespace KMPLibrary.Format.SectionData
             {
                 TPKC_2DPosition_Left = new Vector2(0, 0);
                 TPKC_2DPosition_Right = new Vector2(0, 0);
-                TPKC_RespawnID = 0x00;
-                TPKC_Checkpoint_Type = 0x00;
+                TPKC_RespawnID = 0x00; //255
+                TPKC_Checkpoint_KeyID = 0x00; //255
                 TPKC_PreviousCheckPoint = 0x00;
                 TPKC_NextCheckPoint = 0x00;
-                TPKC_ClipID = 0x00;
-                TPKC_Section = 0x00;
+                TPKC_ClipID = 0x00; //255
+                TPKC_Section = 0x00; //255
                 TPKC_UnknownData3 = 0x00;
                 TPKC_UnknownData4 = 0x00;
             }

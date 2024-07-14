@@ -106,3 +106,9 @@ Show / Hide XXXXRoutes(Group), Checkpoint and objects.
 ・[Object] Added functions to set elements to be selected by default when added
 ・Changed angle notation from radian to degree (PropertyGrid)
 ・Fixed the Position value was included in the Rotation value
+
+[2024/7/15]
+・[TPKC] Changed Section_Type to KeyID
+・[TPKC] Changed KeyID and Section default to 0xFF
+・[EnemyRoutes] Changed UnknownData1 and UnknownData2 default value to 0
+・Updated EditorTheme.xml

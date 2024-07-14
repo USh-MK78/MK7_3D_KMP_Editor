@@ -248,7 +248,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 }
 
                 public byte TPKC_RespawnID { get; set; }
-                public byte TPKC_Checkpoint_Type { get; set; }
+                public byte TPKC_Checkpoint_KeyID { get; set; }
                 public byte TPKC_PreviousCheckPoint { get; set; }
                 public byte TPKC_NextCheckPoint { get; set; }
                 public byte TPKC_ClipID { get; set; }
@@ -263,11 +263,11 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Position_2D_Left = new Position2D_Left(LeftPos);
                     Position_2D_Right = new Position2D_Right(RightPos);
                     TPKC_RespawnID = 0xFF;
-                    TPKC_Checkpoint_Type = 0;
+                    TPKC_Checkpoint_KeyID = 0xFF;
                     TPKC_NextCheckPoint = 0xFF;
                     TPKC_PreviousCheckPoint = 0xFF;
-                    TPKC_ClipID = 255;
-                    TPKC_Section = 0;
+                    TPKC_ClipID = 0xFF;
+                    TPKC_Section = 0xFF;
                     TPKC_UnknownData3 = 0;
                     TPKC_UnknownData4 = 0;
                 }
@@ -279,7 +279,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Position_2D_Left = new Position2D_Left(TPKCValue.TPKC_2DPosition_Left);
                     Position_2D_Right = new Position2D_Right(TPKCValue.TPKC_2DPosition_Right);
                     TPKC_RespawnID = TPKCValue.TPKC_RespawnID;
-                    TPKC_Checkpoint_Type = TPKCValue.TPKC_Checkpoint_Type;
+                    TPKC_Checkpoint_KeyID = TPKCValue.TPKC_Checkpoint_KeyID;
                     TPKC_NextCheckPoint = TPKCValue.TPKC_NextCheckPoint;
                     TPKC_PreviousCheckPoint = TPKCValue.TPKC_PreviousCheckPoint;
                     TPKC_ClipID = TPKCValue.TPKC_ClipID;
@@ -295,7 +295,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                     Position_2D_Left = new Position2D_Left(Checkpoint_Point.Position_2D_Left.ToVector2());
                     Position_2D_Right = new Position2D_Right(Checkpoint_Point.Position_2D_Right.ToVector2());
                     TPKC_RespawnID = Checkpoint_Point.RespawnID;
-                    TPKC_Checkpoint_Type = Checkpoint_Point.Checkpoint_Type;
+                    TPKC_Checkpoint_KeyID = Checkpoint_Point.TPKC_Checkpoint_KeyID;
                     TPKC_NextCheckPoint = Checkpoint_Point.NextCheckPoint;
                     TPKC_PreviousCheckPoint = Checkpoint_Point.PreviousCheckPoint;
                     TPKC_ClipID = Checkpoint_Point.ClipID;
@@ -403,7 +403,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                             TPKC_2DPosition_Right = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].Position_2D_Right.GetVector2(),
 
                             TPKC_RespawnID = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_RespawnID,
-                            TPKC_Checkpoint_Type = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Checkpoint_Type,
+                            TPKC_Checkpoint_KeyID = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_Checkpoint_KeyID,
                             TPKC_PreviousCheckPoint = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_PreviousCheckPoint,
                             TPKC_NextCheckPoint = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_NextCheckPoint,
                             TPKC_ClipID = HPKCValueList[HPKCCount].TPKCValueList[TPKCCount].TPKC_ClipID,

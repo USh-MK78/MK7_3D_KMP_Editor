@@ -15,11 +15,15 @@ namespace MK7_3D_KMP_Editor.EditorSettings
     public partial class EditorSettingForm : Form
     {
         public EditorSettings.EditorSettingXML EditorSettingXML { get; set; }
+        public EditorSettings.EditorThemeXML EditorThemeXML { get; set; }
 
-        public EditorSettingForm(EditorSettings.EditorSettingXML editorSettingXML)
+        public EditorTheme_PGS EditorTheme_PGS { get; set; }
+
+        public EditorSettingForm(EditorSettings.EditorSettingXML editorSettingXML, EditorSettings.EditorThemeXML editorThemeXML)
         {
             InitializeComponent();
             EditorSettingXML = editorSettingXML;
+            EditorThemeXML = editorThemeXML;
         }
 
         private void EditorSettingForm_Load(object sender, EventArgs e)
@@ -29,6 +33,9 @@ namespace MK7_3D_KMP_Editor.EditorSettings
             DefaultNameXML_TXT.Text = EditorSettingXML.FilePathSetting.DefaultXMLFileName;
 
             DefaultObjectID_TXT.Text = EditorSettingXML.GeneralSetting.DefaultValueObjectID;
+
+            EditorTheme_PGS = new EditorTheme_PGS(EditorThemeXML);
+            EditorTheme_PropertyGrid.SelectedObject = EditorTheme_PGS;
         }
 
         private void EditorSettingForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,6 +45,8 @@ namespace MK7_3D_KMP_Editor.EditorSettings
             EditorSettingXML.FilePathSetting.DefaultXMLFileName = DefaultNameXML_TXT.Text;
 
             EditorSettingXML.GeneralSetting.DefaultValueObjectID = DefaultObjectID_TXT.Text;
+
+            EditorThemeXML = new EditorThemeXML(EditorTheme_PGS);
         }
 
         public void EditDefaultDirectoryTXT()

@@ -409,17 +409,17 @@ namespace MK7_3D_KMP_Editor
                                 }
                             }
 
-                            if (Values.TPKC_Checkpoint_Type < 255)
+                            if (Values.TPKC_Checkpoint_KeyID < 255)
                             {
-                                var t = HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList.Where(n => n.TPKC_Checkpoint_Type < 255).ToList();
+                                var t = HPKC_TPKC_Section.HPKCValueList[i].TPKCValueList.Where(n => n.TPKC_Checkpoint_KeyID < 255).ToList();
 
-                                if (t.Where(h => h.TPKC_Checkpoint_Type == Values.TPKC_Checkpoint_Type).Count() > 1)
+                                if (t.Where(h => h.TPKC_Checkpoint_KeyID == Values.TPKC_Checkpoint_KeyID).Count() > 1)
                                 {
                                     CheckValue checkValue = new CheckValue
                                     {
                                         GroupNum = i,
                                         ValueNum = TPKCValueCount,
-                                        Description = "Duplicate Number : " + Values.TPKC_Checkpoint_Type,
+                                        Description = "Duplicate Number : " + Values.TPKC_Checkpoint_KeyID,
                                         CheckValueType = CheckValueType.Error
                                     };
 

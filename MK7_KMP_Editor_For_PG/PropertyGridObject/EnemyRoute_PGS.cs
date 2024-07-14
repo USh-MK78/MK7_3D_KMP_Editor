@@ -585,8 +585,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 GroupID = InputID;
                 HPNENextGroups = new HPNE_NextGroups();
                 HPNEPreviewGroups = new HPNE_PreviewGroups();
-                UnknwonData1 = 65535;
-                UnknownData2 = 65535;
+                UnknwonData1 = 0;
+                UnknownData2 = 0;
 
                 TPNEValueList = new List<TPNEValue>();
             }
@@ -624,8 +624,8 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 GroupID = InputID;
                 HPNEPreviewGroups = new HPNE_PreviewGroups();
                 HPNENextGroups = new HPNE_NextGroups();
-                UnknwonData1 = 65535;
-                UnknownData2 = 65535;
+                UnknwonData1 = 0;
+                UnknownData2 = 0;
 
                 for (int i = 0; i < GroupData.Points.Count; i++)
                 {
