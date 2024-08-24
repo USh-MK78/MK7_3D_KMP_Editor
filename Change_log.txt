@@ -112,3 +112,6 @@ Show / Hide XXXXRoutes(Group), Checkpoint and objects.
 ・[TPKC] Changed KeyID and Section default to 0xFF
 ・[EnemyRoutes] Changed UnknownData1 and UnknownData2 default value to 0
 ・Updated EditorTheme.xml
+
+[2024/8/24]
+・Changed property name "JBOG_UnknownData1"to "eMapDataGeoObjIDIndex"
