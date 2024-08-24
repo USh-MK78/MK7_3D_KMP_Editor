@@ -30,7 +30,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
             public bool IsViewportVisible { get; set; } = true;
 
             public string ObjectID { get; set; }
-            public string JBOG_UnknownData1 { get; set; }
+            public short EMapDataGeoObjIDIndex { get; set; }
 
             [TypeConverter(typeof(ExpandableObjectConverter))]
             public Position Positions { get; set; } = new Position();
@@ -299,7 +299,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 this.ObjectID = ObjectID;
                 JBOG_ITOP_RouteIDIndex = 65535;
                 JBOG_PresenceSetting = 7;
-                JBOG_UnknownData1 = "0000";
+                EMapDataGeoObjIDIndex = 0;
                 JBOG_UnknownData2 = "FFFF";
                 JBOG_UnknownData3 = 0;
                 Positions = new Position(Pos);
@@ -317,7 +317,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 ObjectID = BitConverter.ToString(JBOGValue.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
                 JBOG_ITOP_RouteIDIndex = JBOGValue.JBOG_ITOP_RouteIDIndex;
                 JBOG_PresenceSetting = JBOGValue.JBOG_PresenceSetting;
-                JBOG_UnknownData1 = BitConverter.ToString(JBOGValue.JBOG_UnknownData1.Reverse().ToArray()).Replace("-", string.Empty);
+                EMapDataGeoObjIDIndex = JBOGValue.EMapDataGeoObjIDIndex;
                 JBOG_UnknownData2 = BitConverter.ToString(JBOGValue.JBOG_UnknownData2.Reverse().ToArray()).Replace("-", string.Empty);
                 JBOG_UnknownData3 = JBOGValue.JBOG_UnknownData3;
                 Positions = new Position(JBOGValue.JBOG_Position);
@@ -335,7 +335,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 ObjectID = Object_Value.ObjectID;
                 JBOG_ITOP_RouteIDIndex = Object_Value.RouteIDIndex;
                 JBOG_PresenceSetting = Object_Value.PresenceSetting;
-                JBOG_UnknownData1 = Object_Value.UnknownData1;
+                EMapDataGeoObjIDIndex = Object_Value.EMapDataGeoObjIDIndex;
                 JBOG_UnknownData2 = Object_Value.UnknownData2;
                 JBOG_UnknownData3 = Object_Value.UnknownData3;
                 Positions = new Position(Object_Value.Position.ToVector3D());
@@ -378,7 +378,7 @@ namespace MK7_3D_KMP_Editor.PropertyGridObject
                 JBOG.JBOGValue JBOG_Values = new JBOG.JBOGValue();
 
                 JBOG_Values.ObjectID = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].ObjectID);
-                JBOG_Values.JBOG_UnknownData1 = Byte2StringConverter.OBJIDStrToByteArray(JBOGValueList[Count].JBOG_UnknownData1);
+                JBOG_Values.EMapDataGeoObjIDIndex = JBOGValueList[Count].EMapDataGeoObjIDIndex;
                 JBOG_Values.JBOG_Position = JBOGValueList[Count].Positions.GetVector3D();
                 JBOG_Values.JBOG_Rotation = new Vector3D(RX, RY, RZ);
                 JBOG_Values.JBOG_Scale = JBOGValueList[Count].Scales.GetVector3D();
