@@ -114,4 +114,4 @@ Show / Hide XXXXRoutes(Group), Checkpoint and objects.
 ・Updated EditorTheme.xml
 
 [2024/8/24]
-・Changed property name "JBOG_UnknownData1"to "eMapDataGeoObjIDIndex"
+[JBOG] Changed property name "JBOG_UnknownData1" to "EMapDataGeoObjIDIndex" (Information provided by @B_squo (Twitter/X))
