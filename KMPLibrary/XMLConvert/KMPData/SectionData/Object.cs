@@ -143,8 +143,8 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
             [System.Xml.Serialization.XmlAttribute("ObjectID")]
             public string ObjectID { get; set; }
 
-            [System.Xml.Serialization.XmlAttribute("UnknownData1")]
-            public string UnknownData1 { get; set; }
+            [System.Xml.Serialization.XmlAttribute("eMapDataGeoObjIDIndex")]
+            public short EMapDataGeoObjIDIndex { get; set; }
 
             [System.Xml.Serialization.XmlAttribute("RouteIDIndex")]
             public ushort RouteIDIndex { get; set; }
@@ -169,7 +169,7 @@ namespace KMPLibrary.XMLConvert.KMPData.SectionData
                 ObjectID = BitConverter.ToString(ObjectValues.ObjectID.Reverse().ToArray()).Replace("-", string.Empty);
                 RouteIDIndex = ObjectValues.JBOG_ITOP_RouteIDIndex;
                 PresenceSetting = ObjectValues.JBOG_PresenceSetting;
-                UnknownData1 = BitConverter.ToString(ObjectValues.JBOG_UnknownData1.Reverse().ToArray()).Replace("-", string.Empty);
+                EMapDataGeoObjIDIndex = ObjectValues.EMapDataGeoObjIDIndex;
                 UnknownData2 = BitConverter.ToString(ObjectValues.JBOG_UnknownData2.Reverse().ToArray()).Replace("-", string.Empty);
                 UnknownData3 = ObjectValues.JBOG_UnknownData3;
             }

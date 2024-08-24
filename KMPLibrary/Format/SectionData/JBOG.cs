@@ -20,7 +20,7 @@ namespace KMPLibrary.Format.SectionData
         public class JBOGValue
         {
             public byte[] ObjectID { get; set; }
-            public byte[] JBOG_UnknownData1 { get; set; }
+            public short EMapDataGeoObjIDIndex { get; set; }
             public Vector3D JBOG_Position { get; set; }
             public Vector3D JBOG_Rotation { get; set; }
             public Vector3D JBOG_Scale { get; set; }
@@ -97,7 +97,7 @@ namespace KMPLibrary.Format.SectionData
             public void ReadJBOGValue(BinaryReader br, uint Version)
             {
                 ObjectID = br.ReadBytes(2);
-                JBOG_UnknownData1 = br.ReadBytes(2);
+                EMapDataGeoObjIDIndex = br.ReadInt16();
                 JBOG_Position = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
                 JBOG_Rotation = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
                 JBOG_Scale = KMPHelper.Converter3D.ByteArrayToVector3D(new byte[][] { br.ReadBytes(4), br.ReadBytes(4), br.ReadBytes(4) });
@@ -116,7 +116,7 @@ namespace KMPLibrary.Format.SectionData
             public void WriteJBOGValue(BinaryWriter bw, uint Version)
             {
                 bw.Write(ObjectID);
-                bw.Write(JBOG_UnknownData1);
+                bw.Write(EMapDataGeoObjIDIndex);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[0]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[1]);
                 bw.Write(KMPHelper.Converter3D.Vector3DToByteArray(JBOG_Position)[2]);
@@ -141,7 +141,7 @@ namespace KMPLibrary.Format.SectionData
             public JBOGValue()
             {
                 ObjectID = new byte[2];
-                JBOG_UnknownData1 = new byte[2];
+                EMapDataGeoObjIDIndex = 0;
                 JBOG_Position = new Vector3D(0, 0, 0);
                 JBOG_Rotation = new Vector3D(0, 0, 0);
                 JBOG_Scale = new Vector3D(0, 0, 0);
